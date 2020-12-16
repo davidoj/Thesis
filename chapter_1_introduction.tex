@@ -1,0 +1,54 @@
+
+%!TEX root = main.tex
+
+
+
+\section{Theories of causal inference}
+
+\todo[inline]{Feedback start here}
+
+Beginning in the 1930s, a number of associations between cigarette smoking and lung cancer were established: on a population level, lung cancer rates rose rapidly alongside the prevalence of cigarette smoking. Lung cancer patients were far more likely to have a smoking history than demographically similar individuals without cancer and smokers were around 40 times as likely as demographically similar non-smokers to go on to develop lung cancer. In laborotory experiments, cells which were introduced to tobacco smoke developed \emph{ciliastasis}, and mice exposed to cigarette smoke tars developed tumors\citep{proctor_history_2012}. Nevertheless, until the late 1950s, substantial controversy persisted over the question of whether the available data was sufficient to establish that smoking cigarettes \emph{caused} lung cancer. Cigarette manufacturers famously argued against any possible connection \citep{oreskes_merchants_2011} and Roland Fisher in particular argued that the available data was not enough to establish that smoking actually caused lung cancer \citep{fisher_cancer_1958}. Today, it is widely accepted that cigarettes do cause lung cancer, along with other serious conditions such as vascular disease and chronic respiratory disease \citep{world_health_organisation_tobacco_nodate,wiblin_why_2016}.
+
+The question of a causal link between smoking and cancer is a very important one. Individuals who enjoy smoking (or think they might) may wish to avoid smoking if cigarettes pose a severe health risk, so they are interested in knowing whether or not it is so. Potential investors in cigarette manufacturers want to know if the product they are backing is likely to see limited adoption due to health concerns. People holding investments in cigarette manufacturering firms want the world to be such that cigarettes do not pose a substantial health risk, as this increases the value of their investment. Governments and organisations with a responsibility for public health may see themselves as having responsibility to discourage smoking as much as possible if smoking is severely detrimental to health. The costs and benefits of poor decisions about smoking are large: 8 million annual deaths are attributed to cigarette-caused cancer and vascular disease in 2018\citep{world_health_organisation_tobacco_nodate} while  global cigarette sales were estimated at US\$711 million in 2020, while \citep{noauthor_cigarettes_nodate} (a figure which might be substantially larger if cigarettes were not widely believed to be harmful).
+
+The question of whether or not cigarette smoking causes cancer illustrates two key facts about causal questions: First, having the right answers to some causal questions is of tremendous importance to huge numbers of people. Second, even when large amounts of data show unambiguous associations between phenomena of interest, it is still difficult to know when a causal conclusion is justified.
+
+Causal conclusions are often justified on the basis of ad-hoc reasoning. For example \citet{krittanawong_association_2020} states:
+
+\begin{quote}
+[...] the potential benefit of increased chocolate consumption, reducing coronary artery disease (CAD) risk is not known. We aimed to explore the association between chocolate consumption and CAD.
+\end{quote}
+
+It is not clear whether Krittanawong et. al. mean that a negative association between chocolate consumption and CAD implies that increased chocolate consumption is likely to reduce coronary artery disease, or that an association may be relevant to the question and the reader should draw their own conclusions. Whether the implication is being suggested by Krittanawong et. al. or merely imputed by na\"ive readers, it is being drawn on an ad-hoc basis -- no argument for the implication can be found in this paper. As \citet{pearl_causality:_2009} has forcefully argued, additional assumptions are always required to answer causal questions from associational facts, and stating these assumptions explicitly allows those assumptions to be productively scrutinised.
+
+Theories of causal inference exist to enable formal rather than ad-hoc reasoning about causal questions. Instead of posing informal causal question and answering them based on ad-hoc reasoning, within a theory of causal inference we ask about properties of ``causal models'' (which are simply mathematical types defined by the theory) subject to certain assumptions we are willing to make. A successful theory of causal inference should enable causal models that ``adequately represent'' the original informal question, and the assumptions we invoke should be more accessible to scrutiny than ad-hoc assertions made in the course of answering the informal question.
+
+As well as defining causal models, which represent \emph{claims about causation}, theories of causal inference also formalise the problem of \emph{inferring the correct causal model} - this is the problem of taking some observational data and concluding which causal models are ``possible'' or ``appropriate to use for the given purpose''.
+
+Defining causal models is difficult. In general, applied theories of causal inference posit that:
+\begin{enumerate}
+    \item ``$\RV{X}_i$ causes $\RV{X}_j$'' means that there exist different \emph{ideal interventions} that result in different values of of $\RV{X}_i$, hold other ``causally sufficient'' variables constant, do not directly affect $\RV{X}_j$ but nonetheless entail different values of $\RV{X}_j$
+    \item ``$\RV{X}_i$ causes $\RV{X}_j$'' means that the \emph{counterfactual value} of $\RV{X}_j$ would be different ``if $\RV{X}_i$ had taken a different value''
+\end{enumerate}
+
+In practice, most theories of causal inference seem to be based on the notion of \emph{ideal interventions}. Even ``counterfactual'' theories of causal inference (such as the theory based on ``potential outcomes'' notation) tend to define counterfactual values as ``values that a variable would have taken were it exposed to an ideal intervention'', if they are defined at all \citep{morgan_counterfactuals_2014,rubin_causal_2005,richardson2013single}. Alternative definitions of counterfactual values do exist, however, such as Lewis' closest world semantics \citep{lewis_causation_1986}.
+
+``Ideal interventions'' themselves are difficult to define. The structural model approach of \citet{pearl_causality:_2009} defines ideal interventions in terms of ``causally sufficient models''. However, most attempts to formalise this definition end up being circular. For example:
+\begin{itemize}
+    \item An $[\RV{X}_i,\RV{X}_j]$-ideal intervention is an operation whose result is determined by applying the do-calculus to a causally sufficient triple $((\Omega,\mathcal{F},\prob{Q}),\diagram{G},\vecRV{U})$
+    \item A triple $((\Omega,\mathcal{F},\prob{Q}),\diagram{G},\vecRV{U})$ is $[\RV{X}_i,\RV{X}_j]$-causally sufficient if $\RV{U}$ contains $\RV{X}_i$, $\RV{X}_j$ and ``all intervenable variables'' that \emph{cause} (definition (1)) both $\RV{X}_i$ and $\RV{X}_j$ \footnote{Weaker conditions for causal sufficiency are possible, but they are still premised on causal relationships, so circularity stands \citep{shpitser_complete_2008}.}
+\end{itemize}
+
+Circularity is a recognised problem with interventional definitions of causation \citep{woodward_causation_2016}. In Section \ref{sec:cbns_without_d}, I further show that assuming ideal interventions always exist leads to counterintuitive conclusions. An alternative approach is to designate certain real-world events -- such as flipping coins, querying random number generators and so forth -- as prototypical ``ideal interventions''. This approach is rather inflexible, and refuses to offer answers to causal questions that don't happen to have involve just the right kinds of real world events, typically randomised experiments. However, many causal questions do have apparent answers \citep{pearl_challenging_2018}, and even when gold-standard randomised experimental data is available, it may not permit answers to the original questions of interest \citep{deaton_understanding_2018,heckman_randomization_1991}.
+
+The difficulty in defining ``ideal interventions'' is not unprecedented. It is also difficult to provide an account of what it means for data to be ``distributed according to probability distribution $\prob{P}$''\citep{hajek_interpretations_2019}, but the usefulness of using probability distributions to model data is widely accepted.
+
+Causal statistical decision theory (CSDT) is a theory of ``causal questions'' that does not depend on an underlying theory of causation. \citet{dawid_decision-theoretic_2020} has observed that the problem of deciding how to act in light of data can be formalised without appeal to theories of causation. We show that it is also possible to formalise the problem of determining \emph{counterfactual consequences} without appealing to an underlying theory of causation.
+
+A key feature of CSDT is the importance of the \emph{option set}, which is the set of decisions, acts or counterfactual actions under consideration in a given problem. A great deal of work on causal inference defines with the option set implicitly, possibly also relying on default choices such as that of ``hard intervention''. We argue that:
+
+\begin{itemize}
+    \item Causal questions are not well-posed without an option set in the same way a function is not well-defined without its domain
+    \item The option set can affect the difficulty of causal questions
+    \item Hard interventions are not a good choice for default option sets
+\end{itemize}

@@ -17,7 +17,10 @@
 ## Chapter 3: See-do models are all you need
 
 - See-do models are statistical models with *options*
+    - Definition
+    - Examples
     - Hypothesis sufficiency
+    - D-causation/D-control
 - See-do models answer Pearl's three levels of questions:
     - What am I likely to see next? - see-only
     - What happens next if I do something? - resolvable to a hypothesis sufficient see-do
@@ -44,8 +47,11 @@
 ## Chapter 5: Getting from "see" to "do"/Inference principles
 
 - Invariance (graphical models)
-- Exchangeability (potential outcomes)
+- "Exchangeability" (not regular exchangeability) (potential outcomes)
 - Reproducibility (see-do models)
+
+- "Meta-inference": faithfulness
+    - Open question: anything else?
 
 
 ## Chapter 6: Conclusion
