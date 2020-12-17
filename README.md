@@ -19,8 +19,6 @@
 - See-do models are statistical models with *options*
     - Definition
     - Examples
-    - Hypothesis sufficiency
-    - D-causation/D-control
 - See-do models answer Pearl's three levels of questions:
     - What am I likely to see next? - see-only
     - What happens next if I do something? - resolvable to a hypothesis sufficient see-do
@@ -28,6 +26,9 @@
 - Additional kind of question: "what *should* I do?" = "what happens if I do something?" + "what do I want to happen?"
     - Generates a statistical decision problem
     - Complete class theorem and Bayes decision rules
+- Special cases of see-do models
+    - Hypothesis sufficiency
+    - D-causation/D-control
 
 ## Chapter 4: See-do models vs alternatives
 
