@@ -1,40 +1,21 @@
 
 %!TEX root = main.tex
 
+\chapter{Chapter 2: See-do models}
 
+A \emph{statistical model} is an indexed set of probability distributions $\{\prob{P}_\theta|\theta\in \Theta\}$ where each distribution shares a sample space $\prob{P}_\theta\in \Delta(\sigalg{E})$, $\All \theta$. Equivalently, they are maps $\kernel{P}:\Theta\to \Delta(\sigalg{E})$, as any indexed set is essentially a function. Statistical models are ubiquitous -- they are found in statistical decision theory where the elements of $\Theta$ are typically called ``states''\citep{wald_statistical_1950}, in Bayesian inference where the elements of $\Theta$ may be called ``parameters'' \citep{freedman_asymptotic_1963} and in frequentist inference they may be called ``hypotheses'' \citep{fisher_statistical_1992}. 
 
-\section{Causal Questions}
+Though the precise terminology might differ, in all cases described a statistical model can be interpreted as telling us that if the true state/hypothesis/parameter is given by $\theta$, then the observations we receive are distributed according to $\prob{P}_\theta$. Furthermore, no matter how much you or me might want a particular $\theta^*$ to be the true state, neither of us can have any influence over whether or not $\theta^*$ actually \emph{is} the true state. This choice is Mother Nature's alone.
 
-\citet{pearl_book_2018} has proposed three types of causal question:
-\begin{enumerate}
-    \item Association: How are $\RV{X}$ and $\RV{Y}$ related? How would observing $\RV{X}$ change my beliefs about $\RV{Y}$?
-    \item Intervention: What would happen if I do ... ? How can I make $E$ happen?
-    \item Counterfactual: What if I had done ... instead of what I actually did?
-\end{enumerate}
+Here we are interested in a class of model where ``we'' (specifically, the model's user) \emph{can} make a choice that influences whatever happens in the end. Not all outcomes can be influenced -- some may be \emph{observations} collected prior to making a choice, for example. In these models, \emph{hypotheses} serve two roles: firstly, given a hypothesis $\theta$ we know that \emph{observations} are distributed according to $\kernel{P}_\theta$ for some $\kernel{P}:\Theta\to \Delta(\sigalg{E})$, just as with statistical models. Secondly, a hypothesis $\theta$ \emph{also} tells us that the consequences of each choice $d\in D$, given by $\kernel{C}_{\theta,d}\in \Delta(\sigalg{F})$ for some $\kernel{C}:\Theta\to \Delta(\sigalg{F})$. Thus the model tells us, for each hypothesis $\theta$, what we expect to \emph{see} and what we expect to happen as a result of \emph{doing} something, hence the name ``see-do model''.
 
-I will initially focus on the second question type: ``How can I make $E$ happen?'', and later show how the approach for this type of question can be generalised to handle questions of the third type. Call this kind of question a \emph{causal decision problem}:
+See-do models are a straightforward extension of statistical models, adding a ``do model'' to the ``see model'' that statistical models already provide. We shall also show that they are closely related to \emph{statistical decision problems}, which also consider the possibility of making a choice after observing a given dataset, but unlike see-do models statistical decision problems do not allow for general consequences of decisions.
 
-\begin{quote}\label{def:causal_decision_problem}
-    Given available options, which ones are most likely to lead to a desirable result?
-\end{quote}
-
-Causal \emph{statistical} causal decision problems extend causal decision problems by introducing data:
-
-\begin{quote}\label{def:causal_statistical_decision_problem}
-    Given my available options and data, which options are likely to lead to a desirable result?
-\end{quote}
+See-do models can formalise causal questions, whether of the ``associational'', ``interventional'' or ``counterfactual'' types, in the terminology of \citet{pearl_book_2018}. In \ref{ch:4}, I show that see-do models overlap significantly with existing approaches to formalising questions of these types and argue that where see-do models differ, they are favoured by the difference.
 
 \subsection{See-Do Models with diagrams}
 
-In order to offer an answer to a causal decision problem, I must specify some additional details about the problem. For example:
 
-\begin{itemize}
-    \item My available options are 0 and 1
-    \item I want to maximise my net worth
-    \item The consequence of choosing option 0 is that my net worth will be \$1000, and the consequence of choosing option 1 is that my net worth will be \$1100
-\end{itemize}
-
-In this case, I ought to choose option 1. More generally, to offer an answer to a causal decision problem I need to specify my \emph{option set} $D$, the set of possible outcomes (possible values of my net worth), my preferences (maximise net worth) and a consequence map that takes options and returns outcomes.
 
 A causal statistical decision problem adds data to this basic mix. If this data has any influence on the option that I ultimately select then -- supposing that my preferences do not change -- I must be \emph{uncertain} about how options lead to consequences, and the data may affect my view on which consequences are likely. In order to formally specify everything needed to answer a causal statistical decision problem, I need to formalise the following notions:
 
@@ -248,6 +229,27 @@ However, $\RV{X}_{N+1}$ is related to the prior flips $\vecRV{X}_{<N}$. In parti
 The only real choice that can be made about the prior is $\gamma^\Theta$, and adding the requirement that $\RV{X}_{N+1}$ is distributed as Bernoulli($\theta$) to $\kernel{T}^3$ yields $\kernel{T}^2$.
 
 \todo[inline]{I don't have a theory of stochastic vs non-stochastic uncertainty, but it is the case in general that a hypothesis sufficient model with additional restrictions on the prior can be replaced by a hypothesis insufficient model with no restrictions on the prior. This is mainly relevant with regard to counterfactuals}
+
+\section{Causal Questions}
+
+\citet{pearl_book_2018} has proposed three types of causal question:
+\begin{enumerate}
+    \item Association: How are $\RV{X}$ and $\RV{Y}$ related? How would observing $\RV{X}$ change my beliefs about $\RV{Y}$?
+    \item Intervention: What would happen if I do ... ? How can I make $E$ happen?
+    \item Counterfactual: What if I had done ... instead of what I actually did?
+\end{enumerate}
+
+I will initially focus on the second question type: ``How can I make $E$ happen?'', and later show how the approach for this type of question can be generalised to handle questions of the third type. Call this kind of question a \emph{causal decision problem}:
+
+\begin{quote}\label{def:causal_decision_problem}
+    Given available options, which ones are most likely to lead to a desirable result?
+\end{quote}
+
+Causal \emph{statistical} causal decision problems extend causal decision problems by introducing data:
+
+\begin{quote}\label{def:causal_statistical_decision_problem}
+    Given my available options and data, which options are likely to lead to a desirable result?
+\end{quote}
 
 
 \subsubsection{Decision rules}
