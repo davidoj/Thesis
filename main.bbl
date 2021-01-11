@@ -1,0 +1,251 @@
+\begin{thebibliography}{31}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[\c{C}inlar(2011)]{cinlar_probability_2011}
+Erhan \c{C}inlar.
+\newblock \emph{Probability and Stochastics}.
+\newblock Springer, 2011.
+
+\bibitem[Cho and Jacobs(2019)]{cho_disintegration_2019}
+Kenta Cho and Bart Jacobs.
+\newblock Disintegration and {Bayesian} inversion via string diagrams.
+\newblock \emph{Mathematical Structures in Computer Science}, 29\penalty0
+  (7):\penalty0 938--971, August 2019.
+\newblock ISSN 0960-1295, 1469-8072.
+\newblock \doi{10.1017/S0960129518000488}.
+
+\bibitem[Clerc et~al.(2017)Clerc, Dahlqvist, Danos, and
+  Garnier]{clerc_pointless_2017}
+Florence Clerc, Fredrik Dahlqvist, Vincent Danos, and Ilias Garnier.
+\newblock Pointless learning.
+\newblock \emph{20th International Conference on Foundations of Software
+  Science and Computation Structures (FoSSaCS 2017)}, March 2017.
+\newblock \doi{10.1007/978-3-662-54458-7_21}.
+\newblock URL
+  \url{https://www.research.ed.ac.uk/portal/en/publications/pointless-learning(694fb610-69c5-469c-9793-825df4f8ddec).html}.
+
+\bibitem[Dawid(2020)]{dawid_decision-theoretic_2020}
+A.~Philip Dawid.
+\newblock Decision-theoretic foundations for statistical causality.
+\newblock \emph{arXiv:2004.12493 [math, stat]}, April 2020.
+\newblock URL \url{http://arxiv.org/abs/2004.12493}.
+\newblock arXiv: 2004.12493.
+
+\bibitem[Deaton and Cartwright(2018)]{deaton_understanding_2018}
+Angus Deaton and Nancy Cartwright.
+\newblock Understanding and misunderstanding randomized controlled trials.
+\newblock \emph{Social Science \& Medicine}, 210:\penalty0 2--21, August 2018.
+\newblock ISSN 0277-9536.
+\newblock \doi{10.1016/j.socscimed.2017.12.005}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0277953617307359}.
+
+\bibitem[Fisher(1992)]{fisher_statistical_1992}
+R.~A. Fisher.
+\newblock Statistical {Methods} for {Research} {Workers}.
+\newblock In Samuel Kotz and Norman~L. Johnson, editors, \emph{Breakthroughs in
+  {Statistics}: {Methodology} and {Distribution}}, Springer {Series} in
+  {Statistics}, pages 66--70. Springer, New York, NY, 1992.
+\newblock ISBN 978-1-4612-4380-9.
+\newblock \doi{10.1007/978-1-4612-4380-9_6}.
+\newblock URL \url{https://doi.org/10.1007/978-1-4612-4380-9_6}.
+
+\bibitem[Fisher(1958)]{fisher_cancer_1958}
+Ronald~A. Fisher.
+\newblock Cancer and {Smoking}.
+\newblock \emph{Nature}, 182\penalty0 (4635):\penalty0 596--596, August 1958.
+\newblock ISSN 1476-4687.
+\newblock \doi{10.1038/182596a0}.
+\newblock URL \url{https://www.nature.com/articles/182596a0}.
+\newblock Number: 4635 Publisher: Nature Publishing Group.
+
+\bibitem[Fong(2013)]{fong_causal_2013}
+Brendan Fong.
+\newblock Causal {Theories}: {A} {Categorical} {Perspective} on {Bayesian}
+  {Networks}.
+\newblock \emph{arXiv:1301.6201 [math]}, January 2013.
+\newblock URL \url{http://arxiv.org/abs/1301.6201}.
+\newblock arXiv: 1301.6201.
+
+\bibitem[Freedman(1963)]{freedman_asymptotic_1963}
+David~A. Freedman.
+\newblock On the {Asymptotic} {Behavior} of {Bayes}' {Estimates} in the
+  {Discrete} {Case}.
+\newblock \emph{Annals of Mathematical Statistics}, 34\penalty0 (4):\penalty0
+  1386--1403, December 1963.
+\newblock ISSN 0003-4851, 2168-8990.
+\newblock \doi{10.1214/aoms/1177703871}.
+\newblock URL \url{https://projecteuclid.org/euclid.aoms/1177703871}.
+\newblock Publisher: Institute of Mathematical Statistics.
+
+\bibitem[Heckerman and Shachter(1995)]{heckerman_decision-theoretic_1995}
+D.~Heckerman and R.~Shachter.
+\newblock Decision-{Theoretic} {Foundations} for {Causal} {Reasoning}.
+\newblock \emph{Journal of Artificial Intelligence Research}, 3:\penalty0
+  405--430, December 1995.
+\newblock ISSN 1076-9757.
+\newblock \doi{10.1613/jair.202}.
+\newblock URL \url{https://www.jair.org/index.php/jair/article/view/10151}.
+
+\bibitem[Heckman(1991)]{heckman_randomization_1991}
+James~J. Heckman.
+\newblock Randomization and {Social} {Policy} {Evaluation}.
+\newblock {SSRN} {Scholarly} {Paper} ID 995151, Social Science Research
+  Network, Rochester, NY, July 1991.
+\newblock URL \url{https://papers.ssrn.com/abstract=995151}.
+
+\bibitem[Hájek(2003)]{hajek_what_2003}
+Alan Hájek.
+\newblock What {Conditional} {Probability} {Could} {Not} {Be}.
+\newblock \emph{Synthese}, 137\penalty0 (3):\penalty0 273--323, December 2003.
+\newblock ISSN 1573-0964.
+\newblock \doi{10.1023/B:SYNT.0000004904.91112.16}.
+\newblock URL \url{https://doi.org/10.1023/B:SYNT.0000004904.91112.16}.
+
+\bibitem[Hájek(2019)]{hajek_interpretations_2019}
+Alan Hájek.
+\newblock Interpretations of {Probability}.
+\newblock In Edward~N. Zalta, editor, \emph{The {Stanford} {Encyclopedia} of
+  {Philosophy}}. Metaphysics Research Lab, Stanford University, fall 2019
+  edition, 2019.
+\newblock URL
+  \url{https://plato.stanford.edu/archives/fall2019/entries/probability-interpret/}.
+
+\bibitem[Krittanawong et~al.(2020)Krittanawong, Narasimhan, Wang, Hahn, Virk,
+  Farrell, Zhang, and Tang]{krittanawong_association_2020}
+Chayakrit Krittanawong, Bharat Narasimhan, Zhen Wang, Joshua Hahn, Hafeez
+  Ul~Hassan Virk, Ann~M. Farrell, HongJu Zhang, and WH~Wilson Tang.
+\newblock Association between chocolate consumption and risk of coronary artery
+  disease: a systematic review and meta-analysis:.
+\newblock \emph{European Journal of Preventive Cardiology}, July 2020.
+\newblock \doi{10.1177/2047487320936787}.
+\newblock URL \url{http://journals.sagepub.com/doi/10.1177/2047487320936787}.
+\newblock Publisher: SAGE PublicationsSage UK: London, England.
+
+\bibitem[Lattimore and Rohde(2019)]{lattimore_replacing_2019}
+Finnian Lattimore and David Rohde.
+\newblock Replacing the do-calculus with {Bayes} rule.
+\newblock \emph{arXiv:1906.07125 [cs, stat]}, December 2019.
+\newblock URL \url{http://arxiv.org/abs/1906.07125}.
+\newblock arXiv: 1906.07125.
+
+\bibitem[Lewis(1986)]{lewis_causation_1986}
+David~K Lewis.
+\newblock Causation.
+\newblock \emph{Journal of Philosophy}, 1986.
+
+\bibitem[Morgan and Winship(2014)]{morgan_counterfactuals_2014}
+Stephen~L. Morgan and Christopher Winship.
+\newblock \emph{Counterfactuals and {Causal} {Inference}: {Methods} and
+  {Principles} for {Social} {Research}}.
+\newblock Cambridge University Press, New York, NY, 2 edition edition, November
+  2014.
+\newblock ISBN 978-1-107-69416-3.
+
+\bibitem[Oreskes and Conway(2011)]{oreskes_merchants_2011}
+Naomi Oreskes and Erik~M. Conway.
+\newblock \emph{Merchants of {Doubt}: {How} a {Handful} of {Scientists}
+  {Obscured} the {Truth} on {Issues} from {Tobacco} {Smoke} to {Climate}
+  {Change}: {How} a {Handful} of {Scientists} ... {Issues} from {Tobacco}
+  {Smoke} to {Global} {Warming}}.
+\newblock Bloomsbury Press, New York, NY, June 2011.
+\newblock ISBN 978-1-60819-394-3.
+
+\bibitem[Pearl(2009)]{pearl_causality:_2009}
+Judea Pearl.
+\newblock \emph{Causality: {Models}, {Reasoning} and {Inference}}.
+\newblock Cambridge University Press, 2 edition, 2009.
+
+\bibitem[Pearl(2018)]{pearl_challenging_2018}
+Judea Pearl.
+\newblock Challenging the hegemony of randomized controlled trials: {A}
+  commentary on {Deaton} and {Cartwright}.
+\newblock \emph{Social Science \& Medicine}, 2018.
+
+\bibitem[Pearl and Mackenzie(2018)]{pearl_book_2018}
+Judea Pearl and Dana Mackenzie.
+\newblock \emph{The {Book} of {Why}: {The} {New} {Science} of {Cause} and
+  {Effect}}.
+\newblock Basic Books, New York, 1 edition edition, May 2018.
+\newblock ISBN 978-0-465-09760-9.
+
+\bibitem[Proctor(2012)]{proctor_history_2012}
+Robert~N. Proctor.
+\newblock The history of the discovery of the cigarette–lung cancer link:
+  evidentiary traditions, corporate denial, global toll.
+\newblock \emph{Tobacco Control}, 21\penalty0 (2):\penalty0 87--91, March 2012.
+\newblock ISSN 0964-4563, 1468-3318.
+\newblock \doi{10.1136/tobaccocontrol-2011-050338}.
+\newblock URL \url{https://tobaccocontrol.bmj.com/content/21/2/87}.
+\newblock Publisher: BMJ Publishing Group Ltd Section: The shameful past.
+
+\bibitem[Richardson and Robins(2013)]{richardson2013single}
+Thomas~S Richardson and James~M Robins.
+\newblock Single world intervention graphs (swigs): A unification of the
+  counterfactual and graphical approaches to causality.
+\newblock \emph{Center for the Statistics and the Social Sciences, University
+  of Washington Series. Working Paper}, 128\penalty0 (30):\penalty0 2013, 2013.
+
+\bibitem[Rubin(2005)]{rubin_causal_2005}
+Donald~B. Rubin.
+\newblock Causal {Inference} {Using} {Potential} {Outcomes}.
+\newblock \emph{Journal of the American Statistical Association}, 100\penalty0
+  (469):\penalty0 322--331, March 2005.
+\newblock ISSN 0162-1459.
+\newblock \doi{10.1198/016214504000001880}.
+\newblock URL \url{https://doi.org/10.1198/016214504000001880}.
+
+\bibitem[Selinger(2010)]{selinger_survey_2010}
+Peter Selinger.
+\newblock A survey of graphical languages for monoidal categories.
+\newblock \emph{arXiv:0908.3347 [math]}, 813:\penalty0 289--355, 2010.
+\newblock \doi{10.1007/978-3-642-12821-9_4}.
+\newblock URL \url{http://arxiv.org/abs/0908.3347}.
+\newblock arXiv: 0908.3347.
+
+\bibitem[Shpitser and Pearl(2008)]{shpitser_complete_2008}
+Ilya Shpitser and Judea Pearl.
+\newblock Complete {Identification} {Methods} for the {Causal} {Hierarchy}.
+\newblock \emph{Journal of Machine Learning Research}, 9\penalty0
+  (Sep):\penalty0 1941--1979, 2008.
+\newblock ISSN ISSN 1533-7928.
+\newblock URL \url{https://www.jmlr.org/papers/v9/shpitser08a.html}.
+
+\bibitem[Statista(2020)]{noauthor_cigarettes_nodate}
+Statista.
+\newblock Cigarettes - worldwide {\textbar} {Statista} {Market} {Forecast},
+  2020.
+\newblock URL
+  \url{https://www.statista.com/outlook/50010000/100/cigarettes/worldwide}.
+
+\bibitem[Wald(1950)]{wald_statistical_1950}
+Abraham Wald.
+\newblock \emph{Statistical decision functions}.
+\newblock Statistical decision functions. Wiley, Oxford, England, 1950.
+
+\bibitem[Wiblin(2016)]{wiblin_why_2016}
+Robert Wiblin.
+\newblock Why smoking in the developing world is an enormous problem and how
+  you can help save lives, 2016.
+\newblock URL \url{https://80000hours.org/problem-profiles/tobacco/}.
+
+\bibitem[Woodward(2016)]{woodward_causation_2016}
+James Woodward.
+\newblock Causation and {Manipulability}.
+\newblock In Edward~N. Zalta, editor, \emph{The {Stanford} {Encyclopedia} of
+  {Philosophy}}. Metaphysics Research Lab, Stanford University, winter 2016
+  edition, 2016.
+\newblock URL
+  \url{https://plato.stanford.edu/archives/win2016/entries/causation-mani/}.
+
+\bibitem[{World Health
+  Organisation}(2018)]{world_health_organisation_tobacco_nodate}
+{World Health Organisation}.
+\newblock Tobacco {Fact} sheet no 339, 2018.
+\newblock URL \url{https://www.webcitation.org/6gUXrCDKA}.
+
+\end{thebibliography}
