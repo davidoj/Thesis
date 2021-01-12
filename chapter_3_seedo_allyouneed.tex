@@ -17,38 +17,29 @@ See-do models have deep roots in decision theory. Decision theory asks, out of a
 
 \section{Definition}
 
-The primitives of see-do models are:
 
+\begin{definition}[See-Do model]\label{def:seedo}
+A \emph{see-do model} is a kernel space (Definition \ref{def:kernel_space}) $(\kernel{T},H\times D,X\times Y)$ along with four random variables: the \emph{hypothesis} $\RV{H}:H\times D\times X\times Y\to H$, the \emph{choice} $\RV{D}:H\times D\times X\times Y\to D$, the \emph{observations} $\RV{X}:H\times D\times X\times Y\to X$ and the \emph{consequences} $\RV{Y}:H\times D\times X\times Y\to Y$, all given by the obvious projection maps. 
+
+The spaces $H$, $D$, $X$ and $Y$ are the hypothesis, choice, observation and consequence spaces respectively.
+
+A see-do model has the additional property that, holding the hypothesis fixed, the observations are independent of the choices - i.e. $\RV{X}\CI_{\kernel{T}} \RV{D}|\RV{H}$. We require that $H\times D$ is countable.
+\end{definition}
+
+
+\begin{theorem}[Observation and Consequence maps]\label{th:obs_cmaps}
+Any see-do model $(\kernel{T},H\times D,X\times Y)$ can be uniquely represented by two Markov kernels:
 \begin{itemize}
-    \item \emph{Hypotheses}: each hypothesis  
-    \item \emph{Choices}; the set of options I have available
-    \item \emph{Observations}; the observations I might be given
-    \item \emph{Consequences}; what might arise as a result of my having chosen a particular option
-    \item \emph{Uncertainty}; I am uncertain about which consequences are brought about by my available options, and I may be able to become less uncertain after considering the data I have been given
+    \item The \emph{observation map} $\kernel{T}^{\RV{X}|\Theta}$
+    \item The \emph{consequence map} $\kernel{T}^{\RV{Y}|\Theta\RV{X}\RV{D}}$
 \end{itemize}
-
-\emph{See-Do Models} formalise the above notions. See-Do Models use expected utility theory to formalise preferences and probability theory to model noisy observations and uncertainty over consequences. We make these choices because these are well understood and widely accepted tools for modelling preferences and uncertainty respectively. For a given CSDP, See-Do Models regard the \emph{option set}, the \emph{observation space} and the \emph{consequence space} to be fixed.
-
-\begin{definition}[Option set]
-An \emph{option set} $D$ is a finite or countable set of options. A decision maker may select any option from $D$ and in addition may select any mixture of options from $\Delta(\sigalg{D})$.
-\end{definition}
-
-\begin{definition}[Observation space]
-The decision maker receives an \emph{observation}, which is an element of a standard measurable set $(X,\sigalg{X})$.
-\end{definition}
-
-\begin{definition}[Consequence space]
-The decision maker's choice of option results in a \emph{consequence}, which is an element of a standard measurable set $(Y,\sigalg{Y})$.
-\end{definition}
-
-We allow for two types of uncertainty over which consequences will actually take place given the selection of a particular option. Consequences may be stochastic functions of the option selected and of the given data. Secondly, a decision maker may entertain a number of different \emph{hypotheses} about the relationship between data, decision and consequences. A decision maker may select a particular distribution of hypotheses called a \emph{prior} so that the only remaining uncertainty is stochastic, but we avoid assuming that a canonical prior is available at the outset.
+\end{theorem}
 
 \begin{definition}[See-Do Model]
-A See-Do Model takes a hypothesis $\theta\in \Theta$ and an option $d\in D$ and returns a joint distribution over observations and consequences with the restriction that, given a particular hypothesis, observations are independent of options. Formally, a See-Do Model is a kernel space $(\kernel{T},X\times Y, \Theta\times D)$ where $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ where $\Theta$ is the hypothesis space, $D$ is the option set, $X$ is the observation space and $Y$ is the consequence space. Defining $\RV{X},\RV{Y},\RV{D},\Theta$ to be projection maps to the associated spaces, a see-do model has the property $\RV{X}\CI_{\kernel{T}} \RV{D}|\Theta$. That is, for each hypothesis $\theta\in \Theta$, $\kernel{T}$ holds that the observations $\RV{X}$ are independent of the choice of option $\RV{D}$.
+A See-Do Model takes a hypothesis $\theta\in \Theta$ and an option $d\in D$ and returns a joint distribution over choices and consequences with the restriction that, given a particular hypothesis, observations are independent of the choice. Formally, a See-Do Model is a kernel space $(\kernel{T},X\times Y, \Theta\times D)$ where $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ where $\Theta$ is the hypothesis space, $D$ is the option set, $X$ is the observation space and $Y$ is the consequence space. Defining $\RV{X},\RV{Y},\RV{D},\Theta$ to be projection maps to the associated spaces, a see-do model has the property $\RV{X}\CI_{\kernel{T}} \RV{D}|\Theta$. That is, for each hypothesis $\theta\in \Theta$, $\kernel{T}$ holds that the observations $\RV{X}$ are independent of the choice of option $\RV{D}$.
 
-It is therefore possible to specify a see-do model $\kernel{T}$ with the following elements:
+A see-do model $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ can be uniquely defined by the following pair of Markov kernels:
 \begin{itemize}
-    \item Hypothesis space $\Theta$, options $D$, observations $X$ and consequences $Y$
     \item Observation map $\kernel{T}^{\RV{X}|\Theta}$, which exists by virtue of the independence of observations from consequences
     \item Consequence map $\kernel{T}^{\RV{Y}|\Theta\RV{X}\RV{D}}$
 \end{itemize}
