@@ -1,23 +1,23 @@
 \contentsline {section}{\numberline {0.1}Theories of causal inference}{3}{section.0.1}%
 \contentsline {subsection}{\numberline {0.1.1}Probability Theory}{6}{subsection.0.1.1}%
-\contentsline {paragraph}{Common $\sigma $ algebras}{6}{section*.3}%
+\contentsline {paragraph}{Common $\sigma $ algebras}{7}{section*.4}%
 \contentsline {subsection}{\numberline {0.1.2}Product Notation}{8}{subsection.0.1.2}%
-\contentsline {subsection}{\numberline {0.1.3}String Diagrams}{8}{subsection.0.1.3}%
-\contentsline {subsubsection}{Elements of string diagrams}{9}{section*.4}%
-\contentsline {paragraph}{Elementary operations}{10}{section*.5}%
-\contentsline {paragraph}{Markov kernels with special notation}{11}{section*.6}%
-\contentsline {subsubsection}{Working With String Diagrams}{13}{section*.7}%
-\contentsline {paragraph}{Axioms of Symmetric Monoidal Categories}{13}{section*.8}%
-\contentsline {subsubsection}{Examples}{14}{section*.9}%
+\contentsline {subsection}{\numberline {0.1.3}String Diagrams}{9}{subsection.0.1.3}%
+\contentsline {subsubsection}{Elements of string diagrams}{9}{section*.5}%
+\contentsline {paragraph}{Elementary operations}{10}{section*.6}%
+\contentsline {paragraph}{Markov kernels with special notation}{11}{section*.7}%
+\contentsline {subsubsection}{Working With String Diagrams}{13}{section*.8}%
+\contentsline {paragraph}{Axioms of Symmetric Monoidal Categories}{13}{section*.9}%
+\contentsline {subsubsection}{Examples}{14}{section*.10}%
 \contentsline {subsection}{\numberline {0.1.4}Random Variables}{15}{subsection.0.1.4}%
-\contentsline {subsubsection}{Conditional Independence}{24}{section*.12}%
-\contentsline {chapter}{\numberline {1}Chapter 2: See-do models}{29}{chapter.1}%
+\contentsline {subsubsection}{Conditional Independence}{25}{section*.13}%
+\contentsline {chapter}{\numberline {1}Chapter 3: See-do models}{29}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Definition}{30}{section.1.1}%
-\contentsline {subsubsection}{Examples of see-do models}{32}{section*.15}%
-\contentsline {subsubsection}{Examples of see-do models}{35}{section*.17}%
-\contentsline {section}{\numberline {1.2}Causal Questions}{37}{section.1.2}%
-\contentsline {subsubsection}{Decision rules}{37}{section*.19}%
-\contentsline {subsection}{\numberline {1.2.1}D-causation}{39}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}D-causation vs Heckerman and Shachter}{40}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Properties of D-causation}{43}{subsection.1.2.3}%
-\contentsline {chapter}{\numberline {2}Chapter 4: See-do models compared to causal graphical models and potential outcomes}{45}{chapter.2}%
+\contentsline {subsubsection}{Examples of hypothesis sufficient and insufficient see-do models}{33}{section*.17}%
+\contentsline {subsubsection}{Examples of see-do models}{37}{section*.19}%
+\contentsline {section}{\numberline {1.2}Causal Questions}{39}{section.1.2}%
+\contentsline {subsubsection}{Decision rules}{39}{section*.21}%
+\contentsline {subsection}{\numberline {1.2.1}D-causation}{41}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}D-causation vs Heckerman and Shachter}{42}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Properties of D-causation}{45}{subsection.1.2.3}%
+\contentsline {chapter}{\numberline {2}Chapter 4: See-do models compared to causal graphical models and potential outcomes}{47}{chapter.2}%

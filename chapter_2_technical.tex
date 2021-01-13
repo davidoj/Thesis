@@ -1330,14 +1330,14 @@ Given a kernel space $(\kernel{K},D,\Omega)$, relative probability space $(\prob
 
 \todo[inline]{Almost sure equality}
 
-\begin{itemize}
+\begin{enumerate}
 	\item $\prob{P}^{\RV{X}\RV{D}|\RV{Y}} \sim \prob{P}^{\RV{X}|\RV{Y}}\utimes \prob{P}^{\RV{D}|\RV{Y}}$
 	\item For any version of $\prob{P}^{\{\RV{X}|\RV{Y}\}}$, $\prob{P}^{\RV{X}|\RV{Y}}\otimes\stopper{0.1}_D$ is a version of  $\kernel{K}^{\{\RV{X}|\RV{Y}\RV{D}\}}$
 	\item There exists a version of $\kernel{K}^{\{\RV{X}|\RV{Y}\RV{D}\}}\text{ constant in }\RV{D}$
-\end{itemize}
+\end{enumerate}
 \end{definition}
 
-\begin{theorem}[Definitions are equivalent]
+\begin{theorem}[Definitions are equivalent]\label{th:ci_equivalence}
 (1)$\implies$(2):
 By Lemma \ref{lem:agree_disint}, $\prob{P}^{\{\RV{Y}|\RV{X}\RV{D}\}}=\kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}$. Thus it is sufficient to show that $\prob{P}^{\RV{X}|\RV{Y}}\otimes\stopper{0.1}$ is a version of $\prob{P}^{\{\RV{X}|\RV{Y}\RV{D}\}}$.
 

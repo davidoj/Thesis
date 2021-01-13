@@ -40,6 +40,7 @@
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{intersections}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -51,6 +52,7 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage{bm}
 \usepackage{isomath}
+\usepackage{mathtools}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
@@ -103,7 +105,8 @@
     dist/.style = {triangle,draw,border rotated, inner sep=0pt},
     smalldist/.style = {triangle,draw,border rotated},
     kernel/.style={rectangle,draw,inner sep = 2pt},
-    expectation/.style = {triangle,draw,inner sep=0pt,shape border rotate=270}}
+    expectation/.style = {triangle,draw,inner sep=0pt,shape border rotate=270},
+    copymap/.style = {circle,fill,inner sep=1pt}}
 
 \newcommand\DCI{
 	\begin{tikzpicture}[scale=0.35]

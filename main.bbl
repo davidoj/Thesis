@@ -1,4 +1,4 @@
-\begin{thebibliography}{31}
+\begin{thebibliography}{34}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -27,6 +27,16 @@ Florence Clerc, Fredrik Dahlqvist, Vincent Danos, and Ilias Garnier.
 \newblock \doi{10.1007/978-3-662-54458-7_21}.
 \newblock URL
   \url{https://www.research.ed.ac.uk/portal/en/publications/pointless-learning(694fb610-69c5-469c-9793-825df4f8ddec).html}.
+
+\bibitem[Dawid(2002)]{dawid_influence_2002}
+A.~P. Dawid.
+\newblock Influence {Diagrams} for {Causal} {Modelling} and {Inference}.
+\newblock \emph{International Statistical Review}, 70\penalty0 (2):\penalty0
+  161--189, 2002.
+\newblock ISSN 1751-5823.
+\newblock \doi{10.1111/j.1751-5823.2002.tb00354.x}.
+\newblock URL
+  \url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1751-5823.2002.tb00354.x}.
 
 \bibitem[Dawid(2020)]{dawid_decision-theoretic_2020}
 A.~Philip Dawid.
@@ -146,6 +156,13 @@ Stephen~L. Morgan and Christopher Winship.
   2014.
 \newblock ISBN 978-1-107-69416-3.
 
+\bibitem[Nilsson and Lauritzen(2013)]{nilsson_evaluating_2013}
+Dennis Nilsson and Steffen~L. Lauritzen.
+\newblock Evaluating {Influence} {Diagrams} using {LIMIDs}.
+\newblock \emph{arXiv:1301.3881 [cs]}, January 2013.
+\newblock URL \url{http://arxiv.org/abs/1301.3881}.
+\newblock arXiv: 1301.3881.
+
 \bibitem[Oreskes and Conway(2011)]{oreskes_merchants_2011}
 Naomi Oreskes and Erik~M. Conway.
 \newblock \emph{Merchants of {Doubt}: {How} a {Handful} of {Scientists}
@@ -198,6 +215,12 @@ Donald~B. Rubin.
 \newblock ISSN 0162-1459.
 \newblock \doi{10.1198/016214504000001880}.
 \newblock URL \url{https://doi.org/10.1198/016214504000001880}.
+
+\bibitem[Savage(1972)]{savage_foundations_1972}
+Leonard~J. Savage.
+\newblock \emph{Foundations of {Statistics}}.
+\newblock Dover Publications, New York, revised edition edition, June 1972.
+\newblock ISBN 978-0-486-62349-8.
 
 \bibitem[Selinger(2010)]{selinger_survey_2010}
 Peter Selinger.

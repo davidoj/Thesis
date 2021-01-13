@@ -3,23 +3,26 @@
 
 \chapter{Chapter 3: See-do models}
 
-Consider the following problem: you are presented with a collection $\Theta$ of hypotheses about how the world might function and a vector $\mathbf{x}$ of observational data which you know could have taken values in some space $X$. You want to determine which hypothesis $\theta\in \Theta$ best describes the world. However you ultimately solve the problem, the next step you take will probably be to determine for each $\theta\in \Theta$ a probability distribution $\kernel{P}_\theta\in \Delta(\sigalg{X})$ that indicates how likely you would be to observe the various elements of $X$ were $\theta$ in fact the case. This is a \emph{statistical model} -- an indexed set of probability distributions $\{\prob{P}_\theta|\theta\in \Theta\}$. Statistical models are ubiquitous in the field of statistics -- they are found in statistical decision theory where the elements of $\Theta$ are typically called ``states''\citep{wald_statistical_1950}, in Bayesian inference where the elements of $\Theta$ may be called ``parameters'' \citep{freedman_asymptotic_1963} and in frequentist inference where elements of $\Theta$ they may be called ``hypotheses'' \citep{fisher_statistical_1992}. 
+Consider the following problem: you are presented with a collection $\RV{H}$ of hypotheses about how the world might function and a vector $\mathbf{x}$ of observational data which you know could have taken values in some space $X$. You want to determine which hypothesis $\RV{H}\in \RV{H}$ best describes the world. However you ultimately solve the problem, the next step you take will probably be to determine for each $\RV{H}\in \RV{H}$ a probability distribution $\kernel{P}_\RV{H}\in \Delta(\sigalg{X})$ that indicates how likely you would be to observe the various elements of $X$ were $\RV{H}$ in fact the case. This is a \emph{statistical model} -- an indexed set of probability distributions $\{\prob{P}_\RV{H}|\RV{H}\in \RV{H}\}$. Statistical models are ubiquitous in the field of statistics -- they are found in statistical decision theory where the elements of $\RV{H}$ are typically called ``states''\citep{wald_statistical_1950}, in Bayesian inference where the elements of $\RV{H}$ may be called ``parameters'' \citep{freedman_asymptotic_1963} and in frequentist inference where elements of $\RV{H}$ they may be called ``hypotheses'' \citep{fisher_statistical_1992}. 
 
-These different approaches to statistics may have different notions of what the ``best hypothesis'' $\theta$ is, may employ different estimation methods and may not even agree about what ``distributed according to $\kernel{P}_\theta$'' means. Nonetheless, the interpretation of the statistical model in each case is roughly the same: supposing $\theta\in\Theta$ is true, the data will be distributed according to $\kernel{P}_\theta$. A statistical model takes a hypothesis and tells you what you are likely to \emph{see}.
+These different approaches to statistics may have different notions of what the ``best hypothesis'' $\RV{H}$ is, may employ different estimation methods and may not even agree about what ``distributed according to $\kernel{P}_\RV{H}$'' means. Nonetheless, the interpretation of the statistical model in each case is roughly the same: supposing $\RV{H}\in\RV{H}$ is true, the data will be distributed according to $\kernel{P}_\RV{H}$. A statistical model takes a hypothesis and tells you what you are likely to \emph{see}.
 
-Sometimes we are interested in modelling situations where we can also make some choices that also affect the eventual consequences. For example, I might hypothesise $\theta_1$: the switch on the wall controls my light, $\theta_2$: the switch on the wall does not control my light. Then, given $\theta_1$ I can choose to toggle the switch, and I will see my light turn on, or I can choose not to toggle the switch and I will not see my light turn on. Given $\theta_2$, neither choice will result in a light turned on. Choices are clearly different to hypotheses: the choice I make depends on what I want to happen, while whether or not a hypothesis is true has no regard for my ambitions.
+Sometimes we are interested in modelling situations where we can also make some choices that also affect the eventual consequences. For example, I might hypothesise $\RV{H}_1$: the switch on the wall controls my light, $\RV{H}_2$: the switch on the wall does not control my light. Then, given $\RV{H}_1$ I can choose to toggle the switch, and I will see my light turn on, or I can choose not to toggle the switch and I will not see my light turn on. Given $\RV{H}_2$, neither choice will result in a light turned on. Choices are clearly different to hypotheses: the choice I make depends on what I want to happen, while whether or not a hypothesis is true has no regard for my ambitions.
 
-A ``statistical model with choices'' is simply a map $\prob{T}:D\times \Theta\to \Delta(\sigalg{E})$ for some set of choices $D$, hypotheses $\Theta$ and outcome space $(E,\sigalg{E})$. We can also distinguish two types of outcomes: \emph{observations} which are given prior to a choice being made and \emph{consequences} which happen after a choice is made. Observations cannot be affected by the choices made, while consequences are not subject to this restriction. That is, observations are what we might \emph{see} before making a choice, which depends on the hypothesis alone, and if we are lucky we may be able to invert this dependence to learn something about the hypothesis from observations. On the other hand, the consequences of what we \emph{do} depends jointly on the hypothesis and the choice we make and we judge which choices are more desirable on the basis of which consequences we expect them to produce. 
+A ``statistical model with choices'' is simply a map $\prob{T}:D\times \RV{H}\to \Delta(\sigalg{E})$ for some set of choices $D$, hypotheses $\RV{H}$ and outcome space $(E,\sigalg{E})$. We can also distinguish two types of outcomes: \emph{observations} which are given prior to a choice being made and \emph{consequences} which happen after a choice is made. Observations cannot be affected by the choices made, while consequences are not subject to this restriction. That is, observations are what we might \emph{see} before making a choice, which depends on the hypothesis alone, and if we are lucky we may be able to invert this dependence to learn something about the hypothesis from observations. On the other hand, the consequences of what we \emph{do} depends jointly on the hypothesis and the choice we make and we judge which choices are more desirable on the basis of which consequences we expect them to produce. 
 
 What we are studying is a family of models that generalises of statistical models to include hypotheses, choices, observations and consequences. These models are referred to as \emph{see-do models}. Hypotheses, observations, consequences and choices are not individually new ideas. \emph{Statistical decision problems} \citep{wald_statistical_1950,savage_foundations_1972} extend statistical models with decisions and \emph{losses}. Like consequences, losses depend on which choices are made. However, unlike consequences, losses must be ordered and reflect the preferences of a decision maker. \emph{Influence diagrams} are directed graphs created to represent decision problems that feature ``choice nodes'', ``chance nodes'' and ``utility nodes''. An influence diagram may be associated with a particular probability distribution \cite{nilsson_evaluating_2013} or with a set of probability distributions \cite{dawid_influence_2002}.
 
-See-do models have deep roots in decision theory. Decision theory asks, out of a set of available acts, which ones ought to be chosen. See-do models answer an intermediate question: out of a set of available acts, what are the consequences of each? This question is described by \citet{pearl_causality:_2009} as an ``interventional'' question. To model questions described by Pearl as ``counterfactual'', we can extend see-do models with a notion of \emph{parallel choices}.  This relies on interpreting the choice set $D$ as a set of \emph{counterfactual propositions} rather than a set of \emph{deicisions} or \emph{actions}. It may be possible to perform regular actions in sequence - I can do action ``1'', then action ``2'', and I can consider the results of performing both actions in sequence. In contrast, with counterfactual propositions I can consider the joint results of performing action ``1'' and performing action ``2'' \emph{instead of} action ``1''. can be thought of as imagining the results of performing one experiment multiple times, but making slightly different choices each time. I present a set of conditions formalising this general idea, and show that these conditions imply the existence of \emph{Potential Outcomes}. \todo[inline]{And that seem to have an interesting relationship to the assumptions in Bell-type theorems that rule out quantum behaviour of hidden variable theories, but at this stage I haven't fully worked this out and it isn't a high priority}
+See-do models have deep roots in decision theory. Decision theory asks, out of a set of available acts, which ones ought to be chosen. See-do models answer an intermediate question: out of a set of available acts, what are the consequences of each? This question is described by \citet{pearl_causality:_2009} as an ``interventional'' question. To model questions described by Pearl as ``counterfactual'', we can use a special kind of see-do model with \emph{parallel choices}. Parallel choices model sequences of experiments where taking the same action repeatedly deterministically results in the same outcome, and where the result of a sequence of actions doesn't depend on the order in which the actions are taken. Parallel choices can arguably model a kind of commonsense counterfactuals as expressed in the question ``what would have happened if I chose $b$ instead of $a$?''. Whether or not this interpretation is compelling, we show that \emph{potential outcomes} \citep{rubin_causal_2005} exist in a see-do model if and only if it is a model of parallel choices.
+
+\todo[inline]{Interestingly, it seems to be possible to construct a see-do model where the ``hypothesis'' is a quantum state, and quantum mechanics + locality seems to rule out parallel choices in such models in a manner similar to Bell's theorem. ``Seems to'' because I haven't actually proven any of these things.}
 
 \section{Definition}
 
+\todo[inline]{Terminology question: The variables $\RV{H}$ and $\RV{D}$ aren't \emph{random} in the commonsense understanding of the word. They're also defined on a \emph{kernel space} rather than a \emph{probability space}. They're currently called random variables simply by virtue of being measurable functions on the outcome space. I'm not a huge fan of ``quasirandom variables'', but it does capture the idea that these things are very similar to random variables but not exactly the same.}
 
 \begin{definition}[See-Do model]\label{def:seedo}
-A \emph{see-do model} is a kernel space (Definition \ref{def:kernel_space}) $(\kernel{T},H\times D,X\times Y)$ along with four random variables: the \emph{hypothesis} $\RV{H}:H\times D\times X\times Y\to H$, the \emph{choice} $\RV{D}:H\times D\times X\times Y\to D$, the \emph{observations} $\RV{X}:H\times D\times X\times Y\to X$ and the \emph{consequences} $\RV{Y}:H\times D\times X\times Y\to Y$, all given by the obvious projection maps. 
+A \emph{see-do model} $\langle\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y}\rangle$ is a kernel space (Definition \ref{def:kernel_space}) $(\kernel{T},H\times D,X\times Y)$ along with four random variables: the \emph{hypothesis} $\RV{H}:H\times D\times X\times Y\to H$, the \emph{choice} $\RV{D}:H\times D\times X\times Y\to D$, the \emph{observations} $\RV{X}:H\times D\times X\times Y\to X$ and the \emph{consequences} $\RV{Y}:H\times D\times X\times Y\to Y$, all given by the obvious projection maps. 
 
 The spaces $H$, $D$, $X$ and $Y$ are the hypothesis, choice, observation and consequence spaces respectively.
 
@@ -28,349 +31,258 @@ A see-do model has the additional property that, holding the hypothesis fixed, t
 
 
 \begin{theorem}[Observation and Consequence maps]\label{th:obs_cmaps}
-Any see-do model $(\kernel{T},H\times D,X\times Y)$ can be uniquely represented by two Markov kernels:
+Any see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ can be uniquely represented by the following pair of Markov kernels:
 \begin{itemize}
-    \item The \emph{observation map} $\kernel{T}^{\RV{X}|\Theta}$
-    \item The \emph{consequence map} $\kernel{T}^{\RV{Y}|\Theta\RV{X}\RV{D}}$
+    \item The \emph{observation map} $\kernel{T}^{\RV{X}|\RV{H}}$
+    \item The \emph{consequence map} $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$
 \end{itemize}
+
+Furthermore
+\begin{align}
+\kernel{T} = \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+    \end{tikzpicture}
+\end{align}
 \end{theorem}
 
-\begin{definition}[See-Do Model]
-A See-Do Model takes a hypothesis $\theta\in \Theta$ and an option $d\in D$ and returns a joint distribution over choices and consequences with the restriction that, given a particular hypothesis, observations are independent of the choice. Formally, a See-Do Model is a kernel space $(\kernel{T},X\times Y, \Theta\times D)$ where $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ where $\Theta$ is the hypothesis space, $D$ is the option set, $X$ is the observation space and $Y$ is the consequence space. Defining $\RV{X},\RV{Y},\RV{D},\Theta$ to be projection maps to the associated spaces, a see-do model has the property $\RV{X}\CI_{\kernel{T}} \RV{D}|\Theta$. That is, for each hypothesis $\theta\in \Theta$, $\kernel{T}$ holds that the observations $\RV{X}$ are independent of the choice of option $\RV{D}$.
+\todo[inline]{Maybe moves proofs out of main text}
 
-A see-do model $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ can be uniquely defined by the following pair of Markov kernels:
-\begin{itemize}
-    \item Observation map $\kernel{T}^{\RV{X}|\Theta}$, which exists by virtue of the independence of observations from consequences
-    \item Consequence map $\kernel{T}^{\RV{Y}|\Theta\RV{X}\RV{D}}$
-\end{itemize}
+\begin{proof}
+By \ref{th:representaiton}, 
+
+\begin{align}
+\kernel{T} = \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}\RV{D}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw[name path=P1] (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+        \draw[name path=P2] (copy2) to [out = 65, in = 180] ($(O.west)+(0,-0.15)$);
+    \end{tikzpicture}
+\end{align}
+
+
+By the assumption $\RV{X}\CI_{\kernel{T}} \RV{D}|\RV{H}$ and version 2 of conditional independence from Theorem \ref{th:ci_equivalence},
+
+\begin{align}
+\kernel{T} &= \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+        \draw[-{Rays[n=8]}] (copy2) to [out = 65, in = 180] ($(O.west)+(-0.2,-0.5)$);
+    \end{tikzpicture}\\
+    &= \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+    \end{tikzpicture}
+\end{align}
+
+\end{proof}
+
+\todo[inline]{Not quite sure if this is the right place for the following definition}
+
+The independence of observations and choices is preserved when we take the product of a see-do model and a \emph{prior} over hypotheses. Such a product produces a \emph{Bayesian see-do model}:
+
+\begin{definition}[Bayesian See-Do Model]
+A Bayesian See-Do Model $\langle\kernel{U},\RV{D},\RV{X},\RV{Y}\rangle$ is a Markov kernel space $(\kernel{U},D,X\times Y)$ with the property $\RV{X}\CI_{\kernel{U}}\RV{D}$, along with choices $\RV{D}$, observations $\RV{X}$ and consequences $\RV{Y}$, defined as before.
 \end{definition}
 
+\begin{theorem}[A see-do model with a prior is a Bayesian see-do model]
+The product of a see-do model $\kernel{T}$ and a prior $\gamma\in \Delta(\sigalg{H})$
+\begin{align}
+    \kernel{U} &:= (\gamma\otimes \mathrm{Id}^D)\kernel{T}
+\end{align}
+Is a Bayesian see-do model.
+\end{theorem}
+
+\todo[inline]{Maybe moves proofs out of main text}
+
+\begin{proof}
+
+It nees to be shown that $\RV{X}\CI_{\kernel{U}}\RV{D}$.
+
+By definition
+\begin{align}
+\kernel{U}^{\RV{X}|\RV{D}} &= \kernel{U}\kernel{F}^{\RV{X}}\\
+                            &= (\gamma\otimes \mathrm{Id}^D)\kernel{T}\kernel{F}^{\RV{X}}\\
+                            &= \begin{tikzpicture} \path (0,0) node[dist] (T) {$\gamma$}
+                                    + (0,-1.15) node (D) {$\RV{D}$}
+                                    ++ (0.5,0) node[copymap] (copy0) {}
+                                    + (0.,-1.15) node[copymap] (copy2) {}
+                                    ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+                                    ++ (0.7,0) node[copymap] (copy1) {}
+                                    +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+                                    ++ (1.9,0) node (X) {$\RV{X}$}
+                                    +  (0,-1) node (Y) {};
+                                    \draw (T) -- (O) -- (X);
+                                    \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+                                    \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+                                    \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+                                    \draw[-{Rays[n=8]}] (C) -- (Y);
+                                \end{tikzpicture}\\
+                            &= \begin{tikzpicture} \path (0,0) node[dist] (T) {$\gamma$}
+                                    + (0,-1.15) node (D) {$\RV{D}$}
+                                    ++ (0.5,0) coordinate (copy0)
+                                    ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+                                    ++ (0.7,0) coordinate (copy1)
+                                    ++ (1.9,0) node (X) {$\RV{X}$}
+                                    +  (0,-1) node (Y) {};
+                                    \draw (T) -- (O) -- (X);
+                                    \draw[-{Rays[n=8]}] (D) -- (Y);
+                                \end{tikzpicture}
+\end{align}
+
+Which implies $\RV{X}\CI_{\kernel{U}} \RV{D}$ by version (2) of conditional indpendence (Theorem \ref{th:ci_equivalence}).
+\end{proof}
+
+
 \begin{definition}[Hypothesis sufficiency]
-According to the general definition of a see-do model, observations provide evidence about which hypothesis $\theta$ is correct \emph{and also} may directly affect the consequences. See-do models may be simplified if only the hypothesis and decision affects the consequence. The hypotheses are \emph{sufficient} for a See-Do Model $(\kernel{T},X\times Y, \Theta\times D)$ if $\RV{Y}\CI_{\kernel{T}} \RV{X}|\Theta\RV{D}$.
+The hypothesis $\RV{H}$ is \emph{sufficient} for a see-do model if the consequence map has no dependence on observations $\RV{X}$ conditional on $\RV{H}$. That is, $\RV{Y}\CI_\kernel{T} \RV{X}|\RV{D}\RV{H}$. 
 
 A hypothesis sufficient see-do model can be specified with:
 
 \begin{itemize}
-    \item Hypothesis space $\Theta$, options $D$, observations $X$ and consequences $Y$
-    \item Observation map $\kernel{T}^{\RV{X}|\Theta}$, which exists by virtue of the independence of observations from consequences
-    \item Consequence map $\kernel{T}^{\RV{Y}|\Theta\RV{D}}$
+    \item Hypothesis space $\RV{H}$, choices $D$, observations $X$ and consequences $Y$
+    \item Observation map $\kernel{T}^{\RV{X}|\RV{H}}$
+    \item Reduced consequence map $\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$
 \end{itemize}
 \end{definition}
 
-\begin{definition}[Bayesian See-Do Model]
-A Bayesian See-Do Model $\kernel{U}$ is a Markov kernel $D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ with the property $\RV{X}\CI_{\kernel{U}}\RV{D}$.
-
-A Bayesian See-Do Model can be constructed from a see-do model $\kernel{T}$ by choosing an arbitrary prior $\gamma\in \Delta(\Theta)$ and taking the product:
-
-\begin{align}
-    \kernel{U} &= (\gamma\otimes \mathrm{Id}^D)\kernel{T}
-\end{align}
-
-For all $A\in \sigalg{X}$, $B\in\sigalg{Y}$, $d\in D$:
-\begin{align}
-    \kernel{U}_d(A\times B) &= \int_\Theta \int_A \kernel{T}_{\theta,x,d}^{\RV{Y}|\RV{X}\RV{D}\Theta} (B) d\kernel{T}_{\theta}^{\RV{X}|\Theta}(x) d\gamma(\theta)
-\end{align}
-
-In this case, $\kernel{U}^{\RV{Y}|\RV{X}\RV{D}\Theta}\overset{a.s.}{=}\kernel{T}^{\RV{Y}|\RV{X}\RV{D}\Theta}$ and $\kernel{U}^{\RV{X}|\Theta}\overset{a.s.}{=}\kernel{T}^{\RV{X}|\Theta}$
+Given observations $\RV{X}$, assumed to be an IID sequence $\RV{X}_1,\RV{X}_2,...$ conditional on $\RV{H}$, a common ``causal inference problem'' is to estimate the ``true'' distribution of observations $\kernel{T}^{\RV{X}_i|\RV{H}}_{h^*}$ and from this to estimate the consequence map $\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}_{h^*\cdot}$, if this is possible. This problem only makes sense if hypothesis sufficiency is assumed -- once $h^*$ is given, the consequence map of interest has no further dependence on $\RV{X}$. We show that all decision problems can be modeled by a hypothesis sufficient see-do model.
 
 
-\end{definition}
+\subsubsection{Examples of hypothesis sufficient and insufficient see-do models}
 
-\subsubsection{Examples of see-do models}
-
-Suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a hypothesis sufficient see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\theta\mapsto \mathrm{Bernoulli}(\theta)$. Then define $\kernel{T}^{(1)}$ by:
+Suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a hypothesis sufficient see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\RV{H}\mapsto \mathrm{Bernoulli}(\RV{H})$. Then define $\prescript{1}{}{\kernel{T}}$ by:
 
 \begin{itemize}
     \item $D=\{0,1\}$
     \item $X=\{0,1\}^N$
     \item $Y=\{0,1\}$
-    \item $\Theta=(0,1)$
-    \item $\kernel{T}^{\RV{X}|\Theta(1)}:\splitter{0.1}^N\kernel{B}$
-    \item $\kernel{T}^{\RV{Y}|\RV{D}\Theta(1)}:(\theta,d)\mapsto \mathrm{Bernoulli}(1-|d-\theta|)$
+    \item $H=(0,1)$
+    \item $\prescript{1}{}{\kernel{T}}^{\RV{X}|\RV{H}}:\splitter{0.1}^N\kernel{B}$
+    \item $\prescript{1}{}{\kernel{T}}^{\RV{Y}|\RV{D}\RV{H}}:(\RV{H},d)\mapsto \mathrm{Bernoulli}(1-|d-\RV{H}|)$
 \end{itemize}
 
-In this model, the chance $\theta$ of the coin landing on heads is as much as we can hope to know about how our bet will work out.
+In this model, the chance $\RV{H}$ of the coin landing on heads is as much as we can hope to know about how our bet will work out.
 
-Suppose instead that in addition to the $N$ prior flips, we manage to sneak a look at the outcome of the flip on which we will bet. In this case, the situation can be modeled by the following hypothesis insufficient see-do model $\kernel{T}^{(2)}$:
+Suppose instead that in addition to the $N$ prior flips, we manage to look at the outcome of the flip on which we will bet. In this case, the situation can be modeled by the following hypothesis insufficient see-do model $\prescript{2}{}{\kernel{T}}$:
 
 \begin{itemize}
     \item $D=\{0,1\}$
     \item $X=\{0,1\}^{N+1}$
     \item $Y=\{0,1\}$
-    \item $\Theta=(0,1)$
-    \item $\kernel{T}^{\RV{X}|\Theta (2)}:\splitter{0.1}^{N+1}\kernel{B}$
-    \item $\kernel{T}^{\RV{Y}|\RV{D}\RV{X}\Theta(2)}:(\theta,\mathbf{x},d)\mapsto \delta_{1-|d-x_{N+1}|}$
+    \item $H=(0,1)$
+    \item $\prescript{2}{}{\kernel{T}}^{\RV{X}|\RV{H}}:\splitter{0.1}^{N+1}\kernel{B}$
+    \item $\prescript{2}{}{\kernel{T}}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}:(\RV{H},\mathbf{x},d)\mapsto \delta_{1-|d-x_{N+1}|}$
 \end{itemize}
 
-In this case, the observed data tells us more about how the bet will work out than the hypothesis alone.
+In this case, even if we are told the value of $\RV{H}$, we still benefit from using the observed data when making our decision.
 
-It is also possible to model the second situation with a hypothesis sufficient model by including the result of the $N+1$th flip in the hypothesis. Define the new hypothesis space $\Theta'=(0,1)\times\{0,1\}$ and define $\kernel{T}^{(3)}$ by:
+It appears that it might be possible to model the second situation with a hypothesis sufficient model by including the result of the $N+1$th flip in the hypothesis. Define the new hypothesis space $H'=(0,1)\times\{0,1\}$ and define $\prescript{3}{}{\kernel{T}}$ by:
 
 \begin{itemize}
     \item $D=\{0,1\}$
     \item $X=\{0,1\}^{N+1}$
     \item $Y=\{0,1\}$
-    \item $\Theta'=(0,1)\times\{0,1\}$
-    \item $\kernel{T}^{\RV{X}|\Theta'(3)}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
-    \item $\kernel{T}^{\RV{Y}|\RV{D}\Theta'(3)}:(\theta',x_{N+1},d)\mapsto \delta_{1-|d-x_{N+1}|}$
+    \item $H'=(0,1)\times\{0,1\}$
+    \item $\prescript{3}{}{\kernel{T}}^{\RV{X}|\RV{H}'}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
+    \item $\prescript{3}{}{\kernel{T}}^{\RV{Y}|\RV{H}'\RV{D}}:(h,x_{N+1},d)\mapsto \delta_{1-|d-x_{N+1}|}$
 \end{itemize}
 
-However, $\RV{X}_{N+1}$ is related to the previous flips $\vecRV{X}_{<N}$. In particular, given $\theta\in \Theta$, $\RV{X}_{N+1}$ should be distributed according to Bernoulli($\theta$). That is, defining $\Theta:\Theta'\times D\times X\times Y\to (0,1)$ to be the projection map that yields the parameter $\theta$, any Bayesian model $\kernel{U}$ should have the property $\kernel{U}^{\RV{X}_{N+1}|\Theta}=\kernel{B}$. Then for any $A\in \sigma(\{0,1\}^N), B\in \sigma(\{0,1\}), C\in \sigma(\{0,1\})$
+However, $\RV{X}_{N+1}$ is related to the previous flips $\vecRV{X}_{<N}$ and $\prescript{3}{}{\kernel{T}}$ ignores this fact.  In particular, given any $\RV{H}'=(h,\_)$, $\RV{X}_{N+1}$ as well as $\RV{X}_{i}$, $i\leq N$ should all distributed according to Bernoulli($h$). Thus $\prescript{2}{}{\kernel{T}}$ is preferable to $\prescript{3}{}{\kernel{T}}$ because it represents more of the knowledge we have about the problem.
 
-\begin{align}
-    \kernel{U}^{(3)}_d(A\times B\times C) &= \int_{\Theta} \int_A \int_{B}   \kernel{T}_{\theta',\mathbf{x},d}^{\RV{Y}|\RV{X}\RV{D}\Theta'(3)} (C) d\kernel{U}^{\RV{X}_{N+1}|\Theta}_\theta(x_{N+1}) d\kernel{T}_{\theta}^{\RV{X}|\Theta'(3)}(\mathbf{x}) d\kernel{U}^{\Theta}(\theta)\\
-                                  &= \int_{\Theta} \int_A \int_{B}  \kernel{T}_{\theta',\mathbf{x},d}^{\RV{Y}|\RV{X}\RV{D}\Theta'(3)} (C) d\kernel{B}_\theta(x_{N+1}) d\kernel(\splitter{0.1}^{N}\kernel{B})(\mathbf{x}) d\kernel{U}^{\Theta}(\theta)\\
-                                  &= \int_{\Theta} \int_{A\times B}  \kernel{T}_{\theta',\mathbf{x},d}^{\RV{Y}|\RV{X}\RV{D}\Theta'(2)} (C) d\kernel(\splitter{0.1}^{N+1}\kernel{B})(\mathbf{x}) d\kernel{U}^{\Theta}(\theta)\\
-\end{align}
+If a see-do model is employed in a \emph{decision problem} -- defined in the next section -- there is an alternative way to avoid hypothesis insufficiency that does not require throwing out some of the model structure.
 
-Which is equivalent to $\kernel{T}^{(2)}$ equipped with the prior $\kernel{U}^{\Theta}\in \Delta(\Theta)$. Thus the difference between $\kernel{T}^{(2)}$ and $\kernel{T}^{(3)}$ is whether a constraint is expressed in the model (as in $\kernel{T}^{(2)}$) or in over the class of allowable priors (as in $\kernel{T}^{(3)}$).
+\todo[inline]{The importance of this is that counterfactual questions are usually \emph{not} decision problems and so they do not have the possibility of avoiding insufficiency available; also \emph{in practice} counterfactual problems are usually hypothesis insufficient while decision problems are usually not.}
 
-\todo[inline]{I don't have a theory of stochastic vs non-stochastic uncertainty, but it is the case in general that a hypothesis sufficient model with additional restrictions on the prior can be replaced by a hypothesis insufficient model with no restrictions on the prior. This is mainly relevant with regard to counterfactuals}
-
-
-
-
-
-
-\begin{itemize}
-    \item \emph{Option sets}; the set of options I have available
-    \item \emph{Observations}; the observations I might be given
-    \item \emph{Consequences}; what might arise as a result of my having chosen a particular option
-    \item \emph{Preferences}; which consequences I want, and which I do not want
-    \item \emph{Uncertainty}; I am uncertain about which consequences are brought about by my available options, and I may be able to become less uncertain after considering the data I have been given
-\end{itemize}
-
-\emph{See-Do Models} formalise the above notions. See-Do Models use expected utility theory to formalise preferences and probability theory to model noisy observations and uncertainty over consequences. We make these choices because these are well understood and widely accepted tools for modelling preferences and uncertainty respectively. For a given CSDP, See-Do Models regard the \emph{option set}, the \emph{observation space} and the \emph{consequence space} to be fixed.
-
-\begin{definition}[Option set]
-An \emph{option set} $D$ is a finite or countable set of options. A decision maker may select any option from $D$ and in addition may select any mixture of options from $\Delta(\sigalg{D})$.
-\end{definition}
-
-\begin{definition}[Observation space]
-The decision maker receives an \emph{observation}, which is an element of a standard measurable set $(X,\sigalg{X})$.
-\end{definition}
-
-\begin{definition}[Consequence space]
-The decision maker's choice of option results in a \emph{consequence}, which is an element of a standard measurable set $(Y,\sigalg{Y})$.
-\end{definition}
-
-We allow for two types of uncertainty over which consequences will actually take place given the selection of a particular option. Consequences may be stochastic functions of the option selected and of the given data. Secondly, a decision maker may entertain a number of different \emph{hypotheses} about the relationship between data, decision and consequences. A decision maker may select a particular distribution of hypotheses called a \emph{prior} so that the only remaining uncertainty is stochastic, but we avoid assuming that a canonical prior is available at the outset.
-
-\begin{definition}[See-Do Model]
-A See-Do Model takes a hypothesis $\theta\in \Theta$ and an option $d\in D$ and returns a joint distribution over observations and consequences with the restriction that, given a particular hypothesis, observations are independent of options. Formally, a See-Do Model is a Markov kernel $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ where, given the obvious definitions of observations $\RV{X}$, consequences $\RV{Y}$, options $\RV{D}$ and hypothesis $\Theta$, $\RV{X}\CI_{\kernel{T}}\RV{D}|\Theta$. 
-
-Letting $\kernel{O}$ be a version of $\kernel{T}^{\RV{X}|\Theta}$ and letting $\kernel{S}$ be a version of $\kernel{T}^{\RV{Y}|\RV{D}\RV{X}\Theta}$ we can write
-
-\begin{align}
-    \kernel{T} = 
-    \begin{tikzpicture} \path (0,0) node (T) {$\Theta$}
-        + (0,-1) node (D) {$\RV{D}$}
-        ++ (0.5,0) coordinate (copy0)
-        ++ (0.5,0) node[kernel] (O) {$\kernel{O}$}
-        ++ (0.7,0) coordinate (copy1)
-        +  (0.4,-1) node[kernel] (C) {$\kernel{S}$}
-        ++ (1.1,0) node (X) {$\RV{X}$}
-        +  (0,-1) node (Y) {$\RV{Y}$};
-        \draw (T) -- (O) -- (X);
-        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
-        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
-        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
-        \draw (C) -- (Y);
-    \end{tikzpicture}
-\end{align}
-\end{definition}
-
-\begin{definition}[Hypothesis sufficiency]
-According to the general definition, observations provide evidence about which hypothesis $\theta$ is correct \emph{and also} may directly affect the consequences. The hypotheses are \emph{sufficient} for a See-Do Model $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ if $\RV{Y}\CI_{\kernel{T}} \RV{X}|\Theta\RV{D}$. In this case, letting $\kernel{O}$ be a version of $\kernel{T}^{\RV{X}|\Theta}$ and $\kernel{C}$ be a version of $\kernel{T}^{\RV{Y}|\RV{D}\Theta}$ we can write
-
-\begin{align}
-    \kernel{T} = 
-    \begin{tikzpicture} \path (0,0) node (T) {$\Theta$}
-        + (0,-1) node (D) {$\RV{D}$}
-        ++ (0.5,0) coordinate (copy0)
-        ++ (0.5,0) node[kernel] (O) {$\kernel{O}$}
-        +  (0.,-1) node[kernel] (C) {$\kernel{C}$}
-        ++ (1,0) node (X) {$\RV{X}$}
-        +  (0,-1) node (Y) {$\RV{Y}$};
-        \draw (T) -- (O) -- (X);
-        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0.1)$);
-        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.1)$);
-        \draw (C) -- (Y);    
-    \end{tikzpicture}
-\end{align}
-
-To specify a see-do model with sufficient hypotheses we require an observation model $\kernel{O}:\Theta\to \Delta(\sigalg{X})$ and a consequence map $\kernel{C}:\Theta\times D\to \Delta(\sigalg{Y})$. To specify an insufficient model, we require an observation model (as before) and a \emph{state-dependent} consequence map $\kernel{S}:\Theta\times X\times D\to \Delta(\sigalg{Y})$.
-\end{definition}
-
-\begin{definition}[Bayesian See-Do Model]
-A Bayesian See-Do Model $\kernel{T}$ is a Markov kernel $D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ with the property $\RV{X}\CI_{\kernel{T}}\RV{D}$. Letting $\kernel{V}\in\kernel{T}^{\RV{Y}|\RV{X}\RV{D}}$, it can be written in the form
-
-\begin{align}
-    \kernel{T} = 
-    \begin{tikzpicture} \path (0,0) node[dist] (T) {$\gamma$}
-        + (0,-1) node (D) {$\RV{D}$}
-        ++ (0.5,0) coordinate (copy0)
-        ++ (0.5,0) coordinate (O)
-        +  (0.3,-1) node[kernel] (C) {$\kernel{V}$}
-        ++ (1,0) node (X) {$\RV{X}$}
-        +  (0,-1) node (Y) {$\RV{Y}$};
-        \draw (T) -- (O) -- (X);
-        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
-        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
-        \draw (C) -- (Y);
-    \end{tikzpicture}
-\end{align}
-
-A Bayesian See-Do Model can be constructed from a See-Do Model $\kernel{T}'$ by choosing an arbitrary prior $\gamma\in \Delta(\Theta)$ and taking the product:
-
-\begin{align}
-    \kernel{T} &= (\gamma\otimes\mathrm{Id}^D)\kernel{T}'\\ 
-               &= \begin{tikzpicture} \path (0,0) node[dist] (T) {$\gamma$}
-        + (0,-1) node (D) {$\RV{D}$}
-        ++ (0.5,0) coordinate (copy0)
-        ++ (0.5,0) node[kernel] (O) {$\kernel{O}$}
-        ++ (0.7,0) coordinate (copy1)
-        +  (0.4,-1) node[kernel] (C) {$\kernel{S}$}
-        ++ (1.1,0) node (X) {$\RV{X}$}
-        +  (0,-1) node (Y) {$\RV{Y}$};
-        \draw (T) -- (O) -- (X);
-        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
-        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
-        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
-        \draw (C) -- (Y);
-    \end{tikzpicture}\label{eq:t_with_prior}\\
-               &= \begin{tikzpicture} \path (0,0) node[dist] (T) {$\gamma \kernel{O}$}
-        + (0,-1.3) node (D) {$\RV{D}$}
-        ++ (0.8,0) coordinate (copy0)
-        + (-0.2,-0.2) coordinate (r1)
-        + (0,-0.3) coordinate (copy1)
-        +  (0.9,-0.3) coordinate (c2)
-        + (0.8,-1) node[kernel] (Tg) {$\kernel{T}^{\Theta|\RV{X}}$}
-        +  (1.8,-1.3) node[kernel] (C) {$\kernel{S}$}
-        ++ (2.4,0) node (X) {$\RV{X}$}
-        +  (0,-1.3) node (Y) {$\RV{Y}$}
-        + (0.3,-1.6) coordinate (r2);
-        \draw (T) -- (X);
-        \draw (copy0) to [out=-85,in=180] (Tg) (Tg) to [out=0,in=180] ($(C.west) + (0,0)$);
-        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
-        \draw (copy1) to (c2) to [out=-0,in=180] ($(C.west)+ (0,0.15)$);
-        \draw[red] (r1) rectangle (r2);
-        \draw (C) -- (Y);
-    \end{tikzpicture}
-\end{align}
-
-The existence of $\kernel{T}^{\Theta|\RV{X}}$ follows from the fact that $\Theta$ is independent of $\RV{D}$ in \ref{eq:t_with_prior}. Define $\kernel{V}$ as the kernel in the red box. Then
-
-\begin{align}
-    \kernel{T} &= \begin{tikzpicture} \path (0,0) node[dist] (T) {$\gamma\kernel{O}$}
-        + (0,-1) node (D) {$\RV{D}$}
-        ++ (0.5,0) coordinate (copy0)
-        ++ (0.5,0) coordinate (O)
-        +  (0.3,-1) node[kernel] (C) {$\kernel{V}$}
-        ++ (1,0) node (X) {$\RV{X}$}
-        +  (0,-1) node (Y) {$\RV{Y}$};
-        \draw (T) -- (O) -- (X);
-        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
-        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
-        \draw (C) -- (Y);
-    \end{tikzpicture}
-\end{align}
-
-\end{definition}
-
-\subsubsection{Examples of see-do models}
-
-Suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a hypothesis sufficient see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\theta\mapsto \mathrm{Bernoulli}(\theta)$. Then define $\kernel{T}^1$ by:
-
-\begin{itemize}
-    \item $D=\{0,1\}$
-    \item $X=\{0,1\}^N$
-    \item $Y=\{0,1\}$
-    \item $\Theta=(0,1)$
-    \item $\kernel{O}:\splitter{0.1}^N\kernel{B}$
-    \item $\kernel{C}:(\theta,d)\mapsto \mathrm{Bernoulli}(1-|d-\theta|)$
-\end{itemize}
-
-Where $\otimes^N$ indicates the tensor product copied $N$ times. The chance $\theta$ of the coin landing on heads is as much as we can hope to know about how our bet will work out.
-
-Suppose instead that in addition to the $N$ prior flips, we manage to sneak a look at the outcome of the flip on which we will bet. In this case, the situation can be modeled by the following hypothesis insufficient see-do model $\kernel{T}^2$:
-
-\begin{itemize}
-    \item $D=\{0,1\}$
-    \item $X=\{0,1\}^{N+1}$
-    \item $Y=\{0,1\}$
-    \item $\Theta=(0,1)$
-    \item $\kernel{O}:\splitter{0.1}^{N+1}\kernel{B}$
-    \item $\kernel{S}:(\theta,\mathbf{x},d)\mapsto \delta_{1-|d-x_{N+1}|}$
-\end{itemize}
-
-It is also possible to model the second situation with a hypothesis sufficient model if we include the result of the $N+1$th flip in the hypothesis. Define $\kernel{T}^3$ by the elements:
-
-\begin{itemize}
-    \item $D=\{0,1\}$
-    \item $X=\{0,1\}^{N+1}$
-    \item $Y=\{0,1\}$
-    \item $\Theta=(0,1)\times\{0,1\}$
-    \item $\kernel{O}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
-    \item $\kernel{S}:(\theta,x_{N+1},d)\mapsto \delta_{1-|d-x_{N+1}|}$
-\end{itemize}
-
-However, $\RV{X}_{N+1}$ is related to the prior flips $\vecRV{X}_{<N}$. In particular, given $\theta\in \Theta$, $\RV{X}_{N+1}$ should be distributed according to Bernoulli($\theta$). If we require that any prior $\gamma$ over $\Theta\times \{0,1\}$ have this property, then definining $\kernel{B}^N:=\splitter{0.1}^N\kernel{B}$, the model will factorise as
-
-\begin{align}
-    (\gamma\otimes\mathrm{Id}^D)\kernel{T}^3 &= 
-    \begin{tikzpicture} \path (0,0) node[dist,inner sep=-1pt] (T) {$\gamma^\Theta$}
-        + (0,-1) node (D) {$\RV{D}$}
-        ++ (0.5,0) coordinate (copy0)
-        ++ (0.7,0) node[kernel] (O) {$\kernel{B}$}
-        + (0,0.5) node[kernel] (B) {$\kernel{B}^N$}
-        ++ (0.7,0) coordinate (copy1)
-        +  (0.4,-1) node[kernel] (C) {$\kernel{S}$}
-        ++ (1.1,0) node (X) {$\RV{X}_{N+1}$}
-        +  (0,-1) node (Y) {$\RV{Y}$}
-        + (0,0.5) node (Xn) {$\vecRV{X}_{\leq N}$};
-        \draw (T) -- (O) -- (X);
-        \draw (copy0) to [out=0,in=180] (B) -- (Xn);
-        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
-        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
-        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
-        \draw (C) -- (Y);
-    \end{tikzpicture}\\
-    &= (\gamma^\Theta\otimes\mathrm{Id}^D)\kernel{T}^2
-\end{align}
-
-The only real choice that can be made about the prior is $\gamma^\Theta$, and adding the requirement that $\RV{X}_{N+1}$ is distributed as Bernoulli($\theta$) to $\kernel{T}^3$ yields $\kernel{T}^2$.
-
-\todo[inline]{I don't have a theory of stochastic vs non-stochastic uncertainty, but it is the case in general that a hypothesis sufficient model with additional restrictions on the prior can be replaced by a hypothesis insufficient model with no restrictions on the prior. This is mainly relevant with regard to counterfactuals}
-
-\section{Causal Questions}
+\subsection{Causal questions and decision functions}
 
 \citet{pearl_book_2018} has proposed three types of causal question:
 \begin{enumerate}
-    \item Association: How are $\RV{X}$ and $\RV{Y}$ related? How would observing $\RV{X}$ change my beliefs about $\RV{Y}$?
-    \item Intervention: What would happen if I do ... ? How can I make $E$ happen?
+    \item Association: How are $\RV{W}$ and $\RV{Z}$ related? How would observing $\RV{W}$ change my beliefs about $\RV{Z}$?
+    \item Intervention: What would happen if I do ... ? How can I make ... happen?
     \item Counterfactual: What if I had done ... instead of what I actually did?
 \end{enumerate}
 
-I will initially focus on the second question type: ``How can I make $E$ happen?'', and later show how the approach for this type of question can be generalised to handle questions of the third type. Call this kind of question a \emph{causal decision problem}:
+\emph{Causal decision problems} are, roughly speaking, ``interventional'' problems. In English, a causal decision problem roughly asks
 
-\begin{quote}\label{def:causal_decision_problem}
-    Given available options, which ones are most likely to lead to a desirable result?
+\begin{quote}
+    Given that I have data $\RV{X}$ and I know which values of $\RV{Y}$ I would like to see and some knowledge about how the world works, which of my available choices $D$ should I select?
 \end{quote}
 
-Causal \emph{statistical} causal decision problems extend causal decision problems by introducing data:
+Note that this presupposes somewhat more than Pearl's prototypical interventional questions. First, it supposes that we have \emph{preferences} over the values that $\RV{Y}$ might take, which we need not have to answer the question ``What would happen if I do ...?''. Secondly, and crucially to our theory, causal decision problem suppose that we are given data and a set of choices. 
+\end{definition}
 
-\begin{quote}\label{def:causal_statistical_decision_problem}
-    Given my available options and data, which options are likely to lead to a desirable result?
-\end{quote}
+We will return to the question of preferences. For now, we will focus on the idea that a causal decision problem is about selecting a choice given data. That is, however the selection is made, the answer to a causal decision problem is always a \emph{decision function} $\kernel{D}:X\to \Delta(\sigalg{D})$.
 
+\subsubsection{Avoiding insufficiency with decision functions}
+
+Given that 
 
 \subsubsection{Decision rules}
 
 See-do models encode the relationship between observed data and consequences of decisions. In order to actually make decisions, we also require preferences over consequences. We suppose that a \emph{utility function} is given, and evaluate the desirability of consequences using \emph{expected utility}. A see-do model along with a utility allows us to evaluate the desirability of \emph{decisions rules} according to each hypothesis.
 
 \begin{definition}[Utility function]
-Given a See-Do Model $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, a \emph{utility function} $u$ is a measurable function $Y\to \mathbb{R}$. 
+Given a See-Do Model $\kernel{T}:\RV{H}\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, a \emph{utility function} $u$ is a measurable function $Y\to \mathbb{R}$. 
 \end{definition}
 
 \begin{definition}[Expected utility]
@@ -380,7 +292,7 @@ $\mu$ is \emph{preferred} to $\nu$ if $\mathbb{E}_{\mu}[u]\geq \mathbb{E}_{\nu}[
 \end{definition}
 
 \begin{definition}[Decision rule]
-Given a see-to map $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, a \emph{decision rule} is a Markov kernel $X\to \Delta(\sigalg{D})$. A \emph{deterministic decision rule} is a decision rule that is deterministic.
+Given a see-to map $\kernel{T}:\RV{H}\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, a \emph{decision rule} is a Markov kernel $X\to \Delta(\sigalg{D})$. A \emph{deterministic decision rule} is a decision rule that is deterministic.
 
 \todo[inline]{Define deterministic Markov kernels}
 \end{definition}
@@ -388,31 +300,28 @@ Given a see-to map $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg
 Expected utility together with a decision rule gives rise to the definition of \emph{risk}, which connects CSDT to classical statistical decision theory (SDT). For historical reasons, risks are minimised while utilities are maximised.
 
 \begin{definition}[Risk]
-Given a see-to map $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, a utility $u:Y\to \mathbb{R}$ and the set of decision rules $\mathscr{U}$, the \emph{risk} is a function $l:\Theta\times \mathscr{U}\to \mathbb{R}$ given by
+Given a see-to map $\kernel{T}:\RV{H}\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, a utility $u:Y\to \mathbb{R}$ and the set of decision rules $\mathscr{U}$, the \emph{risk} is a function $l:\RV{H}\times \mathscr{U}\to \mathbb{R}$ given by
 
 \begin{align}
-    R(\theta,\kernel{U}) := - \int_X  \kernel{U}_x \kernel{T}^{\RV{Y}|\RV{D}\RV{X}\Theta}_{\cdot,x,\theta} u d\kernel{T}^{\RV{X}|\Theta}_\theta(x)
+    R(\RV{H},\kernel{U}) := - \int_X  \kernel{U}_x \kernel{T}^{\RV{Y}|\RV{D}\RV{X}\RV{H}}_{\cdot,x,\RV{H}} u d\kernel{T}^{\RV{X}|\RV{H}}_\RV{H}(x)
 \end{align}
 
-for $\theta\in \Theta$, $\kernel{U}\in \mathscr{U}$. Here $\kernel{U}_x \kernel{T}^{\RV{Y}|\RV{D}\RV{X}\Theta}_{\cdot,x,\theta} u$ is the product of the measure $\kernel{U}_x$, the kernel $\kernel{T}^{\RV{Y}|\RV{D}\RV{X}\Theta}_{\cdot,x,\theta}:D\to \Delta(\sigalg{Y})$ and the function $u$.
+for $\RV{H}\in \RV{H}$, $\kernel{U}\in \mathscr{U}$. Here $\kernel{U}_x \kernel{T}^{\RV{Y}|\RV{D}\RV{X}\RV{H}}_{\cdot,x,\RV{H}} u$ is the product of the measure $\kernel{U}_x$, the kernel $\kernel{T}^{\RV{Y}|\RV{D}\RV{X}\RV{H}}_{\cdot,x,\RV{H}}:D\to \Delta(\sigalg{Y})$ and the function $u$.
 \end{definition}
 
-The loss induces a partial order on decision rules. If for all $\theta$, $l(\theta,\kernel{U})\leq l(\theta,\kernel{U}')$ then $\kernel{U}$ is at least as good as $\kernel{U}'$. If, furthermore, there is some $\theta_0$ such that $l(\theta_0,\kernel{U})<l(\theta_0,\kernel{U}')$ then $\kernel{U}$ is preferred to $\kernel{U}'$.
+The loss induces a partial order on decision rules. If for all $\RV{H}$, $l(\RV{H},\kernel{U})\leq l(\RV{H},\kernel{U}')$ then $\kernel{U}$ is at least as good as $\kernel{U}'$. If, furthermore, there is some $\RV{H}_0$ such that $l(\RV{H}_0,\kernel{U})<l(\RV{H}_0,\kernel{U}')$ then $\kernel{U}$ is preferred to $\kernel{U}'$.
 
 \begin{definition}[Induced statistical decision problem]
-A see-do model $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ along with a utility $u$ induces the \emph{statistical decision problem} $(\Theta,\mathscr{U},R)$ with states $\Theta$, decisions $\mathscr{U}$ and risks $R$.
+A see-do model $\kernel{T}:\RV{H}\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ along with a utility $u$ induces the \emph{statistical decision problem} $(\RV{H},\mathscr{U},R)$ with states $\RV{H}$, decisions $\mathscr{U}$ and risks $R$.
 
 \todo[inline]{Statistical decision problems usually define the risk via the loss, but it is only possible to define a loss with a hypothesis sufficient model. We don't actually need a loss, though: the complete class theorem still holds via the induced risk and Bayes risk}
 
 \end{definition}
 
 
-\todo[inline]{An alternative method of converting hypothesis insufficient to hypothesis sufficient models involves expanding the decision set; this is not appliccable to counterfactual models.}
-
-
 A key difference between CSDT and other approaches to causal inference is that diagrams in CSDT feature two coupled maps $\kernel{O}$ and $\kernel{C}$, while most other approaches to causal inference represent both $\kernel{O}$ and $\kernel{C}$ in one diagram. \citet{lattimore_replacing_2019} is the only other example I am aware of that represents both $\kernel{O}$ and $\kernel{C}$. Nevertheless, ``one-picture'' causal models such as Causal Bayesian Networks, Single World Intervention Graphs \emph{do} represent observational distributions and interventional maps, and the two differ (see Section \ref{sec:single_double_representation})
 
-A causal hypothesis class $\Theta$ induces a binary relation between observed probability distributions $\prob{O}_\theta$ and consequence maps $\prob{C}_\theta$. This approach is very agnostic about the actual relation induced -- we do not even insist that the range of the observed data $X$ is the same as the range of possible consequences $Y$ (though we will generally limit our attention to cases where the two coincide). 
+A causal hypothesis class $\RV{H}$ induces a binary relation between observed probability distributions $\prob{O}_\RV{H}$ and consequence maps $\prob{C}_\RV{H}$. This approach is very agnostic about the actual relation induced -- we do not even insist that the range of the observed data $X$ is the same as the range of possible consequences $Y$ (though we will generally limit our attention to cases where the two coincide). 
 
 In common with \citet{heckerman_decision-theoretic_1995}, decisions (or ``acts'') are primitive elements of See-Do Models. In contrast to our work, \citet{heckerman_decision-theoretic_1995} only discuss deterministic \emph{consequence maps}, while See-Do Models represent relations between consequence maps and observed probability.
 
@@ -420,7 +329,7 @@ Decisions are similar to the ``regime indicators'' found in \citet{dawid_decisio
 
 \subsection{D-causation}
 
-While we take $D$ to be a primitive element of causal decision problems, and therefore a primitive of See-Do Models. Causes are not primitive, but we can offer a secondary notion of causation. We call this $D$-causation to stress the fact that it arises in a theory of causal inference in which the set $D$ of available decisions is primitive. A similar idea is discussed extensively in \citet{heckerman_decision-theoretic_1995}. The main differences are that what we call ``consequence maps'' map decisions to probability distributions over possible consequences while Heckerman and Shachter work with ``states'' that map decisions deterministically to consequences. In addition, while we define $D$-causation relative to a particular consequence map $\kernel{C}_\theta$, Heckerman and Shachter define it with respect to a \emph{set} of states.
+While we take $D$ to be a primitive element of causal decision problems, and therefore a primitive of See-Do Models. Causes are not primitive, but we can offer a secondary notion of causation. We call this $D$-causation to stress the fact that it arises in a theory of causal inference in which the set $D$ of available decisions is primitive. A similar idea is discussed extensively in \citet{heckerman_decision-theoretic_1995}. The main differences are that what we call ``consequence maps'' map decisions to probability distributions over possible consequences while Heckerman and Shachter work with ``states'' that map decisions deterministically to consequences. In addition, while we define $D$-causation relative to a particular consequence map $\kernel{C}_\RV{H}$, Heckerman and Shachter define it with respect to a \emph{set} of states.
 
 Section \ref{sec:cbns_without_d} explores the difficulty of defining ``objective causation'' without reference to a set of basic decisions, acts or operations. $D$ need not be interpreted as the set of decisions an agent may make, but whatever interpretation it is assigned, all existing examples of causal models seem to require a ``domain set''.
 
@@ -454,12 +363,12 @@ In this case, it would be unreasonable to hypothesize that all acts that left th
 Formally, $D$-causation is defined in terms of conditional independence:
 
 \begin{definition}[$D$-causation]\label{def:d_cause}
-Given a consequence map $\kernel{C}_\theta:D\to \Delta(\mathcal{Y})$, random variables $\RV{Y}_1:Y\times D\to Y_1$, $\RV{Y}_2:Y\times D\to Y_2$ and domain variable $\RV{D}:Y\times D\to D$ (Definition \ref{def:domain_variable}), $\RV{Y}_1$ $D$-causes $\RV{Y}_2$ iff $\RV{Y}_2\CI_{\kernel{C}_\theta} \RV{D}|\RV{Y}_1$.
+Given a consequence map $\kernel{C}_\RV{H}:D\to \Delta(\mathcal{Y})$, random variables $\RV{Y}_1:Y\times D\to Y_1$, $\RV{Y}_2:Y\times D\to Y_2$ and domain variable $\RV{D}:Y\times D\to D$ (Definition \ref{def:domain_variable}), $\RV{Y}_1$ $D$-causes $\RV{Y}_2$ iff $\RV{Y}_2\CI_{\kernel{C}_\RV{H}} \RV{D}|\RV{Y}_1$.
 \end{definition}
 
 \subsection{D-causation vs Heckerman and Shachter}
 
-Heckerman and Shachter study deterministic ``consequence maps''. Furthermore, what we call hypotheses $\theta\in\Theta$, Heckerman and Schachter call states $s\in S$. One could consider a state to be a hypothesis that is specific enough to yield a deterministic map from decisions to outcomes. Heckerman and Shachter's notion of causation is defined by \emph{limited unresponsiveness} rather than \emph{conditional independence}, which depends on a partition of states rather than a particular hypothesis.
+Heckerman and Shachter study deterministic ``consequence maps''. Furthermore, what we call hypotheses $\RV{H}\in\RV{H}$, Heckerman and Schachter call states $s\in S$. One could consider a state to be a hypothesis that is specific enough to yield a deterministic map from decisions to outcomes. Heckerman and Shachter's notion of causation is defined by \emph{limited unresponsiveness} rather than \emph{conditional independence}, which depends on a partition of states rather than a particular hypothesis.
 
 \begin{definition}[Limited unresponsiveness]
     Given states $S$, deterministic consequence maps $\kernel{C}_s:D\to \Delta(F)$ for each $s\in A$ and a random variables $\RV{X}:F\to X$, $\RV{Y}:F\to Y$, $\RV{Y}$ is unresponsive to $\RV{D}$ in states limited by $\RV{X}$ if $\kernel{C}_{(s,d)}^{\RV{X}|\RV{D}}=\kernel{C}_{(s,d')}^{\RV{X}|\RV{D}\RV{S}}\implies \kernel{C}_{(s,d)}^{\RV{Y}|\RV{D}\RV{S}}=\kernel{C}_{(s,d')}^{\RV{Y}|\RV{D}\RV{S}}$ for all $d,d'\in D$, $s\in S$. Write $\RV{Y}\not\hookleftarrow_{\RV{X}} \RV{D}$
@@ -517,19 +426,19 @@ Then
     \implies [1,0]\kernel{C}^{\RV{F}\RV{L}|\RV{D}}_{\gamma} &\neq [1,0] \splitter{0.1} (\kernel{C}^{\RV{F}|\RV{D}}_\gamma\otimes \kernel{C}^{\RV{L}|\RV{D}}_\gamma)
 \end{align}
 
-Thus under hypothesis mixture $\gamma$, $\RV{F}$ does not $D$-cause $\RV{L}$ even though $\RV{F}$ $D$-causes $\RV{L}$ in all states $S$. The definition of $D$-causation was motivated by the idea that we could reduce a difficult decision problem with a large set $D$ to a simpler problem with a smaller ``effective'' set of decisions by exploiting conditional independence. Even if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\theta\in S$, $\RV{X}$ does not necessarily $D$-cause $\RV{Y}$ in mixtures of states in $S$. For this reason, we do not say that $\RV{X}$ $D$-causes $\RV{Y}$ in $S$ if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\theta\in S$, and in this way we differ substantially from \citet{heckerman_decision-theoretic_1995}.
+Thus under hypothesis mixture $\gamma$, $\RV{F}$ does not $D$-cause $\RV{L}$ even though $\RV{F}$ $D$-causes $\RV{L}$ in all states $S$. The definition of $D$-causation was motivated by the idea that we could reduce a difficult decision problem with a large set $D$ to a simpler problem with a smaller ``effective'' set of decisions by exploiting conditional independence. Even if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, $\RV{X}$ does not necessarily $D$-cause $\RV{Y}$ in mixtures of states in $S$. For this reason, we do not say that $\RV{X}$ $D$-causes $\RV{Y}$ in $S$ if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, and in this way we differ substantially from \citet{heckerman_decision-theoretic_1995}.
 
-Instead, we simply extend the definition of $D$-causation to mixtures of hypotheses: if $\gamma\in \Delta(\Theta)$ is a mixture of hypotheses, define $\kernel{C}_\gamma:= (\gamma\otimes\textbf{Id})\kernel{C}$. Then $\RV{X}$ $D$-causes $\RV{Y}$ relative to $\gamma$ iff $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
+Instead, we simply extend the definition of $D$-causation to mixtures of hypotheses: if $\gamma\in \Delta(\RV{H})$ is a mixture of hypotheses, define $\kernel{C}_\gamma:= (\gamma\otimes\textbf{Id})\kernel{C}$. Then $\RV{X}$ $D$-causes $\RV{Y}$ relative to $\gamma$ iff $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
 
-Theorem \ref{th:univ_d_causation} shows that under some conditions, $D$-causation can hold for arbitrary mixtures over subsets of the hypothesis class $\Theta$.
+Theorem \ref{th:univ_d_causation} shows that under some conditions, $D$-causation can hold for arbitrary mixtures over subsets of the hypothesis class $\RV{H}$.
 
 \begin{theorem}[Universal $D$-causation]\label{th:univ_d_causation}
-If $\kernel{C}^{\RV{X}|\RV{D}}_{\theta} = \kernel{C}^{\RV{X}|\RV{D}}_{\theta'}$ for all $\theta,\theta'\in S\subset \Theta$ and $\RV{X}$ $D$-causes $\RV{Y}$ in all $\theta\in S$, then $\RV{X}$ $D$-causes $\RV{Y}$ with respect to all mixed consequence maps $\kernel{C}_\gamma$ for all $\gamma\in \Delta(\Theta)$ with $\gamma(S)=1$.
+If $\kernel{C}^{\RV{X}|\RV{D}}_{\RV{H}} = \kernel{C}^{\RV{X}|\RV{D}}_{\RV{H}'}$ for all $\RV{H},\RV{H}'\in S\subset \RV{H}$ and $\RV{X}$ $D$-causes $\RV{Y}$ in all $\RV{H}\in S$, then $\RV{X}$ $D$-causes $\RV{Y}$ with respect to all mixed consequence maps $\kernel{C}_\gamma$ for all $\gamma\in \Delta(\RV{H})$ with $\gamma(S)=1$.
 \end{theorem}
 
 \begin{proof}
 
-For $\gamma\in \Delta(\Theta)$, define the mixture
+For $\gamma\in \Delta(\RV{H})$, define the mixture
 
 \begin{align}
 \kernel{C}_\gamma := \begin{tikzpicture}
@@ -541,27 +450,27 @@ For $\gamma\in \Delta(\Theta)$, define the mixture
 \end{tikzpicture}
 \end{align}
 
-Because $\kernel{C}_\theta^{\RV{X}|\RV{D}} = \kernel{C}_{\theta'}^{\RV{X}|\RV{D}}$ for all $\theta,\theta'\in \Theta$, we have
+Because $\kernel{C}_\RV{H}^{\RV{X}|\RV{D}} = \kernel{C}_{\RV{H}'}^{\RV{X}|\RV{D}}$ for all $\RV{H},\RV{H}'\in \RV{H}$, we have
 
 \begin{align}
 \begin{tikzpicture}
     \path (0,0) node[dist] (g) {$\gamma$}
-    + (0.7,-0.15) coordinate (copy0)
+    + (0.7,-0.15) node[copymap] (copy0) {}
     + (0,-0.45) node (D) {$\RV{D}$}
-    ++ (1.5,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\Theta}$}
+    ++ (1.5,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
     ++ (1,0) node (X) {$\RV{X}$}
-    + (0,0.5) node (T) {$\Theta$};
+    + (0,0.5) node (T) {$\RV{H}$};
     \draw (g) to [out=0,in=180] (copy0) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$);
     \draw (C) -- (X);
     \draw (copy0) to [out=90,in=180] (T);
 \end{tikzpicture} &= \begin{tikzpicture}
     \path (0,0) node[dist] (g) {$\gamma$}
     + (0,0.5) node[dist] (g2) {$\gamma$}
-    + (0.7,-0.15) coordinate (copy0)
+    + (0.7,-0.15) node[copymap] (copy0) {}
     + (0,-0.45) node (D) {$\RV{D}$}
-    ++ (1.5,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\Theta}$}
+    ++ (1.5,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
     ++ (1,0) node (X) {$\RV{X}$}
-    + (0,0.3) node (T) {$\Theta$};
+    + (0,0.3) node (T) {$\RV{H}$};
     \draw (g) to [out=0,in=180] (copy0) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$);
     \draw (C) -- (X);
     \draw (g2) to [out=0,in=180] (T);
@@ -584,7 +493,7 @@ Also
     &= \begin{tikzpicture}
     \path (0,0) node[dist] (g) {$\gamma$}
     + (0,-0.45) node (D) {$\RV{D}$}
-    ++ (1,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{XY}|\RV{D}\Theta}$}
+    ++ (1,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{XY}|\RV{D}\RV{H}}$}
     ++ (1,0.15) node (X) {$\RV{X}$}
     + (0,-0.3) node (Y) {$\RV{Y}$};
     \draw (g) to [out=0,in=180] ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$);
@@ -593,26 +502,26 @@ Also
  &= \begin{tikzpicture}
     \path (0,0) node[dist] (g) {$\gamma$}
     + (0,-0.45) node (D) {$\RV{D}$}
-    + (0.7,-0.45) coordinate (copy0)
-    + (0.7,-0.15) coordinate (copy1)
-    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\Theta}$}
+    + (0.7,-0.45) node[copymap] (copy0) {}
+    + (0.7,-0.15) node[copymap] (copy1) {}
+    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
     + (0,0.6) coordinate (via0)
     + (0,-0.6) coordinate (via1)
-    ++ (0.9,0) coordinate (copy2)
-    ++ (0.7,0) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{D}\Theta}$}
+    ++ (0.9,0) node[copymap] (copy2) {}
+    ++ (0.7,0) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{D}\RV{H}}$}
     ++ (1.2,0.15) node (X) {$\RV{Y}$}
     + (0,-0.5) node (Y) {$\RV{X}$};
     \draw (g) to [out=0,in=180] (copy1) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C)--(Yx);
     \draw (copy0) to [out=-90,in=180] (via1) to [out=0,in=180] ($(Yx.west) + (0,-0.15)$) (copy1) to [out=90,in=180] (via0) to [out=0,in=180] ($(Yx.west) + (0,0.15)$);
     \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
  \end{tikzpicture}\\
- &\overset{\RV{Y}\CI \RV{D}|\RV{X}\Theta}{=} \begin{tikzpicture}
+ &\overset{\RV{Y}\CI \RV{D}|\RV{X}\RV{H}}{=} \begin{tikzpicture}
     \path (0,0) node[dist] (g) {$\gamma$}
     + (0,-0.45) node (D) {$\RV{D}$}
-    + (0.7,-0.15) coordinate (copy1)
-    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\Theta}$}
-    ++ (0.9,0.1) coordinate (copy2)
-    ++ (0.7,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\Theta}$}
+    + (0.7,-0.15) node[copymap] (copy1) {}
+    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
+    ++ (0.9,0.1) node[copymap] (copy2) {}
+    ++ (0.7,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$}
     ++ (1.2,0.15) node (X) {$\RV{Y}$}
     + (0,-0.5) node (Y) {$\RV{X}$};
     \draw (g) to [out=0,in=180] (copy1) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) to [out=0,in=180] (copy2) to [out=0,in=180] (Yx);
@@ -622,11 +531,11 @@ Also
  &\overset{\ref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
     \path (0,0) node[dist] (g) {$\gamma$}
     + (0,-0.45) node (D) {$\RV{D}$}
-    + (0.7,-0.15) coordinate (copy1)
-    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\Theta}$}
+    + (0.7,-0.15) node[copymap] (copy1) {}
+    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
     + (1,0.6) node[dist] (g2) {$\gamma$}
-    ++ (0.9,0.1) coordinate (copy2)
-    ++ (1,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\Theta}$}
+    ++ (0.9,0.1) node[copymap] (copy2) {}
+    ++ (1,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$}
     ++ (1.2,0.15) node (X) {$\RV{Y}$}
     + (0,-0.5) node (Y) {$\RV{X}$};
     \draw (g) to [out=0,in=180] (copy1) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) to [out=0,in=180] (copy2) to [out=0,in=180] (Yx);
@@ -636,11 +545,11 @@ Also
  &= \overset{\ref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
     \path (0,0) node (g) {}
     + (0,-0.45) node (D) {$\RV{D}$}
-    + (0.7,-0.45) coordinate (copy1)
-    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}_\gamma^{\RV{X}|\RV{D}\Theta}$}
+    + (0.7,-0.45) node[copymap] (copy1) {}
+    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}_\gamma^{\RV{X}|\RV{D}\RV{H}}$}
     + (1,0.6) node[dist] (g2) {$\gamma$}
-    ++ (0.9,0.1) coordinate (copy2)
-    ++ (1,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\Theta}$}
+    ++ (0.9,0.1) node[copymap] (copy2) {}
+    ++ (1,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$}
     + (-0.5,0.6) coordinate (stop0)
     ++ (1.2,0.15) node (X) {$\RV{Y}$}
     + (0,-0.5) node (Y) {$\RV{X}$};
@@ -650,24 +559,24 @@ Also
     \draw[-{Rays[n=8]}] (copy1) to [out=90,in=180] (stop0);
  \end{tikzpicture}\label{eq:is_conditional}
 \end{align}
-Equation \ref{eq:is_conditional} establishes that $(\gamma\otimes\textbf{Id}_X\otimes\stopper{0.3}_D)\kernel{C}^{\RV{Y}|\RV{X}\Theta}$ is a version of $\kernel{C}_\gamma^{\RV{Y}|\RV{X}\RV{D}}$, and thus $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
+Equation \ref{eq:is_conditional} establishes that $(\gamma\otimes\textbf{Id}_X\otimes\stopper{0.3}_D)\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$ is a version of $\kernel{C}_\gamma^{\RV{Y}|\RV{X}\RV{D}}$, and thus $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
 
 This can also be derived from the semi-graphoid rules:
 
 \begin{align}
-    \Theta\CI \RV{D} \land \Theta\CI \RV{X} | \RV{D} &\implies \Theta\CI \RV{XD}\\
-    &\implies \Theta\CI \RV{D}|\RV{X}\\
-    \RV{D} \CI \Theta|\RV{X} \land \RV{D}\CI \RV{Y}|\RV{X}\Theta &\implies \RV{D}\CI \RV{Y}|\RV{X}\\
+    \RV{H}\CI \RV{D} \land \RV{H}\CI \RV{X} | \RV{D} &\implies \RV{H}\CI \RV{XD}\\
+    &\implies \RV{H}\CI \RV{D}|\RV{X}\\
+    \RV{D} \CI \RV{H}|\RV{X} \land \RV{D}\CI \RV{Y}|\RV{X}\RV{H} &\implies \RV{D}\CI \RV{Y}|\RV{X}\\
     &\implies \RV{Y}\CI\RV{D}|\RV{X}
 \end{align}
 \end{proof}
 
 \subsection{Properties of D-causation}
 
-If $\RV{X}$ D-causes $\RV{Y}$ relative to $\kernel{C}_\theta$, then the following holds:
+If $\RV{X}$ D-causes $\RV{Y}$ relative to $\kernel{C}_\RV{H}$, then the following holds:
 
 \begin{align}
-    \kernel{C}_{\theta}^{\RV{X}|\RV{D}} &= \begin{tikzpicture}
+    \kernel{C}_{\RV{H}}^{\RV{X}|\RV{D}} &= \begin{tikzpicture}
     \path (0,0) node (D) {$\RV{D}$}
     ++ (0.9,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
     ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}}$}
@@ -679,9 +588,9 @@ If $\RV{X}$ D-causes $\RV{Y}$ relative to $\kernel{C}_\theta$, then the followin
 This follows from version (2) of Definition \ref{def:conditional_independence}:
 
 \begin{align}
-    \kernel{C}_\theta^{\RV{X}|\RV{D}} &= \begin{tikzpicture}
+    \kernel{C}_\RV{H}^{\RV{X}|\RV{D}} &= \begin{tikzpicture}
     \path (0,0) node (D) {$\RV{D}$}
-    ++ (0.7,0) coordinate (copy0)
+    ++ (0.7,0) node[copymap] (copy0) {}
     ++ (0.7,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
     + (0,0.5) coordinate (via1)
     ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{D}}$}
@@ -691,7 +600,7 @@ This follows from version (2) of Definition \ref{def:conditional_independence}:
     \end{tikzpicture}\\
      &= \begin{tikzpicture}
     \path (0,0) node (D) {$\RV{D}$}
-    ++ (0.7,0) coordinate (copy0)
+    ++ (0.7,0) node[copymap] (copy0) {}
     ++ (0.7,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
     + (1.3,0.5) coordinate (via1)
     ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}}$}

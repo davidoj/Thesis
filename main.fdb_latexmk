@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex main"] 1608183838 "main.aux" "main.bbl" "main" 1608183844
+["bibtex main"] 1610513817 "main.aux" "main.bbl" "main" 1610513941
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1608183843 14963 92aed61ae88892efbc9ec5e4b87eadb4 "xelatex"
-  "references.bib" 1608181916 163130 aea0f0ad7f5e86fe358f4f1aedc040ad ""
+  "main.aux" 1610513941 16594 031be4d013a5f0584306e9ff1c0d1fb2 "xelatex"
+  "references.bib" 1609994278 164599 bba5c7bc1fa345ab5eab96c4f3246cc3 ""
   (generated)
-  "main.blg"
   "main.bbl"
-["xdvipdfmx"] 1608183843 "main.xdv" "main.pdf" "main" 1608183844
-  "main.xdv" 1608183843 514812 37e424c6fec3620f42091512ed9f2d38 "xelatex"
+  "main.blg"
+["xdvipdfmx"] 1610513941 "main.xdv" "main.pdf" "main" 1610513941
+  "main.xdv" 1610513941 574304 3cad07addfded90dbbda96b1868409d7 "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1608183838 "main.tex" "main.xdv" "main" 1608183844
+["xelatex"] 1610513936 "main.tex" "main.xdv" "main" 1610513941
   "/etc/texmf/web2c/texmf.cnf" 1590547021 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -98,6 +98,7 @@
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex" 1546728038 8842 5cc856e132fac404805c6da091779283 ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex" 1576793519 15929 6d98a2cba15e8807518c016b5ad380a9 ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfadings.code.tex" 1546728038 1179 bb12be2a349da04542eb1820d6ef2546 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryintersections.code.tex" 1576793519 5286 5e33982a0c637f03a5a580b6c0b6d788 ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex" 1546728038 3937 20cd45386ca23052ce976464f0ada984 ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshadows.code.tex" 1546728038 2889 cc480f49ed20c2fcdee5258286919df6 ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex" 1546728038 339 153f95b6d1982135aac9ba139d8a4870 ""
@@ -106,6 +107,8 @@
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex" 1576967981 187592 7922ceab1864698dec4c84978d5b182f ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex" 1546728038 58801 c503519b1e019b14dc7fb801de6de024 ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex" 1546728038 2563 97c355d55617296f2e7ef7030bada827 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex" 1576793519 83910 20dfc3ec7fa0b1c2b3bb20376d4a1a54 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersections.code.tex" 1576793519 44571 ecc73424ea12eefd622053add61bc992 ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex" 1546728038 32995 a4d54c043ae5274ceaaddeb36ad43a6f ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex" 1546728038 160992 a39094cdc3a2bf5a131b9fd00f9002aa ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.misc.code.tex" 1546728038 46241 d4ce0f60786a8555b975b7d1ddfb331c ""
@@ -193,6 +196,8 @@
   "/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty" 1575152344 22520 c4c2dab203104295e1e618be7e5c0f5b ""
   "/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xdvipdfmx.def" 1580854751 24128 c4ebbe7ec59ef4686329b8f63a49f10b ""
   "/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty" 1575499565 5766 13a9e8766c47f30327caf893ece86ac8 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty" 1579298046 55081 be7d8405cd93834f75bdf98c6521d2a0 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty" 1496786006 5317 cf75154a8a7e6436f05a5be497f0b05e ""
   "/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-xetex.def" 1574121697 14109 448fe4388dde5981289f9ae8c547a196 ""
   "/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg" 1574121697 24293 cbbba0a351268f01b03f4a3b8b367d3c ""
   "/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty" 1574121697 71539 3e8331ef062d90caeae5fc7360dcd5bf ""
@@ -248,18 +253,18 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1599613219 4648586 d2b7c7b61735336533540bc8faab0630 ""
   "chapter_1_introduction.tex" 1608094678 9711 13950b8fdccea4c17f9bcf06585bcda6 ""
-  "chapter_2_technical.tex" 1608094589 74506 0e5c03d38c9ab60bb7e26920d3cf9c8f ""
-  "chapter_3_seedo_allyouneed.tex" 1608183831 50801 90c4464a3359cc8c0b5230e95bd6a643 ""
+  "chapter_2_technical.tex" 1610511777 74775 702223fe0e170f41bb785f3dc49031d5 ""
+  "chapter_3_seedo_allyouneed.tex" 1610513936 57523 da5c5c983e3fa5bf48341a29ca998a6c ""
   "chapter_4_csothers.tex" 1608181916 129 5b01f9c621c3c59afc2d7926d2333566 ""
   "chapter_5_inferenceprinciples.tex" 1608094543 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "main.aux" 1608183843 14963 92aed61ae88892efbc9ec5e4b87eadb4 "xelatex"
-  "main.bbl" 1608183838 10757 e483eb486c7fa1b25a30720d97c55ecf "bibtex main"
-  "main.out" 1608183843 956 2254c055f441f07a0a3bdaa539c95094 "xelatex"
-  "main.tex" 1608182576 6127 f3f847a1015637d7a575cd65ea667ffb ""
-  "main.toc" 1608183843 1886 7f1d9f55c60e8407c169c8c13728dc52 "xelatex"
+  "main.aux" 1610513941 16594 031be4d013a5f0584306e9ff1c0d1fb2 "xelatex"
+  "main.bbl" 1610513817 11681 44f94e7c650e50b4e52c444fa2b6cf1b "bibtex main"
+  "main.out" 1610513941 956 3a5cc07f35a52dccb884ead90190b778 "xelatex"
+  "main.tex" 1610513755 6234 a2eb39f046e2ff649c3a3480535f93f8 ""
+  "main.toc" 1610513941 1926 6a2301e20c0b4bcfb8c03e3da08e3a69 "xelatex"
   (generated)
+  "main.out"
+  "main.log"
+  "main.xdv"
   "main.aux"
   "main.toc"
-  "main.xdv"
-  "main.log"
-  "main.out"
