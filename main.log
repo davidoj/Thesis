@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  13 JAN 2021 15:58
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  26 JAN 2021 16:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1025,79 +1025,53 @@ e 1591.
 ]
 Chapter 1.
 [29] [30]
-Overfull \hbox (33.48003pt too wide) in paragraph at lines 33--35
-[][]\T1/lmr/bx/n/10 Theorem 1.1.2 \T1/lmr/m/n/10 (Ob-ser-va-tion and Con-se-que
-nce maps)\T1/lmr/bx/n/10 . []\T1/lmr/m/it/10 Any see-do model $\OT1/cmr/m/n/10 
-(\U/msb/m/n/10 T\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 H\OML/cmm/m/it/10 ; \OT1/cm
-ss/m/n/10 D\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 X\OML/cmm/m/it/10 ; \OT1/cmss/m/
-n/10 Y\OT1/cmr/m/n/10 )$
- []
 
+LaTeX Warning: Reference `sec:single_double_representation' on page 31 undefine
+d on input line 43.
 
-Underfull \vbox (badness 6220) has occurred while \output is active []
-
- [31]
-Overfull \hbox (10.93457pt too wide) in paragraph at lines 153--154
+[31] [32]
+Overfull \hbox (10.93457pt too wide) in paragraph at lines 176--177
 [][]\T1/lmr/bx/n/10 Definition 1.1.4 \T1/lmr/m/n/10 (Bayesian See-Do Model)\T1/
 lmr/bx/n/10 . []\T1/lmr/m/n/10 A Bayesian See-Do Model $\OMS/cmsy/m/n/10 h\U/ms
 b/m/n/10 U\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 D\OML/cmm/m/it/10 ; \OT1/cmss/m/n
 /10 X\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 Y\OMS/cmsy/m/n/10 i$
  []
 
-[32] [33] [34] [35]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[33] [34]
 
- [36]
-[37] [38] [39]
-
-LaTeX Warning: Reference `sec:single_double_representation' on page 40 undefine
-d on input line 536.
-
-[40]
-
-LaTeX Warning: Reference `sec:cbns_without_d' on page 41 undefined on input lin
-e 548.
+LaTeX Warning: Reference `sec:cbns_without_d' on page 35 undefined on input lin
+e 247.
 
 
-Overfull \hbox (36.9879pt too wide) detected at line 560
+Overfull \hbox (36.9879pt too wide) detected at line 257
+[]
+ []
+
+[35]
+Overfull \hbox (36.9879pt too wide) detected at line 268
 []
  []
 
 
-Overfull \hbox (277.51527pt too wide) detected at line 573
-[]
- []
-
-[41]
-Overfull \hbox (1.85011pt too wide) in paragraph at lines 598--599
+Overfull \hbox (5.52379pt too wide) in paragraph at lines 293--294
 []\T1/lmr/m/n/10 By the as-sump-tion of lim-ited un-re-spon-sive-ness, for all 
-$\OML/cmm/m/it/10 d; d[]$ \T1/lmr/m/n/10 such that $\OML/cmm/m/it/10 x\OT1/cmr/
+$\OML/cmm/m/it/10 d; d[]$ \T1/lmr/m/n/10 such that $\OML/cmm/m/it/10 y[]\OT1/cm
+r/m/n/10 (\OML/cmm/m/it/10 s; d\OT1/cmr/m/n/10 ) =
+ []
+
+
+Overfull \hbox (16.84972pt too wide) in paragraph at lines 293--294
+\OML/cmm/m/it/10 y\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s; \OT1/cmr/m/n/10 [\OML/cm
+m/m/it/10 y[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s; \OMS/cmsy/m/n/10 ^^A\OT1/cmr/
+m/n/10 )][](\OML/cmm/m/it/10 y[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s; d\OT1/cmr/
+m/n/10 )))$ \T1/lmr/m/n/10 where $\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 y[]\OT1/cmr
+/m/n/10 (\OML/cmm/m/it/10 s; \OMS/cmsy/m/n/10 ^^A\OT1/cmr/m/n/10 )][](\OML/cmm/
+m/it/10 a\OT1/cmr/m/n/10 )$ \T1/lmr/m/n/10 is an ar-bi-trary el-e-ment of $\OMS
+/cmsy/m/n/10 f\OML/cmm/m/it/10 d\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 y[]\OT1/cmr/
 m/n/10 (\OML/cmm/m/it/10 s; d\OT1/cmr/m/n/10 ) =
  []
 
-
-Overfull \hbox (30.33447pt too wide) in paragraph at lines 598--599
-\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s; d[]\OT1/cmr/m/n/10 )$\T1
-/lmr/m/n/10 , $\OML/cmm/m/it/10 y\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s; d\OT1/cmr
-/m/n/10 ) = \OML/cmm/m/it/10 y\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s; d[]\OT1/cmr/
-m/n/10 )$ \T1/lmr/m/n/10 also. De-fine $\OML/cmm/m/it/10 f \OT1/cmr/m/n/10 : \O
-ML/cmm/m/it/10 X \OMS/cmsy/m/n/10 ^^B \OML/cmm/m/it/10 S \OMS/cmsy/m/n/10 ! \OM
-L/cmm/m/it/10 Y$ \T1/lmr/m/n/10 by $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s; x\OT1/
-cmr/m/n/10 ) \OMS/cmsy/m/n/10 7! \OML/cmm/m/it/10 y\OT1/cmr/m/n/10 (\OML/cmm/m/
-it/10 s; \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s
-; \OMS/cmsy/m/n/10 ^^A\OT1/cmr/m/n/10 )][](\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 (\
-OML/cmm/m/it/10 s; d\OT1/cmr/m/n/10 )))$
- []
-
-
-Underfull \vbox (badness 3039) has occurred while \output is active []
-
- [42]
-[43]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [44]
-[45]) (./chapter_4_csothers.tex [46]
+[36] [37] [38] [39] [40] [41] [42] [43]) (./chapter_4_csothers.tex [44]
 Chapter 2.
 ) (./chapter_5_inferenceprinciples.tex) (./main.bbl
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
@@ -1140,7 +1114,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--30
  / portal / en / publications /
  []
 
-[47
+[45
 
 ]
 Underfull \hbox (badness 2334) in paragraph at lines 130--138
@@ -1150,11 +1124,11 @@ Underfull \hbox (badness 2334) in paragraph at lines 130--138
 
 
 Overfull \hbox (259.96452pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 48 \T1/lmr/m/sl/10 CHAPTER 2.  CHAPTER 4: SEE-DO MODELS COMPARED
+\T1/lmr/m/n/10 46 \T1/lmr/m/sl/10 CHAPTER 2.  CHAPTER 4: SEE-DO MODELS COMPARED
  TO CAUSAL GRAPHICAL MODELS AND POTENTIAL OUTCOMES
  []
 
-[48]
+[46]
 Missing character: There is no – in font ec-lmr10!
 
 Underfull \hbox (badness 1009) in paragraph at lines 194--202
@@ -1162,20 +1136,20 @@ Underfull \hbox (badness 1009) in paragraph at lines 194--202
 563, 1468-3318.  doi:
  []
 
-[49])
+[47])
 Overfull \hbox (259.96452pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 50 \T1/lmr/m/sl/10 CHAPTER 2.  CHAPTER 4: SEE-DO MODELS COMPARED
+\T1/lmr/m/n/10 48 \T1/lmr/m/sl/10 CHAPTER 2.  CHAPTER 4: SEE-DO MODELS COMPARED
  TO CAUSAL GRAPHICAL MODELS AND POTENTIAL OUTCOMES
  []
 
-[50] [51]
+[48] [49]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 178.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 178.
  (./main.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 178.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 178.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 3A5CC07F35A52DCCB884EAD90190B778;956.
+(rerunfilecheck)             Checksum: 255D49BB7711618492F2E1B0C5D6FBAE;1280.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1186,12 +1160,12 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 178.
  ) 
 Here is how much of TeX's memory you used:
- 27476 strings out of 479819
- 499602 string characters out of 5895847
- 828643 words of memory out of 5000000
- 44022 multiletter control sequences out of 15000+600000
- 610652 words of font info for 121 fonts, out of 8000000 for 9000
+ 27482 strings out of 479819
+ 499963 string characters out of 5895847
+ 832569 words of memory out of 5000000
+ 44027 multiletter control sequences out of 15000+600000
+ 619188 words of font info for 123 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 60i,17n,83p,1408b,966s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,17n,83p,1408b,976s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (51 pages, 574304 bytes).
+Output written on main.xdv (49 pages, 563676 bytes).

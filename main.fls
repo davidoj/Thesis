@@ -418,6 +418,8 @@ INPUT chapter_3_seedo_allyouneed.tex
 INPUT chapter_3_seedo_allyouneed.tex
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmr17.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmbx12.tfm
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmri7.tfm
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmri7.tfm
 INPUT chapter_4_csothers.tex
 INPUT chapter_4_csothers.tex
 INPUT chapter_5_inferenceprinciples.tex
