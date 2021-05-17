@@ -676,9 +676,9 @@ Before defining parallel choices, we will consider a ``counterfactual model'' wi
 \todo[inline]{The real solution here is that Pearl's ``variable sets'' are actually ``coupled variables'', see Definition \ref{def:ctensor}, but I'd rather not change his definitions if I can avoid it}
 
 \todo[inline]{put the following inside a quote environment somehow, the regular quote environment fails due to too much markup}
+\vspace{1cm}
 
-\\
-````
+```
 \paragraph{Definition 7.1.1 (Causal Model)}
 A causal model is a triple
 $M = \langle U, V, F\rangle$,
@@ -700,10 +700,10 @@ Let $X$ and $Y$ be two subsets of variables in $V$. The potential response of $Y
 
 \paragraph{Definition 7.1.6 (Probabilistic Causal Model)}
 A probabilistic causal model is a pair $\langle M, P(u)\rangle$, where $M$ is a causal model and $P(u)$ is a probability function defined over the domain of U.
+'''
 
-''''
 
-\\
+\vspace{1cm}
 
 Implicitly, Definition 7.1.3 proposes a set of ``actions'' that have ``effects'' given by $M_x$. It's not entirely clear what this set of actions should be -- the definition seems to suggest that there is an action for each ``realization'' of each variable in $V$, which would imply that the set of actions corresponds to the range of $V$. For the following discussion, we will call the set of actions $D$, whatever it actually contains (we have deliberately chosen to use the same letter as we use to represent choices or actions in see-do models).
 
@@ -733,3 +733,89 @@ One obvious question is: does $\mathbf{g}$ have to be deterministic? While SCMs 
 This idea of doing $x$ and, in the same situation, doing $x$ doesn't render very well in English. Furthermore, even though deterministic reproducibility seems to be an important property of counterfactual SCMs, they don't help very much to elucidate the idea. ``If I take action $x$ in situation $U$ I get $V_x(u)$ and if I take action $x$ in situation $U$ I get $V_x(u)$'' is just a redundant repetition. It seems that we want some way to express the idea of having two copies of $V_x(u)$ or, more generally, having multiple copies of a potential response function in such a way that we can make comparisons between their results.
 
 The idea that we need \emph{can} be clearly expressed with a see-do model. 
+
+
+\section{Functional Exchangeability, Imitability, Potential Outcomes}
+
+A great deal of ``ordinary statistics'' deals with models of \emph{exchangeable random variables}. Random variables $\RV{X}_1$ and $\RV{X}_2$ (which must have the same range) are exchangeable if $\prob{P}^{\RV{X}_1\RV{X}_2} = \prob{P}^{\RV{X}_2\RV{X}_1}$; more generally, a set of $n$ random variables is exchangeable if the joint distribution is unchanged by applying any permutation to the order of the variables. Exchangeability implies indifference to the ordering of \emph{observations}. For example:
+\begin{itemize}
+    \item Suppose the random variables $\RV{X}_1, \RV{X}_2, \RV{X}_3$ represent beliefs about the outcomes of flipping a coin twice. If we are not completely sure the coin is fair, then we might suppose that seeing heads for the first two flips will leave us slightly more confident in a heads than a tails outcome on the next flip, so $\prob{P}^{\RV{X}_3|\RV{X}_2\RV{X}_1}_{\text{HH}}$ is not quite the same as $\prob{P}^{\RV{X}_3}$. However, if $\RV{X}_1,\RV{X}_2$ and $\RV{X}_3$ are exchangeable then it must be the case that $\prob{P}^{\RV{X}_3|\RV{X}_2\RV{X}_1}_{HT}=\prob{P}^{\RV{X}_3|\RV{X}_1\RV{X}_2}_{HT}$; our views about the likelihood of a particular $\RV{X}_3$ after seeing a particular number of heads and a particular number of tails do not depend on the order of the heads and tails.
+    \item Suppose $\RV{W}_1$ and $\RV{W}_2$ represent consecutive draws without replacement from an urn containing a finite number of red and white balls in the frequentist sense that given a large ensemble of draws from the urn, the sample fractions will converge to the respective probabilities of $\RV{W}_1$ and $\RV{W}_2$. While the changing number of balls in the urn makes $\RV{W}_2$ depend on $\RV{W}_1$, it can be verified that supposing an equal chance of drawing any particular ball, $\RV{W}_1$ and $\RV{W}_2$ are exchangeable, i.e. $\prob{P}^{\RV{W}_1\RV{W}_2}=\prob{P}^{\RV{W}_2\RV{W}_1}$. This means that the probability of drawing a certain number of reds and whites does not depend on the order in which the balls are drawn.
+\end{itemize}
+
+An infinite length sequence $\RV{X}_1,\RV{X}_2,...$ is exchangeable if $\RV{X}_1,...\RV{X}_n$ is exchangeable for all $n$.
+
+\emph{Functional exchangeability} is a causal version of exchangeability that applies to consequence maps. Where exchangeability implies indifference to the ordering of observations, functional exchangeability implies indifference to the ordering of \emph{decision-consequence pairs}. For example:
+
+\begin{itemize}
+    \item Suppose you are planning to conduct a sequence of experiments in which you will set a piece of equipment to a particular setting, represented by $\RV{D}_1,\RV{D}_2,\RV{D}_3$, and record the results. The random variables $\RV{Y}_1,\RV{Y}_2,\RV{Y}_3$ represent our beliefs about the results of the first, second and third repeats of the experiment prior to undertaking it. This experiment is functionally exchangeable if it is described by a consequence map $\kernel{C}:D_0^3\to \Delta(\sigalg{Y}^3)$ such that $\kernel{C}^{\RV{Y}_1\RV{Y}_2\RV{Y}_3|\RV{D}_1\RV{D}_2\RV{D}_3}=\kernel{C}^{\RV{Y}_2\RV{Y}_3\RV{Y}_1|\RV{D}_2\RV{D}_3\RV{D}_1}$ and likewise for other joint permutations of the decisions and consequences. As in the coin flipping example, this means that we ``learn the same thing'' from choosing settings $a$ and observing $p$ followed by choosing $b$ and observing $q$ as we would from choosing $b$ and observing $q$ followed by choosing $a$ and observing $p$
+    \item Suppose $\RV{W}_1$ and $\RV{W}_2$ represent (in the frequentist sense) an ensemble of draws from one of two finite urns of red and white balls, with the urn choices given by $\RV{D}_1$, $\RV{D}_2$. Then $\RV{W}_1, \RV{W}_2$ and $\RV{D}_1, \RV{D}_2$ are conditionally exchangeable in the sense that $\prob{P}^{\RV{W}_1\RV{W}_2|\RV{D}_1\RV{D}_2}=\prob{P}^{\RV{W}_2\RV{W}_1|\RV{D}_2\RV{D}_1}$
+\end{itemize}
+
+\begin{definition}[Functional Exchangeability]
+A finite sequence of random variables $\RV{Y}_1,...,\RV{Y}_n:\Omega\to Y$ and a sequence of decision variables\todo{define decision variables; independent of Y conditional on D} $\RV{D}_1,...,\RV{D}_n:D\to D_0$ on kernel space $(\kernel{C},D,\Omega)$ along with is \emph{functionally exchangeable} if for all permutations $\pi:[n]\to[n]$, $\kernel{C}^{\RV{Y}_1,...,\RV{Y}_n|\RV{D}_1,...,\RV{D}_n}=\kernel{C}^{\RV{Y}_{\pi(1)},...,\RV{Y}_{\pi(n)}|\RV{D}_{\pi(1)},...,\RV{D}_{\pi(n)}}$.
+
+Graphically, functional exchangeability of $\RV{Y}_1, \RV{Y}_2$ and $\RV{D}_1, \RV{D}_2$ implies
+
+\begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
+        + (0,-1.15) node (D) {$\RV{D}_2$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+    \end{tikzpicture} = \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+    \end{tikzpicture}
+\end{align}
+
+\end{definition}
+
+\begin{lemma}[Functionally exchangeable sequences induce exchangeable sequences]
+Given functionally exchangeable sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D,\Omega)$ along with an exchangable measure $\prob{P}^{\RV{D}_{[n]}}$, the sequence $\utimes_{i\in[n]}(\RV{Y}_i\otimes\RV{D}_i)$ on the probability space $(\prob{P}^{\RV{D}_{[n]}}\kernel{C}^{\RV{Y}_{[n]}|\RV{D}_{[n]}},\Omega\times D)$ is exchangeable.
+\end{lemma}
+
+\begin{proof}
+We need to show for all permutations $\pi$ of $[n]$, $\prob{P}^{\RV{D}_{\pi([n])}}\kernel{C}^{\RV{Y}_{\pi([n])}|\RV{D}_{\pi([n])}}=\prob{P}^{\RV{D}_{[n]}}\kernel{C}^{\RV{Y}_{[n]}|\RV{D}_{[n]}}$. This is immediate since by assumption
+\begin{align}
+    \prob{P}^{\RV{D}_{\pi([n])}} &= \prob{P}^{\RV{D}_{[n]}}\\
+    \kernel{C}^{\RV{Y}_{\pi([n])}|\RV{D}_{\pi([n])}}&=\kernel{C}^{\RV{Y}_{[n]}|\RV{D}_{[n]}}
+\end{align}
+\end{proof}
+
+\begin{definition}[Infinitely exchangeably extendable]
+A finite exchangeable sequence of random variables $\RV{X}_1,...,\RV{X}_n:\Omega\to X$ on $(\prob{P},\Omega)$ is \emph{infinitely exchangeably extendable} if there exists an infinite exchangeable sequence $\RV{X}'_1,...:\Omega'\to X$ on $(\prob{P}',\Omega)$ such that $\prob{P}^{\RV{X}_{[n]}}=\prob{P}^{\RV{X}'_{[n]}}$.
+\end{definition}
+
+\begin{definition}[Infinitely functionally exchangeably extendable]
+A pair of sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D,\Omega)$ is \emph{infinitely functionally exchangeably extendable} if there exists a positive measure $\prob{P}^{\RV{D}_{[n]}}$ such that $\utimes_{i\in[n]}(\RV{Y}_i\utimes\RV{D}_i)$ on $(\prob{P}^{\RV{D}_{[n]}}\kernel{C}^{\RV{Y}_{[n]}|\RV{D}_{[n]}},\Omega\times D)$ is infinitelly exchangeably extendable.
+\end{definition}
+
+De Finetti's representation theorem shows how infinitely exchangeably extendable sequence of random variables can be represented as mixtures of independent and identically distributed sequences. A similar theorem applies ot infinitely functionally exchangeably extendable sequence pairs.

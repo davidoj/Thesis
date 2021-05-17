@@ -15,45 +15,45 @@ Repeated entry---line 1288 of file references.bib
  : @article{fong_causal_2013
  :                          ,
 I'm skipping whatever remains of this entry
-You've used 34 entries,
+You've used 29 entries,
             2773 wiz_defined-function locations,
-            849 strings with 12125 characters,
-and the built_in function-call counts, 13570 in all, are:
-= -- 1308
-> -- 560
-< -- 34
-+ -- 200
-- -- 166
-* -- 987
-:= -- 2181
-add.period$ -- 163
-call.type$ -- 34
-change.case$ -- 155
-chr.to.int$ -- 34
-cite$ -- 68
-duplicate$ -- 674
-empty$ -- 1192
-format.name$ -- 220
-if$ -- 2848
+            818 strings with 11237 characters,
+and the built_in function-call counts, 12039 in all, are:
+= -- 1147
+> -- 540
+< -- 27
++ -- 191
+- -- 162
+* -- 903
+:= -- 1931
+add.period$ -- 141
+call.type$ -- 29
+change.case$ -- 137
+chr.to.int$ -- 29
+cite$ -- 58
+duplicate$ -- 577
+empty$ -- 1033
+format.name$ -- 207
+if$ -- 2519
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 37
-newline$ -- 235
-num.names$ -- 142
-pop$ -- 274
+missing$ -- 33
+newline$ -- 204
+num.names$ -- 120
+pop$ -- 249
 preamble$ -- 1
-purify$ -- 122
+purify$ -- 111
 quote$ -- 0
-skip$ -- 464
+skip$ -- 406
 stack$ -- 0
-substring$ -- 376
-swap$ -- 60
-text.length$ -- 2
+substring$ -- 350
+swap$ -- 52
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 339
+type$ -- 284
 warning$ -- 0
-while$ -- 131
+while$ -- 113
 width$ -- 0
-write$ -- 561
+write$ -- 482
 (There were 3 error messages)
