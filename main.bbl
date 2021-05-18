@@ -1,4 +1,4 @@
-\begin{thebibliography}{29}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -91,6 +91,16 @@ D.~Heckerman and R.~Shachter.
 \newblock ISSN 1076-9757.
 \newblock \doi{10.1613/jair.202}.
 \newblock URL \url{https://www.jair.org/index.php/jair/article/view/10151}.
+
+\bibitem[Hewitt and Savage(1955)]{hewitt_symmetric_1955}
+Edwin Hewitt and Leonard~J. Savage.
+\newblock Symmetric {Measures} on {Cartesian} {Products}.
+\newblock \emph{Transactions of the American Mathematical Society}, 80\penalty0
+  (2):\penalty0 470--501, 1955.
+\newblock ISSN 0002-9947.
+\newblock \doi{10.2307/1992999}.
+\newblock URL \url{https://www.jstor.org/stable/1992999}.
+\newblock Publisher: American Mathematical Society.
 
 \bibitem[Hájek(2003)]{hajek_what_2003}
 Alan Hájek.
