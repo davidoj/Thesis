@@ -753,52 +753,33 @@ An infinite length sequence $\RV{X}_1,\RV{X}_2,...$ is exchangeable if $\RV{X}_1
 \end{itemize}
 
 \begin{definition}[Functional Exchangeability]
-A finite sequence of random variables $\RV{Y}_1,...,\RV{Y}_n:\Omega\to Y$ and a sequence of decision variables\todo{define decision variables; independent of Y conditional on D} $\RV{D}_1,...,\RV{D}_n:D\to D_0$ on kernel space $(\kernel{C},D,\Omega)$ along with is \emph{functionally exchangeable} if for all permutations $\pi:[n]\to[n]$, $\kernel{C}^{\RV{Y}_1,...,\RV{Y}_n|\RV{D}_1,...,\RV{D}_n}=\kernel{C}^{\RV{Y}_{\pi(1)},...,\RV{Y}_{\pi(n)}|\RV{D}_{\pi(1)},...,\RV{D}_{\pi(n)}}$.
+A finite sequence of random variables $\RV{Y}_1,...,\RV{Y}_n:\Omega\to Y$ and a sequence of choice variables\todo{define choice variables; independent of Y conditional on D} $\RV{D}_1,...,\RV{D}_n:D\to D_0$ on kernel space $(\kernel{C},D,\Omega)$ along with is \emph{functionally exchangeable} if for all permutations $\pi:[n]\to[n]$, $\kernel{C}^{\RV{Y}_1,...,\RV{Y}_n|\RV{D}_1,...,\RV{D}_n}=\kernel{C}^{\RV{Y}_{\pi(1)},...,\RV{Y}_{\pi(n)}|\RV{D}_{\pi(1)},...,\RV{D}_{\pi(n)}}$.
 
 Graphically, functional exchangeability of $\RV{Y}_1, \RV{Y}_2$ and $\RV{D}_1, \RV{D}_2$ implies
 
+\begin{align}
 \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
-        + (0,-1.15) node (D) {$\RV{D}_2$}
-        ++ (0.5,0) node[copymap] (copy0) {}
-        + (0.,-1.15) node[copymap] (copy2) {}
-        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
-        ++ (0.7,0) node[copymap] (copy1) {}
-        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
-        ++ (1.9,0) node (X) {$\RV{X}$}
-        +  (0,-1) node (Y) {$\RV{Y}$}
-        + (0,0.5) node (H) {$\RV{H}$}
-        + (0,-1.5) node (D2) {$\RV{D}$};
-        \draw (T) -- (O) -- (X);
-        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
-        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
-        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
-        \draw (C) -- (Y);
-        \draw (copy0) to [out = 65, in = 180] (H);
-        \draw (copy2) to [out = -65, in = 180] (D2);
-    \end{tikzpicture} = \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
-        + (0,-1.15) node (D) {$\RV{D}$}
-        ++ (0.5,0) node[copymap] (copy0) {}
-        + (0.,-1.15) node[copymap] (copy2) {}
-        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
-        ++ (0.7,0) node[copymap] (copy1) {}
-        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
-        ++ (1.9,0) node (X) {$\RV{X}$}
-        +  (0,-1) node (Y) {$\RV{Y}$}
-        + (0,0.5) node (H) {$\RV{H}$}
-        + (0,-1.5) node (D2) {$\RV{D}$};
-        \draw (T) -- (O) -- (X);
-        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
-        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
-        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
-        \draw (C) -- (Y);
-        \draw (copy0) to [out = 65, in = 180] (H);
-        \draw (copy2) to [out = -65, in = 180] (D2);
+        + (0,-0.3) node (D2) {$\RV{D}_2$}
+        ++ (2,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
+        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
+        +  (0,-0.3) node (Y2) {$\RV{Y}_2$};
+        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
+        \draw (D2) -- ($(C.west)+(0,-0.15)$) ($(C.east)+(0,-0.15)$) -- (Y2);
+    \end{tikzpicture} = \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_2$}
+        + (0,-0.3) node (D2) {$\RV{D}_1$}
+        ++ (2.5,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
+        ++ (2.5,0.15) node (Y1) {$\RV{Y}_2$}
+        +  (0,-0.3) node (Y2) {$\RV{Y}_1$};
+        \draw (D1) to [out=0, in=180] ($(C.west)+(0,-0.15)$) ($(C.east)+(0,-0.15)$) to [out=0, in=180] (Y1);
+        \draw (D2) to [out=0, in=180] ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) to [out=0, in=180] (Y2);
     \end{tikzpicture}
+
+\todo[inline](Probably worth including a lemma about swap maps and variable permutations somewhere)
 \end{align}
 
 \end{definition}
 
-\begin{lemma}[Functionally exchangeable sequences induce exchangeable sequences]
+\begin{lemma}[Functionally exchangeable sequences with exchangeable choices induce exchangeable sequences]
 Given functionally exchangeable sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D,\Omega)$ along with an exchangable measure $\prob{P}^{\RV{D}_{[n]}}$, the sequence $\utimes_{i\in[n]}(\RV{Y}_i\otimes\RV{D}_i)$ on the probability space $(\prob{P}^{\RV{D}_{[n]}}\kernel{C}^{\RV{Y}_{[n]}|\RV{D}_{[n]}},\Omega\times D)$ is exchangeable.
 \end{lemma}
 
@@ -817,5 +798,7 @@ A finite exchangeable sequence of random variables $\RV{X}_1,...,\RV{X}_n:\Omega
 \begin{definition}[Infinitely functionally exchangeably extendable]
 A pair of sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D,\Omega)$ is \emph{infinitely functionally exchangeably extendable} if there exists a positive measure $\prob{P}^{\RV{D}_{[n]}}$ such that $\utimes_{i\in[n]}(\RV{Y}_i\utimes\RV{D}_i)$ on $(\prob{P}^{\RV{D}_{[n]}}\kernel{C}^{\RV{Y}_{[n]}|\RV{D}_{[n]}},\Omega\times D)$ is infinitelly exchangeably extendable.
 \end{definition}
+
+\todo[inline]{I think it is the case that functionally exchangeable + non-interfering implies infinitely functionally exchangeably extendable, but not proved yet. Needs something like the Kolmogorov extension theorem}
 
 De Finetti's representation theorem shows how infinitely exchangeably extendable sequence of random variables can be represented as mixtures of independent and identically distributed sequences. A similar theorem applies ot infinitely functionally exchangeably extendable sequence pairs.
