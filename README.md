@@ -32,29 +32,32 @@
 
 ## Chapter 4: See-do models vs alternatives
 
-- Do-interventions
-    - Theorem: You can't "do" a contradiction => can construct variable sets with no "hard" do-interventions (even with cycles!)
-    - It's widely accepted that a causal graphical model with too few variables will yield "wrong" do-interventions
-    - But a causal graphical model with too many variables has no do-interventions
-    - Conclusion: do-interventions must be defined with respect to a canonical set of variables "not too small, not too big"
-    - Comment: this seems like too many implicit contingencies for the basic notion of an action
-    - The basic notion of an action in a see-do model: an element of the set of options
-- Counterfactuals are more than "Potential Outcomes" (random variables with shared space + consistency):
-    - Prop: Existence of a real variable *Y* + supposition *i* implies the existence of counterfactual *Y^i*
-    - Prop: *Y := f(X)* implies *Y^i=f(X^i)*
-    - Conclusion: "counterfactual sample spaces"
-
+- There are a lot of alternative causal models:
+    - Causal Bayesian Networks (normal/''abductive'' variations)
+    - Structural Causal Models (normal/''abductive'' variations)
+    - ''Heckman structural equation models''
+    - Potential outcomes models (general/treatment effects variations)
+    - Single world intervention graphical models
+    - ''Dawid decision-theoretic models''
+    - ''Heckerman deterministic decision-theoretic models''
+    - Lattimore/Rohde Bayesian causal models
+- They're all see-do with two main axes of differentiation:
+    - Extendably exchangeable or not (abductive vs non-abductive)
+    - Deterministic vs stochastic (potential outcomes exist vs not exist)
+- Two additional ways to differentiate models:
+    - Side effects vs no side-effects 
+    - Prior vs no prior
 
 ## Chapter 5: Getting from "see" to "do"/Inference principles
 
-- Invariance (graphical models)
-- "Exchangeability" (not regular exchangeability) (potential outcomes)
-- Reproducibility (see-do models)
+- Contextual imitability
 
-- "Meta-inference": faithfulness
-    - Open question: anything else?
+## Chapter 6: God's computer?
 
+- Are causal models marginals of ''God's computer'', or do we need alternative justifications?
+- Theorem: You can't "do" a contradiction + God's computer records necessarily related variables + consistency of marginals => God's computer is not a "do-intervention" causal model (even with cycles)
+- Do-interventions have an alternative justification via imitability + maximum entropy
 
-## Chapter 6: Conclusion
+## Chapter 7: Conclusion
 
 - Conclude whatever ends up coming before
