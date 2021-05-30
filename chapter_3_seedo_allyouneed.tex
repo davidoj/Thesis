@@ -227,7 +227,7 @@ Which implies $\RV{X}\CI_{\kernel{U}} \RV{D}$ by version (2) of conditional indp
 
 \subsubsection{Example}
 
-Suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a hypothesis sufficient see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\RV{H}\mapsto \mathrm{Bernoulli}(\RV{H})$. Then define ${\kernel{T}}$ by:
+Suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a decomposable see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\RV{H}\mapsto \mathrm{Bernoulli}(\RV{H})$. Then define ${\kernel{T}}$ by:
 
 \begin{itemize}
     \item Choice set: $D=\{0,1\}$
@@ -335,7 +335,7 @@ Then
     \implies [1,0]\kernel{C}^{\RV{F}\RV{L}|\RV{D}}_{\gamma} &\neq [1,0] \splitter{0.1} (\kernel{C}^{\RV{F}|\RV{D}}_\gamma\otimes \kernel{C}^{\RV{L}|\RV{D}}_\gamma)
 \end{align}
 
-Thus under hypothesis mixture $\gamma$, $\RV{F}$ does not $D$-cause\todo{define this} $\RV{L}$ even though $\RV{F}$ $D$-causes $\RV{L}$ in all states $S$. The definition of $D$-causation was motivated by the idea that we could reduce a difficult decision problem with a large set $D$ to a simpler problem with a smaller ``effective'' set of decisions by exploiting conditional independence. Even if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, $\RV{X}$ does not necessarily $D$-cause $\RV{Y}$ in mixtures of states in $S$. For this reason, we do not say that $\RV{X}$ $D$-causes $\RV{Y}$ in $S$ if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, and in this way we differ substantially from \citet{heckerman_decision-theoretic_1995}.
+Thus under the prior $\gamma$, $\RV{F}$ does not $D$-cause\todo{define this} $\RV{L}$ even though $\RV{F}$ $D$-causes $\RV{L}$ in all states $S$. The definition of $D$-causation was motivated by the idea that we could reduce a difficult decision problem with a large set $D$ to a simpler problem with a smaller ``effective'' set of decisions by exploiting conditional independence. Even if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, $\RV{X}$ does not necessarily $D$-cause $\RV{Y}$ in mixtures of states in $S$. For this reason, we do not say that $\RV{X}$ $D$-causes $\RV{Y}$ in $S$ if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, and in this way we differ substantially from \citet{heckerman_decision-theoretic_1995}.
 
 Instead, we simply extend the definition of $D$-causation to mixtures of hypotheses: if $\gamma\in \Delta(\RV{H})$ is a mixture of hypotheses, define $\kernel{C}_\gamma:= (\gamma\otimes\textbf{Id})\kernel{C}$. Then $\RV{X}$ $D$-causes $\RV{Y}$ relative to $\gamma$ iff $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
 
@@ -534,43 +534,36 @@ D-causation is not transitive: if $\RV{X}$ D-causes $\RV{Y}$ and $\RV{Y}$ D-caus
 
 \subsection{Decision sequences and parallel decisions}
 
-Just as observations $\RV{X}$ can be a sequence of random variables $\RV{X}_1$, $\RV{X}_2$, ..., $\RV{D}$ can be a sequence of ``sub-choices'' $\RV{D}_1$, $\RV{D}_2$, ... . Note that by positing such a sequence there is not requirement that $\RV{D}_1$ comes ``before'' $\RV{D}_2$ or even that they have any ``before'' and ``after'' relations at all.
+Just as observations $\RV{X}$ can be a sequence of random variables $\RV{X}_1$, $\RV{X}_2$, ..., $\RV{D}$ can be a sequence of ``sub-choices'' $\RV{D}_1$, $\RV{D}_2$, ... . Note that by positing such a sequence there is no requirement that $\RV{D}_1$ comes ``before'' $\RV{D}_2$ in any particular sense.
 
-\todo[inline]{Define parallel decisions, show that they induce potential outcomes}
+\subsection{Decomposability and indecomposability}
 
-\subsection{Residual dependence on observations}
+\begin{definition}[decomposability]\label{def:decomposability}
+A see-do model $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ is \emph{decomposable} if $\RV{Y}\CI_\kernel{T} \RV{X}|\RV{D}\RV{H}$. 
 
-\begin{definition}[Hypothesis sufficiency]\label{def:hypothesis_sufficiency}
-The hypothesis $\RV{H}$ is \emph{sufficient} for a see-do model if the consequence model has no dependence on observations $\RV{X}$ conditional on $\RV{H}$. That is, $\RV{Y}\CI_\kernel{T} \RV{X}|\RV{D}\RV{H}$. 
+If $\kernel{T}$ is decomposable we have $\kernel{T}=(\splitter{0.15}_{\Theta}\otimes \mathrm{Id}_D)(\kernel{T}^{\RV{X}|\RV{H}}\otimes\kernel{T}^{\RV{Y}|\RV{H}\RV{D}})$, and so it can be uniquely defined with the observational model $\kernel{O}:= \kernel{T}^{\RV{X}|\RV{H}}$ and the consequence model $\kernel{C}:=\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$.
 
-A hypothesis sufficient see-do model can be specified with:
-
-\begin{itemize}
-    \item Hypothesis space $\RV{H}$, choices $D$, observations $X$ and consequences $Y$
-    \item Observation map $\kernel{T}^{\RV{X}|\RV{H}}$
-    \item Reduced consequence model $\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$
-\end{itemize}
 \end{definition}
 
-Given observations $\RV{X}$, assumed to be an IID sequence $\RV{X}_1,\RV{X}_2,...$ conditional on $\RV{H}$, a common ``causal inference problem'' is to estimate the ``true'' distribution of observations $\kernel{T}^{\RV{X}_i|\RV{H}}_{h^*}$ and from this to estimate the consequence model $\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}_{h^*\cdot}$, if this is possible. This problem only makes sense if hypothesis sufficiency is assumed -- once $h^*$ is given, the consequence model of interest has no further dependence on $\RV{X}$. We show that all decision problems can be modeled by a hypothesis sufficient see-do model.
+Indecomposable models don't allow us to consider observations and consequences separately, as the consequences also depend directly on the observations $\RV{X}$.
 
 
-\subsubsection{Examples of hypothesis sufficient and insufficient see-do models}
+\subsubsection{Examples of decomposable and indecomposable see-do models}
 
-Recall the previous example: suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a hypothesis sufficient see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\RV{H}\mapsto \mathrm{Bernoulli}(\RV{H})$. Then define $\prescript{1}{}{\kernel{T}}$ by:
+Recall the previous example: suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a decomposable see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\RV{H}\mapsto \mathrm{Bernoulli}(\RV{H})$. Then define $\prescript{1}{}{\kernel{T}}$ by:
 
 \begin{itemize}
     \item $D=\{0,1\}$
     \item $X=\{0,1\}^N$
     \item $Y=\{0,1\}$
     \item $H=(0,1)$
-    \item $\prescript{1}{}{\kernel{T}}^{\RV{X}|\RV{H}}:\splitter{0.1}^N\kernel{B}$
-    \item $\prescript{1}{}{\kernel{T}}^{\RV{Y}|\RV{D}\RV{H}}:(h,d)\mapsto \mathrm{Bernoulli}(1-|d-h|)$
+    \item $\prescript{1}{}{\kernel{O}}:\splitter{0.1}^N\kernel{B}$
+    \item $\prescript{1}{}{\kernel{C}}:(h,d)\mapsto \mathrm{Bernoulli}(1-|d-h|)$
 \end{itemize}
 
 In this model, the chance $\RV{H}$ of the coin landing on heads is as much as we can hope to know about how our bet will work out.
 
-Suppose instead that in addition to the $N$ prior flips, we manage to look at the outcome of the flip on which we will bet. In this case, the situation can be modeled by the following hypothesis insufficient see-do model $\prescript{2}{}{\kernel{T}}$:
+Suppose instead that in addition to the $N$ prior flips, we manage to look at the outcome of the flip on which we will bet. In this case, the situation can be modeled by the following indecomposable see-do model $\prescript{2}{}{\kernel{T}}$:
 
 \begin{itemize}
     \item $D=\{0,1\}$
@@ -583,22 +576,32 @@ Suppose instead that in addition to the $N$ prior flips, we manage to look at th
 
 In this case, even if we are told the value of $\RV{H}$, we still benefit from using the observed data when making our decision.
 
-It appears that it might be possible to model the second situation with a hypothesis sufficient model by including the result of the $N+1$th flip in the hypothesis. Define the new hypothesis space $H'=(0,1)\times\{0,1\}$ and define $\prescript{3}{}{\kernel{T}}$ by:
+It is possible to model the second situation with a decomposable model by including the result of the $N+1$th flip in the hypothesis. Define the new hypothesis space $H'=H\times\{0,1\}$ and let $\RV{H}_0$ be the projection to the old hypothesis space $H$. Define $\prescript{3}{}{\kernel{T}}$ by:
 
 \begin{itemize}
     \item $D=\{0,1\}$
     \item $X=\{0,1\}^{N+1}$
     \item $Y=\{0,1\}$
     \item $H'=(0,1)\times\{0,1\}$
-    \item $\prescript{3}{}{\kernel{T}}^{\RV{X}|\RV{H}'}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
-    \item $\prescript{3}{}{\kernel{T}}^{\RV{Y}|\RV{H}'\RV{D}}:(h,x_{N+1},d)\mapsto \delta_{1-|d-x_{N+1}|}$
+    \item $\prescript{3}{}{\kernel{O}}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
+    \item $\prescript{3}{}{\kernel{C}}:(h,x_{N+1},d)\mapsto \delta_{1-|d-x_{N+1}|}$
 \end{itemize}
 
-However, $\RV{X}_{N+1}$ is related to the previous flips $\vecRV{X}_{<N}$ and $\prescript{3}{}{\kernel{T}}$ ignores this fact.  In particular, given any $\RV{H}'=(h,\_)$, $\RV{X}_{N+1}$ as well as $\RV{X}_{i}$, $i\leq N$ should all distributed according to Bernoulli($h$). Thus $\prescript{2}{}{\kernel{T}}$ is preferable to $\prescript{3}{}{\kernel{T}}$ because it represents more of the knowledge we have about the problem.
+However, $\prescript{2}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}} = \kernel{B}$ while $\prescript{3}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}_0}$ is undefined, so $\prescript{3}{}{\kernel{T}}$ is a substantially different model to $\prescript{2}{}{\kernel{T}}$.
 
-If a see-do model is employed in a \emph{decision problem} -- defined in the next section -- there is an alternative way to avoid hypothesis insufficiency that does not require throwing out some of the model structure.
+If a see-do model is employed in a \emph{decision problem} -- defined in the next section -- it is possible to recover decomposability in the sense that we can take an indecomposable model construct a decomposable model that is identical given an identification of the random variables in each.
 
-\todo[inline]{The importance of this is that counterfactual questions are usually \emph{not} decision problems and so they do not have the possibility of avoiding insufficiency available; also \emph{in practice} counterfactual problems are usually hypothesis insufficient while decision problems are usually not.}
+\subsubsection{Exchangeability}
+
+One justification for using statistical models -- by which I mean maps of the type $\kernel{O}:H\to \Delta(\sigalg{X})$ -- is to suppose that we simply have as prior knowledge a set of hypotheses and the fact that for each hypothesis, repeating our observations a large number of times in the appropriate way will yield a sequence that is described by the probability distribution we associate with that hypothesis. An alternative view, set out by \citet{de_finetti_foresight_1992}, is to treat random variables as predictions of uncertain events rather than properties of repeated observations of the system under observation. De Finetti's representation theorem shows that, starting from the assumption of \emph{exchangeability} (informally: indifference to the order in which observations arrive), the predictive model of future observations can be represented by the product of a \emph{prior} and a \emph{conditionally independent and identically distributed statistical model}.
+
+In see-do models, exchangeability of observations additionally implies that the model is decomposable. In addition, I argue that a generalisation of exchangeability I call \emph{functional exchangeability} is a natural assumption to make when modelling counterfacutal suppositions.
+
+\begin{definition}[Exchangeability]
+Given $A\subseteq \mathbb{N}$, a sequence of random variables $\RV{X}_A:=\utimes_{i\in A} \RV{X}_i$ each taking values in $X$ on a probability space $(\prob{P},(\Omega,\sigalg{F}))$ is \emph{exchangeable} if for all $n\in A$, all permutations of indices $\sigma:[n]\to[n]$ and all  $B \in\sigalg{F}$, $\prob{P}^{\RV{X}_{[n]}}(B) =\prob{P}^{\RV{X}_{\sigma([n])}}(B)$.
+
+\todo[inline]{Define infinite coupled copymaps WRT kolmogorov extension theorem}
+\end{definition}
 
 \subsection{Causal questions and decision functions}
 
@@ -619,9 +622,9 @@ This type of question presupposes somewhat more than Pearl's prototypical interv
 
 We will return to the question of preferences. For now, we will focus on the idea that a causal decision problem is about selecting a choice given data. That is, however the selection is made, the answer to a causal decision problem is always a \emph{decision function} $\kernel{D}:X\to \Delta(\sigalg{D})$.
 
-\subsubsection{Avoiding insufficiency with decision functions}
+\subsubsection{Avoiding indecomposability with decision functions}
 
-\todo[inline]{Show that a decision problem with a hypothesis insufficient model induces an equivalent decision problem with a hypothesis sufficient model with an expanded set of choices, subject to some conditions.}
+\todo[inline]{Show that a decision problem with a indecomposable model induces an equivalent decision problem with a decomposable model with an expanded set of choices, subject to some conditions.}
 
 \subsubsection{Decision rules}
 
@@ -660,7 +663,7 @@ The loss induces a partial order on decision rules. If for all $\RV{H}$, $l(\RV{
 \begin{definition}[Induced statistical decision problem]
 A see-do model $\kernel{T}:\RV{H}\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ along with a utility $u$ induces the \emph{statistical decision problem} $(\RV{H},\mathscr{U},R)$ with states $\RV{H}$, decisions $\mathscr{U}$ and risks $R$.
 
-\todo[inline]{Statistical decision problems usually define the risk via the loss, but it is only possible to define a loss with a hypothesis sufficient model. We don't actually need a loss, though: the complete class theorem still holds via the induced risk and Bayes risk}
+\todo[inline]{Statistical decision problems usually define the risk via the loss, but it is only possible to define a loss with a decomposable model. We don't actually need a loss, though: the complete class theorem still holds via the induced risk and Bayes risk}
 
 \end{definition}
 
@@ -735,7 +738,9 @@ This idea of doing $x$ and, in the same situation, doing $x$ doesn't render very
 The idea that we need \emph{can} be clearly expressed with a see-do model. 
 
 
-\section{Functional Exchangeability, Imitability, Potential Outcomes}
+\section{Decomposability and double exchangeability}
+
+A see-do model $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ is decomposable if an observational statistical model $\kernel{O}:\Theta\to \Delta(\sigalg{X})$ and a consequence map $\kernel{C}:\Theta\times D\to \Delta(\sigalg{Y})$ such that 
 
 A great deal of ``non-causal statistics'' deals with models of \emph{exchangeable random variables}. Random variables $\RV{X}_1$ and $\RV{X}_2$ both taking values in $X$ are exchangeable if $\prob{P}^{\RV{X}_1\RV{X}_2} = \prob{P}^{\RV{X}_2\RV{X}_1}$; more generally, a set of $n$ random variables is exchangeable if the joint distribution is unchanged by applying any permutation to the order of the variables. Exchangeability implies indifference to the ordering of \emph{observations}. For example:
 \begin{itemize}
@@ -752,11 +757,7 @@ A great deal of ``non-causal statistics'' deals with models of \emph{exchangeabl
 
 \todo[inline]{Define permutation, set permutation}
 
-\begin{definition}[Exchangeability]
-A (possibly infinite) sequence of random variables $\RV{X}_A:=\utimes_{i\in A} \RV{X}_i$ taking values in $X$ on a probability space $(\prob{P},(\Omega,\sigalg{F}))$ is \emph{exchangeable} if for all $n\in A$, all permutations of indices $\sigma:[n]\to[n]$ and all $B\in X^n$ such that $B\times \in\sigalg{F}$, $\prob{P}^{\RV{X}_{[n]}\RV{X}_{A\setminus[n]}}(B\times X^{|A|-n}) =\prob{P}^{\RV{X}_{\sigma([n])}\RV{X}_{A\setminus[n]}}(B\times X^{|A|-n})$.
 
-\todo[inline]{Define infinite coupled copymaps WRT kolmogorov extension theorem}
-\end{definition}
 
 De Finetti's representation theorem shows that any infinite exchangeable sequence of random variables can be represented as a mixture of independent and identically distributed sequences. This theorem connects exchangeable \emph{subjective Bayesian random variables} $\RV{X}^{(B)}_n$, which represent expectations of future $X^n$-valued observations, and independent and identically distributed \emph{frequentist random variables} $\RV{X}^{(F)}$, which represent almost sure $n\to\infty$ limits of proportions in $X^n$-valued observations. Conseuqences of the theorem are:
 
@@ -768,12 +769,12 @@ De Finetti's representation theorem shows that any infinite exchangeable sequenc
 If our task is to predict future $X$-valued observations and our predictions are the same regardless of the order in which the observations arrive, then the probability distribution representing predictions can be represented by a statistical model and a prior. A similar theorem exists connects ``functionally exchangeable'' consequence models and coupled 2-player statistical models. Coupled 2-player statistical models themselves are closely related to models typically used in causal inference.
 
 \begin{theorem}[Representation of infinite exchangeable sequences\citep{hewitt_symmetric_1955}]
-Let $(X,\sigalg{X})$ be a compact Hausdorff space with the Baire $\sigma$-algebra and $\prob{P}$ a measure on $X^\mathbb{N}$ with the product sigma algebra such that $\RV{X}_\mathbb{N}$ with each $\RV{X}_i$ given by the projection map $\pi_i$. Define $(\Delta(\sigalg{X}),\sigalg{E})$ to be the set of all probability measures on $X$ with the $\sigma$-algebra $\sigalg{E}$ being the coarsest algebra for which the maps $\mathrm{ev}_A:\Delta(\sigalg{X})\to \mathbb{R}$ given by $\mathrm{ev}_A:\rho\mapsto \rho(A)$ are measurable for all $A\in \sigalg{X}$. Then there exists a unique probability measure $\mu$ on $\Delta(\sigalg{X})$ with the given $\sigma$-algebra such that for all $n\in\mathbb{N}$, $C\in\sigalg{X^n}$:
+Let $(X,\sigalg{X})$ be a compact Hausdorff space with the Baire $\sigma$-algebra and $\prob{P}$ a measure on $X^\mathbb{N}$ with the product sigma algebra such that $\RV{X}_\mathbb{N}$ with each $\RV{X}_i$ given by the projection map $\pi_i$. Define $(\Delta(\sigalg{X}),\sigalg{E})$ to be the set of all probability measures on $X$ with the $\sigma$-algebra $\sigalg{E}$ being the coarsest algebra for which the maps $\mathrm{ev}_A:\Delta(\sigalg{X})\to \mathbb{R}$ given by $\mathrm{ev}_A:\rho\mapsto \rho(A)$ (for $\rho\in\Delta(\sigalg{X})$) are measurable for all $A\in \sigalg{X}$. Then there exists a unique probability measure $\mu$ in $\Delta(\sigalg{E})$ such that for all $n\in\mathbb{N}$, $C\in\sigalg{X^n}$:
 \begin{align}
     \prob{P}(C\times X^{\mathbb{N}\setminus[n]}) = \int_{(\Delta(\sigalg{X}))} \prod_{i\in [n]} \rho(\RV{X}_i(C)) d\mu(\rho) 
 \end{align}
 
-Where $\RV{X}_i(A)$ is the image of $A$ under $\RV{X}_i$.
+Where $\RV{X}_i(C)$ is the image of $C$ under $\RV{X}_i$.
 \end{theorem}
 
 Examples of such spaces include bounded Borel subsets of $\mathbb{R}$ and bounded subsets of $\mathbb{N}$.

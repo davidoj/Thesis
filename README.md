@@ -14,21 +14,22 @@
 - Representation of kernel spaces with product of disintegrations
 - *Maybe:* D-separation equivalent in string diagrams
 
-## Chapter 3: See-do models are all you need
+## Chapter 3: Two player statistical models
 
-- See-do models are statistical models with *options*
-    - Definition
-    - Examples
-- See-do models answer Pearl's three levels of questions:
-    - What am I likely to see next? - see-only
-    - What happens next if I do something? - resolvable to a hypothesis sufficient see-do
-    - What would have happened if I had done something different? - not resolvable to hypothesis sufficient see-do
-- Additional kind of question: "what *should* I do?" = "what happens if I do something?" + "what do I want to happen?"
-    - Generates a statistical decision problem
-    - Complete class theorem and Bayes decision rules
-- Special cases of see-do models
-    - Hypothesis sufficiency
-    - D-causation/D-control
+- Traditional statistical models are ''player one'' models (where that ''player one'' is ''nature'')
+    - This can be motivated directly supposing probabilities model the long run behaviour of mechanisms, or via exchangeability in the Bayesian setting
+- A simple generalisation: two-player models, where only one player is ''nature''
+    - Common formulations of decision problems require ''player two'' statistical models
+    - ''Counterfacutal'' questions also require ''player two''
+    - We can add ''player one'' either via mechanisms or functional exchangeability - result: two player statistical models
+- Causal inference imposes an additional constraint: observations cannot be affected by player two's actions
+    - See-do models
+    - See-do models are closely related to Statistical Decision Theory:
+        - See-do model + utility = statistical decision problem
+        - See-do model + decision rule + utility = risk
+        - Complete class theorem
+        - Statistical model dominance
+        - Causal dominance*
 
 ## Chapter 4: See-do models vs alternatives
 
@@ -36,21 +37,22 @@
     - Causal Bayesian Networks (normal/''abductive'' variations)
     - Structural Causal Models (normal/''abductive'' variations)
     - ''Heckman structural equation models''
-    - Potential outcomes models (general/treatment effects variations)
+    - Potential outcomes models (unit/population variations)
     - Single world intervention graphical models
     - ''Dawid decision-theoretic models''
     - ''Heckerman deterministic decision-theoretic models''
     - Lattimore/Rohde Bayesian causal models
-- They're all see-do with two main axes of differentiation:
-    - Extendably exchangeable or not (abductive vs non-abductive)
+- They're all see-do models with two main axes of differentiation:
+    - Double exchangeable vs not doubly exchangeable (abductive vs non-abductive)
     - Deterministic vs stochastic (potential outcomes exist vs not exist)
-- Two additional ways to differentiate models:
+- Two additional ways to differentiate models that aren't as much discussed:
     - Side effects vs no side-effects 
     - Prior vs no prior
 
 ## Chapter 5: Getting from "see" to "do"/Inference principles
 
-- Contextual imitability
+- D-causation/D-control
+- Imitability and contextual imitability
 
 ## Chapter 6: God's computer?
 

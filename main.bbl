@@ -1,4 +1,4 @@
-\begin{thebibliography}{30}
+\begin{thebibliography}{31}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -44,6 +44,16 @@ A.~Philip Dawid.
 \newblock \emph{arXiv:2004.12493 [math, stat]}, April 2020.
 \newblock URL \url{http://arxiv.org/abs/2004.12493}.
 \newblock arXiv: 2004.12493.
+
+\bibitem[de~Finetti(1992)]{de_finetti_foresight_1992}
+Bruno de~Finetti.
+\newblock Foresight: {Its} {Logical} {Laws}, {Its} {Subjective} {Sources}.
+\newblock In Samuel Kotz and Norman~L. Johnson, editors, \emph{Breakthroughs in
+  {Statistics}: {Foundations} and {Basic} {Theory}}, Springer {Series} in
+  {Statistics}, pages 134--174. Springer, New York, NY, 1992.
+\newblock ISBN 978-1-4612-0919-5.
+\newblock \doi{10.1007/978-1-4612-0919-5_10}.
+\newblock URL \url{https://doi.org/10.1007/978-1-4612-0919-5_10}.
 
 \bibitem[Fisher(1992)]{fisher_statistical_1992}
 R.~A. Fisher.

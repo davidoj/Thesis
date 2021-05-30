@@ -18,17 +18,18 @@
 \contentsline {subsection}{\numberline {1.1.2}D-causation vs Limited Unresponsiveness}{36}{subsection.1.1.2}%
 \contentsline {subsection}{\numberline {1.1.3}Properties of D-causation}{39}{subsection.1.1.3}%
 \contentsline {subsection}{\numberline {1.1.4}Decision sequences and parallel decisions}{39}{subsection.1.1.4}%
-\contentsline {subsection}{\numberline {1.1.5}Residual dependence on observations}{40}{subsection.1.1.5}%
-\contentsline {subsubsection}{Examples of hypothesis sufficient and insufficient see-do models}{40}{section*.34}%
-\contentsline {subsection}{\numberline {1.1.6}Causal questions and decision functions}{41}{subsection.1.1.6}%
-\contentsline {subsubsection}{Avoiding insufficiency with decision functions}{42}{section*.36}%
+\contentsline {subsection}{\numberline {1.1.5}Decomposability and indecomposability}{40}{subsection.1.1.5}%
+\contentsline {subsubsection}{Examples of decomposable and indecomposable see-do models}{40}{section*.33}%
+\contentsline {subsubsection}{Exchangeability}{41}{section*.34}%
+\contentsline {subsection}{\numberline {1.1.6}Causal questions and decision functions}{42}{subsection.1.1.6}%
+\contentsline {subsubsection}{Avoiding indecomposability with decision functions}{42}{section*.36}%
 \contentsline {subsubsection}{Decision rules}{42}{section*.38}%
 \contentsline {section}{\numberline {1.2}Existence of counterfactuals}{43}{section.1.2}%
 \contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{44}{section*.44}%
 \contentsline {paragraph}{Definition 7.1.2 (Submodel)}{44}{section*.45}%
 \contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{44}{section*.46}%
 \contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{44}{section*.47}%
-\contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{44}{section*.48}%
+\contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{45}{section*.48}%
 \contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{45}{section*.49}%
-\contentsline {section}{\numberline {1.3}Functional Exchangeability, Imitability, Potential Outcomes}{46}{section.1.3}%
+\contentsline {section}{\numberline {1.3}Decomposability and double exchangeability}{46}{section.1.3}%
 \contentsline {chapter}{\numberline {2}Chapter 4: See-do models compared to causal graphical models and potential outcomes}{51}{chapter.2}%
