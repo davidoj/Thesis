@@ -1,0 +1,332 @@
+%!TEX root = main.tex
+
+\chapter{Chapter 4: See-do models and the causal modelling zoo}\label{ch:4}
+
+
+The field of causal inference is additionally concerned with types of questions called ``counterfactual'' by Pearl. There is substantial theoretical interest in counterfactual questions, but counterfactual questions are much more rarely found in applications than interventional questions. Even though see-do models are motivated by the need to answer interventional questions, the theory develope here is surprisingly appliccable to counterfactuals as well. In particular, the theory of see-do models offers explanations for three key features of counterfactual models:
+\begin{itemize}
+    \item \textbf{Apparent absence of choices}: \emph{Potential outcomes} models, which purportedly answer counterfactual questions, are standard statistical models \emph{without choices} \citep{rubin_causal_2005}
+    \item \textbf{Deterministic dependence on unobserved variables}: Counterfactual models involve \emph{deterministic} dependence on unobserved variables \citep{pearl_causality:_2009,rubin_causal_2005,richardson2013single}
+    \item \textbf{Residual dependence on observations}: Counterfactual questions depend on the given data \emph{even if the joint distribution of this data is known}. For example, \citet{pearl_causality:_2009} introduces a particular method for conditioning a known joint distribution on observations that he calls \emph{abduction}
+\end{itemize}
+
+Potential outcomes models lack a notion of ``choices'' because there is a generic method to ``add choices'' to a potential outcomes model, which is implicitly used whenever potential outcomes models are used. Furthermore, we show that a see-do model induces a potential outcome model if and only if it is a model of \emph{parallel choices}, and in this case the observed consequences depend deterministically on the unobserved potential outcomes in precisely the manner as given in \citet{rubin_causal_2005}. Parallel choices can be roughly understood as models of sequences of experiments where an action can be chosen for each experiment, and with the special properties that repeating the same action deterministically yields the same consequence, and the consequences of a sequence of actions doesn't depend on the order in which the actions are taken. That is, we show that the fundamental property of any ``counterfactual'' model is \emph{deterministic reproducibility} and \emph{action exchangeability}, and while these models may admit a ``counterfactual'' interpretation, they are fundamentally just a special class of see-do models.
+
+\todo[inline]{But the proof is still in my notebook}
+
+\todo[inline]{Interestingly, it seems to be possible to construct a see-do model where the ``hypothesis'' is a quantum state, and quantum mechanics + locality seems to rule out parallel choices in such models in a manner similar to Bell's theorem. ``Seems to'' because I haven't actually proven any of these things.}
+
+The residual dependence on observations exhibited by counterfactual questions is a generic property of see-do models, and it is a particular property of \emph{decision problems} are notable in that it is often
+
+\todo[inline]{Where to discuss the connections to statistical decision theory?}
+
+See-do models are closely related to \emph{statistical decision theory} introduced by \citet{wald_statistical_1950} and elaborated by \citet{savage_foundations_1972} after Wald's death. See-do models equipped with a \emph{utility function} induce a slightly generalised form of statistical decision problems, and the complete class theorm is appliccable to these models.
+
+A stylistic difference between see-do models and most other causal models is that see-do models explicitly represent both the observation model and the consequence model and their coupling, making them ``two picture'' causal models. Causal Bayesian Networks and Single World Interention Graphs \citep{richardson2013single} use ``one picture'' to represent the observation model and the consequence model. However, both of these approaches employ ``graph mutilation'', so one picture on the page actually corresponds to many pictures when combined with the mutilation rules. For more on how these different types of models relate, see Section \ref{sec:single_double_representation}. \citet{lattimore_replacing_2019}'s Bayesian causal inference employs two-picture causal models, as do ``twin networks'' \citep{pearl_causality:_2009}.
+
+Sometimes we are interested in modelling situations where we can also make some choices that also affect the eventual consequences. For example, I might hypothesise $\RV{H}_1$: the switch on the wall controls my light, $\RV{H}_2$: the switch on the wall does not control my light. Then, given $\RV{H}_1$ I can choose to toggle the switch, and I will see my light turn on, or I can choose not to toggle the switch and I will not see my light turn on. Given $\RV{H}_2$, neither choice will result in a light turned on. Choices are clearly different to hypotheses: the choice I make depends on what I want to happen, while whether or not a hypothesis is true has no regard for my ambitions.
+
+A ``statistical model with choices'' is simply a map $\prob{T}:D\times \RV{H}\to \Delta(\sigalg{E})$ for some set of choices $D$, hypotheses $\RV{H}$ and outcome space $(E,\sigalg{E})$. We can also distinguish two types of outcomes: \emph{observations} which are given prior to a choice being made and \emph{consequences} which happen after a choice is made. Observations cannot be affected by the choices made, while consequences are not subject to this restriction. That is, observations are what we might \emph{see} before making a choice, which depends on the hypothesis alone, and if we are lucky we may be able to invert this dependence to learn something about the hypothesis from observations. On the other hand, the consequences of what we \emph{do} depends jointly on the hypothesis and the choice we make and we judge which choices are more desirable on the basis of which consequences we expect them to produce. 
+
+What we are studying is a family of models that generalises of statistical models to include hypotheses, choices, observations and consequences. These models are referred to as \emph{see-do models}. Hypotheses, observations, consequences and choices are not individually new ideas. \emph{Statistical decision problems} \citep{wald_statistical_1950,savage_foundations_1972} extend statistical models with decisions and \emph{losses}. Like consequences, losses depend on which choices are made. However, unlike consequences, losses must be ordered and reflect the preferences of a decision maker. \emph{Influence diagrams} are directed graphs created to represent decision problems that feature ``choice nodes'', ``chance nodes'' and ``utility nodes''. An influence diagram may be associated with a particular probability distribution \cite{nilsson_evaluating_2013} or with a set of probability distributions \cite{dawid_influence_2002}.
+
+See-do models have deep roots in decision theory. Decision theory asks, out of a set of available acts, which ones ought to be chosen. See-do models answer an intermediate question: out of a set of available acts, what are the consequences of each? This question is described by \citet{pearl_causality:_2009} as an ``interventional'' question.
+
+See-do models depend cruicially on a set of choices $D$. While these models can obviously answer questions like ``what is likely to happen if I choose $d\in D$?'', this construction appears to rule out ``causal'' questions like ``Does rain cause wet roads?''. We define a restricted idea of causation called $D$-\emph{causation}. Roughly, if the roads get wet when it rains regardless of my choice of $d\in D$, then rain ``$D$-causes'' wet roads. $D$-causation is closely related to the idea \emph{limited invariance} put forward by \citet{heckerman_decision-theoretic_1995}.
+
+
+\subsection{D-causation}
+
+The choice set $D$ is a primitive element of a see-do model. However, while we claim that see-do models are the basic objects studied in causal inference, so far we have no notion of ``causation''. What we call $D$-\emph{causation} is one such notion. It is called $D$-causation because it is a notion of causation that depends on the set of choices available. A similar idea, called \emph{limited unresponsiveness}, is discussed extensively in the decision theoretic account of causation found in \citet{heckerman_decision-theoretic_1995}. The main difference is that see-do maps are fundamentally stochastic while Heckerman and Shachter work with ``states'' (approximately hypotheses in our terminology) that map decisions deterministically to consequences. In addition, while we define $D$-causation relative to a see-do map $\kernel{T}$, Heckerman and Shachter define limited unresponsiveness with respect to \emph{sets} of states.
+
+Section \ref{sec:cbns_without_d} explores the difficulty of defining ``objective causation'' without reference to a set of choices. $D$ need not be interpreted as the set of choices available to an agent, but however we want to interpret it, all existing examples of causal models seem to require this set.
+
+See Section \ref{ssec:random_variables} for the definition of random variables in Kernel spaces.
+
+One way to motivate the notion of $D$-causation is to observe that for many decision problems, I may wish to include a very large set of choices $D$. Suppose I aim to have my light switched on, and there is a switch that controls the light. Often, the relevant choices for such a problem would appear to be $D_0=\{\text{flip the switch},\text{don't flip the switch}\}$. However, this doesn't come close to exhausting the set of things I might choose to do, and I might wish to consider a larger set of possibilities. For simplicity's sake, suppose I have instead the following set of options:
+
+\begin{align*}
+D_1:=&\{``\text{walk to the switch and press it with my thumb}'', \\
+    &``\text{trip over the lego on the floor, hop to the light switch and stab my finger at it}'',\\
+    &``\text{stay in bed}''\}
+\end{align*}
+
+If having the light turned on is all that matters, I could consider any acts in $D_1$ to be equivalent if, in the end, the light switch ends up in the same position. In this case, I could say that the light switch position $D_1$-causes the state of the light. Subject to the assumption that the light switch position $D_1$-causes the state of the light, I can reduce my problem to one of choosing from $D_0$ (noting that some choices correspond to mixtures of elements of $D_0$).
+
+If I consider an even larger set of possible acts $D_2$, I might not accept that the switch position $D_2$-causes the state of the light. Let $D_2$ be the following acts:
+
+\begin{align*}
+D_2:=&\{``\text{walk to the switch and press it with my thumb}'', \\
+    &``\text{trip over the lego on the floor, hop to the light switch and stab my finger at it}'',\\
+    &``\text{stay in bed}'',\\
+    &``\text{toggle the mains power, then flip the light switch}''\}
+\end{align*}
+
+In this case, it would be unreasonable to suppose that all acts that left the light switch in the ``on'' position would also result in the light being ``on''. Thus the switch does not $D_2$-cause the light to be on.
+
+Formally, $D$-causation is defined in terms of conditional independence. Given a see-do model $\kernel{T}:H\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, define the \emph{consequence model} $\kernel{C}:H\times D\to \Delta(\sigalg{Y})$ as $\kernel{C}:=\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$.
+
+\begin{definition}[$D$-causation]\label{def:d_cause}
+Given a hypothesis $h\in H$ and a consequence model $\kernel{C}:H\times D\to \Delta(\mathcal{Y})$, random variables $\RV{Y}_1:Y\times D\to Y_1$, $\RV{Y}_2:Y\times D\to Y_2$ and $\RV{D}:Y\times D\to D$ (defined the usual way), $\RV{Y}_1$ $D$-causes $\RV{Y}_2$ iff $\RV{Y}_2\CI_{\kernel{C}} \RV{D}|\RV{Y}_1\RV{H}$.
+\end{definition}
+
+\subsection{D-causation vs Limited Unresponsiveness}
+
+Heckerman and Shachter study deterministic ``consequence models''. Furthermore, what we call hypotheses $h\in H$, Heckerman and Schachter call states $s\in S$. Heckerman and Shachter's notion of causation is defined by \emph{limited unresponsiveness} rather than \emph{conditional independence}, which depends on a partition of states rather than a particular hypothesis.
+
+\begin{definition}[Limited unresponsiveness]
+    Given states $S$, deterministic consequence models $\kernel{C}_s:D\to \Delta(F)$ for each $s\in A$ and a random variables $\RV{Y}_1:F\to Y_1$, $\RV{Y}_2:F\to Y_2$, $\RV{Y}_1$ is unresponsive to $\RV{D}$ in states limited by $\RV{Y}_2$ if $\kernel{C}_{(s,d)}^{\RV{Y}_2|\RV{S}\RV{D}}=\kernel{C}_{(s,d')}^{\RV{Y}_2|\RV{S}\RV{D}}\implies \kernel{C}_{(s,d)}^{\RV{Y}_1|\RV{S}\RV{D}}=\kernel{C}_{(s,d')}^{\RV{Y}_1|\RV{S}\RV{D}}$ for all $d,d'\in D$, $s\in S$. Write $\RV{Y}_1\not\hookleftarrow_{\RV{Y}_2} \RV{D}$
+\end{definition}
+
+\begin{lemma}[Limited unresponsiveness implies $D$-causation]
+For deterministic consequence models, $\RV{Y}_1\not\hookleftarrow_{\RV{Y}_2} \RV{D} $ implies $\RV{Y}_2$ $D$-causes $\RV{Y}_1$.
+\end{lemma}
+
+\begin{proof}
+By the assumption of determinism, for each $s\in S$ and $d\in D$ there exists $y_1(s,d)$ and $y_2(s,d)$ such that $\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{S}\RV{D}}_{s,d} = \delta_{y_1(s,d)}\otimes\delta_{y_2(s,d)}$.
+
+By the assumption of limited unresponsiveness, for all $d,d'$ such that $y_2(s,d)=y_2(s,d')$, $y_1(s,d)=y_1(s,d')$ also. Define $f:Y_2\times S\to Y_1$ by $(s,y_1)\mapsto y(s,[y_1(s,\cdot)]^{-1}(y_1(s,d)))$ where $[y_1(s,\cdot)]^{-1}(a)$ is an arbitrary element of $\{d|y_1(s,d)=a\}$. For all $s,d$, $f(y_1(s,d),s)=y_2(s,d)$. Define $\kernel{M}:Y_2\times S\times D\to \Delta(\mathcal{Y}_1)$ by $(y_2,s,d)\mapsto \delta_{f(y_2,s)}$. $\kernel{M}$ is a version of $\kernel{C}^{\RV{Y}_1|\RV{Y}_2,\RV{S},\RV{D}}$ because, for all $A\in \mathcal{Y}_2$, $B\in \mathcal{Y}_1$, $s\in S$, $d\in D$:
+
+\begin{align}
+    \kernel{C}^{\RV{Y}_2|\RV{S}\RV{D}}_{(s,d)}\splitter{0.1}(\kernel{M}\otimes\mathrm{Id}) &= \int_A \kernel{M}(y_2',d,s;B) d\delta_{y_2(s,d)}(y_2') \\
+                                                                                        &= \int_A \delta_{f(y_2',s)}(B) d\delta_{y_2(s,d)}(y_2') \\
+                                                                                        &= \delta_{f(y_2(s,d),s)}(B)\delta_{y_2(s,d)}(A) \\
+                                                                                        &= \delta_{y_1(s,d)}(B)\delta_{y_2(s,d)}(A)\\
+                                                                                        &= \delta_{y_2(s,d)}\otimes\delta_{y_1(s,d)}(A\times B)
+\end{align}
+
+$\kernel{M}$ is clearly constant in $\RV{D}$. Therefore $\RV{Y}_1\CI_{\kernel{C}}\RV{D}|\RV{Y}_2\RV{S}$.
+\end{proof}
+
+However, despite limited unresponsiveness implying $D$-causation, it does not imply $D$-causation in mixtures of states\todo{define this}. Suppose $D=\{0,1\}$ where $1$ stands for ``toggle light switch'' and $0$ stands for ``do nothing''. Suppose $S=\{[0,0],[0,1],[1,0],[1,1]\}$ where $[0,0]$ represents ``switch initially off, mains off'' the other states generalise this in the obvious way. Finally, $\RV{F}\in\{0,1\}$ is the final position of the switch and $\RV{L}\in\{0,1\}$ is the final state of the light. We have
+
+\begin{align}
+    \kernel{C}^{\RV{L}\RV{F}|\RV{D}\RV{S}}_{d,[i,m]} = \delta_{(d\text{ XOR }i)\text{ AND }m}\otimes \delta_{(d\text{ XOR }i)\text{ AND }m}
+\end{align}
+
+Within states $[0,0]$ and $[1,0]$, the light is always off, so $\RV{F}=a\implies \RV{L}=0$ for any $a$. In states $[0,1]$ and $[1,1]$, $\RV{F}=1\implies \RV{L}=1$ and $\RV{F}=0\implies \RV{L}=0$. Thus $\RV{L}\not\hookleftarrow_{\RV{F}} \RV{D}$. However, suppose we take a mixture of consequence models:
+\begin{align}
+    \kernel{C}_\gamma &= \frac{1}{4}\kernel{C}_{\cdot,[0,0]} + \frac{1}{4}\kernel{C}_{\cdot,[0,1]} + \frac{1}{2}\kernel{C}_{\cdot,[1,1]}\\
+    \kernel{C}^{\RV{F}\RV{L}|\RV{D}}_\gamma &= \frac{1}{4} \left[\begin{matrix}
+                        1 & 0\\ 0 & 1
+                      \end{matrix}\right]\otimes \left[\begin{matrix}
+                        1 & 0\\ 1 & 0
+                      \end{matrix}\right] + \frac{1}{4} \left[\begin{matrix}
+                        1 & 0\\ 0 & 1
+                      \end{matrix}\right]\otimes \left[\begin{matrix}
+                        1 & 0\\ 0 & 1
+                      \end{matrix}\right] + \frac{1}{2}\left[\begin{matrix}
+                        0 & 1\\ 1 & 0
+                      \end{matrix}\right]\otimes \left[\begin{matrix}
+                        0 & 1\\ 1 & 0
+                      \end{matrix}\right]
+\end{align}
+
+Then
+
+\begin{align}
+    [1,0]\kernel{C}^{\RV{F}\RV{L}|\RV{D}}_{\gamma} &= \frac{1}{4}[0,1]\otimes[1,0]+\frac{1}{4}[0,1]\otimes[0,1]+\frac{1}{2}[1,0]\otimes[1,0]\\
+    [1,0]\splitter{0.1}(\kernel{C}^{\RV{F}|\RV{D}}_\gamma\otimes \kernel{C}^{\RV{L}|\RV{D}}_\gamma) &= (\frac{1}{2}[0,1]+\frac{1}{2}[1,0])\otimes(\frac{1}{4}[0,1]+\frac{3}{4}[1,0])\\
+    \implies [1,0]\kernel{C}^{\RV{F}\RV{L}|\RV{D}}_{\gamma} &\neq [1,0] \splitter{0.1} (\kernel{C}^{\RV{F}|\RV{D}}_\gamma\otimes \kernel{C}^{\RV{L}|\RV{D}}_\gamma)
+\end{align}
+
+Thus under the prior $\gamma$, $\RV{F}$ does not $D$-cause\todo{define this} $\RV{L}$ even though $\RV{F}$ $D$-causes $\RV{L}$ in all states $S$. The definition of $D$-causation was motivated by the idea that we could reduce a difficult decision problem with a large set $D$ to a simpler problem with a smaller ``effective'' set of decisions by exploiting conditional independence. Even if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, $\RV{X}$ does not necessarily $D$-cause $\RV{Y}$ in mixtures of states in $S$. For this reason, we do not say that $\RV{X}$ $D$-causes $\RV{Y}$ in $S$ if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, and in this way we differ substantially from \citet{heckerman_decision-theoretic_1995}.
+
+Instead, we simply extend the definition of $D$-causation to mixtures of hypotheses: if $\gamma\in \Delta(\RV{H})$ is a mixture of hypotheses, define $\kernel{C}_\gamma:= (\gamma\otimes\textbf{Id})\kernel{C}$. Then $\RV{X}$ $D$-causes $\RV{Y}$ relative to $\gamma$ iff $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
+
+Theorem \ref{th:univ_d_causation} shows that under some conditions, $D$-causation can hold for arbitrary mixtures over subsets of the hypothesis class $\RV{H}$.
+
+\begin{theorem}[Universal $D$-causation]\label{th:univ_d_causation}
+If $\RV{X}\CI\RV{H}|\RV{D}$ for all $\RV{H},\RV{H}'\in S\subset \RV{H}$ and $\RV{X}$ $D$-causes $\RV{Y}$ in all $\RV{H}\in S$, then $\RV{X}$ $D$-causes $\RV{Y}$ with respect to all mixed consequence models $\kernel{C}_\gamma$ for all $\gamma\in \Delta(\RV{H})$ with $\gamma(S)=1$.
+\end{theorem}
+
+\begin{proof}
+
+For $\gamma\in \Delta(\RV{H})$, define the mixture
+
+\begin{align}
+\kernel{C}_\gamma := \begin{tikzpicture}
+    \path (0,0) node[dist] (g) {$\gamma$}
+    + (0,-0.45) node (D) {$\RV{D}$}
+    ++ (1,-0.3) node[kernel] (C) {$\kernel{C}$}
+    ++ (1,0) node (F) {$\RV{F}$};
+    \draw (g) to [out=0,in=180] ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) -- (F);
+\end{tikzpicture}
+\end{align}
+
+Because $\kernel{C}_\RV{H}^{\RV{X}|\RV{D}} = \kernel{C}_{\RV{H}'}^{\RV{X}|\RV{D}}$ for all $\RV{H},\RV{H}'\in \RV{H}$, we have
+
+\begin{align}
+\begin{tikzpicture}
+    \path (0,0) node[dist] (g) {$\gamma$}
+    + (0.7,-0.15) node[copymap] (copy0) {}
+    + (0,-0.45) node (D) {$\RV{D}$}
+    ++ (1.5,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
+    ++ (1,0) node (X) {$\RV{X}$}
+    + (0,0.5) node (T) {$\RV{H}$};
+    \draw (g) to [out=0,in=180] (copy0) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$);
+    \draw (C) -- (X);
+    \draw (copy0) to [out=90,in=180] (T);
+\end{tikzpicture} &= \begin{tikzpicture}
+    \path (0,0) node[dist] (g) {$\gamma$}
+    + (0,0.5) node[dist] (g2) {$\gamma$}
+    + (0.7,-0.15) node[copymap] (copy0) {}
+    + (0,-0.45) node (D) {$\RV{D}$}
+    ++ (1.5,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
+    ++ (1,0) node (X) {$\RV{X}$}
+    + (0,0.3) node (T) {$\RV{H}$};
+    \draw (g) to [out=0,in=180] (copy0) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$);
+    \draw (C) -- (X);
+    \draw (g2) to [out=0,in=180] (T);
+\end{tikzpicture} \label{eq:decompose_condi_x}
+\end{align}
+
+Also
+
+\begin{align}
+    \kernel{C}_\gamma^{\RV{XY}|\RV{D}} &= \begin{tikzpicture}
+    \path (0,0) node[dist] (g) {$\gamma$}
+    + (0,-0.45) node (D) {$\RV{D}$}
+    ++ (1,-0.3) node[kernel] (C) {$\kernel{C}$}
+    ++ (1,0) node[kernel] (F) {$\kernel{F}^{\RV{X}\utimes\RV{Y}}$}
+    ++ (1,0.15) node (X) {$\RV{X}$}
+    + (0,-0.3) node (Y) {$\RV{Y}$};
+    \draw (g) to [out=0,in=180] ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) -- (F);
+    \draw ($(F.east) + (0,0.15)$) -- (X) ($(F.east) + (0,-0.15)$) -- (Y);
+\end{tikzpicture}\\
+    &= \begin{tikzpicture}
+    \path (0,0) node[dist] (g) {$\gamma$}
+    + (0,-0.45) node (D) {$\RV{D}$}
+    ++ (1,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{XY}|\RV{D}\RV{H}}$}
+    ++ (1,0.15) node (X) {$\RV{X}$}
+    + (0,-0.3) node (Y) {$\RV{Y}$};
+    \draw (g) to [out=0,in=180] ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$);
+    \draw ($(C.east) + (0,0.15)$) -- (X) ($(C.east) + (0,-0.15)$) -- (Y);
+\end{tikzpicture}\\
+ &= \begin{tikzpicture}
+    \path (0,0) node[dist] (g) {$\gamma$}
+    + (0,-0.45) node (D) {$\RV{D}$}
+    + (0.7,-0.45) node[copymap] (copy0) {}
+    + (0.7,-0.15) node[copymap] (copy1) {}
+    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
+    + (0,0.6) coordinate (via0)
+    + (0,-0.6) coordinate (via1)
+    ++ (0.9,0) node[copymap] (copy2) {}
+    ++ (0.7,0) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{D}\RV{H}}$}
+    ++ (1.2,0.15) node (X) {$\RV{Y}$}
+    + (0,-0.5) node (Y) {$\RV{X}$};
+    \draw (g) to [out=0,in=180] (copy1) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C)--(Yx);
+    \draw (copy0) to [out=-90,in=180] (via1) to [out=0,in=180] ($(Yx.west) + (0,-0.15)$) (copy1) to [out=90,in=180] (via0) to [out=0,in=180] ($(Yx.west) + (0,0.15)$);
+    \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
+ \end{tikzpicture}\\
+ &\overset{\RV{Y}\CI \RV{D}|\RV{X}\RV{H}}{=} \begin{tikzpicture}
+    \path (0,0) node[dist] (g) {$\gamma$}
+    + (0,-0.45) node (D) {$\RV{D}$}
+    + (0.7,-0.15) node[copymap] (copy1) {}
+    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
+    ++ (0.9,0.1) node[copymap] (copy2) {}
+    ++ (0.7,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$}
+    ++ (1.2,0.15) node (X) {$\RV{Y}$}
+    + (0,-0.5) node (Y) {$\RV{X}$};
+    \draw (g) to [out=0,in=180] (copy1) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) to [out=0,in=180] (copy2) to [out=0,in=180] (Yx);
+    \draw (copy1) to [out=90,in=180] ($(Yx.west) + (0,0.15)$);
+    \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
+ \end{tikzpicture} \\
+ &\overset{\ref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
+    \path (0,0) node[dist] (g) {$\gamma$}
+    + (0,-0.45) node (D) {$\RV{D}$}
+    + (0.7,-0.15) node[copymap] (copy1) {}
+    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
+    + (1,0.6) node[dist] (g2) {$\gamma$}
+    ++ (0.9,0.1) node[copymap] (copy2) {}
+    ++ (1,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$}
+    ++ (1.2,0.15) node (X) {$\RV{Y}$}
+    + (0,-0.5) node (Y) {$\RV{X}$};
+    \draw (g) to [out=0,in=180] (copy1) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) to [out=0,in=180] (copy2) to [out=0,in=180] (Yx);
+    \draw (g2) to [out=0,in=180] ($(Yx.west) + (0,0.15)$);
+    \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
+ \end{tikzpicture}\\
+ &= \overset{\ref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
+    \path (0,0) node (g) {}
+    + (0,-0.45) node (D) {$\RV{D}$}
+    + (0.7,-0.45) node[copymap] (copy1) {}
+    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}_\gamma^{\RV{X}|\RV{D}\RV{H}}$}
+    + (1,0.6) node[dist] (g2) {$\gamma$}
+    ++ (0.9,0.1) node[copymap] (copy2) {}
+    ++ (1,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$}
+    + (-0.5,0.6) coordinate (stop0)
+    ++ (1.2,0.15) node (X) {$\RV{Y}$}
+    + (0,-0.5) node (Y) {$\RV{X}$};
+    \draw (D) -- ($(C.west) + (0,-0.15)$) (C) to [out=0,in=180] (copy2) to [out=0,in=180] (Yx);
+    \draw (g2) to [out=0,in=180] ($(Yx.west) + (0,0.15)$);
+    \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
+    \draw[-{Rays[n=8]}] (copy1) to [out=90,in=180] (stop0);
+ \end{tikzpicture}\label{eq:is_conditional}
+\end{align}
+Equation \ref{eq:is_conditional} establishes that $(\gamma\otimes\textbf{Id}_X\otimes\stopper{0.3}_D)\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$ is a version of $\kernel{C}_\gamma^{\RV{Y}|\RV{X}\RV{D}}$, and thus $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
+
+This can also be derived from the semi-graphoid rules:
+
+\begin{align}
+    \RV{H}\CI \RV{D} \land \RV{H}\CI \RV{X} | \RV{D} &\implies \RV{H}\CI \RV{XD}\\
+    &\implies \RV{H}\CI \RV{D}|\RV{X}\\
+    \RV{D} \CI \RV{H}|\RV{X} \land \RV{D}\CI \RV{Y}|\RV{X}\RV{H} &\implies \RV{D}\CI \RV{Y}|\RV{X}\\
+    &\implies \RV{Y}\CI\RV{D}|\RV{X}
+\end{align}
+\end{proof}
+
+\subsection{Properties of D-causation}
+
+If $\RV{X}$ D-causes $\RV{Y}$ relative to $\kernel{C}_\RV{H}$, then the following holds:
+
+\begin{align}
+    \kernel{C}_{\RV{H}}^{\RV{X}|\RV{D}} &= \begin{tikzpicture}
+    \path (0,0) node (D) {$\RV{D}$}
+    ++ (0.9,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
+    ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}}$}
+    ++ (0.9,0) node (Y) {$\RV{Y}$};
+    \draw (D) -- (Xd) -- (Yd) -- (Y); 
+    \end{tikzpicture}
+\end{align}
+
+This follows from version (2) of Definition \ref{def:conditional_independence}:
+
+\begin{align}
+    \kernel{C}_\RV{H}^{\RV{X}|\RV{D}} &= \begin{tikzpicture}
+    \path (0,0) node (D) {$\RV{D}$}
+    ++ (0.7,0) node[copymap] (copy0) {}
+    ++ (0.7,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
+    + (0,0.5) coordinate (via1)
+    ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{D}}$}
+    ++ (0.9,0) node (Y) {$\RV{Y}$};
+    \draw (D) -- (Xd) -- (Yd) -- (Y);
+    \draw (copy0) to [out=90,in=180] (via1) to [out=0,in=180] ($(Yd.west)+(0,0.15)$); 
+    \end{tikzpicture}\\
+     &= \begin{tikzpicture}
+    \path (0,0) node (D) {$\RV{D}$}
+    ++ (0.7,0) node[copymap] (copy0) {}
+    ++ (0.7,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
+    + (1.3,0.5) coordinate (via1)
+    ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}}$}
+    ++ (0.9,0) node (Y) {$\RV{Y}$};
+    \draw (D) -- (Xd) -- (Yd) -- (Y);
+    \draw[-{Rays[n=8]}] (copy0) to [out=90,in=180] (via1); 
+    \end{tikzpicture}\\
+    &= \begin{tikzpicture}
+    \path (0,0) node (D) {$\RV{D}$}
+    ++ (0.9,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
+    ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}}$}
+    ++ (0.9,0) node (Y) {$\RV{Y}$};
+    \draw (D) -- (Xd) -- (Yd) -- (Y); 
+    \end{tikzpicture}
+\end{align}
+
+D-causation is not transitive: if $\RV{X}$ D-causes $\RV{Y}$ and $\RV{Y}$ D-causes $\RV{Z}$ then $\RV{X}$ doesn't necessarily D-cause $\RV{Z}$.
+
+\todo[inline]{Pearl's ``front door adjustment'' and general identification results make use of composing ``sub-consequence-kernels'' like this. Show, if possible, that Pearl's ``sub-consequence-kernels'' obey $D$-causation like relations}
+
+\todo[inline]{Does this ``weak D-causation'' respect mixing under the same conditions as regular D-causation?}
+
+\subsection{Decision sequences and parallel decisions}
+
+Just as observations $\RV{X}$ can be a sequence of random variables $\RV{X}_1$, $\RV{X}_2$, ..., $\RV{D}$ can be a sequence of ``sub-choices'' $\RV{D}_1$, $\RV{D}_2$, ... . Note that by positing such a sequence there is no requirement that $\RV{D}_1$ comes ``before'' $\RV{D}_2$ in any particular sense.

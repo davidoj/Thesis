@@ -1,4 +1,4 @@
-\begin{thebibliography}{31}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -111,14 +111,6 @@ Edwin Hewitt and Leonard~J. Savage.
 \newblock \doi{10.2307/1992999}.
 \newblock URL \url{https://www.jstor.org/stable/1992999}.
 \newblock Publisher: American Mathematical Society.
-
-\bibitem[Hájek(2003)]{hajek_what_2003}
-Alan Hájek.
-\newblock What {Conditional} {Probability} {Could} {Not} {Be}.
-\newblock \emph{Synthese}, 137\penalty0 (3):\penalty0 273--323, December 2003.
-\newblock ISSN 1573-0964.
-\newblock \doi{10.1023/B:SYNT.0000004904.91112.16}.
-\newblock URL \url{https://doi.org/10.1023/B:SYNT.0000004904.91112.16}.
 
 \bibitem[Krittanawong et~al.(2020)Krittanawong, Narasimhan, Wang, Hahn, Virk,
   Farrell, Zhang, and Tang]{krittanawong_association_2020}

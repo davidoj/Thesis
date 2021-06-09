@@ -1,66 +1,70 @@
 
 %!TEX root = main.tex
 
-\chapter{Chapter 3: See-do models}
+\chapter{Chapter 3: Two player statistical models and see-do models}
 
 \todo[inline]{These are ``todo'' notes. All such notes that involve theoretical development are also collected in an unordered list of outstanding theoretical questions}
 
 \todo[inline]{The basic claim of this chapter is that see-do models are the basic type of thing that everyone who is studying ``causal inference'' is working with, even if they don't know it themselves}
 
-Consider the following problem: you are presented with a collection $\RV{H}$ of hypotheses about how the world might function and a vector $\mathbf{x}$ of observational data which you know could have taken values in some space $X$. You want to determine which hypothesis $\RV{H}\in \RV{H}$ best describes the world. However you ultimately solve the problem, the next step you take will probably be to determine for each $\RV{H}\in \RV{H}$ a probability distribution $\kernel{P}_\RV{H}\in \Delta(\sigalg{X})$ that indicates how likely you would be to observe the various elements of $X$ were $\RV{H}$ in fact the case. This is a \emph{statistical model} -- an indexed set of probability distributions $\{\prob{P}_\RV{H}|\RV{H}\in \RV{H}\}$. Statistical models are ubiquitous in the field of statistics -- they are found in statistical decision theory where the elements of $\RV{H}$ are typically called ``states''\citep{wald_statistical_1950}, in Bayesian inference where the elements of $\RV{H}$ may be called ``parameters'' \citep{freedman_asymptotic_1963} and in frequentist inference where elements of $\RV{H}$ they may be called ``hypotheses'' \citep{fisher_statistical_1992}. 
+In this chapter I introduce two types of model. Models of the first type are called \emph{two player statistical models} and the second type are a special class of the first called \emph{see-do models}. Fundamentally, each of these is just a particular kind of stochastic function. The reason we are interested in these kinds of stochastic functions is that is that almost all causal models are instances of see-do models. Before introducing two player models and discussing what makes them causal, it is worth briefly considering models in statistics and machine learning generally.
 
-These different approaches to statistics may have different notions of what the ``best hypothesis'' $\RV{H}$ is, may employ different estimation methods and may not even agree about what ``distributed according to $\kernel{P}_\RV{H}$'' means. Nonetheless, the interpretation of the statistical model in each case is roughly the same: supposing $\RV{H}\in\RV{H}$ is true, the data will be distributed according to $\kernel{P}_\RV{H}$. A statistical model takes a hypothesis and tells you what you are likely to \emph{see}.
+A \emph{world model} is something I will informally define as a family of ``descriptions'' indexed by hypotheses $\{R_h|h\in H\}$. The set $H$ represents hypotheses or proposals for how the world ought to be described, and each proposal $h\in H$ entails some description of the world $\prob{R}_h$. Some examples of world models:
 
-Sometimes we are interested in modelling situations where we can also make some choices that also affect the eventual consequences. For example, I might hypothesise $\RV{H}_1$: the switch on the wall controls my light, $\RV{H}_2$: the switch on the wall does not control my light. Then, given $\RV{H}_1$ I can choose to toggle the switch, and I will see my light turn on, or I can choose not to toggle the switch and I will not see my light turn on. Given $\RV{H}_2$, neither choice will result in a light turned on. Choices are clearly different to hypotheses: the choice I make depends on what I want to happen, while whether or not a hypothesis is true has no regard for my ambitions.
-
-A ``statistical model with choices'' is simply a map $\prob{T}:D\times \RV{H}\to \Delta(\sigalg{E})$ for some set of choices $D$, hypotheses $\RV{H}$ and outcome space $(E,\sigalg{E})$. We can also distinguish two types of outcomes: \emph{observations} which are given prior to a choice being made and \emph{consequences} which happen after a choice is made. Observations cannot be affected by the choices made, while consequences are not subject to this restriction. That is, observations are what we might \emph{see} before making a choice, which depends on the hypothesis alone, and if we are lucky we may be able to invert this dependence to learn something about the hypothesis from observations. On the other hand, the consequences of what we \emph{do} depends jointly on the hypothesis and the choice we make and we judge which choices are more desirable on the basis of which consequences we expect them to produce. 
-
-What we are studying is a family of models that generalises of statistical models to include hypotheses, choices, observations and consequences. These models are referred to as \emph{see-do models}. Hypotheses, observations, consequences and choices are not individually new ideas. \emph{Statistical decision problems} \citep{wald_statistical_1950,savage_foundations_1972} extend statistical models with decisions and \emph{losses}. Like consequences, losses depend on which choices are made. However, unlike consequences, losses must be ordered and reflect the preferences of a decision maker. \emph{Influence diagrams} are directed graphs created to represent decision problems that feature ``choice nodes'', ``chance nodes'' and ``utility nodes''. An influence diagram may be associated with a particular probability distribution \cite{nilsson_evaluating_2013} or with a set of probability distributions \cite{dawid_influence_2002}.
-
-See-do models have deep roots in decision theory. Decision theory asks, out of a set of available acts, which ones ought to be chosen. See-do models answer an intermediate question: out of a set of available acts, what are the consequences of each? This question is described by \citet{pearl_causality:_2009} as an ``interventional'' question.
-
-See-do models depend cruicially on a set of choices $D$. While these models can obviously answer questions like ``what is likely to happen if I choose $d\in D$?'', this construction appears to rule out ``causal'' questions like ``Does rain cause wet roads?''. We define a restricted idea of causation called $D$-\emph{causation}. Roughly, if the roads get wet when it rains regardless of my choice of $d\in D$, then rain ``$D$-causes'' wet roads. $D$-causation is closely related to the idea \emph{limited invariance} put forward by \citet{heckerman_decision-theoretic_1995}.
-
-The field of causal inference is additionally concerned with types of questions called ``counterfactual'' by Pearl. There is substantial theoretical interest in counterfactual questions, but counterfactual questions are much more rarely found in applications than interventional questions. Even though see-do models are motivated by the need to answer interventional questions, the theory develope here is surprisingly appliccable to counterfactuals as well. In particular, the theory of see-do models offers explanations for three key features of counterfacutla models:
 \begin{itemize}
-    \item \textbf{Apparent absence of choices}: \emph{Potential outcomes} models, which purportedly answer counterfactual questions, are standard statistical models \emph{without choices} \citep{rubin_causal_2005}
-    \item \textbf{Deterministic dependence on unobserved variables}: Counterfactual models involve \emph{deterministic} dependence on unobserved variables \citep{pearl_causality:_2009,rubin_causal_2005,richardson2013single}
-    \item \textbf{Residual dependence on observations}: Counterfactual questions depend on the given data \emph{even if the joint distribution of this data is known}. For example, \citet{pearl_causality:_2009} introduces a particular method for conditioning a known joint distribution on observations that he calls \emph{abduction}
+    \item A linear regressor may take some data $\mathbf{x}$ and $\mathbf{y}$ and returns a parameter $\beta\in B$ with the property that $(\mathbf{y}-\mathbf{x}^T \beta)^2$ is small. A normal way to interpret the parameter $\beta$ is to consider it to be a proposal about how some phenomenon of interest should be described, with this description explicitly given by the function $f:x\mapsto \beta x$.
+    \item A neural network used in classification may take data $\mathbf{x}$ and labels $\mathbf{y}$ and returns parameters $\mathbf{w}\in W$ with the property that $-\mathbf{y} \log \mathbf{x}+(1-y)\log(1-\mathbf{x})$ is small. Each $\mathbf{w}$ is a proposal for how to classify data and the classification rule associated with each $\mathbf{w}$ is a function $x\mapsto f(\mathbf{w},x)$.
+    \item A crude description of a general election pre-poll result can be given by the ``true fraction'' $\theta$ of voters for each candidate and, under some unreasonably strong sampling assumptions, and the results of the survey for each $\theta$ can be described by $\prod_N\prob{P}_\theta^\RV{X}$ where $N$ is the number of voters surveyed and $\RV{X}$ is the vote choice of each.
 \end{itemize}
 
-Potential outcomes models lack a notion of ``choices'' because there is a generic method to ``add choices'' to a potential outcomes model, which is implicitly used whenever potential outcomes models are used. Furthermore, we show that a see-do model induces a potential outcome model if and only if it is a model of \emph{parallel choices}, and in this case the observed consequences depend deterministically on the unobserved potential outcomes in precisely the manner as given in \citet{rubin_causal_2005}. Parallel choices can be roughly understood as models of sequences of experiments where an action can be chosen for each experiment, and with the special properties that repeating the same action deterministically yields the same consequence, and the consequences of a sequence of actions doesn't depend on the order in which the actions are taken. That is, we show that the fundamental property of any ``counterfactual'' model is \emph{deterministic reproducibility} and \emph{action exchangeability}, and while these models may admit a ``counterfactual'' interpretation, they are fundamentally just a special class of see-do models.
+In the first two examples the ``description'' that goes with each hypothesis is a function, while in the third example the descriptions are probability measures. In almost all practical cases, these descriptions of the world do not tell us exactly how the world will turn out under each hypothesis, but at best offer us a prediction that is as good as we can hope for. Probability is the tool that is very widely used to formalise such ``descriptions with uncertainty''. Say I have two different linear regressors: one which minimises squared error on the training data and one that always returns $\beta=10$. I want to ask which one produces descriptions that are more fit for my purpose. It is pointless to ask which one is correct because, in general, I cannot know that either will offer a description that is even approximately correct. However, I can consider a second level world model $\{\prob{P}^{\RV{X}\RV{Y}}_\alpha|\alpha\in A\}$ in which the phenomenon of interest is described by a family of probability measures, and then I can ask, given an $\alpha$, which $\beta$ is my regressor likely to return and how closely will $x\mapsto \beta x$ be to $\mathbb{E}_{\prob{P}_\alpha}[\RV{Y}|\RV{X}]$ for each likely choice. Generally, if I need to model a world with uncertainty I will need a world model that is an indexed family of probability measures.
 
-\todo[inline]{But the proof is still in my notebook}
+A world model that consists of a family of probability measures $\{\prob{P}_h|h\in H\}$ is a \emph{statistical model} or \emph{statistical experiment}. Because I almost always need to Statistical models can be found everywhere in theoretical statistics and machine learning \cite{fisher_statistical_1992,le_cam_comparison_1996,freedman_asymptotic_1963,de_finetti_foresight_1992,vapnik_nature_2013,wald_statistical_1950}. A key point about statistical models -- even if I can only state it somewhat vaguely -- is that the truth of any hypothesis $h\in H$ has no dependence on what I might want to be true. As a user of statistical models, I have no authority to choose a hypothesis -- this is Nature's choice alone. 
 
-\todo[inline]{Interestingly, it seems to be possible to construct a see-do model where the ``hypothesis'' is a quantum state, and quantum mechanics + locality seems to rule out parallel choices in such models in a manner similar to Bell's theorem. ``Seems to'' because I haven't actually proven any of these things.}
+I can sometimes make choices that will affect the way that the future turns out. I might have some set $D$ of choices I can make, and for each $d\in D$ I require a description of the results of my choice. Just as the results of hypotheses are often uncertain, so are the results of choices. I might be motivated to choose a probability measure $\prob{P}_d$ to describe them, maybe because it is common to do so or because I find arguments for subjective expected utility theory compelling \citep{steele_decision_2020}. A family of probability measures indexed by a set of choices $\{\prob{P}_d|d\in D\}$ will be called a \emph{consequence model}.
 
-The residual dependence on observations exhibited by counterfactual questions is a generic property of see-do models, and it is a particular property of \emph{decision problems} are notable in that it is often
+Statistical models and consequence models are both families of probability measures indexed by arbitrary sets, which we have called hypotheses $H$ and choices $D$ respectively. Their general types are the same, and the only difference is in the interpretation of the sets $H$ and $D$. The difference can be informally summarised in this manner: I do not get to tell Nature what choice $h\in H$ she makes, and Nature does not get to tell me what choice $d\in D$ I make. It will often be the case that I have multiple choices that can affect how the world turns out \emph{and} I have multiple hypotheses about how each choice will affect the world. In this case, I will have a \emph{two-player statistical model} $\{\prob{P}_{h,d}|h\in H,d\in D\}$. 
 
-\todo[inline]{Where to discuss the connections to statistical decision theory?}
+So far I have explained the distinction between ``player 1'' and ``player 2'' in vague metaphorical terms. If I am using a two-player statistical model in the context of a well defined problem such as ``given data, what choice should I make?'' then we can say precisely what $H$ and $D$ are and what role each plays in the problem. However, the field of causal inference includes other types of problem so-called counterfactual problems which involve a choice set $D$ that plays a different role to the choice set in decision problems. Thus, while I will argue that causal models are two-player statistical models, and the second player is what distinguishes them from ordinary statistical models, the same kind of model can be used with different interpretations of what the second player's choices represent.
 
-See-do models are closely related to \emph{statistical decision theory} introduced by \citet{wald_statistical_1950} and elaborated by \citet{savage_foundations_1972} after Wald's death. See-do models equipped with a \emph{utility function} induce a slightly generalised form of statistical decision problems, and the complete class theorm is appliccable to these models.
+Decision problems involving often involve some data $\RV{X}$ is observed, then a choice is made, then the consequences $\RV{Y}$ are observed. In such a model, the observed data $\RV{X}$ cannot be affected by the choice. These models will be called \emph{see-do} models to capture the assumption that there is an order in which seeing and doing happen.
 
-A stylistic difference between see-do models and most other causal models is that see-do models explicitly represent both the observation model and the consequence model and their coupling, making them ``two picture'' causal models. Causal Bayesian Networks and Single World Interention Graphs \citep{richardson2013single} use ``one picture'' to represent the observation model and the consequence model. However, both of these approaches employ ``graph mutilation'', so one picture on the page actually corresponds to many pictures when combined with the mutilation rules. For more on how these different types of models relate, see Section \ref{sec:single_double_representation}. \citet{lattimore_replacing_2019}'s Bayesian causal inference employs two-picture causal models, as do ``twin networks'' \citep{pearl_causality:_2009}.
+In this chapter I will introduce two-player statistical models with a focus on how they relate to ordinary statistics, while in the next chapter I will explore the zoo of causal modelling approaches and the types of two player models associated with each.
 
+\section{Two player statistical models and see-do models}
 
-\section{Definition}
+Two player statistical models were introduced as doubly indexed sets of probability measures $\{\prob{P}_{h,d}|h\in H,d\in D\}$. If each $\prob{P}_{h,d}\in \Delta(\sigalg{E})$ for some measurable space $(E,\sigalg{E})$, the indexed set is equivalent to a function $H\times D\to \Delta(\sigalg{E})$. In the following work, we will make two simplifying assumptions:
 
-\todo[inline]{Terminology question: The variables $\RV{H}$ and $\RV{D}$ aren't necessarily \emph{random} in the commonsense understanding of the word. They're also defined on a \emph{kernel space} rather than a \emph{probability space}. They're currently called random variables simply by virtue of being measurable functions on the outcome space. I'm not a huge fan of ``quasirandom variables'', but it does capture the idea that these things are very similar to random variables but not exactly the same.}
+\begin{enumerate}
+    \item A two player statistical model can be represented by a \emph{Markov kernel} $\kernel{T}:H\times D\to \Delta(\sigalg{E})$
+    \item The kernel space $(\kernel{T},(H\times D,\sigalg{H}\otimes\sigalg{D}),(E,\sigalg{E}))$ admits disintegrations $\kernel{T}^{\RV{Y}|\RV{XDH}}$ for arbitrary random variables $\RV{X},\RV{Y}$ on $H\times D\times E$ and domain variable $\RV{D}\utimes\RV{H}$
+\end{enumerate}
 
-\begin{definition}[See-Do model]\label{def:seedo}
-A \emph{see-do model} $\langle\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y}\rangle$ is a kernel space (Definition \ref{def:kernel_space}) $(\kernel{T},H\times D,X\times Y)$ along with four random variables: the \emph{hypothesis} $\RV{H}:H\times D\times X\times Y\to H$, the \emph{choice} $\RV{D}:H\times D\times X\times Y\to D$, the \emph{observations} $\RV{X}:H\times D\times X\times Y\to X$ and the \emph{consequences} $\RV{Y}:H\times D\times X\times Y\to Y$, all given by the obvious projection maps. 
+The first condition amounts to the additional requirement that $(h,d)\mapsto \kernel{T}_{h,d}(A)$ is measurable for every $A\in \sigalg{H}\otimes\sigalg{D}\otimes\sigalg{E}$, and sufficient for the second condition is that $D\times H$ is countable and $X\times Y$ standard measurable (though this is not necessary, see Theorem \ref{th:existence_continous}).
 
-The spaces $H$, $D$, $X$ and $Y$ are the hypothesis, choice, observation and consequence spaces respectively.
-
-A see-do model has the additional property that, holding the hypothesis fixed, the observations are independent of the choices - i.e. $\RV{X}\CI_{\kernel{T}} \RV{D}|\RV{H}$. We require that $H\times D$ is countable.
+\begin{definition}[Two player statistical model]\label{def:2p_stat}
+A \emph{two-player statistical model} is a Markov kernel $\kernel{T}:H\times D\to \Delta(\sigalg{E})$ such that, for any random variables $\RV{X}: H\times D\times E\to X$ and $\RV{Y}:H\times D\times E\to Y$, a disintegration $\kernel{K}^{\RV{Y}|\RV{XDH}}:X\times D\times H\to \Delta(\sigalg{Y})$ exists. Every two player statistical model has two distinguished random variables: the \emph{hypothesis} $\RV{H}:H\times D\times E\to H$ given by $(h,d,e)\mapsto h$ and the \emph{choice} $\RV{D}:H\times D\times E\to D$ given by $(h,d,e)\mapsto d$.
 \end{definition}
 
+\begin{definition}[See-Do model]\label{def:seedo}
+A \emph{see-do model} is a two-player statistical model $\kernel{T}:H\times D\to \Delta(\sigalg{E})$ with two additional distinguished random variables: the \emph{observation} $\RV{X}: H\times D\times E\to X$ and the \emph{consequence} $\RV{Y}:H\times D\times E\to Y$. A see-do model must observe the conditional independence $\RV{X}\CI_\kernel{T} \RV{D}|\RV{H}$, i.e. the observation is independent of the choice conditional on the hypothesis.
+\end{definition}
+
+\subsection{Decomposability}
+
+Decomposability is a property of see-do models that is relevant to the distinction between counterfacutal and regular models. As we will show, many causal problems allow the use of decomposable see-do models. However, certain types of counterfactual problem do not.
+
+\begin{definition}[decomposability]\label{def:decomposability}
+A see-do model $\kernel{T}:H\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ is \emph{decomposable} iff $\RV{Y}\CI_\kernel{T} \RV{X}|\RV{D}\RV{H}$. That is, if the consequence is independent of the observations given the hypothesis and the choice.
+\end{definition}
+
+Decomposable see-do models can be represented as a pair $(\kernel{O},\kernel{C})$ where $\kernel{O}$ is a one-player statistical model we call the \emph{observation model} and $\kernel{C}$ is a two-player statistical model we call the \emph{consequence model} (Corollary \ref{corr:decomp_representation}. Most models in the causal inference literature are decomposable -- if the observed data can tell us nothing useful beyond the distribution of observations, then we have a decomposable model.
 
 \begin{theorem}[Observation and Consequence models]\label{th:obs_cmaps}
 Any see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ can be uniquely represented by the following pair of Markov kernels:
 \begin{itemize}
-    \item The \emph{observation map} $\kernel{T}^{\RV{X}|\RV{H}}$
-    \item The \emph{consequence model} $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$
+    \item The \emph{observation model} $\kernel{T}^{\RV{X}|\RV{H}}$
+    \item The \emph{contextual consequence model} $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$
 \end{itemize}
 
 Furthermore
@@ -162,6 +166,100 @@ By the assumption $\RV{X}\CI_{\kernel{T}} \RV{D}|\RV{H}$ and version 2 of condit
 
 \end{proof}
 
+\begin{corollary}\label{corr:decomp_representation}
+A decomposable see-do model $\kernel{T}:H\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ can be uniquely represented by
+\begin{itemize}
+    \item The \emph{observation model} $\kernel{T}^{\RV{X}|\RV{H}}$
+    \item The \emph{consequence model} $\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$
+\end{itemize}
+\end{corollary}
+
+\begin{proof}
+Because $\kernel{T}$ is decomposable, $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}= \stopper{0.2}_X\otimes \kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$. Then by theorem \ref{th:representaiton} we have a unique representation of $\kernel{T}$.
+\end{proof}
+
+\subsubsection{Examples of decomposable and indecomposable see-do models}
+
+Recall the previous example: suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a decomposable see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\RV{H}\mapsto \mathrm{Bernoulli}(\RV{H})$. Then define $\prescript{1}{}{\kernel{T}}$ by:
+
+\begin{itemize}
+    \item $D=\{0,1\}$
+    \item $X=\{0,1\}^N$
+    \item $Y=\{0,1\}$
+    \item $H=(0,1)$
+    \item $\prescript{1}{}{\kernel{O}}:\splitter{0.1}^N\kernel{B}$
+    \item $\prescript{1}{}{\kernel{C}}:(h,d)\mapsto \mathrm{Bernoulli}(1-|d-h|)$
+\end{itemize}
+
+In this model, the chance $\RV{H}$ of the coin landing on heads is as much as we can hope to know about how our bet will work out.
+
+Suppose instead that in addition to the $N$ prior flips, we manage to look at the outcome of the flip on which we will bet. In this case, the situation can be modeled by the following indecomposable see-do model $\prescript{2}{}{\kernel{T}}$:
+
+\begin{itemize}
+    \item $D=\{0,1\}$
+    \item $X=\{0,1\}^{N+1}$
+    \item $Y=\{0,1\}$
+    \item $H=(0,1)$
+    \item $\prescript{2}{}{\kernel{T}}^{\RV{X}|\RV{H}}:\splitter{0.1}^{N+1}\kernel{B}$
+    \item $\prescript{2}{}{\kernel{T}}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}:(h,\mathbf{x},d)\mapsto \delta_{1-|d-x_{N+1}|}$
+\end{itemize}
+
+In this case, even if we are told the value of $\RV{H}$, we still benefit from using the observed data when making our decision.
+
+It is possible to model the second situation with a decomposable model by including the result of the $N+1$th flip in the hypothesis. Define the new hypothesis space $H'=H\times\{0,1\}$ and let $\RV{H}_0$ be the projection to the old hypothesis space $H$. Define $\prescript{3}{}{\kernel{T}}$ by:
+
+\begin{itemize}
+    \item $D=\{0,1\}$
+    \item $X=\{0,1\}^{N+1}$
+    \item $Y=\{0,1\}$
+    \item $H'=(0,1)\times\{0,1\}$
+    \item $\prescript{3}{}{\kernel{O}}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
+    \item $\prescript{3}{}{\kernel{C}}:(h,x_{N+1},d)\mapsto \delta_{1-|d-x_{N+1}|}$
+\end{itemize}
+
+However, $\prescript{2}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}} = \kernel{B}$ while $\prescript{3}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}_0}$ is undefined, so $\prescript{3}{}{\kernel{T}}$ is a substantially different model to $\prescript{2}{}{\kernel{T}}$.
+
+If a see-do model is employed in a \emph{decision problem} -- defined later -- it is possible to recover decomposability in the sense that we can take an indecomposable model construct a decomposable model that is identical given an identification of the random variables in each.
+
+\subsubsection{Exchangeability}
+
+Thus far, we haven't dwelt on what it means for a probability measure to ``describe'' or ``represent'' something. In one view, probability measures constrain the behaviour of long sequences or ensembles of observations taken under identical conditions; in this view long sequences of random variables represent ``allowable'' sequences of observations. Alternatively, the probability distribution of a random variable could be a forecast of an observation associated with that variable.
+
+We can consider the hypothesis class in a one or two player statistical model to be an element of the prior knowledge we have to bring to the problem. An alternative view set out by \citet{de_finetti_foresight_1992} is that the hypothesis class
+
+One justification for using statistical models -- by which I mean maps of the type $\kernel{O}:H\to \Delta(\sigalg{X})$ -- is to suppose that we simply have as prior knowledge a set of hypotheses and the fact that for each hypothesis, repeating our observations a large number of times in the appropriate way will yield a sequence that is described by the probability distribution we associate with that hypothesis. An alternative view, set out by \citet{de_finetti_foresight_1992}, is to treat random variables as predictions of uncertain events rather than properties of repeated observations of the system under observation. De Finetti's representation theorem shows that, starting from the assumption of \emph{exchangeability} (informally: indifference to the order in which observations arrive), the predictive model of future observations can be represented by the product of a \emph{prior} and a \emph{conditionally independent and identically distributed statistical model}.
+
+In see-do models, exchangeability of observations additionally implies that the model is decomposable. In addition, I argue that a generalisation of exchangeability I call \emph{functional exchangeability} is a natural assumption to make when modelling counterfacutal suppositions.
+
+\begin{definition}[Exchangeability]
+Given $A\subseteq \mathbb{N}$, a sequence of random variables $\RV{X}_A:=\utimes_{i\in A} \RV{X}_i$ each taking values in $X$ on a probability space $(\prob{P},(\Omega,\sigalg{F}))$ is \emph{exchangeable} if for all $n\in A$, all permutations of indices $\sigma:[n]\to[n]$ and all  $B \in\sigalg{F}$, $\prob{P}^{\RV{X}_{[n]}}(B) =\prob{P}^{\RV{X}_{\sigma([n])}}(B)$.
+
+\todo[inline]{Define infinite coupled copymaps WRT kolmogorov extension theorem}
+\end{definition}
+
+\subsection{Causal questions and decision functions}
+
+\citet{pearl_book_2018} has proposed three types of causal question:
+\begin{enumerate}
+    \item Association: How are $\RV{W}$ and $\RV{Z}$ related? How would observing $\RV{W}$ change my beliefs about $\RV{Z}$?
+    \item Intervention: What would happen if I do ... ? How can I make ... happen?
+    \item Counterfactual: What if I had done ... instead of what I actually did?
+\end{enumerate}
+
+\emph{Causal decision problems} are, roughly speaking, ``interventional'' problems. In English, a causal decision problem roughly asks
+
+\begin{quote}
+    Given that I have data $\RV{X}$ and I know which values of $\RV{Y}$ I would like to see and some knowledge about how the world works, which of my available choices $D$ should I select?
+\end{quote}
+
+This type of question presupposes somewhat more than Pearl's prototypical interventional questions. First, it supposes that we have \emph{preferences} over the values that $\RV{Y}$ might take, which we need not have to answer the question ``What would happen if I do ...?''. Secondly, and crucially to our theory, causal decision problem suppose that we are given data and a set of choices. 
+
+We will return to the question of preferences. For now, we will focus on the idea that a causal decision problem is about selecting a choice given data. That is, however the selection is made, the answer to a causal decision problem is always a \emph{decision function} $\kernel{D}:X\to \Delta(\sigalg{D})$.
+
+A property that will be of interest when considering counterfactual models is \emph{decomposability}. A see-do model 
+
+
+
 \begin{definition}[Consequence map]
 Given a see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$, a \emph{consequence map} is a map $\kernel{C}:D\to \Delta(\sigalg{Y})$ where $D$ is a choice set and $Y$ is a consequence set.
 
@@ -240,387 +338,7 @@ Suppose we are betting on the outcome of the flip of a possibly biased coin with
 
 In this model, the chance $\RV{H}$ of the coin landing on heads is as much as we can hope to know about the success of our bet. $\RV{H}$ may be inferred from observation by some standard method, and 
 
-\subsection{D-causation}
 
-The choice set $D$ is a primitive element of a see-do model. However, while we claim that see-do models are the basic objects studied in causal inference, so far we have no notion of ``causation''. What we call $D$-\emph{causation} is one such notion. It is called $D$-causation because it is a notion of causation that depends on the set of choices available. A similar idea, called \emph{limited unresponsiveness}, is discussed extensively in the decision theoretic account of causation found in \citet{heckerman_decision-theoretic_1995}. The main difference is that see-do maps are fundamentally stochastic while Heckerman and Shachter work with ``states'' (approximately hypotheses in our terminology) that map decisions deterministically to consequences. In addition, while we define $D$-causation relative to a see-do map $\kernel{T}$, Heckerman and Shachter define limited unresponsiveness with respect to \emph{sets} of states.
-
-Section \ref{sec:cbns_without_d} explores the difficulty of defining ``objective causation'' without reference to a set of choices. $D$ need not be interpreted as the set of choices available to an agent, but however we want to interpret it, all existing examples of causal models seem to require this set.
-
-See Section \ref{ssec:random_variables} for the definition of random variables in Kernel spaces.
-
-One way to motivate the notion of $D$-causation is to observe that for many decision problems, I may wish to include a very large set of choices $D$. Suppose I aim to have my light switched on, and there is a switch that controls the light. Often, the relevant choices for such a problem would appear to be $D_0=\{\text{flip the switch},\text{don't flip the switch}\}$. However, this doesn't come close to exhausting the set of things I might choose to do, and I might wish to consider a larger set of possibilities. For simplicity's sake, suppose I have instead the following set of options:
-
-\begin{align*}
-D_1:=&\{``\text{walk to the switch and press it with my thumb}'', \\
-    &``\text{trip over the lego on the floor, hop to the light switch and stab my finger at it}'',\\
-    &``\text{stay in bed}''\}
-\end{align*}
-
-If having the light turned on is all that matters, I could consider any acts in $D_1$ to be equivalent if, in the end, the light switch ends up in the same position. In this case, I could say that the light switch position $D_1$-causes the state of the light. Subject to the assumption that the light switch position $D_1$-causes the state of the light, I can reduce my problem to one of choosing from $D_0$ (noting that some choices correspond to mixtures of elements of $D_0$).
-
-If I consider an even larger set of possible acts $D_2$, I might not accept that the switch position $D_2$-causes the state of the light. Let $D_2$ be the following acts:
-
-\begin{align*}
-D_2:=&\{``\text{walk to the switch and press it with my thumb}'', \\
-    &``\text{trip over the lego on the floor, hop to the light switch and stab my finger at it}'',\\
-    &``\text{stay in bed}'',\\
-    &``\text{toggle the mains power, then flip the light switch}''\}
-\end{align*}
-
-In this case, it would be unreasonable to suppose that all acts that left the light switch in the ``on'' position would also result in the light being ``on''. Thus the switch does not $D_2$-cause the light to be on.
-
-Formally, $D$-causation is defined in terms of conditional independence. Given a see-do model $\kernel{T}:H\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, define the \emph{consequence model} $\kernel{C}:H\times D\to \Delta(\sigalg{Y})$ as $\kernel{C}:=\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$.
-
-\begin{definition}[$D$-causation]\label{def:d_cause}
-Given a hypothesis $h\in H$ and a consequence model $\kernel{C}:H\times D\to \Delta(\mathcal{Y})$, random variables $\RV{Y}_1:Y\times D\to Y_1$, $\RV{Y}_2:Y\times D\to Y_2$ and $\RV{D}:Y\times D\to D$ (defined the usual way), $\RV{Y}_1$ $D$-causes $\RV{Y}_2$ iff $\RV{Y}_2\CI_{\kernel{C}} \RV{D}|\RV{Y}_1\RV{H}$.
-\end{definition}
-
-\subsection{D-causation vs Limited Unresponsiveness}
-
-Heckerman and Shachter study deterministic ``consequence models''. Furthermore, what we call hypotheses $h\in H$, Heckerman and Schachter call states $s\in S$. Heckerman and Shachter's notion of causation is defined by \emph{limited unresponsiveness} rather than \emph{conditional independence}, which depends on a partition of states rather than a particular hypothesis.
-
-\begin{definition}[Limited unresponsiveness]
-    Given states $S$, deterministic consequence models $\kernel{C}_s:D\to \Delta(F)$ for each $s\in A$ and a random variables $\RV{Y}_1:F\to Y_1$, $\RV{Y}_2:F\to Y_2$, $\RV{Y}_1$ is unresponsive to $\RV{D}$ in states limited by $\RV{Y}_2$ if $\kernel{C}_{(s,d)}^{\RV{Y}_2|\RV{S}\RV{D}}=\kernel{C}_{(s,d')}^{\RV{Y}_2|\RV{S}\RV{D}}\implies \kernel{C}_{(s,d)}^{\RV{Y}_1|\RV{S}\RV{D}}=\kernel{C}_{(s,d')}^{\RV{Y}_1|\RV{S}\RV{D}}$ for all $d,d'\in D$, $s\in S$. Write $\RV{Y}_1\not\hookleftarrow_{\RV{Y}_2} \RV{D}$
-\end{definition}
-
-\begin{lemma}[Limited unresponsiveness implies $D$-causation]
-For deterministic consequence models, $\RV{Y}_1\not\hookleftarrow_{\RV{Y}_2} \RV{D} $ implies $\RV{Y}_2$ $D$-causes $\RV{Y}_1$.
-\end{lemma}
-
-\begin{proof}
-By the assumption of determinism, for each $s\in S$ and $d\in D$ there exists $y_1(s,d)$ and $y_2(s,d)$ such that $\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{S}\RV{D}}_{s,d} = \delta_{y_1(s,d)}\otimes\delta_{y_2(s,d)}$.
-
-By the assumption of limited unresponsiveness, for all $d,d'$ such that $y_2(s,d)=y_2(s,d')$, $y_1(s,d)=y_1(s,d')$ also. Define $f:Y_2\times S\to Y_1$ by $(s,y_1)\mapsto y(s,[y_1(s,\cdot)]^{-1}(y_1(s,d)))$ where $[y_1(s,\cdot)]^{-1}(a)$ is an arbitrary element of $\{d|y_1(s,d)=a\}$. For all $s,d$, $f(y_1(s,d),s)=y_2(s,d)$. Define $\kernel{M}:Y_2\times S\times D\to \Delta(\mathcal{Y}_1)$ by $(y_2,s,d)\mapsto \delta_{f(y_2,s)}$. $\kernel{M}$ is a version of $\kernel{C}^{\RV{Y}_1|\RV{Y}_2,\RV{S},\RV{D}}$ because, for all $A\in \mathcal{Y}_2$, $B\in \mathcal{Y}_1$, $s\in S$, $d\in D$:
-
-\begin{align}
-    \kernel{C}^{\RV{Y}_2|\RV{S}\RV{D}}_{(s,d)}\splitter{0.1}(\kernel{M}\otimes\mathrm{Id}) &= \int_A \kernel{M}(y_2',d,s;B) d\delta_{y_2(s,d)}(y_2') \\
-                                                                                        &= \int_A \delta_{f(y_2',s)}(B) d\delta_{y_2(s,d)}(y_2') \\
-                                                                                        &= \delta_{f(y_2(s,d),s)}(B)\delta_{y_2(s,d)}(A) \\
-                                                                                        &= \delta_{y_1(s,d)}(B)\delta_{y_2(s,d)}(A)\\
-                                                                                        &= \delta_{y_2(s,d)}\otimes\delta_{y_1(s,d)}(A\times B)
-\end{align}
-
-$\kernel{M}$ is clearly constant in $\RV{D}$. Therefore $\RV{Y}_1\CI_{\kernel{C}}\RV{D}|\RV{Y}_2\RV{S}$.
-\end{proof}
-
-However, despite limited unresponsiveness implying $D$-causation, it does not imply $D$-causation in mixtures of states\todo{define this}. Suppose $D=\{0,1\}$ where $1$ stands for ``toggle light switch'' and $0$ stands for ``do nothing''. Suppose $S=\{[0,0],[0,1],[1,0],[1,1]\}$ where $[0,0]$ represents ``switch initially off, mains off'' the other states generalise this in the obvious way. Finally, $\RV{F}\in\{0,1\}$ is the final position of the switch and $\RV{L}\in\{0,1\}$ is the final state of the light. We have
-
-\begin{align}
-    \kernel{C}^{\RV{L}\RV{F}|\RV{D}\RV{S}}_{d,[i,m]} = \delta_{(d\text{ XOR }i)\text{ AND }m}\otimes \delta_{(d\text{ XOR }i)\text{ AND }m}
-\end{align}
-
-Within states $[0,0]$ and $[1,0]$, the light is always off, so $\RV{F}=a\implies \RV{L}=0$ for any $a$. In states $[0,1]$ and $[1,1]$, $\RV{F}=1\implies \RV{L}=1$ and $\RV{F}=0\implies \RV{L}=0$. Thus $\RV{L}\not\hookleftarrow_{\RV{F}} \RV{D}$. However, suppose we take a mixture of consequence models:
-\begin{align}
-    \kernel{C}_\gamma &= \frac{1}{4}\kernel{C}_{\cdot,[0,0]} + \frac{1}{4}\kernel{C}_{\cdot,[0,1]} + \frac{1}{2}\kernel{C}_{\cdot,[1,1]}\\
-    \kernel{C}^{\RV{F}\RV{L}|\RV{D}}_\gamma &= \frac{1}{4} \left[\begin{matrix}
-                        1 & 0\\ 0 & 1
-                      \end{matrix}\right]\otimes \left[\begin{matrix}
-                        1 & 0\\ 1 & 0
-                      \end{matrix}\right] + \frac{1}{4} \left[\begin{matrix}
-                        1 & 0\\ 0 & 1
-                      \end{matrix}\right]\otimes \left[\begin{matrix}
-                        1 & 0\\ 0 & 1
-                      \end{matrix}\right] + \frac{1}{2}\left[\begin{matrix}
-                        0 & 1\\ 1 & 0
-                      \end{matrix}\right]\otimes \left[\begin{matrix}
-                        0 & 1\\ 1 & 0
-                      \end{matrix}\right]
-\end{align}
-
-Then
-
-\begin{align}
-    [1,0]\kernel{C}^{\RV{F}\RV{L}|\RV{D}}_{\gamma} &= \frac{1}{4}[0,1]\otimes[1,0]+\frac{1}{4}[0,1]\otimes[0,1]+\frac{1}{2}[1,0]\otimes[1,0]\\
-    [1,0]\splitter{0.1}(\kernel{C}^{\RV{F}|\RV{D}}_\gamma\otimes \kernel{C}^{\RV{L}|\RV{D}}_\gamma) &= (\frac{1}{2}[0,1]+\frac{1}{2}[1,0])\otimes(\frac{1}{4}[0,1]+\frac{3}{4}[1,0])\\
-    \implies [1,0]\kernel{C}^{\RV{F}\RV{L}|\RV{D}}_{\gamma} &\neq [1,0] \splitter{0.1} (\kernel{C}^{\RV{F}|\RV{D}}_\gamma\otimes \kernel{C}^{\RV{L}|\RV{D}}_\gamma)
-\end{align}
-
-Thus under the prior $\gamma$, $\RV{F}$ does not $D$-cause\todo{define this} $\RV{L}$ even though $\RV{F}$ $D$-causes $\RV{L}$ in all states $S$. The definition of $D$-causation was motivated by the idea that we could reduce a difficult decision problem with a large set $D$ to a simpler problem with a smaller ``effective'' set of decisions by exploiting conditional independence. Even if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, $\RV{X}$ does not necessarily $D$-cause $\RV{Y}$ in mixtures of states in $S$. For this reason, we do not say that $\RV{X}$ $D$-causes $\RV{Y}$ in $S$ if $\RV{X}$ $D$-causes $\RV{Y}$ in every $\RV{H}\in S$, and in this way we differ substantially from \citet{heckerman_decision-theoretic_1995}.
-
-Instead, we simply extend the definition of $D$-causation to mixtures of hypotheses: if $\gamma\in \Delta(\RV{H})$ is a mixture of hypotheses, define $\kernel{C}_\gamma:= (\gamma\otimes\textbf{Id})\kernel{C}$. Then $\RV{X}$ $D$-causes $\RV{Y}$ relative to $\gamma$ iff $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
-
-Theorem \ref{th:univ_d_causation} shows that under some conditions, $D$-causation can hold for arbitrary mixtures over subsets of the hypothesis class $\RV{H}$.
-
-\begin{theorem}[Universal $D$-causation]\label{th:univ_d_causation}
-If $\RV{X}\CI\RV{H}|\RV{D}$ for all $\RV{H},\RV{H}'\in S\subset \RV{H}$ and $\RV{X}$ $D$-causes $\RV{Y}$ in all $\RV{H}\in S$, then $\RV{X}$ $D$-causes $\RV{Y}$ with respect to all mixed consequence models $\kernel{C}_\gamma$ for all $\gamma\in \Delta(\RV{H})$ with $\gamma(S)=1$.
-\end{theorem}
-
-\begin{proof}
-
-For $\gamma\in \Delta(\RV{H})$, define the mixture
-
-\begin{align}
-\kernel{C}_\gamma := \begin{tikzpicture}
-    \path (0,0) node[dist] (g) {$\gamma$}
-    + (0,-0.45) node (D) {$\RV{D}$}
-    ++ (1,-0.3) node[kernel] (C) {$\kernel{C}$}
-    ++ (1,0) node (F) {$\RV{F}$};
-    \draw (g) to [out=0,in=180] ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) -- (F);
-\end{tikzpicture}
-\end{align}
-
-Because $\kernel{C}_\RV{H}^{\RV{X}|\RV{D}} = \kernel{C}_{\RV{H}'}^{\RV{X}|\RV{D}}$ for all $\RV{H},\RV{H}'\in \RV{H}$, we have
-
-\begin{align}
-\begin{tikzpicture}
-    \path (0,0) node[dist] (g) {$\gamma$}
-    + (0.7,-0.15) node[copymap] (copy0) {}
-    + (0,-0.45) node (D) {$\RV{D}$}
-    ++ (1.5,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
-    ++ (1,0) node (X) {$\RV{X}$}
-    + (0,0.5) node (T) {$\RV{H}$};
-    \draw (g) to [out=0,in=180] (copy0) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$);
-    \draw (C) -- (X);
-    \draw (copy0) to [out=90,in=180] (T);
-\end{tikzpicture} &= \begin{tikzpicture}
-    \path (0,0) node[dist] (g) {$\gamma$}
-    + (0,0.5) node[dist] (g2) {$\gamma$}
-    + (0.7,-0.15) node[copymap] (copy0) {}
-    + (0,-0.45) node (D) {$\RV{D}$}
-    ++ (1.5,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
-    ++ (1,0) node (X) {$\RV{X}$}
-    + (0,0.3) node (T) {$\RV{H}$};
-    \draw (g) to [out=0,in=180] (copy0) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$);
-    \draw (C) -- (X);
-    \draw (g2) to [out=0,in=180] (T);
-\end{tikzpicture} \label{eq:decompose_condi_x}
-\end{align}
-
-Also
-
-\begin{align}
-    \kernel{C}_\gamma^{\RV{XY}|\RV{D}} &= \begin{tikzpicture}
-    \path (0,0) node[dist] (g) {$\gamma$}
-    + (0,-0.45) node (D) {$\RV{D}$}
-    ++ (1,-0.3) node[kernel] (C) {$\kernel{C}$}
-    ++ (1,0) node[kernel] (F) {$\kernel{F}^{\RV{X}\utimes\RV{Y}}$}
-    ++ (1,0.15) node (X) {$\RV{X}$}
-    + (0,-0.3) node (Y) {$\RV{Y}$};
-    \draw (g) to [out=0,in=180] ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) -- (F);
-    \draw ($(F.east) + (0,0.15)$) -- (X) ($(F.east) + (0,-0.15)$) -- (Y);
-\end{tikzpicture}\\
-    &= \begin{tikzpicture}
-    \path (0,0) node[dist] (g) {$\gamma$}
-    + (0,-0.45) node (D) {$\RV{D}$}
-    ++ (1,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{XY}|\RV{D}\RV{H}}$}
-    ++ (1,0.15) node (X) {$\RV{X}$}
-    + (0,-0.3) node (Y) {$\RV{Y}$};
-    \draw (g) to [out=0,in=180] ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$);
-    \draw ($(C.east) + (0,0.15)$) -- (X) ($(C.east) + (0,-0.15)$) -- (Y);
-\end{tikzpicture}\\
- &= \begin{tikzpicture}
-    \path (0,0) node[dist] (g) {$\gamma$}
-    + (0,-0.45) node (D) {$\RV{D}$}
-    + (0.7,-0.45) node[copymap] (copy0) {}
-    + (0.7,-0.15) node[copymap] (copy1) {}
-    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
-    + (0,0.6) coordinate (via0)
-    + (0,-0.6) coordinate (via1)
-    ++ (0.9,0) node[copymap] (copy2) {}
-    ++ (0.7,0) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{D}\RV{H}}$}
-    ++ (1.2,0.15) node (X) {$\RV{Y}$}
-    + (0,-0.5) node (Y) {$\RV{X}$};
-    \draw (g) to [out=0,in=180] (copy1) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C)--(Yx);
-    \draw (copy0) to [out=-90,in=180] (via1) to [out=0,in=180] ($(Yx.west) + (0,-0.15)$) (copy1) to [out=90,in=180] (via0) to [out=0,in=180] ($(Yx.west) + (0,0.15)$);
-    \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
- \end{tikzpicture}\\
- &\overset{\RV{Y}\CI \RV{D}|\RV{X}\RV{H}}{=} \begin{tikzpicture}
-    \path (0,0) node[dist] (g) {$\gamma$}
-    + (0,-0.45) node (D) {$\RV{D}$}
-    + (0.7,-0.15) node[copymap] (copy1) {}
-    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
-    ++ (0.9,0.1) node[copymap] (copy2) {}
-    ++ (0.7,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$}
-    ++ (1.2,0.15) node (X) {$\RV{Y}$}
-    + (0,-0.5) node (Y) {$\RV{X}$};
-    \draw (g) to [out=0,in=180] (copy1) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) to [out=0,in=180] (copy2) to [out=0,in=180] (Yx);
-    \draw (copy1) to [out=90,in=180] ($(Yx.west) + (0,0.15)$);
-    \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
- \end{tikzpicture} \\
- &\overset{\ref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
-    \path (0,0) node[dist] (g) {$\gamma$}
-    + (0,-0.45) node (D) {$\RV{D}$}
-    + (0.7,-0.15) node[copymap] (copy1) {}
-    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}^{\RV{X}|\RV{D}\RV{H}}$}
-    + (1,0.6) node[dist] (g2) {$\gamma$}
-    ++ (0.9,0.1) node[copymap] (copy2) {}
-    ++ (1,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$}
-    ++ (1.2,0.15) node (X) {$\RV{Y}$}
-    + (0,-0.5) node (Y) {$\RV{X}$};
-    \draw (g) to [out=0,in=180] (copy1) -- ($(C.west) + (0,0.15)$) (D) -- ($(C.west) + (0,-0.15)$) (C) to [out=0,in=180] (copy2) to [out=0,in=180] (Yx);
-    \draw (g2) to [out=0,in=180] ($(Yx.west) + (0,0.15)$);
-    \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
- \end{tikzpicture}\\
- &= \overset{\ref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
-    \path (0,0) node (g) {}
-    + (0,-0.45) node (D) {$\RV{D}$}
-    + (0.7,-0.45) node[copymap] (copy1) {}
-    ++ (1.4,-0.3) node[kernel] (C) {$\kernel{C}_\gamma^{\RV{X}|\RV{D}\RV{H}}$}
-    + (1,0.6) node[dist] (g2) {$\gamma$}
-    ++ (0.9,0.1) node[copymap] (copy2) {}
-    ++ (1,0.3) node[kernel] (Yx) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$}
-    + (-0.5,0.6) coordinate (stop0)
-    ++ (1.2,0.15) node (X) {$\RV{Y}$}
-    + (0,-0.5) node (Y) {$\RV{X}$};
-    \draw (D) -- ($(C.west) + (0,-0.15)$) (C) to [out=0,in=180] (copy2) to [out=0,in=180] (Yx);
-    \draw (g2) to [out=0,in=180] ($(Yx.west) + (0,0.15)$);
-    \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
-    \draw[-{Rays[n=8]}] (copy1) to [out=90,in=180] (stop0);
- \end{tikzpicture}\label{eq:is_conditional}
-\end{align}
-Equation \ref{eq:is_conditional} establishes that $(\gamma\otimes\textbf{Id}_X\otimes\stopper{0.3}_D)\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$ is a version of $\kernel{C}_\gamma^{\RV{Y}|\RV{X}\RV{D}}$, and thus $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
-
-This can also be derived from the semi-graphoid rules:
-
-\begin{align}
-    \RV{H}\CI \RV{D} \land \RV{H}\CI \RV{X} | \RV{D} &\implies \RV{H}\CI \RV{XD}\\
-    &\implies \RV{H}\CI \RV{D}|\RV{X}\\
-    \RV{D} \CI \RV{H}|\RV{X} \land \RV{D}\CI \RV{Y}|\RV{X}\RV{H} &\implies \RV{D}\CI \RV{Y}|\RV{X}\\
-    &\implies \RV{Y}\CI\RV{D}|\RV{X}
-\end{align}
-\end{proof}
-
-\subsection{Properties of D-causation}
-
-If $\RV{X}$ D-causes $\RV{Y}$ relative to $\kernel{C}_\RV{H}$, then the following holds:
-
-\begin{align}
-    \kernel{C}_{\RV{H}}^{\RV{X}|\RV{D}} &= \begin{tikzpicture}
-    \path (0,0) node (D) {$\RV{D}$}
-    ++ (0.9,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
-    ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}}$}
-    ++ (0.9,0) node (Y) {$\RV{Y}$};
-    \draw (D) -- (Xd) -- (Yd) -- (Y); 
-    \end{tikzpicture}
-\end{align}
-
-This follows from version (2) of Definition \ref{def:conditional_independence}:
-
-\begin{align}
-    \kernel{C}_\RV{H}^{\RV{X}|\RV{D}} &= \begin{tikzpicture}
-    \path (0,0) node (D) {$\RV{D}$}
-    ++ (0.7,0) node[copymap] (copy0) {}
-    ++ (0.7,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
-    + (0,0.5) coordinate (via1)
-    ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}\RV{D}}$}
-    ++ (0.9,0) node (Y) {$\RV{Y}$};
-    \draw (D) -- (Xd) -- (Yd) -- (Y);
-    \draw (copy0) to [out=90,in=180] (via1) to [out=0,in=180] ($(Yd.west)+(0,0.15)$); 
-    \end{tikzpicture}\\
-     &= \begin{tikzpicture}
-    \path (0,0) node (D) {$\RV{D}$}
-    ++ (0.7,0) node[copymap] (copy0) {}
-    ++ (0.7,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
-    + (1.3,0.5) coordinate (via1)
-    ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}}$}
-    ++ (0.9,0) node (Y) {$\RV{Y}$};
-    \draw (D) -- (Xd) -- (Yd) -- (Y);
-    \draw[-{Rays[n=8]}] (copy0) to [out=90,in=180] (via1); 
-    \end{tikzpicture}\\
-    &= \begin{tikzpicture}
-    \path (0,0) node (D) {$\RV{D}$}
-    ++ (0.9,0) node[kernel] (Xd) {$\kernel{C}^{\RV{X}|\RV{D}}$}
-    ++ (1.3,0) node[kernel] (Yd) {$\kernel{C}^{\RV{Y}|\RV{X}}$}
-    ++ (0.9,0) node (Y) {$\RV{Y}$};
-    \draw (D) -- (Xd) -- (Yd) -- (Y); 
-    \end{tikzpicture}
-\end{align}
-
-D-causation is not transitive: if $\RV{X}$ D-causes $\RV{Y}$ and $\RV{Y}$ D-causes $\RV{Z}$ then $\RV{X}$ doesn't necessarily D-cause $\RV{Z}$.
-
-\todo[inline]{Pearl's ``front door adjustment'' and general identification results make use of composing ``sub-consequence-kernels'' like this. Show, if possible, that Pearl's ``sub-consequence-kernels'' obey $D$-causation like relations}
-
-\todo[inline]{Does this ``weak D-causation'' respect mixing under the same conditions as regular D-causation?}
-
-\subsection{Decision sequences and parallel decisions}
-
-Just as observations $\RV{X}$ can be a sequence of random variables $\RV{X}_1$, $\RV{X}_2$, ..., $\RV{D}$ can be a sequence of ``sub-choices'' $\RV{D}_1$, $\RV{D}_2$, ... . Note that by positing such a sequence there is no requirement that $\RV{D}_1$ comes ``before'' $\RV{D}_2$ in any particular sense.
-
-\subsection{Decomposability and indecomposability}
-
-\begin{definition}[decomposability]\label{def:decomposability}
-A see-do model $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ is \emph{decomposable} if $\RV{Y}\CI_\kernel{T} \RV{X}|\RV{D}\RV{H}$. 
-
-If $\kernel{T}$ is decomposable we have $\kernel{T}=(\splitter{0.15}_{\Theta}\otimes \mathrm{Id}_D)(\kernel{T}^{\RV{X}|\RV{H}}\otimes\kernel{T}^{\RV{Y}|\RV{H}\RV{D}})$, and so it can be uniquely defined with the observational model $\kernel{O}:= \kernel{T}^{\RV{X}|\RV{H}}$ and the consequence model $\kernel{C}:=\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$.
-
-\end{definition}
-
-Indecomposable models don't allow us to consider observations and consequences separately, as the consequences also depend directly on the observations $\RV{X}$.
-
-
-\subsubsection{Examples of decomposable and indecomposable see-do models}
-
-Recall the previous example: suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a decomposable see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\RV{H}\mapsto \mathrm{Bernoulli}(\RV{H})$. Then define $\prescript{1}{}{\kernel{T}}$ by:
-
-\begin{itemize}
-    \item $D=\{0,1\}$
-    \item $X=\{0,1\}^N$
-    \item $Y=\{0,1\}$
-    \item $H=(0,1)$
-    \item $\prescript{1}{}{\kernel{O}}:\splitter{0.1}^N\kernel{B}$
-    \item $\prescript{1}{}{\kernel{C}}:(h,d)\mapsto \mathrm{Bernoulli}(1-|d-h|)$
-\end{itemize}
-
-In this model, the chance $\RV{H}$ of the coin landing on heads is as much as we can hope to know about how our bet will work out.
-
-Suppose instead that in addition to the $N$ prior flips, we manage to look at the outcome of the flip on which we will bet. In this case, the situation can be modeled by the following indecomposable see-do model $\prescript{2}{}{\kernel{T}}$:
-
-\begin{itemize}
-    \item $D=\{0,1\}$
-    \item $X=\{0,1\}^{N+1}$
-    \item $Y=\{0,1\}$
-    \item $H=(0,1)$
-    \item $\prescript{2}{}{\kernel{T}}^{\RV{X}|\RV{H}}:\splitter{0.1}^{N+1}\kernel{B}$
-    \item $\prescript{2}{}{\kernel{T}}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}:(h,\mathbf{x},d)\mapsto \delta_{1-|d-x_{N+1}|}$
-\end{itemize}
-
-In this case, even if we are told the value of $\RV{H}$, we still benefit from using the observed data when making our decision.
-
-It is possible to model the second situation with a decomposable model by including the result of the $N+1$th flip in the hypothesis. Define the new hypothesis space $H'=H\times\{0,1\}$ and let $\RV{H}_0$ be the projection to the old hypothesis space $H$. Define $\prescript{3}{}{\kernel{T}}$ by:
-
-\begin{itemize}
-    \item $D=\{0,1\}$
-    \item $X=\{0,1\}^{N+1}$
-    \item $Y=\{0,1\}$
-    \item $H'=(0,1)\times\{0,1\}$
-    \item $\prescript{3}{}{\kernel{O}}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
-    \item $\prescript{3}{}{\kernel{C}}:(h,x_{N+1},d)\mapsto \delta_{1-|d-x_{N+1}|}$
-\end{itemize}
-
-However, $\prescript{2}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}} = \kernel{B}$ while $\prescript{3}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}_0}$ is undefined, so $\prescript{3}{}{\kernel{T}}$ is a substantially different model to $\prescript{2}{}{\kernel{T}}$.
-
-If a see-do model is employed in a \emph{decision problem} -- defined in the next section -- it is possible to recover decomposability in the sense that we can take an indecomposable model construct a decomposable model that is identical given an identification of the random variables in each.
-
-\subsubsection{Exchangeability}
-
-One justification for using statistical models -- by which I mean maps of the type $\kernel{O}:H\to \Delta(\sigalg{X})$ -- is to suppose that we simply have as prior knowledge a set of hypotheses and the fact that for each hypothesis, repeating our observations a large number of times in the appropriate way will yield a sequence that is described by the probability distribution we associate with that hypothesis. An alternative view, set out by \citet{de_finetti_foresight_1992}, is to treat random variables as predictions of uncertain events rather than properties of repeated observations of the system under observation. De Finetti's representation theorem shows that, starting from the assumption of \emph{exchangeability} (informally: indifference to the order in which observations arrive), the predictive model of future observations can be represented by the product of a \emph{prior} and a \emph{conditionally independent and identically distributed statistical model}.
-
-In see-do models, exchangeability of observations additionally implies that the model is decomposable. In addition, I argue that a generalisation of exchangeability I call \emph{functional exchangeability} is a natural assumption to make when modelling counterfacutal suppositions.
-
-\begin{definition}[Exchangeability]
-Given $A\subseteq \mathbb{N}$, a sequence of random variables $\RV{X}_A:=\utimes_{i\in A} \RV{X}_i$ each taking values in $X$ on a probability space $(\prob{P},(\Omega,\sigalg{F}))$ is \emph{exchangeable} if for all $n\in A$, all permutations of indices $\sigma:[n]\to[n]$ and all  $B \in\sigalg{F}$, $\prob{P}^{\RV{X}_{[n]}}(B) =\prob{P}^{\RV{X}_{\sigma([n])}}(B)$.
-
-\todo[inline]{Define infinite coupled copymaps WRT kolmogorov extension theorem}
-\end{definition}
-
-\subsection{Causal questions and decision functions}
-
-\citet{pearl_book_2018} has proposed three types of causal question:
-\begin{enumerate}
-    \item Association: How are $\RV{W}$ and $\RV{Z}$ related? How would observing $\RV{W}$ change my beliefs about $\RV{Z}$?
-    \item Intervention: What would happen if I do ... ? How can I make ... happen?
-    \item Counterfactual: What if I had done ... instead of what I actually did?
-\end{enumerate}
-
-\emph{Causal decision problems} are, roughly speaking, ``interventional'' problems. In English, a causal decision problem roughly asks
-
-\begin{quote}
-    Given that I have data $\RV{X}$ and I know which values of $\RV{Y}$ I would like to see and some knowledge about how the world works, which of my available choices $D$ should I select?
-\end{quote}
-
-This type of question presupposes somewhat more than Pearl's prototypical interventional questions. First, it supposes that we have \emph{preferences} over the values that $\RV{Y}$ might take, which we need not have to answer the question ``What would happen if I do ...?''. Secondly, and crucially to our theory, causal decision problem suppose that we are given data and a set of choices. 
-
-We will return to the question of preferences. For now, we will focus on the idea that a causal decision problem is about selecting a choice given data. That is, however the selection is made, the answer to a causal decision problem is always a \emph{decision function} $\kernel{D}:X\to \Delta(\sigalg{D})$.
 
 \subsubsection{Avoiding indecomposability with decision functions}
 
