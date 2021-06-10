@@ -64,7 +64,7 @@ Decomposable see-do models can be represented as a pair $(\kernel{O},\kernel{C})
 Any see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ can be uniquely represented by the following pair of Markov kernels:
 \begin{itemize}
     \item The \emph{observation model} $\kernel{T}^{\RV{X}|\RV{H}}$
-    \item The \emph{contextual consequence model} $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$
+    \item The \emph{context-sensitive consequence model} $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$
 \end{itemize}
 
 Furthermore
@@ -223,7 +223,7 @@ If a see-do model is employed in a \emph{decision problem} -- defined later -- i
 
 \subsubsection{Exchangeability}
 
-Thus far, we haven't dwelt on what it means for a probability measure to ``describe'' or ``represent'' something. In one view, probability measures constrain the behaviour of long sequences or ensembles of observations taken under identical conditions; in this view long sequences of random variables represent ``allowable'' sequences of observations. Alternatively, the probability distribution of a random variable could be a forecast of an observation associated with that variable.
+The starting point for two-player statistical models was one player statistical models. This was justified by the observation that statistical models are already widely accepted and by some informal arguments about the need to incorporate uncertainty. There are a number of ``representation theorems'' in the literature 
 
 We can consider the hypothesis class in a one or two player statistical model to be an element of the prior knowledge we have to bring to the problem. An alternative view set out by \citet{de_finetti_foresight_1992} is that the hypothesis class
 
