@@ -3,57 +3,57 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-Repeated entry---line 831 of file references.bib
+Repeated entry---line 845 of file references.bib
  : @phdthesis{shpitser_complete_2008
  :                                  ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1132 of file references.bib
+Repeated entry---line 1146 of file references.bib
  : @article{clerc_pointless_2017
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1326 of file references.bib
+Repeated entry---line 1340 of file references.bib
  : @article{fong_causal_2013
  :                          ,
 I'm skipping whatever remains of this entry
-You've used 30 entries,
+You've used 33 entries,
             2773 wiz_defined-function locations,
-            827 strings with 11576 characters,
-and the built_in function-call counts, 12724 in all, are:
-= -- 1222
-> -- 569
-< -- 29
-+ -- 200
-- -- 170
-* -- 949
-:= -- 2032
-add.period$ -- 149
-call.type$ -- 30
-change.case$ -- 142
-chr.to.int$ -- 30
-cite$ -- 60
-duplicate$ -- 610
-empty$ -- 1087
-format.name$ -- 218
-if$ -- 2677
+            843 strings with 12019 characters,
+and the built_in function-call counts, 13796 in all, are:
+= -- 1318
+> -- 614
+< -- 32
++ -- 216
+- -- 183
+* -- 1015
+:= -- 2208
+add.period$ -- 162
+call.type$ -- 33
+change.case$ -- 155
+chr.to.int$ -- 33
+cite$ -- 66
+duplicate$ -- 673
+empty$ -- 1190
+format.name$ -- 236
+if$ -- 2905
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 34
-newline$ -- 213
-num.names$ -- 126
-pop$ -- 255
+missing$ -- 38
+newline$ -- 231
+num.names$ -- 140
+pop$ -- 284
 preamble$ -- 1
-purify$ -- 115
+purify$ -- 125
 quote$ -- 0
-skip$ -- 436
+skip$ -- 475
 stack$ -- 0
-substring$ -- 384
-swap$ -- 61
+substring$ -- 390
+swap$ -- 65
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 295
+type$ -- 323
 warning$ -- 0
-while$ -- 120
+while$ -- 130
 width$ -- 0
-write$ -- 506
+write$ -- 551
 (There were 3 error messages)

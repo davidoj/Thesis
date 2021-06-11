@@ -1,11 +1,9 @@
 
 %!TEX root = main.tex
 
-\chapter{Chapter 3: Two player statistical models and see-do models}
+\chapter{Two player statistical models and see-do models}
 
 \todo[inline]{These are ``todo'' notes. All such notes that involve theoretical development are also collected in an unordered list of outstanding theoretical questions}
-
-\todo[inline]{The basic claim of this chapter is that see-do models are the basic type of thing that everyone who is studying ``causal inference'' is working with, even if they don't know it themselves}
 
 In this chapter I introduce two types of model. Models of the first type are called \emph{two player statistical models} and the second type are a special class of the first called \emph{see-do models}. Fundamentally, each of these is just a particular kind of stochastic function. The reason we are interested in these kinds of stochastic functions is that is that almost all causal models are instances of see-do models. Before introducing two player models and discussing what makes them causal, it is worth briefly considering models in statistics and machine learning generally.
 
@@ -29,7 +27,7 @@ So far I have explained the distinction between ``player 1'' and ``player 2'' in
 
 Decision problems involving often involve some data $\RV{X}$ is observed, then a choice is made, then the consequences $\RV{Y}$ are observed. In such a model, the observed data $\RV{X}$ cannot be affected by the choice. These models will be called \emph{see-do} models to capture the assumption that there is an order in which seeing and doing happen.
 
-In this chapter I will introduce two-player statistical models with a focus on how they relate to ordinary statistics, while in the next chapter I will explore the zoo of causal modelling approaches and the types of two player models associated with each.
+In this chapter I will introduce two-player statistical models ``looking backwards'' towards key results in the foundations of ordinary statistics, with a particular focus on exchangeability-like assumptions and statistical decision theory. In the following chapters, results obtained here will be applied ``looking forwards'' problems of causal inference.
 
 \section{Two player statistical models and see-do models}
 
@@ -43,11 +41,11 @@ Two player statistical models were introduced as doubly indexed sets of probabil
 The first condition amounts to the additional requirement that $(h,d)\mapsto \kernel{T}_{h,d}(A)$ is measurable for every $A\in \sigalg{H}\otimes\sigalg{D}\otimes\sigalg{E}$, and sufficient for the second condition is that $D\times H$ is countable and $X\times Y$ standard measurable (though this is not necessary, see Theorem \ref{th:existence_continous}).
 
 \begin{definition}[Two player statistical model]\label{def:2p_stat}
-A \emph{two-player statistical model} is a Markov kernel $\kernel{T}:H\times D\to \Delta(\sigalg{E})$ such that, for any random variables $\RV{X}: H\times D\times E\to X$ and $\RV{Y}:H\times D\times E\to Y$, a disintegration $\kernel{K}^{\RV{Y}|\RV{XDH}}:X\times D\times H\to \Delta(\sigalg{Y})$ exists. Every two player statistical model has two distinguished random variables: the \emph{hypothesis} $\RV{H}:H\times D\times E\to H$ given by $(h,d,e)\mapsto h$ and the \emph{choice} $\RV{D}:H\times D\times E\to D$ given by $(h,d,e)\mapsto d$.
+A \emph{two-player statistical model} is a Markov kernel $\kernel{T}:H\times D\to \Delta(\sigalg{E})$ such that, for any random variables $\RV{X}: H\times D\times E\to X$ and $\RV{Y}:H\times D\times E\to Y$, a disintegration $\kernel{K}^{\RV{Y}|\RV{XDH}}:X\times D\times H\to \Delta(\sigalg{Y})$ exists. Every two player statistical model has three distinguished random variables: the \emph{hypothesis} $\RV{H}:H\times D\times E\to H$ given by $(h,d,e)\mapsto h$ and the \emph{choice} $\RV{D}:H\times D\times E\to D$ given by $(h,d,e)\mapsto d$ and the \emph{outcome} $\RV{O}:H\times D\times E\to E$ given by $(h,d,e)\mapsto e$..
 \end{definition}
 
 \begin{definition}[See-Do model]\label{def:seedo}
-A \emph{see-do model} is a two-player statistical model $\kernel{T}:H\times D\to \Delta(\sigalg{E})$ with two additional distinguished random variables: the \emph{observation} $\RV{X}: H\times D\times E\to X$ and the \emph{consequence} $\RV{Y}:H\times D\times E\to Y$. A see-do model must observe the conditional independence $\RV{X}\CI_\kernel{T} \RV{D}|\RV{H}$, i.e. the observation is independent of the choice conditional on the hypothesis.
+A \emph{see-do model} is a two-player statistical model $\kernel{T}:H\times D\to \Delta(\sigalg{E})$ with two additional distinguished random variables: the \emph{observation} $\RV{X}: H\times D\times E\to X$ and the \emph{consequence} $\RV{Y}:H\times D\times E\to Y$ such that the outcome is the coupled product of the observation and the consequence $\RV{O}=\RV{X}\utimes\RV{Y}$\todo{More generally, an invertible function of this}. A see-do model must observe the conditional independence $\RV{X}\CI_\kernel{T} \RV{D}|\RV{H}$, i.e. the observation is independent of the choice conditional on the hypothesis.
 \end{definition}
 
 \subsection{Decomposability}
@@ -219,23 +217,310 @@ It is possible to model the second situation with a decomposable model by includ
 
 However, $\prescript{2}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}} = \kernel{B}$ while $\prescript{3}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}_0}$ is undefined, so $\prescript{3}{}{\kernel{T}}$ is a substantially different model to $\prescript{2}{}{\kernel{T}}$.
 
-If a see-do model is employed in a \emph{decision problem} -- defined later -- it is possible to recover decomposability in the sense that we can take an indecomposable model construct a decomposable model that is identical given an identification of the random variables in each.
+If an indecomposable see-do model is employed in a \emph{decision problem} it is possible to create an equivalent decision problem with a decomposable model as I will show later. Some counterfactual problems cannot be formulated as decision problems, and indecomposability is a property of the types of counterfacutal model proposed by \citet{pearl_causality:_2009}, but not to my knowledge of any causal models used in a ``decision like context''.
 
 \subsubsection{Exchangeability}
 
-Thus far, we haven't dwelt on what it means for a probability measure to ``describe'' or ``represent'' something. In one view, probability measures constrain the behaviour of long sequences or ensembles of observations taken under identical conditions; in this view long sequences of random variables represent ``allowable'' sequences of observations. Alternatively, the probability distribution of a random variable could be a forecast of an observation associated with that variable.
+Thus far, we haven't dwelt on what it means for a probability measure to ``describe'' or ``represent'' something. It's well-known that probability is suitable for representing a number of different things. Two common choices are:
 
-We can consider the hypothesis class in a one or two player statistical model to be an element of the prior knowledge we have to bring to the problem. An alternative view set out by \citet{de_finetti_foresight_1992} is that the hypothesis class
+\begin{enumerate}
+    \item The long run convergence of sequences or ensembles of observations of certain types of systems
+    \item Forecasts of observations that will take place in the future
+\end{enumerate}
 
-One justification for using statistical models -- by which I mean maps of the type $\kernel{O}:H\to \Delta(\sigalg{X})$ -- is to suppose that we simply have as prior knowledge a set of hypotheses and the fact that for each hypothesis, repeating our observations a large number of times in the appropriate way will yield a sequence that is described by the probability distribution we associate with that hypothesis. An alternative view, set out by \citet{de_finetti_foresight_1992}, is to treat random variables as predictions of uncertain events rather than properties of repeated observations of the system under observation. De Finetti's representation theorem shows that, starting from the assumption of \emph{exchangeability} (informally: indifference to the order in which observations arrive), the predictive model of future observations can be represented by the product of a \emph{prior} and a \emph{conditionally independent and identically distributed statistical model}.
+Taking the first view, one can view each hypotheses in a statistical model as representing the proposition that the system will tend to produce long-run sequences of observations favoured by the associated probability measure. Given a possibly loaded die, we might entertain hypotheses a) it is a system that produces a 6 $\frac{1}{6}$ of the time, b) it is a system that produces a 6 $\frac{1}{4}$ of the time and so forth. On the other hand, if we view a sequence of random variables as a sequence of forecasts it is not immediately obvious that we need such hypotheses. If $\RV{X}_1,\RV{X}_2,\RV{X}_3,...$ are rolls of a possibly loaded die, then it seems reasonable on observing a large number of sixes that sixes are more likely in the future. Unlike hypotheses a) and b), forecasts of the outcome do not assign a stable value to the proportion of sixes produced by the die. \citet{de_finetti_foresight_1992} showed that if and only if a probabilistic forecast $\prob{P}$ has the property that the forecast of a sequence of random variables $\prob{P}^{\RV{X}_1\RV{X}_2\RV{X}_3}$ is identical to the forecast of any permutation of the sequence $\prob{P}^{\RV{X}_2\RV{X}_1\RV{X}_3}$ (an assumption known as \emph{exchangeability}) and this sequence could be extended infinitely, then there exists an $(H,\sigalg{H})$, a Markov kernel $\kernel{Q}:H\to \Delta(\sigalg{X}^3)$ and a \emph{prior} $\mu\in \Delta(\sigalg{H})$ such that
 
-In see-do models, exchangeability of observations additionally implies that the model is decomposable. In addition, I argue that a generalisation of exchangeability I call \emph{functional exchangeability} is a natural assumption to make when modelling counterfacutal suppositions.
+\begin{align}
+    \prob{P}^{\RV{X}_1\RV{X}_2\RV{X}_3} = \begin{tikzpicture}
+        \path (0,0) node[dist] (P) {$\mu$}
+        ++ (0.7,0) node[copymap] (copy0) {}
+        ++ (0.5,0.5) node[kernel] (Q1) {$\kernel{Q}$}
+        +  (0,-0.5) node[kernel] (Q2) {$\kernel{Q}$}
+        +  (0,-1) node[kernel] (Q3) {$\kernel{Q}$}
+        ++ (1,0) node (X1) {$\RV{X}_1$}
+        + (0,-0.5) node (X2) {$\RV{X}_2$}
+        + (0,-1) node (X3) {$\RV{X}_3$};
+        \draw (P) -- (copy0);
+        \draw (copy0) to [out=45,in=180] (Q1) (copy0) to [out=0, in=180] (Q2) (copy0) to [out=-45,in=180] (Q3);
+        \draw (Q1) -- (X1) (Q2) -- (X2) (Q3) -- (X3);
+    \end{tikzpicture}
+\end{align}
+
+We can then consider $H$ to be the hypothesis class and define the statistical model
+
+\begin{align}
+    \begin{tikzpicture}
+        \path (0,0) node (P) {$\RV{H}$}
+        ++ (0.7,0) node[copymap] (copy0) {}
+        ++ (0.5,0.5) node[kernel] (Q1) {$\kernel{Q}$}
+        +  (0,-0.5) node[kernel] (Q2) {$\kernel{Q}$}
+        +  (0,-1) node[kernel] (Q3) {$\kernel{Q}$}
+        ++ (1,0) node (X1) {$\RV{X}_1$}
+        + (0,-0.5) node (X2) {$\RV{X}_2$}
+        + (0,-1) node (X3) {$\RV{X}_3$};
+        \draw (P) -- (copy0);
+        \draw (copy0) to [out=45,in=180] (Q1) (copy0) to [out=0, in=180] (Q2) (copy0) to [out=-45,in=180] (Q3);
+        \draw (Q1) -- (X1) (Q2) -- (X2) (Q3) -- (X3);
+    \end{tikzpicture}
+\end{align}
+
+Exchangeability-like assumptions have a number of interesting applications to see-do models:
+\begin{itemize}
+    \item \emph{Functional exchangeability} is a fundamental assumption of counterfactual models
+    \item Exchangeability of observations implies decomposability
+    \item A representation theorem similar to the one described above will be proved for \emph{doubly exchangeable} see-do forecasts
+    \item \emph{Imitable} see-do models, a special class of doubly exchangeable models, play a key role in identification of causal effects
+\end{itemize}
+
+In general, we will call the product of a prior and a two player statistical models a \emph{forecasts}.
+
+
+\begin{definition}[Forecasts, see-do forecast]
+A \emph{forecast} is a Markov kernel $D\to \Delta(\sigalg{E})$ for some set of choices $D$ and outcomes $E$. The choice variable $\RV{D}:D\times E\to D$ and the outcome variable $\RV{O}:D\times E\to E$ are defined analagously to \ref{def:2p_stat}.
+
+A \emph{see-do forecast} is a forecast $D\to \Delta(\sigalg{E})$ with an \emph{observation variable} $\RV{X}:D\times E\to X$ and a consequence variable $\RV{Y}:D\times E\to Y$ such that $\RV{O}=\RV{X}\utimes\RV{Y}$ and $\RV{X}\CI\RV{D}$.
+\end{definition}
+
+\todo[inline]{stop here}
+
+\begin{theorem}
+The product $\kernel{L}:=(\mu\otimes \mathrm{Id}_D)\kernel{K}$ of a prior $\mu\in \Delta(\sigalg{H})$ and a two player statistical model $\kernel{K}:H\times D\to \Delta(\sigalg{E})$ is a forecast $D\to \Delta(\sigalg{E})$ with $\RV{D}^f:(d,e)\mapsto d$ and $\RV{E}^f:(d,e)\mapsto e$. If $\kernel{K}$ is a see-do model with respect to observations $\RV{X}^{sd}$, $\RV{Y}^{sd}$ then there exist $\RV{X}^{f}$, $\RV{Y}^f$ such that $\kernel{L}$ is a see-do forecast.
+\end{theorem}
+
+
+\begin{proof}
+The first part is trivial: $(\mu\otimes \mathrm{Id}_D)\kernel{K}$ is a Markov kernel $D\to \Delta(\sigalg{E})$.
+
+For the second part $\RV{X}^f\CI\RV{D}$ is required for some $\RV{X}^f$.By Theorem \ref{th:iterated_disint} we have
+
+\begin{align}
+    \kernel{K}^{\RV{X}^{sd}\RV{Y}^{sd}|\RV{HD}} = \begin{tikzpicture}
+        \path (0,0) node (H) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        ++ (0.7,0) node[kernel] (X) {$\kernel{K}^{\RV{X}|\RV{H}}$}
+        ++ (0.5,0) node[copymap] (copy1) {}
+        +  (0.8,-1) node[kernel] (Y) {$\kernel{K}^{\RV{Y}|\RV{XHD}}$}
+        ++ (2,0) node (Xr) {$\RV{X}^{sd}$}
+        +  (0,-1) node (Yr) {$\RV{Y}^{sd}$};
+        \draw (H) -- (X) -- (Xr);
+        \draw (copy0) to [out=-90,in=180] ($(Y.west) + (0,0)$) 
+              (copy1) to [out=-90,in=180] ($(Y.west) + (0,0.15)$)
+              (D) -- ($(Y.west) + (0,-0.15)$);
+        \draw (Y) -- (Yr);
+    \end{tikzpicture}
+\end{align}
+
+Define $\RV{X}^f$ and $\RV{Y}^f$ such that
+
+\begin{align}
+    \kernel{L}^{\RV{X}^{f}\RV{Y}^{f}|\RV{D}} = \begin{tikzpicture}
+        \path (0,0) node[dist] (H) {$\mu$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        ++ (0.7,0) node[kernel] (X) {$\kernel{K}^{\RV{X}|\RV{H}}$}
+        ++ (0.5,0) node[copymap] (copy1) {}
+        +  (0.8,-1) node[kernel] (Y) {$\kernel{K}^{\RV{Y}|\RV{XHD}}$}
+        ++ (2,0) node (Xr) {$\RV{X}^{f}$}
+        +  (0,-1) node (Yr) {$\RV{Y}^{f}$};
+        \draw (H) -- (X) -- (Xr);
+        \draw (copy0) to [out=-90,in=180] ($(Y.west) + (0,0)$) 
+              (copy1) to [out=-90,in=180] ($(Y.west) + (0,0.15)$)
+              (D) -- ($(Y.west) + (0,-0.15)$);
+        \draw (Y) -- (Yr);
+    \end{tikzpicture}
+\end{align}
+
+Clearly $\RV{O}^f=\RV{X}^f\utimes\RV{Y}^f$.
+
+Then
+
+\begin{align}
+    \kernel{L}^{\RV{X}^{f}|\RV{D}} &= \begin{tikzpicture}
+        \path (0,0) node[dist] (H) {$\mu$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        ++ (0.7,0) node[kernel] (X) {$\kernel{K}^{\RV{X}|\RV{H}}$}
+        ++ (0.5,0) node[copymap] (copy1) {}
+        +  (0.8,-1) node[kernel] (Y) {$\kernel{K}^{\RV{Y}|\RV{XHD}}$}
+        ++ (2,0) node (Xr) {$\RV{X}^{f}$}
+        +  (0,-1) node (Yr) {};
+        \draw (H) -- (X) -- (Xr);
+        \draw (copy0) to [out=-90,in=180] ($(Y.west) + (0,0)$) 
+              (copy1) to [out=-90,in=180] ($(Y.west) + (0,0.15)$)
+              (D) -- ($(Y.west) + (0,-0.15)$);
+        \draw[-{Rays[n=8]}] (Y) -- (Yr);
+    \end{tikzpicture}\\
+    &= \begin{tikzpicture}
+        \path (0,0) node[dist] (H) {$\mu$}
+        + (0,-1.) node (D) {$\RV{D}$}
+        ++ (1.2,0) node[kernel] (X) {$\kernel{K}^{\RV{X}|\RV{H}}$}
+        ++ (2.5,0) node (Xr) {$\RV{X}^{f}$}
+        +  (0,-1) node (Yr) {};
+        \draw (H) -- (X) -- (Xr);
+        \draw[-{Rays[n=8]}] (D) -- (Yr);
+    \end{tikzpicture}
+\end{align}
+
+And so $\RV{X}^f\CI_{\kernel{M}}\RV{D}$.
+\end{proof}
 
 \begin{definition}[Exchangeability]
 Given $A\subseteq \mathbb{N}$, a sequence of random variables $\RV{X}_A:=\utimes_{i\in A} \RV{X}_i$ each taking values in $X$ on a probability space $(\prob{P},(\Omega,\sigalg{F}))$ is \emph{exchangeable} if for all $n\in A$, all permutations of indices $\sigma:[n]\to[n]$ and all  $B \in\sigalg{F}$, $\prob{P}^{\RV{X}_{[n]}}(B) =\prob{P}^{\RV{X}_{\sigma([n])}}(B)$.
-
-\todo[inline]{Define infinite coupled copymaps WRT kolmogorov extension theorem}
 \end{definition}
+
+\begin{theorem}[Representation of infinite exchangeable sequences\citep{hewitt_symmetric_1955}]
+Let $(X,\sigalg{X})$ be a compact Hausdorff space with the Baire $\sigma$-algebra and $\prob{P}$ a measure on $X^\mathbb{N}$ with the product sigma algebra such that $\RV{X}_\mathbb{N}$ with each $\RV{X}_i$ given by the projection map $\pi_i$. Define $(\Delta(\sigalg{X}),\sigalg{E})$ to be the set of all probability measures on $X$ with the $\sigma$-algebra $\sigalg{E}$ being the coarsest algebra for which the maps $\mathrm{ev}_A:\Delta(\sigalg{X})\to \mathbb{R}$ given by $\mathrm{ev}_A:\rho\mapsto \rho(A)$ (for $\rho\in\Delta(\sigalg{X})$) are measurable for all $A\in \sigalg{X}$. Then there exists a unique probability measure $\mu$ in $\Delta(\sigalg{E})$ such that for all $n\in\mathbb{N}$, $C\in\sigalg{X^n}$:
+\begin{align}
+    \prob{P}(C\times X^{\mathbb{N}\setminus[n]}) = \int_{(\Delta(\sigalg{X}))} \prod_{i\in [n]} \rho(\RV{X}_i(C)) d\mu(\rho) 
+\end{align}
+
+Where $\RV{X}_i(C)$ is the image of $C$ under $\RV{X}_i$.
+\end{theorem}
+
+Examples of such spaces include bounded Borel subsets of $\mathbb{R}$ and bounded subsets of $\mathbb{N}$.
+
+
+\begin{definition}[Functional Exchangeability]
+Given a two player statistical model $\kernel{K}:D\times H\to \Delta(\sigalg{E})$, a \emph{choice variable} $\RV{D}_i$ is a variable such that $\RV{D}_i \CI_{\kernel{K}} \RV{O} | \RV{D}$ a finite sequence of random variables $\RV{Y}_1,...,\RV{Y}_n:D\times E \to Y$ and a sequence of choice variables\todo{define choice variables; independent of Y conditional on D} $\RV{D}_1,...,\RV{D}_n:D\to D_0$ on kernel space $(\kernel{C},D,\Omega)$ along with is \emph{functionally exchangeable} if for all permutations $\sigma:[n]\to[n]$, $\kernel{C}^{\RV{Y}_1,...,\RV{Y}_n|\RV{D}_1,...,\RV{D}_n}=\kernel{C}^{\RV{Y}_{\sigma(1)},...,\RV{Y}_{\sigma(n)}|\RV{D}_{\sigma(1)},...,\RV{D}_{\sigma(n)}}$.
+
+Graphically, functional exchangeability of $\RV{Y}_1, \RV{Y}_2$ and $\RV{D}_1, \RV{D}_2$ implies
+
+\begin{align}
+\begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
+        + (0,-0.3) node (D2) {$\RV{D}_2$}
+        ++ (2,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
+        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
+        +  (0,-0.3) node (Y2) {$\RV{Y}_2$};
+        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
+        \draw (D2) -- ($(C.west)+(0,-0.15)$) ($(C.east)+(0,-0.15)$) -- (Y2);
+    \end{tikzpicture} = \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_2$}
+        + (0,-0.3) node (D2) {$\RV{D}_1$}
+        ++ (2.5,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
+        ++ (2.5,0.15) node (Y1) {$\RV{Y}_2$}
+        +  (0,-0.3) node (Y2) {$\RV{Y}_1$};
+        \draw (D1) to [out=0, in=180] ($(C.west)+(0,-0.15)$) ($(C.east)+(0,-0.15)$) to [out=0, in=180] (Y1);
+        \draw (D2) to [out=0, in=180] ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) to [out=0, in=180] (Y2);
+    \end{tikzpicture}
+\end{align}
+\todo[inline]{Include a lemma about swap maps and variable permutations}
+
+
+\end{definition}
+
+\begin{lemma}[Functionally exchangeable sequences with exchangeable choices induce exchangeable sequences]\label{lem:f-ex2ex}
+Given functionally exchangeable sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D_0^n,Y_0^n)$ with product $\sigma$-algebra, along with an exchangable measure $\prob{P}^{\RV{D}_{[n]}}$, define $\prob{P}'$ as follows:
+
+\begin{align}
+    \prob{P}' = 
+    \begin{tikzpicture}
+        \path (0,0) node[dist] (P) {$\prob{P}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        ++ (0.5,0.5) node[kernel] (C) {$\kernel{C}$}
+        ++ (1,0) node (Y) {$\RV{Y}_{[n]}$}
+        + (0,-1) node (D) {$\RV{D}_{[n]}$};
+        \draw (P) -- (copy0) (copy0) to [out=45,in=180] (C) (C) -- (Y);
+        \draw (copy0) to [out=-45,in=180] (D);
+    \end{tikzpicture}
+\end{align}
+
+Then sequence $\utimes_{i\in[n]}(\RV{Y}_i\otimes\RV{D}_i)$ (given by the obvious projection maps) on the probability space $(\prob{P}',Y_0^n\times D_0^n, \sigalg{Y}_0^n\otimes\sigalg{D}_0^n)$ is exchangeable.
+\end{lemma}
+
+\begin{proof}
+For $i\in [n]$, $A_i\in \sigalg{Y}$, $B_i\in \sigalg{D}$ and arbitrary permutation $\sigma$ we have
+
+\begin{align}
+    \prob{P}^{\prime \RV{X}_{1}\RV{D}_1,...,\RV{X}_n\RV{D}_n}(\prod_{i\in[n]} A_i\times B_i) &= \int_{\prod_{i\in[n]}B_i} \prob{P}^{\prime \RV{X}_{[n]}|\RV{D}_{[n]}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\prime \RV{D}_{[n]}}(d_{[n]})\\
+                                                                                             &= \int_{\prod_{i\in[n]}B_i} \kernel{C}^{\RV{X}_{[n]}|\RV{D}_{[n]}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\RV{D}_{[n]}}(d_{[n]})\label{eq:swapoutprime}\\
+                                                                                             &= \int_{\prod_{i\in[n]}B_i} \kernel{C}^{\RV{X}_{\sigma([n])}|\RV{D}_{\sigma([n])}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\RV{D}_{\sigma([n])}}(d_{[n]})\label{eq:doubleswap}\\
+                                                                                             &= \int_{\prod_{i\in[n]}B_i} \kernel{P}^{\prime \RV{X}_{\sigma([n])}|\RV{D}_{\sigma([n])}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\prime \RV{D}_{\sigma([n])}}\label{eq:swapforpprime}\\
+                                                                                             &= \prob{P}^{\prime \RV{X}_{\sigma(1)}\RV{D}_{\sigma(1)},...,\RV{X}_{\sigma(n)}\RV{D}_{\sigma(n)}}(\prod_{i\in[n]} A_i\times B_i)
+\end{align}
+
+Where line \ref{eq:doubleswap} follows from exchangeability of $\prob{P}$ and functional exchangeability of $\kernel{C}$ and lines \ref{eq:swapoutprime} and \ref{eq:swapforpprime} follow from the fact that for any invertible function $f$ of $\RV{D}_{[n]}$ and random variable $\RV{Y}$, $\kernel{C}^{\RV{Y}|f(\RV{D}_{[n]})}$ is a version of $\prob{P}^{\prime \RV{Y}|f(\RV{D}_{[n]})}$ and $\prob{P}^{f(\RV{D}_{[n]})}=\prob{P}^{\prime \RV{Y}|f(\RV{D}_{[n]})}$.
+\end{proof}
+
+\begin{definition}[Non-interfering]
+A pair of sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D,\Omega)$ is \emph{noninterfering} if for all $U\subset [n]$, $\kernel{C}^{\RV{Y}_U|\RV{D}_U}$ exists and $\kernel{C}^{\RV{Y}_{U}|\RV{D}_{[n]}}=\kernel{C}^{\RV{Y}_U|\RV{D}_U}$. Non-interference implies that discard maps can ``fall through'' kernels:
+
+\begin{align}
+\begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
+        + (0,-0.3) node (D2) {$\RV{D}_2$}
+        ++ (2,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
+        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
+        +  (0,-0.3) node (Y2) {};
+        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
+        \draw (D2) -- ($(C.west)+(0,-0.15)$);
+        \draw[-{Rays[n=8]}] ($(C.east)+(0,-0.15)$) -- (Y2);
+    \end{tikzpicture} &= \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
+        + (0,-0.3) node (D2) {$\RV{D}_2$}
+        ++ (2,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1|\RV{D}_1}$}
+        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
+        +  (-3,-1) node (Y2) {$\RV{Y}_2$};
+        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
+        \draw (D2) -- ($(C.west)+(0,-0.15)$);
+        \draw[-{Rays[n=8]}] ($(C.east)+(0,-0.15)$) -- (Y2);
+    \end{tikzpicture}
+\end{align}
+
+\end{definition}
+
+\todo[inline]{I think it is the case that functionally exchangeable + non-interfering implies infinitely functionally exchangeably extendable, but not proved yet}
+
+\begin{theorem}[Representation of functionally exchangeable sequences]
+Let $(Y,\sigalg{Y})$ be a compact Hausdorff space with the Baire $\sigma$-algebra and $(D,\sigalg{D})$ a finite discrete space. Let $\kernel{C}$ be a Markov kernel $D^\mathbb{N}\to \Delta(\sigalg{Y}^\mathbb{N})$ and $\RV{Y}_\mathbb{N}$, $\RV{D}_\mathbb{N}$ a pair of functionally exchangeable sequences. Define $(F,\sigalg{F})$ to be the set of all Markov kernels $D\to \Delta(\sigalg{Y})$ with $\sigalg{F}$ the coarsest $\sigma$-algebra for which all evaluation maps $\mathrm{ev}_{d,A}:F\to \mathbb{R}$ given by $\mathrm{ev}_{d,A}:\kernel{H}\mapsto \kernel{H}_d(A)$ are measurable. Then there exists a unique probability measure $\nu$ on $\Delta(\sigalg{F})$ such that for all $n\in\mathbb{N}$, $d\in D^n$, $C\in \sigalg{Y}^n$:
+
+\begin{align}
+    \kernel{C}_d(C) = \int_{F} \prod_{i\in [n]} \kernel{H}_{\RV{D}_i(d)}(\RV{Y}_i(C)) d\nu(\kernel{H})
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Let $\delta\in\Delta(\sigalg{D})$ be such that for all $n\in \mathbb{N}$, $\emptyset\neq B\in \sigalg{D}^n$ we have $\delta\splitter{0.1}_n(B)>0$. Such a measure exists by assumption on $D$. Define $delta_{\underline{n}}:=\delta\splitter{0.1}_n$. It is trivial to show that $\delta_{\underline{n}}$ is exchangeable. Define 
+\begin{align}
+\kernel{C}^n_{\delta} := \begin{tikzpicture}
+        \path (0,0) node[dist] (P) {$\prob{P}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        ++ (0.5,0.5) node[kernel] (C) {$\kernel{C}$}
+        ++ (1,0) node (Y) {$\RV{Y}_{[n]}$}
+        + (0,-1) node (D) {$\RV{D}_{[n]}$};
+        \draw (P) -- (copy0) (copy0) to [out=45,in=180] (C) (C) -- (Y);
+        \draw (copy0) to [out=-45,in=180] (D);
+\end{tikzpicture}
+\end{align}
+ $:= \delta_{\underline{n}} \kernel{C}\utimes \mathrm{Id}_{D^n}$
+
+
+
+.  By Lemma \ref{lem:f-ex2ex}, there is an exchangeable sequence $\utimes_{i\in[n]} \RV{Y}'_i\utimes \RV{D}'_i$ on the probability space $(\delta_{\underline{n}} \kernel{C}\utimes\mathrm{Id}_D,Y^n\times D^n, \sigalg{Y}^n\otimes\sigalg{D}^n)$.
+ 
+
+
+\end{proof}
+
+\begin{corollary}
+Equivalently, for all $n\in \mathbb{N}$, let $\kernel{G}:F\to $
+
+\begin{align}
+\begin{tikzpicture}
+    \path (0,0) node (D) {$\RV{D}_{[n]}$}
+    ++ (2,0.) node[kernel] (C) {$\kernel{C}$}
+    ++ (2,0.) node (Y) {$\RV{Y}_{[n]}$};
+    \draw (D) -- (C) -- (Y);
+\end{tikzpicture} &= \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
+        + (0,-0.5) node (dot) {...}
+        + (0,-1) node (D2) {$\RV{D}_n$}
+        ++ (2,0) node[kernel] (C) {$\kernel{H}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
+        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
+        +  (0,-0.5) node (dot2) {...}
+        +  (0,-1) node (Y2) {$\RV{Y}_n$};
+        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
+        \draw (D2) -- ($(C.west)+(0,-0.15)$) ($(C.east)+(0,-0.15)$) -- (Y2);
+    \end{tikzpicture}
+\end{align}
+
+\end{corollary}
 
 \subsection{Causal questions and decision functions}
 
@@ -281,8 +566,6 @@ The product of a see-do model $\kernel{T}$ and a prior $\gamma\in \Delta(\sigalg
 \end{align}
 Is a Bayesian see-do model.
 \end{theorem}
-
-\todo[inline]{Maybe moves proofs out of main text}
 
 \begin{proof}
 
@@ -454,186 +737,3 @@ One obvious question is: does $\mathbf{g}$ have to be deterministic? While SCMs 
 This idea of doing $x$ and, in the same situation, doing $x$ doesn't render very well in English. Furthermore, even though deterministic reproducibility seems to be an important property of counterfactual SCMs, they don't help very much to elucidate the idea. ``If I take action $x$ in situation $U$ I get $V_x(u)$ and if I take action $x$ in situation $U$ I get $V_x(u)$'' is just a redundant repetition. It seems that we want some way to express the idea of having two copies of $V_x(u)$ or, more generally, having multiple copies of a potential response function in such a way that we can make comparisons between their results.
 
 The idea that we need \emph{can} be clearly expressed with a see-do model. 
-
-
-\section{Decomposability and double exchangeability}
-
-A see-do model $\kernel{T}:\Theta\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ is decomposable if an observational statistical model $\kernel{O}:\Theta\to \Delta(\sigalg{X})$ and a consequence map $\kernel{C}:\Theta\times D\to \Delta(\sigalg{Y})$ such that 
-
-A great deal of ``non-causal statistics'' deals with models of \emph{exchangeable random variables}. Random variables $\RV{X}_1$ and $\RV{X}_2$ both taking values in $X$ are exchangeable if $\prob{P}^{\RV{X}_1\RV{X}_2} = \prob{P}^{\RV{X}_2\RV{X}_1}$; more generally, a set of $n$ random variables is exchangeable if the joint distribution is unchanged by applying any permutation to the order of the variables. Exchangeability implies indifference to the ordering of \emph{observations}. For example:
-\begin{itemize}
-    \item Suppose the random variables $\RV{X}_1, \RV{X}_2, \RV{X}_3$ represent beliefs about the outcomes of flipping a coin twice. If we are not completely sure the coin is fair, then we might suppose that seeing heads for the first two flips will leave us slightly more confident in a heads than a tails outcome on the next flip, so $\prob{P}^{\RV{X}_3|\RV{X}_2\RV{X}_1}_{\text{HH}}$ is not quite the same as $\prob{P}^{\RV{X}_3}$. However, if $\RV{X}_1,\RV{X}_2$ and $\RV{X}_3$ are exchangeable then it must be the case that $\prob{P}^{\RV{X}_3|\RV{X}_2\RV{X}_1}_{HT}=\prob{P}^{\RV{X}_3|\RV{X}_1\RV{X}_2}_{HT}$; our views about the likelihood of a particular $\RV{X}_3$ after seeing a particular number of heads and a particular number of tails do not depend on the order of the heads and tails.
-    \item Suppose $\RV{W}_1$ and $\RV{W}_2$ represent consecutive draws without replacement from an urn containing a finite number of red and white balls in the frequentist sense that given a large ensemble of draws from the urn, the sample fractions will converge to the respective probabilities of $\RV{W}_1$ and $\RV{W}_2$. While the changing number of balls in the urn makes $\RV{W}_2$ depend on $\RV{W}_1$, it can be verified that supposing an equal chance of drawing any particular ball, $\RV{W}_1$ and $\RV{W}_2$ are exchangeable, i.e. $\prob{P}^{\RV{W}_1\RV{W}_2}=\prob{P}^{\RV{W}_2\RV{W}_1}$. This means that the probability of drawing a certain number of reds and whites does not depend on the order in which the balls are drawn.
-\end{itemize}
-
-\emph{Functional exchangeability} is a causal version of exchangeability that applies to consequence maps. Where exchangeability implies indifference to the ordering of observations, functional exchangeability implies indifference to the ordering of \emph{decision-consequence pairs}. For example:
-
-\begin{itemize}
-    \item Suppose you are planning to conduct a sequence of experiments in which you will set a piece of equipment to a particular setting, represented by $\RV{D}_1,\RV{D}_2,\RV{D}_3$, and record the results. The random variables $\RV{Y}_1,\RV{Y}_2,\RV{Y}_3$ represent our beliefs about the results of the first, second and third repeats of the experiment prior to undertaking it. This experiment is functionally exchangeable if it is described by a consequence map $\kernel{C}:D_0^3\to \Delta(\sigalg{Y}^3)$ such that $\kernel{C}^{\RV{Y}_1\RV{Y}_2\RV{Y}_3|\RV{D}_1\RV{D}_2\RV{D}_3}=\kernel{C}^{\RV{Y}_2\RV{Y}_3\RV{Y}_1|\RV{D}_2\RV{D}_3\RV{D}_1}$ and likewise for other joint permutations of the decisions and consequences. As in the coin flipping example, this means that we ``learn the same thing'' from choosing settings $a$ and observing $p$ followed by choosing $b$ and observing $q$ as we would from choosing $b$ and observing $q$ followed by choosing $a$ and observing $p$
-    \item Suppose $\RV{W}_1$ and $\RV{W}_2$ represent (in the frequentist sense) an ensemble of draws from one of two finite urns of red and white balls, with the urn choices given by $\RV{D}_1$, $\RV{D}_2$. Then $\RV{W}_1, \RV{W}_2$ and $\RV{D}_1, \RV{D}_2$ are conditionally exchangeable in the sense that $\prob{P}^{\RV{W}_1\RV{W}_2|\RV{D}_1\RV{D}_2}=\prob{P}^{\RV{W}_2\RV{W}_1|\RV{D}_2\RV{D}_1}$
-\end{itemize}
-
-\todo[inline]{Define permutation, set permutation}
-
-
-
-De Finetti's representation theorem shows that any infinite exchangeable sequence of random variables can be represented as a mixture of independent and identically distributed sequences. This theorem connects exchangeable \emph{subjective Bayesian random variables} $\RV{X}^{(B)}_n$, which represent expectations of future $X^n$-valued observations, and independent and identically distributed \emph{frequentist random variables} $\RV{X}^{(F)}$, which represent almost sure $n\to\infty$ limits of proportions in $X^n$-valued observations. Conseuqences of the theorem are:
-
-\begin{itemize}
-    \item Any exchangeable sequence of random variables $\RV{X}_A$ that can be extended to an infinite sequence can be represented as a mixture $\mu\in\Delta(\theta)$ of coupled statistical models $\utimes_{i\in A} \kernel{O}$ where $\kernel{O}:\Theta\to \Delta(\sigalg{X})$
-    \item Any statistical model $\kernel{O}:\Theta\to \Delta(\sigalg{X})$ along with a prior $\mu$ induces a family of exchangeable sequences of random variables $\RV{X}_A$, $A\subset\mathbb{N}$
-\end{itemize}
-
-If our task is to predict future $X$-valued observations and our predictions are the same regardless of the order in which the observations arrive, then the probability distribution representing predictions can be represented by a statistical model and a prior. A similar theorem exists connects ``functionally exchangeable'' consequence models and coupled 2-player statistical models. Coupled 2-player statistical models themselves are closely related to models typically used in causal inference.
-
-\begin{theorem}[Representation of infinite exchangeable sequences\citep{hewitt_symmetric_1955}]
-Let $(X,\sigalg{X})$ be a compact Hausdorff space with the Baire $\sigma$-algebra and $\prob{P}$ a measure on $X^\mathbb{N}$ with the product sigma algebra such that $\RV{X}_\mathbb{N}$ with each $\RV{X}_i$ given by the projection map $\pi_i$. Define $(\Delta(\sigalg{X}),\sigalg{E})$ to be the set of all probability measures on $X$ with the $\sigma$-algebra $\sigalg{E}$ being the coarsest algebra for which the maps $\mathrm{ev}_A:\Delta(\sigalg{X})\to \mathbb{R}$ given by $\mathrm{ev}_A:\rho\mapsto \rho(A)$ (for $\rho\in\Delta(\sigalg{X})$) are measurable for all $A\in \sigalg{X}$. Then there exists a unique probability measure $\mu$ in $\Delta(\sigalg{E})$ such that for all $n\in\mathbb{N}$, $C\in\sigalg{X^n}$:
-\begin{align}
-    \prob{P}(C\times X^{\mathbb{N}\setminus[n]}) = \int_{(\Delta(\sigalg{X}))} \prod_{i\in [n]} \rho(\RV{X}_i(C)) d\mu(\rho) 
-\end{align}
-
-Where $\RV{X}_i(C)$ is the image of $C$ under $\RV{X}_i$.
-\end{theorem}
-
-Examples of such spaces include bounded Borel subsets of $\mathbb{R}$ and bounded subsets of $\mathbb{N}$.
-
-\begin{definition}[Functional Exchangeability]
-A finite sequence of random variables $\RV{Y}_1,...,\RV{Y}_n:\Omega\to Y$ and a sequence of choice variables\todo{define choice variables; independent of Y conditional on D} $\RV{D}_1,...,\RV{D}_n:D\to D_0$ on kernel space $(\kernel{C},D,\Omega)$ along with is \emph{functionally exchangeable} if for all permutations $\sigma:[n]\to[n]$, $\kernel{C}^{\RV{Y}_1,...,\RV{Y}_n|\RV{D}_1,...,\RV{D}_n}=\kernel{C}^{\RV{Y}_{\sigma(1)},...,\RV{Y}_{\sigma(n)}|\RV{D}_{\sigma(1)},...,\RV{D}_{\sigma(n)}}$.
-
-Graphically, functional exchangeability of $\RV{Y}_1, \RV{Y}_2$ and $\RV{D}_1, \RV{D}_2$ implies
-
-\begin{align}
-\begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
-        + (0,-0.3) node (D2) {$\RV{D}_2$}
-        ++ (2,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
-        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
-        +  (0,-0.3) node (Y2) {$\RV{Y}_2$};
-        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
-        \draw (D2) -- ($(C.west)+(0,-0.15)$) ($(C.east)+(0,-0.15)$) -- (Y2);
-    \end{tikzpicture} = \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_2$}
-        + (0,-0.3) node (D2) {$\RV{D}_1$}
-        ++ (2.5,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
-        ++ (2.5,0.15) node (Y1) {$\RV{Y}_2$}
-        +  (0,-0.3) node (Y2) {$\RV{Y}_1$};
-        \draw (D1) to [out=0, in=180] ($(C.west)+(0,-0.15)$) ($(C.east)+(0,-0.15)$) to [out=0, in=180] (Y1);
-        \draw (D2) to [out=0, in=180] ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) to [out=0, in=180] (Y2);
-    \end{tikzpicture}
-\end{align}
-\todo[inline]{Include a lemma about swap maps and variable permutations}
-
-
-\end{definition}
-
-\begin{lemma}[Functionally exchangeable sequences with exchangeable choices induce exchangeable sequences]\label{lem:f-ex2ex}
-Given functionally exchangeable sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D_0^n,Y_0^n)$ with product $\sigma$-algebra, along with an exchangable measure $\prob{P}^{\RV{D}_{[n]}}$, define $\prob{P}'$ as follows:
-
-\begin{align}
-    \prob{P}' = 
-    \begin{tikzpicture}
-        \path (0,0) node[dist] (P) {$\prob{P}$}
-        ++ (0.5,0) node[copymap] (copy0) {}
-        ++ (0.5,0.5) node[kernel] (C) {$\kernel{C}$}
-        ++ (1,0) node (Y) {$\RV{Y}_{[n]}$}
-        + (0,-1) node (D) {$\RV{D}_{[n]}$};
-        \draw (P) -- (copy0) (copy0) to [out=45,in=180] (C) (C) -- (Y);
-        \draw (copy0) to [out=-45,in=180] (D);
-    \end{tikzpicture}
-\end{align}
-
-Then sequence $\utimes_{i\in[n]}(\RV{Y}_i\otimes\RV{D}_i)$ (given by the obvious projection maps) on the probability space $(\prob{P}',Y_0^n\times D_0^n, \sigalg{Y}_0^n\otimes\sigalg{D}_0^n)$ is exchangeable.
-\end{lemma}
-
-\begin{proof}
-For $i\in [n]$, $A_i\in \sigalg{Y}$, $B_i\in \sigalg{D}$ and arbitrary permutation $\sigma$ we have
-
-\begin{align}
-    \prob{P}^{\prime \RV{X}_{1}\RV{D}_1,...,\RV{X}_n\RV{D}_n}(\prod_{i\in[n]} A_i\times B_i) &= \int_{\prod_{i\in[n]}B_i} \prob{P}^{\prime \RV{X}_{[n]}|\RV{D}_{[n]}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\prime \RV{D}_{[n]}}(d_{[n]})\\
-                                                                                             &= \int_{\prod_{i\in[n]}B_i} \kernel{C}^{\RV{X}_{[n]}|\RV{D}_{[n]}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\RV{D}_{[n]}}(d_{[n]})\label{eq:swapoutprime}\\
-                                                                                             &= \int_{\prod_{i\in[n]}B_i} \kernel{C}^{\RV{X}_{\sigma([n])}|\RV{D}_{\sigma([n])}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\RV{D}_{\sigma([n])}}(d_{[n]})\label{eq:doubleswap}\\
-                                                                                             &= \int_{\prod_{i\in[n]}B_i} \kernel{P}^{\prime \RV{X}_{\sigma([n])}|\RV{D}_{\sigma([n])}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\prime \RV{D}_{\sigma([n])}}\label{eq:swapforpprime}\\
-                                                                                             &= \prob{P}^{\prime \RV{X}_{\sigma(1)}\RV{D}_{\sigma(1)},...,\RV{X}_{\sigma(n)}\RV{D}_{\sigma(n)}}(\prod_{i\in[n]} A_i\times B_i)
-\end{align}
-
-Where line \ref{eq:doubleswap} follows from exchangeability of $\prob{P}$ and functional exchangeability of $\kernel{C}$ and lines \ref{eq:swapoutprime} and \ref{eq:swapforpprime} follow from the fact that for any invertible function $f$ of $\RV{D}_{[n]}$ and random variable $\RV{Y}$, $\kernel{C}^{\RV{Y}|f(\RV{D}_{[n]})}$ is a version of $\prob{P}^{\prime \RV{Y}|f(\RV{D}_{[n]})}$ and $\prob{P}^{f(\RV{D}_{[n]})}=\prob{P}^{\prime \RV{Y}|f(\RV{D}_{[n]})}$.
-\end{proof}
-
-\begin{definition}[Non-interfering]
-A pair of sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D,\Omega)$ is \emph{noninterfering} if for all $U\subset [n]$, $\kernel{C}^{\RV{Y}_U|\RV{D}_U}$ exists and $\kernel{C}^{\RV{Y}_{U}|\RV{D}_{[n]}}=\kernel{C}^{\RV{Y}_U|\RV{D}_U}$. Non-interference implies that discard maps can ``fall through'' kernels:
-
-\begin{align}
-\begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
-        + (0,-0.3) node (D2) {$\RV{D}_2$}
-        ++ (2,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
-        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
-        +  (0,-0.3) node (Y2) {};
-        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
-        \draw (D2) -- ($(C.west)+(0,-0.15)$);
-        \draw[-{Rays[n=8]}] ($(C.east)+(0,-0.15)$) -- (Y2);
-    \end{tikzpicture} &= \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
-        + (0,-0.3) node (D2) {$\RV{D}_2$}
-        ++ (2,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1|\RV{D}_1}$}
-        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
-        +  (-3,-1) node (Y2) {$\RV{Y}_2$};
-        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
-        \draw (D2) -- ($(C.west)+(0,-0.15)$);
-        \draw[-{Rays[n=8]}] ($(C.east)+(0,-0.15)$) -- (Y2);
-    \end{tikzpicture}
-\end{align}
-
-\end{definition}
-
-\todo[inline]{I think it is the case that functionally exchangeable + non-interfering implies infinitely functionally exchangeably extendable, but not proved yet}
-
-\begin{theorem}[Representation of functionally exchangeable sequences]
-Let $(Y,\sigalg{Y})$ be a compact Hausdorff space with the Baire $\sigma$-algebra and $(D,\sigalg{D})$ a finite discrete space. Let $\kernel{C}$ be a Markov kernel $D^\mathbb{N}\to \Delta(\sigalg{Y}^\mathbb{N})$ and $\RV{Y}_\mathbb{N}$, $\RV{D}_\mathbb{N}$ a pair of functionally exchangeable sequences. Define $(F,\sigalg{F})$ to be the set of all Markov kernels $D\to \Delta(\sigalg{Y})$ with $\sigalg{F}$ the coarsest $\sigma$-algebra for which all evaluation maps $\mathrm{ev}_{d,A}:F\to \mathbb{R}$ given by $\mathrm{ev}_{d,A}:\kernel{H}\mapsto \kernel{H}_d(A)$ are measurable. Then there exists a unique probability measure $\nu$ on $\Delta(\sigalg{F})$ such that for all $n\in\mathbb{N}$, $d\in D^n$, $C\in \sigalg{Y}^n$:
-
-\begin{align}
-    \kernel{C}_d(C) = \int_{F} \prod_{i\in [n]} \kernel{H}_{\RV{D}_i(d)}(\RV{Y}_i(C)) d\nu(\kernel{H})
-\end{align}
-\end{theorem}
-
-\begin{proof}
-Let $\delta\in\Delta(\sigalg{D})$ be such that for all $n\in \mathbb{N}$, $\emptyset\neq B\in \sigalg{D}^n$ we have $\delta\splitter{0.1}_n(B)>0$. Such a measure exists by assumption on $D$. Define $delta_{\underline{n}}:=\delta\splitter{0.1}_n$. It is trivial to show that $\delta_{\underline{n}}$ is exchangeable. Define 
-\begin{align}
-\kernel{C}^n_{\delta} := \begin{tikzpicture}
-        \path (0,0) node[dist] (P) {$\prob{P}$}
-        ++ (0.5,0) node[copymap] (copy0) {}
-        ++ (0.5,0.5) node[kernel] (C) {$\kernel{C}$}
-        ++ (1,0) node (Y) {$\RV{Y}_{[n]}$}
-        + (0,-1) node (D) {$\RV{D}_{[n]}$};
-        \draw (P) -- (copy0) (copy0) to [out=45,in=180] (C) (C) -- (Y);
-        \draw (copy0) to [out=-45,in=180] (D);
-\end{tikzpicture}
-\end{align}
- $:= \delta_{\underline{n}} \kernel{C}\utimes \mathrm{Id}_{D^n}$
-
-
-
-.  By Lemma \ref{lem:f-ex2ex}, there is an exchangeable sequence $\utimes_{i\in[n]} \RV{Y}'_i\utimes \RV{D}'_i$ on the probability space $(\delta_{\underline{n}} \kernel{C}\utimes\mathrm{Id}_D,Y^n\times D^n, \sigalg{Y}^n\otimes\sigalg{D}^n)$.
- 
-
-
-\end{proof}
-
-\begin{corollary}
-Equivalently, for all $n\in \mathbb{N}$, let $\kernel{G}:F\to $
-
-\begin{align}
-\begin{tikzpicture}
-    \path (0,0) node (D) {$\RV{D}_{[n]}$}
-    ++ (2,0.) node[kernel] (C) {$\kernel{C}$}
-    ++ (2,0.) node (Y) {$\RV{Y}_{[n]}$};
-    \draw (D) -- (C) -- (Y);
-\end{tikzpicture} &= \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
-        + (0,-0.5) node (dot) {...}
-        + (0,-1) node (D2) {$\RV{D}_n$}
-        ++ (2,0) node[kernel] (C) {$\kernel{H}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
-        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
-        +  (0,-0.5) node (dot2) {...}
-        +  (0,-1) node (Y2) {$\RV{Y}_n$};
-        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
-        \draw (D2) -- ($(C.west)+(0,-0.15)$) ($(C.east)+(0,-0.15)$) -- (Y2);
-    \end{tikzpicture}
-\end{align}
-
-\end{corollary}
