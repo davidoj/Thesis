@@ -3,57 +3,57 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-Repeated entry---line 845 of file references.bib
+Repeated entry---line 843 of file references.bib
  : @phdthesis{shpitser_complete_2008
  :                                  ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1146 of file references.bib
+Repeated entry---line 1144 of file references.bib
  : @article{clerc_pointless_2017
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1340 of file references.bib
+Repeated entry---line 1338 of file references.bib
  : @article{fong_causal_2013
  :                          ,
 I'm skipping whatever remains of this entry
 You've used 33 entries,
             2773 wiz_defined-function locations,
-            843 strings with 12019 characters,
-and the built_in function-call counts, 13796 in all, are:
-= -- 1318
-> -- 614
+            837 strings with 11907 characters,
+and the built_in function-call counts, 13679 in all, are:
+= -- 1299
+> -- 607
 < -- 32
-+ -- 216
-- -- 183
-* -- 1015
-:= -- 2208
-add.period$ -- 162
++ -- 214
+- -- 181
+* -- 997
+:= -- 2193
+add.period$ -- 160
 call.type$ -- 33
 change.case$ -- 155
 chr.to.int$ -- 33
 cite$ -- 66
-duplicate$ -- 673
-empty$ -- 1190
-format.name$ -- 236
-if$ -- 2905
+duplicate$ -- 677
+empty$ -- 1191
+format.name$ -- 232
+if$ -- 2883
 int.to.chr$ -- 1
 int.to.str$ -- 1
 missing$ -- 38
-newline$ -- 231
-num.names$ -- 140
-pop$ -- 284
+newline$ -- 228
+num.names$ -- 142
+pop$ -- 291
 preamble$ -- 1
-purify$ -- 125
+purify$ -- 124
 quote$ -- 0
-skip$ -- 475
+skip$ -- 470
 stack$ -- 0
-substring$ -- 390
+substring$ -- 365
 swap$ -- 65
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 323
 warning$ -- 0
-while$ -- 130
+while$ -- 129
 width$ -- 0
-write$ -- 551
+write$ -- 546
 (There were 3 error messages)

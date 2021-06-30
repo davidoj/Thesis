@@ -6,6 +6,8 @@
 \end{theorem}
 
 
+\todo[inline]{Todo: conditional expectation, martingale convergence}
+
 \subsection{Probability Theory}
 
 Given a set $A$, a $\sigma$-algebra $\mathcal{A}$ is a collection of subsets of $A$ where
@@ -112,7 +114,7 @@ Key features of string diagrams include:
 	\end{itemize}
 \end{itemize}
 
-\subsubsection{Elements of string diagrams}
+\subsubsection{Elements of string diagrams}\label{sec:string_diagram_elements}
 
 The basic elements of a string diagram are Markov kernels. Diagrams representing Markov kernels can be assembled into larger diagrams by taking regular products or tensor products.
 
@@ -132,7 +134,7 @@ A Markov kernel $\kernel{M}:X\to \Delta(\mathcal{Y})$ can always be represented 
 
 Note that we will later substitute labelling wires with spaces for labelling them with random variable names.
 
-Probability measures are kernels with an indiscrete domain $\mu \in \Delta(\mathcal{X})$ can be written as triangles:
+Probability measures $\mu \in \Delta(\mathcal{X})$ can be written as triangles:
 \begin{align}
 \begin{tikzpicture}
 \path (0,0) node[dist] (B) {$\mu$}
@@ -141,9 +143,9 @@ Probability measures are kernels with an indiscrete domain $\mu \in \Delta(\math
 \end{tikzpicture}\label{eq:prob_meas_sd}
 \end{align}
 
-Note that Eq \ref{eq:prob_meas_sd} technically represents a Markov kernel $\mu':\{*\}\to\Delta(\mathcal{X})$, but for our purposes this distinction isn't practically important.
+We can exploit the identification of the probability measure $\mu$ with the Markov kernel $\mu':\{*\}\to\Delta(\mathcal{X})$ given by $*\mapsto \mu$ to preserve the principle that any element of a string diagram is a Markov kernel. Under this identification, all elements of string diagrams are Markov kernels. Because, furthermore, and the set of Markov kernels is closed under the product and tensor product operations introduced below, a consequence is that all well-formed string diagrams are Markov kernels.
 
-We do \emph{not} define kernel-function products for string diagrams. While kernel-kernel products always yield Markov kernels as a result, and measure-kernel products can be reinterpreted as kernel-kernel products, kernel-function products do not admit such a reinterpretation. \citet{cho_disintegration_2019} defines the operation of \emph{conditioning} using kernel-function products, but this will take extra work to incorporate into our notation which hasn't yet been done.
+\citet{cho_disintegration_2019} defines the operation of \emph{conditioning} using kernel-function products which makes use of kernel-function products which and, unlike measure-kernel products, kernel-function products do not in general produce Markov kernels. At this stage, we do not make use of a graphical conditioning operation, but we note that this could be an useful direction to extend the graphical theory presented here.
 
 \paragraph{Elementary operations}
 
@@ -269,10 +271,10 @@ The copy map ``copies'' its arguments to kernels or under the right product:
 															&= \kernel{K}_{x,x}(A)
 \end{align}
 
-The swap map $\sigma:X\times Y\to \Delta(\mathcal{Y}\otimes\mathcal{X})$ swaps its inputs:
+The swap map $\rho:X\times Y\to \Delta(\mathcal{Y}\otimes\mathcal{X})$ swaps its inputs:
 
 \begin{align}
-\sigma := (x,y)\to \delta_{(y,x)} \equiv \begin{tikzpicture}
+\rho := (x,y)\to \delta_{(y,x)} \equiv \begin{tikzpicture}
 \path (0,0) node (X) {$X$}
 +(1,0.3) node (X1) {$X$}
 (0,0.3) node (Y) {$Y$}
@@ -284,9 +286,9 @@ The swap map $\sigma:X\times Y\to \Delta(\mathcal{Y}\otimes\mathcal{X})$ swaps i
 Under products are taken with the swap map, arguments are interchanged. For $\kernel{K}:X\times Y\to \Delta(\sigalg{Z})$ and $\kernel{L}:Z\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, $A\in \sigalg{X}$, $B\in\sigalg{Y}$:
 
 \begin{align}
-	(\sigma\kernel{K})_{y,x}(A) &= \int_(X\times Y) \kernel{K}_{x',y'}(A) d\sigma_{(y,x)}(x',y') &= \int_(X\times Y) \kernel{K}_{x',y'}(A) d\delta_{(x,y)}(x',y')\\
+	(\rho\kernel{K})_{y,x}(A) &= \int_(X\times Y) \kernel{K}_{x',y'}(A) d\rho_{(y,x)}(x',y') &= \int_(X\times Y) \kernel{K}_{x',y'}(A) d\delta_{(x,y)}(x',y')\\
 													   &= \kernel{K}_{x,y}(A)\\
-	(\kernel{L}\sigma)_{z}(B\times A) &= \int_{X\times Y} \sigma_{x',y'}(B\times A) d\kernel{L}_z(x',y')\\
+	(\kernel{L}\rho)_{z}(B\times A) &= \int_{X\times Y} \rho_{x',y'}(B\times A) d\kernel{L}_z(x',y')\\
 	&= \int_{X\times Y} \delta_{(y',x')} (B\times A) d\kernel{L}_z(x',y')\\
 	&= \kernel{L}_z(A\times B)
 \end{align}
@@ -324,11 +326,6 @@ for any $a\in V$, $B\in \sigalg{X}$:
 
 \subsubsection{Working With String Diagrams}\label{sssec:string_diagram_manipulation}
 
-todo:
-\begin{itemize}
-\item Infinite copy map
-\item De Finetti's representation theorem
-\end{itemize}
 
 There are a relatively small number of manipulation rules that are useful for string diagrams. In addition, we will define graphically analogues of the standard notions of \emph{conditional probability}, \emph{conditioning}, and infinite sequences of exchangeable random variables.
 
@@ -507,6 +504,22 @@ The following additional properties hold for $\stopper{0.2}$ and $\splitter{0.1}
 \draw (copy1) to [bend right] (F2);
 \end{tikzpicture}
 \end{align}
+
+Note that for some set $X$, the copy map $\splitter{0.2}_X=\mathrm{Id}_X\utimes \mathrm{Id}_X$. This combined with \ref{eq:ccom3} allows us to define the $A$-copy map for some $A\subseteq\mathbb{N}$:
+
+\begin{align}
+	\begin{tikzpicture}[scale=0.8]
+	\path (0,0) node (X) {$X$} 
+	++ (1,0) node[copymap,label={$A$}] (copy0) {}
+	+ (1,0.15) node (X1) {}
+	+(1,-0.15) node (X3) {}
+	+ (1.6,0) node (X4) {$X^{|A|}$};
+	\draw (X) -- (copy0) to [out=25,in=180] (X1) (copy0) to [out=-25,in=180] (X3);
+	\draw ($(copy0.west) + (-0.2,0.6)$) rectangle ($(X3.west) + (0,-0.1)$);
+	\draw ($(X3.west) + (0,0.15)$) to (X4);
+	\end{tikzpicture}:= \utimes_{i\in A} \mathrm{Id}_X \label{eq:A_copymap}
+\end{align}
+
 
 A key fact that \emph{does not} hold in general is
 
@@ -704,7 +717,7 @@ f\utimes g&:= \begin{tikzpicture}[scale=1.2]\path (0,0) node (E) {$E$}
 \end{align}
 The operation denoted by $\utimes$ is associative (Lemma \ref{lem:utimes_assoc}), so we can without ambiguity write $f\utimes g\utimes h=(f\utimes g)\utimes h = f\utimes(g\utimes h)$ for finite groups of functions or Markov kernels sharing a domain. 
 
-The notation $\utimes_{i\in [N]} f_i$ is taken to mean $f_1\utimes f_2\utimes ...\utimes f_N$.
+The notation $\utimes_{i\in [N]} f_i$ means $f_1\utimes f_2\utimes ...\utimes f_N$. This is unambiguous due to Lemma \ref{lem:utimes_assoc}
 \end{definition}
 
 \begin{lemma}[$\utimes$ is associative]\label{lem:utimes_assoc}

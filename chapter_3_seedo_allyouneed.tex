@@ -41,11 +41,13 @@ Two player statistical models were introduced as doubly indexed sets of probabil
 The first condition amounts to the additional requirement that $(h,d)\mapsto \kernel{T}_{h,d}(A)$ is measurable for every $A\in \sigalg{H}\otimes\sigalg{D}\otimes\sigalg{E}$, and sufficient for the second condition is that $D\times H$ is countable and $X\times Y$ standard measurable (though this is not necessary, see Theorem \ref{th:existence_continous}).
 
 \begin{definition}[Two player statistical model]\label{def:2p_stat}
-A \emph{two-player statistical model} is a Markov kernel $\kernel{T}:H\times D\to \Delta(\sigalg{E})$ such that, for any random variables $\RV{X}: H\times D\times E\to X$ and $\RV{Y}:H\times D\times E\to Y$, a disintegration $\kernel{K}^{\RV{Y}|\RV{XDH}}:X\times D\times H\to \Delta(\sigalg{Y})$ exists. Every two player statistical model has three distinguished random variables: the \emph{hypothesis} $\RV{H}:H\times D\times E\to H$ given by $(h,d,e)\mapsto h$ and the \emph{choice} $\RV{D}:H\times D\times E\to D$ given by $(h,d,e)\mapsto d$ and the \emph{outcome} $\RV{O}:H\times D\times E\to E$ given by $(h,d,e)\mapsto e$..
+A \emph{two-player statistical model} $(\kernel{T},\RV{H},\RV{D},\RV{O})$ is a Markov kernel $\kernel{T}:H\times D\to \Delta(\sigalg{E})$ such that, for any random variables $\RV{X}: H\times D\times E\to X$ and $\RV{Y}:H\times D\times E\to Y$, a disintegration $\kernel{K}^{\RV{Y}|\RV{XDH}}:X\times D\times H\to \Delta(\sigalg{Y})$ exists along with three distinguished random variables: the \emph{hypothesis} $\RV{H}:H\times D\times E\to H$ given by $(h,d,e)\mapsto h$ (forgetting the choice and outcome) and the \emph{choice} $\RV{D}:H\times D\times E\to D$ given by $(h,d,e)\mapsto d$ (forgetting the hypothesis and outcome) and the \emph{outcome} $\RV{O}:H\times D\times E\to E$ given by $(h,d,e)\mapsto e$ (forgetting the choice and hypothesis).
 \end{definition}
 
 \begin{definition}[See-Do model]\label{def:seedo}
-A \emph{see-do model} is a two-player statistical model $\kernel{T}:H\times D\to \Delta(\sigalg{E})$ with two additional distinguished random variables: the \emph{observation} $\RV{X}: H\times D\times E\to X$ and the \emph{consequence} $\RV{Y}:H\times D\times E\to Y$ such that the outcome is the coupled product of the observation and the consequence $\RV{O}=\RV{X}\utimes\RV{Y}$\todo{More generally, an invertible function of this}. A see-do model must observe the conditional independence $\RV{X}\CI_\kernel{T} \RV{D}|\RV{H}$, i.e. the observation is independent of the choice conditional on the hypothesis.
+A \emph{see-do model} $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is a two-player statistical model $(\kernel{T},\RV{H},\RV{D},\RV{O})$ with two additional distinguished random variables: the \emph{observation} $\RV{X}: H\times D\times E\to X$ and the \emph{consequence} $\RV{Y}:H\times D\times E\to Y$ such that the outcome is the coupled product of the observation and the consequence $\RV{O}=\RV{X}\utimes\RV{Y}$. A see-do model must observe the conditional independence $\RV{X}\CI_\kernel{T} \RV{D}|\RV{H}$, i.e. the observation is independent of the choice conditional on the hypothesis.
+
+Because $\RV{O}=\RV{X}\utimes \RV{Y}$, we do not need to explicitly define $\RV{O}$ when specifying a see-do model.
 \end{definition}
 
 \subsection{Decomposability}
@@ -53,13 +55,13 @@ A \emph{see-do model} is a two-player statistical model $\kernel{T}:H\times D\to
 Decomposability is a property of see-do models that is relevant to the distinction between counterfacutal and regular models. As we will show, many causal problems allow the use of decomposable see-do models. However, certain types of counterfactual problem do not.
 
 \begin{definition}[decomposability]\label{def:decomposability}
-A see-do model $\kernel{T}:H\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ is \emph{decomposable} iff $\RV{Y}\CI_\kernel{T} \RV{X}|\RV{D}\RV{H}$. That is, if the consequence is independent of the observations given the hypothesis and the choice.
+A see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is \emph{decomposable} iff $\RV{Y}\CI_\kernel{T} \RV{X}|\RV{D}\RV{H}$. That is, if the consequence is independent of the observations given the hypothesis and the choice.
 \end{definition}
 
-Decomposable see-do models can be represented as a pair $(\kernel{O},\kernel{C})$ where $\kernel{O}$ is a one-player statistical model we call the \emph{observation model} and $\kernel{C}$ is a two-player statistical model we call the \emph{consequence model} (Corollary \ref{corr:decomp_representation}. Most models in the causal inference literature are decomposable -- if the observed data can tell us nothing useful beyond the distribution of observations, then we have a decomposable model.
+Decomposable see-do models can be represented as a pair $(\kernel{B},\kernel{C})$ where $\kernel{B}$ is a one-player statistical model we call the \emph{observation model} and $\kernel{C}$ is a two-player statistical model we call the \emph{consequence model} (Corollary \ref{corr:decomp_representation}. Most models in the causal inference literature are decomposable -- if the observed data can tell us nothing useful beyond the distribution of observations, then we have a decomposable model.
 
 \begin{theorem}[Observation and Consequence models]\label{th:obs_cmaps}
-Any see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ can be uniquely represented by the following pair of Markov kernels:
+Any see-do model $(\kernel{T},\RV{H},\RV{O},\RV{D},\RV{X},\RV{Y})$ can be uniquely represented by the following pair of Markov kernels:
 \begin{itemize}
     \item The \emph{observation model} $\kernel{T}^{\RV{X}|\RV{H}}$
     \item The \emph{context-sensitive consequence model} $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$
@@ -185,7 +187,7 @@ Recall the previous example: suppose we are betting on the outcome of the flip o
     \item $X=\{0,1\}^N$
     \item $Y=\{0,1\}$
     \item $H=(0,1)$
-    \item $\prescript{1}{}{\kernel{O}}:\splitter{0.1}^N\kernel{B}$
+    \item $\prescript{1}{}{\kernel{B}}:\splitter{0.1}^N\kernel{B}$
     \item $\prescript{1}{}{\kernel{C}}:(h,d)\mapsto \mathrm{Bernoulli}(1-|d-h|)$
 \end{itemize}
 
@@ -211,7 +213,7 @@ It is possible to model the second situation with a decomposable model by includ
     \item $X=\{0,1\}^{N+1}$
     \item $Y=\{0,1\}$
     \item $H'=(0,1)\times\{0,1\}$
-    \item $\prescript{3}{}{\kernel{O}}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
+    \item $\prescript{3}{}{\kernel{B}}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
     \item $\prescript{3}{}{\kernel{C}}:(h,x_{N+1},d)\mapsto \delta_{1-|d-x_{N+1}|}$
 \end{itemize}
 
@@ -224,72 +226,36 @@ If an indecomposable see-do model is employed in a \emph{decision problem} it is
 Thus far, we haven't dwelt on what it means for a probability measure to ``describe'' or ``represent'' something. It's well-known that probability is suitable for representing a number of different things. Two common choices are:
 
 \begin{enumerate}
-    \item The long run convergence of sequences or ensembles of observations of certain types of systems
+    \item The long run convergence of relative frequencies of sequences or ensembles of observations of certain types of systems
     \item Forecasts of observations that will take place in the future
 \end{enumerate}
 
-Taking the first view, one can view each hypotheses in a statistical model as representing the proposition that the system will tend to produce long-run sequences of observations favoured by the associated probability measure. Given a possibly loaded die, we might entertain hypotheses a) it is a system that produces a 6 $\frac{1}{6}$ of the time, b) it is a system that produces a 6 $\frac{1}{4}$ of the time and so forth. On the other hand, if we view a sequence of random variables as a sequence of forecasts it is not immediately obvious that we need such hypotheses. If $\RV{X}_1,\RV{X}_2,\RV{X}_3,...$ are rolls of a possibly loaded die, then it seems reasonable on observing a large number of sixes that sixes are more likely in the future. Unlike hypotheses a) and b), forecasts of the outcome do not assign a stable value to the proportion of sixes produced by the die. \citet{de_finetti_foresight_1992} showed that if and only if a probabilistic forecast $\prob{P}$ has the property that the forecast of a sequence of random variables $\prob{P}^{\RV{X}_1\RV{X}_2\RV{X}_3}$ is identical to the forecast of any permutation of the sequence $\prob{P}^{\RV{X}_2\RV{X}_1\RV{X}_3}$ (an assumption known as \emph{exchangeability}) and this sequence could be extended infinitely, then there exists an $(H,\sigalg{H})$, a Markov kernel $\kernel{Q}:H\to \Delta(\sigalg{X}^3)$ and a \emph{prior} $\mu\in \Delta(\sigalg{H})$ such that
+Taking the first view, one can view each hypotheses in a statistical model as representing the proposition that the system will tend to produce long-run sequences of observations favoured by the associated probability measure. Given a possibly loaded die, we might entertain hypotheses a) it is a system that produces a 6 $\frac{1}{6}$ of the time, b) it is a system that produces a 6 $\frac{1}{4}$ of the time and so forth. On the other hand, if we view a sequence of random variables as a sequence of forecasts it is not immediately obvious that we need such hypotheses. If $\RV{X}_1,\RV{X}_2,\RV{X}_3,...$ are rolls of a possibly loaded die, then it seems reasonable on observing a large number of sixes that sixes are more likely in the future. Unlike hypotheses a) and b), forecasts of the outcome do not assign a stable value to the proportion of sixes produced by the die. 
 
-\begin{align}
-    \prob{P}^{\RV{X}_1\RV{X}_2\RV{X}_3} = \begin{tikzpicture}
-        \path (0,0) node[dist] (P) {$\mu$}
-        ++ (0.7,0) node[copymap] (copy0) {}
-        ++ (0.5,0.5) node[kernel] (Q1) {$\kernel{Q}$}
-        +  (0,-0.5) node[kernel] (Q2) {$\kernel{Q}$}
-        +  (0,-1) node[kernel] (Q3) {$\kernel{Q}$}
-        ++ (1,0) node (X1) {$\RV{X}_1$}
-        + (0,-0.5) node (X2) {$\RV{X}_2$}
-        + (0,-1) node (X3) {$\RV{X}_3$};
-        \draw (P) -- (copy0);
-        \draw (copy0) to [out=45,in=180] (Q1) (copy0) to [out=0, in=180] (Q2) (copy0) to [out=-45,in=180] (Q3);
-        \draw (Q1) -- (X1) (Q2) -- (X2) (Q3) -- (X3);
-    \end{tikzpicture}
-\end{align}
+The first view is usually called \emph{frequentist} and the second view is usually called \emph{Bayesian}. Discussions of frequentism and Bayesianism often carry overtones of whether we should consider probabilities to represent long run frequencies or forecasts, and this issue is much debated \cite{hajek_interpretations_2019}.
 
-We can then consider $H$ to be the hypothesis class and define the statistical model
 
-\begin{align}
-    \begin{tikzpicture}
-        \path (0,0) node (P) {$\RV{H}$}
-        ++ (0.7,0) node[copymap] (copy0) {}
-        ++ (0.5,0.5) node[kernel] (Q1) {$\kernel{Q}$}
-        +  (0,-0.5) node[kernel] (Q2) {$\kernel{Q}$}
-        +  (0,-1) node[kernel] (Q3) {$\kernel{Q}$}
-        ++ (1,0) node (X1) {$\RV{X}_1$}
-        + (0,-0.5) node (X2) {$\RV{X}_2$}
-        + (0,-1) node (X3) {$\RV{X}_3$};
-        \draw (P) -- (copy0);
-        \draw (copy0) to [out=45,in=180] (Q1) (copy0) to [out=0, in=180] (Q2) (copy0) to [out=-45,in=180] (Q3);
-        \draw (Q1) -- (X1) (Q2) -- (X2) (Q3) -- (X3);
-    \end{tikzpicture}
-\end{align}
+When probability measures are used to represent convergence of relative frequencies, one player statistical models $(\kernel{T},\RV{H},\RV{O})$ are often used to describe the system of interest, which include a hypothesis $\RV{H}$ as a basic element. When probability measures are used to represent forecasts of future observations, we typically only consider a single probability measure $\prob{F}\in \Delta(\sigalg{E})$ along with an outcome variable $\RV{O}$. These are not hard requirements of either view -- someone modelling frequencies might have reason to model a system with only one hypothesis, and a forecaster might want to consider a set of forecasts generated by a number of hypotheses. Nonetheless, the two purposes typically differ on whether hypotheses are a basic element of the system model.
 
-Exchangeability-like assumptions have a number of interesting applications to see-do models:
-\begin{itemize}
-    \item \emph{Functional exchangeability} is a fundamental assumption of counterfactual models
-    \item Exchangeability of observations implies decomposability
-    \item A representation theorem similar to the one described above will be proved for \emph{doubly exchangeable} see-do forecasts
-    \item \emph{Imitable} see-do models, a special class of doubly exchangeable models, play a key role in identification of causal effects
-\end{itemize}
-
-In general, we will call the product of a prior and a two player statistical models a \emph{forecasts}.
-
+The analogy with two player statistical models is that we can consider a two player model $(\kernel{T},\RV{H},\RV{D},\RV{O})$ to describe the long run frequencies obtained by repeated experiments on a system, or to describe a \emph{forecast} of what is likely to happen given a particular choice we can use a map $\kernel{F}:D\to \Delta(\sigalg{E})$, the observation $\RV{D}$ and the outcome $\RV{O}$. We will call such objects \emph{forecasts}, and \emph{see-do forecasts} the special subset of forecasts that feature observations that are independent of choices.
 
 \begin{definition}[Forecasts, see-do forecast]
-A \emph{forecast} is a Markov kernel $D\to \Delta(\sigalg{E})$ for some set of choices $D$ and outcomes $E$. The choice variable $\RV{D}:D\times E\to D$ and the outcome variable $\RV{O}:D\times E\to E$ are defined analagously to \ref{def:2p_stat}.
+A \emph{do forecast} $(\kernel{F},\RV{D},\RV{O})$ is a Markov kernel $\kernel{F}:D\to \Delta(\sigalg{E})$ for some set of choices $D$ and outcomes $E$. The choice variable $\RV{D}:D\times E\to D$ is the map $(d,e)\mapsto d$ that forgest the outcome and and the outcome variable $\RV{O}:D\times E\to E$ is the map $(d,e)\to e$ that forgets the choice.
 
-A \emph{see-do forecast} is a forecast $D\to \Delta(\sigalg{E})$ with an \emph{observation variable} $\RV{X}:D\times E\to X$ and a consequence variable $\RV{Y}:D\times E\to Y$ such that $\RV{O}=\RV{X}\utimes\RV{Y}$ and $\RV{X}\CI\RV{D}$.
+A \emph{see-do forecast} is a forecast $(\kernel{F},\RV{D},\RV{O},\RV{X},\RV{Y})$ with an \emph{observation variable} $\RV{X}:D\times E\to X$ and a \emph{consequence variable} $\RV{Y}:D\times E\to Y$ such that $\RV{O}=\RV{X}\utimes\RV{Y}$ and $\RV{X}\CI\RV{D}$.
+
+A \emph{forecast} $(\kernel{F},\RV{O})$ is a probability measure $\prob{F}\in\Delta(\sigalg{E})$ and an outcome variable $\RV{O}:E\to O$.
 \end{definition}
 
-\todo[inline]{stop here}
+We can go from a see-do model to a see-do forecast by adding a prior to the model.
 
 \begin{theorem}
-The product $\kernel{L}:=(\mu\otimes \mathrm{Id}_D)\kernel{K}$ of a prior $\mu\in \Delta(\sigalg{H})$ and a two player statistical model $\kernel{K}:H\times D\to \Delta(\sigalg{E})$ is a forecast $D\to \Delta(\sigalg{E})$ with $\RV{D}^f:(d,e)\mapsto d$ and $\RV{E}^f:(d,e)\mapsto e$. If $\kernel{K}$ is a see-do model with respect to observations $\RV{X}^{sd}$, $\RV{Y}^{sd}$ then there exist $\RV{X}^{f}$, $\RV{Y}^f$ such that $\kernel{L}$ is a see-do forecast.
+The product $\kernel{L}:=(\mu\otimes \mathrm{Id}_D)\kernel{K}$ of a \emph{prior} $\mu\in \Delta(\sigalg{H})$ and a two player statistical model $\kernel{K}:H\times D\to \Delta(\sigalg{E})$ is a forecast $D\to \Delta(\sigalg{E})$ with $\RV{D}^f:(d,e)\mapsto d$ and $\RV{E}^f:(d,e)\mapsto e$. If $\kernel{K}$ is a see-do model with respect to observations $\RV{X}^{sd}$, $\RV{Y}^{sd}$ then there exist $\RV{X}^{f}$, $\RV{Y}^f$ such that $\kernel{L}$ is a see-do forecast.
 \end{theorem}
 
 
 \begin{proof}
-The first part is trivial: $(\mu\otimes \mathrm{Id}_D)\kernel{K}$ is a Markov kernel $D\to \Delta(\sigalg{E})$.
+The first part is trivial: $(\mu\otimes \mathrm{Id}_D)\kernel{K}$ is a Markov kernel $D\to \Delta(\sigalg{E})$ by construction.
 
 For the second part $\RV{X}^f\CI\RV{D}$ is required for some $\RV{X}^f$.By Theorem \ref{th:iterated_disint} we have
 
@@ -365,21 +331,335 @@ Then
 And so $\RV{X}^f\CI_{\kernel{M}}\RV{D}$.
 \end{proof}
 
-\begin{definition}[Exchangeability]
-Given $A\subseteq \mathbb{N}$, a sequence of random variables $\RV{X}_A:=\utimes_{i\in A} \RV{X}_i$ each taking values in $X$ on a probability space $(\prob{P},(\Omega,\sigalg{F}))$ is \emph{exchangeable} if for all $n\in A$, all permutations of indices $\sigma:[n]\to[n]$ and all  $B \in\sigalg{F}$, $\prob{P}^{\RV{X}_{[n]}}(B) =\prob{P}^{\RV{X}_{\sigma([n])}}(B)$.
-\end{definition}
+In addition, any see-do forecast can be interpreted as a see-do model with a single hypothesis. Recalling the discussion of the indiscrete space $\{*\}$ in \ref{sec:string_diagram_elements}, we can identify a Markov kernel $\kernel{F}:D\to \Delta(\sigalg{E})$ with a Markov kernel $\kernel{T}:\{*\}\times D\to \Delta(\sigalg{E})$ where $\kernel{T}_{*,d}=\kernel{F}_d$ for all $d\in D$. Defining the hypothesis $\RV{H}:\{*\}\times D\times E\to H$ given by the constant fuction $(*,d,e)\mapsto *$, we can create from any see-do forecast $(\kernel{F},\RV{D},\RV{X},\RV{Y})$ a see-do model $(\RV{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ (the required conditional independence is observed by construction in the single hypothesis $*$). However, a statistical model with a single hypothesis is a very unusual type of statistical model.
 
-\begin{theorem}[Representation of infinite exchangeable sequences\citep{hewitt_symmetric_1955}]
-Let $(X,\sigalg{X})$ be a compact Hausdorff space with the Baire $\sigma$-algebra and $\prob{P}$ a measure on $X^\mathbb{N}$ with the product sigma algebra such that $\RV{X}_\mathbb{N}$ with each $\RV{X}_i$ given by the projection map $\pi_i$. Define $(\Delta(\sigalg{X}),\sigalg{E})$ to be the set of all probability measures on $X$ with the $\sigma$-algebra $\sigalg{E}$ being the coarsest algebra for which the maps $\mathrm{ev}_A:\Delta(\sigalg{X})\to \mathbb{R}$ given by $\mathrm{ev}_A:\rho\mapsto \rho(A)$ (for $\rho\in\Delta(\sigalg{X})$) are measurable for all $A\in \sigalg{X}$. Then there exists a unique probability measure $\mu$ in $\Delta(\sigalg{E})$ such that for all $n\in\mathbb{N}$, $C\in\sigalg{X^n}$:
+\citet{de_finetti_foresight_1992} has shown how more typical statistical models can be recovered from certain types of forecast. Informally speaking, if and only if a forecast $(\prob{P},\RV{O})$ has the property that distribution of a sequence of random variables $\prob{P}^{\RV{X}_1\RV{X}_2\RV{X}_3}$ is identical to the distribution of any permutation of the sequence $\prob{P}^{\RV{X}_2\RV{X}_1\RV{X}_3}$ (an assumption known as \emph{exchangeability}), and this sequence can be extended infinitely, then there exists a hypothesis class $(H,\sigalg{H})$, a Markov kernel $\kernel{Q}:H\to \Delta(\sigalg{E})$ and a \emph{prior} $\mu\in \Delta(\sigalg{H})$ such that
+
 \begin{align}
-    \prob{P}(C\times X^{\mathbb{N}\setminus[n]}) = \int_{(\Delta(\sigalg{X}))} \prod_{i\in [n]} \rho(\RV{X}_i(C)) d\mu(\rho) 
+    \prob{P}^{\RV{X}_1\RV{X}_2\RV{X}_3} = \begin{tikzpicture}
+        \path (0,0) node[dist] (P) {$\mu$}
+        ++ (0.7,0) node[copymap] (copy0) {}
+        ++ (0.5,0.5) node[kernel] (Q1) {$\kernel{Q}$}
+        +  (0,-0.5) node[kernel] (Q2) {$\kernel{Q}$}
+        +  (0,-1) node[kernel] (Q3) {$\kernel{Q}$}
+        ++ (1,0) node (X1) {$\RV{X}_1$}
+        + (0,-0.5) node (X2) {$\RV{X}_2$}
+        + (0,-1) node (X3) {$\RV{X}_3$};
+        \draw (P) -- (copy0);
+        \draw (copy0) to [out=45,in=180] (Q1) (copy0) to [out=0, in=180] (Q2) (copy0) to [out=-45,in=180] (Q3);
+        \draw (Q1) -- (X1) (Q2) -- (X2) (Q3) -- (X3);
+    \end{tikzpicture}
 \end{align}
 
-Where $\RV{X}_i(C)$ is the image of $C$ under $\RV{X}_i$.
+Defining the hypothesis $\RV{H}:E\mapsto H$ such that $\prob{P}^{\RV{H}}=\mu$ and $\prob{P}^{\RV{O}|\RV{H}}=\kernel{Q}$, $(\kernel{Q},\RV{H},\RV{O})$ is a statistical model.
+
+Exchangeability-like assumptions have a number of interesting applications to see-do models. In addition to providing a means of obtaining see-do models from see-do forecasts analogous to the theorm of \citet{de_finetti_foresight_1992} mentioned above, we have a number of additional results:
+\begin{itemize}
+    \item Exchangeability of observations implies decomposability
+    \item We show that the existence of counterfactual random variables is equivalent to \emph{functional exchangeability} along with \emph{deterministic reproducibility} and \emph{non-interference}
+    \item \emph{Imitable} see-do models, a special class of doubly exchangeable models, play a key role in identification of causal effects
+\end{itemize}
+
+\todo[inline]{Not happy with the previous list}
+
+
+\begin{definition}[Permutations and swaps]
+A \emph{finite permutation} $\rho'$ on $B\subseteq\mathbb{N}$ is a map $B\to B$ such that there is some finite $A\subset B$ for which $\rho'|_A:A\to A$ is an invertible function and $\rho'|_{B\setminus A} = \mathrm{Id}_{B\setminus A}$.
+
+Given measureable space $(E,\sigalg{E})$ and a set of random variables $\{\RV{X}_i|i\in B\}$ the swap function $\rho^*:E\to E$ associated with a finite permutation $\rho'$ and the random variables $\{\RV{X}_i\}_B$ is the $\sigma(\utimes_{i\in B}\RV{X}_i)$ measurable function which has the property $\RV{X}_i\circ \rho^*=\RV{X}_{\rho'(i)} $ for all $i\in B$. By convention we also denote the swap kernel associated with this function $\rho:E\to \Delta(\sigalg{E})$.
+
+For example, if $E = Y\times X_1^{|B|}$ and $\RV{X}_i:E\to X_1$ projects the $i$-th ``x'' element of the space $(y,x_1,...,x_i,...)\mapsto x_i$, then for some $\rho'$ the associated swap $\rho$ is the Markov kernel associated with the fuction $\rho^*:(y,x_1,...,x_i,...)\mapsto (y,x_{\rho'(1)},...,x_{\rho'(i)},...)$.
+\end{definition}
+
+A consequence of this is 
+\begin{align}
+    \rho\utimes_{i\in B} \kernel{F}_{\RV{X}_i} &= \utimes_{i\in B} \rho \kernel{F}_{\RV{X}_{i}}\label{eq:determ_commute}\\
+                                               &= \utimes_{i\in B} \kernel{F}_{\RV{X}_{\rho'(i)}}\label{eq:function_composition}
+\end{align}
+
+Where line \ref{eq:determ_commute} follows from the fact that deterministic kernels commute with the split map (\ref{eq:composition}), and line \ref{eq:function_composition} follows from the fact that for two functional kernels 
+
+\begin{align}
+    (\kernel{F}_{f}\kernel{F}_g)_x(A) &= \int_X (\kernel{F}_g)_y(A) d(\kernel{F}_f)_x(y)\\
+                                      &= \int_X \delta_{g(y)}(A) d\delta_{f(x)}(y)\\
+                                      &= \delta_{g(f(x))} (A)\\
+                                      &= (\kernel{F}_{g\circ f})_x(A) 
+\end{align}
+
+\todo[inline]{lemmafy, move to chapter 2}
+
+\begin{definition}[Partial frequencies]\label{def:partial_freq}
+Given a standard measurable space $(E,\sigalg{E})$ along with random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, for $A\in \sigalg{X}_1$ and $m\leq n\in \mathbb{N}$ define the size $n$, $m$-tuple \emph{partial frequency of} $A$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ to be $\RV{Z}^{m,n}_A:=\frac{(n-m)!}{n!}\sum_{I\subset [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$ where $I$ ranges over all $m$-sized ordered subsets of $n$.
+
+Define the $m$-tuple \emph{relative frequency of } $A$ with respect to $\RV{X}$ to be $\RV{Z}^{m,\infty}_A:= \lim_{n\to \infty}\frac{(n-m)!}{n!}\sum_{I\in [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$.
+
+Given a countable set $\sigalg{G}$ generating $\sigalg{X}_1$ (i.e. $\sigma(\sigalg{G})=\sigalg{X}_1)$, define the $m$-tuple \emph{relative frequency of} $\RV{X}$ to be $\RV{Z}^{m,\infty}:=\utimes_{A\in G} \RV{Z}^{m,\infty}_A$, if such a limit exists for all $A$.
+
+For the special case of $m=1$, let $\RV{Z}:=\RV{Z}^{1,\infty}$
+\end{definition}
+
+\begin{definition}[Exchangeable $\sigma$-algebra]\label{def:exchange_sig_alb}
+For standard measurable $(E,\sigalg{E})$ and $n\in \mathbb{N}$, a size $n$ swap function $\rho^{*n}:E\to E$ is a swap function associated with a permutation $\rho^{\prime n}$ with the property $i>n\implies \rho^{\prime n}(i)=i$. Given random variables $\RV{X}_i:E\to X_1$ for each $i\in\mathbb{N}$, the size $n$ \emph{exchangeable $\sigma$-algebra} with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$, denoted $\sigalg{H}^n\subset\sigma(\RV{X})$, is the $\sigma$-algebra $\{A|A\in\sigma(\RV{X}),\rho^{*n}(A)=A\forall \text{ size $n$ swap functions }\rho^{*n}:E\to E\}$.
+
+Define the exchangeable $\sigma$-algebra $\sigalg{H}:=\int_{n\in\mathbb{N}} \sigalg{H}^n$
+\end{definition}
+
+\begin{lemma}
+The size $n$ exchangeable sigma algebras $\sigalg{H}^n$ on $(E,\sigalg{E})$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ are $\sigma$-algebras for all $n\in \mathbb{N}$.
+\end{lemma}
+
+\begin{proof}
+Take $A\in\sigalg{H}^n$. By assumption, for any $\omega\in A$, $\rho^{*}(\omega)\in A$ for all size $n$ swap functions $\rho^{*}$. Consider $\omega\not\in A$, and suppose there is some swap function $\rho^{*}$ such that $\rho^{*}(\omega)\in A$. By definition, the permutation $\rho^{\prime}$ has an inverse $\rho^{\prime -1}$ which is also a size $n$ permutation. By construction, $(\rho^{-1})^*$ is also the inverse of $\rho^*$. Thus $(\rho^{-1})^*(\omega)\not\in A$, a contradiction. Thus $E\setminus A\in \sigalg{H}$.
+
+For any invertible function $f:E\to E$, $f(E)=E$. Thus $E\in \sigalg{H}$.
+
+Finally, for a countable collection $A_1,A_2,...$ and any size $n$ swap function $\rho^*$, $\rho^*(\cup_{i=1}^{\infty} A_i) = \cup_{i=1}^\infty \rho^*(A_i) = \cup_{i=1}^\infty A_i$. Thus $\sigalg{H}$ is a $\sigma$-algebra.
+
+$\sigalg{H}$ is an intersection of $\sigma$-algebras, so it is also a $\sigma$-algebra.
+\end{proof}
+
+\begin{lemma}\label{lem:partialfreq_exchangeable}
+Given $\RV{Z}^{m,n}$, the size $n$, $m$-tuple relative frequency of $\RV{X}:=\utimes_{i\in \mathbb{N}} \RV{X}_i$, define $\sigalg{I}^{m,n}_A:=\vee_{i\in[n,\infty)}\sigma(\RV{Z}^{m,i})$. Then $\sigalg{I}^{m,n}\subset\sigalg{H}^n$ for any $m$, and also $\sigalg{I}^{m,\infty}:=\cap_{n\in\mathbb{N}} \sigalg{I}^{m,n}\subset\sigalg{H}$.
+\end{lemma}
+
+\begin{proof}
+For any $A\in \sigalg{G}$, size $n$ swap function $\rho^{*}: E\to E$ associated with some finite permuation of the natural numbers $\rho^{\prime}:\mathbb{N}\to \mathbb{N}$, we have $\RV{Z}^{m,n}_A\circ \rho^{*} = \RV{Z}^{m,n}_A$. Thus $(\RV{Z}^{m,n}_A)^{-1}(B) = (\RV{Z}^{m,n}_A\circ (\rho^{*})^{-1})^{-1}(B) = \rho^{*}((\RV{Z}^{m,n}_A)^{-1}(B))$ for $B\in \sigalg{B}([0,1])$. Because $\rho^{*}$ is injective, for any collection of sets $\{A_i|i\in R\subset\mathbb{N}\}$ for which $\rho^{*}(A_i)=A_i$, we have $\rho^{*}(\cap_{i\in R} A_i)=\cap_{i\in R} \rho^*(A_i) = \cap_{i\in R} A_i$.
+
+We have $\sigalg{I}^{m,n}=\vee_{i\in[n,\infty)}\vee_{A\in \sigalg{G}} \sigma(\RV{Z}^{m,i}_A)$.
+
+A generating $\pi$-system for $\sigalg{I}^{m,n}$ is $\sigalg{J}^{m,n}:=\{\cap_{i=1}^r B_i|B_i\in \sigma(\RV{Z}^{m,j}_{A_i}),A_i\in\sigalg{G},j\in[n,\infty),r\in\mathbb{N})$ where $A_i$ is an enumeration of the sets in $\sigalg{G}$. In the previous paragraph we showed that symmetry with respect to $\rho^*$ is preserved for intersections, thus $\rho^*(A) = A$ for all $A\in \sigalg{J}^{m,n}$ for all size $n$ swap functions $\rho^*$.
+
+Thus $\sigalg{J}^{m,n}\subset\sigalg{H}^n$ and, because $\sigalg{J}^{m,n}$ is a $\pi$-system, $\sigalg{I}^{m,n}\subset\sigalg{H}^n$ by the monotone class theorem.
+
+As $\sigalg{I}^{m,\infty}=\cap_{n\in\mathbb{N}} \sigalg{I}^{m,n}$ we have $\sigalg{I}^{m,\infty}\subset\sigalg{H}$ also.
+\end{proof}
+
+\begin{definition}[Exchangeability]
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with the property that $\RV{X}:=\utimes_{i\in A} \RV{X}_i$ for some set of random variables $\{\RV{X}_i|i\in A\}$ all taking values in $X_1$ where $A\subseteq \mathbb{N}$. 
+
+If for every finite $B\subset A$ and every permutation $\rho':B\to B$ of $B$ we have $\kernel{T}\rho=\kernel{T}$, where $\rho$ is the swap associated with $\rho'$ and $\{\RV{X}_i|i\in B\}$, then $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is \emph{exchangeable} with respect to $\{\RV{X}_i|i\in A\}$.
+
+If $A$ is an infinite set then $\kernel{T}$ is \emph{infinitely exchangeable}, and if $\kernel{T}=\kernel{S}(\mathrm{Id}_{X}\otimes \stopper{0.15}\otimes \mathrm{Id}_Y)$ for some infinitely exchangeable $(\kernel{S},\RV{D},\RV{X}',\RV{Y}')$, then $\kernel{T}$ is infinitely exchangeably extendable.
+\end{definition}
+
+Note that $\kernel{T}\rho^{\RV{X}_i|\RV{D}} = \kernel{T}^{\RV{X}_{\rho'(i)}|\RV{D}}$.
+
+This implies the usual notion of exchangeability if we take $Y=\{*\}$ (that is, if we assume the consequences are trivial), as by assumption $\RV{X}$ is independent of $\RV{D}$.
+
+\begin{lemma}[Infinitely exchangeably extendable forecasts]\label{lem:partial_representation}
+Given a forecast $(\prob{P},\RV{X})$ where $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some $\{\RV{X}_i|i\in A\subseteq\mathbb{N}\}$ and $X$ is standard measurable, if $\prob{P}$ is exchangeable with respect to $\RV{X}$ then there exists a function $f:X\to H_B$ such that, defining $\RV{H}_B:f\circ \RV{X}$:
+        \begin{itemize}
+            \item $\RV{X}_i\CI\RV{X}_{A\setminus\{i\}}|\RV{H}_B$ for all $i\in A$
+            \item $\prob{P}^{\RV{X}_i|\RV{H}_B}=\prob{P}^{\RV{X}_j|\RV{H}_B}$ for all $i,j\in A$
+        \end{itemize}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Without loss of generality, assume $X_1=[0,1]$, $\sigalg{X}=\mathcal{B}([0,1])$ and $\RV{X}=[0,1]^{\mathbb{N}}$.
+
+Let $\mathbb{Q}$ be the rationals between $[0,1]$ and define $\RV{Z}_q^n:D\times X\times Y \to [0,1]$ by $\omega \mapsto \frac{1}{n}\sum_{i}^n \mathds{1}_{[0,q]}(\RV{X}_i(\omega))$ Let $\sigalg{Z}^n_q=\sigma(\RV{Z}_q^n)$, i.e. $\RV{Z}^n$ is a 1-tuple partial frequency as in Definition \ref{def:partial_freq}.
+
+Define $\sigalg{I}^n_q = \vee_{N}^\infty \sigalg{Z}^n_q$. Then $\sigalg{I}^1_q\supset\sigalg{I}^2_q\supset...\sigalg{I}_q:=\cap_{i\in\mathbb{N}}\sigalg{I}^i_q = \sigalg{Z}^\infty_q$.
+
+Let $\sigalg{I}^n=\vee_{q\in\mathbb{Q}} \sigalg{I}^n_q$. Then $\sigalg{I}^1\supset \sigalg{I}2\supset...\supset\sigalg{I}$.
+
+By Lemma \ref{lem:partialfreq_exchangeable} for $m=1$, $\sigalg{I}^n\subset\sigalg{H}^n$.
+
+Let $\rho'_{ij}:\mathbb{N}\to\mathbb{N}$ swaps indices $i$ and $j$ for some $i,j\in[n]$ and otherwise acts as the identity. $\rho_{ij}:D\times X\times Y\to \Delta(\sigalg{D}\times \sigalg{X}\times \sigalg{Y})$ is the swap kernel associated with $\rho'_{ij}$ and $\{\RV{X}_i|i\in \mathbb{N}\}$, and $\rho^*_{ij}$ the function associated with $\rho_{ij}$. For any $m$, $n$, $A\in \sigalg{H}^n$, $d\in D$: 
+
+\begin{align}
+    \int_{A} \RV{Z}_q^{n} (\omega) d\prob{P}(\omega) &= \int_{A} \frac{1}{n}\sum_{i}^{n} (\mathds{1}_{[0,q]}\circ \RV{X}_i)(\omega)d\prob{P}(\omega)\\
+    &= \frac{1}{n}\sum_{i}^{n} \int_{(\rho^*_{ij})^{-1}\rho^*_{ij}(A)} (\mathds{1}_{[0,q]}\circ \RV{X}_i)(\omega)d\prob{P}\rho_{ij}(\omega)\label{eq:permutation_invertible}\\
+    &= \frac{1}{n}\sum_{i}^{n} \int_{\rho^*_{ij}(A)} (\mathds{1}_{[0,q]}\circ \RV{X}_{i}\circ \rho_{ij}) (\omega)d\prob{P}(\omega)\label{eq:using_pushforward}\\
+    &= \frac{1}{n}\sum_{i}^{n} \int_{A} (\mathds{1}_{[0,q]}\circ \RV{X}_{j})(\omega)d\prob{P}(\omega)\label{eq:closure_under_permutation}\\
+    &= \int_{A} (\mathds{1}_{[0,q]} \circ \RV{X}_j)(\omega)d\prob{P}(\omega) \label{eq:cond_expectation_first}
+\end{align}
+
+Where line \ref{eq:permutation_invertible} follows from exchangeability of $\kernel{T}$ and invertibility of $\rho_{ij}$. the fact that $\rho$line \ref{eq:using_pushforward} follows from the fact that $\prob{P}\rho_{ij}$ is the pushforward measure of $\prob{P}$ with respect to $\rho^*_{ij}$ and \ref{eq:closure_under_permutation} uses the fact that $\rho(A) = A$ for all $A\in \RV{Z}^n_q$ and all permutations $\rho$.
+
+From Equation \ref{eq:cond_expectation_first}, we have for all $n$, $A\in \sigalg{H}^{n+1}$
+
+\begin{align}
+    \int_{A} \RV{Z}_q^{n+1} (\omega) d\prob{P}(\omega) &= \int_{A} \RV{Z}_q^{n} (\omega) d\prob{P}(\omega)
+\end{align}
+
+Because $\RV{Z}_q^{n+1}$ is $\sigalg{H}^{n+1}$ measurable, $\RV{Z}_q^{n+1} = \mathbb{E}[\RV{Z}_q^{n}|\sigalg{H}^{n+1}]$.
+
+Thus the sequence $[\RV{Z}^1_q,\RV{Z}^2_q,...]$ is a backwards martingale with respect to the reversed filtration $\sigalg{H}^1\supset\sigalg{H}^2\supset...\supset \sigalg{H}^3$.
+
+Furthermore, for all $n\in \mathbb{N}$, $\sup_\omega|\RV{Z}^n(\omega)|\leq 1$ so the sequence is also uniformly integrable. Thus it goes almost surely to the limit $\RV{Z}_q$, and for all $A\in \sigalg{H}$
+
+\begin{align}
+    \lim_{n\to\infty} \int_A \RV{Z}^n_q(\omega) d\prob{P}(\omega) &= \int_A \RV{Z}_q(\omega) d\prob{P}(\omega)
+\end{align}
+
+Finally, because for all $n\in \mathbb{N}$, all $j\in[n]$ and all $A\in \sigalg{H}^n$ we also have
+
+\begin{align}
+    \int_A \mathds{1}_{[0,q]}(\RV{X}_j(\omega))d\prob{P}(\omega) &= \int_A \RV{Z}_q^n(\omega) d\prob{P}(\omega)
+\end{align}
+
+it follows that for all $A\in \sigalg{H}$, $j\in \mathbb{N}$
+
+\begin{align}
+    \int_A \RV{Z}_q(\omega) d\prob{P}(\omega) = \int_A \mathds{1}_{[0,q]}(\RV{X}_j(\omega))d\prob{P}(\omega)\label{eq:cond_expectation}
+\end{align}
+
+[\citet{cinlar_probability_2011} Thm 4.7.]. Thus $\RV{Z}_q = \mathbb{E}[\mathds{1}_{[0,q]}\circ\RV{X}_j|\sigalg{H}]$ for all $j\in \mathbb{N}$. This implies $\RV{Z}_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]$.
+
+Define $\RV{Z} = \utimes_q\in \mathbb{Q} \RV{Z}_q$. As $\sigma(\RV{Z})\subset\sigalg{H}$, Equation \ref{eq:cond_expectation} establishes in addition that $\RV{Z}_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigma(Z)]$. 
+
+By the definition of conditional expectation, for any version of $\prob{P}_{\RV{Z}(\omega)}^{\RV{X}_j|\RV{Z}\RV{D}}([0,q])$ we have
+
+\begin{align}
+    \prob{P}_{\RV{Z}(\omega)}^{\RV{X}_j|\RV{Z}}([0,q]) &= \mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigma(\RV{Z})](\omega)\\
+\end{align}
+
+$\prob{P}$-almost surely.
+
+Furthermore, the measure $\prob{P}_{h}^{\RV{X}_j|\RV{Z}}$ is uniquely defined by its value on $[0,q]$ for all $q\in \mathbb{Q}$. Thus for all $i,j\in \mathbb{N}$ we have
+
+\begin{align}
+    \prob{P}^{\RV{X}_j|\RV{H}} = \prob{P}^{\RV{X}_i|\RV{H}}
+\end{align}
+
+Completing the proof of property 1.
+
+Next, we will show $\RV{X}_i\CI_\kernel{T} \RV{X}_{\mathbb{N}\setminus \{i\}} | \RV{H}$.
+
+Let $\RV{Z}^{m,n}_q$ be a partial frequency as in Definition \ref{def:partial_freq} where $q$ stands for the set $[0,q]$.
+
+Let $\sigalg{I}^{m,n}=\vee_{q\in\mathbb{Q}} \sigalg{I}^{m,n}_q$. Then $\sigalg{I}^{m,1}\supset \sigalg{I}^{m,2}\supset...\supset\sigalg{I}^{m,\infty}$.
+
+By Lemma \ref{lem:partialfreq_exchangeable}, $\sigalg{I}^{m,\infty}\subset\sigalg{H}$.
+
+Let $J\subset[n]$ be some set of $m$ elements from $n$ and $\rho'_{IJ}$ be a permutation that sends the elements of $I\subset[n]$ to $J$.
+
+\begin{align}
+    \int_{A} \RV{Z}_q^{m,n} (\omega) d\prob{P}(\omega) &= \int_{A} \frac{(n-m)!}{n!}\sum_{I\subset[n]}\prod_{i\in I} (\mathds{1}_{[0,q]}\circ \RV{X}_i)(\omega)d\prob{P}(\omega)\\
+    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{(\rho^*_{IJ})^{-1}\rho^*_{IJ}(A)} \prod_{i\in I}(\mathds{1}_{[0,q]}\circ \RV{X}_i)(\omega)d\prob{P}\rho_{IJ}(\omega)\label{eq:permutation_invertible}\\
+    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{\rho^*_{IJ}(A)} \prod_{i\in I}(\mathds{1}_{[0,q]}\circ \RV{X}_{i}\circ \rho_{IJ}) (\omega)d\prob{P}(\omega)\label{eq:using_pushforward}\\
+    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q]}\circ \RV{X}_{j})(\omega)d\prob{P}(\omega)\label{eq:closure_under_permutation}\\
+    &= \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q]} \circ \RV{X}_j)(\omega)d\prob{P}(\omega) \label{eq:cond_expectation_first}
+\end{align}
+
+From Equation \ref{eq:cond_expectation_first}, we have for all $n$, $m<n$, $A\in \sigalg{H}^{n+1}$
+
+\begin{align}
+    \int_{A} \RV{Z}_q^{m,n+1} (\omega) d\prob{P}(\omega) &= \int_{A} \RV{Z}_q^{m,n} (\omega) d\prob{P}(\omega)
+\end{align}
+
+Because $\RV{Z}_q^{m,n+1}$ is $\sigalg{H}^{n+1}$ measurable, $\RV{Z}_q^{m,n+1} = \mathbb{E}[\RV{Z}_q^{m,n}|\sigalg{H}^{n+1}]$.
+
+Thus the sequence $[\RV{Z}^{m,1}_q,\RV{Z}^{m,2}_q,...]$ is a backwards martingale with respect to the reversed filtration $\sigalg{H}^1\supset\sigalg{H}^2\supset...\supset \sigalg{H}^3$.
+
+Furthermore, for all $n\in \mathbb{N}$, $\sup_\omega|\RV{Z}^{m,n}_q(\omega)|\leq 1$ so the sequence is also uniformly integrable. Thus it goes almost surely to a limit $\RV{Z}^{m,\infty}_q$, and for all $A\in \sigalg{H}$
+
+\begin{align}
+    \lim_{n\to\infty} \int_A \RV{Z}^{m,n}_q(\omega) d\prob{P}(\omega) &= \int_A \RV{Z}^{m,\infty}_q(\omega) d\prob{P}(\omega)\\
+    \implies \RV{Z}^{m,n}_q &= \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]
+\end{align}
+
+Let $[n]^m_\mathrm{rep}$ be the set of all $m$ length sequences of elements of $[n]$ with repeats. Note that $\lim_{n\to\infty}\frac{(n-m)!}{n!}|[n]^m_\mathrm{rep}| = \lim_{n\to\infty}\frac{n^m(n-m)!}{n!}-1 = 0$
+
+\begin{align}
+    \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}](\omega) &= \lim_{n\to\infty}\frac{(n-m)!}{n!}\sum_{I\subset[n]}\prod_{i\in I} (\mathds{1}_{[0,q]}\circ \RV{X}_i)\\
+                                                                      &= \lim_{n\to\infty}\frac{1}{n^m}\sum_{I\subset[n]}\prod_{i\in I}(\mathds{1}_{[0,q]}\circ \RV{X}_i)\\
+                                                                      &= \lim_{n\to\infty}\frac{1}{n^m}\left[\sum_{i_1\in [n]}...\sum_{i_m\in [n]}\prod_{k\in [m]} (1_{[0,q]}\circ \RV{X}_{i_k})-\sum_{J\subset[n]^m_\mathrm{rep}}\prod_{i\in I} (\mathds{1}_{[0,q]}\circ \RV{X}_i)\right]\\ 
+                                                                      &= \prod_{k\in [m]} \lim_{n\to\infty} \frac{1}{n}\sum_{i_k\in[n]}(1_{[0,q]}\circ\RV{X}_{ik})\\
+                                                                      &= \prod_{k\in [m]} \mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]\\
+                                                                      &= \prod_{k\in J} \mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]\\
+                                                                      &= \prod_{k\in J} \RV{Z}_q\label{eq:h_measurable}
+\end{align}
+
+Because $\mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]$ is $\RV{Z}$-measurable we also have
+
+\begin{align}
+    \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigma(\RV{Z})] &= \prod_{k\in J} \RV{Z}_q
+\end{align}
+
+By the definition of conditional expectation, for all $J\subset \mathbb{N}$
+
+\begin{align}
+    \prob{P}_{\RV{H}(\omega)}^{\RV{X}_J|\RV{H}}(\times_{j\in J}[0,q]) &= \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}](\omega)\\
+                                                                      &= \prod_{k\in J} \prob{P}_{\RV{H}(\omega)}^{\RV{X}_j|\RV{H}}([0,q])
+\end{align}
+
+And thus $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in\mathbb{N}$.
+\end{proof}
+
+\begin{theorem}[Representation of infinitely exchangeably extendable see-do forecasts]
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some $\{\RV{X}_i|i\in A\subseteq\mathbb{N}\}$ and $X\times Y$ is standard measurable, the following statements are equivalent:
+
+\begin{enumerate}
+    \item $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is infinitely exchangeably extendable with respect to $\{\RV{X}_i|i\in A\}$
+    \item There exists a function $f:X\to H_B$ such that, defining $\RV{H}_B:f\circ \RV{X}$,
+    \begin{align}
+        \kernel{T}^{\RV{H}_B\RV{X}\RV{Y}|\RV{D}} = \begin{tikzpicture}
+            \path (0,0) node[dist,inner sep=-2pt] (H) {$\kernel{H}_B$}
+            + (0,-1) node (D) {$\RV{D}$}
+            ++ (0.5,0) node[copymap] (copy0) {}
+            ++ (0.6,0) node[copymap,label={$A$}] (copy1) {}
+            ++ (1.2,0.5) node[kernel] (XH) {$\kernel{T}^{\RV{X}_1|\RV{H}_B}$}
+            + (0,-0.5) node[kernel] (XH2) {$\kernel{T}^{\RV{X}_1|\RV{H}_B}$}
+            + (0,-1.25) node[kernel] (YD) {$\kernel{T}^{\RV{Y}|\RV{H}_B\RV{D}}$}
+            ++ (1.2,-0.25) node (X1) {$\RV{X}$}
+            + (0,-1) node (Y) {$\RV{Y}$}
+            + (0,0.9) node (Hb) {$\RV{H}_b$};
+            \draw (H) -- (copy1) (copy1) to [out=35,in=180] (XH) (copy1) to [out=-35,in=180] (XH2);
+            \draw ($(XH.east)$) to [out=-15,in=180] ($(X1.west) + (-0.2,0.25)$) ($(XH2.east)$) to [out=15,in=180] ($(X1.west)+(-0.2,-0.25)$);
+            \draw ($(X1.west) + (-0.2,0)$) to (X1);
+            \draw (copy0) to [out=-90,in=180] ($(YD.west) + (0,0.15)$);
+            \draw (D) to [out=0,in=180] ($(YD.west)+(0,-0.15)$) (YD) -- (Y);
+            \draw ($(copy1.west)+(-0.1,0.8)$) rectangle ($(X1.west) + (-0.2,-0.55)$);
+            \draw (copy0) to [out = 90, in=180] (Hb);
+        \end{tikzpicture}
+    \end{align}
+    \item There exists a function $f:X\to H_B$ such that, defining $\RV{H}_B:f\circ \RV{X}$, for any $d\in D$, $L\in \sigalg{H}_B$ $(\times_{i\in A}J_i)\in \sigalg{X}$, $K\in \sigalg{Y}$
+    \begin{align}
+        \kernel{T}^{\RV{H}_B\RV{X}\RV{Y}|\RV{D}}_d(L\times(\times_{i\in A}J_i)\times K) = \int_{L} \prod_{i\in A} \kernel{T}^{\RV{X}_1|\RV{H}_B}_h(J_i)\kernel{T}_{h,d}^{\RV{Y}|\RV{H}_B\RV{D}}(K)d\kernel{T}^{\RV{H}_B}(h)
+    \end{align}
+    \item There exists a function $f:X\to H_B$ such that, defining $\RV{H}_B:f\circ \RV{X}$
+        \begin{itemize}
+            \item $\RV{X}_i\CI\RV{X}_{A\setminus\{i\}}|\RV{H}_B$ for all $i\in A$
+            \item $\kernel{T}^{\RV{X}_i|\RV{H}_B}=\kernel{T}^{\RV{X}_j|\RV{H}_B}$ for all $i,j\in A$
+            \item $\RV{Y}\CI\RV{X}|\RV{H}_B\utimes \RV{D}$
+        \end{itemize}
+\end{enumerate}
 \end{theorem}
 
-Examples of such spaces include bounded Borel subsets of $\mathbb{R}$ and bounded subsets of $\mathbb{N}$.
+\begin{proof}
 
+Without loss of generality, assume $X_1=Y=[0,1]$, $A=\mathbb{N}$.
+
+(2) $\iff$ (3) follows from the fact that (3) + the associated quantifications is the integral representation of the string diagram in (2).
+
+We will show (3) $\implies$ (1), (1) $\implies$ (4) and (4) $\implies$ (3).
+
+(3) $\implies$ (1):
+
+$\kernel{T}$ is a see-do forecast, so $\RV{X}\CI_{\kernel{T}}\RV{D}$. Thus there exists a marginal $\kernel{T}^{\RV{X}}$ independent of $\RV{D}$.
+
+From Lemma \ref{lem:partial_representation}, $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kernel{T}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in \mathbb{N}$ and $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}} |\RV{Z}$.
+
+To show $\RV{Y}\CI\RV{X}|\RV{Z}\utimes\RV{D}$, we will make a graphical argument. For $B,C\subset\mathbb{N}$:
+
+\begin{align}
+    \kernel{T}^{\RV{Z}\RV{X}_B\RV{X}_C\RV{Y}} &= \begin{tikzpicture}
+        
+    \end{tikzpicture}
+\end{align}
+
+(1) $\implies$ (4):
+
+
+\end{proof}
+
+
+\begin{proof}
+
+\end{proof}
 
 \begin{definition}[Functional Exchangeability]
 Given a two player statistical model $\kernel{K}:D\times H\to \Delta(\sigalg{E})$, a \emph{choice variable} $\RV{D}_i$ is a variable such that $\RV{D}_i \CI_{\kernel{K}} \RV{O} | \RV{D}$ a finite sequence of random variables $\RV{Y}_1,...,\RV{Y}_n:D\times E \to Y$ and a sequence of choice variables\todo{define choice variables; independent of Y conditional on D} $\RV{D}_1,...,\RV{D}_n:D\to D_0$ on kernel space $(\kernel{C},D,\Omega)$ along with is \emph{functionally exchangeable} if for all permutations $\sigma:[n]\to[n]$, $\kernel{C}^{\RV{Y}_1,...,\RV{Y}_n|\RV{D}_1,...,\RV{D}_n}=\kernel{C}^{\RV{Y}_{\sigma(1)},...,\RV{Y}_{\sigma(n)}|\RV{D}_{\sigma(1)},...,\RV{D}_{\sigma(n)}}$.

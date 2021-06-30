@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex main"] 1623392877 "main.aux" "main.bbl" "main" 1623392883
+["bibtex main"] 1624596905 "main.aux" "main.bbl" "main" 1624596912
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1623392883 23787 11aee693e0e2d424043e52d9d179960e "xelatex"
-  "references.bib" 1623201150 169374 cf32079f866be655db2b1aa0a0a339d1 ""
+  "main.aux" 1624596911 24714 45114e60502b6716c7e2ab2ba05c6bf8 "xelatex"
+  "references.bib" 1624427764 169249 c24b3148fe9f52670ce40d19d23c423c ""
   (generated)
   "main.blg"
   "main.bbl"
-["xdvipdfmx"] 1623392883 "main.xdv" "main.pdf" "main" 1623392883
-  "main.xdv" 1623392883 698672 a1ca677aa24ef10a154e9348479b8528 "xelatex"
+["xdvipdfmx"] 1624596911 "main.xdv" "main.pdf" "main" 1624596912
+  "main.xdv" 1624596911 730060 ed183fff3e7f549670cdb1155e1def1a "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1623392877 "main.tex" "main.xdv" "main" 1623392883
+["xelatex"] 1624596905 "main.tex" "main.xdv" "main" 1624596912
   "/etc/texmf/web2c/texmf.cnf" 1590547021 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -254,18 +254,18 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1599613219 4648586 d2b7c7b61735336533540bc8faab0630 ""
   "chapter_1_introduction.tex" 1620024017 13462 fdc3a4defcc32e4db6bb2206fd9586df ""
-  "chapter_2_technical.tex" 1623391638 91869 b76bab6c7328525a21f0a08ae606b795 ""
-  "chapter_3_seedo_allyouneed.tex" 1623392871 56404 7c9e058b8a8603e18ef6654ef53de93b ""
+  "chapter_2_technical.tex" 1624586530 92845 ec8684f7233fcaec070f8a520e9d938f ""
+  "chapter_3_seedo_allyouneed.tex" 1624596899 69602 62410d4a648413a818fe166500f2b444 ""
   "chapter_4_interventions_counterfactuals.tex" 1623375606 27926 30904b6ec383dc6b8134387667046e72 ""
   "chapter_5_inference.tex" 1623120624 84 ae0d9a8c19c398550cc44ba6722d3d80 ""
-  "main.aux" 1623392883 23787 11aee693e0e2d424043e52d9d179960e "xelatex"
-  "main.bbl" 1623392877 11657 808f9cd7b2e6d08b688b06408f5f8b84 "bibtex main"
-  "main.out" 1623392883 1383 200b40fb608cf759e3ba82bc77b0f548 "xelatex"
+  "main.aux" 1624596911 24714 45114e60502b6716c7e2ab2ba05c6bf8 "xelatex"
+  "main.bbl" 1624596905 11600 3f7d3138e7549099a31ad97c4d5d09c2 "bibtex main"
+  "main.out" 1624596911 1383 200b40fb608cf759e3ba82bc77b0f548 "xelatex"
   "main.tex" 1623375166 6245 8e5da35c04f278a33c91a2e990cd855f ""
-  "main.toc" 1623392883 3067 1ffde2cd4c68c60ed5b0f7c9c34318c2 "xelatex"
+  "main.toc" 1624596911 3069 1c47789a0e8bbed51f6cd2896a46228f "xelatex"
   (generated)
-  "main.log"
-  "main.toc"
-  "main.aux"
   "main.xdv"
+  "main.aux"
+  "main.toc"
+  "main.log"
   "main.out"

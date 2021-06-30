@@ -102,15 +102,14 @@ D.~Heckerman and R.~Shachter.
 \newblock \doi{10.1613/jair.202}.
 \newblock URL \url{https://www.jair.org/index.php/jair/article/view/10151}.
 
-\bibitem[Hewitt and Savage(1955)]{hewitt_symmetric_1955}
-Edwin Hewitt and Leonard~J. Savage.
-\newblock Symmetric {Measures} on {Cartesian} {Products}.
-\newblock \emph{Transactions of the American Mathematical Society}, 80\penalty0
-  (2):\penalty0 470--501, 1955.
-\newblock ISSN 0002-9947.
-\newblock \doi{10.2307/1992999}.
-\newblock URL \url{https://www.jstor.org/stable/1992999}.
-\newblock Publisher: American Mathematical Society.
+\bibitem[Hájek(2019)]{hajek_interpretations_2019}
+Alan Hájek.
+\newblock Interpretations of {Probability}.
+\newblock In Edward~N. Zalta, editor, \emph{The {Stanford} {Encyclopedia} of
+  {Philosophy}}. Metaphysics Research Lab, Stanford University, fall 2019
+  edition, 2019.
+\newblock URL
+  \url{https://plato.stanford.edu/archives/fall2019/entries/probability-interpret/}.
 
 \bibitem[Krittanawong et~al.(2020)Krittanawong, Narasimhan, Wang, Hahn, Virk,
   Farrell, Zhang, and Tang]{krittanawong_association_2020}
