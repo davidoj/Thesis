@@ -663,10 +663,32 @@ From Lemma \ref{lem:partial_representation}, $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kern
 To show $\RV{Y}\CI\RV{X}|\RV{Z}\utimes\RV{D}$, due to the exchangeability of $\kernel{T}$, for any $A\in \sigma(\sigalg{H}^n\utimes\RV{X}_I)$, $I\subset\mathbb{N}$ any size $n$ swap function $\rho^*$ and any $A\in\sigalg{H}^n$:
 
 \begin{align}
-    \int_A \mathbb{E}[\RV{Y}|\sigma(\RV{X}_I)] \circ \rho^* d\kernel{T}_d &= \int_A \mathbb{E}[\RV{Y}|\sigma(\RV{X}_I)] d(\kernel{T}\rho)_d\\
+    \int_A \mathbb{E}[\RV{Y}|\sigma(\RV{X}_I)] \circ \rho^* d\kernel{T}_d &= \int_{\rho^*(A)} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_I)] d(\kernel{T}\rho)_d\\
                                                                                        &= \int_A \mathbb{E}[\RV{Y}|\sigma(\RV{X}_I)] d\kernel{T}_d
 \end{align}
 
+Consider also, for $i,j\in \mathbb{N}$, swap function $\rho^*_{ji}$, $B\in \sigalg{B}([0,1])$:
+
+\begin{align}
+    \int_{\RV{X}_i^{-1}(B)} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)] \circ \rho^*_{ji} d\kernel{T}_d &= \int_{\rho^*_{ji}(\RV{X}_i^{-1}(B))} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)] d(\kernel{T}\rho_{ij})_d\\
+                                                                               &= \int_{\RV{X}^{-1}_{j}(B)} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)] d\kernel{T}_d\\
+                                                                               &= \int_{\RV{X}_j^{-1}} \RV{Y} d\kernel{T}_d\\
+                                                                               &= \int_{\rho_{ji}^*(\RV{X}_j^{-1}(B))}\RV{Y}\circ \rho^*_{ji} d(\kernel{T}\rho_{ji})_d\\
+                                                                               &= \int_{\RV{X}_i^{-1}(B)} \RV{Y}d\kernel{T}_d
+\end{align}
+
+Thus $\mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]\circ\rho^*_{ji}$ is a version of $\mathbb{E}[\RV{Y}|\sigma({\RV{X}_i})]$.
+
+Consider arbitrary $j,n\in \mathbb{N}$ and let $R$ be the set of all size $n$ swap functions. Define $\RV{W}^n := \frac{1}{|R|}\sum_{r\in R} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]\circ \rho^*_r$. Note that for any $\rho^*_r,\rho^*_s\in R$, $\rho^*_s\circ\rho^{*-1}_r\in R$ so the set $\{\rho^*_s\circ\rho^*_r|\rho_s\in R\}=R$, and therefore $\RV{W}^n\circ \rho^*_r=\RV{W}^n$ and so $\RV{W}^n$ is $\sigalg{H}^n$-measurable. For $A\in\sigalg{H}^n$, $d\in D$:
+
+\begin{align}
+    \int_A \RV{W}^n d\kernel{T}_d &= \frac{1}{|R|}\sum_{r\in R} \int_A \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]\circ \rho^*_{r} d\kernel{T}_d\\
+                                  &= \frac{1}{|R|}\sum_{r\in R} \int_{\rho_r^*(A)} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]d(\kernel{T}\rho_r)_d\\
+                                  &= \int_{A} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]d\kernel{T}_d
+                                  &= \int_{A} \RV{Y} d\kernel{T}_d
+\end{align}
+
+Where the last line follows from the fact that $\sigalg{H}^n\subset \sigma(\RV{X}_j)$. Therefore $\RV{W}^n$ is a version of $\mathbb{E}[\RV{Y}|\sigalg{H}^n]$.
 
 \todo[inline]{Then you take a sum of conditional expectations of Y composed with swaps and show it goes to E[1q(Y)|H], then take a product E[1q(Y)|H]Z and show it also goes to E[1q(Y)1r(X)|H] by cancelling all the swaps}
 
