@@ -451,18 +451,18 @@ Given a forecast $(\prob{P},\RV{X})$ where $\RV{X}=\utimes_{i\in A} \RV{X}_i$ fo
 \begin{proof}
 Without loss of generality, assume $X_1=[0,1]$, $\sigalg{X}=\mathcal{B}([0,1])$ and $\RV{X}=[0,1]^{\mathbb{N}}$.
 
-Let $\mathbb{Q}$ be the rationals between $[0,1]$ and define $\RV{Z}_q^n:D\times X\times Y \to [0,1]$ by $\omega \mapsto \frac{1}{n}\sum_{i}^n \mathds{1}_{[0,q]}(\RV{X}_i(\omega))$ Let $\sigalg{Z}^n_q=\sigma(\RV{Z}_q^n)$, i.e. $\RV{Z}^n$ is a 1-tuple partial frequency as in Definition \ref{def:partial_freq}.
+Let $\mathbb{Q}$ be the rationals between $[0,1]$ and define $\RV{Z}_q^n:D\times X\times Y \to [0,1]$ by $\omega \mapsto \frac{1}{n}\sum_{i}^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega))$ Let $\sigalg{Z}^n_q=\sigma(\RV{Z}_q^n)$, i.e. $\RV{Z}^n$ is a 1-tuple partial frequency as in Definition \ref{def:partial_freq}.
 
 $\RV{Z}^n\circ\rho^{*n}=\RV{Z}^n$ for any size $n$ swap function $\rho^{*n}$, so by Lemma \ref{lem:partialfreq_exchangeable} $\RV{Z}^n$ is $\sigalg{H}^n$-measurable.
 
 Let $\rho'_{ij}:\mathbb{N}\to\mathbb{N}$ swaps indices $i$ and $j$ for some $i,j\in[n]$ and otherwise acts as the identity. $\rho_{ij}:D\times X\times Y\to \Delta(\sigalg{D}\times \sigalg{X}\times \sigalg{Y})$ is the swap kernel associated with $\rho'_{ij}$ and $\{\RV{X}_i|i\in \mathbb{N}\}$, and $\rho^*_{ij}$ the function associated with $\rho_{ij}$. For any $m$, $n$, $A\in \sigalg{H}^n$, $d\in D$: 
 
 \begin{align}
-    \int_{A} \RV{Z}_q^{n} (\omega) d\prob{P}(\omega) &= \int_{A} \frac{1}{n}\sum_{i}^{n} (\mathds{1}_{[0,q]}\circ \RV{X}_i)(\omega)d\prob{P}(\omega)\\
-    &= \frac{1}{n}\sum_{i}^{n} \int_{(\rho^*_{ij})^{-1}\rho^*_{ij}(A)} (\mathds{1}_{[0,q]}\circ \RV{X}_i)(\omega)d\prob{P}\rho_{ij}(\omega)\label{eq:permutation_invertible}\\
-    &= \frac{1}{n}\sum_{i}^{n} \int_{\rho^*_{ij}(A)} (\mathds{1}_{[0,q]}\circ \RV{X}_{i}\circ \rho_{ij}) (\omega)d\prob{P}(\omega)\label{eq:using_pushforward}\\
-    &= \frac{1}{n}\sum_{i}^{n} \int_{A} (\mathds{1}_{[0,q]}\circ \RV{X}_{j})(\omega)d\prob{P}(\omega)\label{eq:closure_under_permutation}\\
-    &= \int_{A} (\mathds{1}_{[0,q]} \circ \RV{X}_j)(\omega)d\prob{P}(\omega) \label{eq:cond_expectation_first}
+    \int_{A} \RV{Z}_q^{n} (\omega) d\prob{P}(\omega) &= \int_{A} \frac{1}{n}\sum_{i}^{n} (\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}(\omega)\\
+    &= \frac{1}{n}\sum_{i}^{n} \int_{(\rho^*_{ij})^{-1}\rho^*_{ij}(A)} (\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}\rho_{ij}(\omega)\label{eq:permutation_invertible}\\
+    &= \frac{1}{n}\sum_{i}^{n} \int_{\rho^*_{ij}(A)} (\mathds{1}_{[0,q)}\circ \RV{X}_{i}\circ \rho_{ij}) (\omega)d\prob{P}(\omega)\label{eq:using_pushforward}\\
+    &= \frac{1}{n}\sum_{i}^{n} \int_{A} (\mathds{1}_{[0,q)}\circ \RV{X}_{j})(\omega)d\prob{P}(\omega)\label{eq:closure_under_permutation}\\
+    &= \int_{A} (\mathds{1}_{[0,q)} \circ \RV{X}_j)(\omega)d\prob{P}(\omega) \label{eq:cond_expectation_first}
 \end{align}
 
 Where line \ref{eq:permutation_invertible} follows from exchangeability of $\kernel{T}$ and invertibility of $\rho_{ij}$. the fact that $\rho$line \ref{eq:using_pushforward} follows from the fact that $\prob{P}\rho_{ij}$ is the pushforward measure of $\prob{P}$ with respect to $\rho^*_{ij}$ and \ref{eq:closure_under_permutation} uses the fact that $\rho(A) = A$ for all $A\in \RV{Z}^n_q$ and all permutations $\rho$.
@@ -486,28 +486,28 @@ Furthermore, for all $n\in \mathbb{N}$, $\sup_\omega|\RV{Z}^n(\omega)|\leq 1$ so
 Finally, because for all $n\in \mathbb{N}$, all $j\in[n]$ and all $A\in \sigalg{H}^n$ we also have
 
 \begin{align}
-    \int_A \mathds{1}_{[0,q]}(\RV{X}_j(\omega))d\prob{P}(\omega) &= \int_A \RV{Z}_q^n(\omega) d\prob{P}(\omega)
+    \int_A \mathds{1}_{[0,q)}(\RV{X}_j(\omega))d\prob{P}(\omega) &= \int_A \RV{Z}_q^n(\omega) d\prob{P}(\omega)
 \end{align}
 
 it follows that for all $A\in \sigalg{H}$, $j\in \mathbb{N}$
 
 \begin{align}
-    \int_A \RV{Z}_q(\omega) d\prob{P}(\omega) = \int_A \mathds{1}_{[0,q]}(\RV{X}_j(\omega))d\prob{P}(\omega)\label{eq:cond_expectation}
+    \int_A \RV{Z}_q(\omega) d\prob{P}(\omega) = \int_A \mathds{1}_{[0,q)}(\RV{X}_j(\omega))d\prob{P}(\omega)\label{eq:cond_expectation}
 \end{align}
 
-[\citet{cinlar_probability_2011} Thm 4.7.]. Thus $\RV{Z}_q = \mathbb{E}[\mathds{1}_{[0,q]}\circ\RV{X}_j|\sigalg{H}]$ for all $j\in \mathbb{N}$. This implies $\RV{Z}_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]$.
+[\citet{cinlar_probability_2011} Thm 4.7.]. Thus $\RV{Z}_q = \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{X}_j|\sigalg{H}]$ for all $j\in \mathbb{N}$. This implies $\RV{Z}_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{X}_j|\sigalg{H}]$.
 
-Define $\RV{Z} = \utimes_q\in \mathbb{Q} \RV{Z}_q$. As $\sigma(\RV{Z})\subset\sigalg{H}$, Equation \ref{eq:cond_expectation} establishes in addition that $\RV{Z}_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigma(Z)]$. 
+Define $\RV{Z} = \utimes_q\in \mathbb{Q} \RV{Z}_q$. As $\sigma(\RV{Z})\subset\sigalg{H}$, Equation \ref{eq:cond_expectation} establishes in addition that $\RV{Z}_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{X}_j|\sigma(Z)]$. 
 
-By the definition of conditional expectation, for any version of $\prob{P}_{\RV{Z}(\omega)}^{\RV{X}_j|\RV{Z}\RV{D}}([0,q])$ we have
+By the definition of conditional expectation, for any version of $\prob{P}_{\RV{Z}(\omega)}^{\RV{X}_j|\RV{Z}\RV{D}}([0,q))$ we have
 
 \begin{align}
-    \prob{P}_{\RV{Z}(\omega)}^{\RV{X}_j|\RV{Z}}([0,q]) &= \mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigma(\RV{Z})](\omega)\\
+    \prob{P}_{\RV{Z}(\omega)}^{\RV{X}_j|\RV{Z}}([0,q)) &= \mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{X}_j|\sigma(\RV{Z})](\omega)\\
 \end{align}
 
 $\prob{P}$-almost surely.
 
-Furthermore, the measure $\prob{P}_{h}^{\RV{X}_j|\RV{Z}}$ is uniquely defined by its value on $[0,q]$ for all $q\in \mathbb{Q}$. Thus for all $i,j\in \mathbb{N}$ we have
+Furthermore, the measure $\prob{P}_{h}^{\RV{X}_j|\RV{Z}}$ is uniquely defined by its value on $[0,q)$ for all $q\in \mathbb{Q}$. Thus for all $i,j\in \mathbb{N}$ we have
 
 \begin{align}
     \prob{P}^{\RV{X}_j|\RV{H}} = \prob{P}^{\RV{X}_i|\RV{H}}
@@ -517,16 +517,16 @@ Completing the proof of property 1.
 
 Next, we will show $\RV{X}_i\CI_\kernel{T} \RV{X}_{\mathbb{N}\setminus \{i\}} | \RV{H}$.
 
-Let $\RV{Z}^{m,n}_q$ be a partial frequency as in Definition \ref{def:partial_freq} where $q$ stands for the set $[0,q]$. $\RV{Z}^{m,n}_q\circ \rho^{*n}=\RV{Z}^{m,n}_q$ for all size $n$ swap functions so by Lemma \ref{lem:partialfreq_exchangeable}, $\RV{Z}^{m,n}_q$  is $\sigalg{H}^n$ measurable.
+Let $\RV{Z}^{m,n}_q$ be a partial frequency as in Definition \ref{def:partial_freq} where $q$ stands for the set $[0,q)$. $\RV{Z}^{m,n}_q\circ \rho^{*n}=\RV{Z}^{m,n}_q$ for all size $n$ swap functions so by Lemma \ref{lem:partialfreq_exchangeable}, $\RV{Z}^{m,n}_q$  is $\sigalg{H}^n$ measurable.
 
 Let $J\subset[n]$ be some set of $m$ elements from $n$ and $\rho'_{IJ}$ be a permutation that sends the elements of $I\subset[n]$ to $J$.
 
 \begin{align}
-    \int_{A} \RV{Z}_q^{m,n} (\omega) d\prob{P}(\omega) &= \int_{A} \frac{(n-m)!}{n!}\sum_{I\subset[n]}\prod_{i\in I} (\mathds{1}_{[0,q]}\circ \RV{X}_i)(\omega)d\prob{P}(\omega)\\
-    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{(\rho^*_{IJ})^{-1}\rho^*_{IJ}(A)} \prod_{i\in I}(\mathds{1}_{[0,q]}\circ \RV{X}_i)(\omega)d\prob{P}\rho_{IJ}(\omega)\label{eq:permutation_invertible}\\
-    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{\rho^*_{IJ}(A)} \prod_{i\in I}(\mathds{1}_{[0,q]}\circ \RV{X}_{i}\circ \rho_{IJ}) (\omega)d\prob{P}(\omega)\label{eq:using_pushforward}\\
-    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q]}\circ \RV{X}_{j})(\omega)d\prob{P}(\omega)\label{eq:closure_under_permutation}\\
-    &= \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q]} \circ \RV{X}_j)(\omega)d\prob{P}(\omega) \label{eq:cond_expectation_first}
+    \int_{A} \RV{Z}_q^{m,n} (\omega) d\prob{P}(\omega) &= \int_{A} \frac{(n-m)!}{n!}\sum_{I\subset[n]}\prod_{i\in I} (\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}(\omega)\\
+    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{(\rho^*_{IJ})^{-1}\rho^*_{IJ}(A)} \prod_{i\in I}(\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}\rho_{IJ}(\omega)\label{eq:permutation_invertible}\\
+    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{\rho^*_{IJ}(A)} \prod_{i\in I}(\mathds{1}_{[0,q)}\circ \RV{X}_{i}\circ \rho_{IJ}) (\omega)d\prob{P}(\omega)\label{eq:using_pushforward}\\
+    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q)}\circ \RV{X}_{j})(\omega)d\prob{P}(\omega)\label{eq:closure_under_permutation}\\
+    &= \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q)} \circ \RV{X}_j)(\omega)d\prob{P}(\omega) \label{eq:cond_expectation_first}
 \end{align}
 
 From Equation \ref{eq:cond_expectation_first}, we have for all $n$, $m<n$, $A\in \sigalg{H}^{n+1}$
@@ -543,32 +543,32 @@ Furthermore, for all $n\in \mathbb{N}$, $\sup_\omega|\RV{Z}^{m,n}_q(\omega)|\leq
 
 \begin{align}
     \lim_{n\to\infty} \int_A \RV{Z}^{m,n}_q(\omega) d\prob{P}(\omega) &= \int_A \RV{Z}^{m,\infty}_q(\omega) d\prob{P}(\omega)\\
-    \implies \RV{Z}^{m,n}_q &= \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]
+    \implies \RV{Z}^{m,n}_q &= \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q)}\circ \RV{X}_j|\sigalg{H}]
 \end{align}
 
 Let $[n]^m_\mathrm{rep}$ be the set of all $m$ length sequences of elements of $[n]$ with repeats. Note that $\lim_{n\to\infty}\frac{(n-m)!}{n!}|[n]^m_\mathrm{rep}| = \lim_{n\to\infty}\frac{n^m(n-m)!}{n!}-1 = 0$
 
 \begin{align}
-    \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}](\omega) &= \lim_{n\to\infty}\frac{(n-m)!}{n!}\sum_{I\subset[n]}\prod_{i\in I} (\mathds{1}_{[0,q]}\circ \RV{X}_i)\\
-                                                                      &= \lim_{n\to\infty}\frac{1}{n^m}\sum_{I\subset[n]}\prod_{i\in I}(\mathds{1}_{[0,q]}\circ \RV{X}_i)\\
-                                                                      &= \lim_{n\to\infty}\frac{1}{n^m}\left[\sum_{i_1\in [n]}...\sum_{i_m\in [n]}\prod_{k\in [m]} (1_{[0,q]}\circ \RV{X}_{i_k})-\sum_{J\subset[n]^m_\mathrm{rep}}\prod_{i\in I} (\mathds{1}_{[0,q]}\circ \RV{X}_i)\right]\\ 
-                                                                      &= \prod_{k\in [m]} \lim_{n\to\infty} \frac{1}{n}\sum_{i_k\in[n]}(1_{[0,q]}\circ\RV{X}_{ik})\\
-                                                                      &= \prod_{k\in [m]} \mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]\\
-                                                                      &= \prod_{k\in J} \mathbb{E}[\mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]\\
+    \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q)}\circ \RV{X}_j|\sigalg{H}](\omega) &= \lim_{n\to\infty}\frac{(n-m)!}{n!}\sum_{I\subset[n]}\prod_{i\in I} (\mathds{1}_{[0,q)}\circ \RV{X}_i)\\
+                                                                      &= \lim_{n\to\infty}\frac{1}{n^m}\sum_{I\subset[n]}\prod_{i\in I}(\mathds{1}_{[0,q)}\circ \RV{X}_i)\\
+                                                                      &= \lim_{n\to\infty}\frac{1}{n^m}\left[\sum_{i_1\in [n]}...\sum_{i_m\in [n]} (1_{[0,q)}\circ \RV{X}_{i_k})-\sum_{J\subset[n]^m_\mathrm{rep}}\prod_{i\in I} (\mathds{1}_{[0,q)}\circ \RV{X}_i)\right]\\ 
+                                                                      &= \prod_{k\in [m]} \lim_{n\to\infty} \frac{1}{n}\sum_{i_k\in[n]}(1_{[0,q)}\circ\RV{X}_{ik})\\
+                                                                      &= \prod_{k\in [m]} \mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{X}_j|\sigalg{H}]\\
+                                                                      &= \prod_{k\in J} \mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{X}_j|\sigalg{H}]\\
                                                                       &= \prod_{k\in J} \RV{Z}_q\label{eq:h_measurable}
 \end{align}
 
-Because $\mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}]$ is $\RV{Z}$-measurable we also have
+Because $\mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q)}\circ \RV{X}_j|\sigalg{H}]$ is $\RV{Z}$-measurable we also have
 
 \begin{align}
-    \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigma(\RV{Z})] &= \prod_{k\in J} \RV{Z}_q
+    \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q)}\circ \RV{X}_j|\sigma(\RV{Z})] &= \prod_{k\in J} \RV{Z}_q
 \end{align}
 
 By the definition of conditional expectation, for all $J\subset \mathbb{N}$
 
 \begin{align}
-    \prob{P}_{\RV{H}(\omega)}^{\RV{X}_J|\RV{H}}(\times_{j\in J}[0,q]) &= \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q]}\circ \RV{X}_j|\sigalg{H}](\omega)\\
-                                                                      &= \prod_{k\in J} \prob{P}_{\RV{H}(\omega)}^{\RV{X}_j|\RV{H}}([0,q])
+    \prob{P}_{\RV{H}(\omega)}^{\RV{X}_J|\RV{H}}(\times_{j\in J}[0,q)) &= \mathbb{E}[\prod_{j\in J} \mathds{1}_{[0,q)}\circ \RV{X}_j|\sigalg{H}](\omega)\\
+                                                                      &= \prod_{k\in J} \prob{P}_{\RV{H}(\omega)}^{\RV{X}_j|\RV{H}}([0,q))
 \end{align}
 
 And thus $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in\mathbb{N}$.
@@ -660,35 +660,63 @@ $\kernel{T}$ is a see-do forecast, so $\RV{X}\CI_{\kernel{T}}\RV{D}$. Thus there
 
 From Lemma \ref{lem:partial_representation}, $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kernel{T}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in \mathbb{N}$ and $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}} |\RV{Z}$.
 
-To show $\RV{Y}\CI\RV{X}|\RV{Z}\utimes\RV{D}$, due to the exchangeability of $\kernel{T}$, for any $A\in \sigma(\sigalg{H}^n\utimes\RV{X}_I)$, $I\subset\mathbb{N}$ any size $n$ swap function $\rho^*$ and any $A\in\sigalg{H}^n$:
+To show $\RV{Y}\CI\RV{X}|\RV{Z}\utimes\RV{D}$, consider arbitrary $\RV{V}:E\to V$. Due to the exchangeability of $\kernel{T}$, for any $A\in \sigma(\sigalg{H}^n\utimes\RV{X}_I)$, $I\subset\mathbb{N}$ any size $n$ swap function $\rho^*$ and any $A\in\sigalg{H}^n$:
 
 \begin{align}
-    \int_A \mathbb{E}[\RV{Y}|\sigma(\RV{X}_I)] \circ \rho^* d\kernel{T}_d &= \int_{\rho^*(A)} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_I)] d(\kernel{T}\rho)_d\\
-                                                                                       &= \int_A \mathbb{E}[\RV{Y}|\sigma(\RV{X}_I)] d\kernel{T}_d
+    \int_A \mathbb{E}[\RV{V}|\sigma(\RV{X}_I)] \circ \rho^* d\kernel{T}_d &= \int_{\rho^*(A)} \mathbb{E}[\RV{V}|\sigma(\RV{X}_I)] d(\kernel{T}\rho)_d\\
+                                                                                       &= \int_A \mathbb{E}[\RV{V}|\sigma(\RV{X}_I)] d\kernel{T}_d
 \end{align}
 
 Consider also, for $i,j\in \mathbb{N}$, swap function $\rho^*_{ji}$, $B\in \sigalg{B}([0,1])$:
 
 \begin{align}
-    \int_{\RV{X}_i^{-1}(B)} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)] \circ \rho^*_{ji} d\kernel{T}_d &= \int_{\rho^*_{ji}(\RV{X}_i^{-1}(B))} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)] d(\kernel{T}\rho_{ij})_d\\
-                                                                               &= \int_{\RV{X}^{-1}_{j}(B)} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)] d\kernel{T}_d\\
-                                                                               &= \int_{\RV{X}_j^{-1}} \RV{Y} d\kernel{T}_d\\
-                                                                               &= \int_{\rho_{ji}^*(\RV{X}_j^{-1}(B))}\RV{Y}\circ \rho^*_{ji} d(\kernel{T}\rho_{ji})_d\\
-                                                                               &= \int_{\RV{X}_i^{-1}(B)} \RV{Y}d\kernel{T}_d
+    \int_{\RV{X}_i^{-1}(B)} \mathbb{E}[\RV{V}|\sigma(\RV{X}_j)] \circ \rho^*_{ji} d\kernel{T}_d &= \int_{\rho^*_{ji}(\RV{X}_i^{-1}(B))} \mathbb{E}[\RV{V}|\sigma(\RV{X}_j)] d(\kernel{T}\rho_{ij})_d\\
+                                                                               &= \int_{\RV{X}^{-1}_{j}(B)} \mathbb{E}[\RV{V}|\sigma(\RV{X}_j)] d\kernel{T}_d\\
+                                                                               &= \int_{\RV{X}_j^{-1}(B)} \RV{V} d\kernel{T}_d\\
+                                                                               &= \int_{\rho_{ji}^*(\RV{X}_j^{-1}(B))}\RV{V}\circ \rho^*_{ji} d(\kernel{T}\rho_{ji})_d\\
+                                                                               &= \int_{\RV{X}_i^{-1}(B)} \RV{V}d\kernel{T}_d
 \end{align}
 
-Thus $\mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]\circ\rho^*_{ji}$ is a version of $\mathbb{E}[\RV{Y}|\sigma({\RV{X}_i})]$.
+Thus $\mathbb{E}[\RV{V}|\sigma(\RV{X}_j)]\circ\rho^*_{ji}$ is a version of $\mathbb{E}[\RV{V}|\sigma({\RV{X}_i})]$.
 
-Consider arbitrary $j,n\in \mathbb{N}$ and let $R$ be the set of all size $n$ swap functions. Define $\RV{W}^n := \frac{1}{|R|}\sum_{r\in R} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]\circ \rho^*_r$. Note that for any $\rho^*_r,\rho^*_s\in R$, $\rho^*_s\circ\rho^{*-1}_r\in R$ so the set $\{\rho^*_s\circ\rho^*_r|\rho_s\in R\}=R$, and therefore $\RV{W}^n\circ \rho^*_r=\RV{W}^n$ and so $\RV{W}^n$ is $\sigalg{H}^n$-measurable. For $A\in\sigalg{H}^n$, $d\in D$:
+Define $\RV{W}^n_q := \frac{1}{n}\sum_{i\in [n]} \mathbb{E}[\mathds{1}_{[0,q]}\RV{V}|\sigma(\RV{X}_i)]$. Note that for any size $n$ swap function $\rho^*$, $\RV{W}^n_q\circ\rho^*=\RV{W}_q^n$, therefore $\RV{W}_q^n$ is $\sigalg{H}^n$-measurable. 
+
+Consider $\omega,\omega'$ such that $\RV{W}_q^n(\omega)\neq \RV{W}_q^n(\omega')$. Then there exists no size $n$ swap function $\rho^*$ such that $\RV{X}_{[n]}(\omega)=\RV{X}_{[n]}(\rho^*(\omega'))$. Without loss of generality, suppose $\RV{X}_1(\omega)\leq\RV{X}_2(\omega)\leq...\leq\RV{X}_n(\omega)$ and $\RV{X}_1(\omega')\leq\RV{X}_2(\omega')\leq...\leq\RV{X}_n(\omega')$. Then there is some first index $j$ for which $\RV{X}_{j}(\omega)> \RV{X}_{j}(\omega')$. and some and some rational $q$ such that $\RV{X}_j(\omega)>q>\RV{X}_j(\omega')$. Then $\sum_{i}^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega)) > \sum_i^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega'))$ and so $\RV{Z}^n(\omega)\neq\RV{Z}^n(\omega')$ also.
+
+Thus $\RV{W}_q^n$ is in fact $\sigma(\RV{Z}^n)$ measurable. Define $\sigalg{I}^n:=\vee_{n\to\infty} \sigma(\RV{Z}^n)$. Then $\sigalg{I}^1\supset\sigalg{I}^2\supset...\supset\sigma(\RV{Z})=\cap_{i}^\infty \sigalg{I}^i$. In addition, but the $\sigalg{H}^n$-measurability of $\RV{Z}^{>n}$, $\sigalg{I}^n\subset\sigalg{H}^n$ and $\sigalg{I}\subset\sigalg{H}$.
+
+For $A\in\sigalg{I}^n$, $d\in D$:
 
 \begin{align}
-    \int_A \RV{W}^n d\kernel{T}_d &= \frac{1}{|R|}\sum_{r\in R} \int_A \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]\circ \rho^*_{r} d\kernel{T}_d\\
-                                  &= \frac{1}{|R|}\sum_{r\in R} \int_{\rho_r^*(A)} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]d(\kernel{T}\rho_r)_d\\
-                                  &= \int_{A} \mathbb{E}[\RV{Y}|\sigma(\RV{X}_j)]d\kernel{T}_d
-                                  &= \int_{A} \RV{Y} d\kernel{T}_d
+    \int_A \RV{W}_q^n d\kernel{T}_d &= \frac{1}{n}\sum_{i\in[n]} \int_A \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{V}|\sigma(\RV{X}_i)] d\kernel{T}_d\\
+                                  &= \frac{1}{n}\sum_{i\in[n]} \int_{\rho_{ij}^*(A)} \mathbb{E}[\mathds{1}_{[0,q)}\circ|\sigma(\RV{X}_i)]\circ\rho_{ij}^*d(\kernel{T}\rho_{ij})_d\\
+                                  &= \int_{A} \mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{V} \sigma(\RV{X}_j)]d\kernel{T}_d\\
+                                  &= \int_{A} \mathds{1}_{[0,q)}\circ \RV{V} d\kernel{T}_d
 \end{align}
 
-Where the last line follows from the fact that $\sigalg{H}^n\subset \sigma(\RV{X}_j)$. Therefore $\RV{W}^n$ is a version of $\mathbb{E}[\RV{Y}|\sigalg{H}^n]$.
+Where the last line follows from the fact that $\sigalg{I}^n\subset \sigma(\RV{X}_j)$. Therefore $\RV{W}^n_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q)}\circ|\sigalg{I}^n]$. Furthermore $\RV{W}^1_q,...,\RV{W}^n_q,..$ is a backwards martingale with respect to $\sigalg{I}^1,....,sigalg{I}^n,..\sigalg{I}$ and so it goes to a limit $\RV{W}_q=\mathbb{E}[\mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{V} |\sigma(\RV{Z})]$.
+
+Define $\RV{W}^{n}_{q,r} = \frac{1}{n}\sum_{i\in[n]} \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{V}|\mathds{1}_{[0,r)}\circ\RV{X}_i] \mathds{1}_{[0,r)}\circ\RV{X}_i$.
+
+For $A\in \sigalg{I}^n$, any $d\in D$ and any $j\in [n]$:
+
+\begin{align}
+    \int_A \RV{W}^{n}_{q,r} (\omega)d\kernel{T}_d(\omega) &= \int_A \frac{1}{n}\sum_{i\in [n]} \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{V}|\mathds{1}_{[0,r)}\circ\RV{X}_i](\omega) \mathds{1}_{[0,r)}\circ\RV{X}_i(\omega) d\kernel{T}_d(\omega)\\
+    &= \int_A\mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{V}|\mathds{1}_{[0,r)}\circ\RV{X}_j](\omega) \mathds{1}_{[0,r)}\circ\RV{X}_j(\omega)  d\kernel{T}_d(\omega)\\
+    &= \int_{A\cap \RV{X}_j^{-1}([0,r))}\mathds{1}_{[0,q)}\circ \RV{V} (\omega)d\kernel{T}_d(\omega)\\
+    &= \int_A \mathds{1}_{[0,q)}\circ\RV{V}(\omega) \mathds{1}_{[0,r)}\circ\RV{X}_i(\omega) d\kernel{T}_d(\omega)
+\end{align}
+
+The last line follows from the fact that $A\cap \RV{X}_j^{-1}([0,r))\in [0,r)\}\in \sigma(\RV{X}_j)$. Thus $\RV{W}^{n}_{q,r}$ is a version of $\mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{V} \mathds{1}_{[0,r)}\circ \RV{X}_j|\sigalg{I}^n]$. As before, we have a backward martingale that goes to $\mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{V} \mathds{1}_{[0,r)}\circ \RV{X}_j|\sigalg{I}^n]$.
+
+So
+
+\begin{align}
+    \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{V} \mathds{1}_{[0,r)}\circ \RV{X}_j|\sigalg{I}^n] &= \lim_{n\to\infty}\frac{1}{n}\sum_{i\in [n]} \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{V}|\mathds{1}_{[0,r)}\circ\RV{X}_i] \mathds{1}_{[0,r)}\circ\RV{X}_i\\
+    &= \int_A \left(\mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{V}|\sigma(\RV{X}_i)]\right) d\kernel{T}_d\right)\\
+    && \left(\frac{1}{n}\sum_{i\in[n]} \int_A \mathbb{E}[\mathds{1}_{[0,r)}\circ\RV{X}|\sigma(\RV{X}_i)] d\kernel{T}_d\right)
+\end{align}
+
 
 \todo[inline]{Then you take a sum of conditional expectations of Y composed with swaps and show it goes to E[1q(Y)|H], then take a product E[1q(Y)|H]Z and show it also goes to E[1q(Y)1r(X)|H] by cancelling all the swaps}
 
