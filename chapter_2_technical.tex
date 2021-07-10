@@ -1,14 +1,11 @@
 %!TEX root = main.tex
 
-\todo[inline][Todo: I need the following theorem in this chapter]
-\begin{theorem}[Representation]\label{th:representation}
-\todo[inline]{Representation theorem: can uniquely define kernel $P^{\RV{X}|\RV{Y}}$ with $P^{\RV{Z}|\RV{Y}}$ and $P^{\RV{X}|\RV{Z}\RV{Y}}$ }
-\end{theorem}
- \begin{proof}
- Iterated application of Theorem \ref{th:iterated_disint}
- \end{proof}
+
 
 \todo[inline]{Todo: conditional expectation, martingale convergence}
+\todo[inline]{Almost sure equality convention}
+\todo[inline]{Existence of disintegrations for choosing probability measures}
+
 
 \subsection{Probability Theory}
 
@@ -1101,10 +1098,10 @@ Note that for any variable $\RV{W}:\Omega\times D\to W$ and the domain variable 
 \draw ($(m.east) + (0,-0.15)$) -- (F);
 \end{tikzpicture} &= \begin{tikzpicture}
 \path (0,0) node (O) {}
-++ (0.3,0) coordinate (copy1)
+++ (0.3,0) node[copymap] (copy1) {}
 ++ (1,0) node[kernel] (m) {$\kernel{K}_{0}$}
-++ (0.7,0) coordinate (copy0)
-+ (0,-0.5) coordinate (copy2)
+++ (0.7,0) node[copymap] (copy0) {}
++ (0,-0.5) node[copymap] (copy2) {}
 ++ (0.7,0.3) node[kernel] (Fx) {$\kernel{F}^\RV{W}$}
 ++(0,-0.8) node[kernel] (Fd) {$\kernel{F}^{\RV{D}}$}
 ++(0.7,0) node (D) {$\RV{D}$}
@@ -1117,10 +1114,10 @@ Note that for any variable $\RV{W}:\Omega\times D\to W$ and the domain variable 
 \end{tikzpicture}\\
 &= \begin{tikzpicture}
 \path (0,0) node (O) {}
-++ (0.3,0) coordinate (copy1)
+++ (0.3,0) node[copymap] (copy1) {}
 ++ (1,0) node[kernel] (m) {$\kernel{K}_{0}$}
-++ (0.7,0) coordinate (copy0)
-+ (0,-0.5) coordinate (copy2)
+++ (0.7,0) node[copymap] (copy0) {}
++ (0,-0.5) node[copymap] (copy2) {}
 ++ (0.7,0.3) node[kernel] (Fx) {$\kernel{F}^\RV{W}$}
 ++(0,-0.8) coordinate (Fd)
 ++(0.7,0) node (D) {$\RV{D}$}
@@ -1133,11 +1130,10 @@ Note that for any variable $\RV{W}:\Omega\times D\to W$ and the domain variable 
 \end{tikzpicture}\\
 &= \begin{tikzpicture}
 \path (0,0) node (O) {}
-++ (0.3,0) coordinate (copy1)
-+ (0.2,0) coordinate (copy3)
+++ (0.3,0) node[copymap] (copy1) {}
++ (0.2,0) node[copymap] (copy3) {}
 ++ (1,0) node[kernel] (m) {$\kernel{K}_{0}$}
-++ (0.7,0) coordinate (copy0)
-+ (0,-0.5) coordinate (copy2)
+++ (0.7,0) coordinate (hold)
 ++ (0.7,-0.1) node[kernel] (Fx) {$\kernel{F}^\RV{W}$}
 ++(0,-0.5) coordinate (Fd)
 ++(0.7,0) node (D) {$\RV{D}$}
@@ -1150,10 +1146,9 @@ Note that for any variable $\RV{W}:\Omega\times D\to W$ and the domain variable 
 \end{tikzpicture}\\
 &= \begin{tikzpicture}
 \path (0,0) node (O) {}
-++ (0.3,0) coordinate (copy1)
+++ (0.3,0) node[copymap] (copy1) {}
 ++ (1,0) node[kernel] (m) {$\kernel{K}$}
-++ (0.7,0) coordinate (copy0)
-+ (0,-0.5) coordinate (copy2)
+++ (0.7,0) coordinate (hold)
 ++ (0.7,-0.) node[kernel] (Fx) {$\kernel{F}^\RV{W}$}
 ++(0,-0.5) coordinate (Fd)
 ++(0.7,0) node (D) {$\RV{D}$}
@@ -1165,7 +1160,7 @@ Note that for any variable $\RV{W}:\Omega\times D\to W$ and the domain variable 
 \end{tikzpicture}\\
 &=\begin{tikzpicture}
 \path (0,0) node (O) {}
-++ (0.3,0) coordinate (copy1)
+++ (0.3,0) node[copymap] (copy1) {}
 ++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{W}|\RV{D}}$}
 ++(0,-0.5) coordinate (Fd)
 ++(1,0) node (D) {$\RV{D}$}
@@ -1178,36 +1173,160 @@ Note that for any variable $\RV{W}:\Omega\times D\to W$ and the domain variable 
 
 We use the informal convention of labelling wires in quote marks $``\RV{X}''$ if that wire is ``supposed to'' carry the label $\RV{X}$ but the label may not be valid.
 
-\begin{theorem}[Iterated disintegration]\label{th:iterated_disint}
+\begin{lemma}[Iterated disintegration]\label{th:iterated_disint}
 Given a kernel space $(\kernel{K},D,\Omega)$, random variables $\RV{X}$, $\RV{Y}$ and $\RV{Z}$ and domain variable $\RV{D}$,
 \begin{align}
 \begin{tikzpicture}
-	\path (0,0.15) node (D) {$``\RV{D}''$}
-	+ (0,-0.3) node (X) {$``\RV{X}''$}
-	++ (.7,-0.15) coordinate (copy0)
-	++ (.7,0) node[kernel] (Yxd) {$\kernel{K}^{\RV{Y}|\RV{XD}}$}
-	++ (0.7,0) coordinate (copy1)
+	\path (0,0.15) node (D) {$``\RV{X}''$}
+	+ (0,-0.3) node (X) {$``\RV{D}''$}
+	++ (.7,0) node[copymap] (copy0) {}
+	+ (0,-0.3) node[copymap] (copy01) {}
+	++ (.7,-0.15) node[kernel] (Yxd) {$\kernel{K}^{\RV{Y}|\RV{XD}}$}
+	++ (0.7,0) node[copymap] (copy1) {}
 	++(1.5,0) node[kernel] (Zxyd) {$\kernel{K}^{\RV{Z}|\RV{XYD}}$}
 	++(1.5,0) node (Z) {$``\RV{Z}''$}
-	+(0,-0.4) node (Y) {$``\RV{Y}''$};
+	+(0,0.4) node (Y) {$``\RV{Y}''$};
 	\draw (D) -- ($(Yxd.west) + (0,0.15)$) (X) -- ($(Yxd.west) + (0,-0.15)$);
 	\draw (Yxd) -- (Zxyd);
-	\draw ($(copy0) + (0,0.15)$) to [out=90,in=180] ($(Zxyd.west)+(0,0.15)$);
-	\draw ($(copy0) + (0,-0.15)$) to [out=-90,in = 180] ($(Zxyd.west)+(0,-0.15)$);
-	\draw (copy1) to [out=-90,in=180] (Y) (Zxyd) -- (Z);
-\end{tikzpicture}\in \kernel{K}^{\{\RV{ZY}|\RV{XD}\}}
+	\draw (copy0) to [out=90,in=180] ($(Zxyd.west)+(0,0.15)$);
+	\draw (copy01) to [out=-90,in = 180] ($(Zxyd.west)+(0,-0.15)$);
+	\draw (copy1) to [out=75,in=180] (Y) (Zxyd) -- (Z);
+\end{tikzpicture}\overset{a.s.}{=} \kernel{K}^{\RV{YZ}|\RV{XD}}
 \end{align}
 
 Equivalently, for $d\in D$ and $x\in X$, $A\in \sigalg{Y}$, $B\in\sigalg{Z}$,
 
 \begin{align}
-	(d,x;A,B)\mapsto \int_A \kernel{K}^{\RV{Z}|\RV{XYD}}_{(x,y,d)}(B) d\kernel{K}^{\RV{Y}|\RV{XD}}_{(x,d)}(y) \in \kernel{K}^{\{\RV{ZY}|\RV{XD}\}}
+	(d,x;A\times B)\mapsto \int_A \kernel{K}^{\RV{Z}|\RV{XYD}}_{(x,y,d)}(B) d\kernel{K}^{\RV{Y}|\RV{XD}}_{(x,d)}(dy) \overset{a.s.}{=} \kernel{K}^{\RV{YZ}|\RV{XD}}
 \end{align}
-\end{theorem}
+\end{lemma}
 
 \begin{proof}
-\todo[inline]{standard result, to write}
 
+Define
+\begin{align}
+	\kernel{L} := (d,x;A\times B)\mapsto \int_A \kernel{K}^{\RV{Z}|\RV{XYD}}_{(x,y,d)}(B) d\kernel{K}^{\RV{Y}|\RV{XD}}_{(x,d)}(dy)
+\end{align}
+
+We need to show that $\kernel{L}$ satisfies the disintegration property. That is
+
+
+\begin{align}
+	\kernel{K}^{\RV{XYZ}|\RV{D}} = \begin{tikzpicture}
+		\path (0,0) node (O) {``$\RV{D}$''}
+		++ (0.6,0) node[copymap] (copy1) {}
+		++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XYZ}|\RV{D}}$}
+		++ (1,0.15) node[copymap] (copy0) {}
+		+(0.1,-0.3) node (T) {}
+		++ (1.5,0) node (E) {``$\RV{X}$''}
+		++(-0.9,-0.8) node[kernel] (K) {$\kernel{L}$}
+		++(0.9,0.15) node (F) {``$\RV{Y}$''}
+		+(0,-0.3) node (G) {``$\RV{Z}$''};
+		\draw (O) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+		\draw (copy0) to [bend right] (K) ($(K.east)+(0,0.15)$) -- (F);
+		\draw ($(K.east) + (0,-0.15)$) -- (G);
+		\draw (copy1) to [out=290,in=180] ($(K.west) + (0,-0.15)$);
+		\draw[-{Rays [n=8]}] ($(m.east) + (0,-0.15)$) -- (T);
+	\end{tikzpicture}
+\end{align}
+Substituting in the definition of $\kernel{L}$:
+\begin{align}
+	\begin{tikzpicture}
+		\path (0,0) node (O) {``$\RV{D}$''}
+		++ (0.6,0) node[copymap] (copy1) {}
+		++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XYZ}|\RV{D}}$}
+		++ (1,0.15) node[copymap] (copy0) {}
+		+(0.1,-0.3) node (T) {}
+		++ (1.5,0) node (E) {``$\RV{X}$''}
+		++(-0.7,-0.8) node[kernel] (K) {$\kernel{L}$}
+		++(0.9,0.15) node (F) {``$\RV{Y}$''}
+		+(0,-0.3) node (G) {``$\RV{Z}$''};
+		\draw (O) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+		\draw (copy0) to [bend right] (K) ($(K.east)+(0,0.15)$) -- (F);
+		\draw ($(K.east) + (0,-0.15)$) -- (G);
+		\draw (copy1) to [out=290,in=180] ($(K.west) + (0,-0.15)$);
+		\draw[-{Rays [n=8]}] ($(m.east) + (0,-0.15)$) -- (T);
+	\end{tikzpicture} &= \begin{tikzpicture}
+	\path (0,0.15) node (D) {``$\RV{D}$''}
+	++ (0.6,0) node[copymap] (copy0) {}
+	++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XYZ}|\RV{D}}$}
+	++ (.9,0.15) node[copymap] (copy1) {}
+	++ (.9,-0.75) node[kernel] (Yxd) {$\kernel{K}^{\RV{Y}|\RV{XD}}$}
+	++ (0.9,0) node[copymap] (copy2) {}
+	++(0.9,-0.5) node[kernel] (Zxyd) {$\kernel{K}^{\RV{Z}|\RV{XYD}}$}
+	++(1.5,0) node (Z) {$``\RV{Z}''$}
+	+(0,0.5) node (Y) {$``\RV{Y}''$}
+	+(0,1.25) node (X) {$``\RV{X}''$};
+	\draw (D) -- (m) (copy0) to [out=-45,in=180] ($(Yxd.west) + (0,-0.15)$);
+	\draw (copy1) to [out=-45,in=180] ($(Yxd.west) + (0,0.15)$);
+	\draw ($(m.east)+(0,0.15)$) -- (X) (Yxd) -- (Y) (Zxyd) -- (Z);
+	\draw[-{Rays[n=8]}] (m) -- ($(m.east) + (0.2,0)$);
+	\draw[-{Rays[n=8]}] ($(m.east) + (0,-0.15)$) -- ($(m.east)+(0.2,-0.15)$);
+	\draw (copy0) to [out=-90,in=180] ($(Zxyd.west)+(0,-0.15)$);
+	\draw (copy1) to [out=-90, in=180] ($(Yxd.south) + (0,-0.3)$);
+	\draw ($(Yxd.south)+(0,-0.3)$) -- (Zxyd);
+	\draw (copy2) to [out=-90,in=180] ($(Zxyd.west) + (0,0.15)$);
+\end{tikzpicture}\\
+	&= \begin{tikzpicture}
+	\path (0,0.15) node (D) {``$\RV{D}$''}
+	++ (0.6,0) node[copymap] (copy0) {}
+	++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XY}|\RV{D}}$}
+	++ (.9,0.15) node[copymap] (copy1) {}
+	+  (1.8,0) node[copymap] (copy3) {}
+	++ (.9,-0.75) node[kernel] (Yxd) {$\kernel{K}^{\RV{Y}|\RV{XD}}$}
+	++ (0.8,0) node[copymap] (copy2) {}
+	++(1,-0.5) node[kernel] (Zxyd) {$\kernel{K}^{\RV{Z}|\RV{XYD}}$}
+	++(1.5,0) node (Z) {$``\RV{Z}''$}
+	+(0,0.5) node (Y) {$``\RV{Y}''$}
+	+(0,1.25) node (X) {$``\RV{X}''$};
+	\draw (D) -- (m) (copy0) to [out=-45,in=180] ($(Yxd.west) + (0,-0.15)$);
+	\draw (copy1) to [out=-45,in=180] ($(Yxd.west) + (0,0.15)$);
+	\draw ($(m.east)+(0,0.15)$) -- (X) (Yxd) -- (Y) (Zxyd) -- (Z);
+	\draw[-{Rays[n=8]}] (m) -- ($(m.east) + (0.2,0)$);
+	\draw (copy0) to [out=-90, in=180] ($(Zxyd.west)+(0,-0.15)$);
+	\draw (copy3) to [out=-90, in=180] ($(Zxyd.west) + (0,0.15)$);
+	\draw (copy2) to [out=-90, in=180] (Zxyd);
+\end{tikzpicture}\\
+	&= \begin{tikzpicture}
+	\path (0,0.15) node (D) {``$\RV{D}$''}
+	++ (0.6,0) node[copymap] (copy0) {}
+	++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XY}|\RV{D}}$}
+	++ (0.9,0) node[copymap] (copy2) {}
+	+  (0.1,0.15) node[copymap] (copy3) {}
+	++(0.9,-0.5) node[kernel] (Zxyd) {$\kernel{K}^{\RV{Z}|\RV{XYD}}$}
+	++(1.5,0) node (Z) {$``\RV{Z}''$}
+	+(0,0.5) node (Y) {$``\RV{Y}''$}
+	+(0,1.15) node (X) {$``\RV{X}''$};
+	\draw (D) -- (m);
+	\draw ($(m.east)+(0,0.15)$) -- ($(m.east)+(0.4,0.15)$) to [out=0,in=180] (X);
+	\draw[-{Rays[n=8]}] ($(m.east) + (0,-0.15)$) -- ($(m.east)+(0.2,-0.15)$);
+	\draw (m) -- (Y);
+	\draw (copy0) to [out=-90,in=180] ($(Zxyd.west)+(0,-0.15)$);
+	\draw (copy2) to [out=-90,in=180] ($(Zxyd.west) + (0,0.)$);
+	\draw (copy3) to [out=-90,in=180] ($(Zxyd.west) + (0,0.15)$);
+\end{tikzpicture}\\
+	&= \kernel{K}^{\RV{XYZ}|\RV{D}}
+\end{align}
+As required.
+
+\end{proof}
+
+\begin{lemma}\label{lem:representation_of_kernels}
+Suppose a kernel space $(\kernel{K},D,\Omega)$ for which disintegrations exist and a set of random variables $\{\RV{X}_i:D\times \Omega\to X_i|i\in [n]\}$, $\RV{X}_{[n]}:=\utimes_{i\in A}\RV{X}_i$ and $\RV{Y}:D\times \Omega \to \RV{Y}$ such that $\kernel{K}^{\RV{X}_A|\RV{Y}}$ exists. Consider an arbitrary non-repeating sequence $[\RV{X}_{i_1},\RV{X}_{i_2},...,\RV{X}_{i_{n}}]$ where $i_j=\rho(j)$ for some permuation $\rho:[n]\to[n]$ and a corresponding sequence $[\RV{W}_{i_0},\RV{W}_{i_1},\RV{W}_{i_2},...\RV{W}_{i_{n-1}}]:=[\stopper{0.2},\utimes_{j\in\{i_1\}} \RV{X}_j,\utimes_{j\in \{i_1,i_2\}}\RV{X}_j,...,\utimes_{j\in\{i_1,i_2,...,i_{n-1}\}}\RV{X}_j]$. Then $\kernel{K}^{\RV{X}_A|\RV{Y}}$ can be almost surely uniquely uniquely defined by the collection of kernels $\kernel{K}^{\RV{X}_{i_j}|\RV{W}_{i_{j-1}}\RV{Y}}$, $i\in A$, and in particular for any $\times_{j\in[n]} B_{i_j}$, $B_{i_j}\in \sigalg{X}_{i_j}$:
+
+\begin{align}
+	\kernel{K}^{\RV{X}_{\rho([n])}|\RV{Y}}_y(\times_{j\in[n]} B_{i_j}) &\overset{a.s.}{=} \int_{B_{i_1}}...\int_{B_{i_{n-1}}}\kernel{K}^{\RV{X}_{i_{n}}|\RV{W}_{i_{n-1}}\RV{Y}}_{x_{i_1},...,x_{i_{n-1}},y}(B_{i_n})...\kernel{K}^{\RV{X}_1|\RV{Y}}_y(dx_{i_1}) 
+\end{align}
+\end{lemma}
+
+\begin{proof}
+By application of Lemma \ref{th:iterated_disint}
+
+\begin{align}
+	\kernel{K}^{\RV{X}_{\rho([n])}|\RV{Y}}_y(\times_{j\in[n]} B_{i_j}) &= \int_{B_{i_1}} \kernel{K}^{\RV{X}_{\rho(\{2,..,n\})}|\RV{X}_{i_{1}}\RV{Y}}_{x_{i_1},y}(B_{i_n})...\kernel{K}^{\RV{X}_{i_1}|\RV{Y}}_y(dx_{i_1}) 
+\end{align}
+
+We can then apply Lemma \ref{th:iterated_disint} recursively to $\kernel{K}^{\RV{X}_{\rho(\{2,..,n\})}|\RV{X}_{i_{1}}\RV{Y}}_{x_{i_1},y}(B_{i_n})$ and so forth.
 \end{proof}
 
 \subsubsection{Existence of Disintegrations}
