@@ -1,7 +1,16 @@
+# Outline
+
+ - Why do we want to learn anything? Most of the time, so we can manipulate stuff better
+
+
+
 ## Introduction
 
 - Introduce whatever ends up coming next
 - People like manipulating things, and want to know what happens after they've done some manipulations
+
+
+
 
 ## Chapter 2: Technical prerequisites
 
