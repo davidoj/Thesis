@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  8 JUL 2021 15:59
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  13 JUL 2021 16:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1025,14 +1025,6 @@ Overfull \hbox (27.99973pt too wide) detected at line 1309
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23]
-Overfull \hbox (89.77626pt too wide) in paragraph at lines 1315--1316
-\T1/lmr/m/it/10 cor-re-spond-ing se-quence $\OT1/cmr/m/n/10 [\OT1/cmss/m/n/10 W
-[]\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 W[]\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 W[
-]\OML/cmm/m/it/10 ; :::\OT1/cmss/m/n/10 W[]\OT1/cmr/m/n/10 ] := [[]\OML/cmm/m/i
-t/10 ; [][]\OT1/cmss/m/n/10 X[]\OML/cmm/m/it/10 ; [][]\OT1/cmss/m/n/10 X[]\OML/
-cmm/m/it/10 ; :::; [][]\OT1/cmss/m/n/10 X[]\OT1/cmr/m/n/10 ]$\T1/lmr/m/it/10 .
- []
-
 [24]
 LaTeX Font Info:    Trying to load font information for U+dsrom on input line 1
 346.
@@ -1103,13 +1095,23 @@ Overfull \hbox (25.17783pt too wide) has occurred while \output is active
  []
 
 [46] [47]
+
+LaTeX Warning: Reference `lem:partialfreq_exchangeable' on page 48 undefined on
+ input line 450.
+
+
 Overfull \hbox (25.17783pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 48 \T1/lmr/m/sl/10 CHAPTER 1.  TWO PLAYER STATISTICAL MODELS AND
  SEE-DO MODELS
  []
 
-[48] [49]
-Overfull \hbox (35.57124pt too wide) detected at line 558
+[48]
+
+LaTeX Warning: Reference `lem:partialfreq_exchangeable' on page 49 undefined on
+ input line 514.
+
+[49]
+Overfull \hbox (35.57124pt too wide) detected at line 553
 []
  []
 
@@ -1120,7 +1122,7 @@ Overfull \hbox (25.17783pt too wide) has occurred while \output is active
  []
 
 [50] [51]
-Overfull \hbox (35.74866pt too wide) detected at line 643
+Overfull \hbox (35.74866pt too wide) detected at line 638
 []
  []
 
@@ -1146,8 +1148,16 @@ Overfull \hbox (25.17783pt too wide) has occurred while \output is active
  []
 
 [56]
-Overfull \hbox (2.24638pt too wide) in paragraph at lines 923--924
-[][]\T1/lmr/bx/n/10 Lemma 1.1.17 \T1/lmr/m/n/10 (Func-tion-ally ex-change-able 
+Overfull \hbox (20.47404pt too wide) in paragraph at lines 891--892
+[][]\T1/lmr/bx/n/10 Definition 1.1.15 \T1/lmr/m/n/10 (Func-tional Ex-change-abi
+l-ity)\T1/lmr/bx/n/10 . []\T1/lmr/m/n/10 Given a see-do fore-cast $\OT1/cmr/m/n
+/10 (\U/msb/m/n/10 T\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 D\OML/cmm/m/it/10 ; \OT
+1/cmss/m/n/10 O\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 Y\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (2.24638pt too wide) in paragraph at lines 902--903
+[][]\T1/lmr/bx/n/10 Lemma 1.1.16 \T1/lmr/m/n/10 (Func-tion-ally ex-change-able 
 se-quences with ex-change-able choices
  []
 
@@ -1158,8 +1168,8 @@ Overfull \hbox (25.17783pt too wide) has occurred while \output is active
  []
 
 [58]
-Overfull \hbox (16.68456pt too wide) in paragraph at lines 1070--1071
-[][]\T1/lmr/bx/n/10 Definition 1.1.22 \T1/lmr/m/n/10 (Bayesian See-Do Model)\T1
+Overfull \hbox (16.68456pt too wide) in paragraph at lines 999--1000
+[][]\T1/lmr/bx/n/10 Definition 1.1.20 \T1/lmr/m/n/10 (Bayesian See-Do Model)\T1
 /lmr/bx/n/10 . []\T1/lmr/m/n/10 A Bayesian See-Do Model $\OMS/cmsy/m/n/10 h\U/m
 sb/m/n/10 U\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 D\OML/cmm/m/it/10 ; \OT1/cmss/m/
 n/10 X\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 Y\OMS/cmsy/m/n/10 i$
@@ -1177,12 +1187,12 @@ Overfull \hbox (25.17783pt too wide) has occurred while \output is active
  SEE-DO MODELS
  []
 
-[62] [63]
-Underfull \hbox (badness 10000) in paragraph at lines 1239--1243
+[62]
+Underfull \hbox (badness 10000) in paragraph at lines 1168--1172
 
  []
 
-) (./chapter_4_interventions_counterfactuals.tex
+[63]) (./chapter_4_interventions_counterfactuals.tex
 Overfull \hbox (25.17783pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 64 \T1/lmr/m/sl/10 CHAPTER 1.  TWO PLAYER STATISTICAL MODELS AND
  SEE-DO MODELS
@@ -1320,12 +1330,12 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 178.
  ) 
 Here is how much of TeX's memory you used:
- 27749 strings out of 479819
- 504874 string characters out of 5895847
- 846993 words of memory out of 5000000
- 44294 multiletter control sequences out of 15000+600000
+ 27737 strings out of 479819
+ 504609 string characters out of 5895847
+ 845765 words of memory out of 5000000
+ 44282 multiletter control sequences out of 15000+600000
  619188 words of font info for 123 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  60i,17n,83p,1472b,974s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (77 pages, 852396 bytes).
+Output written on main.xdv (77 pages, 832252 bytes).

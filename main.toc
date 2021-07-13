@@ -17,17 +17,17 @@
 \contentsline {subsection}{\numberline {1.1.1}Decomposability}{40}{subsection.1.1.1}%
 \contentsline {subsubsection}{Examples of decomposable and indecomposable see-do models}{42}{section*.26}%
 \contentsline {subsubsection}{Exchangeability}{43}{section*.27}%
-\contentsline {subsection}{\numberline {1.1.2}Causal questions and decision functions}{59}{subsection.1.1.2}%
-\contentsline {subsubsection}{Example}{60}{section*.33}%
-\contentsline {subsubsection}{Avoiding indecomposability with decision functions}{61}{section*.34}%
-\contentsline {subsubsection}{Decision rules}{61}{section*.36}%
-\contentsline {section}{\numberline {1.2}Existence of counterfactuals}{62}{section.1.2}%
-\contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{62}{section*.42}%
-\contentsline {paragraph}{Definition 7.1.2 (Submodel)}{63}{section*.43}%
-\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{63}{section*.44}%
-\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{63}{section*.45}%
-\contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{63}{section*.46}%
-\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{64}{section*.47}%
+\contentsline {subsection}{\numberline {1.1.2}Causal questions and decision functions}{58}{subsection.1.1.2}%
+\contentsline {subsubsection}{Example}{59}{section*.32}%
+\contentsline {subsubsection}{Avoiding indecomposability with decision functions}{60}{section*.33}%
+\contentsline {subsubsection}{Decision rules}{60}{section*.35}%
+\contentsline {section}{\numberline {1.2}Existence of counterfactuals}{61}{section.1.2}%
+\contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{62}{section*.41}%
+\contentsline {paragraph}{Definition 7.1.2 (Submodel)}{62}{section*.42}%
+\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{62}{section*.43}%
+\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{62}{section*.44}%
+\contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{62}{section*.45}%
+\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{63}{section*.46}%
 \contentsline {chapter}{\numberline {2}See-do models and the causal modelling zoo}{65}{chapter.2}%
 \contentsline {subsection}{\numberline {2.0.1}D-causation}{67}{subsection.2.0.1}%
 \contentsline {subsection}{\numberline {2.0.2}D-causation vs Limited Unresponsiveness}{69}{subsection.2.0.2}%

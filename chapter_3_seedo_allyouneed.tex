@@ -888,125 +888,64 @@ Functional exchangeability is a generalisation of exchangeablility to Markov ker
 
 
 \begin{definition}[Functional Exchangeability]
-Given a two player statistical model $(\kernel{T},\RV{H},\RV{D},\RV{O})$ where $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some random variables $\RV{X}_i$, for any perumtation $\rho':A\to A$ define the observation swap function $\rho^{\RV{X}}$ and the choice swap function $\rho^{\RV{D}}$ as in \ref{def:permut_swap}. Then $\kernel{T}$ is functionally exchangeable with respect to $\RV{D}$ and $\RV{X}$ if $\kernel{T}=R^{\RV{D}}\kernel{T}R^{\RV{X}}$.
-\end{definition}
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{O},\RV{Y})$ where $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some random variables $\{\RV{D}_i\}_A, \{\RV{X}_i\}_A$, for any perumtation $\rho:A\to A$ define the observation and choice swap function $\rho^{\RV{D}\RV{X}}$ and the choice swap function $\rho^{\RV{D}}$ as in \ref{def:permut_swap}. Then $\kernel{T}$ is functionally exchangeable with respect to $\RV{D}$ and $\RV{X}$ if $\kernel{T}=R^{\RV{D}}\kernel{T}R^{\RV{D}\RV{X}}$.
 
-Due to \ref{eq:function_composition}
-
-
-\begin{lemma}[Functionally exchangeable sequences with exchangeable choices induce exchangeable sequences]\label{lem:f-ex2ex}
-Given functionally exchangeable sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D_0^n,Y_0^n)$ with product $\sigma$-algebra, along with an exchangable measure $\prob{P}^{\RV{D}_{[n]}}$, define $\prob{P}'$ as follows:
+$\kernel{T}$ is infinitely functionally exchangeably extendable if here exists a do forecast $(\kernel{T}',\RV{D}',\RV{O}')$ non-interfering and functionally exchangeable with respect to $\RV{D}'=\utimes_{i\in\mathbb{N}}\RV{D}'_i$ and $\RV{X}'=\utimes_{i\in\mathbb{N}}\RV{X}'_i$ such that for all $B\subset A$
 
 \begin{align}
-    \prob{P}' = 
-    \begin{tikzpicture}
-        \path (0,0) node[dist] (P) {$\prob{P}$}
-        ++ (0.5,0) node[copymap] (copy0) {}
-        ++ (0.5,0.5) node[kernel] (C) {$\kernel{C}$}
-        ++ (1,0) node (Y) {$\RV{Y}_{[n]}$}
-        + (0,-1) node (D) {$\RV{D}_{[n]}$};
-        \draw (P) -- (copy0) (copy0) to [out=45,in=180] (C) (C) -- (Y);
-        \draw (copy0) to [out=-45,in=180] (D);
-    \end{tikzpicture}
+    \kernel{T}^{\prime \RV{X}'_B|\RV{D}'_B}=\kernel{T}^{\RV{X}_B|\RV{D}_B} 
 \end{align}
 
-Then sequence $\utimes_{i\in[n]}(\RV{Y}_i\otimes\RV{D}_i)$ (given by the obvious projection maps) on the probability space $(\prob{P}',Y_0^n\times D_0^n, \sigalg{Y}_0^n\otimes\sigalg{D}_0^n)$ is exchangeable.
+\end{definition}
+
+The following Lemma is a bit odd as it involves interpreting an exchangeable probability measure as an exchangeable see-do forecast with observations and consequences interchanged. This is so we can re-use Theorem \ref{th:rep_seedo_obs} without proving an almost identical theorem for probability measures.
+
+\begin{lemma}[Functionally exchangeable see-do models with exchangeable choices induce exchangeable see do models]\label{lem:f-ex2ex}
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{O},\RV{Y})$ functionally exchangeable with respect to $\RV{Y}=\utimes_{i\in A} \RV{Y}_i$ and $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and some $\prob{P}^{\RV{D}}$ exchangeable with respect to $\RV{D}$, then $\prob{P}\kernel{T}\in \Delta(\sigalg{D}\otimes\sigalg{O}\otimes\sigalg{Y})$ is exchangeable with respect to $\RV{G}:=\utimes_i\in A \RV{Y}_i\utimes\RV{D}_i$. 
+
+Furthermore, defining the trivial choice $\RV{C}:\{*\}\times O\times Y\to *$, $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{O})$ is a see-do model exchangeable with respect to $\RV{G}$.
 \end{lemma}
 
 \begin{proof}
-For $i\in [n]$, $A_i\in \sigalg{Y}$, $B_i\in \sigalg{D}$ and arbitrary permutation $\sigma$ we have
+
+For arbitrary $\rho:A\to A$, associated swap kernel $R^{\RV{D}}$ and $R^{\RV{X}}$:
 
 \begin{align}
-    \prob{P}^{\prime \RV{X}_{1}\RV{D}_1,...,\RV{X}_n\RV{D}_n}(\prod_{i\in[n]} A_i\times B_i) &= \int_{\prod_{i\in[n]}B_i} \prob{P}^{\prime \RV{X}_{[n]}|\RV{D}_{[n]}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\prime \RV{D}_{[n]}}(d_{[n]})\\
-                                                                                             &= \int_{\prod_{i\in[n]}B_i} \kernel{C}^{\RV{X}_{[n]}|\RV{D}_{[n]}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\RV{D}_{[n]}}(d_{[n]})\label{eq:swapoutprime}\\
-                                                                                             &= \int_{\prod_{i\in[n]}B_i} \kernel{C}^{\RV{X}_{\sigma([n])}|\RV{D}_{\sigma([n])}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\RV{D}_{\sigma([n])}}(d_{[n]})\label{eq:doubleswap}\\
-                                                                                             &= \int_{\prod_{i\in[n]}B_i} \kernel{P}^{\prime \RV{X}_{\sigma([n])}|\RV{D}_{\sigma([n])}}_{d_{[n]}}(\prod_{i\in[n]} A_i) d\prob{P}^{\prime \RV{D}_{\sigma([n])}}\label{eq:swapforpprime}\\
-                                                                                             &= \prob{P}^{\prime \RV{X}_{\sigma(1)}\RV{D}_{\sigma(1)},...,\RV{X}_{\sigma(n)}\RV{D}_{\sigma(n)}}(\prod_{i\in[n]} A_i\times B_i)
+    \prob{P}\kernel{T} R^{\RV{D}\RV{X}} &= (\prob{P} R^{\RV{D}}) \kernel{T} R^{\RV{D}\RV{X}}\\
+                                  &= \prob{P}(R^{\RV{D}}\kernel{T}R^{\RV{D}\RV{X}})\\
+                                  &= \prob{P}\kernel{T}
 \end{align}
-
-Where line \ref{eq:doubleswap} follows from exchangeability of $\prob{P}$ and functional exchangeability of $\kernel{C}$ and lines \ref{eq:swapoutprime} and \ref{eq:swapforpprime} follow from the fact that for any invertible function $f$ of $\RV{D}_{[n]}$ and random variable $\RV{Y}$, $\kernel{C}^{\RV{Y}|f(\RV{D}_{[n]})}$ is a version of $\prob{P}^{\prime \RV{Y}|f(\RV{D}_{[n]})}$ and $\prob{P}^{f(\RV{D}_{[n]})}=\prob{P}^{\prime \RV{Y}|f(\RV{D}_{[n]})}$.
 \end{proof}
 
-\begin{definition}[Non-interfering]
-A pair of sequences $\RV{Y}_{[n]}$ and $\RV{D}_{[n]}$ on $(\kernel{C},D,\Omega)$ is \emph{noninterfering} if for all $U\subset [n]$, $\kernel{C}^{\RV{Y}_U|\RV{D}_U}$ exists and $\kernel{C}^{\RV{Y}_{U}|\RV{D}_{[n]}}=\kernel{C}^{\RV{Y}_U|\RV{D}_U}$. Non-interference implies that discard maps can ``fall through'' kernels:
+% \begin{definition}[Non-interfering]
+% Given a do forecast $(\kernel{T},\RV{D},\RV{O})$ where $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some random variables $\{\RV{D}_i\}_A, \{\RV{X}_i\}_A$, $\kernel{T}$ is non-interfereing with respect to $\RV{D}$ and $\RV{X}$ if for all $B\subset A$, $\RV{X}_B\CI \RV{D}_{A\setminus B}|\RV{D}_B$.
+% \end{definition}
 
-\begin{align}
-\begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
-        + (0,-0.3) node (D2) {$\RV{D}_2$}
-        ++ (2,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
-        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
-        +  (0,-0.3) node (Y2) {};
-        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
-        \draw (D2) -- ($(C.west)+(0,-0.15)$);
-        \draw[-{Rays[n=8]}] ($(C.east)+(0,-0.15)$) -- (Y2);
-    \end{tikzpicture} &= \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
-        + (0,-0.3) node (D2) {$\RV{D}_2$}
-        ++ (2,-0.15) node[kernel] (C) {$\kernel{C}^{\RV{Y}_1|\RV{D}_1}$}
-        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
-        +  (-3,-1) node (Y2) {$\RV{Y}_2$};
-        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
-        \draw (D2) -- ($(C.west)+(0,-0.15)$);
-        \draw[-{Rays[n=8]}] ($(C.east)+(0,-0.15)$) -- (Y2);
-    \end{tikzpicture}
-\end{align}
-
-\end{definition}
-
-\todo[inline]{I think it is the case that functionally exchangeable + non-interfering implies infinitely functionally exchangeably extendable, but not proved yet}
-
-\begin{theorem}[Representation of functionally exchangeable sequences]
-Let $(Y,\sigalg{Y})$ be a compact Hausdorff space with the Baire $\sigma$-algebra and $(D,\sigalg{D})$ a finite discrete space. Let $\kernel{C}$ be a Markov kernel $D^\mathbb{N}\to \Delta(\sigalg{Y}^\mathbb{N})$ and $\RV{Y}_\mathbb{N}$, $\RV{D}_\mathbb{N}$ a pair of functionally exchangeable sequences. Define $(F,\sigalg{F})$ to be the set of all Markov kernels $D\to \Delta(\sigalg{Y})$ with $\sigalg{F}$ the coarsest $\sigma$-algebra for which all evaluation maps $\mathrm{ev}_{d,A}:F\to \mathbb{R}$ given by $\mathrm{ev}_{d,A}:\kernel{H}\mapsto \kernel{H}_d(A)$ are measurable. Then there exists a unique probability measure $\nu$ on $\Delta(\sigalg{F})$ such that for all $n\in\mathbb{N}$, $d\in D^n$, $C\in \sigalg{Y}^n$:
-
-\begin{align}
-    \kernel{C}_d(C) = \int_{F} \prod_{i\in [n]} \kernel{H}_{\RV{D}_i(d)}(\RV{Y}_i(C)) d\nu(\kernel{H})
-\end{align}
+\begin{theorem}[Representation of functionally exchangeable do forecasts]
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{O})$ with denumerable choice set $D$ and infinitely extendably functionally exchangeable with respect to $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and $\RV{Y}=\utimes_{i\in A} \RV{Y}_i$, there exists a random variable $\RV{W}:D\times O\to W$ such that for all $i\in A$, $\RV{Y}_i\CI_{\kernel{T}}\RV{D}_{A\setminus\{i\}}\RV{Y}_{A\setminus \{i\}}|\RV{W}\RV{D}_i$ and $\kernel{T}^{\RV{Y}_i|\RV{D}_i}=\kernel{T}^{\RV{Y}_j|\RV{D}_j}$ for all $i,j\in A$ and $\RV{O}\CI\RV{Y}|\RV{W}\RV{D}$.
 \end{theorem}
 
 \begin{proof}
-Let $\delta\in\Delta(\sigalg{D})$ be such that for all $n\in \mathbb{N}$, $\emptyset\neq B\in \sigalg{D}^n$ we have $\delta\splitter{0.1}_n(B)>0$. Such a measure exists by assumption on $D$. Define $delta_{\underline{n}}:=\delta\splitter{0.1}_n$. It is trivial to show that $\delta_{\underline{n}}$ is exchangeable. Define 
+By extendability of $\kernel{T}$ we have some $(\kernel{T}',\RV{D}',\RV{O}',\RV{Y}'')$ functionally exchangeable with respect to $\RV{D}'=\utimes_{i\in \mathbb{N}}\RV{D}'_i$ and $\RV{Y}'=\utimes_{i\in \mathbb{N}} \RV{Y}'_i$.
+
+By Lemma \ref{lem:f-ex2ex} we have an infinitely extendably exchangeable $\prob{P}\kernel{T}'$ with respect to $\RV{G}:=\utimes_{i\in\mathbb{N}} \RV{Y}_i\utimes\RV{D}_i$. Furthermore, by denumerability of $D$, $\prob{P}$ can be chosen such that $\prob{P}(\RV{D}'_A\in B)>0$ for all $B\in \sigalg{D}$, $B\neq \emptyset$. By Theorem \ref{th:rep_seedo_obs} we therefore have some $\RV{W}$ such that $(\prob{P}\kernel{T}')^{\RV{Y}_i\RV{D}_i|\RV{W}}=(\prob{P}\kernel{T}')^{\RV{Y}_j\RV{D}_j|\RV{W}}$ for all $i,j\in \mathbb{N}$ and $\RV{Y}_i\utimes\RV{D}_i\CI_{\prob{P}\kernel{T}'} \utimes_{j\in\mathbb{N}\setminus\{i\}} \RV{Y}_j \utimes \RV{D}_j | \RV{W}$ and $\RV{O}\CI\RV{G}|\RV{W}\RV{D}$. \todo[inline]{semigraphoid axioms} By weak union, $\RV{Y}_i\CI_{\prob{P}\kernel{T}'} \utimes_{j\in\mathbb{N}\setminus\{i\}} \RV{Y}_j \utimes \RV{D}_j | \RV{W} \RV{D}_i$ and $\RV{O}\CI\RV{Y}|\RV{W}$.
+
+Because $\prob{P}$ is strictly positive, we can apply Lemma \ref{lem:agree_disint} for
 \begin{align}
-\kernel{C}^n_{\delta} := \begin{tikzpicture}
-        \path (0,0) node[dist] (P) {$\prob{P}$}
-        ++ (0.5,0) node[copymap] (copy0) {}
-        ++ (0.5,0.5) node[kernel] (C) {$\kernel{C}$}
-        ++ (1,0) node (Y) {$\RV{Y}_{[n]}$}
-        + (0,-1) node (D) {$\RV{D}_{[n]}$};
-        \draw (P) -- (copy0) (copy0) to [out=45,in=180] (C) (C) -- (Y);
-        \draw (copy0) to [out=-45,in=180] (D);
-\end{tikzpicture}
+    \kernel{T}^{\RV{O}\RV{Y}|\RV{W}\RV{D}} \overset{a.s.}{=} (\prob{P}\kernel{T}')^{\RV{O}'\RV{Y}'_A|\RV{W}\RV{D}'_A}
 \end{align}
- $:= \delta_{\underline{n}} \kernel{C}\utimes \mathrm{Id}_{D^n}$
 
+Thus $\RV{Y}_i\CI_{\kernel{T}} \utimes_{j\in A \setminus\{i\}} \RV{Y}_j \utimes \RV{D}_j | \RV{W} \RV{D}_i$ and $\RV{O}\CI\RV{Y}|\RV{W}$. Marginalising and applying this independence, we finally have for all $i, j\in A$
 
-
-.  By Lemma \ref{lem:f-ex2ex}, there is an exchangeable sequence $\utimes_{i\in[n]} \RV{Y}'_i\utimes \RV{D}'_i$ on the probability space $(\delta_{\underline{n}} \kernel{C}\utimes\mathrm{Id}_D,Y^n\times D^n, \sigalg{Y}^n\otimes\sigalg{D}^n)$.
- 
-
-
+\begin{align}
+    \kernel{T}^{\RV{Y}_i|\RV{D}_i}&\text{ and }\kernel{T}^{\RV{Y}_j|\RV{D}_j}\text{ exist and }\\
+    \kernel{T}^{\RV{Y}_i|\RV{D}_i} &= \kernel{T}^{\RV{Y}_j|\RV{D}_j}
+\end{align}
 \end{proof}
 
-\begin{corollary}
-Equivalently, for all $n\in \mathbb{N}$, let $\kernel{G}:F\to $
+\begin{theorem}[Representation of functionally exchangeable see-do forecasts]
 
-\begin{align}
-\begin{tikzpicture}
-    \path (0,0) node (D) {$\RV{D}_{[n]}$}
-    ++ (2,0.) node[kernel] (C) {$\kernel{C}$}
-    ++ (2,0.) node (Y) {$\RV{Y}_{[n]}$};
-    \draw (D) -- (C) -- (Y);
-\end{tikzpicture} &= \begin{tikzpicture} \path (0,0) node (D1) {$\RV{D}_1$}
-        + (0,-0.5) node (dot) {...}
-        + (0,-1) node (D2) {$\RV{D}_n$}
-        ++ (2,0) node[kernel] (C) {$\kernel{H}^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2}$}
-        ++ (2,0.15) node (Y1) {$\RV{Y}_1$}
-        +  (0,-0.5) node (dot2) {...}
-        +  (0,-1) node (Y2) {$\RV{Y}_n$};
-        \draw (D1) -- ($(C.west)+(0,0.15)$) ($(C.east)+(0,0.15)$) -- (Y1);
-        \draw (D2) -- ($(C.west)+(0,-0.15)$) ($(C.east)+(0,-0.15)$) -- (Y2);
-    \end{tikzpicture}
-\end{align}
-
-\end{corollary}
+\end{theorem}
 
 \subsection{Causal questions and decision functions}
 
