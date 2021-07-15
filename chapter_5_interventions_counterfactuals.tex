@@ -1,7 +1,53 @@
 %!TEX root = main.tex
 
-\chapter{See-do models and the causal modelling zoo}\label{ch:4}
+\chapter{See-do models, interventions and counterfactuals}\label{ch:4}
 
+
+\section{How do see-do models relate to other approaches to causal inference?}
+
+\begin{itemize}
+    \item Review of approaches: CBN, CBN soft intervention, CBN fat-hand intervention, CBN noise intervention, SEM (Pearl/Heckman), PO unit model, PO population model, SWIG, Dawid decision theoretic model, Heckerman decision theoretic model, Rohde/Lattimore Bayesian model
+    \item Focus on CBN, PO unit model, PO population model
+\end{itemize}
+
+
+\section{Interpretations of the choice set}
+
+\begin{itemize}
+    \item Decisions or actions we could actually make - decision problem
+    \item Idealised/hypothetical choices constrained by a set of causal relationships - interventions
+    \item Suppositions - counterfactuals
+    \item Further possibility - intervention $\to$ decisions might be actuator randomisation
+\end{itemize}
+
+\section{Causal Bayesian Networks as see-do models}
+
+\begin{itemize}
+    \item Definition of CBN, intervention set (recall: existence of disintegrations, decomposability)
+    \item How interventions differ from decisions: no effect strength uncertainty, side effects, may be more interventions than what we actually know how to do
+    \item Example: sets of CBNs and d-separation
+\end{itemize}
+
+\section{Unit Potential Outcomes models}
+
+\begin{itemize}
+    \item Counterfactual random variables Yx answer a question: "what would Y be supposing X was x?"
+    \item Proposed formalisation of suppositions: (....)
+    \item Implies existence of counterfactual random variables
+    \item Difference between suppositions and decisions: determinism, other conditions
+    \item "3-player models": hypotheses, suppositions and interventions/decisions
+    \item Error in key theorem of Ruben, Imbens (ignorability does not imply functional exchangeability)
+    \item What can be represented by a 3 player model?
+    \begin{itemize}
+        \item ``1 of 2 counterfactuals'': anything
+        \item ``3 of 2 counterfactuals'': very restrictive
+        \item ``2 of 3 counterfactuals'': Bell's theorem, counterfactual definiteness
+    \end{itemize}
+\end{itemize}
+
+
+
+\todo[inline]{This chapter is currently a disorganised cut and paste}
 
 The field of causal inference is additionally concerned with types of questions called ``counterfactual'' by Pearl. There is substantial theoretical interest in counterfactual questions, but counterfactual questions are much more rarely found in applications than interventional questions. Even though see-do models are motivated by the need to answer interventional questions, the theory develope here is surprisingly appliccable to counterfactuals as well. In particular, the theory of see-do models offers explanations for three key features of counterfactual models:
 \begin{itemize}
@@ -330,3 +376,75 @@ D-causation is not transitive: if $\RV{X}$ D-causes $\RV{Y}$ and $\RV{Y}$ D-caus
 \subsection{Decision sequences and parallel decisions}
 
 Just as observations $\RV{X}$ can be a sequence of random variables $\RV{X}_1$, $\RV{X}_2$, ..., $\RV{D}$ can be a sequence of ``sub-choices'' $\RV{D}_1$, $\RV{D}_2$, ... . Note that by positing such a sequence there is no requirement that $\RV{D}_1$ comes ``before'' $\RV{D}_2$ in any particular sense.
+
+
+
+
+\section{Existence of counterfactuals}
+
+\todo[inline]{I'm struggling with how to explain this well.}
+
+``Counterfactual'' or ``potential outcomes'' models in the causal inference literature are consequence models where choices can be considered in \emph{parallel}. 
+
+Before defining parallel choices, we will consider a ``counterfactual model'' without parallel choices. Consider the following definitions, first from \citet{pearl_causality:_2009} pg. 203-204. I have preserved his notation, including not using any special fonts for things called ``variables'' because this term is used interchangeably with ``sets of variables'' and using special fonts for variables might give the impression that these should be treated as different things while using special fonts for sets of variables is inconsistent with my usual notation.
+
+\todo[inline]{The real solution here is that Pearl's ``variable sets'' are actually ``coupled variables'', see Definition \ref{def:ctensor}, but I'd rather not change his definitions if I can avoid it}
+
+\todo[inline]{put the following inside a quote environment somehow, the regular quote environment fails due to too much markup}
+\vspace{1cm}
+
+```
+\paragraph{Definition 7.1.1 (Causal Model)}
+A causal model is a triple
+$M = \langle U, V, F\rangle$,
+where:
+\begin{enumerate}[label=(\roman*)]
+    \item $U$ is a set of \emph{background} variables, (also called \emph{exogenous}), that are determined by factors outside the model;
+    \item $V$ is a set $\{V_1 , V_2 ,..., V_n\}$ of variables, called \emph{endogenous}, that are determined by variables in the model -- that is, variables in $U\cup V$;
+    \item $F$ is a set of functions $\{f_1 , f_2 ,..., f_n\}$ such that each $f_i$ is a mapping from (the respective domains of) $U_i \cup PA_i$ to $V_i$, where $U i \subseteq U$ and $PA_i \subseteq V \setminus V_i$ and the entire set $F$ forms a mapping from $U$ to $V$. In other words, each $f_i$ in $$v_i = f_i (pa_i , u_i ),\qquad  i\in 1, ... n,$$ assigns a value to $V_i$ that depends on (the values of) a select set of variables in $V \cup U$, and the entire set $F$ has a unique solution $V(u)$.
+\end{enumerate}
+
+\paragraph{Definition 7.1.2 (Submodel)}
+Let $M$ be a causal model, $X$ a set of variables in $V$, and $x$ a particular realization of $X$. A submodel $M_x$ of $M$ is the causal model $$M_x =\{U, V, F_x\},$$ where $$F_x = \{ f_i : V_i \notin X\}\cup\{ X = x\}.$$
+
+\paragraph{Definition 7.1.3 (Effect of Action)}
+Let $M$ be a causal model, $X$ a set of variables in $V$, and $x$ a particular realization of $X$. The effect of action $do(X=x)$ on $M$ is given by the submodel $M_x$
+
+\paragraph{Definition 7.1.4 (Potential Response)}
+Let $X$ and $Y$ be two subsets of variables in $V$. The potential response of $Y$ to action $do(X = x)$, denoted $Y_x(u)$, is the solution for $Y$ of the set of equations $F_x$, that is, $Y_x(u) = Y_{M_x}(u)$.
+
+\paragraph{Definition 7.1.6 (Probabilistic Causal Model)}
+A probabilistic causal model is a pair $\langle M, P(u)\rangle$, where $M$ is a causal model and $P(u)$ is a probability function defined over the domain of U.
+'''
+
+
+\vspace{1cm}
+
+Implicitly, Definition 7.1.3 proposes a set of ``actions'' that have ``effects'' given by $M_x$. It's not entirely clear what this set of actions should be -- the definition seems to suggest that there is an action for each ``realization'' of each variable in $V$, which would imply that the set of actions corresponds to the range of $V$. For the following discussion, we will call the set of actions $D$, whatever it actually contains (we have deliberately chosen to use the same letter as we use to represent choices or actions in see-do models).
+
+Given $D$, Definition 7.1.3 appears to define a function $h:\mathscr{M}\times D\to \mathscr{M}$, where $\mathscr{M}$ is the space of causal models with background variables $U$ and endogenous variables $V$, such that for $M\in \mathscr{M}$, $do(X=x)\in D$, $h(M,do(X=x))=M_x$.
+
+Definition 7.1.4 then appears to define a function $Y_\cdot(\cdot):D\times U\to Y$ (distinct from $Y$, which appears to be a function $U\to\text{something}$) and calls $Y_\cdot(\cdot)$ the ``potential response''. We could always consider the variable $\RV{V}:=\utimes_{i\in [n]} \RV{V}_i$ and define the ``total potential response'' $\mathbf{g}:=\RV{V}_\cdot(\cdot)$, which captures the potential responses of any subset of variables in $V$.
+
+From this, we might surmise that in the Pearlean view, it is necessary that a ``counterfactual'' or ``potential response'' model has a probability measure $P$ on background variables $U$, a set of actions $D$ and a \emph{deterministic} potential response function $\mathbf{g}:D\times U\to V$.
+
+Pearl's model also features a second deterministic function $\mathbf{f}:U\to Y$, and $G$ is derived from $F$ via the equation modifications permitted by $D$. It is straightforward to show that an arbitrary function $\mathbf{f}:U\to Y$ can be constructed from Pearl's set of functions $f_i$, and if $D$ may modify the set $F$ arbitrarily, then it appears that $\mathbf{g}$ can in principle be an arbitrary function $D\times U\to Y$ (though many possible choices would be quite unusual).
+
+Pearl's counterfactual model seems to essentially be a deterministic map $\mathbf{g}:D\times U\to V$ along with a probability measure $P$ on $U$. Putting these together and marginalising over $U$ (as we might expect we want to do with ``background variables'') simply yields a consequence map $D\to \Delta(\sigalg{V})$, which doesn't seem to have any special counterfactual properties.
+
+In order to pose counterfactual questions, Pearl introduces the idea of holding $U$ fixed:
+\\
+````
+\paragraph{Definition 7.1.5 (Counterfactual)}
+Let $X$ and $Y$ be two subsets of variables in $V$. The counterfactual sentence ``$Y$ would be $y$ (in situation $u$), had $X$ been $x$'' is interpreted as the equality $Y_x(u) = y$, with $Y_x(u)$
+being the potential response of $Y$ to $X = x$.'
+'''
+\\
+
+Holding $U$ fixed allows SCM counterfactual models to answer questions about what would have happened if we had taken different actions given the same background context. For example, we can compare $Y_x(u)$ with $Y_{x'}(u)$ and interpret the comparison as telling us what would have happened in the same situation $u$ if we did $x$ and, at the same time, what would happen if we did $x'$. It is the ability to consider different actions ``in exactly the same situation'' that makes these models ``counterfactual''.
+
+One obvious question is: does $\mathbf{g}$ have to be deterministic? While SCMs are defined in terms of deterministic functions with noise arguments, it's not clear that this is a necessary feature of counterfactual models. If $\mathbf{g}$ were properly stochastic, what is the problem with considering $\mathbf{g}(x,u)$ and $\mathbf{g}(x',u)$ to represents what would happen in a fixed situation $u$ if I did $x$ and if I did $x'$ respectively? In fact, a nondeterministic $\mathbf{g}$  arguably fails to capture a key intuition of taking actions ``in exactly the same situation''. If I want to know the result of doing action $x$ and, in exactly the same situation, the result of doing action $x$, then one might intuitively think that the result should always be \emph{deterministically the same}. This property, which we call \emph{deterministic reproducibility}, does not hold if we consider a nondeterministic potential response map $\mathbf{g}$.
+
+This idea of doing $x$ and, in the same situation, doing $x$ doesn't render very well in English. Furthermore, even though deterministic reproducibility seems to be an important property of counterfactual SCMs, they don't help very much to elucidate the idea. ``If I take action $x$ in situation $U$ I get $V_x(u)$ and if I take action $x$ in situation $U$ I get $V_x(u)$'' is just a redundant repetition. It seems that we want some way to express the idea of having two copies of $V_x(u)$ or, more generally, having multiple copies of a potential response function in such a way that we can make comparisons between their results.
+
+The idea that we need \emph{can} be clearly expressed with a see-do model. 

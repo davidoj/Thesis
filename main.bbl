@@ -1,9 +1,17 @@
-\begin{thebibliography}{33}
+\begin{thebibliography}{38}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bongers et~al.(2016)Bongers, Peters, Schölkopf, and
+  Mooij]{bongers_theoretical_2016}
+Stephan Bongers, Jonas Peters, Bernhard Schölkopf, and Joris~M. Mooij.
+\newblock Theoretical {Aspects} of {Cyclic} {Structural} {Causal} {Models}.
+\newblock \emph{arXiv:1611.06221 [cs, stat]}, November 2016.
+\newblock URL \url{http://arxiv.org/abs/1611.06221}.
+\newblock arXiv: 1611.06221.
 
 \bibitem[\c{C}inlar(2011)]{cinlar_probability_2011}
 Erhan \c{C}inlar.
@@ -55,6 +63,13 @@ Bruno de~Finetti.
 \newblock \doi{10.1007/978-1-4612-0919-5_10}.
 \newblock URL \url{https://doi.org/10.1007/978-1-4612-0919-5_10}.
 
+\bibitem[Ferguson(1967)]{toutenburg_ferguson_1967}
+Thomas~S. Ferguson.
+\newblock \emph{Mathematical {Statistics}: {A} {Decision} {Theoretic}
+  {Approach}}.
+\newblock Academic Press, July 1967.
+\newblock ISBN 978-1-4832-2123-6.
+
 \bibitem[Fisher(1992)]{fisher_statistical_1992}
 R.~A. Fisher.
 \newblock Statistical {Methods} for {Research} {Workers}.
@@ -101,6 +116,16 @@ D.~Heckerman and R.~Shachter.
 \newblock ISSN 1076-9757.
 \newblock \doi{10.1613/jair.202}.
 \newblock URL \url{https://www.jair.org/index.php/jair/article/view/10151}.
+
+\bibitem[Hernán and Taubman(2008)]{hernan_does_2008}
+M.~A. Hernán and S.~L. Taubman.
+\newblock Does obesity shorten life? {The} importance of well-defined
+  interventions to answer causal questions.
+\newblock \emph{International Journal of Obesity}, 32\penalty0 (S3):\penalty0
+  S8--S14, August 2008.
+\newblock ISSN 1476-5497.
+\newblock \doi{10.1038/ijo.2008.82}.
+\newblock URL \url{https://www.nature.com/articles/ijo200882}.
 
 \bibitem[Hájek(2019)]{hajek_interpretations_2019}
 Alan Hájek.
@@ -155,12 +180,33 @@ Judea Pearl.
 \newblock \emph{Causality: {Models}, {Reasoning} and {Inference}}.
 \newblock Cambridge University Press, 2 edition, 2009.
 
+\bibitem[Pearl(2018)]{pearl_does_2018}
+Judea Pearl.
+\newblock Does {Obesity} {Shorten} {Life}? {Or} is it the {Soda}? {On}
+  {Non}-manipulable {Causes}.
+\newblock \emph{Journal of Causal Inference}, 6\penalty0 (2), 2018.
+\newblock \doi{10.1515/jci-2018-2001}.
+\newblock URL
+  \url{https://www.degruyter.com/view/j/jci.2018.6.issue-2/jci-2018-2001/jci-2018-2001.xml}.
+
 \bibitem[Pearl and Mackenzie(2018)]{pearl_book_2018}
 Judea Pearl and Dana Mackenzie.
 \newblock \emph{The {Book} of {Why}: {The} {New} {Science} of {Cause} and
   {Effect}}.
 \newblock Basic Books, New York, 1 edition edition, May 2018.
 \newblock ISBN 978-0-465-09760-9.
+
+\bibitem[Peters et~al.(2016)Peters, Bühlmann, and
+  Meinshausen]{peters_causal_2016}
+Jonas Peters, Peter Bühlmann, and Nicolai Meinshausen.
+\newblock Causal inference by using invariant prediction: identification and
+  confidence intervals.
+\newblock \emph{Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology)}, 78\penalty0 (5):\penalty0 947--1012, 2016.
+\newblock ISSN 1467-9868.
+\newblock \doi{10.1111/rssb.12167}.
+\newblock URL
+  \url{https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167}.
 
 \bibitem[Proctor(2012)]{proctor_history_2012}
 Robert~N. Proctor.

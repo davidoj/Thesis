@@ -1,0 +1,428 @@
+%!TEX root = main.tex
+
+\chapter{Statistical Decision Theory}
+
+
+\section{A see-do model with a utility is a statistical decision problem}
+
+\subsection{Decision functions}
+
+\begin{itemize}
+    \item Define decision functions
+    \item Choosing a particular mixed decision vs choosing a mixture of decisions; disintegrations exist both ways
+\end{itemize}
+
+\subsection{Risk}
+
+\begin{itemize}
+    \item Define risk
+    \item Define risk set
+\end{itemize}
+
+\subsection{Reachable consequences}
+
+\begin{itemize}
+    \item Reachable consequences $\sim$ risk set without a utility
+\end{itemize}
+
+\subsection{Decision rules}
+
+\begin{itemize}
+    \item Need a rule for selecting a decision function
+    \item Admissibility
+    \item Maximise EU w/a Bayes forecast
+    \item Minimax
+    \item Complete class theorem
+\end{itemize}
+
+\subsection{Comparison of experiments and actuators}
+
+\begin{itemize}
+    \item Comparison of experiments
+    \item Comparison of actuators
+    \item Limiting cases: no information and no influence (thus: some information and some influence is necessary for nontrivial problem)
+\end{itemize}
+
+\subsection{Equivalence of see-do models}
+
+\begin{itemize}
+    \item Definition of equivalence via reachable set
+    \item Defintion + examples: decomposability
+    \item Thm: an indecomposable see-do model has an equivalent decomposable model
+\end{itemize}
+
+\section{Scraps to be moved into skeleton above}
+\todo[inline]{Currently a disorganised cut and paste}
+
+\subsection{Decomposability}
+
+Decomposability is a property of see-do models that is relevant to the distinction between counterfacutal and regular models. As we will show, many causal problems allow the use of decomposable see-do models. However, certain types of counterfactual problem do not.
+
+\begin{definition}[decomposability]\label{def:decomposability}
+A see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is \emph{decomposable} iff $\RV{Y}\CI_\kernel{T} \RV{X}|\RV{D}\RV{H}$. That is, if the consequence is independent of the observations given the hypothesis and the choice.
+\end{definition}
+
+Decomposable see-do models can be represented as a pair $(\kernel{B},\kernel{C})$ where $\kernel{B}$ is a one-player statistical model we call the \emph{observation model} and $\kernel{C}$ is a two-player statistical model we call the \emph{consequence model} (Corollary \ref{corr:decomp_representation}. Most models in the causal inference literature are decomposable -- if the observed data can tell us nothing useful beyond the distribution of observations, then we have a decomposable model.
+
+\begin{theorem}[Observation and Consequence models]\label{th:obs_cmaps}
+Any see-do model $(\kernel{T},\RV{H},\RV{O},\RV{D},\RV{X},\RV{Y})$ can be uniquely represented by the following pair of Markov kernels:
+\begin{itemize}
+    \item The \emph{observation model} $\kernel{T}^{\RV{X}|\RV{H}}$
+    \item The \emph{context-sensitive consequence model} $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$
+\end{itemize}
+
+Furthermore
+\begin{align}
+\kernel{T} = \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+    \end{tikzpicture}
+\end{align}
+\end{theorem}
+
+\todo[inline]{Maybe moves proofs out of main text}
+
+\begin{proof}
+By \ref{th:representaiton}, 
+
+\begin{align}
+\kernel{T} = \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}\RV{D}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw[name path=P1] (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+        \draw[name path=P2] (copy2) to [out = 65, in = 180] ($(O.west)+(0,-0.15)$);
+    \end{tikzpicture}
+\end{align}
+
+
+By the assumption $\RV{X}\CI_{\kernel{T}} \RV{D}|\RV{H}$ and version 2 of conditional independence from Theorem \ref{th:ci_equivalence},
+
+\begin{align}
+\kernel{T} &= \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+        \draw[-{Rays[n=8]}] (copy2) to [out = 65, in = 180] ($(O.west)+(-0.2,-0.5)$);
+    \end{tikzpicture}\\
+    &= \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
+        + (0,-1.15) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        + (0.,-1.15) node[copymap] (copy2) {}
+        ++ (0.7,0) node[kernel] (O) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+        ++ (0.7,0) node[copymap] (copy1) {}
+        +  (0.9,-1) node[kernel] (C) {$\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$}
+        ++ (1.9,0) node (X) {$\RV{X}$}
+        +  (0,-1) node (Y) {$\RV{Y}$}
+        + (0,0.5) node (H) {$\RV{H}$}
+        + (0,-1.5) node (D2) {$\RV{D}$};
+        \draw (T) -- (O) -- (X);
+        \draw (copy0) to [out=-90,in=180] ($(C.west) + (0,0)$);
+        \draw (D) to [out=0,in=180] ($(C.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(C.west)+ (0,0.15)$);
+        \draw (C) -- (Y);
+        \draw (copy0) to [out = 65, in = 180] (H);
+        \draw (copy2) to [out = -65, in = 180] (D2);
+    \end{tikzpicture}
+\end{align}
+
+\end{proof}
+
+\begin{corollary}\label{corr:decomp_representation}
+A decomposable see-do model $\kernel{T}:H\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ can be uniquely represented by
+\begin{itemize}
+    \item The \emph{observation model} $\kernel{T}^{\RV{X}|\RV{H}}$
+    \item The \emph{consequence model} $\kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$
+\end{itemize}
+\end{corollary}
+
+\begin{proof}
+Because $\kernel{T}$ is decomposable, $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}= \stopper{0.2}_X\otimes \kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$. Then by theorem \ref{th:representaiton} we have a unique representation of $\kernel{T}$.
+\end{proof}
+
+\subsubsection{Examples of decomposable and indecomposable see-do models}
+
+Recall the previous example: suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a decomposable see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\RV{H}\mapsto \mathrm{Bernoulli}(\RV{H})$. Then define $\prescript{1}{}{\kernel{T}}$ by:
+
+\begin{itemize}
+    \item $D=\{0,1\}$
+    \item $X=\{0,1\}^N$
+    \item $Y=\{0,1\}$
+    \item $H=(0,1)$
+    \item $\prescript{1}{}{\kernel{B}}:\splitter{0.1}^N\kernel{B}$
+    \item $\prescript{1}{}{\kernel{C}}:(h,d)\mapsto \mathrm{Bernoulli}(1-|d-h|)$
+\end{itemize}
+
+In this model, the chance $\RV{H}$ of the coin landing on heads is as much as we can hope to know about how our bet will work out.
+
+Suppose instead that in addition to the $N$ prior flips, we manage to look at the outcome of the flip on which we will bet. In this case, the situation can be modeled by the following indecomposable see-do model $\prescript{2}{}{\kernel{T}}$:
+
+\begin{itemize}
+    \item $D=\{0,1\}$
+    \item $X=\{0,1\}^{N+1}$
+    \item $Y=\{0,1\}$
+    \item $H=(0,1)$
+    \item $\prescript{2}{}{\kernel{T}}^{\RV{X}|\RV{H}}:\splitter{0.1}^{N+1}\kernel{B}$
+    \item $\prescript{2}{}{\kernel{T}}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}:(h,\mathbf{x},d)\mapsto \delta_{1-|d-x_{N+1}|}$
+\end{itemize}
+
+In this case, even if we are told the value of $\RV{H}$, we still benefit from using the observed data when making our decision.
+
+It is possible to model the second situation with a decomposable model by including the result of the $N+1$th flip in the hypothesis. Define the new hypothesis space $H'=H\times\{0,1\}$ and let $\RV{H}_0$ be the projection to the old hypothesis space $H$. Define $\prescript{3}{}{\kernel{T}}$ by:
+
+\begin{itemize}
+    \item $D=\{0,1\}$
+    \item $X=\{0,1\}^{N+1}$
+    \item $Y=\{0,1\}$
+    \item $H'=(0,1)\times\{0,1\}$
+    \item $\prescript{3}{}{\kernel{B}}:(\splitter{0.1}^N\kernel{B}\otimes \delta_{x_{N+1}}$
+    \item $\prescript{3}{}{\kernel{C}}:(h,x_{N+1},d)\mapsto \delta_{1-|d-x_{N+1}|}$
+\end{itemize}
+
+However, $\prescript{2}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}} = \kernel{B}$ while $\prescript{3}{}{\kernel{T}}^{\RV{X}_{N+1}|\RV{H}_0}$ is undefined, so $\prescript{3}{}{\kernel{T}}$ is a substantially different model to $\prescript{2}{}{\kernel{T}}$.
+
+If an indecomposable see-do model is employed in a \emph{decision problem} it is possible to create an equivalent decision problem with a decomposable model as I will show later. Some counterfactual problems cannot be formulated as decision problems, and indecomposability is a property of the types of counterfacutal model proposed by \citet{pearl_causality:_2009}, but not to my knowledge of any causal models used in a ``decision like context''.
+
+\subsection{Causal questions and decision functions}
+
+\citet{pearl_book_2018} has proposed three types of causal question:
+\begin{enumerate}
+    \item Association: How are $\RV{W}$ and $\RV{Z}$ related? How would observing $\RV{W}$ change my beliefs about $\RV{Z}$?
+    \item Intervention: What would happen if I do ... ? How can I make ... happen?
+    \item Counterfactual: What if I had done ... instead of what I actually did?
+\end{enumerate}
+
+\emph{Causal decision problems} are, roughly speaking, ``interventional'' problems. In English, a causal decision problem roughly asks
+
+\begin{quote}
+    Given that I have data $\RV{X}$ and I know which values of $\RV{Y}$ I would like to see and some knowledge about how the world works, which of my available choices $D$ should I select?
+\end{quote}
+
+This type of question presupposes somewhat more than Pearl's prototypical interventional questions. First, it supposes that we have \emph{preferences} over the values that $\RV{Y}$ might take, which we need not have to answer the question ``What would happen if I do ...?''. Secondly, and crucially to our theory, causal decision problem suppose that we are given data and a set of choices. 
+
+We will return to the question of preferences. For now, we will focus on the idea that a causal decision problem is about selecting a choice given data. That is, however the selection is made, the answer to a causal decision problem is always a \emph{decision function} $\kernel{D}:X\to \Delta(\sigalg{D})$.
+
+A property that will be of interest when considering counterfactual models is \emph{decomposability}. A see-do model 
+
+
+% Decisions are similar to the ``regime indicators'' found in \citet{dawid_decision-theoretic_2020}. They coincide precisely if we suppose that the observation and consequence spaces coincide ($X=Y$) and there exists an ``idle'' decision $d^*\in D$ such that $\kernel{C}_{(\cdot,d^*)} = \kernel{O}_{\cdot}$. However, in general we don't require that $\kernel{O}$ and $\kernel{C}$ are related in this manner. This assumption will be revisited in \todo[inline]{A section I haven't written yet}.
+
+\subsubsection{Example}
+
+Suppose we are betting on the outcome of the flip of a possibly biased coin with payout 1 for a correct guess and 0 for an incorrect guess, and we are given $N$ previous flips of the coin to inspect. This situation can be modeled by a decomposable see-do model. Define $\kernel{B}:(0,1)\to \Delta(\{0,1\})$ by $\kernel{B}:\RV{H}\mapsto \mathrm{Bernoulli}(\RV{H})$. Then define ${\kernel{T}}$ by:
+
+\begin{itemize}
+    \item Choice set: $D=\{0,1\}$
+    \item Observation set: $X=\{0,1\}^N$
+    \item Consequence set: $Y=\{0,1\}$
+    \item Hypothesis set: $H=(0,1)$
+    \item Observation map: ${\kernel{T}}^{\RV{X}|\RV{H}}:\splitter{0.1}^N\kernel{B}$
+    \item Consequence model: ${\kernel{T}}^{\RV{Y}|\RV{D}\RV{H}}:(h,d)\mapsto \mathrm{Bernoulli}(1-|d-h|)$
+\end{itemize}
+
+In this model, the chance $\RV{H}$ of the coin landing on heads is as much as we can hope to know about the success of our bet. $\RV{H}$ may be inferred from observation by some standard method, and 
+
+
+
+\subsubsection{Avoiding indecomposability with decision functions}
+
+\todo[inline]{Show that a decision problem with a indecomposable model induces an equivalent decision problem with a decomposable model with an expanded set of choices, subject to some conditions.}
+
+\subsubsection{Decision rules}
+
+See-do models encode the relationship between observed data and consequences of decisions. In order to actually make decisions, we also require preferences over consequences. We suppose that a \emph{utility function} is given, and evaluate the desirability of consequences using \emph{expected utility}. A see-do model along with a utility allows us to evaluate the desirability of \emph{decisions rules} according to each hypothesis.
+
+\begin{definition}[Utility function]
+Given a See-Do Model $\kernel{T}:\RV{H}\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, a \emph{utility function} $u$ is a measurable function $Y\to \mathbb{R}$. 
+\end{definition}
+
+\begin{definition}[Expected utility]
+Given a utility function $u:Y\to \mathbb{R}$ and probability measures $\mu,\nu\in \Delta(\sigalg{Y})$, the \emph{expected utility} of $\mu$ is $\mathbb{E}_{\mu}[u]$.
+
+$\mu$ is \emph{preferred} to $\nu$ if $\mathbb{E}_{\mu}[u]\geq \mathbb{E}_{\nu}[u]$, and \emph{strictly preferred} if $\mathbb{E}_{\mu}[u]>\mathbb{E}_{\nu}[u]$.
+\end{definition}
+
+\begin{definition}[Decision rule]
+Given a see-to map $\kernel{T}:\RV{H}\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, a \emph{decision rule} is a Markov kernel $X\to \Delta(\sigalg{D})$. A \emph{deterministic decision rule} is a decision rule that is deterministic.
+
+\todo[inline]{Define deterministic Markov kernels}
+\end{definition}
+
+Expected utility together with a decision rule gives rise to the definition of \emph{risk}, which connects CSDT to classical statistical decision theory (SDT). For historical reasons, risks are minimised while utilities are maximised.
+
+\begin{definition}[Risk]
+Given a see-to map $\kernel{T}:\RV{H}\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$, a utility $u:Y\to \mathbb{R}$ and the set of decision rules $\mathscr{U}$, the \emph{risk} is a function $l:\RV{H}\times \mathscr{U}\to \mathbb{R}$ given by
+
+\begin{align}
+    R(\RV{H},\kernel{U}) := - \int_X  \kernel{U}_x \kernel{T}^{\RV{Y}|\RV{D}\RV{X}\RV{H}}_{\cdot,x,\RV{H}} u d\kernel{T}^{\RV{X}|\RV{H}}_\RV{H}(x)
+\end{align}
+
+for $\RV{H}\in \RV{H}$, $\kernel{U}\in \mathscr{U}$. Here $\kernel{U}_x \kernel{T}^{\RV{Y}|\RV{D}\RV{X}\RV{H}}_{\cdot,x,\RV{H}} u$ is the product of the measure $\kernel{U}_x$, the kernel $\kernel{T}^{\RV{Y}|\RV{D}\RV{X}\RV{H}}_{\cdot,x,\RV{H}}:D\to \Delta(\sigalg{Y})$ and the function $u$.
+\end{definition}
+
+The loss induces a partial order on decision rules. If for all $\RV{H}$, $l(\RV{H},\kernel{U})\leq l(\RV{H},\kernel{U}')$ then $\kernel{U}$ is at least as good as $\kernel{U}'$. If, furthermore, there is some $\RV{H}_0$ such that $l(\RV{H}_0,\kernel{U})<l(\RV{H}_0,\kernel{U}')$ then $\kernel{U}$ is preferred to $\kernel{U}'$.
+
+\begin{definition}[Induced statistical decision problem]
+A see-do model $\kernel{T}:\RV{H}\times D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$ along with a utility $u$ induces the \emph{statistical decision problem} $(\RV{H},\mathscr{U},R)$ with states $\RV{H}$, decisions $\mathscr{U}$ and risks $R$.
+
+\todo[inline]{Statistical decision problems usually define the risk via the loss, but it is only possible to define a loss with a decomposable model. We don't actually need a loss, though: the complete class theorem still holds via the induced risk and Bayes risk}
+
+\end{definition}
+
+
+We develop causal statistical decision problems (CSDPs) inspired by statistical decision problems (SDPs) of \citet{wald_statistical_1950}. CSDPs differ from SDPs in that our preferences (i.e. utility or loss) are known less directly in former case. We show that every SDP can be represented by a CSDP and that the converse is sometimes but not always possible. We show that an analogoue of the fundamental \emph{complete class theorem} of SDPs applies to the class of CSDPs that can be represented by SDPs, but whether such a theorem applies more generally is an open question.
+
+Following \citep{toutenburg_ferguson_1967}, we consider SDPs and CSDPs to represent normal form two person games. At the most abstract level the games represent the options and possible payoffs available to the decision maker, and this representation allows us to compare the two types of problem. In their more detailed versions,  CSDPs and SDPs differ in their representation of the state of the world and in the type of function that represents preferences. These differences are summarised in Table \ref{tab:sdp_cdp_comparison}.
+
+\begin{definition}[Normal form two person game]
+A normal form game is a triple $\langle \mathscr{S}, A, L\rangle$ where $\mathscr{S}$ and $A$ are arbitrary sets and $L:\mathscr{S}\times A\to [0,\infty)$ is a loss function.
+
+\end{definition}
+The set $\mathscr{S}$ is a set of possible states that the environment may occupy and $A$ is a set of actions the decision maker may take. The decision maker seeks an action in $A$ that minimises the loss $L$. Generally there is no action that minimises the loss for all environment states. A minimax solution is an action that minimises the worst case loss: $a^*_{mm} = \argmin_{a\in A} [\sup_{s\in \mathscr{S}} L(s,a)]$.
+
+If the set $\mathscr{S}$ is equipped with a $\sigma$-algebra $\mathcal{S}$ and a probability measure $\xi\in \Delta(\mathcal{S})$ which we will call a ``prior'', a Bayes solution minimizes the expected risk with respect to $\xi$: $a^*_{ba} = \argmin_{a\in A} \int_{\mathcal{S}} L(s,a) \xi(ds)$.
+
+\begin{definition}[Admissible Action]
+Given a normal form two person game $\langle \mathscr{S}, A, L\rangle$, an action $a\in A$ is \emph{strictly better} than $a'\in A$ iff $L(s,a)\leq L(s,a')$ for all $s\in\mathscr{S}$ and $L(s_0,a)<L(s_0,a')$ for some $s_0\in \mathscr{S}$. If only the first holds, then $a$ is as good as $a'$. An \emph{admissible action} is an action $a\in A$ such that there is no action strictly better than $A$.
+\end{definition}
+
+\begin{definition}[Complete Class]
+A class $C$ of decisions is a \emph{complete class} if for every $a\not\in C$ there is some $a'\in C$ that is strictly better than $a$.
+
+$C$ is an \emph{essentially complete} class if for every $a\not\in C$ there is some $a'\in C$ that is as good as $a$.
+\end{definition}
+
+A statistical decision problem represents a normal form two-person game where the available actions are \emph{decision functions} that output a decision given data, the states of the environment are associated with probability measures on some measurable space and we assume a loss expressing preferences over decisions and states is known.
+
+\begin{definition}[Statistical Experiment]\label{def:stat_expt}
+A \emph{statistical experiment} relative to a set $\Theta$, a measurable space $(E,\mathcal{E})$ and a map $m:\Theta\to \Delta(\mathcal{E})$ is a multiset $\mathscr{H}=\{\mu_\theta|\theta\in \Theta\}$ where $\mu_\theta:=m(\theta)$. The set $\Theta$ indexes the ``state of nature''.
+\end{definition}
+
+
+\begin{definition}[Statistical Decision Problem]
+A statistical decision problem (SDP) is a tuple $\langle\Theta, (\mathscr{H},m), D, \ell\rangle$. $\mathscr{H}\subset\Delta(\mathcal{E})$ is a statistical experiment relative to states $\Theta$, space $(E,\mathcal{E})$ and map $m:\Theta\to \Delta(\mathcal{E})$, $D$ is the set of available decisions with some $\sigma$-algebra $\mathcal{D}$ and $\ell:\Theta\times D\to \mathbb{R}$ is a loss function where $\ell(\theta,\cdot)$ is measurable with respect to $\mathcal{D}$ and $\mathcal{B}(\mathbb{R})$.
+
+Denote by $\mathscr{J}$ the set of stochastic decision functions $E\to \Delta(\mathcal{D})$. For $J\in \mathscr{J}$ and $\mu_\theta\in \mathcal{H}$, the risk $R:\Theta\times\mathscr{J}\to [0,\infty)$ is defined as $R(J,\theta) = \int_D \ell(\theta,y) \mu_\theta J(dy)$. The triple $\langle \Theta, \mathscr{J}, R\rangle$ forms a two player normal form game.
+\end{definition}
+
+The loss function $\ell$ expresses preferences over general (state, decision) pairs. It may be the case that our preferences are most directly known over future states of the world - we know which results of our decisions are desirable and which are undesirable, which we represent with a \emph{utility function}. In this case, if we are to induce preferences over the possible decisions, that we have a model that is more informative than a statistical experiment. In particular, we require each state of nature to be associated with both a distribution over the given information and a map from decisions to distributions over results - we call this map a \emph{consequence}, and the object that pairs a distribution and a consequence with each state of the world a \emph{causal theory}.
+
+\begin{definition}[Consequences]
+Given a measurable result space $(F,\mathcal{F})$ and a measurable decision space $(D,\mathcal{D})$, a Markov kernel $\kappa:D \to \Delta(\mathcal{F})$ is a \emph{consequence mapping}, or just a \emph{consequence}.
+\end{definition}
+
+\begin{definition}[Causal state]
+Given a consequence $\kappa:D\to \Delta(\mathcal{F})$, a measurable observation space $(E,\mathcal{E})$ and some distribution $\mu\in \Delta(\mathcal{E})$, the pair $(\kappa,\mu)$ is a \emph{causal state} on $E, D$ and $F$. We refer to $\kappa$ as the consequence and $\mu$ as the observed distribution.
+\end{definition}
+
+In many cases the observation space $E$ and the results space $F$ might coincide. However, these spaces are defined by different aspects of the given information: the former is fixed by what observations are available and the latter by which parts of the world are relevant to the investigator's preferences (see Theorems \ref{th:CSDP_u_red} and \ref{th:CSDP_ob_red}), and there is not a clear reason to insist that these spaces should always be the same.
+
+\begin{definition}[Causal Theory]\label{def:causal_theory}
+A causal theory $\mathscr{T}$ is a set of causal states sharing the same decision, observation and outcome spaces. We abuse notation to assign the ``type signature'' $\mathscr{T}:E\times D\rightarrowtriangle F$ for a causal theory with observed distributions in $\Delta(\mathcal{E})$ and consequences of type $D\to \Delta(\mathcal{F})$. The causal states of a theory $\mathscr{T}$ may be associated with a master set of states $\Theta$, but in contrast to a statistical experiment this is not necessary to define the basic associated decision problem.
+\end{definition}
+
+\begin{definition}[Causal Statistical Decision Problem]\label{def:CSDP}
+A causal statistical decision problem (CSDP) is a triple $\langle \mathscr{T}, D, u \rangle$. $\mathscr{T}$ is a causal theory on $D\times E\rightarrowtriangle F$, $D$ is the decision set with $\sigma$-algebra $\mathcal{D}$ and $u:F\to \mathbb{R}$ is a measurable utility function expressing preference over the results of decisions.
+
+Define the canonical loss $L:\mathscr{T}\times D\to \mathbb{R}$ by $L:(\kappa,\mu),y\mapsto -\mathbb{E}_{\gamma\kappa}[u]$. This change conforms with the conventions that utilities are maximised while losses are minimised.
+
+Given a decision function $J\in\mathscr{J}$ and $(\kappa,\mu)\in \mathscr{T}$, we define the risk $R:\mathscr{T}\times \mathscr{J} \to [0,\infty)$ by $R(\kappa,\mu,J) := L((\kappa,\mu),\mu J)$. The triple $\langle \mathscr{T}, \mathscr{J}, R\rangle$ is a normal form two person game.
+\end{definition}
+
+The loss and the utility differ in that the loss expresses per-state preferences while the utility expresses state independent preferences. While we choose the loss to be a particular function of the utility here, it is possible to allow losses to be a more general class of functions of the utility and state without altering the preference ordering of a CSDP under minimax or Bayes decision rules. Given arbitrary $f:\mathscr{T}\to\mathbb{R}$, define $l:\mathscr{T}\times D\to \mathbb{R}$ by $l:(\kappa,\mu,y)\mapsto a f(\kappa,\mu) + b \mathbb{E}_{\delta_y\kappa}[u]$. We can define a loss (relative to $f$) $L:\mathscr{T}\times\Delta(\mathcal{D})\to [0,\infty]$ by
+\begin{align}
+    L((\kappa,\mu),\gamma) &:= \mathbb{E}_\gamma[l(\kappa,\mu,\cdot)]\\
+                           &= a f(\kappa,\mu) - b \mathbb{E}_{\gamma\kappa}[u]\label{eq:canonical_loss}\\
+\end{align}
+For $(\kappa,\mu)\in \mathscr{T}$, $\gamma\in \Delta(\mathcal{D})$ and $a\in \mathbb{R}$, $b\in \mathbb{R}^{+}$. 
+
+A common example of a loss of the type above is the \emph{regret}, which takes $a=b=1$ and $f(\kappa,\mu) = \sup_{\gamma'\in \Delta(\mathcal{D})} \mathbb{E}_{\gamma'\kappa}[u]$. Because expected utility preserves preference orderings under positive affine transformations, the ordering of preferences given a particular state is not affected by the choices of $a,b$ and $f$, nor is the Bayes ordering of preferences given some prior $\xi$ over $\mathscr{T}$. While it may be possible to formulate decision rules for which the choices of $a,b$ and $f$ do matter, we will take these properties as sufficient to allow us to choose $a=0$ and $b=1$. More general classes of loss are of interest. \emph{Regret theory}, for example, is a straightforward generalisation of the losses discussed here and is a prominent alternative to expected utility theory \citep{loomes_regret_1982}.
+
+There are obvious similarities between SDPs and CSDPs: both have the same high level representation as a two person game which is arrived at by taking the expectation of a loss with respect to a decision function. In fact, if we consider two decision problems to be the same if they have the same representation as a two player game, we find that CSDPs are a special case of SDPs.
+
+\begin{theorem}[CSDPs are a special case of SDPs]\label{th:csdps_are_sdps}
+Given any CSDP $\alpha=\langle \mathscr{T}, D, u \rangle$ with two player game representation $\langle \mathscr{T}, \mathscr{J}, R\rangle$, there exists an SDP $\langle \mathscr{T}, (\mathscr{H},m), D,\ell \rangle$ with the same representation as a two player game.
+\end{theorem}
+
+\begin{proof}
+Let $m:\mathscr{T}\to \mathscr{H}$ be defined such that $m:(\kappa,\mu)\mapsto \mu$ for $(\kappa,\mu)\in \mathscr{H}$. Define $\ell:\mathscr{T}\times D\to \mathbb{R}$ by $\ell:((\kappa,\mu),y)\mapsto -\mathbb{E}_{\delta_y \kappa}[u]$. Let $R'((\kappa,\mu),J) = \mathbb{E}_{\mu J}[\ell(\theta,\cdot)]$. Then
+\begin{align}
+    R'((\kappa,\mu),J) &= -\int_D \mathbb{E}_{\delta_y \kappa}[u] \mu J(dy)\\ 
+                       &= -\int_D \int_F u(x) \kappa(y;dx) \mu J(dy)\\
+                       &= -\int_F u(x) \mu J \kappa(dx)\\
+                       &= R((\kappa,\mu),J)
+\end{align}
+\end{proof}
+
+The converse is not true, as the set $\Theta$ in an SDP is of an arbitrary type and may not be a causal theory. However, it is possible for any SDP with environmental states $\Theta$ to find a CSDP with causal theory $\mathscr{T}$ such that the games represented by each decision problem are related by a surjective map $f:\Theta\to \mathscr{T}$ which associates each state of nature with a causal state. We call such a map a \emph{reduction} from an SDP to a CSDP.
+
+\begin{definition}[Reduction]\label{def:red_sdp_CSDP}
+Given normal form two person games $\alpha = \langle \mathscr{S}^\alpha, A, L^\alpha\rangle$ and $\beta = \langle \mathscr{S}^\beta, A, L^\beta \rangle$, $f:\mathscr{S}^\alpha\to \mathscr{S}^\beta$ is a \emph{reduction} from $\alpha$ to $\beta$ if, defining the image $f(\mathscr{S}^\alpha)=\{f(\theta)|\theta\in \mathscr{S}^\alpha\}$, we have $\langle \mathscr{S}^\beta, A, L^\beta \rangle = \langle f(\mathscr{S}^\alpha), A, L^\alpha\circ(f\otimes I_A)\rangle$.
+\end{definition}
+
+\begin{theorem}[SDP can be reduced to a CSDP]\label{th:csdps_represent_sdps}
+Given any SDP $\langle \Theta, (\mathscr{H},m), D, \ell\rangle$ represented as the game $\alpha = \langle \Theta, \mathscr{J},R\rangle$, there exists a CSDP $\langle \mathscr{T},D,u\rangle$ represented as the game $\beta=\langle\mathscr{T},\mathscr{J},R' \rangle$ such that there is some reduction $f:\Theta\to \mathscr{T}$ from $\alpha$ to $\beta$.
+\end{theorem} 
+
+\begin{proof}
+Take $\mathscr{H}\subset\Delta(\mathcal{E})$ and define $f:\Theta\to \Delta(\mathcal{E})\times \Delta(\mathcal{B}(\mathbb{R}))^D$ by $f:\theta\mapsto (y\mapsto \delta_{l(\theta,y)},\mu_\theta)$. Noting that $y\mapsto \delta_{l(\theta,y)}$ is a Markov kernel $D\to \Delta(\mathcal{B}(\mathbb{R}))$, the image $f(\Theta)$ is a causal theory $E\times D\rightarrowtriangle \mathbb{R}$. Consider the CSDP $\langle f(\Theta),D,-I_{(\mathbb{R})}\rangle$. Then, letting $R'$ denote the risk associated with this theory
+\begin{align}
+ R'((\kappa,\mu),J) &= -\int_\mathbb{R} \int_D (-x) \delta_{l(\theta,y)}(dx) \mu_\theta J(dy)\\
+                    &= \int_D l(\theta,y) \mu_\theta J(dy)\\
+                    &= R(\Theta,J)
+\end{align}
+\end{proof}
+
+The fundamental \emph{complete class theorem} of SDPs establishes that there are no decision rules that dominate the set of all Bayes rules under some regularity assumptions. By theorem \ref{th:csdps_are_sdps}, this must also be true of CSDPs.
+
+\begin{theorem}[Complete class theorem (CSDP)]\label{th:complete_class}
+Given any CSDP $\alpha:=\langle \mathscr{T},D,u\rangle$ with two player game representation $\langle \mathscr{T},\mathscr{J},R\rangle$, if $|\mathscr{T}|<\infty$ and $\inf_{J\in\mathscr{J},(\kappa,\mu)\in\mathscr{H}} R((\kappa,\mu),J)>-\infty$, then the set of all Bayes decision functions is a complete class for $\alpha$ and the set of all admissible Bayes decision functions is a minimal complete class for $\alpha$.
+\end{theorem}
+
+\begin{proof}
+By theorem \ref{th:csdps_are_sdps}, there exists an SDP $\beta$ such that $\alpha$ and $\beta$ have the same representation as a two player game. By assumption, $\beta$ has a finite set of states and a risk function that is bounded below. Therefore the Bayes rules on $\alpha$ are a complete class and admissible Bayes rules are a minimal complete class for the problem $\langle \mathscr{T},\mathscr{J},R\rangle$ \citep{toutenburg_ferguson_1967}.
+\end{proof}
+
+

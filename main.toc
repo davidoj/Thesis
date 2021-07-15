@@ -1,36 +1,62 @@
-\contentsline {section}{\numberline {0.1}Theories of causal inference}{3}{section.0.1}%
-\contentsline {subsection}{\numberline {0.1.1}Probability Theory}{7}{subsection.0.1.1}%
-\contentsline {paragraph}{Common $\sigma $ algebras}{7}{section*.8}%
-\contentsline {subsection}{\numberline {0.1.2}Product Notation}{9}{subsection.0.1.2}%
-\contentsline {subsection}{\numberline {0.1.3}String Diagrams}{9}{subsection.0.1.3}%
-\contentsline {subsubsection}{Elements of string diagrams}{10}{section*.9}%
-\contentsline {paragraph}{Elementary operations}{10}{section*.10}%
-\contentsline {paragraph}{Markov kernels with special notation}{11}{section*.11}%
-\contentsline {subsubsection}{Working With String Diagrams}{14}{section*.12}%
-\contentsline {paragraph}{Axioms of Symmetric Monoidal Categories}{14}{section*.13}%
-\contentsline {subsubsection}{Examples}{15}{section*.14}%
-\contentsline {subsection}{\numberline {0.1.4}Random Variables}{16}{subsection.0.1.4}%
-\contentsline {subsubsection}{Existence of Disintegrations}{25}{section*.15}%
-\contentsline {subsubsection}{Conditional Independence}{33}{section*.21}%
-\contentsline {chapter}{\numberline {1}Two player statistical models and see-do models}{37}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Two player statistical models and see-do models}{39}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Decomposability}{40}{subsection.1.1.1}%
-\contentsline {subsubsection}{Examples of decomposable and indecomposable see-do models}{42}{section*.26}%
-\contentsline {subsubsection}{Exchangeability}{43}{section*.27}%
-\contentsline {subsection}{\numberline {1.1.2}Causal questions and decision functions}{58}{subsection.1.1.2}%
-\contentsline {subsubsection}{Example}{59}{section*.32}%
-\contentsline {subsubsection}{Avoiding indecomposability with decision functions}{60}{section*.33}%
-\contentsline {subsubsection}{Decision rules}{60}{section*.35}%
-\contentsline {section}{\numberline {1.2}Existence of counterfactuals}{61}{section.1.2}%
-\contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{62}{section*.41}%
-\contentsline {paragraph}{Definition 7.1.2 (Submodel)}{62}{section*.42}%
-\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{62}{section*.43}%
-\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{62}{section*.44}%
-\contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{62}{section*.45}%
-\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{63}{section*.46}%
-\contentsline {chapter}{\numberline {2}See-do models and the causal modelling zoo}{65}{chapter.2}%
-\contentsline {subsection}{\numberline {2.0.1}D-causation}{67}{subsection.2.0.1}%
-\contentsline {subsection}{\numberline {2.0.2}D-causation vs Limited Unresponsiveness}{69}{subsection.2.0.2}%
-\contentsline {subsection}{\numberline {2.0.3}Properties of D-causation}{71}{subsection.2.0.3}%
-\contentsline {subsection}{\numberline {2.0.4}Decision sequences and parallel decisions}{72}{subsection.2.0.4}%
-\contentsline {chapter}{\numberline {3}Chapter 5: Inferring causes from data}{73}{chapter.3}%
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Theories of causal inference}{5}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Technical Prerequisites}{9}{chapter.2}%
+\contentsline {subsection}{\numberline {2.0.1}Probability Theory}{9}{subsection.2.0.1}%
+\contentsline {paragraph}{Common $\sigma $ algebras}{10}{section*.7}%
+\contentsline {subsection}{\numberline {2.0.2}Product Notation}{11}{subsection.2.0.2}%
+\contentsline {subsection}{\numberline {2.0.3}String Diagrams}{12}{subsection.2.0.3}%
+\contentsline {subsubsection}{Elements of string diagrams}{12}{section*.8}%
+\contentsline {paragraph}{Elementary operations}{13}{section*.9}%
+\contentsline {paragraph}{Markov kernels with special notation}{14}{section*.10}%
+\contentsline {subsubsection}{Working With String Diagrams}{16}{section*.11}%
+\contentsline {paragraph}{Axioms of Symmetric Monoidal Categories}{16}{section*.12}%
+\contentsline {subsubsection}{Examples}{18}{section*.13}%
+\contentsline {subsection}{\numberline {2.0.4}Random Variables}{19}{subsection.2.0.4}%
+\contentsline {subsubsection}{Existence of Disintegrations}{27}{section*.14}%
+\contentsline {subsubsection}{Conditional Independence}{35}{section*.20}%
+\contentsline {chapter}{\numberline {3}Two player statistical models and see-do models}{39}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Two player statistical models and see-do models}{41}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Frequentist random variables and Bayesian forecasts}{42}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Statistical Decision Theory}{59}{chapter.4}%
+\contentsline {section}{\numberline {4.1}A see-do model with a utility is a statistical decision problem}{59}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Decision functions}{59}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Risk}{59}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Reachable consequences}{59}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Decision rules}{59}{subsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.1.5}Comparison of experiments and actuators}{60}{subsection.4.1.5}%
+\contentsline {subsection}{\numberline {4.1.6}Equivalence of see-do models}{60}{subsection.4.1.6}%
+\contentsline {section}{\numberline {4.2}Scraps to be moved into skeleton above}{60}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Decomposability}{60}{subsection.4.2.1}%
+\contentsline {subsubsection}{Examples of decomposable and indecomposable see-do models}{62}{section*.31}%
+\contentsline {subsection}{\numberline {4.2.2}Causal questions and decision functions}{63}{subsection.4.2.2}%
+\contentsline {subsubsection}{Example}{64}{section*.32}%
+\contentsline {subsubsection}{Avoiding indecomposability with decision functions}{64}{section*.33}%
+\contentsline {subsubsection}{Decision rules}{64}{section*.35}%
+\contentsline {chapter}{\numberline {5}See-do models, interventions and counterfactuals}{71}{chapter.5}%
+\contentsline {section}{\numberline {5.1}How do see-do models relate to other approaches to causal inference?}{71}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Interpretations of the choice set}{71}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Causal Bayesian Networks as see-do models}{71}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Unit Potential Outcomes models}{72}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}D-causation}{75}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}D-causation vs Limited Unresponsiveness}{76}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Properties of D-causation}{79}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Decision sequences and parallel decisions}{79}{subsection.5.4.4}%
+\contentsline {section}{\numberline {5.5}Existence of counterfactuals}{80}{section.5.5}%
+\contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{80}{section*.49}%
+\contentsline {paragraph}{Definition 7.1.2 (Submodel)}{80}{section*.50}%
+\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{81}{section*.51}%
+\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{81}{section*.52}%
+\contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{81}{section*.53}%
+\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{82}{section*.54}%
+\contentsline {chapter}{\numberline {6}Imitablity and inferring causes from data}{83}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Assumptions enabling learning}{83}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Imitability}{83}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Identification with imitability}{83}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Causal relationships on God's computer}{85}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Are we trying to understand consequences or actions or objective causal relationships?}{85}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Necessary relationships}{86}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Recursive Structural Causal Models}{87}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Recursive Structural Causal Models with Necessary Relationships}{88}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}Cyclic Structural Causal Models}{92}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Not all variables have well-defined interventions}{94}{subsection.7.1.5}%
+\contentsline {subsubsection}{Necessary relationships in cyclic SCMs}{95}{section*.59}%
