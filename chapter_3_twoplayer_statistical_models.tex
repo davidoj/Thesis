@@ -272,13 +272,11 @@ Note that $\kernel{T}R^{\RV{X}_i|\RV{D}} = \kernel{T}^{\RV{X}_{\rho(i)}|\RV{D}}$
 
 This implies the usual notion of exchangeability if we take $Y=\{*\}$ (that is, if we assume the consequences are trivial), as by assumption $\RV{X}$ is independent of $\RV{D}$.
 
-\todo[inline]{For this and following representation proofs, I need to carefully explain how the models are infinitely extended and that the hypothesis is defined only on the infinitely extended model.}
-
 \begin{lemma}[Infinitely exchangeably extendable forecasts]\label{lem:partial_representation}
-Given a forecast $(\prob{P},\RV{X})$ where $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some $\{\RV{X}_i|i\in A\subseteq\mathbb{N}\}$ and $X$ is standard measurable, if $\prob{P}$ is exchangeable with respect to $\RV{X}$ then there exists a function $f:X\to H_B$ such that, defining $\RV{H}_B:f\circ \RV{X}$:
+Given a forecast $(\prob{P},\RV{X})$ where $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some $\{\RV{X}_i|i\in \mathbb{N}\}$ and $X$ is standard measurable, if $\prob{P}$ is exchangeable with respect to $\RV{X}$ then there exists a function $f:X\to H$ such that, defining $\RV{Z}:f\circ \RV{X}$:
     \begin{itemize}
-        \item $\RV{X}_i\CI\RV{X}_{A\setminus\{i\}}|\RV{H}_B$ for all $i\in A$
-        \item $\prob{P}^{\RV{X}_i|\RV{H}_B}=\prob{P}^{\RV{X}_j|\RV{H}_B}$ for all $i,j\in A$
+        \item $\RV{X}_i\CI\RV{X}_{A\setminus\{i\}}|\RV{Z}$ for all $i\in A$
+        \item $\prob{P}^{\RV{X}_i|\RV{Z}}=\prob{P}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
     \end{itemize}
 \end{lemma}
 
@@ -409,17 +407,17 @@ And thus $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in\mat
 \end{proof}
 
 \begin{theorem}[Representation of infinitely exchangeably extendable see-do forecasts]\label{th:rep_seedo_obs}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some $\{\RV{X}_i|i\in A\subseteq\mathbb{N}\}$ and $X\times Y$ is standard measurable, the following statements are equivalent:
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=\utimes_{i\in \mathbb{N}} \RV{X}_i$ for some $\{\RV{X}_i|i\in \mathbb{N}\}$ and $X\times Y$ is standard measurable, the following statements are equivalent:
 
 \begin{enumerate}
-    \item $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is infinitely exchangeably extendable with respect to $\{\RV{X}_i|i\in A\}$
+    \item $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is infinitely exchangeably extendable with respect to $\{\RV{X}_i|i\in \mathbb{N}\}$
     \item There exists a function $f:X\to Z$ such that, defining $\RV{Z}:f\circ \RV{X}$,
     \begin{align}
         \kernel{T}^{\RV{Z}\RV{X}\RV{Y}|\RV{D}} = \begin{tikzpicture}
             \path (0,0) node[dist,inner sep=-2pt] (H) {$\kernel{T}^{\RV{Z}}$}
             + (0,-1) node (D) {$\RV{D}$}
             ++ (0.5,0) node[copymap] (copy0) {}
-            ++ (0.6,0) node[copymap,label={$A$}] (copy1) {}
+            ++ (0.6,0) node[copymap,label={$\mathbb{N}$}] (copy1) {}
             ++ (1.2,0.5) node[kernel] (XH) {$\kernel{T}^{\RV{X}_1|\RV{Z}}$}
             + (0,-0.5) node[kernel] (XH2) {$\kernel{T}^{\RV{X}_1|\RV{Z}}$}
             + (0,-1.25) node[kernel] (YD) {$\kernel{T}^{\RV{Y}|\RV{Z}\RV{D}}$}
@@ -435,22 +433,22 @@ Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=\utime
             \draw (copy0) to [out = 90, in=180] (Hb);
         \end{tikzpicture}
     \end{align}
-    \item There exists a function $f:X\to H_B$ such that, defining $\RV{H}_B:f\circ \RV{X}$, for any $d\in D$, $L\in \sigalg{H}_B$ $(\times_{i\in A}J_i)\in \sigalg{X}$, $K\in \sigalg{Y}$
+    \item There exists a function $f:X\to Z$ such that, defining $\RV{Z}:f\circ \RV{X}$, for any $d\in D$, $L\in \sigalg{Z}$ $(\times_{i\in \mathbb{N}}J_i)\in \sigalg{X}$, $K\in \sigalg{Y}$
     \begin{align}
-        \kernel{T}^{\RV{H}_B\RV{X}\RV{Y}|\RV{D}}_d(L\times(\times_{i\in A}J_i)\times K) = \int_{L} \prod_{i\in A} \kernel{T}^{\RV{X}_1|\RV{H}_B}_h(J_i)\kernel{T}_{h,d}^{\RV{Y}|\RV{H}_B\RV{D}}(K)d\kernel{T}^{\RV{H}_B}(h)
+        \kernel{T}^{\RV{Z}\RV{X}\RV{Y}|\RV{D}}_d(L\times(\times_{i\in A}J_i)\times K) = \int_{L} \prod_{i\in \mathbb{N}} \kernel{T}^{\RV{X}_1|\RV{Z}}_z(J_i)\kernel{T}_{z,d}^{\RV{Y}|\RV{Z}\RV{D}}(K)d\kernel{T}^{\RV{Z}}(z)
     \end{align}
-    \item There exists a function $f:X\to H_B$ such that, defining $\RV{H}_B:f\circ \RV{X}$
+    \item There exists a function $f:X\to Z$ such that, defining $\RV{Z}:f\circ \RV{X}$
         \begin{itemize}
-            \item $\RV{X}_i\CI\RV{X}_{A\setminus\{i\}}|\RV{H}_B$ for all $i\in A$
-            \item $\kernel{T}^{\RV{X}_i|\RV{H}_B}=\kernel{T}^{\RV{X}_j|\RV{H}_B}$ for all $i,j\in A$
-            \item $\RV{Y}\CI\RV{X}|\RV{H}_B\utimes \RV{D}$
+            \item $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in A$
+            \item $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kernel{T}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
+            \item $\RV{Y}\CI\RV{X}|\RV{Z}\utimes \RV{D}$
         \end{itemize}
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
 
-Without loss of generality, assume $X_1=Y=[0,1]$, $A=\mathbb{N}$.
+Without loss of generality, assume $X_1=Y=[0,1]$.
 
 (2) $\iff$ (3) follows from the fact that (3) + the associated quantifications is the integral representation of the string diagram in (2).
 
@@ -721,11 +719,9 @@ As desired.
 
 \end{proof}
 
-Theorem \ref{th:rep_seedo_obs} establishes that, given a see-do forecast with exchangeable observations, there exists a variable (namely $\RV{Z}$) that plays the role of the hypothesis with respect to the observations. That is, disintegrating a see-do forecast on the hypothesis gives a see-do model for which the observations are independent and identically distributed and which converge in limiting frequency. Such a see-do model is also decomposable. However, the consequences in the see-do model obtained by disintigrating such a see-do forecast need not be extentable to a kernel with any particular limiting frequency properties. This is a rather different type of model to a Causal Bayesian Network where consequences are given by expressions like $\prob{P}(\RV{Y}|do(\RV{W}=w))$ which seem to represent frequentist properties of a ``consequence generating mechanism''. As we will see in the next chapter, Causal Bayesian Networks are a type of see-do model, but they are one where both the observations and consequences are frequentist models. This type of model is associated with see-do forecasts for which the observations are exchangeable (as in Theorem \ref{th:rep_seedo_obs}) and the consequences are \emph{functionally exchangeable}.
+Theorem \ref{th:rep_seedo_obs} establishes that, given a see-do forecast with exchangeable observations, there exists a variable (namely $\RV{Z}$) that plays the role of the hypothesis with respect to the observations. That is, disintegrating a see-do forecast on the hypothesis gives a see-do model for which the observations are independent and identically distributed and which converge in limiting frequency. However, the consequences in the see-do model obtained by disintigrating such a see-do forecast need not be extentable to a kernel with any particular limiting frequency properties. This is a rather different type of model to a Causal Bayesian Network where consequences are given by expressions like $\prob{P}(\RV{Y}|do(\RV{W}=w))$ which seem to represent frequentist properties of a ``consequence generating mechanism''. As we will see in the next chapter, Causal Bayesian Networks are a type of see-do model, but they are one where both the observations and consequences are frequentist models. This type of model is associated with see-do forecasts for which the observations are exchangeable (as in Theorem \ref{th:rep_seedo_obs}) and the consequences are \emph{functionally exchangeable}.
 
 Functional exchangeability is a generalisation of exchangeablility to Markov kernels. It captures the intuition that if we swap the order of the outputs (say, $\RV{Y}_1,\RV{Y}_2$ is swapped to $\RV{Y}_2, \RV{Y}_1$), we need to make analagous exchange of choices ($\RV{D}_1$, $\RV{D}_2$ becomes $\RV{D}_2$, $\RV{D}_1$) in order to maintain the correspondence of choices and outputs.
-
-
 
 \begin{definition}[Functional Exchangeability]
 Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and $\RV{Y}=\utimes_{i\in A} \RV{X}_i$ for some random variables $\{\RV{D}_i\}_A, \{\RV{Y}_i\}_A$, for any perumtation $\rho:A\to A$ define the observation and choice swap function $\rho^{\RV{D}\RV{Y}}$ and the choice swap function $\rho^{\RV{D}}$ as in \ref{def:permut_swap}. Then $\kernel{T}$ is functionally exchangeable with respect to $\RV{D}$ and $\RV{X}$ if $\kernel{T}=R^{\RV{D}}\kernel{T}R^{\RV{D}\RV{Y}}$.
@@ -740,12 +736,12 @@ A see-do forecast that is infinitely exchangeably extendable with respect to $\R
 
 \end{definition}
 
-The following Lemma is a bit odd as it involves interpreting an exchangeable probability measure as an exchangeable see-do forecast with observations and consequences interchanged. This is so we can re-use Theorem \ref{th:rep_seedo_obs} without proving an almost identical theorem for probability measures.
+The following lemma interprets an exchangeable probability measure as an exchangeable see-do forecast with observations and consequences interchanged. This is so we can re-use Theorem \ref{th:rep_seedo_obs} without separately proving an almost identical theorem for probability measures.
 
 \begin{lemma}[Functionally exchangeable see-do models with exchangeable choices induce exchangeable see do models]\label{lem:f-ex2ex}
 Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ functionally exchangeable with respect to $\RV{Y}=\utimes_{i\in A} \RV{Y}_i$ and $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and some $\prob{P}^{\RV{D}}$ exchangeable with respect to $\RV{D}$, then $\prob{P}\kernel{T}\in \Delta(\sigalg{D}\otimes\sigalg{X}\otimes\sigalg{Y})$ is exchangeable with respect to $\RV{G}:=\utimes_i\in A \RV{Y}_i\utimes\RV{D}_i$. 
 
-Furthermore, defining the trivial choice $\RV{C}:\{*\}\times X\times Y\to *$, $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{X})$ is a see-do model exchangeable with respect to $\RV{G}$.
+Furthermore, defining the trivial choice $\RV{C}:\{*\}\times X\times Y\to *$, $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{X})$ is a see-do forecast exchangeable with respect to $\RV{G}$.
 \end{lemma}
 
 \begin{proof}
@@ -761,26 +757,28 @@ For arbitrary $\rho:A\to A$, associated swap kernel $R^{\RV{D}}$ and $R^{\RV{X}}
 This is sufficient for exchangeability of $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{O})$ with respect to $\RV{G}$.
 \end{proof}
 
-% \begin{definition}[Non-interfering]
-% Given a do forecast $(\kernel{T},\RV{D},\RV{O})$ where $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some random variables $\{\RV{D}_i\}_A, \{\RV{X}_i\}_A$, $\kernel{T}$ is non-interfereing with respect to $\RV{D}$ and $\RV{X}$ if for all $B\subset A$, $\RV{X}_B\CI \RV{D}_{A\setminus B}|\RV{D}_B$.
-% \end{definition}
+For the following lemma, we have to deal with two issues: first, we require an infinite sequence of consequences in order to have an exact representation theorem like Theorem \ref{th:rep_seedo_obs}. At the same time, we want a denumerable set of choices $\RV{D}$ in order to avoid concerns regarding the existence of disintegrations. For this, we define a \emph{default extension} of an functionally exchangeably extendable see-do forecast that extends the consequences without adding extra choices.
+
+\begin{definition}[Default extension]
+Given an infinitely functionally exchangeably extendable see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with respect to $\RV{D}=\utimes_{i\in A} \RV{D}_i$ and $\RV{Y}=\utimes_{i\in A} \RV{Y}_i$ ($A\subset \mathbb{N}$ finite), take some infinitely exchangeable $\prob{P}\in\Delta(\sigalg{D}_1^{\mathbb{N}})$ and define  such that for any $\mathbf{d}\in D_1^A$, $\prob{P}^{\RV{D}_{A}}(\{d\})>0$
+\end{definition}
+
+\todo[inline]{Mention that an approximate version is probably neater}
 
 \begin{lemma}[Representation of functionally exchangeable do forecasts]\label{lem:rep_fex_sdf}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable choice set $D$ and standard measurable $X$, $Y$, if $\kernel{T}$ is infinitely functionally exchangeable with respect to $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and $\RV{Y}=\utimes_{i\in A} \RV{Y}_i$, then there exists a function $f:Y\times D\to W$ and a random variable $\RV{W}:=f\circ \RV{Y}$ such that for all $i\in A$, $\RV{Y}_i\CI_{\kernel{T}}\RV{D}_{A\setminus\{i\}}\RV{Y}_{A\setminus \{i\}}|\RV{W}\RV{D}_i$ and $\kernel{T}^{\RV{Y}_i|\RV{D}_i}=\kernel{T}^{\RV{Y}_j|\RV{D}_j}$ for all $i,j\in A$ and $\RV{X}\CI\RV{Y}|\RV{W}\RV{D}$.
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable choice set $D$ and standard measurable $X$, $Y$, if $\kernel{T}$ is infinitely functionally exchangeable with respect to $\RV{D}=\utimes_{i\in \mathbb{N}}\RV{D}_i$ and $\RV{Y}=\utimes_{i\in \mathbb{N}} \RV{Y}_i$, then there exists a function $f:Y\times D\to W$ and a random variable $\RV{W}:=f\circ \RV{Y}$ such that for all $i\in \mathbb{N}$, $\RV{Y}_i\CI_{\kernel{T}}\RV{D}_{\mathbb{N}\setminus\{i\}}\RV{Y}_{\mathbb{N}\setminus \{i\}}|\RV{W}\RV{D}_i$ and $\kernel{T}^{\RV{Y}_i|\RV{D}_i}=\kernel{T}^{\RV{Y}_j|\RV{D}_j}$ for all $i,j\in \mathbb{N}$ and $\RV{X}\CI\RV{Y}|\RV{W}\RV{D}$.
 
 \end{lemma}
 
 \begin{proof}
-Without loss of generality, assume $A=\mathbb{N}$.
-
-By Lemma \ref{lem:f-ex2ex} we have some $\prob{P}$ such that $\prob{P}\kernel{T}$ is infinitely exchangeable with respect to $\RV{G}:=\utimes_{i\in\mathbb{N}} \RV{Y}_i\utimes\RV{D}_i$. Furthermore, by denumerability of $D$, $\prob{P}$ can be chosen such that $\prob{P}(\RV{D}_[n]\in B)>0$ for all $n\in\mathbb{N}$, $B\in \sigalg{D}_1^n$, $B\neq \emptyset$. By Theorem \ref{th:rep_seedo_obs} we therefore have some $\RV{W}$ (defined as a function of $\RV{Y}\utimes \RV{D}$) such that $(\prob{P}\kernel{T}')^{\RV{Y}_i\RV{D}_i|\RV{W}}=(\prob{P}\kernel{T}')^{\RV{Y}_j\RV{D}_j|\RV{W}}$ for all $i,j\in \mathbb{N}$ and $\RV{Y}_i\utimes\RV{D}_i\CI_{\prob{P}\kernel{T}'} \utimes_{j\in\mathbb{N}\setminus\{i\}} \RV{Y}_j \utimes \RV{D}_j | \RV{W}$ and $\RV{X}\CI\RV{G}|\RV{W}\RV{D}$. \todo[inline]{semigraphoid axioms} By weak union, $\RV{Y}_i\CI_{\prob{P}\kernel{T}'} \utimes_{j\in\mathbb{N}\setminus\{i\}} \RV{Y}_j \utimes \RV{D}_j | \RV{W} \RV{D}_i$ and $\RV{X}\CI\RV{Y}|\RV{W}$.
+By Lemma \ref{lem:f-ex2ex} we have some $\prob{P}$ such that $\prob{P}\kernel{T}$ is exchangeable with respect to $\RV{G}:=\utimes_{i\in\mathbb{N}} \RV{Y}_i\utimes\RV{D}_i$. Furthermore, by denumerability of $D$, $\prob{P}$ can be chosen such that $\prob{P}(\RV{D}_[n]\in B)>0$ for all $n\in\mathbb{N}$, $B\in \sigalg{D}_1^n$, $B\neq \emptyset$. By Theorem \ref{th:rep_seedo_obs} we therefore have some $\RV{W}$ (defined as a function of $\RV{Y}\utimes \RV{D}$) such that $(\prob{P}\kernel{T}')^{\RV{Y}_i\RV{D}_i|\RV{W}}=(\prob{P}\kernel{T}')^{\RV{Y}_j\RV{D}_j|\RV{W}}$ for all $i,j\in \mathbb{N}$ and $\RV{Y}_i\utimes\RV{D}_i\CI_{\prob{P}\kernel{T}'} \utimes_{j\in\mathbb{N}\setminus\{i\}} \RV{Y}_j \utimes \RV{D}_j | \RV{W}$ and $\RV{X}\CI\RV{G}|\RV{W}\RV{D}$. \todo[inline]{semigraphoid axioms} By weak union, $\RV{Y}_i\CI_{\prob{P}\kernel{T}'} \utimes_{j\in\mathbb{N}\setminus\{i\}} \RV{Y}_j \utimes \RV{D}_j | \RV{W} \RV{D}_i$ and $\RV{X}\CI\RV{Y}|\RV{W}$.
 
 Because $\prob{P}$ is strictly positive on $\sigalg{D}$, we can apply Lemma \ref{lem:agree_disint} for
 \begin{align}
-    \kernel{T}^{\RV{X}\RV{Y}|\RV{W}\RV{D}} \overset{a.s.}{=} (\prob{P}\kernel{T}')^{\RV{X}'\RV{Y}'_A|\RV{W}\RV{D}'_A}
+    \kernel{T}^{\RV{X}\RV{Y}|\RV{W}\RV{D}} \overset{a.s.}{=} (\prob{P}\kernel{T})^{\RV{X}\RV{Y}'_A|\RV{W}\RV{D}'_A}
 \end{align}
 
-Thus $\RV{Y}_i\CI_{\kernel{T}} \utimes_{j\in A \setminus\{i\}} \RV{Y}_j \utimes \RV{D}_j | \RV{W} \RV{D}_i$ and $\RV{X}\CI\RV{Y}|\RV{W}$. Marginalising and applying this independence, we finally have for all $i, j\in A$
+Thus $\RV{Y}_i\CI_{\kernel{T}} \utimes_{j\in \mathbb{N} \setminus\{i\}} \RV{Y}_j \utimes \RV{D}_j | \RV{W} \RV{D}_i$ and $\RV{X}\CI\RV{Y}|\RV{W}$. Marginalising and applying this independence, we finally have for all $i, j\in A$
 
 \begin{align}
     \kernel{T}^{\RV{Y}_i|\RV{D}_i}&\text{ and }\kernel{T}^{\RV{Y}_j|\RV{D}_j}\text{ exist and }\\
