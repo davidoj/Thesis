@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  15 JUL 2021 12:55
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  16 JUL 2021 11:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1117,7 +1117,7 @@ Overfull \hbox (25.17783pt too wide) has occurred while \output is active
 [46]
 
 LaTeX Warning: Reference `lem:partialfreq_exchangeable' on page 47 undefined on
- input line 290.
+ input line 286.
 
 
 Overfull \hbox (12.95595pt too wide) has occurred while \output is active
@@ -1134,7 +1134,7 @@ Overfull \hbox (25.17783pt too wide) has occurred while \output is active
 [48]
 
 LaTeX Warning: Reference `lem:partialfreq_exchangeable' on page 49 undefined on
- input line 354.
+ input line 350.
 
 
 Overfull \hbox (12.95595pt too wide) has occurred while \output is active
@@ -1143,7 +1143,7 @@ mr/m/n/10 49
  []
 
 [49]
-Overfull \hbox (35.57124pt too wide) detected at line 393
+Overfull \hbox (35.57124pt too wide) detected at line 389
 []
  []
 
@@ -1160,7 +1160,7 @@ mr/m/n/10 51
  []
 
 [51]
-Overfull \hbox (35.74866pt too wide) detected at line 478
+Overfull \hbox (35.74866pt too wide) detected at line 474
 []
  []
 
@@ -1189,7 +1189,7 @@ mr/m/n/10 55
  []
 
 [55]
-Overfull \hbox (19.77962pt too wide) in paragraph at lines 731--732
+Overfull \hbox (19.77962pt too wide) in paragraph at lines 725--726
 [][]\T1/lmr/bx/n/10 Definition 3.2.10 \T1/lmr/m/n/10 (Func-tional Ex-change-abi
 l-ity)\T1/lmr/bx/n/10 . []\T1/lmr/m/n/10 Given a see-do fore-cast $\OT1/cmr/m/n
 /10 (\U/msb/m/n/10 T\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 D\OML/cmm/m/it/10 ; \OT
@@ -1208,45 +1208,60 @@ Overfull \hbox (12.95595pt too wide) has occurred while \output is active
 mr/m/n/10 57
  []
 
-[57]) (./chapter_4_statistical_decision_theory.tex
+[57]
+Underfull \vbox (badness 2050) has occurred while \output is active []
+
+
 Overfull \hbox (25.17783pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 58 \T1/lmr/m/sl/10 CHAPTER 3.  TWO PLAYER STATISTICAL MODELS AND
  SEE-DO MODELS
  []
 
-[58]
+[58]) (./chapter_4_statistical_decision_theory.tex
+Overfull \hbox (12.95595pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 3.2.  FREQUENTIST RANDOM VARIABLES AND BAYESIAN FORECASTS \T1/l
+mr/m/n/10 59
+ []
+
+[59]
+Overfull \hbox (25.17783pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10 60 \T1/lmr/m/sl/10 CHAPTER 3.  TWO PLAYER STATISTICAL MODELS AND
+ SEE-DO MODELS
+ []
+
+[60
+
+]
 Chapter 4.
-[59
+[61] [62]
 
-] [60]
-
-LaTeX Warning: Reference `th:representaiton' on page 61 undefined on input line
+LaTeX Warning: Reference `th:representaiton' on page 63 undefined on input line
  101.
 
-[61]
+[63]
 
-LaTeX Warning: Reference `th:representaiton' on page 62 undefined on input line
+LaTeX Warning: Reference `th:representaiton' on page 64 undefined on input line
  182.
 
-[62] [63] [64]
+[64] [65] [66]
 
-LaTeX Warning: Reference `tab:sdp_cdp_comparison' on page 65 undefined on input
+LaTeX Warning: Reference `tab:sdp_cdp_comparison' on page 67 undefined on input
  line 317.
 
-[65] [66]
+[67] [68]
 
-LaTeX Warning: Reference `th:CSDP_u_red' on page 67 undefined on input line 360
+LaTeX Warning: Reference `th:CSDP_u_red' on page 69 undefined on input line 360
 .
 
 
-LaTeX Warning: Reference `th:CSDP_ob_red' on page 67 undefined on input line 36
+LaTeX Warning: Reference `th:CSDP_ob_red' on page 69 undefined on input line 36
 0.
 
 
-Package natbib Warning: Citation `loomes_regret_1982' on page 67 undefined on i
+Package natbib Warning: Citation `loomes_regret_1982' on page 69 undefined on i
 nput line 381.
 
-[67]
+[69]
 Overfull \hbox (23.71169pt too wide) in paragraph at lines 406--407
 [][]\T1/lmr/bx/n/10 Theorem 4.2.20 \T1/lmr/m/n/10 (SDP can be re-duced to a CSD
 P)\T1/lmr/bx/n/10 . []\T1/lmr/m/it/10 Given any SDP $\OMS/cmsy/m/n/10 h\OML/cmm
@@ -1254,7 +1269,7 @@ P)\T1/lmr/bx/n/10 . []\T1/lmr/m/it/10 Given any SDP $\OMS/cmsy/m/n/10 h\OML/cmm
 10 )\OML/cmm/m/it/10 ; D; `\OMS/cmsy/m/n/10 i$
  []
 
-[68]
+[70]
 Overfull \hbox (81.2746pt too wide) in paragraph at lines 421--422
 \OMS/cmsy/m/n/10 h\U/eus/m/n/10 T\OML/cmm/m/it/10 ; D; u\OMS/cmsy/m/n/10 i$ \T1
 /lmr/m/it/10 with two player game rep-re-sen-ta-tion $\OMS/cmsy/m/n/10 h\U/eus/
@@ -1265,25 +1280,11 @@ R\OT1/cmr/m/n/10 ((\OML/cmm/m/it/10 ^^T; ^^V\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ;
  J\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10 >
  []
 
-) (./chapter_5_interventions_counterfactuals.tex [69] [70
+) (./chapter_5_interventions_counterfactuals.tex [71] [72
 
 ]
 Chapter 5.
-[71]
-Overfull \hbox (37.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 72 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
-COUNTERFACTUALS
- []
-
-[72]
-
-LaTeX Warning: Reference `sec:single_double_representation' on page 73 undefine
-d on input line 71.
-
 [73]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 Overfull \hbox (37.26372pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 74 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
 COUNTERFACTUALS
@@ -1291,7 +1292,21 @@ COUNTERFACTUALS
 
 [74]
 
-LaTeX Warning: Reference `sec:cbns_without_d' on page 75 undefined on input lin
+LaTeX Warning: Reference `sec:single_double_representation' on page 75 undefine
+d on input line 71.
+
+[75]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (37.26372pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10 76 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
+COUNTERFACTUALS
+ []
+
+[76]
+
+LaTeX Warning: Reference `sec:cbns_without_d' on page 77 undefined on input lin
 e 88.
 
 
@@ -1307,7 +1322,7 @@ Overfull \hbox (36.9879pt too wide) detected at line 109
 
 Underfull \vbox (badness 8189) has occurred while \output is active []
 
- [75]
+ [77]
 Overfull \hbox (5.52379pt too wide) in paragraph at lines 134--135
 []\T1/lmr/m/n/10 By the as-sump-tion of lim-ited un-re-spon-sive-ness, for all 
 $\OML/cmm/m/it/10 d; d[]$ \T1/lmr/m/n/10 such that $\OML/cmm/m/it/10 y[]\OT1/cm
@@ -1328,12 +1343,6 @@ m/n/10 (\OML/cmm/m/it/10 s; d\OT1/cmr/m/n/10 ) =
 
 
 Overfull \hbox (37.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 76 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
-COUNTERFACTUALS
- []
-
-[76] [77]
-Overfull \hbox (37.26372pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 78 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
 COUNTERFACTUALS
  []
@@ -1345,25 +1354,31 @@ COUNTERFACTUALS
  []
 
 [80] [81]
+Overfull \hbox (37.26372pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10 82 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
+COUNTERFACTUALS
+ []
+
+[82] [83]
 Underfull \hbox (badness 10000) in paragraph at lines 439--443
 
  []
 
 ) (./chapter_6_imitability_inference.tex
 Overfull \hbox (37.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 82 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
+\T1/lmr/m/n/10 84 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
 COUNTERFACTUALS
  []
 
-[82]
+[84]
 Chapter 6.
-[83
-
-]) (./chapter_7_godscomputer.tex [84]
-Chapter 7.
 [85
 
-] [86]
+]) (./chapter_7_godscomputer.tex [86]
+Chapter 7.
+[87
+
+] [88]
 Overfull \hbox (16.96071pt too wide) in paragraph at lines 96--97
 [][]\T1/lmr/bx/n/10 Lemma 7.1.4 \T1/lmr/m/n/10 (Cou-pled prod-uct of all ran-do
 m vari-ables is the iden-tity)\T1/lmr/bx/n/10 . []$[][]\OT1/cmss/m/n/10 X[] \OT
@@ -1371,12 +1386,6 @@ m vari-ables is the iden-tity)\T1/lmr/bx/n/10 . []$[][]\OT1/cmss/m/n/10 X[] \OT
  []
 
 
-Overfull \hbox (224.4057pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 7.1.  ARE WE TRYING TO UNDERSTAND CONSEQUENCES OR ACTIONS OR OB
-JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 87
- []
-
-[87] [88]
 Overfull \hbox (224.4057pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10 7.1.  ARE WE TRYING TO UNDERSTAND CONSEQUENCES OR ACTIONS OR OB
 JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 89
@@ -1389,6 +1398,12 @@ JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 91
  []
 
 [91] [92]
+Overfull \hbox (224.4057pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  ARE WE TRYING TO UNDERSTAND CONSEQUENCES OR ACTIONS OR OB
+JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 93
+ []
+
+[93] [94]
 Overfull \hbox (0.98639pt too wide) in paragraph at lines 495--496
 [][]\T1/lmr/bx/n/10 Definition 7.1.11 \T1/lmr/m/n/10 (Struc-tural Causal Model)
 \T1/lmr/bx/n/10 . []\T1/lmr/m/n/10 A struc-tural causal model (SCM)
@@ -1397,16 +1412,16 @@ Overfull \hbox (0.98639pt too wide) in paragraph at lines 495--496
 
 Overfull \hbox (224.4057pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10 7.1.  ARE WE TRYING TO UNDERSTAND CONSEQUENCES OR ACTIONS OR OB
-JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 93
- []
-
-[93] [94]
-Overfull \hbox (224.4057pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 7.1.  ARE WE TRYING TO UNDERSTAND CONSEQUENCES OR ACTIONS OR OB
 JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 95
  []
 
-[95]
+[95] [96]
+Overfull \hbox (224.4057pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  ARE WE TRYING TO UNDERSTAND CONSEQUENCES OR ACTIONS OR OB
+JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 97
+ []
+
+[97]
 Overfull \hbox (41.65875pt too wide) in paragraph at lines 597--598
 [][]\T1/lmr/bx/n/10 Definition 7.1.17 \T1/lmr/m/n/10 (De-rived model)\T1/lmr/bx
 /n/10 . []\T1/lmr/m/n/10 Given a SCNM $\OMS/cmsy/m/n/10 M \OT1/cmr/m/n/10 := \O
@@ -1417,13 +1432,13 @@ r/bx/n/10 f[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 g[]\OML/cmm/m/it/10 ; \U/msb/m
 n/10 ,
  []
 
-[96])
+[98])
 Overfull \hbox (224.4057pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10 7.1.  ARE WE TRYING TO UNDERSTAND CONSEQUENCES OR ACTIONS OR OB
-JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 97
+JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 99
  []
 
-[97] (./main.bbl
+[99] (./main.bbl
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
 3.
  (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
@@ -1469,19 +1484,19 @@ Underfull \hbox (badness 1968) in paragraph at lines 57--65
 10 Break-throughs in
  []
 
-[98]
+[100]
 Underfull \hbox (badness 2334) in paragraph at lines 141--149
 []$\T1/lmtt/m/n/10 http : / / journals . sagepub . com / doi / 10 . 1177 / 2047
 487320936787$[]\T1/lmr/m/n/10 .  Pub-
  []
 
 
-Overfull \hbox (224.4057pt too wide) has occurred while \output is active
+Overfull \hbox (229.4057pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10 7.1.  ARE WE TRYING TO UNDERSTAND CONSEQUENCES OR ACTIONS OR OB
-JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 99
+JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 101
  []
 
-[99]
+[101]
 Missing character: There is no – in font ec-lmr10!
 
 Underfull \hbox (badness 1009) in paragraph at lines 212--220
@@ -1489,17 +1504,17 @@ Underfull \hbox (badness 1009) in paragraph at lines 212--220
 563, 1468-3318.  doi:
  []
 
-[100])
+[102])
 Overfull \hbox (229.4057pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10 7.1.  ARE WE TRYING TO UNDERSTAND CONSEQUENCES OR ACTIONS OR OB
-JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 101
+JECTIVE CAUSAL RELATIONSHIPS? \T1/lmr/m/n/10 103
  []
 
-[101]
+[103]
 
 Package natbib Warning: There were undefined citations.
 
-[102]
+[104]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 180.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 180.
  (./main.aux)
@@ -1520,12 +1535,12 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 180.
  ) 
 Here is how much of TeX's memory you used:
- 27974 strings out of 479819
- 509080 string characters out of 5895847
- 839950 words of memory out of 5000000
- 44515 multiletter control sequences out of 15000+600000
+ 27987 strings out of 479819
+ 509311 string characters out of 5895847
+ 839986 words of memory out of 5000000
+ 44528 multiletter control sequences out of 15000+600000
  619188 words of font info for 123 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  60i,17n,83p,1472b,976s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (102 pages, 1020880 bytes).
+Output written on main.xdv (104 pages, 1043840 bytes).

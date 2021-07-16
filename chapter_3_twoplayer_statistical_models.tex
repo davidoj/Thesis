@@ -94,8 +94,6 @@ We can go from a see-do model to a see-do forecast by adding a prior to the mode
 Given a two player statistical model $(\kernel{K},\RV{H},\RV{D},\RV{O})$ and any prior $\mu\in \Delta(\sigalg{H})$, defining $\kernel{L}:=(\mu\otimes \mathrm{Id}_D)\kernel{K}$ we have $(\kernel{L},\RV{D},\RV{O})$ is a do-forecast. 
 
 If $(\kernel{K},\RV{H},\RV{D},\RV{X},\RV{Y})$ is a see-do model then, defining $\kernel{L}$ as before, $(\kernel{L},\RV{D},\RV{X},\RV{Y})$ is a see-do forecast.
-
-
 \end{theorem}
 
 
@@ -757,16 +755,8 @@ For arbitrary $\rho:A\to A$, associated swap kernel $R^{\RV{D}}$ and $R^{\RV{X}}
 This is sufficient for exchangeability of $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{O})$ with respect to $\RV{G}$.
 \end{proof}
 
-For the following lemma, we have to deal with two issues: first, we require an infinite sequence of consequences in order to have an exact representation theorem like Theorem \ref{th:rep_seedo_obs}. At the same time, we want a denumerable set of choices $\RV{D}$ in order to avoid concerns regarding the existence of disintegrations. For this, we define a \emph{default extension} of an functionally exchangeably extendable see-do forecast that extends the consequences without adding extra choices.
-
-\begin{definition}[Default extension]
-Given an infinitely functionally exchangeably extendable see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with respect to $\RV{D}=\utimes_{i\in A} \RV{D}_i$ and $\RV{Y}=\utimes_{i\in A} \RV{Y}_i$ ($A\subset \mathbb{N}$ finite), take some infinitely exchangeable $\prob{P}\in\Delta(\sigalg{D}_1^{\mathbb{N}})$ and define  such that for any $\mathbf{d}\in D_1^A$, $\prob{P}^{\RV{D}_{A}}(\{d\})>0$
-\end{definition}
-
-\todo[inline]{Mention that an approximate version is probably neater}
-
 \begin{lemma}[Representation of functionally exchangeable do forecasts]\label{lem:rep_fex_sdf}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable choice set $D$ and standard measurable $X$, $Y$, if $\kernel{T}$ is infinitely functionally exchangeable with respect to $\RV{D}=\utimes_{i\in \mathbb{N}}\RV{D}_i$ and $\RV{Y}=\utimes_{i\in \mathbb{N}} \RV{Y}_i$, then there exists a function $f:Y\times D\to W$ and a random variable $\RV{W}:=f\circ \RV{Y}$ such that for all $i\in \mathbb{N}$, $\RV{Y}_i\CI_{\kernel{T}}\RV{D}_{\mathbb{N}\setminus\{i\}}\RV{Y}_{\mathbb{N}\setminus \{i\}}|\RV{W}\RV{D}_i$ and $\kernel{T}^{\RV{Y}_i|\RV{D}_i}=\kernel{T}^{\RV{Y}_j|\RV{D}_j}$ for all $i,j\in \mathbb{N}$ and $\RV{X}\CI\RV{Y}|\RV{W}\RV{D}$.
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable choice set $D$ and standard measurable $X$, $Y$, if $\kernel{T}$ is functionally exchangeable with respect to $\RV{D}=\utimes_{i\in \mathbb{N}}\RV{D}_i$ and $\RV{Y}=\utimes_{i\in \mathbb{N}} \RV{Y}_i$, then there exists a function $f:Y\times D\to W$ and a random variable $\RV{W}:=f\circ \RV{Y}$ such that for all $i\in \mathbb{N}$, $\RV{Y}_i\CI_{\kernel{T}}\RV{D}_{\mathbb{N}\setminus\{i\}}\RV{Y}_{\mathbb{N}\setminus \{i\}}|\RV{W}\RV{D}_i$ and $\kernel{T}^{\RV{Y}_i|\RV{D}_i}=\kernel{T}^{\RV{Y}_j|\RV{D}_j}$ for all $i,j\in \mathbb{N}$ and $\RV{X}\CI\RV{Y}|\RV{W}\RV{D}$.
 
 \end{lemma}
 
@@ -787,48 +777,129 @@ Thus $\RV{Y}_i\CI_{\kernel{T}} \utimes_{j\in \mathbb{N} \setminus\{i\}} \RV{Y}_j
 \end{proof}
 
 \begin{theorem}[Representation of doubly exchangeable see-do forecasts]\label{th:rep_dex_sdf}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable $D$ and standard measurable $X$, $Y$, the following statements are equivalent:
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable $D$ and standard measurable $X$, $Y$, the following statements are equivalent (given finite $A\subset\mathbb{N}$, $B\subset\mathbb{N}$ not necessarily finite):
 
 \begin{enumerate}
-    \item $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is doubly extendable with respect to $\RV{D}$, $\RV{X}$, $\RV{Y}$
-    \item There exist function $f:X\to Z$, $g:D\times Y\to W$ such that, defining $\RV{Z}:f\circ \RV{X}$,
+    \item $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is doubly exchangeable with respect to $\RV{D}=\utimes_{i\in A}\RV{D}_i$, $\RV{X}=\utimes_{i\in B} \RV{X}_i$, $\RV{Y}=\utimes_{i\in A} \RV{Y}_i$
+    \item There exists a set $H$, $\kernel{T}^{\RV{H}}\in \Delta(\sigalg{H})$ and Markov kernels $\kernel{T}^{\RV{X}_1|\RV{H}}$ and $\kernel{T}^{\RV{Y}_1|\RV{H}\RV{D}_1}$ such that
     \begin{align}
         \kernel{T}^{\RV{Z}\RV{X}\RV{Y}|\RV{D}} = \begin{tikzpicture}
-            \path (0,0) node[dist,inner sep=-2pt] (H) {$\kernel{T}^{\RV{Z}}$}
+            \path (0,0) node[dist,inner sep=-2pt] (H) {$\kernel{T}^{\RV{H}}$}
             + (0,-1) node (D) {$\RV{D}$}
             ++ (0.5,0) node[copymap] (copy0) {}
-            ++ (0.6,0) node[copymap,label={$A$}] (copy1) {}
-            ++ (1.2,0.5) node[kernel] (XH) {$\kernel{T}^{\RV{X}_1|\RV{Z}}$}
-            + (0,-0.5) node[kernel] (XH2) {$\kernel{T}^{\RV{X}_1|\RV{Z}}$}
-            + (0,-1.25) node[kernel] (YD) {$\kernel{T}^{\RV{Y}|\RV{Z}\RV{D}}$}
+            ++ (0.6,0) node[copymap,label={$B$}] (copy1) {}
+            ++ (1.2,0.5) node[kernel] (XH) {$\kernel{T}^{\RV{X}_1|\RV{H}}$}
+            + (0,-0.5) node[kernel] (XH2) {$\kernel{T}^{\RV{X}_1|\RV{H}}$}
+            + (0,-1.75) node[kernel] (YD) {$\kernel{T}^{\RV{Y}_1|\RV{H}\RV{D}_1}$}
+            + (-.9,-1.6) node[copymap,label={$A$}] (copy2) {}
+            + (-.9,-2.2) node[copymap, label={$A$}] (copy3) {}
+            + (0,-2.25) node[kernel] (YD2) {$\kernel{T}^{\RV{Y}_1|\RV{H}\RV{D}_1}$}
             ++ (1.2,-0.25) node (X1) {$\RV{X}$}
-            + (0,-1) node (Y) {$\RV{Y}$}
-            + (0,0.9) node (Hb) {$\RV{Z}$};
+            + (0,-1.5) node (Y) {$\RV{Y}$};
             \draw (H) -- (copy1) (copy1) to [out=35,in=180] (XH) (copy1) to [out=-35,in=180] (XH2);
             \draw ($(XH.east)$) to [out=-15,in=180] ($(X1.west) + (-0.2,0.25)$) ($(XH2.east)$) to [out=15,in=180] ($(X1.west)+(-0.2,-0.25)$);
             \draw ($(X1.west) + (-0.2,0)$) to (X1);
-            \draw (copy0) to [out=-90,in=180] ($(YD.west) + (0,0.15)$);
-            \draw (D) to [out=0,in=180] ($(YD.west)+(0,-0.15)$) (YD) -- (Y);
+            \draw (copy0) to [out=-90,in=180] (copy2) -- ($(YD.west) + (0,0.15)$);
+            \draw (D) to [out=0,in=180] (copy3) -- ($(YD.west)+(0,-0.15)$) (YD);
+            \draw (copy2) to [out=-45,in=180] ($(YD2.west) + (0,0.15)$);
+            \draw (copy3) to [out=-45,in=180] ($(YD2.west) + (0,-0.15)$);
             \draw ($(copy1.west)+(-0.1,0.8)$) rectangle ($(X1.west) + (-0.2,-0.55)$);
-            \draw (copy0) to [out = 90, in=180] (Hb);
+            \draw ($(copy2.west)+(-0.1,0.5)$) rectangle ($(Y.west) + (-0.2,-0.85)$);
+            \draw ($(Y.west) + (-0.2,0)$) -- (Y);
         \end{tikzpicture}
     \end{align}
-    \item There exists a function $f:X\to H_B$ such that, defining $\RV{H}_B:f\circ \RV{X}$, for any $d\in D$, $L\in \sigalg{H}_B$ $(\times_{i\in A}J_i)\in \sigalg{X}$, $K\in \sigalg{Y}$
+    \item There exists a set $H$, $\mu\in \Delta(\sigalg{H})$ and Markov kernels $\kernel{T}^{\RV{H}}$, $\kernel{T}^{\RV{X}_1|\RV{H}}$ and $\kernel{T}^{\RV{Y}_1|\RV{H}\RV{D}_1}$ such that for all $\mathbf{d}_A\in D$, $\{J_i\in \sigalg{X}_1|i\in B\}$, $\{K_i\in \sigalg{Y}_1|i\in A\}$:
     \begin{align}
-        \kernel{T}^{\RV{H}_B\RV{X}\RV{Y}|\RV{D}}_d(L\times(\times_{i\in A}J_i)\times K) = \int_{L} \prod_{i\in A} \kernel{T}^{\RV{X}_1|\RV{H}_B}_h(J_i)\kernel{T}_{h,d}^{\RV{Y}|\RV{H}_B\RV{D}}(K)d\kernel{T}^{\RV{H}_B}(h)
+        \kernel{T}^{\RV{X}\RV{Y}|\RV{D}}_{\mathbf{d}_A}((\times_{i\in B}J_i)\times (\times_{j\in A} K_j)) = \int_{H} \prod_{i\in B} \kernel{T}^{\RV{X}_1|\RV{H}}_h(J_i)\prod_{i\in A}\kernel{T}_{h,d_i}^{\RV{Y}_1|\RV{H}\RV{D}_1}(K_i)d\kernel{T}^{\RV{H}}(h)
     \end{align}
-    \item There exists a function $f:X\to H_B$ such that, defining $\RV{H}_B:f\circ \RV{X}$
-        \begin{itemize}
-            \item $\RV{X}_i\CI\RV{X}_{A\setminus\{i\}}|\RV{H}_B$ for all $i\in A$
-            \item $\kernel{T}^{\RV{X}_i|\RV{H}_B}=\kernel{T}^{\RV{X}_j|\RV{H}_B}$ for all $i,j\in A$
-            \item $\RV{Y}\CI\RV{X}|\RV{H}_B\utimes \RV{D}$
-        \end{itemize}
-\end{enumerate}
 
+\end{enumerate}
 \end{theorem}
 
-
-
 \begin{proof}
-\todo[inline]{TBC}
+$(2)$ and $(3)$ are string and integral notation for the same statement. 
+
+$(1)\implies (2)$:
+
+By infinite extendability of $\kernel{T}$, there is a doubly exchangeable see-do forecast $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ with $\RV{X}'=\utimes{i\in\mathbb{N}}\RV{X}'_i$, $\RV{Y}'=\utimes{i\in\mathbb{N}}\RV{Y}'_i$, $\RV{D}'=\utimes{i\in\mathbb{N}}\RV{D}'_i$ that agrees with $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ on the appropriate marginals. Note that, because the codomain of $\RV{D}'$ is in any nontrivial case uncountably infinite, we don't necessarily have the existence of arbitrary disintegrations of $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ (see Theorem \ref{th:disintegration_exist} and related discussion).
+
+By Theorem \ref{th:rep_seedo_obs} we have $\RV{Z}'$ such that 
+\begin{itemize}
+    \item $\RV{X}'_i\CI_{\kernel{T}'}\RV{X}'_{\mathbb{N}\setminus\{i\}}|\RV{Z}'$ for all $i\in A$
+    \item $\kernel{T}^{\prime \RV{X}'_i|\RV{Z}''}=\kernel{T}^{\prime \RV{X}'_j|\RV{Z}''}$ for all $i,j\in A$
+    \item $\RV{Y}'\CI_{\kernel{T}'}\RV{X}'|\RV{Z}'\utimes \RV{D}'$
+\end{itemize}
+
+Because $\RV{W}'$ is a function of $\RV{Y}'$, we also have $\RV{X}'\CI_{\kernel{T}'} \RV{W}'|\RV{Z}'\utimes\RV{D}'$. Furthermore, because $\RV{Z}'$ is a function of $\RV{X}'$ we have $\RV{Z}'\CI_{\kernel{T}'} \RV{D}'$ and so $\RV{X}'\CI_{\kernel{T}'}\RV{D}'\utimes\RV{Z}'$ by contraction and $\RV{X}'\CI_{\kernel{T}'}\RV{D}'|\RV{Z}'$ by weak union. 
+
+Finally, this implies $\RV{X}'\CI_{\kernel{T}'} \RV{W}'\utimes\RV{D}'|\RV{Z}'$ by contraction which in turn implies $\RV{X}'\CI_{\kernel{T}'}\RV{W}'|\RV{Z}'$ by weak union.
+
+By Lemma \ref{lem:rep_fex_sdf} we have $\RV{W}'$ such that
+
+\begin{itemize}
+    \item for all $i\in \mathbb{N}$, $\RV{Y}'_i\CI_{\kernel{T}''}\RV{D}'_{\mathbb{N}\setminus\{i\}}\RV{Y}'_{\mathbb{N}\setminus \{i\}}|\RV{W}'\utimes \RV{D}'_i$
+    \item $\kernel{T}^{\prime \RV{Y}'_i|\RV{D}'_i}=\kernel{T}^{\RV{Y}'_j|\RV{D}'_j}$ for all $i,j\in \mathbb{N}$ 
+    \item $\RV{X}'\CI_{\kernel{T}'}\RV{Y}'|\RV{W}'\utimes \RV{D}'$
+\end{itemize}
+
+Because $\RV{Z}'$ is a function of $\RV{X}'$, and thus $\RV{Z}'\utimes\RV{X}'$ is a function of $\RV{X}'$, we also have $\RV{Y}'\CI_{\kernel{T}'}\RV{Z}'\utimes\RV{X}'|\RV{W}'\utimes \RV{D}'$.
+
+By Lemma \ref{lem:representation_of_kernels}, and 
+\begin{align}
+    \kernel{T}^{\prime \RV{Z}'\RV{W}'\RV{X}'\RV{Y}'|\RV{D}'} &= \begin{tikzpicture}
+        \path (0,0) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        ++ (1,0) node[kernel] (H) {$\kernel{T}^{\RV{Z}|\RV{D}}$}
+        ++ (0.9,0) node[copymap] (copy1) {}
+        ++ (0.9,-0.5) node[kernel] (Xzd) {$\kernel{T}^{\RV{X}|\RV{ZD}}$}
+        ++ (0.9,0) node[copymap] (copy2) {}
+        ++ (0.9,-0.5) node[kernel] (Yzxd) {$\kernel{T}^{\RV{Y}|\RV{XZD}}$}
+        ++ (1.5,0) node (Y) {$\RV{Y}$}
+        +  (0,0.5) node (X) {$\RV{X}$}
+        + (0,1) node (Z) {$\RV{Z}$};
+        \draw (D) -- (H) -- (Z);
+        \draw (copy0) to [out=-45,in=180] ($(Xzd.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(Xzd.west) + (0,0.15)$);
+        \draw (copy0) to [out=-90,in=180] ($(Yzxd.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-90,in=180] ($(Yzxd.west) + (0,0)$);
+        \draw (copy2) to [out=-90,in=180] ($(Yzxd.west) + (0,0.15)$);
+        \draw (Xzd) -- (X) (Yzxd) -- (Y);
+    \end{tikzpicture}\\
+     &= \begin{tikzpicture}
+        \path (0,0) node (D) {$\RV{D}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        ++ (1,0) node[dist] (H) {$\kernel{T}^{\RV{Z}}$}
+        ++ (0.9,0) node[copymap] (copy1) {}
+        ++ (0.9,-0.5) node[kernel] (Xzd) {$\kernel{T}^{\RV{X}|\RV{Z}}$}
+        ++ (0.9,0) node[copymap] (copy2) {}
+        ++ (0.9,-0.5) node[kernel] (Yzxd) {$\kernel{T}^{\RV{Y}|\RV{ZD}}$}
+        ++ (1.5,0) node (Y) {$\RV{Y}$}
+        +  (0,0.5) node (X) {$\RV{X}$}
+        + (0,1) node (Z) {$\RV{Z}$};
+        \draw[-{Rays[n=8]}] (D) -- ($(D.west) + (1,0)$);
+        \draw (H) -- (Z);
+        \draw[-{Rays[n=8]}] (copy0) to [out=-45,in=180] ($(Xzd.west) + (-0.7,-0.15)$);
+        \draw (copy1) to [out=-60,in=180] ($(Xzd.west) + (0,0.15)$);
+        \draw (copy0) to [out=-90,in=180] ($(Yzxd.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-90,in=180] ($(Yzxd.west) + (0,0)$);
+        \draw[-{Rays[n=8]}] (copy2) to [out=-90,in=180] ($(Yzxd.west) + (-0.1,0.15)$);
+        \draw (Xzd) -- (X) (Yzxd) -- (Y);
+    \end{tikzpicture}\\
+     &= \begin{tikzpicture}
+        \path (0,0) node (D) {$\RV{D}$}
+        ++ (0,1) node[dist] (H) {$\kernel{T}^{\RV{Z}}$}
+        ++ (0.9,0) node[copymap] (copy1) {}
+        ++ (0.9,-0.5) node[kernel] (Xzd) {$\kernel{T}^{\RV{X}|\RV{Z}}$}
+        ++ (1.8,-0.5) node[kernel] (Yzxd) {$\kernel{T}^{\RV{Y}|\RV{ZD}}$}
+        ++ (1.5,0) node (Y) {$\RV{Y}$}
+        +  (0,0.5) node (X) {$\RV{X}$}
+        + (0,1) node (Z) {$\RV{Z}$};
+        \draw (H) -- (Z);
+        \draw (copy1) to [out=-60,in=180] ($(Xzd.west) + (0,0.15)$);
+        \draw (D) -- ($(Yzxd.west) + (0,-0.15)$);
+        \draw (copy1) to [out=-90,in=180] ($(Yzxd.west) + (0,0)$);
+        \draw (Xzd) -- (X) (Yzxd) -- (Y);
+    \end{tikzpicture}
+\end{align}
+
 \end{proof}
