@@ -16,45 +16,45 @@ Repeated entry---line 1338 of file references.bib
  :                          ,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "loomes_regret_1982"
-You've used 38 entries,
+You've used 39 entries,
             2773 wiz_defined-function locations,
-            876 strings with 13145 characters,
-and the built_in function-call counts, 15855 in all, are:
-= -- 1507
-> -- 717
-< -- 35
-+ -- 252
-- -- 214
-* -- 1179
-:= -- 2544
-add.period$ -- 186
-call.type$ -- 38
-change.case$ -- 180
-chr.to.int$ -- 38
-cite$ -- 76
-duplicate$ -- 777
-empty$ -- 1366
-format.name$ -- 272
-if$ -- 3333
+            887 strings with 13411 characters,
+and the built_in function-call counts, 16361 in all, are:
+= -- 1562
+> -- 738
+< -- 36
++ -- 259
+- -- 220
+* -- 1221
+:= -- 2623
+add.period$ -- 193
+call.type$ -- 39
+change.case$ -- 185
+chr.to.int$ -- 39
+cite$ -- 78
+duplicate$ -- 797
+empty$ -- 1406
+format.name$ -- 281
+if$ -- 3440
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 44
-newline$ -- 264
-num.names$ -- 162
-pop$ -- 331
+missing$ -- 45
+newline$ -- 273
+num.names$ -- 166
+pop$ -- 335
 preamble$ -- 1
-purify$ -- 145
+purify$ -- 149
 quote$ -- 0
-skip$ -- 540
+skip$ -- 556
 stack$ -- 0
-substring$ -- 425
-swap$ -- 73
+substring$ -- 452
+swap$ -- 74
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 373
+type$ -- 384
 warning$ -- 0
-while$ -- 148
+while$ -- 153
 width$ -- 0
-write$ -- 631
+write$ -- 652
 (There were 3 error messages)
