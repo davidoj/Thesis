@@ -2,8 +2,14 @@
 
 \chapter{Statistical Decision Theory}
 
-
 \section{A see-do model with a utility is a statistical decision problem}
+
+We introduced see-do models in Chapter \ref{ch:2p_statmodels} and gave the random variables suggestive names: $\RV{D}$ is the ``choices'', $\RV{X}$ is the ``observations'', $\RV{H}$ is the ``hypothesis'' and $\RV{Y}$ is the ``consequences''. However, as we discussed, the actual interpretations of these variables depend on what exactly the model is being used for. One use case is making decisions. 
+
+We will consider an idealised decision problem where a set of observations will be given taking values in $X$, a utility function $u:Y\to \mathbb{R}$ is given and the task is, after viewing the observations, to select one decision from a known set $D$ in order to bring about a good consequence as measured by $u$.
+
+In order to solve a problem of this nature, we have to bring some knowledge of our own. In particular, we require a relationship between decisions we might make $D$ and consequences $Y$, because the decision are what we choose while the consequences are how we are evaluated. If we want to do a good job, we also want some means by which we can update this relationship given the data we have observed. Finally, it is unlikely that we can soundly assume a functional relationship between $D$ and $Y$ before or after updating on the given data, while the given utility $u$ only evaluates the desirability of points in $Y$ and thus only provides a means of ranking decisions given a functional relationship (even with a functional relationship, some decisions might be rated as equally desirable, but this is still a ranking).
+
 
 \subsection{Decision functions}
 

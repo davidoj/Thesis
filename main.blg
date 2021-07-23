@@ -3,58 +3,58 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-Repeated entry---line 843 of file references.bib
+Repeated entry---line 852 of file references.bib
  : @phdthesis{shpitser_complete_2008
  :                                  ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1144 of file references.bib
+Repeated entry---line 1153 of file references.bib
  : @article{clerc_pointless_2017
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1338 of file references.bib
+Repeated entry---line 1347 of file references.bib
  : @article{fong_causal_2013
  :                          ,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "loomes_regret_1982"
-You've used 39 entries,
+You've used 40 entries,
             2773 wiz_defined-function locations,
-            887 strings with 13411 characters,
-and the built_in function-call counts, 16361 in all, are:
-= -- 1562
-> -- 738
-< -- 36
-+ -- 259
-- -- 220
-* -- 1221
-:= -- 2623
-add.period$ -- 193
-call.type$ -- 39
-change.case$ -- 185
-chr.to.int$ -- 39
-cite$ -- 78
-duplicate$ -- 797
-empty$ -- 1406
-format.name$ -- 281
-if$ -- 3440
+            892 strings with 13522 characters,
+and the built_in function-call counts, 16653 in all, are:
+= -- 1584
+> -- 748
+< -- 37
++ -- 263
+- -- 223
+* -- 1236
+:= -- 2671
+add.period$ -- 196
+call.type$ -- 40
+change.case$ -- 188
+chr.to.int$ -- 40
+cite$ -- 80
+duplicate$ -- 817
+empty$ -- 1438
+format.name$ -- 285
+if$ -- 3501
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 45
-newline$ -- 273
-num.names$ -- 166
-pop$ -- 335
+missing$ -- 47
+newline$ -- 278
+num.names$ -- 170
+pop$ -- 347
 preamble$ -- 1
-purify$ -- 149
+purify$ -- 152
 quote$ -- 0
-skip$ -- 556
+skip$ -- 568
 stack$ -- 0
-substring$ -- 452
-swap$ -- 74
+substring$ -- 454
+swap$ -- 75
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 384
+type$ -- 390
 warning$ -- 0
-while$ -- 153
+while$ -- 156
 width$ -- 0
-write$ -- 652
+write$ -- 664
 (There were 3 error messages)

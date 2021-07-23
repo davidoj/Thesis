@@ -428,11 +428,3 @@ INPUT chapter_6_imitability_inference.tex
 INPUT chapter_6_imitability_inference.tex
 INPUT chapter_7_godscomputer.tex
 INPUT chapter_7_godscomputer.tex
-INPUT main.bbl
-INPUT main.bbl
-INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
-INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtt10.tfm
-INPUT main.aux
-INPUT ./main.out
-INPUT ./main.out
