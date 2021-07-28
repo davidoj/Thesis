@@ -88,7 +88,7 @@ In the world of ``ordinary'' one-player statistical models, De Finetti's Represe
 
 Thus, one way that statistical models could describe objective facts is if forecasts can be assumed to be exchangeable, in which case the forecast can be factored into a prior and a statistical model describing  independent and identically distributed sequences. As \citet{walley_statistical_1991} cautions, exchangeability is quite a strong assumption -- for example, it entails that one will never believe, no matter how much evidence is apparent, that a sequence is cyclic rather than converging to a stable relative frequency. Acknowledging there is a lot more to explore in this area, in Theorem \ref{th:rep_dex_sdf} we extend De Finetti's representation theorem to see-do models and show that, considering \emph{see-do forecasts}, if both observations and consequences satisfy a kind of exchangeability then the forecast is the product of a prior and a see-do model which, given a hypothesis, describes a sequence of independent and identical consequence maps.
 
-\begin{definition}[Forecasts, see-do forecast]
+\begin{definition}[Forecasts, see-do forecast]\label{def:do_forecast}
 A \emph{do forecast} $(\kernel{F},\RV{D},\RV{O})$ is a Markov kernel $\kernel{F}:D\to \Delta(\sigalg{O})$ for some set of choices $D$ and outcomes $O$. The choice variable $\RV{D}:D\times O\to D$ is the map $(d,e)\mapsto d$ that forgest the outcome and and the outcome variable $\RV{O}:D\times O\to O$ is the map $(d,o)\to o$ that forgets the choice.
 
 A \emph{see-do forecast} is a forecast $(\kernel{F},\RV{D},\RV{X},\RV{Y})$ with an \emph{observation variable} $\RV{X}:D\times O\to X$ and a \emph{consequence variable} $\RV{Y}:D\times O\to Y$ such that $\RV{O}=\RV{X}\utimes\RV{Y}$ and $\RV{X}\CI\RV{D}$.
