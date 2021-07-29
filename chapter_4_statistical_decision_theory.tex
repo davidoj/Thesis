@@ -2,6 +2,43 @@
 
 \chapter{Statistical Decision Theory}
 
+\todo[inline]{I think I've got a good idea for a result that is relevant to the discussion below}
+
+\emph{Proposition:} If you have a decision problem of the following form:
+
+\begin{itemize}
+    \item You get an observation $x$ and may return some mixtures of decisions in $\Delta(\sigalg{D})$; that is, you can choose some function $x\to \Delta(\sigalg{D})$
+    \item For any function $Q:x\to \Delta(\sigalg{D})$ we have a forecast of the observations, decisions and consequences, and it is appropriate to model the forecast with some probability over observations decisions and consequences $\prob{P}_Q\in \Delta(\sigalg{X}\otimes\sigalg{D}\otimes\sigalg{Y})$
+    \begin{itemize}
+        \item You can probably make this a collection of probabilities/Markov kernel, it's just simpler to consider one probability for this outline
+    \end{itemize}
+    \item For all $Q,R:x\to \Delta(\sigalg{D})$, $\prob{P}_Q^{\RV{X}}=\prob{P}_R^{\RV{X}}$, $\prob{P}_Q^{\RV{Y}|\RV{X}\RV{D}}=\prob{P}_R^{\RV{Y}|\RV{X}\RV{D}}$ and $\prob{P}_Q^{\RV{D}|\RV{X}}=Q$
+    \begin{itemize}
+        \item That is: I should expect the same observations whatever function I end up choosing and I expect the same consequences holding the observations and decision fixed (even more informally: it doesn't matter how I choose decisions provided I end up choosing the same one)
+        \item Finally, the decision function we choose is the relation between $\RV{X}$ and $\RV{D}$
+    \end{itemize}
+    \item There exists some $Q$ such that $\prob{P}_Q$ has full support
+\end{itemize}
+
+Then there is a unique see-do forecast $\kernel{T}$ such that for every $Q:x\to \Delta(\sigalg{D})$, $\kernel{T}$ ``intertwined'' with $Q$ is equal to $\prob{P}_Q$ (intertwining being a well-defined operation I haven't written down).
+
+\emph{Proof sketch:} \citet{jacobs_causal_2019} introduces the notion of a ``2-comb'' which is a Markov kernel with two inputs, two outputs and one of the outputs is independent of one of the inputs. This is essentially equivalent to a see-do model (Definition \ref{def:seedo}) - ``essentially'' because we need to give wires names to get a see-do model, but the independence condition means that there is always a unique way to do this.
+
+Jacobs et. al. prove a \emph{comb disintegration} theorem: given any probability with 3 wires and full support, there is a unique 2-comb and a Markov kernel that can be ``intertwined'' to give the original probability. Thus we can get a unique 2-comb $\RV{V}$ for some $Q$ where $\prob{P}_Q$.
+
+Further, we can get a collection of 2-combs $\RV{U},\RV{W}$,... for $R, S:x\to \Delta(\sigalg{D})$ where $\prob{P}_R$ may or may not have full support.
+
+If we have two 2-combs $\kernel{U}$ and $\kernel{V}$ such that $\kernel{U}^{\RV{X}|\RV{H}}=\kernel{V}^{\RV{X}|\RV{H}}$ and $\kernel{U}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}=\kernel{V}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}$ then $\kernel{U}=\kernel{V}$ (applying Lemma \ref{lem:representation_of_kernels}). Thus $\kernel{U}$ is a unique 2-comb that every probability $\prob{P}_Q$, $\prob{P}_R$ etc. can be disintegrated to.
+
+
+\emph{Comment:} This is a ``soft representation theorem''. While the theorems discussed below try to establish the need for expected utility and probability from constraints on rational preferences or beliefs, this one says if you're already happy to use probability then you can represent your knowledge with a see-do forecast/see-do model
+
+Also, it ties in with von Neumann-Morgenstern: we have assumed at the outset that we are choosing between $\prob{P}_Q$, $\prob{P}_R$ etc., which are lotteries (albeit non-standard ones) in the language of vNM.
+
+It might also tie in with Walley - if we have a \emph{coherent prevision} for each decision function, then this can be uniquely represented with a set of probailities.
+
+\todo[inline]{End of the sketch of the result}
+
 \section{Representing prior knowledge in decision problems}
 
 We introduced see-do models in Chapter \ref{ch:2p_statmodels} and gave the random variables suggestive names: $\RV{D}$ is the ``choices'', $\RV{X}$ is the ``observations'', $\RV{H}$ is the ``hypothesis'' and $\RV{Y}$ is the ``consequences''. However, as we discussed, the actual interpretations of these variables depend on what exactly the model is being used for. One use case is making decisions. 
@@ -12,46 +49,44 @@ In order to solve this kind of problem, we need some additional knowledge: we ca
 
 If our uncertainty is represented by a single map $D\to \Delta(\sigalg{Y})$ then we have a do-forecast (Definition \ref{def:do_forecast}. If our uncertainty is represented by a set of maps, then we can assign each map an index $h\in H$ for some set of hypotheses $H$ such that $h(d)\in \Delta(\sigalg{Y})$. Assuming measurability, then $\kernel{T}:H\times D\to \Delta(\sigalg{Y})$ given by $\kernel{T}:(h,d)\mapsto h(d)$ is a two-player statistical model (Definition \ref{def:2p_stat}).
 
-We will often also wish to make use of the observations $X$ to improve our decision. If we are fortunate, the observations can reduce our uncertainty. We may wish to represent joint uncertainty as a single map to joint distributions $\kernel{T}:D\to \Delta(\sigalg{X}\otimes \sigalg{Y})$ and ``make use of'' an observation $x\in X$ by conditioning $\kernel{T}$ on the event $\mathds{1}_{\RV{X}=x}$. Alternatively, we could choose a set of such maps and ``make use of'' observations by conditioning each map on them. If we add the assumption of independence $\RV{X}\CI \RV{D}$ for all such maps, in the case of a single map we have a see-do forecast (Definition \ref{def:do_forecast}) and in the case of sets of maps we have a see-do model (Definition \ref{def:seedo}).
+We will often also wish to make use of the observations $X$ to improve our decision. If we are fortunate, the observations can reduce our uncertainty. We may wish to represent joint uncertainty as a single map to joint distributions $\kernel{T}:D\to \Delta(\sigalg{X}\otimes \sigalg{Y})$ and ``make use of'' an observation $x\in X$ by conditioning $\kernel{T}$ on the event $\mathds{1}_{\RV{X}=x}$. Alternatively, we could choose a set of such maps and ``make use of'' observations by conditioning each map on them. If we add the assumption $\RV{X}\CI \RV{D}$ (which will be explained in more detail in this chapter) for all such maps, in the case of a single map we have a see-do forecast (Definition \ref{def:do_forecast}) and in the case of sets of maps we have a see-do model (Definition \ref{def:seedo}).
 
 \todo[inline]{Define conditioning chapter 2}
 
 \subsection{How should knowledge be represented?}
 
-Decision problems require certain types of additional knowledge, and if we make certain choices about how this additional knowledge is represented then we can represent this additional knowledge using see-do models or forecasts. It is quite reasonable to ask if and when these are sound choices to make. Our answer, for the time being, is to lean on prior work: we will show in in Chapter \ref{ch:ints_counterfactuals} that graphical causal models are a subset of see-do models and that two-player statistical models in conjunction with a particular set of assumptions defining ``counterfactual random variables'' yield standard potential outcomes models. Finally, in this chapter we will see how see-do models combined with utility yield statistical decision problems. As all of these are types of see-do model, or can be derived from see-do models along with additional provisions, it follows that if any of them are sometimes sound approaches for representing knowledge in decision problems then see-do models must be sound choices.
+Decision problems require certain types of additional knowledge, and see-do models or forecasts can represent knowledge of this type. We can ask if and when it is a sound choice to use these kinds of models for this purpose. Our answer, for the time being, is to lean on prior work: we will show in in Chapter \ref{ch:ints_counterfactuals} that graphical causal models are a subset of see-do models and that two-player statistical models in conjunction with a particular set of assumptions defining ``counterfactual random variables'' yield standard potential outcomes models. Finally, in this chapter we will see how see-do models combined with utility yield statistical decision problems. As all of these are types of see-do model, or can be derived from see-do models along with additional provisions, it follows that if any of them are sometimes sound approaches for representing knowledge in decision problems then see-do models must be sound choices.
 
-An alternative (and maybe more satisfying) approach to answering questions of this type is to define a set of axioms that we want our knowledge representation to satisfy and then show that these axioms are compatible with see-do models or even that these axioms imply see-do models. For now, we do not have any such theorems. However, there is a body of literature of this genre and we will briefly survey results and comment on their relationship to see-do models. Most such ``representation theorems'' aim to show that a particular means of representing knowledge is \emph{necessary} given a number set of assumptions that purport to define ``rational preferences'' or ``rational beliefs''. The question of whether the axioms are in fact required to call an agents preferences or beliefs rational is a difficult one, and we will not have anything to add to that discussion here.
+An alternative approach to answering this question is to define a set of axioms that we want our knowledge representation to satisfy and then show that these axioms are compatible with see-do models or even that these axioms imply see-do models. There is a body of literature of this genre and we will briefly survey results and comment on their relationship to see-do models. Most such ``representation theorems'' aim to show that a particular means of representing knowledge is \emph{necessary} given a number set of assumptions that purport to define ``rational preferences'' or ``rational beliefs''. The question of whether a given set of axioms are in fact required to call an agents preferences or beliefs rational is a difficult one, and we will not have anything to add to that discussion here -- neither by commenting on axioms already proposed or by proposing our own. However, we are still interested in comparing see-do models with model types used in existing representation theorems.
 
-This two-type uncertainty corresponds to what \citet{walley_statistical_1991} defines as a \emph{coherent prevision}, which is itself a type of ``vague probability''.
-
-The following discussion will often make reference to \emph{preference relations}. A preference relation is a relation $\succurly,\precurly,\sim$ on a set $A$ such that for any $a,a'$ in $A$ we have:
+The following discussion will often make reference to \emph{preference relations}. A preference relation is a relation $\succ,\prec,\sim$ on a set $A$ such that for any $a,a'$ in $A$ we have:
 \begin{itemize}
-    \item Exactly one of $a\succurly a'$, $a\precurly a'$, $a\sim a'$ holds
-    \item $(a\succurly a')\iff(a'\precurly a)$
-    \item $a\succurly a'$ and $a'\succurly a''$ implies $a\succurly a''$
+    \item Exactly one of $a\succ a'$, $a\prec a'$, $a\sim a'$ holds
+    \item $(a\succ a')\iff(a'\prec a)$
+    \item $a\succ a'$ and $a'\succ a''$ implies $a\succ a''$
 \end{itemize}
 
-This defintion is meant to correspond to the common sense idea of having preferences over some large set of things, where $\succurly$ can be read as ``strictly better than'', $\precurly$ read as ``strictly worse than'' and $\sim$ read as ``as good as''. Given any two things from the set, I can say which one I prefer, or if I prefer neither (and all of these are mutually exclusive). If I prefer $a$ to $a'$ then I think $a'$ is worse than $a$. Furthermore, if I prefer $a$ to $a'$ and $a'$ to $a''$ then I prefer $a$ to $a''$.
+This defintion is meant to correspond to the common sense idea of having preferences over some large set of things, where $\succ$ can be read as ``strictly better than'', $\prec$ read as ``strictly worse than'' and $\sim$ read as ``as good as''. Given any two things from the set, I can say which one I prefer, or if I prefer neither (and all of these are mutually exclusive). If I prefer $a$ to $a'$ then I think $a'$ is worse than $a$. Furthermore, if I prefer $a$ to $a'$ and $a'$ to $a''$ then I prefer $a$ to $a''$.
 
 \subsubsection{von Neumann-Morgenstern utility}
 
-\citet{von_neumann_theory_1944} proved that when the \emph{vNM axioms} hold (not defined here; see the original reference or \citet{steele_decision_2020}), an agent's preferences between ``lotteries'' (which for our purposes are probability distributions in $\Delta(\sigalg{Y})$) can be represented with a utility function $u:Y\to \mathbb{R}$ unique up to affine transformation along with the principle of expected utility, which is, for lotteries $\prob{P},\prob{P}'\in\Delta(\sigalg{Y})$ the rule that $\mathbb{E}_{\prob{P}}[u]> \mathbb{E}_{\prob{P}'}[u]$ is equivalent to the statement $\prob{P} \succurly \prob{P}'$.
+\citet{von_neumann_theory_1944} proved that when the \emph{vNM axioms} hold (not defined here; see the original reference or \citet{steele_decision_2020}), an agent's preferences between ``lotteries'' (which for our purposes are probability distributions in $\Delta(\sigalg{Y})$) can be represented with a utility function $u:Y\to \mathbb{R}$ unique up to affine transformation along with the principle of expected utility, which is, for lotteries $\prob{P},\prob{P}'\in\Delta(\sigalg{Y})$ the rule that $\mathbb{E}_{\prob{P}}[u]> \mathbb{E}_{\prob{P}'}[u]$ is equivalent to the statement $\prob{P} \succ \prob{P}'$.
 
 If we consider a set of decisions $D$ and a do-forecast $\kernel{T}^{\RV{Y}|\RV{{D}}}$, then we can identify the set of lotteries with the evaluations of each decision under $\kernel{T}$ -- that is, the lotteries are $\{\kernel{T}^{\RV{Y}|\RV{D}}_d|d\in D\}$. We can then define preferences over decisions: $d$ is strictly preferred to $d'$ if and only if $\kernel{T}_{d}^{\RV{Y}|\RV{D}}$ is strictly preferred to $\kernel{T}_{d'}^{\RV{Y}|\RV{D}}$. Then, if preferences over the set of lotteries satisfies the \emph{vNM axioms}, there exists a utility function $u:Y\to \mathbb{R}$ such that
 \begin{itemize}
-    \item $d\succurly d'$ if and only if $\kernel{T}_d^{\RV{Y}|\RV{D}}u>\kernel{T}_{d'}^{\RV{Y}|\RV{D}}u$
+    \item $d\succ d'$ if and only if $\kernel{T}_d^{\RV{Y}|\RV{D}}u>\kernel{T}_{d'}^{\RV{Y}|\RV{D}}u$
 \end{itemize}
 
 \todo[inline]{Is this worth stating as a theorem?}
 
 \subsubsection{Savage's decision theory}
-'
-The von Numann-Morgenstern theorm shows that, if we take do-forecasts for granted and assuming the vNM axioms then we can represent preferences between decisions using expected utility. We are more interested in when we should use do-forecasts or see-do forecasts or see-do models. 
+
+The von Neumann-Morgenstern theorem shows that, if we take do-forecasts for granted and assuming the vNM axioms then we can represent preferences between decisions using expected utility. We are more interested in when we should use do-forecasts or see-do forecasts or see-do models. 
 
 \citet{savage_foundations_1954} proved a representation theorem for decision problems, which has more overlap with our original question - namely, what should we use to represent the knowledge we bring to a kind of idealised decision problem. Savage's decision problems featured \emph{states} $H$ (which we can be identified with hypotheses in Definition \ref{def:2p_stat}), \emph{acts} $D$ (which can be identified with decisions in \ref{def:2p_stat}) and \emph{outcomes} $O$ (which can be identified with outcomes in Definition \ref{def:2p_stat}). Savage takes it as a given that we have a deterministic two player statistical model $(\kernel{T},\RV{H},\RV{D},\RV{O})$, and furthermore for \emph{any} function $f:H\to O$ there exists some $d\in D$ such that $\kernel{T}_{h,d} = \delta_{f(h)}$, and furthermore we have a preference relation on $D$. He then shows that if the \emph{Savage axioms} hold for the preference relation on $D$ then there exists a unique probability measure $\prob{P}\in \Delta(\sigalg{H})$ and a utility $u:O\to \mathbb{R}$ unique up to affine transformation such that
 
 \begin{align}
-(d\succurly d')\iff (\prob{P}\otimes \delta_d)\kernel{T} u > (\prob{P}\otimes \delta_{d'})\kernel{T} u\label{eq:savage_utility}
+(d\succ d')\iff (\prob{P}\otimes \delta_d)\kernel{T} u > (\prob{P}\otimes \delta_{d'})\kernel{T} u\label{eq:savage_utility}
 \end{align}
 
 The use of two player statistical models is baked into Savage's representation theorem as a basic assumption. However, he also shows that if the Savage axioms hold for preferences among outcomes, then it is possible to define a unique do-forecast
@@ -63,7 +98,7 @@ The use of two player statistical models is baked into Savage's representation t
 (using the existing definitions for $\RV{D}$ and $\RV{O}$) such that
 
 \begin{align}
-    (d\succurly d')\iff \kernel{F}_d\kernel{T} u > \kernel{F}_d u\label{eq:savage_utility}
+    (d\succ d')\iff \kernel{F}_d\kernel{T} u > \kernel{F}_d u\label{eq:savage_utility2}
 \end{align}
 
 \todo[inline]{Is this worth stating as a theorem?}
@@ -73,23 +108,30 @@ The use of two player statistical models is baked into Savage's representation t
 The approach to decision making set out by \citet{jeffrey_logic_1990} and \citet{bolker_functions_1966} differs from Savage's approach in a number of ways. Firstly, the representation theorem proved by Bolker does not distinguish between hypotheses, outcomes and decisions. It assumes only an algebra of outcomes $(O,\sigalg{O})$ and a preference relation over these outcomes. If the preference relation satisfies the \emph{Jeffrey axioms} then there exists a utility $u:O\to\mathbb{R}$ and a probability distribution $\prob{P}\in \Delta(\sigalg{O})$ which are non-unique such that for $A,B\in \sigalg{O}$ and finite partition $C_1,...,C_n\in \sigalg{O}$ (the proof is given by \citet{bolker_functions_1966}):
 
 \begin{align}
-    (A \succurly B) \iff (\prob{P}^{\RV{O}|\mathds{1}_A}_1u>\prob{P}^{\RV{O}|\mathds{1}_B}_1u) \label{eq:ev_dec_theory}
+    (A \succ B) \iff (\prob{P}^{\RV{O}|\mathds{1}_A}_1u>\prob{P}^{\RV{O}|\mathds{1}_B}_1u) \label{eq:ev_dec_theory}
 \end{align}
 
-The original proof uses an $O$ that is not standard measurable, and states Equation \ref{eq:ev_dec_theory} in terms of the probability conditioned on events. I state it this way so that the notation is consistent with other theories under discussion which I hope helps to discuss the comparison.
+A key feature to note here is that instead of comparing two decisions by evaluating one Markov kernel at two different points (as in our theory and Savage's), Jeffrey compares two events by comparing two different Markov kernels $\prob{P}^{\RV{O}|\mathds{1}_A}$ and $\prob{P}^{\RV{O}|\mathds{1}_B}$.  In order to use such a model in a decision problem, Jeffrey suggests we can identify a subset of the events with the choices we can make: $D:=\{D_i\in \sigalg{O}|i\in A\}$ for some set $A$, so we get one Markov kernel for each decision we might make. 
 
-In order to use such a model in a decision problem, Jeffrey suggests we can pick a subset of $\mathscr{D}:=\{D_i\in \sigalg{O}|i\in A\}$ for some set $A$ that we identify as ``decisions that we can make''. There is a somewhat subtle issue here. Consider the problem of deciding whether or not to order a drink decision problem with the options $D=\{d_1=\text{``order water''},d_2=\text{``order a drink''}\}$. By assumption, we the object of a decision problem is to select a \emph{single} decision from the available set. Suppose I'd prefer to drink water than anything else, and I also think $d_2$ has some chance resulting in not-water. Then I will choose $d_1$ and I will \emph{not} choose $d_2$. At the same time, if I order water it will be true that I ordered a drink. 
+Whether we should model decisions as a set $D$ and consequence maps as Markov kernels with $D$ as the domain or as a collection of events and consequence maps as a corresponding collection of Markov kernels, or something else is a somewhat subtle issue that I don't fully understand.
 
-Note that if $\mathscr{D}$ is countable, the map $\kernel{T}:\mathscr{D}\to \Delta(\sigalg{O})$ along with $\RV{D}:\mathscr{D}\times O\to \mathscr{D}$ and $\RV{O}:\mathscr{D}\times O\to O$ is a see-do forecast.
+I think Jeffrey goes too far in saying decisions are events. Consider the problem of deciding whether or not to order a drink, and suppose that I choose to consider a set of options $D=\{d_1=\text{``order a drink and make sure that drink is water''}, d_2=\text{``order a drink''}, d_3=\text{``don't order a drink''}\}$. If I choose $d_1$, then it will certainly be true that I will order a drink and also true that I will order a drink of water, and in general an event ``A and B'' implies an event ``A''. However, $d_1$ and $d_2$ are distinct -- if I particularly want to drink water then I will choose $d_1$ and not $d_2$. This feature of decision making is reflected in our idealised decision problem at the start where we may make a single decision from our set of available choices.
 
- I regard it as somewhat  Thus if I decide to ``drink water'' then it is very likely to be true that I end up drinking something. However, at the same time, it is false that I selected the second option -- here labeled ``drink something'' -- from the set of available decisions. 
+At the same time, it does seem that in the same way that events leave many features of the outcome underspecified, when we describe choices we very often leave features of what we precisely intend to do underspecified. Choices aren't necessarily underspecified: imagine a reinforcement learner in a simulated discrete time environment. At each timestep this learner takes its history so far and outputs some action and, if we examine the code governing how it interacts with its environment we can probably deduce \emph{all} the actions available to it at each timestep. In less controlled contexts, which is really most contexts we are familiar with, if we want to come up with a list of decisions we could make then all the decisions in this list are likely to leave a large number of things that we could in principle decide on underspecified. In the example above, it seems I could decide to:
+\begin{itemize}
+    \item Order a drink
+    \item Order a glass of water
+    \item Order a glass of water and say please and thankyou when I do
+    \item Order a glass of water, say please and thankyou, carefully avoid scratching my itchy ear
+\end{itemize}
 
-given by $D_i\mapsto \prob{P}_{|D_i}$ is a do-forecast  Consider the $\sigma$-algebra $\sigma(\mathscr{D})$ and the random variable $\RV{D}:=\utimes_{i\in A} \mathds{1}_{D_i}$, if that function is measurable. Note that $\int_{\omega in D_i} \RV{D}(\omega)=\{\omega|\omega\in D_i\}$ Then, letting $\RV{O}$ be the identity on $O$, if $\prob{P}^{\RV{O}|\RV{D}}$ exists then for $i,j\in A$
+And so forth. I could go on adding details for a very long time without exhausting the set of things I could in principle decide to do. I usually would not want to consider all these ``in principle'' choices I have available. Many of the details are more or less irrelevant and not worth spending the time to think about. Furthermore, even if I do consider all choices I have available in principle, it seems plausible that a less specific decision could be preferable. For example I might expect the ``automatic execution'' of some things things I didn't fully specify to be closer to optimal than the best guess I have of how to specify them (consider managing a competent employee; one might get better results by being less specific in requests).
 
-\begin{align}
-    (D_i\succurly D_j) \iff \prob{P}^{\RV{O}|\RV{D}}_{d_i}>\prob{P}^{\RV{O}|\RV{D}}_{d_j}
-\end{align}
+I think the question of how one could structure the decisions set $D$ is an interesting one. I have so far treated it as ``just a set'' with no particular additional structure. Jeffrey suggests that decisions are a collection of events, and decisions do seem to have some event-like features, like the fact that they specify incompletely what I will do next and the fact that different specifications can apparently be joined with ``and''. However, the proposition that decisions are identical to events does not seem quite right because, as in the example above, deciding to do ``A and B'' does not imply deciding to do ``A''.
 
+I think this is also potentially an important question. In Chapter \ref{ch:inferring_causes} I discuss the assumption of \emph{imitability}, that it is within a decision maker's power to reproduce the observed data. Such an assumption, if it holds, licences a number of inferences from data to consequences. It may often be a plausible assumption considering the full set of decisions $D^*$ that a decision maker could make \emph{in principle}, but may be much less often plausible when considering the restricted set of decisions $D$ a decision maker is actually considering. Understanding how these may relate to one another may help to better understand assumptions like imitability.
+
+\todo[inline]{Which has only just occurred to me}
 
 \subsubsection{Causal decision theory}
 
@@ -192,7 +234,7 @@ Furthermore
 \todo[inline]{Maybe moves proofs out of main text}
 
 \begin{proof}
-By \ref{th:representaiton}, 
+By Lemma \ref{lem:representation_of_kernels}, 
 
 \begin{align}
 \kernel{T} = \begin{tikzpicture} \path (0,0) node (T) {$\RV{H}$}
@@ -273,7 +315,7 @@ A decomposable see-do model $\kernel{T}:H\times D\to \Delta(\sigalg{X}\otimes\si
 \end{corollary}
 
 \begin{proof}
-Because $\kernel{T}$ is decomposable, $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}= \stopper{0.2}_X\otimes \kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$. Then by theorem \ref{th:representaiton} we have a unique representation of $\kernel{T}$.
+Because $\kernel{T}$ is decomposable, $\kernel{T}^{\RV{Y}|\RV{X}\RV{H}\RV{D}}= \stopper{0.2}_X\otimes \kernel{T}^{\RV{Y}|\RV{H}\RV{D}}$. Then by Lemma \ref{lem:representation_of_kernels} we have a unique representation of $\kernel{T}$.
 \end{proof}
 
 \subsubsection{Examples of decomposable and indecomposable see-do models}

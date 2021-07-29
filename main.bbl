@@ -1,9 +1,19 @@
-\begin{thebibliography}{42}
+\begin{thebibliography}{45}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bolker(1966)]{bolker_functions_1966}
+Ethan~D. Bolker.
+\newblock Functions {Resembling} {Quotients} of {Measures}.
+\newblock \emph{Transactions of the American Mathematical Society},
+  124\penalty0 (2):\penalty0 292--312, 1966.
+\newblock ISSN 0002-9947.
+\newblock \doi{10.2307/1994401}.
+\newblock URL \url{https://www.jstor.org/stable/1994401}.
+\newblock Publisher: American Mathematical Society.
 
 \bibitem[Bongers et~al.(2016)Bongers, Peters, Schölkopf, and
   Mooij]{bongers_theoretical_2016}
@@ -146,6 +156,21 @@ Alan Hájek.
 \newblock URL
   \url{https://plato.stanford.edu/archives/fall2019/entries/probability-interpret/}.
 
+\bibitem[Jacobs et~al.(2019)Jacobs, Kissinger, and Zanasi]{jacobs_causal_2019}
+Bart Jacobs, Aleks Kissinger, and Fabio Zanasi.
+\newblock Causal {Inference} by {String} {Diagram} {Surgery}.
+\newblock In Mikołaj Bojańczyk and Alex Simpson, editors, \emph{Foundations
+  of {Software} {Science} and {Computation} {Structures}}, Lecture {Notes} in
+  {Computer} {Science}, pages 313--329. Springer International Publishing,
+  2019.
+\newblock ISBN 978-3-030-17127-8.
+
+\bibitem[Jeffrey(1965)]{jeffrey_logic_1990}
+Richard~C. Jeffrey.
+\newblock \emph{The {Logic} of {Decision}}.
+\newblock University of Chicago Press, July 1965.
+\newblock ISBN 978-0-226-39582-1.
+
 \bibitem[Krittanawong et~al.(2020)Krittanawong, Narasimhan, Wang, Hahn, Virk,
   Farrell, Zhang, and Tang]{krittanawong_association_2020}
 Chayakrit Krittanawong, Bharat Narasimhan, Zhen Wang, Joshua Hahn, Hafeez
@@ -168,6 +193,16 @@ Finnian Lattimore and David Rohde.
 L.~Le~Cam.
 \newblock Comparison of {Experiments} - {A} {Short} {Review}.pdf.
 \newblock \emph{IMS Lecture Notes - Monograph Series}, 30, 1996.
+
+\bibitem[Loomes and Sugden(1982)]{loomes_regret_1982}
+Graham Loomes and Robert Sugden.
+\newblock Regret {Theory}: {An} {Alternative} {Theory} of {Rational} {Choice}
+  {Under} {Uncertainty}.
+\newblock \emph{The Economic Journal}, 92\penalty0 (368):\penalty0 805--824,
+  1982.
+\newblock ISSN 0013-0133.
+\newblock \doi{10.2307/2232669}.
+\newblock URL \url{https://www.jstor.org/stable/2232669}.
 
 \bibitem[Nilsson and Lauritzen(2013)]{nilsson_evaluating_2013}
 Dennis Nilsson and Steffen~L. Lauritzen.
@@ -244,19 +279,10 @@ Donald~B. Rubin.
 \newblock \doi{10.1198/016214504000001880}.
 \newblock URL \url{https://doi.org/10.1198/016214504000001880}.
 
-\bibitem[Savage(1951)]{savage_theory_1951}
-L.~J. Savage.
-\newblock The theory of statistical decision.
-\newblock \emph{Journal of the American Statistical Association}, 46:\penalty0
-  55--67, 1951.
-\newblock ISSN 1537-274X(Electronic),0162-1459(Print).
-\newblock \doi{10.2307/2280094}.
-
-\bibitem[Savage(1972)]{savage_foundations_1972}
+\bibitem[Savage(1954)]{savage_foundations_1954}
 Leonard~J. Savage.
-\newblock \emph{Foundations of {Statistics}}.
-\newblock Dover Publications, New York, revised edition edition, June 1972.
-\newblock ISBN 978-0-486-62349-8.
+\newblock \emph{The {Foundations} of {Statistics}}.
+\newblock Wiley Publications in Statistics, 1954.
 
 \bibitem[Selinger(2010)]{selinger_survey_2010}
 Peter Selinger.

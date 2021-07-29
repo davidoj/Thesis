@@ -299,12 +299,12 @@ Let $\rho'_{ij}:\mathbb{N}\to\mathbb{N}$ swaps indices $i$ and $j$ for some $i,j
 \begin{align}
     \int_{A} \RV{Z}_q^{n} (\omega) d\prob{P}(\omega) &= \int_{A} \frac{1}{n}\sum_{i}^{n} (\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}(\omega)\\
     &= \frac{1}{n}\sum_{i}^{n} \int_{(\rho^{\RV{X}}_{ij})^{-1}\rho^{\RV{X}}_{ij}(A)} (\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}\rho_{ij}(\omega)\label{eq:permutation_invertible}\\
-    &= \frac{1}{n}\sum_{i}^{n} \int_{\rho^{\RV{X}}_{ij}(A)} (\mathds{1}_{[0,q)}\circ \RV{X}_{i}\circ \rho_{ij}) (\omega)d\prob{P}(\omega)\label{eq:using_pushforward}\\
+    &= \frac{1}{n}\sum_{i}^{n} \int_{\rho^{\RV{X}}_{ij}(A)} (\mathds{1}_{[0,q)}\circ \RV{X}_{i}\circ \rho_{ij}) (\omega)d\prob{P}(\omega)\label{eq:using_push2}\\
     &= \frac{1}{n}\sum_{i}^{n} \int_{A} (\mathds{1}_{[0,q)}\circ \RV{X}_{j})(\omega)d\prob{P}(\omega)\label{eq:closure_under_permutation}\\
     &= \int_{A} (\mathds{1}_{[0,q)} \circ \RV{X}_j)(\omega)d\prob{P}(\omega) \label{eq:cond_expectation_first}
 \end{align}
 
-Where line \ref{eq:permutation_invertible} follows from exchangeability of $\kernel{T}$ and invertibility of $\rho_{ij}$. the fact that $\rho$line \ref{eq:using_pushforward} follows from the fact that $\prob{P}\rho_{ij}$ is the pushforward measure of $\prob{P}$ with respect to $\rho^{\RV{X}}_{ij}$ and \ref{eq:closure_under_permutation} uses the fact that $\rho(A) = A$ for all $A\in \RV{Z}^n_q$ and all permutations $\rho$.
+Where line \ref{eq:permutation_invertible} follows from exchangeability of $\kernel{T}$ and invertibility of $\rho_{ij}$. Line \ref{eq:using_push2} follows from the fact that $\prob{P}\rho_{ij}$ is the pushforward measure of $\prob{P}$ with respect to $\rho^{\RV{X}}_{ij}$ and \ref{eq:closure_under_permutation} uses the fact that $\rho(A) = A$ for all $A\in \RV{Z}^n_q$ and all permutations $\rho$.
 
 From Equation \ref{eq:cond_expectation_first}, we have for all $n$, $A\in \sigalg{H}^{n+1}$
 
@@ -362,13 +362,13 @@ Let $J\subset[n]$ be some set of $m$ elements from $n$ and $\rho'_{IJ}$ be a per
 
 \begin{align}
     \int_{A} \RV{Z}_q^{m,n} (\omega) d\prob{P}(\omega) &= \int_{A} \frac{(n-m)!}{n!}\sum_{I\subset[n]}\prod_{i\in I} (\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}(\omega)\\
-    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{(\rho^{\RV{X}}_{IJ})^{-1}\rho^{\RV{X}}_{IJ}(A)} \prod_{i\in I}(\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}\rho_{IJ}(\omega)\label{eq:permutation_invertible}\\
+    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{(\rho^{\RV{X}}_{IJ})^{-1}\rho^{\RV{X}}_{IJ}(A)} \prod_{i\in I}(\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}\rho_{IJ}(\omega)\\
     &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{\rho^{\RV{X}}_{IJ}(A)} \prod_{i\in I}(\mathds{1}_{[0,q)}\circ \RV{X}_{i}\circ \rho_{IJ}) (\omega)d\prob{P}(\omega)\label{eq:using_pushforward}\\
-    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q)}\circ \RV{X}_{j})(\omega)d\prob{P}(\omega)\label{eq:closure_under_permutation}\\
-    &= \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q)} \circ \RV{X}_j)(\omega)d\prob{P}(\omega) \label{eq:cond_expectation_first}
+    &= \frac{(n-m)!}{n!}\sum_{I\subset[n]} \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q)}\circ \RV{X}_{j})(\omega)d\prob{P}(\omega)\label{eq:closure_under_permutation2}\\
+    &= \int_{A} \prod_{j\in J}(\mathds{1}_{[0,q)} \circ \RV{X}_j)(\omega)d\prob{P}(\omega) \label{eq:cond_expectation_first2}
 \end{align}
 
-From Equation \ref{eq:cond_expectation_first}, we have for all $n$, $m<n$, $A\in \sigalg{H}^{n+1}$
+From Equation \ref{eq:cond_expectation_first2}, we have for all $n$, $m<n$, $A\in \sigalg{H}^{n+1}$
 
 \begin{align}
     \int_{A} \RV{Z}_q^{m,n+1} (\omega) d\prob{P}(\omega) &= \int_{A} \RV{Z}_q^{m,n} (\omega) d\prob{P}(\omega)

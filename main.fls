@@ -584,6 +584,7 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/doublestroke/dsrom8.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/euler/eusm10.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/euler/eusm7.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/hfbright/hfbrmb10.pfb

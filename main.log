@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (TeX Live 2021)  (format=lualatex 2021.7.16)  28 JUL 2021 11:34
+This is LuaHBTeX, Version 1.13.0 (TeX Live 2021)  (format=lualatex 2021.7.16)  29 JUL 2021 15:49
  restricted system commands enabled.
 **main.tex
 (./main.tex
@@ -887,23 +887,7 @@ File: l3backend-luatex.def 2021-03-18 L3 backend support: PDF output (LuaTeX)
 \l__color_backend_stack_int=\count318
 \l__pdf_internal_box=\box62
 )
-(./main.aux
-
-LaTeX Warning: Label `eq:permutation_invertible' multiply defined.
-
-
-LaTeX Warning: Label `eq:using_pushforward' multiply defined.
-
-
-LaTeX Warning: Label `eq:closure_under_permutation' multiply defined.
-
-
-LaTeX Warning: Label `eq:cond_expectation_first' multiply defined.
-
-
-LaTeX Warning: Label `ch:6' multiply defined.
-
-)
+(./main.aux)
 \openout1 = main.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 152.
@@ -1141,12 +1125,7 @@ Overfull \hbox (65.96545pt too wide) detected at line 1658
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [34]
-[35] [36] [37]
-
-LaTeX Warning: Reference `def:labeled_disint' on page 38 undefined on input lin
-e 1936.
-
-) (./chapter_3_twoplayer_statistical_models.tex [38]
+[35] [36] [37]) (./chapter_3_twoplayer_statistical_models.tex [38]
 Chapter 3.
 [39
 
@@ -1310,40 +1289,29 @@ Overfull \hbox (25.17783pt too wide) has occurred while \output is active
 
 ]
 Chapter 4.
-[63] [64] [65] [66]
+[63] [64] [65] [66] [67]
+Overfull \hbox (36.29724pt too wide) in paragraph at lines 118--119
+\T1/lmr/m/n/10 sider a set of op-tions $\OML/cmm/m/it/10 D \OT1/cmr/m/n/10 = \O
+MS/cmsy/m/n/10 f\OML/cmm/m/it/10 d[] \OT1/cmr/m/n/10 = []\OML/cmm/m/it/10 ; d[]
+ \OT1/cmr/m/n/10 =
+ []
 
-LaTeX Warning: Reference `th:representaiton' on page 67 undefined on input line
- 132.
+[68] [69] [70] [71] [72] [73] [74] [75]
 
+LaTeX Warning: Reference `tab:sdp_cdp_comparison' on page 76 undefined on input
+ line 453.
 
-Underfull \vbox (badness 3713) has occurred while \output is active []
+[76]
 
- [67]
-
-LaTeX Warning: Reference `th:representaiton' on page 68 undefined on input line
- 213.
-
-[68] [69] [70] [71]
-
-LaTeX Warning: Reference `tab:sdp_cdp_comparison' on page 72 undefined on input
- line 348.
-
-[72]
-
-LaTeX Warning: Reference `th:CSDP_u_red' on page 73 undefined on input line 391
+LaTeX Warning: Reference `th:CSDP_u_red' on page 77 undefined on input line 496
 .
 
 
-LaTeX Warning: Reference `th:CSDP_ob_red' on page 73 undefined on input line 39
-1.
+LaTeX Warning: Reference `th:CSDP_ob_red' on page 77 undefined on input line 49
+6.
 
-[73]
-
-Package natbib Warning: Citation `loomes_regret_1982' on page 74 undefined on i
-nput line 412.
-
-[74]
-Overfull \hbox (18.38603pt too wide) in paragraph at lines 437--438
+[77] [78]
+Overfull \hbox (18.38603pt too wide) in paragraph at lines 542--543
 [][]\T1/lmr/bx/n/10 The-o-rem 4.2.20 \T1/lmr/m/n/10 (SDP can be re-duced to a CS
 DP)\T1/lmr/bx/n/10 . []\T1/lmr/m/it/10 Given any SDP $\OMS/cmsy/m/n/10 h\OML/cm
 m/m/it/10 ; \OT1/cmr/m/n/10 (\U/eus/m/n/10 H\OML/cmm/m/it/10 ; m\OT1/cmr/m/n/1
@@ -1351,7 +1319,7 @@ m/m/it/10 ; \OT1/cmr/m/n/10 (\U/eus/m/n/10 H\OML/cmm/m/it/10 ; m\OT1/cmr/m/n/1
  []
 
 
-Overfull \hbox (77.8578pt too wide) in paragraph at lines 452--453
+Overfull \hbox (77.8578pt too wide) in paragraph at lines 557--558
 \OMS/cmsy/m/n/10 h\U/eus/m/n/10 T\OML/cmm/m/it/10 ; D; u\OMS/cmsy/m/n/10 i$ \T1
 /lmr/m/it/10 with two player game rep-re-sen-ta-tion $\OMS/cmsy/m/n/10 h\U/eus/
 m/n/10 T\OML/cmm/m/it/10 ; \U/eus/m/n/10 J\OML/cmm/m/it/10 ; R\OMS/cmsy/m/n/10 
@@ -1361,28 +1329,33 @@ R\OT1/cmr/m/n/10 ((\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; J\O
 T1/cmr/m/n/10 ) \OML/cmm/m/it/10 >
  []
 
-[75]) (./chapter_5_interventions_counterfactuals.tex [76]
+[79]) (./chapter_5_interventions_counterfactuals.tex [80]
 Chapter 5.
-[77
+[81
 
 ]
 Overfull \hbox (37.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 78 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
+\T1/lmr/m/n/10 82 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
  []
 
-[78]
+[82]
 
-LaTeX Warning: Reference `sec:single_double_representation' on page 79 undefine
+LaTeX Warning: Reference `sec:single_double_representation' on page 83 undefine
 d on input line 71.
 
-[79]
+[83]
+
+Package natbib Warning: Citation `savage_foundations_1972' on page 84 undefined
+ on input line 77.
+
+
 Overfull \hbox (37.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 80 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
+\T1/lmr/m/n/10 84 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
  []
 
-[80]
+[84]
 
-LaTeX Warning: Reference `sec:cbns_without_d' on page 81 undefined on input lin
+LaTeX Warning: Reference `sec:cbns_without_d' on page 85 undefined on input lin
 e 88.
 
 
@@ -1395,7 +1368,7 @@ Overfull \hbox (36.9879pt too wide) detected at line 109
 []
  []
 
-[81]
+[85]
 Overfull \hbox (0.48987pt too wide) in paragraph at lines 134--135
 []\T1/lmr/m/n/10 By the as-sump-tion of lim-ited un-re-spon-sive-ness, for all 
 $\OML/cmm/m/it/10 d; d[]$ \T1/lmr/m/n/10 such that $\OML/cmm/m/it/10 y[]\OT1/cm
@@ -1416,56 +1389,46 @@ y/m/n/10 f\OML/cmm/m/it/10 d\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 y[]\OT1/cmr/m/n/
 
 
 Overfull \hbox (37.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 82 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
- []
-
-[82] [83]
-Overfull \hbox (37.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 84 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
- []
-
-[84] [85]
-Overfull \hbox (37.26372pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 86 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
  []
 
-[86]
-Underfull \hbox (badness 10000) in paragraph at lines 439--443
-
- []
-
-[87]) (./chapter_6_imitability_inference.tex
+[86] [87]
 Overfull \hbox (37.26372pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 88 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
  []
 
-[88]
+[88] [89]
+Overfull \hbox (37.26372pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10 90 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
+ []
+
+[90]
+Underfull \hbox (badness 10000) in paragraph at lines 439--443
+
+ []
+
+[91]) (./chapter_6_imitability_inference.tex
+Overfull \hbox (37.26372pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10 92 \T1/lmr/m/sl/10 CHAP-TER 5.  SEE-DO MOD-ELS, IN-TER-VEN-TIONS AND COUN-TER-FAC-TU-ALS
+ []
+
+[92]
 Chapter 6.
-[89
+[93
 
-]) (./chapter_7_godscomputer.tex [90]
+]) (./chapter_7_godscomputer.tex [94]
 Chapter 7.
-[91
+[95
 
-] [92]
-Overfull \hbox (224.4057pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 93
- []
-
-[93] [94]
-Underfull \vbox (badness 2050) has occurred while \output is active []
-
-
-Overfull \hbox (224.4057pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 95
- []
-
-[95] [96]
+] [96]
 Overfull \hbox (224.4057pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 97
  []
 
 [97] [98]
+Underfull \vbox (badness 2050) has occurred while \output is active []
+
+
 Overfull \hbox (224.4057pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 99
  []
@@ -1475,20 +1438,30 @@ Overfull \hbox (229.4057pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 101
  []
 
-[101]
+[101] [102]
+Overfull \hbox (229.4057pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 103
+ []
+
+[103] [104]
+Overfull \hbox (229.4057pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 105
+ []
+
+[105]
 Overfull \hbox (37.38277pt too wide) in paragraph at lines 597--598
 [][]\T1/lmr/bx/n/10 Def-i-ni-tion 7.1.17 \T1/lmr/m/n/10 (De-rived model)\T1/lmr
 /bx/n/10 . []\T1/lmr/m/n/10 Given a SCNM $\OMS/cmsy/m/n/10 M \OT1/cmr/m/n/10 := \OMS/cmsy/m/n/10 hI\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 J\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 X[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 E[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 f[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 g[]\OML/cmm/m/it/10 ; \U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OML/cmbr/bx/it/10 E[]\OMS/cmsy/m/n/10 i$\T1/lmr/m/n/10 ,
  []
 
-[102])
+[106])
 Overfull \hbox (229.4057pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 103
+\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 107
  []
 
-[103] (./main.bbl
+[107] (./main.bbl
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-3.
+5.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1497,75 +1470,80 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \hbox (badness 6125) in paragraph at lines 31--38
+Underfull \hbox (badness 6125) in paragraph at lines 41--48
 []\T1/lmr/m/n/10 Flo-rence Clerc, Fredrik Dahlqvist, Vin-cent Danos, and Il-ias Gar-
  []
 
 
-Underfull \hbox (badness 2035) in paragraph at lines 31--38
+Underfull \hbox (badness 2035) in paragraph at lines 41--48
 \T1/lmr/m/n/10 nier.  Point-less learn-ing.  \T1/lmr/m/it/10 20th In-ter-na-tion
 al Con-fer-ence on Foun-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--38
+Underfull \hbox (badness 10000) in paragraph at lines 41--48
 \T1/lmr/m/it/10 da-tions of Soft-ware Sci-ence and Com-pu-ta-tion Struc-tures (F
 oS-
  []
 
 
-Underfull \hbox (badness 7397) in paragraph at lines 31--38
+Underfull \hbox (badness 7397) in paragraph at lines 41--48
 \T1/lmr/m/it/10 SaCS 2017)\T1/lmr/m/n/10 , March 2017.  doi: $10.1007/978-[]3-[
 ]662-[]54458-[]7_21$.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--38
+Underfull \hbox (badness 10000) in paragraph at lines 41--48
 \T1/lmr/m/n/10 URL []$\T1/lmtt/m/n/10 https://www.research.ed.ac.uk/portal/en/pu
 blications/
  []
 
-[104]
+[108]
 Overfull \hbox (229.4057pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 105
+\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 109
  []
 
-[105] [106
+[109
+Missing character: There is no ł (U+0142) in font ec-lmr10!
+Missing character: There is no ń (U+0144) in font ec-lmr10!
+] [110]
+Overfull \hbox (229.4057pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 111
+ []
+
+[111
 Missing character: There is no – (U+2013) in font ec-lmr10!
-])
-Overfull \hbox (229.4057pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 107
- []
-
-[107]
+]) [112]
 
 Package natbib Warning: There were undefined citations.
 
-[108] (./main.aux)
+
+Overfull \hbox (229.4057pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  ARE WE TRY-ING TO UN-DER-STAND CON-SE-QUENCES OR AC-TIONS OR OB-JEC-TIVE CAUSAL RE-LA-TION-SHIPS? \T1/lmr/m/n/10 113
+ []
+
+[113] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 3E25C713CF75CB9B39715ED034665562;9882.
+(rerunfilecheck)             Checksum: D864D199BD52F594F565A8E5E450F547;9861.
 )
 
 Here is how much of LuaTeX's memory you used:
- 29890 strings out of 478531
+ 29935 strings out of 478531
  125007,953878 words of node,token memory allocated
  5125 words of node memory still in use:
    83 hlist, 8 vlist, 10 rule, 13 disc, 4 local_par, 99 glue, 14 kern, 7 penalty
 , 1 margin_kern, 131 glyph, 311 attribute, 60 glue_spec, 311 attribute_list, 6 w
 rite, 4 save_pos, 150 pdf_literal, 29 pdf_action, 20 pdf_colorstack nodes
-   avail lists: 2:5916,3:2215,4:153,5:636,6:63,7:8548,8:121,9:1591,10:25,11:640
- 47831 multiletter control sequences out of 65536+600000
+   avail lists: 2:5916,3:2215,4:147,5:642,6:63,7:8548,8:123,9:1591,10:23,11:648
+ 47855 multiletter control sequences out of 65536+600000
  131 fonts using 9691439 bytes
- 87i,17n,92p,1481b,994s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 87i,17n,92p,1473b,994s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
 live/2021/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</usr/local/texlive/2021/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-
@@ -1584,26 +1562,27 @@ fonts/cm/cmss8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/doublestroke/d
-srom10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/euler
-/eusm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/eule
-r/eusm7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/hfbright/hfbr
-mb10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></
-usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/t
-exlive/2021/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2021/
-texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2021/texmf-dist/f
-onts/type1/public/lm/lmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/p
-ublic/lm/lmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr7
-.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/lo
-cal/texlive/2021/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive
-/2021/texmf-dist/fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2021/texmf
--dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2021/texmf-dist/fonts
-/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fo
-nts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2021/texmf-dist/
-fonts/type1/public/stmaryrd/stmary10.pfb>
-Output written on main.pdf (108 pages, 1013580 bytes).
+srom10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/doublestroke/d
+srom8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/euler/
+eusm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/euler
+/eusm7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/hfbright/hfbrm
+b10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></u
+sr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/te
+xlive/2021/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2021/t
+exmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2021/texmf-dist/fo
+nts/type1/public/lm/lmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/pu
+blic/lm/lmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr7.
+pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/loc
+al/texlive/2021/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/
+2021/texmf-dist/fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2021/texmf-
+dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2021/texmf-dist/fonts/
+type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fon
+ts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2021/texmf-dist/f
+onts/type1/public/stmaryrd/stmary10.pfb>
+Output written on main.pdf (113 pages, 1036555 bytes).
 
-PDF statistics: 1866 PDF objects out of 2073 (max. 8388607)
- 1683 compressed objects within 17 object streams
- 733 named destinations out of 1000 (max. 131072)
+PDF statistics: 1932 PDF objects out of 2073 (max. 8388607)
+ 1742 compressed objects within 18 object streams
+ 754 named destinations out of 1000 (max. 131072)
  520 words of extra memory for PDF output out of 10000 (max. 100000000)
 
