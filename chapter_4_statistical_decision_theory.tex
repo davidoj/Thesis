@@ -70,17 +70,17 @@ The use of two player statistical models is baked into Savage's representation t
 
 \subsubsection{Jeffrey's decision theory}
 
-\todo[inline]{Conditioning on a set}
-
-The approach to decision making set out by \citet{jeffrey_logic_1990} and \citet{bolker_functions_1966} differs from Savage's approach in a number of ways. Firstly, the representation theorem proved by Bolker does not distinguish between hypotheses, outcomes and decisions. It assumes only an algebra of outcomes $(O,\sigalg{O})$ (incidentally, not standard measurable) and a preference relation over these outcomes. If the preference relation satisfies the \emph{Jeffrey axioms} then there exists a utility $u:O\to\mathbb{R}$ and a probability distribution $\prob{P}\in \Delta(\sigalg{O})$ which are non-unique such that for $A,B\in \sigalg{O}$ and finite partition $C_1,...,C_n\in \sigalg{O}$ (the proof is given by \citet{bolker_functions_1966}):
+The approach to decision making set out by \citet{jeffrey_logic_1990} and \citet{bolker_functions_1966} differs from Savage's approach in a number of ways. Firstly, the representation theorem proved by Bolker does not distinguish between hypotheses, outcomes and decisions. It assumes only an algebra of outcomes $(O,\sigalg{O})$ and a preference relation over these outcomes. If the preference relation satisfies the \emph{Jeffrey axioms} then there exists a utility $u:O\to\mathbb{R}$ and a probability distribution $\prob{P}\in \Delta(\sigalg{O})$ which are non-unique such that for $A,B\in \sigalg{O}$ and finite partition $C_1,...,C_n\in \sigalg{O}$ (the proof is given by \citet{bolker_functions_1966}):
 
 \begin{align}
-    (A \succurly B) \iff (\mathbb{E}_{\prob{P}}[u|A]>\mathbb{E}_{\prob{P}}[u|B])
+    (A \succurly B) \iff (\prob{P}^{\RV{O}|\mathds{1}_A}_1u>\prob{P}^{\RV{O}|\mathds{1}_B}_1u) \label{eq:ev_dec_theory}
 \end{align}
 
-In order to use such a model in a decision problem, Jeffrey suggests we can pick a subset of $\mathscr{D}:=\{D_i\in \sigalg{O}|i\in A\}$ for some set $A$ that we identify as ``decisions that we can make''. Note that if $\mathscr{D}$ is countable, the map $\kernel{T}:\mathscr{D}\to \Delta(\sigalg{O})$ along with $\RV{D}:\mathscr{D}\times O\to \mathscr{D}$ and $\RV{O}:\mathscr{D}\times O\to O$ is a see-do forecast.
+The original proof uses an $O$ that is not standard measurable, and states Equation \ref{eq:ev_dec_theory} in terms of the probability conditioned on events. I state it this way so that the notation is consistent with other theories under discussion which I hope helps to discuss the comparison.
 
-However, there is a problem with defining elements of the outcome algebra to be decisions. If $D_i\subset D_j$ then $D_i\implies D_j$. Consider a decision problem with the options $D=\{d_1=\text{``order water''},d_2=\text{``order a drink''}\}$. By assumption, we the object of a decision problem is to select a \emph{single} decision from the available set. Suppose I'd prefer to drink water than anything else, and I also think $d_2$ has some chance resulting in not-water. Then I will choose $d_1$ and I will \emph{not} choose $d_2$. At the same time, if I order water it will be true that I ordered a drink. 
+In order to use such a model in a decision problem, Jeffrey suggests we can pick a subset of $\mathscr{D}:=\{D_i\in \sigalg{O}|i\in A\}$ for some set $A$ that we identify as ``decisions that we can make''. There is a somewhat subtle issue here. Consider the problem of deciding whether or not to order a drink decision problem with the options $D=\{d_1=\text{``order water''},d_2=\text{``order a drink''}\}$. By assumption, we the object of a decision problem is to select a \emph{single} decision from the available set. Suppose I'd prefer to drink water than anything else, and I also think $d_2$ has some chance resulting in not-water. Then I will choose $d_1$ and I will \emph{not} choose $d_2$. At the same time, if I order water it will be true that I ordered a drink. 
+
+Note that if $\mathscr{D}$ is countable, the map $\kernel{T}:\mathscr{D}\to \Delta(\sigalg{O})$ along with $\RV{D}:\mathscr{D}\times O\to \mathscr{D}$ and $\RV{O}:\mathscr{D}\times O\to O$ is a see-do forecast.
 
  I regard it as somewhat  Thus if I decide to ``drink water'' then it is very likely to be true that I end up drinking something. However, at the same time, it is false that I selected the second option -- here labeled ``drink something'' -- from the set of available decisions. 
 
