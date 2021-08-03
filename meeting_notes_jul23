@@ -1,4 +1,4 @@
-Define recursive box disintegration recipe
+Define recursive box disintegration recipe, use standard BN plate notation
 
 Add subheadings to Chapter 3 + a few sentences introducing each subsection
 
@@ -16,3 +16,39 @@ See-do-judge
 When people talk about "a cause" Bob thinks they're mixing up a model with reality
 
 Chapter 6: inferring consequences from data
+
+
+Chapter 3 notes Cheng:
+
+Start with statistical models instead of world models
+
+Who is player 1, who is player 2?
+
+Were<->are
+
+Distinguish what is known from what is being proposed
+
+"Chapter 2 introduces see-do models as a special case of 2-player games. I'm not quite sure why you need exchangeability"
+
+Here is the question we are trying to ask: what kind of things can answer this question?
+
+Chapter 3 notes Bob:
+
+"Chapter 3 is about how to extend existing statistical decision theory to deal with the added complexity of observing and doing. Use the building blocks of Markov kernels, then questions of exchangeability and representation naturally arise"
+
+Executive summary before heading into narrative:
+ - We need to do outcome stuff
+ - Classical statistics doesn't do outcome stuff, but it does a lot of other stuff well
+ - We take classical statistics and add
+ - Questions of representation naturally arise
+ 
+Use bigotimes instead of otimes
+
+Use vec notation instead of utimes
+
+"De Finetti's result is yadada ydada and it's useful because blah blah blah. However, it doesn't apply to our situation because we have two players in our statistical games, so the question arises: can we adapt the proof to our situation? Fortunately, we can"
+
+
+Let's revisit causality in a way that illuminates existing results and also potentially illuminates a path towards new approaches.
+
+

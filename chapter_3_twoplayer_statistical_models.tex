@@ -1,11 +1,18 @@
 
 %!TEX root = main.tex
 
-\chapter{Two player statistical models and see-do models}\label{ch:2p_statmodels}
+\chapter{Statistical models with consequences}\label{ch:2p_statmodels}
 
 \todo[inline]{These are ``todo'' notes. All such notes that involve theoretical development are also collected in an unordered list of outstanding theoretical questions}
 
-In this chapter I introduce two types of model. Models of the first type are called \emph{two player statistical models} and the second type are a special class of the first called \emph{see-do models}. Fundamentally, each of these is just a particular kind of stochastic function. The reason we are interested in these kinds of stochastic functions is that is that almost all causal models are instances of see-do models. Before introducing two player models and discussing what makes them causal, it is worth briefly considering models in statistics and machine learning generally.
+\section{Summary}
+
+Statistical models are a familiar type of model used in inference problems. A statistical model features a set of hypotheses and each hypothesis is associated with a probability distribution over observations. We need to extend statistical models to model consequences of decisions. We do this with two types of model: the first model type is the \emph{two player statistical model}, which is like a statistical model that depends on a set of choices as a set of hypotheses. The ``two players'' are player $H$, who chooses hypotheses, and player $D$ who chooses decisions; this terminology is motivated by the game-theoretic approach to statistics. The second model type is the \emph{see-do model}, which is a two-player statistical model in which we distinguish between \emph{observations} and \emph{consequences}, and require that the observations are independent of the choices. A see-do model can be used in problems where we are given some data and wish to make a decision with good consequences on the basis of this, a type of problem that is discussed at length in Chapter \ref{ch:evaluating_decisions}.
+
+See-do models are an extension of classical statistical models. Each hypotheses in a classical statistical models is often associated with a corresponding infinite and identically distributed sequence of observations (though this just a common choice, not a strict requirement). A question that naturally arises is whether hypotheses in see-do models can represent something analogous to an infinite IID sequence of observations \emph{and consequences}. If so, a further question that arises is what types of see-do model represent such sequences. We answer this question by extending De Finetti's representation theorem to see-do models, showing that see-do models that are both \emph{exchangeable} and \emph{functionally exchangeable} corrspond to blah blah blah
+
+
+\section{Motivation}
 
 A \emph{world model} is something I will informally define as a family of ``descriptions'' indexed by hypotheses $\{R_h|h\in H\}$. The set $H$ represents hypotheses or proposals for how the world ought to be described, and each proposal $h\in H$ entails some description of the world $\prob{R}_h$. Some examples of world models:
 
