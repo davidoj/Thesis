@@ -1,9 +1,17 @@
-\begin{thebibliography}{45}
+\begin{thebibliography}{47}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bishop(2006)]{bishop_pattern_2006}
+Christopher Bishop.
+\newblock \emph{Pattern {Recognition} and {Machine} {Learning}}.
+\newblock Information {Science} and {Statistics}. Springer-Verlag, New York,
+  2006.
+\newblock ISBN 978-0-387-31073-2.
+\newblock URL \url{https://www.springer.com/gp/book/9780387310732}.
 
 \bibitem[Bolker(1966)]{bolker_functions_1966}
 Ethan~D. Bolker.
@@ -63,12 +71,12 @@ A.~Philip Dawid.
 \newblock URL \url{http://arxiv.org/abs/2004.12493}.
 \newblock arXiv: 2004.12493.
 
-\bibitem[de~Finetti(1992)]{de_finetti_foresight_1992}
+\bibitem[de~Finetti({[1937] 1992})]{de_finetti_foresight_1992}
 Bruno de~Finetti.
 \newblock Foresight: {Its} {Logical} {Laws}, {Its} {Subjective} {Sources}.
 \newblock In Samuel Kotz and Norman~L. Johnson, editors, \emph{Breakthroughs in
   {Statistics}: {Foundations} and {Basic} {Theory}}, Springer {Series} in
-  {Statistics}, pages 134--174. Springer, New York, NY, 1992.
+  {Statistics}, pages 134--174. Springer, New York, NY, {[1937] 1992}.
 \newblock ISBN 978-1-4612-0919-5.
 \newblock \doi{10.1007/978-1-4612-0919-5_10}.
 \newblock URL \url{https://doi.org/10.1007/978-1-4612-0919-5_10}.
@@ -80,12 +88,12 @@ Thomas~S. Ferguson.
 \newblock Academic Press, July 1967.
 \newblock ISBN 978-1-4832-2123-6.
 
-\bibitem[Fisher(1992)]{fisher_statistical_1992}
+\bibitem[Fisher({[1925] 1992})]{fisher_statistical_1992}
 R.~A. Fisher.
 \newblock Statistical {Methods} for {Research} {Workers}.
 \newblock In Samuel Kotz and Norman~L. Johnson, editors, \emph{Breakthroughs in
   {Statistics}: {Methodology} and {Distribution}}, Springer {Series} in
-  {Statistics}, pages 66--70. Springer, New York, NY, 1992.
+  {Statistics}, pages 66--70. Springer, New York, NY, {[1925] 1992}.
 \newblock ISBN 978-1-4612-4380-9.
 \newblock \doi{10.1007/978-1-4612-4380-9_6}.
 \newblock URL \url{https://doi.org/10.1007/978-1-4612-4380-9_6}.
@@ -117,6 +125,13 @@ David~A. Freedman.
 \newblock \doi{10.1214/aoms/1177703871}.
 \newblock URL \url{https://projecteuclid.org/euclid.aoms/1177703871}.
 \newblock Publisher: Institute of Mathematical Statistics.
+
+\bibitem[Goodfellow et~al.(2016)Goodfellow, Bengio, and
+  Courville]{Goodfellow-et-al-2016}
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+\newblock \emph{Deep Learning}.
+\newblock MIT Press, 2016.
+\newblock \url{http://www.deeplearningbook.org}.
 
 \bibitem[Heckerman and Shachter(1995)]{heckerman_decision-theoretic_1995}
 D.~Heckerman and R.~Shachter.
