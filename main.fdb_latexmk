@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex main"] 1628216168 "main.aux" "main.bbl" "main" 1628216359
+["bibtex main"] 1628577976 "main.aux" "main.bbl" "main" 1628577985
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1628216359 37650 293ce899b43123df7c91a04b0e54a17d "xelatex"
+  "main.aux" 1628577985 38034 ba613c7c99c62e45d78718354ed70222 "xelatex"
   "references.bib" 1628215230 171869 f0c45938caf24412e38366b1ea7b2803 ""
   (generated)
-  "main.bbl"
   "main.blg"
-["xdvipdfmx"] 1628216359 "main.xdv" "main.pdf" "main" 1628216359
-  "main.xdv" 1628216359 1122912 c087d3503f93c6cceeeb76781470a24f "xelatex"
+  "main.bbl"
+["xdvipdfmx"] 1628577985 "main.xdv" "main.pdf" "main" 1628577985
+  "main.xdv" 1628577985 1136180 240ecafd8f512d8301d5eb81048b85f1 "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1628216350 "main.tex" "main.xdv" "main" 1628216359
+["xelatex"] 1628577976 "main.tex" "main.xdv" "main" 1628577985
   "/etc/texmf/web2c/texmf.cnf" 1590547021 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -255,19 +255,19 @@
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1599613219 4648586 d2b7c7b61735336533540bc8faab0630 ""
   "chapter_1_introduction.tex" 1626304629 13449 d74fe23c627e00becac15cbba6b5bac6 ""
   "chapter_2_technical.tex" 1627603770 99750 68777b95ccbde2b0ea10f7462d6e238a ""
-  "chapter_3_twoplayer_statistical_models.tex" 1628216350 85094 1deec19eb9eabaeaa178e2feb558adbd ""
+  "chapter_3_twoplayer_statistical_models.tex" 1628577967 96055 dc8a7bde98291f6e4b2dd1adb58d826f ""
   "chapter_4_statistical_decision_theory.tex" 1627886922 52759 78e521f8f3ebb74cab3bc38eba23f124 ""
   "chapter_5_interventions_counterfactuals.tex" 1627603770 38259 b42c961feac988abaa1c2050b7ee495a ""
   "chapter_6_imitability_inference.tex" 1627603770 1820 34488cd2a2cc5e9f2b2617e77fcdeccb ""
   "chapter_7_godscomputer.tex" 1626312547 47951 e9405176a8320ce263355c13bb4a11df ""
-  "main.aux" 1628216359 37650 293ce899b43123df7c91a04b0e54a17d "xelatex"
-  "main.bbl" 1628216168 16423 0fff10a3fa6f7420ed9b2ec8a3c8c767 "bibtex main"
-  "main.out" 1628216359 4194 2b5d928d10d338450221726a3c9e89c6 "xelatex"
+  "main.aux" 1628577985 38034 ba613c7c99c62e45d78718354ed70222 "xelatex"
+  "main.bbl" 1628577976 16423 0fff10a3fa6f7420ed9b2ec8a3c8c767 "bibtex main"
+  "main.out" 1628577985 4436 33f217aa85988278a33fbc9a9497b165 "xelatex"
   "main.tex" 1628214457 6348 7d28449de31dc2b9c15851e7b869f887 ""
-  "main.toc" 1628216359 6400 63250eac10a7d76f5a28e68e1dacf748 "xelatex"
+  "main.toc" 1628577985 6867 a61ca16f2927fe6774f19c78d709468b "xelatex"
   (generated)
-  "main.aux"
-  "main.out"
   "main.xdv"
   "main.log"
   "main.toc"
+  "main.aux"
+  "main.out"

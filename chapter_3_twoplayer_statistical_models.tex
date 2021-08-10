@@ -75,7 +75,7 @@ Explicitly, the indepence on line \ref{eq:see_do_independence_requirement} impli
              \end{tikzpicture}
 \end{align}
 
-\section{Repeatable experiments and actions}
+\section{Repeatable experiments and actions}\label{sec:repeatable_experiments}
 
 It is very common that statistical problems feature data from repeatable experiments. These are typically modelled with statistical models of \emph{conditionally independent and identically distributed} (conditionally IID) sequences. Given a statistical model $(\kernel{T}, (O,\sigalg{O}), (S,\sigalg{S}))$ with state variable $\RV{S}$, we say that a sequence of random variables $(\RV{X}_i)_{i\in A}$, where $\RV{X}_i:O\to X_0$ for all $i$, is conditionally independent and identically distributed if $\RV{X}_i\CI_{\kernel{T}}\RV{X}_{A\setminus \{i\}}|\RV{S}$ for all $i\in A$. Given a particular state $s\in S$, we have $(\RV{X}_i)_{i\in A}$ are independent and identically distributed with respect to $\kernel{T}_s$; $\RV{X}_i\CI_{\kernel{T}_s} \RV{X}_{A\setminus \{i\}}$ for all $i\in A$.
 
@@ -128,8 +128,6 @@ De Finetti's well-known representation theorem shows that probability models wit
 
 We will find additional motivation for considering these assumptions in forthcoming chapters; in Chapter \ref{ch:ints_counterfactuals} we will discuss how exchangeability-like assumptions seem to be a key feature of models of counterfactual propositions (such as potential outcomes), and in Chapter \ref{ch:inferring_causes} we will consider how assumptions of symmetry that hold within each sequence $(\RV{X}_i)_{i\in A}$ and $(\RV{Y}_i)_{i\in B}$ could be extended to some kind of symmetry that holds across both sequences.
 
-In the following discussion we will assume that subjective uncertainty is modeled with a single probability distribution. This is a common view, but the aim of modelling subjective uncertainty does not force us to use a single probability distribution. \citet{walley_statistical_1991} has developed a kind of model for subjective uncertainty he calls a \emph{prevision}, and each prevision is equivalent to a class of probability measures, and a class of probability measures can be represented as a statistical model. If the motivating arguments for previsions can be extended to address joint observations, decisions and consequences, and whether any resulting ``see-do prevision'' can be represented by a see-do model is an open question.
-
 We have acknowledged some ambiguity in whether see-do models will be used to represent subjective or objective uncertainty. We find a similar ambiguity in \citet[Chapter 1]{pearl_causality:_2009}; Introducing probability, Pearl writes:
 
 \begin{quote}
@@ -144,31 +142,116 @@ Which endorses the view that, in the work that follows, probability will be used
 
 If causes are objective physical constraints, then if Causal Bayesian Networks described by Pearl model causes it appears that they must be modelling such objective constraints, not merely subjective uncertainty about consequences.
 
-In the world of ``ordinary'' one-player statistical models, De Finetti's Representation Theorem establishes that if we are using probabilities to represent forecasts and we are willing to assume that these forecasts are \emph{exchangeable} -- that is, the probability distribution we choose to represent our forecast of future events is exactly the same as the probability distribution we would choose to represent our forecasts of any permutation of these events -- then it is possible to define a random variable representing the \emph{hypothesis} such that the probability distribution representing our forecast can be written as the product of a \emph{prior distribution} over hypotheses and a statistical model that maps hypotheses to independent and identically distributed sequences of observations, which is a sequence of precisely the type that converges in the frequentist sense.
+In the following discussion we will consider modelling subjective uncertainty with a single probability distribution. This is a common choice, but the aim of modelling subjective uncertainty does not force us to use a single probability distribution. \citet{walley_statistical_1991} has developed a kind of model for subjective uncertainty he calls a \emph{prevision}, and each prevision is equivalent to a class of probability measures, and a class of probability measures can be represented as a statistical model. If the motivating arguments for previsions can be extended to address joint observations, decisions and consequences, and whether any resulting ``see-do prevision'' can be represented by a see-do model is an open question.
 
-Thus, one way that statistical models could describe objective facts is if forecasts can be assumed to be exchangeable, in which case the forecast can be factored into a prior and a statistical model describing  independent and identically distributed sequences. As \citet{walley_statistical_1991} cautions, exchangeability is quite a strong assumption -- for example, it entails that one will never believe, no matter how much evidence is apparent, that a sequence is cyclic rather than converging to a stable relative frequency. Acknowledging there is a lot more to explore in this area, in Theorem \ref{th:rep_dex_sdf} we extend De Finetti's representation theorem to see-do models and show that, considering \emph{see-do forecasts}, if both observations and consequences satisfy a kind of exchangeability then the forecast is the product of a prior and a see-do model which, given a hypothesis, describes a sequence of independent and identical consequence maps.
+\subsection{A representation theorem for see-do models}
 
-\begin{definition}[Forecasts, see-do forecast]\label{def:do_forecast}
-A \emph{do forecast} $(\kernel{F},\RV{D},\RV{O})$ is a Markov kernel $\kernel{F}:D\to \Delta(\sigalg{O})$ for some set of choices $D$ and outcomes $O$. The choice variable $\RV{D}:D\times O\to D$ is the map $(d,e)\mapsto d$ that forgest the outcome and and the outcome variable $\RV{O}:D\times O\to O$ is the map $(d,o)\to o$ that forgets the choice.
+De Finetti's representation theorem shows that every exchangeable probability measure is the product of a conditionally IID statistical model and a \emph{prior}, which is a probability measure over states. Exchangeability is a property of a probability measure and a sequence of random variables - a probability measure $\prob{P}$ is exchangeable with respect to a sequence $(\RV{X}_i)_{i\in A}$ if for all finite permutations $\rho:A\to A$, $\prob{P}^{(\RV{X}_i)_{i\in A}} = \prob{P}^{(\RV{X}_{\rho{i}})_{i\in A}}$.
 
-A \emph{see-do forecast} is a forecast $(\kernel{F},\RV{D},\RV{X},\RV{Y})$ with an \emph{observation variable} $\RV{X}:D\times O\to X$ and a \emph{consequence variable} $\RV{Y}:D\times O\to Y$ such that $\RV{O}=\RV{X}\utimes\RV{Y}$ and $\RV{X}\CI\RV{D}$.
+We present a version of De Finetti's theorem and go on to extend it to see-do models. To formally define exchangeability, we will make use of swap functions. Swap functions are functions that swap random variables in a sequence according to some permutation of the sequence indices. We define swap functions with respect to the sequence of random variables to be swapped and a second random variable that should be left untouched. This second part of the definition is to facilitate exchangeability of two different sequences.
 
-A \emph{forecast} $(\kernel{F},\RV{O})$ is a probability measure $\prob{F}\in\Delta(\sigalg{O})$ and an outcome variable $\RV{O}:O\to O$.
+\begin{definition}[Permutations]\label{def:permutation}
+A \emph{finite permutation} $\rho'$ on $B\subseteq\mathbb{N}$ is a map $B\to B$ such that there is some finite $A\subset B$ for which $\rho'|_A:A\to A$ is an invertible function and $\rho'|_{B\setminus A} = \mathrm{Id}_{B\setminus A}$.
 \end{definition}
 
-We can go from a see-do model to a see-do forecast by adding a prior to the model.
+\begin{definition}[Swap function]\label{def:swap}
+Given measureable space $(E,\sigalg{E})$, a sequence of random variables $\RV{X}:=(\RV{X}_i)_{i\in A}$, a random variable $\RV{Y}$ with $\sigma(\RV{X})\cap \sigma(\RV{Y})=\{\emptyset,E\}$ and a finite permutation $\rho:A\to A$, the swap function $\rho^{\RV{X}}:E\to E$ that holds $\RV{Y}$ fixed is a $\sigalg{E}$-measurable function for which $\RV{X}_i\circ \rho^{\RV{X}}=\RV{X}_{\rho'(i)} $ for all $i\in A$, and $Y\circ\rho^{\RV{X}}=\RV{Y}$.
+\end{definition}
 
-\begin{theorem}
-Given a two player statistical model $(\kernel{K},\RV{H},\RV{D},\RV{O})$ and any prior $\mu\in \Delta(\sigalg{H})$, defining $\kernel{L}:=(\mu\otimes \mathrm{Id}_D)\kernel{K}$ we have $(\kernel{L},\RV{D},\RV{O})$ is a do-forecast. 
+For example, and as a proof of existence, if $E = Y\times X_0^{|A|}$, $\RV{X}_i:E\to X_0$ projects the $i$-th ``x'' element of the sequence $(y,x_1,...,x_i,...)\mapsto x_i$, $\RV{X}=(\RV{X}_i)_{i\in A}$ then for any finite permuation $\rho:A\to A$ the swap function is the the fuction $\rho^{\RV{X}}:(y,x_1,...,x_i,...)\mapsto (y,x_{\rho(1)},...,x_{\rho(i)},...)$.
 
-If $(\kernel{K},\RV{H},\RV{D},\RV{X},\RV{Y})$ is a see-do model then, defining $\kernel{L}$ as before, $(\kernel{L},\RV{D},\RV{X},\RV{Y})$ is a see-do forecast.
-\end{theorem}
+If we are only interested in the sequence $\RV{X}$ then we can choose $\RV{Y}=\mathds{1}_E$, for which the second condition will always be satisfied.
 
+Note that a swap function $\rho^{\RV{X}}$ also has an associated Markov kernel $\kernel{F}_{\rho^{\RV{X}}}$. The product of the swap kernel with the kernel associated with the original random variable $\RV{X}$ is the permuted version of $\RV{X}$:
+
+\begin{align}
+    \kernel{F}_{\rho^{\RV{X}}} \kernel{F}_{(\RV{X},\RV{Y})} &= \kernel{F}_{\rho^{\RV{X}}} (\utimes_{i\in B} \kernel{F}_{\RV{X}_i})\utimes \kernel{F}_{\RV{Y}} \\
+    &= (\utimes_{i\in B} \kernel{F}_{\rho^{\RV{X}}} \kernel{F}_{\RV{X}_{i}})\utimes \kernel{F}_{\rho^{\RV{X}}} \kernel{F}_{\RV{Y}} \label{eq:determ_commute}\\
+                                               &= (\utimes_{i\in B} \kernel{F}_{\RV{X}_{\rho(i)}})\utimes \kernel{F}_{\RV{Y}}\label{eq:function_composition}
+\end{align}
+
+Where line \ref{eq:determ_commute} follows from the fact that deterministic kernels commute with the split map (\ref{eq:composition}), and line \ref{eq:function_composition} follows from the fact that for two functional kernels 
+
+\begin{align}
+    (\kernel{F}_{f}\kernel{F}_g)_x(A) &= \int_X (\kernel{F}_g)_y(A) d(\kernel{F}_f)_x(y)\\
+                                      &= \int_X \delta_{g(y)}(A) d\delta_{f(x)}(y)\\
+                                      &= \delta_{g(f(x))} (A)\\
+                                      &= (\kernel{F}_{g\circ f})_x(A) 
+\end{align}
+
+\todo[inline]{lemmafy, move to chapter 2}
+
+We will use this property to define exchangeability. As with swap functions, we will define exchangeability with respect to a sequence and an additional random variable that should remain untouched.
+
+\begin{definition}[Exchangeability]\label{def:exchangeability}
+Given a probability measure $(\kernel{T},(O,\sigalg{O}))$ with a sequence of random variables $\RV{X}:O\to X_0^{|A|}$, $\RV{X}:=(\RV{X}_i)_{i\in A}$ for $A\subseteq \mathbb{N}$ and some $\RV{Y}:O\to Y$ with $\sigma(\RV{X})\cap\sigma(\RV{Y})=\{\emptyset,O\}$, if for every finite permutation $\rho:A\to A$ we have $\kernel{T}\kernel{F}_{\rho^{\RV{X}}}=\kernel{T}$ then $\kernel{T}$ is \emph{exchangeable} with respect to $\RV{X}$.
+\end{definition}
+
+The following lemma shows how this definition relates to the first definition of exchangeability given above.
+
+\begin{lemma}
+Given a statistical model $(\kernel{T},(O,\sigalg{O}))$ with random variables $\RV{X}:=(\RV{X}_i)_{i\in A}$ and $\RV{Y}:O\to Y$ such that $\mathrm{Id}_O = (\RV{Y},\RV{X})$, then for every finite permutation $\rho:A\to A$, $\kernel{T}^{\RV{Y}(\RV{X}_{i})_{i\in A}}=\kernel{T}^{\RV{Y}(\RV{X}_{\rho(i)})_{i\in A}}$ if and only if $(\kernel{T},S,O)$ is exchangeable with respect to $(\RV{X}_i)_{i\in A}$ and $\RV{Y}$.
+\end{lemma}
 
 \begin{proof}
-The first part is trivial: $(\mu\otimes \mathrm{Id}_D)\kernel{K}$ is a Markov kernel $D\to \Delta(\sigalg{O})$ by construction, and $\RV{D}$ and $\RV{O}$ are choice and outcome variables by definition of the original two player statistical model.
+$\implies$
+For arbitrary $\rho:A\to A$
+\begin{align}
+    \kernel{T}^{\RV{Y}(\RV{X}_i)_{i\in A}} &= \kernel{T}[\kernel{F}_{\RV{Y}}\utimes(\utimes_{i\in A}\kernel{F}_{\RV{X}_i})] \\
+                                     &= \kernel{T}\kernel{F}_{\rho^{\RV{X}}}[\kernel{F}_{\RV{Y}}\utimes(\utimes_{i\in A}\kernel{F}_{\RV{X}_i})] \qquad\text{by exchangeability}\\
+                                     &= \kernel{T}[\kernel{F}_{\RV{Y}}\utimes(\utimes_{i\in A}\kernel{F}_{\RV{X}_{\rho(i)}})]\\
+                                     &= \kernel{T}^{\RV{Y}(\RV{X}_{\rho(i)})_{i\in A}}
+\end{align}
+$\Leftarrow$
+For arbitrary $\rho:A\to A$, by assumption
+\begin{align}
+\kernel{T}^{\RV{Y}(\RV{X}_i)_{i\in A}} &= \kernel{T}[\kernel{F}_{\RV{Y}}(\utimes_{i\in A}\kernel{F}_{\RV{X}_i})]\\
+                                     &= \kernel{T}^{\RV{Y}(\RV{X}_{\rho(i)})_{i\in A}}\\
+                                     &= \kernel{T}[\kernel{F}_{\RV{Y}}\utimes(\utimes_{i\in A}\kernel{F}_{\RV{X}_{\rho(i)}})]\\
+                                     &= \kernel{T}[\kernel{F}_{\rho^{\RV{X}}}\kernel{F}_{\RV{Y}}\utimes(\utimes_{i\in A}\kernel{F}_{\rho^{\RV{X}}}\kernel{F}_{\RV{X}_{i}})]\\
+                                     &= \kernel{T}\kernel{F}_{\rho^{\RV{X}}}[\kernel{F}_{\RV{Y}}\utimes(\utimes_{i\in A} \kernel{F}_{\RV{X}_i})]\\
+                                     &= \kernel{F}\kernel{F}_{\rho^{\RV{X}}} \kernel{F}_{\mathrm{Id}_O} \qquad \text{by assumption }\mathrm{Id}_O=(\RV{X},\RV{Y})\\
+                                     &= \kernel{F}\kernel{F}_{\rho^{\RV{X}}}
+\end{align}
+\end{proof}
 
-For the second part $\RV{X}\CI_{\kernel{L}}\RV{D}$ is required. By Theorem \ref{th:iterated_disint} we have
+A statement of De Finetti's representation theorem follows. The theorem is quite familiar, but we will include our own proof in Section \ref{sec:de_finetti_rep_thm} because we want the right form to extend to see-do models.
+
+\begin{theorem}[Representation]\label{th:de_finetti_rep_thm}
+Given a probability space $(\kernel{P},(O,\sigalg{O}))$ exchangeable with respect to $\RV{X}:=(\RV{X}_i)_{i\in A}$ (where $\RV{X}_i:O\to X_0$ for all $i\in A$) and $\RV{Y}:O\to Y$, where $O$ is standard measurable and $A$ is countably infinite, then there exists some $\RV{Z}:O\to Z$ such that $\sigma(\RV{Z})\subset \sigma(\RV{X})$ and both of the following hold:
+\begin{enumerate}
+    \item $\RV{X}_i\CI_{\kernel{P}}\RV{X}_{A\setminus\{i\}}|\RV{Z}$ for all $i\in A$
+    \item $\prob{P}^{\RV{X}_i|\RV{Z}}=\prob{P}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
+\end{enumerate}
+\end{theorem}
+
+The Markov kernel $\prob{P}^{\RV{X}|\RV{Z}}$ along with $Z$ and $X_0^{|A|}$ is a conditionally IID statistical model. Furthermore, by Lemma \ref{lem:representation_of_kernels} we have
+
+\begin{align}
+    \kernel{P}^{\RV{X}}=\kernel{P}^{\RV{Z}}\kernel{P}^{\RV{X}|\RV{Z}}
+\end{align}
+
+Thus $\kernel{P}^{\RV{X}}$ is the product of the ``prior'' $\kernel{P}^{\RV{Z}}$ and the conditionally IID kernel $\kernel{P}^{\RV{X}|\RV{Z}}$.
+
+If we choose $\RV{Y}=\mathds{1}_{O}$, then the reverse also holds: the prodcut of a prior $\prob{Q}^{\RV{Z}}\in \Delta(\sigalg{Z})$ and a conditionally IID statistical model $(\prob{Q}^{\RV{X}|\RV{Z}},(Z,\sigalg{Z}),(X,\sigalg{X}))$ is exchangeable with respect to $(\RV{X}_i)_{i\in A}$ and $\RV{Y}$. We won't prove this here; this choice of $\RV{Y}$ means the second part of our exchangeability condition is trivial and so it precisely matches the usual definition of exchangeability. The reverse implication for the standard proof is given in \citet{de_finetti_foresight_1992}.
+
+
+\subsubsection{See-do models with priors}
+
+De Finetti's representation theorem assumes an exchangeable probability distribution and shows how a conditionally IID statistical model is induced. To get from a statistical model to a probability distribution, we take the product of the model with a prior, which is a probability distribution over states. To prove a similar result to see-do models, we need to define the kind of thing one gets when we take the product of a prior distribution over \emph{hypotheses} and a see-do model. We will call this a \emph{see-do forecast}.
+
+\begin{definition}[Forecasts, see-do forecast]\label{def:do_forecast}
+A \emph{see-do forecast} is a tuple $(\kernel{F},\RV{D},\RV{X},\RV{Y})$ where the decisions $\RV{D}$ take values in $(D,\sigalg{D})$, observations $\RV{X}$ takes values in $(X,\sigalg{X})$, consequences $\RV{Y}$ takes values in $(Y,\sigalg{Y})$, $\kernel{F}:D\to \Delta(\sigalg{X}\otimes \sigalg{Y})$ and $\RV{X}\CI_{\kernel{F}}\RV{D}$.
+\end{definition}
+
+The following theorem shows that see-do forecasts actually are the kind of thing one gets by taking the product of a prior and a see-do model.
+
+\begin{theorem}
+Given a see-do model $(\kernel{K},\RV{H},\RV{D},\RV{X},\RV{Y})$ and a prior $\mu\in \Delta(\sigalg{H})$, defining $\kernel{L}:=(\mu\otimes \mathrm{Id}_D)\kernel{K}$, $(\kernel{L},\RV{D},\RV{X},\RV{Y})$ is a see-do forecast. 
+\end{theorem}
+
+\begin{proof}
+We have immediately that $(\mu\otimes \mathrm{Id}_D)\kernel{K}$ is a Markov kernel $D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$. We require $\RV{X}\CI_{\kernel{L}}\RV{D}$. By Theorem \ref{th:iterated_disint} we have
 
 \begin{align}
     \kernel{K} &= \kernel{K}^{\RV{X}\RV{Y}|\RV{HD}}\\
@@ -243,112 +326,56 @@ Then
 And so $\RV{X}\CI_{\kernel{L}}\RV{D}$.
 \end{proof}
 
-In addition, any see-do forecast can be interpreted as a see-do model with a single hypothesis. Recalling the discussion of the indiscrete space $\{*\}$ in \ref{sec:string_diagram_elements}, we can identify a Markov kernel $\kernel{F}:D\to \Delta(\sigalg{E})$ with a Markov kernel $\kernel{T}:\{*\}\times D\to \Delta(\sigalg{E})$ where $\kernel{T}_{*,d}=\kernel{F}_d$ for all $d\in D$. Defining the hypothesis $\RV{H}:\{*\}\times D\times E\to H$ given by the constant fuction $(*,d,e)\mapsto *$, we can create from any see-do forecast $(\kernel{F},\RV{D},\RV{X},\RV{Y})$ a see-do model $(\RV{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ (the required conditional independence is observed by construction in the single hypothesis $*$). However, this single hypothesis model is typically not a \emph{frequentist model}.
+\subsubsection{Functional exchangeability}
 
-\citet{de_finetti_foresight_1992} has shown how frequentist models in particular can be recovered from exchangeable forecasts. Informally speaking, if and only if a forecast $(\prob{P},\RV{O})$ has the property that distribution of a sequence of random variables $\prob{P}^{\RV{X}_1\RV{X}_2\RV{X}_3}$ is identical to the distribution of any permutation of the sequence $\prob{P}^{\RV{X}_2\RV{X}_1\RV{X}_3}$ (an assumption known as \emph{exchangeability}), and this sequence can be extended infinitely, then there exists a hypothesis class $(H,\sigalg{H})$, a Markov kernel $\kernel{Q}:H\to \Delta(\sigalg{O})$ and a \emph{prior} $\mu\in \Delta(\sigalg{H})$ such that
+With the definition of see-do forecasts in hand, we require a notion analogous to exchangeability for probability distributions. Motivated by the discussion at the start of Section \ref{sec:repeatable_experiments}, we will look for two exchangeability assumptions, the first for the observations $(\RV{X}_i)_{i\in A}$ and the second for the consequences $(\RV{Y}_i)_{i\in B}$. As suggested by that discussion, we will consider an assumption analogous to ordinary exchangeability for the observations. We will consider models that allow for all elements of the consequence sequence $(\RV{Y}_i)_{i\in B}$ to be controlled individually, which demands the introduction of \emph{functional exchangeability}:
 
-\begin{align}
-    \prob{P}^{\RV{X}_1\RV{X}_2\RV{X}_3} = \begin{tikzpicture}
-        \path (0,0) node[dist] (P) {$\mu$}
-        ++ (0.7,0) node[copymap] (copy0) {}
-        ++ (0.5,0.5) node[kernel] (Q1) {$\kernel{Q}$}
-        +  (0,-0.5) node[kernel] (Q2) {$\kernel{Q}$}
-        +  (0,-1) node[kernel] (Q3) {$\kernel{Q}$}
-        ++ (1,0) node (X1) {$\RV{X}_1$}
-        + (0,-0.5) node (X2) {$\RV{X}_2$}
-        + (0,-1) node (X3) {$\RV{X}_3$};
-        \draw (P) -- (copy0);
-        \draw (copy0) to [out=45,in=180] (Q1) (copy0) to [out=0, in=180] (Q2) (copy0) to [out=-45,in=180] (Q3);
-        \draw (Q1) -- (X1) (Q2) -- (X2) (Q3) -- (X3);
-    \end{tikzpicture}
-\end{align}
-
-Defining the hypothesis $\RV{H}:O\mapsto H$ such that $\prob{P}^{\RV{H}}=\mu$ and $\prob{P}^{\RV{O}|\RV{H}}=\kernel{Q}$, $(\kernel{Q},\RV{H},\RV{O})$ is a statistical model.
-
-In the following section, we extend this result to the case of see-do forecasts. We first consider a model that is exchangeable in the observations only, and then introduce the notion of functional exchangeability which is a generalisation of exchangeability to Markov kernels. Finally, we prove a representation theorem for see-do forecasts that are both exchangeable in observations and functionally exchangeable in consequences.
-
-\begin{definition}[Permutations and swaps]\label{def:permut_swap}
-A \emph{finite permutation} $\rho'$ on $B\subseteq\mathbb{N}$ is a map $B\to B$ such that there is some finite $A\subset B$ for which $\rho'|_A:A\to A$ is an invertible function and $\rho'|_{B\setminus A} = \mathrm{Id}_{B\setminus A}$.
-
-Given measureable space $(E,\sigalg{E})$ and a set of random variables $\{\RV{X}_i|i\in B\}$ the swap function $\rho^{\RV{X}}:E\to E$ associated with a finite permutation $\rho:B\to B$ and the random variables $\{\RV{X}_i\}_B$ is a $\sigalg{E}$ measurable function which has the property $\RV{X}_i\circ \rho^{\RV{X}}=\RV{X}_{\rho'(i)} $ for all $i\in B$, and for any $\RV{Y}:E\to Y$ with $\RV{Y}(\RV{X}^{-1}(A))=Y$ for any $A\in \sigalg{E}$, $Y\circ\rho^{\RV{X}}=\RV{Y}$. This swap function also has an associated Markov kernel $R:=\kernel{F}_{\rho^{\RV{X}}}$.
-
-For example, if $E = Y\times X_1^{|B|}$ and $\RV{X}_i:E\to X_1$ projects the $i$-th ``x'' element of the space $(y,x_1,...,x_i,...)\mapsto x_i$, then for some finite permuation $\rho$ the associated swap is the the fuction $\rho^{\RV{X}}:(y,x_1,...,x_i,...)\mapsto (y,x_{\rho'(1)},...,x_{\rho'(i)},...)$.
+\begin{definition}[Exchangeable observations]
+A see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=(\RV{X}_i)_{i\in A}$ for which $(\kernel{T}^{\RV{X}}_d,(X\times Y,\sigalg{X}\otimes\sigalg{Y}))$ is exchangeable with respect to $\RV{X}$ holding $\RV{Y}$ fixed (Definition \ref{def:exchangeability}) is said to have exchangeable observations.
 \end{definition}
 
-\begin{align}
-    R \utimes_{i\in B} \kernel{F}_{\RV{X}_i} &= \utimes_{i\in B} R \kernel{F}_{\RV{X}_{i}}\label{eq:determ_commute}\\
-                                               &= \utimes_{i\in B} \kernel{F}_{\RV{X}_{\rho(i)}}\label{eq:function_composition}
-\end{align}
-
-Where line \ref{eq:determ_commute} follows from the fact that deterministic kernels commute with the split map (\ref{eq:composition}), and line \ref{eq:function_composition} follows from the fact that for two functional kernels 
-
-\begin{align}
-    (\kernel{F}_{f}\kernel{F}_g)_x(A) &= \int_X (\kernel{F}_g)_y(A) d(\kernel{F}_f)_x(y)\\
-                                      &= \int_X \delta_{g(y)}(A) d\delta_{f(x)}(y)\\
-                                      &= \delta_{g(f(x))} (A)\\
-                                      &= (\kernel{F}_{g\circ f})_x(A) 
-\end{align}
-
-\todo[inline]{lemmafy, move to chapter 2}
-
-\begin{definition}[Partial frequencies]\label{def:partial_freq}
-Given a standard measurable space $(E,\sigalg{E})$ along with random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, for $A\in \sigalg{X}_1$ and $m\leq n\in \mathbb{N}$ define the size $n$, $m$-tuple \emph{partial frequency of} $A$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ to be $\RV{Z}^{m,n}_A:=\frac{(n-m)!}{n!}\sum_{I\subset [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$ where $I$ ranges over all $m$-sized ordered subsets of $n$.
-
-Define the $m$-tuple \emph{relative frequency of } $A$ with respect to $\RV{X}$ to be $\RV{Z}^{m,\infty}_A:= \lim_{n\to \infty}\frac{(n-m)!}{n!}\sum_{I\in [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$.
-
-Given a countable set $\sigalg{G}$ generating $\sigalg{X}_1$ (i.e. $\sigma(\sigalg{G})=\sigalg{X}_1)$, define the $m$-tuple \emph{relative frequency of} $\RV{X}$ to be $\RV{Z}^{m,\infty}:=\utimes_{A\in G} \RV{Z}^{m,\infty}_A$, if such a limit exists for all $A$.
-
-For the special case of $m=1$, let $\RV{Z}:=\RV{Z}^{1,\infty}$
+\begin{definition}[Functional exchangeability]
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{D}=(\RV{D}_i)_{i\in B}$ and $\RV{Y}=(\RV{Y}_i)_{i\in B}$, define the interleaved consequence and decision variable $\RV{DY}:=(\RV{D}_i,\RV{Y}_i)_{i\in B}$. For any perumtation $\rho:B\to B$ we have the decision and consequence swap function $\rho^{\RV{DY}}:D\times X\times Y\to D\times X\times Y$ (which holds observations $\RV{X}$ fixed) and the decision swap function $\rho^{\RV{D}}:D\to D$ (which holds $\mathds{1}_D$ fixed; see Definition \ref{def:swap}). Then $\kernel{T}$ is functionally exchangeable with respect to $\RV{D}$ and $\RV{X}$ if $\kernel{T}=\kernel{F}_{\rho^{\RV{D}}}\kernel{T}\kernel{F}_{rho^{\RV{D}\RV{Y}}}$.
 \end{definition}
 
-\begin{definition}[Exchangeable $\sigma$-algebra]\label{def:exchange_sig_alb}
-Given a set of random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, with $X=X_1^{\mathbb{N}}$, a \emph{n-place symmetric function} $f:X\to W$ is a function for which $f = f\circ \rho$ for any permuation $\rho:\mathbb{N}\to\mathbb{N}$ such that $i>n\implies\rho(i)=i$. 
+The product of a functionally exchangeable see-do forecast and an exchangeable distribution over decisions is an exchangeable distribution. This allows us to apply the representation theorem (Theorem \ref{th:de_finetti_rep_thm}) to the product of a see-do forecast and an exchangeable distribution over decisions. To show the representation theorem, we will choose an exchangeable distribution over decisions with full support so that the independence properties for the product distribution hold for the see-do forecast also. 
 
-The \emph{n-place exchangeable $\sigma$-algebra} (with respect to the random variable $\RV{X}_i$), $\sigalg{H}^n$, is the $\sigma$-algebra generated by all n-place symmetric functions, and $\sigma{H}=\cap_{n\in \mathbb{N}} \sigalg{H}^n$. 
+\begin{lemma}[Functionally exchangeable see-do models with exchangeable choices induce exchangeable see do models]\label{lem:f-ex2ex}
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ functionally exchangeable with respect to $\RV{Y}=(\RV{Y}_i)_{i\in A}$ and $\RV{D}=(\RV{D}_i)_{i\in A}$ holding $\RV{X}$ fixed, some $\prob{P}^{\RV{D}}\in \Delta(\sigalg{D})$ exchangeable with respect to $\RV{D}$, then $\prob{P}^{\RV{D}}\kernel{T}\in \Delta(\sigalg{D}\otimes\sigalg{X}\otimes\sigalg{Y})$ is exchangeable with respect to $(\RV{D}_i,\RV{Y{_i}})_{i\in A}$ holding $\RV{X}$ fixed.
 
-For standard measurable $(E,\sigalg{E})$ and $n\in \mathbb{N}$, a size $n$ swap function $\rho^{\RV{X}n}:E\to E$ is a swap function associated with a permutation $\rho^{\prime n}$ with the property $i>n\implies \rho^{\prime n}(i)=i$. An $n$-symmetric set $S\subset E$ has the property $\rho^{\RV{X}n}(S)=S$ for all size $n$ swap functions $\rho^{\RV{X}n}$. Define the symmetric sets $\sigalg{S}^n$ $n$-symmetric sets, and $\sigalg{S}=\cap_{n\in\mathbb{N}} \sigalg{S}^n$. Given random variables $\RV{X}_i:E\to X_1$ for each $i\in\mathbb{N}$, the size $n$ \emph{exchangeable $\sigma$-algebra} with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$, denoted $\sigalg{H}^n\subset\sigma(\RV{X})$, is the $\sigma$-algebra generated by $\{\RV{X}^{-1}(A)|A\in\sigalg{X}\}\cap S^n$.
-
-\end{definition}
-
-\begin{lemma}
-The size $n$ exchangeable sigma algebra $\sigalg{H}^n$ on $(E,\sigalg{E})$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ has the property $\rho^{\RV{X}n}(A)=A$ for all $A\in \sigalg{H}^n$, and all size $n$ swap functions $\rho^{\RV{X}n}$.
+Furthermore, defining the trivial choice $\RV{C}:\{*\}\times X\times Y\to *$, $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{X})$ is a see-do forecast exchangeable with respect to $\RV{G}$.
 \end{lemma}
 
 \begin{proof}
-Let $W_f$ be the codomain of a function $f$, and $\sigalg{W}_f$ its $\sigma$-algebra. $\sigalg{H}^n$ is generated by $\sigalg{G}^n=\{f^{-1}(A)|A\in \sigalg{W}_f,f\text{ n-place symmetric}\}$. By the definition of n-place symmetric functions, any set of the form $f^{-1}(A)=(f\circ\rho^{\RV{X}})^{-1}(A) = (\rho^{\RV{X}}){-1}(f^{-1}(A))$. Because every $n$-place permutation $\rho$ has an inverse $\rho^{-1}$ that is also an $n$-place permutation, all sets in $B\in\sigalg{G}$ have the property $\rho^{\RV{X}}(B)=B$ for all $n$-place permuations $\rho$.
 
-Define $\sigalg{S}^n$ to be all subsets of $E$ such that for $B\in \sigalg{S}^n$, $n$-place permuations $\rho$, $\rho^{\RV{X}}(B)=B$. $\sigalg{S}^n$ is a $\sigma$-algebra, and it contains $\sigalg{G}^n$, so it also contains $\sigalg{H}^n$.
+For arbitrary $\rho:A\to A$, associated swap kernel $R^{\RV{D}}$ and $R^{\RV{X}}$:
 
-Take $A\in\sigalg{S}^n$. By assumption, for any $\omega\in A$, $\rho^{\RV{X}}(\omega)\in A$ for all size $n$ swap functions $\rho^{\RV{X}}$. Consider $\omega\not\in A$, and suppose there is some swap function $\rho^{\RV{X}}$ such that $\rho^{\RV{X}}(\omega)\in A$. By definition, the permutation $\rho$ has an inverse $\rho^{-1}$ which is also a size $n$ permutation. By construction, $(\rho^{-1})^{\RV{X}}$ is also the inverse of $\rho^{\RV{X}}$. Thus $(\rho^{-1})^{\RV{X}}(\omega)\not\in A$ and so $\omega\not\in A$, a contradiction. Thus $E\setminus A\in \sigalg{G}^n$.
+\begin{align}
+    \prob{P}\kernel{T} R^{\RV{D}\RV{X}} &= (\prob{P} R^{\RV{D}}) \kernel{T} R^{\RV{D}\RV{X}}\\
+                                  &= \prob{P}(R^{\RV{D}}\kernel{T}R^{\RV{D}\RV{X}})\\
+                                  &= \prob{P}\kernel{T}
+\end{align}
 
-For any invertible function $f:E\to E$, $f(E)=E$. Thus $E\in \sigalg{G}^n$.
-
-Finally, for a countable collection $A_1,A_2,...$ and any size $n$ swap function $\rho^{\RV{X}}$, $\rho^{\RV{X}}(\cup_{i=1}^{\infty} A_i) = \cup_{i=1}^\infty \rho^{\RV{X}}(A_i) = \cup_{i=1}^\infty A_i$. Thus $\sigalg{S}^n$ is a $\sigma$-algebra, and by the monotone class theorem it contains $\RV{H}^n$.
+This is sufficient for exchangeability of $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{O})$ with respect to $\RV{G}$.
 \end{proof}
 
-\begin{definition}[Exchangeability]
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with the property that $\RV{X}:=\utimes_{i\in A} \RV{X}_i$ for some set of random variables $\{\RV{X}_i|i\in A\}$ all taking values in $X_1$ where $A\subseteq \mathbb{N}$. 
+We will first prove a slight extension of Theorem \ref{th:de_finetti_rep_thm}: we will show that a see-do forecast with exchangeable observations induces a conditionally IID statistical model over observations. The main addition here is that we need to show that exchangeability ``holding the consequences $\RV{Y}$ fixed'' additionally implies conditional independence of $\RV{X}$ and $\RV{Y}$ given $(\RV{Z},\RV{D})$.
 
-If for every finite $B\subset A$ and every permutation $\rho':B\to B$ of $B$ we have $\kernel{T}\rho=\kernel{T}$, where $\rho$ is the swap associated with $\rho'$ and $\{\RV{X}_i|i\in B\}$, then $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is \emph{exchangeable} with respect to $\{\RV{X}_i|i\in A\}$.
-
-If $A$ is an infinite set then $\kernel{T}$ is \emph{infinitely exchangeable}, and if $\kernel{T}=\kernel{S}(\mathrm{Id}_{X}\otimes \stopper{0.15}\otimes \mathrm{Id}_Y)$ for some infinitely exchangeable $(\kernel{S},\RV{D},\RV{X}',\RV{Y}')$, then $\kernel{T}$ is infinitely exchangeably extendable.
-\end{definition}
-
-Note that $\kernel{T}R^{\RV{X}_i|\RV{D}} = \kernel{T}^{\RV{X}_{\rho(i)}|\RV{D}}$.
-
-This implies the usual notion of exchangeability if we take $Y=\{*\}$ (that is, if we assume the consequences are trivial), as by assumption $\RV{X}$ is independent of $\RV{D}$.
-
-\begin{lemma}[Infinitely exchangeably extendable forecasts]\label{lem:partial_representation}
-Given a forecast $(\prob{P},\RV{X})$ where $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some $\{\RV{X}_i|i\in \mathbb{N}\}$ and $X$ is standard measurable, if $\prob{P}$ is exchangeable with respect to $\RV{X}$ then there exists a function $f:X\to H$ such that, defining $\RV{Z}:f\circ \RV{X}$:
-    \begin{itemize}
-        \item $\RV{X}_i\CI\RV{X}_{A\setminus\{i\}}|\RV{Z}$ for all $i\in A$
-        \item $\prob{P}^{\RV{X}_i|\RV{Z}}=\prob{P}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
-    \end{itemize}
-Call $\RV{Z}$ the \emph{hypothesis}.
+\begin{lemma}[Representation of infinitely exchangeably extendable see-do forecasts]\label{lem:rep_seedo_obs}
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=\utimes_{i\in \mathbb{N}} \RV{X}_i$ for some $\{\RV{X}_i|i\in \mathbb{N}\}$ and $X\times Y$ is standard measurable, if $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is infinitely exchangeable with respect to $\{\RV{X}_i|i\in \mathbb{N}\}$ then there exists a function $f:X\to Z$ such that, defining $\RV{Z}:f\circ \RV{X}$:
+\begin{itemize}
+    \item $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in A$
+    \item $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kernel{T}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
+    \item $\RV{Y}\CI\RV{X}|\RV{Z}\utimes \RV{D}$
+\end{itemize}
 \end{lemma}
 
+
+\subsubsection{Proof of Theorem \label{sec:de_finetti_rep_thm}}
+
+
 \begin{proof}
-Without loss of generality, assume $X_1=[0,1]$, $\sigalg{X}=\mathcal{B}([0,1])$ and $\RV{X}=[0,1]^{\mathbb{N}}$.
+Because all standard measurable spaces are isomorphic to $([0,1],\mathcal{B}([0,1]))$, without loss of generality we can assume $X_0=[0,1]$, $\sigalg{X}=\mathcal{B}([0,1])$ and $\RV{X}=[0,1]^{\mathbb{N}}$.
 
 Let $\mathbb{Q}$ be the rationals between $[0,1]$ and define $\RV{Z}_q^n:D\times X\times Y \to [0,1]$ by $\omega \mapsto \frac{1}{n}\sum_{i}^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega))$ Let $\sigalg{Z}^n_q=\sigma(\RV{Z}_q^n)$, i.e. $\RV{Z}^n$ is a 1-tuple partial frequency as in Definition \ref{def:partial_freq}.
 
@@ -473,6 +500,41 @@ By the definition of conditional expectation, for all $J\subset \mathbb{N}$
 And thus $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in\mathbb{N}$.
 \end{proof}
 
+\begin{definition}[Partial relative frequencies]\label{def:partial_freq}
+Given a standard measurable space $(E,\sigalg{E})$ along with random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, for $A\in \sigalg{X}_1$ and $m\leq n\in \mathbb{N}$ define the size $n$, $m$-tuple \emph{partial frequency of} $A$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ to be $\RV{Z}^{m,n}_A:=\frac{(n-m)!}{n!}\sum_{I\subset [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$ where $I$ ranges over all $m$-sized ordered subsets of $n$.
+
+Define the $m$-tuple \emph{relative frequency of } $A$ with respect to $\RV{X}$ to be $\RV{Z}^{m,\infty}_A:= \lim_{n\to \infty}\frac{(n-m)!}{n!}\sum_{I\in [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$.
+
+Given a countable set $\sigalg{G}$ generating $\sigalg{X}_1$ (i.e. $\sigma(\sigalg{G})=\sigalg{X}_1)$, define the $m$-tuple \emph{relative frequency of} $\RV{X}$ to be $\RV{Z}^{m,\infty}:=\utimes_{A\in G} \RV{Z}^{m,\infty}_A$, if such a limit exists for all $A$.
+
+For the special case of $m=1$, let $\RV{Z}:=\RV{Z}^{1,\infty}$
+\end{definition}
+
+\begin{definition}[Exchangeable $\sigma$-algebra]\label{def:exchange_sig_alb}
+Given a set of random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, with $X=X_1^{\mathbb{N}}$, a \emph{n-place symmetric function} $f:X\to W$ is a function for which $f = f\circ \rho$ for any permuation $\rho:\mathbb{N}\to\mathbb{N}$ such that $i>n\implies\rho(i)=i$. 
+
+The \emph{n-place exchangeable $\sigma$-algebra} (with respect to the random variable $\RV{X}_i$), $\sigalg{H}^n$, is the $\sigma$-algebra generated by all n-place symmetric functions, and $\sigma{H}=\cap_{n\in \mathbb{N}} \sigalg{H}^n$. 
+
+For standard measurable $(E,\sigalg{E})$ and $n\in \mathbb{N}$, a size $n$ swap function $\rho^{\RV{X}n}:E\to E$ is a swap function associated with a permutation $\rho^{\prime n}$ with the property $i>n\implies \rho^{\prime n}(i)=i$. An $n$-symmetric set $S\subset E$ has the property $\rho^{\RV{X}n}(S)=S$ for all size $n$ swap functions $\rho^{\RV{X}n}$. Define the symmetric sets $\sigalg{S}^n$ $n$-symmetric sets, and $\sigalg{S}=\cap_{n\in\mathbb{N}} \sigalg{S}^n$. Given random variables $\RV{X}_i:E\to X_1$ for each $i\in\mathbb{N}$, the size $n$ \emph{exchangeable $\sigma$-algebra} with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$, denoted $\sigalg{H}^n\subset\sigma(\RV{X})$, is the $\sigma$-algebra generated by $\{\RV{X}^{-1}(A)|A\in\sigalg{X}\}\cap S^n$.
+
+\end{definition}
+
+\begin{lemma}
+The size $n$ exchangeable sigma algebra $\sigalg{H}^n$ on $(E,\sigalg{E})$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ has the property $\rho^{\RV{X}n}(A)=A$ for all $A\in \sigalg{H}^n$, and all size $n$ swap functions $\rho^{\RV{X}n}$.
+\end{lemma}
+
+\begin{proof}
+Let $W_f$ be the codomain of a function $f$, and $\sigalg{W}_f$ its $\sigma$-algebra. $\sigalg{H}^n$ is generated by $\sigalg{G}^n=\{f^{-1}(A)|A\in \sigalg{W}_f,f\text{ n-place symmetric}\}$. By the definition of n-place symmetric functions, any set of the form $f^{-1}(A)=(f\circ\rho^{\RV{X}})^{-1}(A) = (\rho^{\RV{X}}){-1}(f^{-1}(A))$. Because every $n$-place permutation $\rho$ has an inverse $\rho^{-1}$ that is also an $n$-place permutation, all sets in $B\in\sigalg{G}$ have the property $\rho^{\RV{X}}(B)=B$ for all $n$-place permuations $\rho$.
+
+Define $\sigalg{S}^n$ to be all subsets of $E$ such that for $B\in \sigalg{S}^n$, $n$-place permuations $\rho$, $\rho^{\RV{X}}(B)=B$. $\sigalg{S}^n$ is a $\sigma$-algebra, and it contains $\sigalg{G}^n$, so it also contains $\sigalg{H}^n$.
+
+Take $A\in\sigalg{S}^n$. By assumption, for any $\omega\in A$, $\rho^{\RV{X}}(\omega)\in A$ for all size $n$ swap functions $\rho^{\RV{X}}$. Consider $\omega\not\in A$, and suppose there is some swap function $\rho^{\RV{X}}$ such that $\rho^{\RV{X}}(\omega)\in A$. By definition, the permutation $\rho$ has an inverse $\rho^{-1}$ which is also a size $n$ permutation. By construction, $(\rho^{-1})^{\RV{X}}$ is also the inverse of $\rho^{\RV{X}}$. Thus $(\rho^{-1})^{\RV{X}}(\omega)\not\in A$ and so $\omega\not\in A$, a contradiction. Thus $E\setminus A\in \sigalg{G}^n$.
+
+For any invertible function $f:E\to E$, $f(E)=E$. Thus $E\in \sigalg{G}^n$.
+
+Finally, for a countable collection $A_1,A_2,...$ and any size $n$ swap function $\rho^{\RV{X}}$, $\rho^{\RV{X}}(\cup_{i=1}^{\infty} A_i) = \cup_{i=1}^\infty \rho^{\RV{X}}(A_i) = \cup_{i=1}^\infty A_i$. Thus $\sigalg{S}^n$ is a $\sigma$-algebra, and by the monotone class theorem it contains $\RV{H}^n$.
+\end{proof}
+
 \begin{lemma}[Independent and identically distributed random variables]\label{lem:iid_rvs}
 Suppose we have a forecast $(\prob{P},\RV{X})$ where $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some $\{\RV{X}_i|i\in \mathbb{N}\}$ and $X$ is standard measurable, and $\prob{P}$ is exchangeable with respect to $\RV{X}$. Furthermore, suppose we have $\RV{V}=\utimes_{i\in\mathbb{N}} f\circ \RV{X}_i$ for some measurable $f:X_1\to V_1$ such that $\RV{V}$ is independent and identically distributes - that is, $\prob{P}^{\RV{V}} = \otimes_{i\in\mathbb{N}} \prob{P}^{\RV{V}_1}$. Then, letting $\RV{Z}$ be the hypothesis from Lemma \ref{lem:partial_representation}, $\RV{V}\CI\RV{Z}$.
 \end{lemma}
@@ -495,14 +557,7 @@ Thus $\RV{V}\CI\RV{Z}$.
 
 \end{proof}
 
-\begin{lemma}[Representation of infinitely exchangeably extendable see-do forecasts]\label{lem:rep_seedo_obs}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=\utimes_{i\in \mathbb{N}} \RV{X}_i$ for some $\{\RV{X}_i|i\in \mathbb{N}\}$ and $X\times Y$ is standard measurable, if $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is infinitely exchangeable with respect to $\{\RV{X}_i|i\in \mathbb{N}\}$ then there exists a function $f:X\to Z$ such that, defining $\RV{Z}:f\circ \RV{X}$:
-\begin{itemize}
-    \item $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in A$
-    \item $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kernel{T}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
-    \item $\RV{Y}\CI\RV{X}|\RV{Z}\utimes \RV{D}$
-\end{itemize}
-\end{lemma}
+
 
 \begin{proof}
 
@@ -575,40 +630,7 @@ Using Lemma \ref{lem:rep_seedo_obs} it is possible to prove a version of De Fine
 
 Functional exchangeability is a generalisation of exchangeablility to Markov kernels. It captures the intuition that if we swap the order of the outputs (say, $\RV{Y}_1,\RV{Y}_2$ is swapped to $\RV{Y}_2, \RV{Y}_1$), we need to make analagous exchange of choices ($\RV{D}_1$, $\RV{D}_2$ becomes $\RV{D}_2$, $\RV{D}_1$) in order to maintain the correspondence of choices and outputs.
 
-\begin{definition}[Functional Exchangeability]
-\todo[inline]{Maybe include a diagram here? I think the pictorial representation helps with intuition, though it's hard to state as rigorously with pictures}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and $\RV{Y}=\utimes_{i\in A} \RV{X}_i$ for some random variables $\{\RV{D}_i\}_A, \{\RV{Y}_i\}_A$, for any perumtation $\rho:A\to A$ define the observation and choice swap function $\rho^{\RV{D}\RV{Y}}$ and the choice swap function $\rho^{\RV{D}}$ as in \ref{def:permut_swap}. Then $\kernel{T}$ is functionally exchangeable with respect to $\RV{D}$ and $\RV{X}$ if $\kernel{T}=R^{\RV{D}}\kernel{T}R^{\RV{D}\RV{Y}}$.
 
-$\kernel{T}$ is infinitely functionally exchangeably extendable if here exists a do forecast $(\kernel{T}',\RV{D}',\RV{X}')$ non-interfering and functionally exchangeable with respect to $\RV{D}'=\utimes_{i\in\mathbb{N}}\RV{D}'_i$ and $\RV{Y}'=\utimes_{i\in\mathbb{N}}\RV{Y}'_i$ such that for all $B\subset A$
-
-\begin{align}
-    \kernel{T}^{\prime \RV{Y}'_B|\RV{D}'_B}=\kernel{T}^{\RV{Y}_B|\RV{D}_B} 
-\end{align}
-
-A see-do forecast that is infinitely exchangeably extendable with respect to $\RV{X}$ and infinitely functionally exchangeably extendable with respect to $\RV{D}$, $\RV{Y}$ is \emph{doubly exchangeable} (we omit ``infinitely extendable'' for the sake of brevity).
-
-\end{definition}
-
-The following lemma interprets an exchangeable probability measure as an exchangeable see-do forecast with observations and consequences interchanged. This is so we can re-use Lemma \ref{lem:rep_seedo_obs} without separately proving an almost identical result for probability measures.
-
-\begin{lemma}[Functionally exchangeable see-do models with exchangeable choices induce exchangeable see do models]\label{lem:f-ex2ex}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ functionally exchangeable with respect to $\RV{Y}=\utimes_{i\in A} \RV{Y}_i$ and $\RV{D}=\utimes_{i\in A}\RV{D}_i$ and some $\prob{P}^{\RV{D}}$ exchangeable with respect to $\RV{D}$, then $\prob{P}\kernel{T}\in \Delta(\sigalg{D}\otimes\sigalg{X}\otimes\sigalg{Y})$ is exchangeable with respect to $\RV{G}:=\utimes_i\in A \RV{Y}_i\utimes\RV{D}_i$. 
-
-Furthermore, defining the trivial choice $\RV{C}:\{*\}\times X\times Y\to *$, $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{X})$ is a see-do forecast exchangeable with respect to $\RV{G}$.
-\end{lemma}
-
-\begin{proof}
-
-For arbitrary $\rho:A\to A$, associated swap kernel $R^{\RV{D}}$ and $R^{\RV{X}}$:
-
-\begin{align}
-    \prob{P}\kernel{T} R^{\RV{D}\RV{X}} &= (\prob{P} R^{\RV{D}}) \kernel{T} R^{\RV{D}\RV{X}}\\
-                                  &= \prob{P}(R^{\RV{D}}\kernel{T}R^{\RV{D}\RV{X}})\\
-                                  &= \prob{P}\kernel{T}
-\end{align}
-
-This is sufficient for exchangeability of $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{O})$ with respect to $\RV{G}$.
-\end{proof}
 
 \begin{theorem}[Representation of doubly exchangeable see-do forecasts]\label{th:rep_dex_sdf}
 Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable $D$ and standard measurable $X$, $Y$, the following statements are equivalent (given finite $A\subset\mathbb{N}$, $B\subset\mathbb{N}$ not necessarily finite):
