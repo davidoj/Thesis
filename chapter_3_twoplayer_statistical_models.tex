@@ -5,41 +5,41 @@
 
 \section{Summary}
 
-Statistical models are ubiquitous in the analysis of inference problems. A statistical model features a set of hypotheses, and each hypothesis is mapped to a probability distribution over \emph{outcomes}. We need to consider variants of statistical models that model consequences of decisions. We do this with two types of model: the first model type is the \emph{two player statistical model}, which are a special kind of statistical model that differ from classical statistical model by incorporating dependence on decisions in addition to dependence on hypotheses. The ``two players'' are player $H$, who chooses a hypothesis, and player $D$ who chooses a decision. The second model type is the \emph{see-do model}, which is a two-player statistical model where we also draw a distinction among outcomes between \emph{observations} and \emph{consequences}, and require that the observations are independent of the decisions. A see-do model can be used in problems where we are given some data and wish to make a decision with good consequences on the basis of this, a type of problem that is discussed at length in Chapter \ref{ch:evaluating_decisions}.
+Statistical models are ubiquitous in the analysis of inference problems. A statistical model features a set of \emph{states}, and each state is mapped to a probability distribution over \emph{outcomes}. If we want to model problems involving \emph{decisions} and \emph{consequences}, we need to consider different kinds of statistical models. We introduce two types of model for this purpose: \emph{two player statistical models} which differ from classical statistical model in that the state is assumed to consist of a decision and a \emph{hypothesis} (the two players are the decision maker ``player D'' and the hypothesis selector ``player H''). They model the consequences of decisions under various hypotheses. A \emph{see-do model} is a special case of two player statistical model that can be used in situtations where some \emph{observations} are available for review prior to selecting a decision. See-do models are the main focus of work here and problems involving observations, decisions and consequences will be discussed at length in Chapter \ref{ch:evaluating_decisions}.
 
-See-do models are an extension of classical statistical models. A common simplifying assumption made in classical statistical models is that they are \emph{conditionally independent and identically distributed} (conditinally IID); this means that the model maps each hypothesis to an independent and identically distributed (IID) sequence of observations (though this just a common choice, not a strict requirement). The question arises of what a similar assumption relevant to see-do models is. If consequences depend on choices, then it does not make sense to assert that observations and consequences together form a single IID sequence of random variables, so we need to consider alternatives. We propose that models where observervations are an IID sequence and choices and consequences together are \emph{independent and functionally identical} (IFI; defined later in this chapter) are similar to conditionally IID statistical models. 
+A common simplifying assumption made when using classical statistical models is that they are \emph{conditionally independent and identically distributed} (conditinally IID); this means that the model maps each state to an independent and identically distributed (IID) sequence of observations. This just a common choice, it is not a strict requirement. A similar assumption is likely to be useful for see-do models. If consequences depend on choices, then it does not make sense to assert that observations and consequences together form a single IID sequence of random variables, so we need to consider alternatives. We propose that models where observervations are an IID sequence and choices and consequences together are \emph{independent and functionally identical} (IFI; defined later in this chapter) are similar to conditionally IID statistical models. 
 
-Assuming that the appropriate statistical model is conditionally IID may be a basic assumption for a given problem, or it might not be immediately obvious whether this assumption is sound for the problem. \emph{De Finetti's representation theorem} shows that conditionally IID models are also induced by ``Bayesian forecast'' models for which the sequences of observations is assumed to be \emph{exchangeable}, which offers another way of justifying conditionally IID models: one can either assume it directly, or assume exchangeability and study the induced conditionally IID model. A further question arises: is there an analogous representation theorem for see-do models for which observations are IID and consequences are IFI? We show that there is: a see-do ``forecast'' with exchangeable observations and \emph{functionally exchangeable} consequences induces a see-do model with IID observations and IFI consequences.
+Instead of directly assuming that a conditionally IID model is appropriate, \emph{De Finetti's representation theorem} shows that probability models where the sequence of observations is \emph{exchangeable} induce conditionally IID statistical models. The assumption of exchangeabile observations is preferable to the assumption of IID observations if a probability model is being used to represent subjective uncertainty. We investigate whether there is an analogous result relating ``exchangeability-like'' assumptions for see-do models to ``IID-like'' assumptions. We show that there is: in particular, a see-do ``forecast'' with exchangeable observations and \emph{functionally exchangeable} decision to consequence maps induces a see-do model with IID observations and IFI consequences.
 
-The assumption of functional exchangeability will appear again in Chapter \ref{ch:ints_counterfactuals} in our discussion of counterfactual random variables, and we will consider the joint assumptions of exchangeable observations and functionally exchangeable consequences to motivate the assumption of \emph{imitability} in Chapter \ref{ch:inferring_causes}, an assumption that in combination with a number of other assumptions allows for inference of consequences from data.
+The assumption of functional exchangeability will appear again in Chapter \ref{ch:ints_counterfactuals} as part of the definition of \emph{counterfactual models}, and the joint assumptions of exchangeable observations and functionally exchangeable consequences to motivate the assumption of \emph{imitability} in Chapter \ref{ch:inferring_causes}, an assumption that in combination with a number of other assumptions allows for inference of consequences from data.
 
 \section{Modelling observations, choices and consequences}
 
 \subsection{Modelling observations with statistical models}
 
-Statistical models are a ubiquitous in statistics and machine learning. It consists of a set of \emph{states} $(S,\sigalg{S})$, and for each state the model prescribes a single probability distribution on a given measurable set of \emph{outcomes} $(O,\sigalg{O})$.
+Statistical models are a ubiquitous type of model in statistics and machine learning. They consist of a set of \emph{states} $(S,\sigalg{S})$, and for each state the model prescribes a single probability distribution on a given measurable set of \emph{outcomes} $(O,\sigalg{O})$.
 
 \begin{definition}[Statistical model]\label{def:statistical model}
 A statistical model is a set of states $(S,\sigalg{S})$, a set of outcomes $(O,\sigalg{O})$ and a stochastic map $\kernel{T}:S\to \Delta(\sigalg{O})$.
 \end{definition}
 
 \begin{definition}[State and outcome variables]\label{def:state_outcome}
-Given a statistical model $(\kernel{T},(O,\sigalg{O}),(S,\sigalg{S}))$, define the \emph{state variable} $\RV{S}:S\times O\to S$ as the projeciton from $S\times O\to S$ and define the \emph{outcome variable} $\RV{O}:S\times O\to O$ as the projection onto $O$.
+Given a statistical model $(\kernel{T},(O,\sigalg{O}),(S,\sigalg{S}))$, define the \emph{state variable} $\RV{S}:S\times O\to S$ as the projection from $S\times O\to S$ and define the \emph{outcome variable} $\RV{O}:S\times O\to O$ as the projection onto $O$.
 \end{definition}
 
-The often cited example of a potentially biased coin is modelled with a statistical model. We suppose our coin has some rate of heads $\theta\in [0,1]$, and we furthermore suppose that for each $\theta$ the result of flipping the coin can be modeled (in some sense) by the probability distribution $\text{Bernoulli}(\theta)$. The statistical model here is the set of hypotheses $H=[0,1]$ (corresponding to \emph{rates of heads}), the observation space $O=\{0,1\}$ (with the discrete sigma-algebra) and the stochastic map $\kernel{B}:[0,1]\to \Delta(\mathscr{P}(0,1))$ which is given by $\kernel{B}:\theta\to \text{Bernoulli}(\theta)$.
+The common example of a potentially biased coin is modelled with a statistical model. We suppose our coin has some rate of heads $\theta\in [0,1]$, and we furthermore suppose that for each $\theta$ the result of flipping the coin can be modeled (in some sense) by the probability distribution $\text{Bernoulli}(\theta)$. The statistical model here is the set of states $S=[0,1]$ (corresponding to \emph{rates of heads}), the observation space $O=\{0,1\}^n$ with the discrete sigma-algebra (where $n$ is the number of flips observed) and the stochastic map $\kernel{B}:[0,1]\to \Delta(\mathscr{P}(0,1))$ which is given by $\kernel{B}:\theta\to \text{Bernoulli}(\theta)$.
 
-Almost any theoretical treatment of statistics or machine learning will at some point make use of statistical models to describe the problem they are addressing -- for a collection of examples from the last 100 years, see \cite{Goodfellow-et-al-2016,vapnik_nature_2013,bishop_pattern_2006,le_cam_comparison_1996,freedman_asymptotic_1963,wald_statistical_1950,de_finetti_foresight_1992,fisher_statistical_1992}. 
+Almost any theoretical treatment of statistics or machine learning will at some point make use of statistical models to describe the problem they are addressing -- for a collection of examples from the last 100 years, see \cite{Goodfellow-et-al-2016,vapnik_nature_2013,bishop_pattern_2006,le_cam_comparison_1996,freedman_asymptotic_1963,wald_statistical_1950,de_finetti_foresight_1992,fisher_statistical_1992}. They are often simply assumed without a great deal of discussion of why this type of model is chosen, or what role they play.
 
-Statistical models don't necessarily play a prominent role in the execution of learning algorithms, but they are important for understanding the results. For example, consider a linear regressor that takes a set of predictors $x\in X$ and targets $y\in Y$ and returns some $\beta\in B$ such that $(y-x^T\beta)^2$ is as small as possible. If we interpret $B$ as a set of hypotheses, then we can put together a crude statistical model as follows: identify $B$ as a set of hypotheses and the set of linear functions $X\to Y$ as the set of observations, which we will denote $Y^X$ and assume we also have some sigma-algebra $\sigalg{Y}^X$. Then the function $\kernel{T}:B\to \Delta(\sigalg{Y}^X)$ that sends $\beta$ deterministically to the function $x\mapsto x^T\beta$ is the stochastic map. $(\kernel{T},B,Y^X)$ is a statistical model, but it would be unreasonable to expect it to be a good model of the world.
+If we want to reason about how well some learning algorithm performs in some context, we typically require a reasonable model of the context in which the learning algorithm operates. The algorithms themselves may not give us such a model. Because learning almost always operates in a context with noise an uncertainty, we need models that can handle noise and uncertainty. Probability models are a very common choice for this. In addition, it is often assumed that we do not know with certainty the exact probability model that should be used to model a context. A statistical model assumes a certain number of states may prevail -- reflecting uncertainty in the ``mechanics of the world'' -- and given any state it gives us a probability distribution -- reflecting uncertainty remaining after the mechanics of the world are well-understood.
 
-Suppose we want to ask whether the function $f$ given by a linear regressor is useful for some purpose. It will almost never be helpful to ask whether predictors $x$ and targets $y$ will always be related by $f$, because they are almost always sampled with noise and so the answer will almost always be ``no''. It is also unhelpful, in the face of such uncertainty, to declare all possible functions equally fit for our purpose. Rather, we need some way of describing the relationship between $x$ and $y$ with allowance for uncertainty. To do this, we usually use probability. In this example, we might consider a statistical model $(\kernel{T},H,O)$ where for each $h\in H$, $\kernel{T}_h\in \Delta(\sigalg{Y}\otimes\sigalg{X})$ such that $\kernel{T}_h^{\RV{Y}|\RV{X}}=\text{Normal}(\RV{X}^T\beta_h,\sigma_h)$. If we assume the data generating process is described by such a probability distribution for some $h$, we can ask questions like ``does the linear regressor output a $\beta$ such that $\RV{Y}-\RV{X}^T\beta<\epsilon$ with high probability for all $h\in H$?''
+Learning algorithms don't necessarily implement reasonable models of the world. For example, consider a linear regressor that takes a set of predictors $x\in X$ and targets $y\in Y$ and returns some $\beta\in B$ such that $(y-x^T\beta)^2$ is as small as possible. It is possible to interpret $B$ as a set of states, and consider the learner to be implementing the statistical model $(\kernel{T},B,\mathcal{L}_{X\to Y})$ where $\mathcal{L}_{X\to Y}$ is the set of liner function $X\to Y$ given by $\{x\mapsto x^T\beta|\beta\in B\}$ and $\kernel{T}$ maps a state $\beta\in B$ deterministically to the function $x\mapsto x^T\beta$. This is, formally, a statistical model, but it is not one that would typically be considered a good model of the world in the kinds of problems that a linear regressor is used to solve. One problem with this model is that it is deterministic - the outcome for any $\beta\in B$ will be a particular function $X\to Y$. However, it will almost never be the case that some set of targets $y$ will be an exact function of some set of predictors $x$, and insisting on an exact functional relationship will typically give very poor generalisation results if this demand can be satisfied at all.
 
-One will not necessarily construct an explicit statistical model in the course of developing a learning algorithm for a problem of interest, but if we want to reason about how well the results of the algorithm fit the world then we often need a model of the world that is more credible than the model ``embedded in the algorithm'', and statistical models are very often the kinds of models chosen for this purpose.
+Suppose we want to ask whether the function $f$ given by a linear regressor is useful for some purpose. In order to address this question, we want to consider a more appropriate model of the world than the crude statistical model given above, and consider what behaviour we will see from the regressor under different assumptions imposed on this model. Statistical models typically are used to serve the purpose of a ``more appropriate model of the world''. In this example, we might consider a statistical model $(\kernel{T},H,O)$ where for each $h\in H$, $\kernel{T}_h\in \Delta(\sigalg{Y}\otimes\sigalg{X})$ such that $\kernel{T}_h^{\RV{Y}|\RV{X}}=\text{Normal}(\RV{X}^T\beta_h,\sigma_h)$. If we assume the data generating process is described by such a probability distribution for some $h$, we can ask questions like ``does the linear regressor output a $\beta$ such that $\RV{Y}-\RV{X}^T\beta<\epsilon$ with high probability for all $h\in H$?''
 
 \subsection{Modelling choices and consequences with two-player statistical models}
 
-Typically the states in a statistical model are considered to be ``under the control of nature''. In the possibly biased coin example above, if we were to consider someone, call her ``player D'', acutally flipping the coin and trying to infer the bias, we would typically assume that their opinion about the coin's bias does not affect the coin's actual bias. However, in some cases player D can make choices that might affect the outcomes. Suppose player D has the option to choose how high to toss the coin, perhaps she can aim for a toss height anywhere from 10 to 50cm. This plausibly affects the outcomes of her coin toss and, unlike the coin's bias, she gets to choose the height she tosses it to (or at least the height she intends to toss it to). We call features of the state that are not under player D's control \emph{hypotheses} and features that are under player D's control \emph{decisions}, and statistical models in which the state is the Cartesian product of a set of hypotheses and a set of decisions ``two player statistical models'' (the two players being nature or ``player H'' and the decision maker or ``player D'').
+The states in a statistical model are usually considered to be ``under the control of nature''. In the possibly biased coin example above, if we were to consider some ``player D'' acutally flipping the coin and trying to infer the bias, we would typically assume that their opinion about the coin's bias does not affect the coin's actual bias; they could decide it is biased towards heads when in fact it is completely unbiased. In some cases player D can make choices that affect the outcomes. Suppose player D has the option to choose how high to toss the coin -- perhaps they can aim for a toss height anywhere from 10 to 50cm. This plausibly affects the outcomes of their coin toss and, unlike the coin's bias, they gets to choose the height they intend to toss it. If they decide to toss it to a height of 15cm then 15cm is the height they have chosen to toss it to. Unlike the state, which can differ from whatever player D ultimately decides on, the choice made by player D is the same thing as whatever they ultimately decide on. We call features of the state that are not under player D's control \emph{hypotheses} and features that are under player D's control \emph{decisions}, and statistical models in which the state is the Cartesian product of a set of hypotheses and a set of decisions ``two player statistical models'' (the two players being nature or ``player H'' and the decision maker or ``player D'').
 
 \begin{definition}[Two player statistical model]\label{def:2p_stat}
 A \emph{two-player statistical model} is a tuple $(\kernel{T},\RV{H},\RV{D},\RV{O})$ where $(\kernel{T},(H\times D,\sigalg{H}\otimes\sigalg{D}), (O,\sigalg{O}))$ is a statistical model and $\RV{H}:H\times D\times O\to H$, $\RV{D}:H\times D\times O\to D$ and $\RV{O}:H\times D\times O\to O$ are measurable functions that project elements of $H\times D\times O$ to their respective codomains. $\RV{H}$ is called the \emph{hypothesis}, $\RV{D}$ the \emph{decision} and $\RV{O}$ the \emph{outcome}.
@@ -47,7 +47,7 @@ A \emph{two-player statistical model} is a tuple $(\kernel{T},\RV{H},\RV{D},\RV{
 
 Whenever we propose a two player statistical model, we will also assume for any random variables $\RV{X}: H\times D\times O\to X$ and $\RV{Y}:H\times D\times O\to Y$, a disintegration $\kernel{K}^{\RV{Y}|\RV{XDH}}:X\times D\times H\to \Delta(\sigalg{Y})$ exists (see Theorem \ref{th:existence_continous} for a sufficient condition).
 
-The problems that we will mostly study in this work, in addition to having a second player (``player D''), will often involve some data $\RV{X}$ that is observed before the second player is able to make a choice. Two player statistical models with observations that cannot be affected by the second player's choice are called \emph{see-do models}.
+The problems that we will mostly study in this work, in addition to having a second player (``player D''), will often involve some data $\RV{X}$ that is observed before the second player is able to make a choice. Two player statistical models with \emph{observations} are called \emph{see-do models}.
 
 \begin{definition}[See-Do model]\label{def:seedo}
 A \emph{see-do model} $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is a two-player statistical model along with two additional random variables: the \emph{observation} $\RV{X}: H\times D\times O\to X$ and the \emph{consequence} $\RV{Y}:H\times D\times O\to Y$. The outcome variable is defined to be the coupled product of the observation and the consequence $\RV{O}=(\RV{X},\RV{Y})$, and we will leave this implicit when specifying a see-do model. A see-do model must observe the conditional independence:
@@ -56,9 +56,9 @@ A \emph{see-do model} $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is a two-player
 \end{align}
 \end{definition}
 
-We can informally read the independence requirement as saying ``the observations are independent of the decision given the hypothesis''. This does not imply that in probability models we construct from $\kernel{T}$ that $\RV{D}$ and $\RV{X}$ will necessarily be probabilistically independent conditional on $\RV{H}$ and in fact this will often not be the case. In Chapter \ref{ch:ints_counterfactuals} we will argue that this requirement captures the intuition that observations are not ``affected'' by decisions. For now, we will observe that this independence requirement means that $\kernel{T}$ can be drawn with no path from $\RV{D}$ to $\RV{X}$, but we can also construct probability models by drawing a path from $\RV{X}$ to $\RV{D}$.
+We can informally read the independence requirement as saying ``the observations are independent of the decision given the hypothesis''. This does not imply that probability models we construct from $\kernel{T}$ will necessarily have the property that $\RV{D}$ and $\RV{X}$ will be independent conditional on $\RV{H}$, and in fact this will often not be the case. In Chapter \ref{ch:ints_counterfactuals} we will argue that this requirement captures the intuition that observations are not ``affected'' by decisions. For now, we will observe that this independence requirement means that $\kernel{T}$ can be drawn with no path from $\RV{D}$ to $\RV{X}$.
 
-Explicitly, the indepence on line \ref{eq:see_do_independence_requirement} implies that the kernel $\kernel{T}$ can be drawn as follows:
+Explicitly, the independence on line \ref{eq:see_do_independence_requirement} implies that the kernel $\kernel{T}$ can be drawn as follows:
 
 \begin{align}
 \kernel{T}:= \begin{tikzpicture}
@@ -75,23 +75,25 @@ Explicitly, the indepence on line \ref{eq:see_do_independence_requirement} impli
              \end{tikzpicture}
 \end{align}
 
+In this picture, again informally, $\RV{Y}$ takes input from $\RV{D}$ but $\RV{X}$ does not.    
+
 \section{Repeatable experiments and actions}\label{sec:repeatable_experiments}
 
-It is very common that statistical problems feature data from repeatable experiments. These are typically modelled with statistical models of \emph{conditionally independent and identically distributed} (conditionally IID) sequences. Given a statistical model $(\kernel{T}, (O,\sigalg{O}), (S,\sigalg{S}))$ with state variable $\RV{S}$, we say that a sequence of random variables $(\RV{X}_i)_{i\in A}$, where $\RV{X}_i:O\to X_0$ for all $i$, is conditionally independent and identically distributed if $\RV{X}_i\CI_{\kernel{T}}\RV{X}_{A\setminus \{i\}}|\RV{S}$ for all $i\in A$. Given a particular state $s\in S$, we have $(\RV{X}_i)_{i\in A}$ are independent and identically distributed with respect to $\kernel{T}_s$; $\RV{X}_i\CI_{\kernel{T}_s} \RV{X}_{A\setminus \{i\}}$ for all $i\in A$.
+It is very common that statistical problems feature data from repeatable experiments. These are typically modelled with statistical models of \emph{conditionally independent and identically distributed} (conditionally IID) sequences. Given a statistical model $(\kernel{T}, (O,\sigalg{O}), (S,\sigalg{S}))$ with state variable $\RV{S}$, we say that a sequence of random variables $(\RV{X}_i)_{i\in A}$, where $\RV{X}_i:O\to X_0$ for all $i$, is conditionally independent and identically distributed if $\RV{X}_i\CI_{\kernel{T}}\RV{X}_{A\setminus \{i\}}|\RV{S}$ for all $i\in A$. Given a particular state $s\in S$, this implies $(\RV{X}_i)_{i\in A}$ are independent and identically distributed with respect to $\kernel{T}_s$; $\RV{X}_i\CI_{\kernel{T}_s} \RV{X}_{A\setminus \{i\}}$ for all $i\in A$.
 
-This assumption is so common that it is often made implicitly. Statements like ``assume we have an independent and identically distributed sequence'' are usually invocations of the conditional IID assumption, as they typically mean to assume that the sequence is IID with some unknown distribution, in which case the set of possible distributions can be identified with the set of states. 
+This assumption is very common and sometimes made implicitly. Statements like ``assume we have an independent and identically distributed sequence'' can be understood to imply a conditionally IID statistical model -- each state can be thought of as a possible marginal distribution of one observation, and the statistical model maps all such states to a sequence of mutually independent observations that all share this distribution.
 
-See-do models are much less well-known than classical statistical models, and as we shall see the assumption that observations and consequences together are conditionally independent and identically distributed is one that we usually want to avoid. Nonetheless, given how common the conditional IID assumption is in classical statistical models it is likely that we will also often want to make an assumption like the conditional IID assumption for see-do models. Thus the question arises: what assumption is the appropriate analogue?
+Given how common the conditional IID assumption is, and given how similar see-do models are to statistical models, it is reasonable to suppose that see-do models will often be used with assumptions like conditional IID. One way to apply a conditional IID assumption to a see-do model is to forget the distinction between observations and consequences and assume that that observations and consequences are together IID conditional on $(\RV{H},\RV{D})$. This is usually an inappropriate assumption, so the question arises: what assumptions similar to the conditional IID assumption are appropriate for see-do models?
 
-The conditional IID assumption itself, applied to see-do models, has implications that we think are usually undesirable. From an informal point of view, if both $\RV{X}$ and $\RV{Y}$ form a single IID sequence then conditional on both $\RV{H}$ and $\RV{D}$ then it seems the decision $\RV{D}$ cannot have any impact on the consequence $\RV{Y}$. Suppose we have a see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ and the observations and consequences are both sequences of random variables $\RV{X}=(\RV{X}_i)_{i\in A}$, $\RV{Y}=(\RV{Y}_i)_{i\in B}$. See-do models assume that $\RV{X}\CI\RV{D}|\RV{H}$ which implies for all $i\in A$ $\RV{X}_i\CI\RV{D}|\RV{H}$. If we assume that the sequence $(\RV{X}_i,\RV{Y}_i)_{i\in A}$ is condtionally IID given $(\RV{H},\RV{D})$ (recall that this pair is the state variable for see-do models), then $\kernel{T}^{\RV{Y}_i|\RV{HD}}=\kernel{T}^{\RV{X}_j|\RV{HD}}$ for all $i\in B$, $j\in A$. Because $\RV{Y}=(\RV{Y}_i)_{i\in A}$, $\RV{Y}\CI \RV{D}|\RV{H}$ also.
+Let's first consider the assumption that observations and consequences are jointly IID conditional on $(\RV{H},\RV{D})$. From an informal point of view, if $\RV{X}$ and $\RV{Y}$ form a single IID sequence, and $\RV{X}$ is independent of $\RV{D}$, then it seems that $\RV{D}$ cannot affect the consequences $\RV{Y}$. More formally, suppose we have a see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ and the observations and consequences are both sequences of random variables $\RV{X}=(\RV{X}_i)_{i\in A}$, $\RV{Y}=(\RV{Y}_i)_{i\in B}$. See-do models assume that $\RV{X}\CI\RV{D}|\RV{H}$ which implies for all $i\in A$ $\RV{X}_i\CI\RV{D}|\RV{H}$. If we assume that the sequence $(\RV{X}_i,\RV{Y}_i)_{i\in A}$ is condtionally IID given $(\RV{H},\RV{D})$ (recall that this pair is the state variable for see-do models), then $\kernel{T}^{\RV{Y}_i|\RV{HD}}=\kernel{T}^{\RV{X}_j|\RV{HD}}$ for all $i\in B$, $j\in A$. Because $\RV{Y}=(\RV{Y}_i)_{i\in A}$, $\RV{Y}\CI \RV{D}|\RV{H}$ also.
 
-There is some subtlety here. The statement $\RV{Y}_i\CI\RV{D}|\RV{H}$ seems like it could mean something like ``decisions cannot affect consequences''. We will see in Chapter \ref{ch:ints_counterfactuals}, it doesn't necessarily mean that we expect decisions and consequences to be probabilistically independent. However, when using a see-do model ``in the usual way'' (which, again, we will spell out in Chapter \ref{ch:ints_counterfactuals}), it does imply that we expect decisions and consequences to be probabilistically independent, and we take this as enough to say that in usual cases we want to use see-do models where $\RV{Y}$ is not independent of $\RV{D}$ given $\RV{H}$.
+There is some subtlety in understanding what this means. Just as $\RV{X}\CI_{\kernel{T}}\RV{D}|\RV{H}$ does not necessarily mean $\RV{X}$ and $\RV{D}$ are probabilistically independent in any probability model we construct from $\kernel{T}$, $\RV{Y}\CI_{\kernel{T}}\RV{D}|\RV{H}$ does not rule out constructing probability models from $\kernel{T}$ where $\RV{Y}$ and $\RV{D}$ are not independent. However, such constructions rely on non-standard usage of see-do models where ``decisions follow from consequences'' (this is discussed further in Chapter \ref{ch:ints_counterfactuals}). Thus for most normal usage see-do models should avoid the property $\RV{Y}\CI_{\kernel{T}}\RV{D}|\RV{H}$.
 
-The previous discussion suggests that generalising the conditional IID assumption to see-do models requires treating the observations the observations $(\RV{X}_i)_{i\in A}$ and the consequences $(\RV{Y}_i)_{i\in B}$ separately. For the observations, the obvious choice is to assume that $(\RV{X}_i)_{i\in A}$ are IID conditional on $\RV{H}$. Because $\RV{X}\CI\RV{D}|\RV{H}$ and any subsequence of observations is a function of $\RV{X}$, this implies that observations are IID conditional on $(\RV{H},\RV{D})$ also. Furthermore, if we consider a see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=(\RV{X}_i)_{i\in A}$ are IID conditional on $\RV{H}$, then marginalising over $\RV{Y}$ induces the statistical model $(\kernel{T}^{\RV{X}|\RV{H}},\RV{H},\RV{X})$ where $(\RV{X}_i)_{i\in A}$ are conditionally IID by assumption. It is common practice with causal models to assume that conditionally IID statistical models; wherever it is assumed that we have an ``observational probability distribution'' that can be determined precisely in the limit of infinite data, there typically appears to be an implicit assumption that the observations are modeled by a conditionally IID statistical model.
+Because we want observations to be independent of decisions $\RV{X}\CI_{\kernel{T}}\RV{D}|\RV{H}$ but we also want consequences to be non-independent $\RV{Y}\not\CI_{\kernel{T}}\RV{D}|\RV{H}$, this suggests that a ``conditional IID-like'' assumption for see-do models must treat $\RV{X}$ and $\RV{Y}$ as different sequences. For the observations, the obvious choice is to assume that $(\RV{X}_i)_{i\in A}$ are IID conditional on $\RV{H}$. Because $\RV{X}\CI\RV{D}|\RV{H}$ and any subsequence of observations is a function of $\RV{X}$, this implies that observations are IID conditional on $(\RV{H},\RV{D})$ also. If this assumption holds, then the see-do model induces a conditionally IID statistical model if we forget about the consequences. This aligns with a common practice in the construction of causal models: assuming that a conditionally IID statistical model describes the observations. This assumption is usually being made, for example, when it is assumed that there is a fixed but unknown ``observational probability distribution'' that could in principle be determined precisely given infinite data.
 
 There are at least two different ``IID-like'' assumptions we could make pertaining to a sequence of consequences $\RV{Y}=(\RV{Y}_i)_{i\in A}$. In the first case, we could assume that it is only possible to influence all consequences at once; in the second case, we assume that all consequences can be individually influenced. The first case could be used to model ``high-level policy'' decisions -- for example, a teacher deciding which instruction to give to an entire class at once. The second could be used to model ``repeated individual'' decisions, for example a teacher offering feedback on individual students' work.
 
-If the entire sequence must be controlled at once, we can assume that $(\RV{Y}_i_{i\in B}$ is conditionally IID given $(\RV{H},\RV{D})$. Combined with a conditional IID assumption for observations, this gives us a see-do model with two sequences -- $\RV{X}$ and $\RV{Y}$ -- both of which are conditionally IID given $(\RV{H},\RV{D})$, but each may in general have different distributions. We will call such models \emph{double IID}.
+If the entire sequence must be controlled at once, we can assume that $(\RV{Y}_i)_{i\in B}$ is conditionally IID given $(\RV{H},\RV{D})$. Combined with a conditional IID assumption for observations, this gives us a see-do model with two sequences -- $\RV{X}$ and $\RV{Y}$ -- both of which are conditionally IID given $(\RV{H},\RV{D})$, but each may in general have different distributions. We will call such models \emph{double IID}.
 
 To model independent control of each element $\RV{Y}_i$ of the sequence of consequences, we must also have a sequence of ``sub-decisions'' $D=(\RV{D}_i)_{i\in B}$, where each $\RV{D}_i$ controls one consequence $\RV{Y}_i$. In this case, it doesn't make sense to assume that the sequence of consequences is IID, as different choices for $\RV{D}_i$ and $\RV{D}_j$ may yield different distributions for $\RV{Y}_i$ and $\RV{Y}_j$. Rather than assuming that each $\RV{Y}_i$ is identically distributed, we can assume that the function $\kernel{T}^{\RV{Y}_i|\RV{H}\RV{D}_i}:D_1\to \Delta(\RV{Y}_1)$ is identical for each $(\RV{D}_i,\RV{Y}_i)$ pair. If this is true, we will say that $\RV{D}$ and $\RV{Y}$ together are conditionally \emph{independent and functionally identical} (IFI). As with IID sequences, IFI sequences are mutually independent. Rather than each consequence having the same distribution, the assumption of functional identity holds that the stochastic maps from sub-decisions to sub-consequences are identical for all $(\RV{D}_i,\RV{Y}_i)$.
 
@@ -170,18 +172,9 @@ Note that a swap function $\rho^{\RV{X}}$ also has an associated Markov kernel $
                                                &= (\utimes_{i\in B} \kernel{F}_{\RV{X}_{\rho(i)}})\utimes \kernel{F}_{\RV{Y}}\label{eq:function_composition}
 \end{align}
 
-Where line \ref{eq:determ_commute} follows from the fact that deterministic kernels commute with the split map (\ref{eq:composition}), and line \ref{eq:function_composition} follows from the fact that for two functional kernels 
+Where line \ref{eq:determ_commute} follows from the fact that deterministic kernels commute with the split map (\ref{eq:composition}), and line \ref{eq:function_composition} follows from Lemma \ref{lem:func_kern_product}.
 
-\begin{align}
-    (\kernel{F}_{f}\kernel{F}_g)_x(A) &= \int_X (\kernel{F}_g)_y(A) d(\kernel{F}_f)_x(y)\\
-                                      &= \int_X \delta_{g(y)}(A) d\delta_{f(x)}(y)\\
-                                      &= \delta_{g(f(x))} (A)\\
-                                      &= (\kernel{F}_{g\circ f})_x(A) 
-\end{align}
-
-\todo[inline]{lemmafy, move to chapter 2}
-
-We will use this property to define exchangeability. As with swap functions, we will define exchangeability with respect to a sequence and an additional random variable that should remain untouched.
+As with swap functions, we will define exchangeability with respect to a sequence and an additional random variable that should remain untouched.
 
 \begin{definition}[Exchangeability]\label{def:exchangeability}
 Given a probability measure $(\kernel{T},(O,\sigalg{O}))$ with a sequence of random variables $\RV{X}:O\to X_0^{|A|}$, $\RV{X}:=(\RV{X}_i)_{i\in A}$ for $A\subseteq \mathbb{N}$ and some $\RV{Y}:O\to Y$ with $\sigma(\RV{X})\cap\sigma(\RV{Y})=\{\emptyset,O\}$, if for every finite permutation $\rho:A\to A$ we have $\kernel{T}\kernel{F}_{\rho^{\RV{X}}}=\kernel{T}$ then $\kernel{T}$ is \emph{exchangeable} with respect to $\RV{X}$.
@@ -218,12 +211,16 @@ For arbitrary $\rho:A\to A$, by assumption
 A statement of De Finetti's representation theorem follows. The theorem is quite familiar, but we will include our own proof in Section \ref{sec:de_finetti_rep_thm} because we want the right form to extend to see-do models.
 
 \begin{theorem}[Representation]\label{th:de_finetti_rep_thm}
-Given a probability space $(\kernel{P},(O,\sigalg{O}))$ exchangeable with respect to $\RV{X}:=(\RV{X}_i)_{i\in A}$ (where $\RV{X}_i:O\to X_0$ for all $i\in A$) and $\RV{Y}:O\to Y$, where $O$ is standard measurable and $A$ is countably infinite, then there exists some $\RV{Z}:O\to Z$ such that $\sigma(\RV{Z})\subset \sigma(\RV{X})$ and both of the following hold:
+Given a probability space $(\kernel{P},(O,\sigalg{O}))$ exchangeable with respect to $\RV{X}:=(\RV{X}_i)_{i\in \mathbb{N}}$ (where $\RV{X}_i:O\to X_0$ for all $i\in \mathbb{N}$) and $\RV{Y}:O\to Y$, where $O$ is standard measurable and $A$ is countably infinite, then there exists some $\RV{Z}:O\to Z$ such that $\sigma(\RV{Z})\subset \sigma(\RV{X})$ and both of the following hold:
 \begin{enumerate}
     \item $\RV{X}_i\CI_{\kernel{P}}\RV{X}_{A\setminus\{i\}}|\RV{Z}$ for all $i\in A$
     \item $\prob{P}^{\RV{X}_i|\RV{Z}}=\prob{P}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
 \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+While this is a well-known result (see \citet{de_finetti_foresight_1992,hewitt_symmetric_1955}, a proof is given in Section \ref{sec:de_finetti_rep_thm} for the particular version we use in subsequent results.
+\end{proof}
 
 The Markov kernel $\prob{P}^{\RV{X}|\RV{Z}}$ along with $Z$ and $X_0^{|A|}$ is a conditionally IID statistical model. Furthermore, by Lemma \ref{lem:representation_of_kernels} we have
 
@@ -233,7 +230,7 @@ The Markov kernel $\prob{P}^{\RV{X}|\RV{Z}}$ along with $Z$ and $X_0^{|A|}$ is a
 
 Thus $\kernel{P}^{\RV{X}}$ is the product of the ``prior'' $\kernel{P}^{\RV{Z}}$ and the conditionally IID kernel $\kernel{P}^{\RV{X}|\RV{Z}}$.
 
-If we choose $\RV{Y}=\mathds{1}_{O}$, then the reverse also holds: the prodcut of a prior $\prob{Q}^{\RV{Z}}\in \Delta(\sigalg{Z})$ and a conditionally IID statistical model $(\prob{Q}^{\RV{X}|\RV{Z}},(Z,\sigalg{Z}),(X,\sigalg{X}))$ is exchangeable with respect to $(\RV{X}_i)_{i\in A}$ and $\RV{Y}$. We won't prove this here; this choice of $\RV{Y}$ means the second part of our exchangeability condition is trivial and so it precisely matches the usual definition of exchangeability. The reverse implication for the standard proof is given in \citet{de_finetti_foresight_1992}.
+If we choose $\RV{Y}=\mathds{1}_{O}$, then the reverse also holds: the prodcut of a prior $\prob{Q}^{\RV{Z}}\in \Delta(\sigalg{Z})$ and a conditionally IID statistical model $(\prob{Q}^{\RV{X}|\RV{Z}},(Z,\sigalg{Z}),(X,\sigalg{X}))$ is exchangeable with respect to $(\RV{X}_i)_{i\in A}$ and $\RV{Y}$. We won't prove this here; this choice of $\RV{Y}$ means the second part of our exchangeability condition is trivial and so it precisely matches the usual definition of exchangeability. The reverse implication is a standard result given in, for example, \citet{de_finetti_foresight_1992}.
 
 
 \subsubsection{See-do models with priors}
@@ -251,7 +248,7 @@ Given a see-do model $(\kernel{K},\RV{H},\RV{D},\RV{X},\RV{Y})$ and a prior $\mu
 \end{theorem}
 
 \begin{proof}
-We have immediately that $(\mu\otimes \mathrm{Id}_D)\kernel{K}$ is a Markov kernel $D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$. We require $\RV{X}\CI_{\kernel{L}}\RV{D}$. By Theorem \ref{th:iterated_disint} we have
+$(\mu\otimes \mathrm{Id}_D)\kernel{K}$ is a Markov kernel $D\to \Delta(\sigalg{X}\otimes\sigalg{Y})$. We require $\RV{X}\CI_{\kernel{L}}\RV{D}$. By Theorem \ref{th:iterated_disint}
 
 \begin{align}
     \kernel{K} &= \kernel{K}^{\RV{X}\RV{Y}|\RV{HD}}\\
@@ -338,6 +335,8 @@ A see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=(\RV{X}_i)_{
 Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{D}=(\RV{D}_i)_{i\in B}$ and $\RV{Y}=(\RV{Y}_i)_{i\in B}$, define the interleaved consequence and decision variable $\RV{DY}:=(\RV{D}_i,\RV{Y}_i)_{i\in B}$. For any perumtation $\rho:B\to B$ we have the decision and consequence swap function $\rho^{\RV{DY}}:D\times X\times Y\to D\times X\times Y$ (which holds observations $\RV{X}$ fixed) and the decision swap function $\rho^{\RV{D}}:D\to D$ (which holds $\mathds{1}_D$ fixed; see Definition \ref{def:swap}). Then $\kernel{T}$ is functionally exchangeable with respect to $\RV{D}$ and $\RV{X}$ if $\kernel{T}=\kernel{F}_{\rho^{\RV{D}}}\kernel{T}\kernel{F}_{rho^{\RV{D}\RV{Y}}}$.
 \end{definition}
 
+Functional exchangeability captures the intuition that if we swap the order of the outputs (say, $\RV{Y}_1,\RV{Y}_2$ is swapped to $\RV{Y}_2, \RV{Y}_1$), we need to make analagous exchange of choices ($\RV{D}_1$, $\RV{D}_2$ becomes $\RV{D}_2$, $\RV{D}_1$) in order to maintain the correspondence of choices and outputs.
+
 The product of a functionally exchangeable see-do forecast and an exchangeable distribution over decisions is an exchangeable distribution. This allows us to apply the representation theorem (Theorem \ref{th:de_finetti_rep_thm}) to the product of a see-do forecast and an exchangeable distribution over decisions. To show the representation theorem, we will choose an exchangeable distribution over decisions with full support so that the independence properties for the product distribution hold for the see-do forecast also. 
 
 \begin{lemma}[Functionally exchangeable see-do models with exchangeable choices induce exchangeable see do models]\label{lem:f-ex2ex}
@@ -370,9 +369,78 @@ Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=\utime
 \end{itemize}
 \end{lemma}
 
+Using Lemma \ref{lem:rep_seedo_obs} and Lemma \ref{lem:f-ex2ex} we show in Theorem \ref{th:rep_dex_sdf} that a see-do forecast exchangeable in observations and functionally exchangeable in decisions and consequences is the prodcut of a prior and a statistical model with independent and identically distributed observations and independent and functionally identical consequences.
 
-\subsubsection{Proof of Theorem \label{sec:de_finetti_rep_thm}}
+In order to prove this theorem, we also require the idea of an \emph{extension} of a see-do forecast. This is because the theorem holds for finite sequences of decisions and consequences, but the proof requires an infinite extension of this sequence (for finite sequences, approximate versions of De Finetti's representation theorem hold, see \citet{diaconis_finite_1980,kerns_definettis_2006}). One kernel is an extension of another if the original kernel can be obtained by marginalising the extension.
 
+\begin{definition}[Extension]\label{def:extension}
+Given a see-do forecast $(\kernel{T}, \RV{D}, \RV{X}, \RV{Y})$ where $\RV{X}$ takes values in $(X,\sigalg{X})$ and $\RV{Y}$ takes values in $(Y,\sigalg{Y})$, let $O=X\times Y$. $\kernel{T}':D'\to \Delta(\sigalg{X}'\otimes\sigalg{Y}')$ is an \emph{extension} of $\kernel{T}$ if there exists some $O^*$, $D^*$ such that $\kernel{T}\otimes\mathrm{Id}_{D^*} = \kernel{T}'(\mathrm{Id}_O\otimes\stopper{0.2}_{O^*})$.
+\end{definition}
+
+\begin{theorem}[Representation of doubly exchangeable see-do forecasts]\label{th:rep_dex_sdf}
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable $D:=D_0^B$ and standard measurable $X:=X_0^A$, $Y:=Y_0^B$, and where $\RV{X}=(\RV{X}_i)_{i\in A}$, $\RV{Y}=(\RV{Y}_i)_{i\in B}$ adn $\RV{D}=(\RV{D}_i)_{i\in B}$ for finite $B\subset \mathbb{N}$, $A\subseteq \mathbb{N}$ not necessarily finite, the following statements are equivalent:
+
+\begin{enumerate}
+    \item There exists $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ where $\kernel{T}'$ is an extension of $\kernel{T}$, $\RV{X}'=(\RV{X}'_i)_{i\in \mathbb{N}}$, $\RV{Y}'=(\RV{Y}'_i)_{i\in \mathbb{N}}$, $\RV{D}'=(\RV{D}'_i)_{i\in\mathbb{N}}$ and $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ has exchangeable observations (holding $\RV{Y}'$ and $\RV{D}'$ fixed) and exchangeable consequences (holding $\RV{X}'$ fixed).
+    \item There exists a a set $H$, a prior $\kernel{T}^{\RV{H}}\in\Delta(\sigalg{H})$ and Markov kernels $\kernel{T}^{\RV{X}_0|\RV{H}}$ and $\kernel{T}^{\RV{Y}_0|\RV{H}\RV{D}_0}$ such that for all $d\in D$, $\{J_i\in \sigalg{X}_0|i\in A\}$, $\{K_i\in \sigalg{Y}_0|i\in B\}$:
+    \begin{align}
+        \kernel{T}^{\RV{X}\RV{Y}|\RV{D}}_{d}((\bigtimes_{i\in A}J_i)\times (\bigtimes_{j\in B} K_j)) = \int_{H} \prod_{i\in A} \kernel{T}^{\RV{X}_0|\RV{H}}_h(J_i)\prod_{i\in B}\kernel{T}_{h,d_i}^{\RV{Y}_0|\RV{H}\RV{D}_0}(K_i)d\kernel{T}^{\RV{H}}(h)
+    \end{align}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+A proof is given in Section 
+\end{proof}
+
+\subsubsection{Proof of Theorem \ref{th:de_finetti_rep_thm}}\label{sec:de_finetti_rep_thm}
+
+We start with a definition of partial relative frequencies, exchangeable $\sigma$-algebras and a 
+
+\begin{definition}[Partial relative frequencies]\label{def:partial_freq}
+Given a standard measurable space $(E,\sigalg{E})$ along with random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, for $A\in \sigalg{X}_1$ and $m\leq n\in \mathbb{N}$ define the size $n$, $m$-tuple \emph{partial frequency of} $A$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ to be $\RV{Z}^{m,n}_A:=\frac{(n-m)!}{n!}\sum_{I\subset [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$ where $I$ ranges over all $m$-sized ordered subsets of $n$.
+
+Define the $m$-tuple \emph{relative frequency of } $A$ with respect to $\RV{X}$ to be $\RV{Z}^{m,\infty}_A:= \lim_{n\to \infty}\frac{(n-m)!}{n!}\sum_{I\in [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$.
+
+Given a countable set $\sigalg{G}$ generating $\sigalg{X}_1$ (i.e. $\sigma(\sigalg{G})=\sigalg{X}_1)$, define the $m$-tuple \emph{relative frequency of} $\RV{X}$ to be $\RV{Z}^{m,\infty}:=\utimes_{A\in G} \RV{Z}^{m,\infty}_A$, if such a limit exists for all $A$.
+
+For the special case of $m=1$, let $\RV{Z}:=\RV{Z}^{1,\infty}$
+\end{definition}
+
+\begin{definition}[Exchangeable $\sigma$-algebra]\label{def:exchange_sig_alb}
+Given a set of random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, with $X=X_1^{\mathbb{N}}$, a \emph{n-place symmetric function} $f:X\to W$ is a function for which $f = f\circ \rho$ for any permuation $\rho:\mathbb{N}\to\mathbb{N}$ such that $i>n\implies\rho(i)=i$. 
+
+The \emph{n-place exchangeable $\sigma$-algebra} (with respect to the random variable $\RV{X}_i$), $\sigalg{H}^n$, is the $\sigma$-algebra generated by all n-place symmetric functions, and $\sigma{H}=\cap_{n\in \mathbb{N}} \sigalg{H}^n$. 
+
+For standard measurable $(E,\sigalg{E})$ and $n\in \mathbb{N}$, a size $n$ swap function $\rho^{\RV{X}n}:E\to E$ is a swap function associated with a permutation $\rho^{\prime n}$ with the property $i>n\implies \rho^{\prime n}(i)=i$. An $n$-symmetric set $S\subset E$ has the property $\rho^{\RV{X}n}(S)=S$ for all size $n$ swap functions $\rho^{\RV{X}n}$. Define the symmetric sets $\sigalg{S}^n$ $n$-symmetric sets, and $\sigalg{S}=\cap_{n\in\mathbb{N}} \sigalg{S}^n$. Given random variables $\RV{X}_i:E\to X_1$ for each $i\in\mathbb{N}$, the size $n$ \emph{exchangeable $\sigma$-algebra} with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$, denoted $\sigalg{H}^n\subset\sigma(\RV{X})$, is the $\sigma$-algebra generated by $\{\RV{X}^{-1}(A)|A\in\sigalg{X}\}\cap S^n$.
+
+\end{definition}
+
+\begin{lemma}
+The size $n$ exchangeable sigma algebra $\sigalg{H}^n$ on $(E,\sigalg{E})$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ has the property $\rho^{\RV{X}n}(A)=A$ for all $A\in \sigalg{H}^n$, and all size $n$ swap functions $\rho^{\RV{X}n}$.
+\end{lemma}
+
+\begin{proof}
+Let $W_f$ be the codomain of a function $f$, and $\sigalg{W}_f$ its $\sigma$-algebra. $\sigalg{H}^n$ is generated by $\sigalg{G}^n=\{f^{-1}(A)|A\in \sigalg{W}_f,f\text{ n-place symmetric}\}$. By the definition of n-place symmetric functions, any set of the form $f^{-1}(A)=(f\circ\rho^{\RV{X}})^{-1}(A) = (\rho^{\RV{X}}){-1}(f^{-1}(A))$. Because every $n$-place permutation $\rho$ has an inverse $\rho^{-1}$ that is also an $n$-place permutation, all sets in $B\in\sigalg{G}$ have the property $\rho^{\RV{X}}(B)=B$ for all $n$-place permuations $\rho$.
+
+Define $\sigalg{S}^n$ to be all subsets of $E$ such that for $B\in \sigalg{S}^n$, $n$-place permuations $\rho$, $\rho^{\RV{X}}(B)=B$. $\sigalg{S}^n$ is a $\sigma$-algebra, and it contains $\sigalg{G}^n$, so it also contains $\sigalg{H}^n$.
+
+Take $A\in\sigalg{S}^n$. By assumption, for any $\omega\in A$, $\rho^{\RV{X}}(\omega)\in A$ for all size $n$ swap functions $\rho^{\RV{X}}$. Consider $\omega\not\in A$, and suppose there is some swap function $\rho^{\RV{X}}$ such that $\rho^{\RV{X}}(\omega)\in A$. By definition, the permutation $\rho$ has an inverse $\rho^{-1}$ which is also a size $n$ permutation. By construction, $(\rho^{-1})^{\RV{X}}$ is also the inverse of $\rho^{\RV{X}}$. Thus $(\rho^{-1})^{\RV{X}}(\omega)\not\in A$ and so $\omega\not\in A$, a contradiction. Thus $E\setminus A\in \sigalg{G}^n$.
+
+For any invertible function $f:E\to E$, $f(E)=E$. Thus $E\in \sigalg{G}^n$.
+
+Finally, for a countable collection $A_1,A_2,...$ and any size $n$ swap function $\rho^{\RV{X}}$, $\rho^{\RV{X}}(\cup_{i=1}^{\infty} A_i) = \cup_{i=1}^\infty \rho^{\RV{X}}(A_i) = \cup_{i=1}^\infty A_i$. Thus $\sigalg{S}^n$ is a $\sigma$-algebra, and by the monotone class theorem it contains $\RV{H}^n$.
+\end{proof}
+
+The proof of the main theorem follows.
+
+\begin{reptheorem}{OrdinaryRepresentation}[Representation]
+Given a probability space $(\kernel{P},(O,\sigalg{O}))$ exchangeable with respect to $\RV{X}:=(\RV{X}_i)_{i\in \mathbb{N}}$ (where $\RV{X}_i:O\to X_0$ for all $i\in \mathbb{N}$) and $\RV{Y}:O\to Y$, where $O$ is standard measurable and $A$ is countably infinite, then there exists some $\RV{Z}:O\to Z$ such that $\sigma(\RV{Z})\subset \sigma(\RV{X})$ and both of the following hold:
+\begin{enumerate}
+    \item $\RV{X}_i\CI_{\kernel{P}}\RV{X}_{A\setminus\{i\}}|\RV{Z}$ for all $i\in A$
+    \item $\prob{P}^{\RV{X}_i|\RV{Z}}=\prob{P}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
+\end{enumerate}
+\end{reptheorem}
 
 \begin{proof}
 Because all standard measurable spaces are isomorphic to $([0,1],\mathcal{B}([0,1]))$, without loss of generality we can assume $X_0=[0,1]$, $\sigalg{X}=\mathcal{B}([0,1])$ and $\RV{X}=[0,1]^{\mathbb{N}}$.
@@ -500,43 +568,9 @@ By the definition of conditional expectation, for all $J\subset \mathbb{N}$
 And thus $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in\mathbb{N}$.
 \end{proof}
 
-\begin{definition}[Partial relative frequencies]\label{def:partial_freq}
-Given a standard measurable space $(E,\sigalg{E})$ along with random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, for $A\in \sigalg{X}_1$ and $m\leq n\in \mathbb{N}$ define the size $n$, $m$-tuple \emph{partial frequency of} $A$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ to be $\RV{Z}^{m,n}_A:=\frac{(n-m)!}{n!}\sum_{I\subset [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$ where $I$ ranges over all $m$-sized ordered subsets of $n$.
-
-Define the $m$-tuple \emph{relative frequency of } $A$ with respect to $\RV{X}$ to be $\RV{Z}^{m,\infty}_A:= \lim_{n\to \infty}\frac{(n-m)!}{n!}\sum_{I\in [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$.
-
-Given a countable set $\sigalg{G}$ generating $\sigalg{X}_1$ (i.e. $\sigma(\sigalg{G})=\sigalg{X}_1)$, define the $m$-tuple \emph{relative frequency of} $\RV{X}$ to be $\RV{Z}^{m,\infty}:=\utimes_{A\in G} \RV{Z}^{m,\infty}_A$, if such a limit exists for all $A$.
-
-For the special case of $m=1$, let $\RV{Z}:=\RV{Z}^{1,\infty}$
-\end{definition}
-
-\begin{definition}[Exchangeable $\sigma$-algebra]\label{def:exchange_sig_alb}
-Given a set of random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, with $X=X_1^{\mathbb{N}}$, a \emph{n-place symmetric function} $f:X\to W$ is a function for which $f = f\circ \rho$ for any permuation $\rho:\mathbb{N}\to\mathbb{N}$ such that $i>n\implies\rho(i)=i$. 
-
-The \emph{n-place exchangeable $\sigma$-algebra} (with respect to the random variable $\RV{X}_i$), $\sigalg{H}^n$, is the $\sigma$-algebra generated by all n-place symmetric functions, and $\sigma{H}=\cap_{n\in \mathbb{N}} \sigalg{H}^n$. 
-
-For standard measurable $(E,\sigalg{E})$ and $n\in \mathbb{N}$, a size $n$ swap function $\rho^{\RV{X}n}:E\to E$ is a swap function associated with a permutation $\rho^{\prime n}$ with the property $i>n\implies \rho^{\prime n}(i)=i$. An $n$-symmetric set $S\subset E$ has the property $\rho^{\RV{X}n}(S)=S$ for all size $n$ swap functions $\rho^{\RV{X}n}$. Define the symmetric sets $\sigalg{S}^n$ $n$-symmetric sets, and $\sigalg{S}=\cap_{n\in\mathbb{N}} \sigalg{S}^n$. Given random variables $\RV{X}_i:E\to X_1$ for each $i\in\mathbb{N}$, the size $n$ \emph{exchangeable $\sigma$-algebra} with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$, denoted $\sigalg{H}^n\subset\sigma(\RV{X})$, is the $\sigma$-algebra generated by $\{\RV{X}^{-1}(A)|A\in\sigalg{X}\}\cap S^n$.
-
-\end{definition}
-
-\begin{lemma}
-The size $n$ exchangeable sigma algebra $\sigalg{H}^n$ on $(E,\sigalg{E})$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ has the property $\rho^{\RV{X}n}(A)=A$ for all $A\in \sigalg{H}^n$, and all size $n$ swap functions $\rho^{\RV{X}n}$.
-\end{lemma}
-
-\begin{proof}
-Let $W_f$ be the codomain of a function $f$, and $\sigalg{W}_f$ its $\sigma$-algebra. $\sigalg{H}^n$ is generated by $\sigalg{G}^n=\{f^{-1}(A)|A\in \sigalg{W}_f,f\text{ n-place symmetric}\}$. By the definition of n-place symmetric functions, any set of the form $f^{-1}(A)=(f\circ\rho^{\RV{X}})^{-1}(A) = (\rho^{\RV{X}}){-1}(f^{-1}(A))$. Because every $n$-place permutation $\rho$ has an inverse $\rho^{-1}$ that is also an $n$-place permutation, all sets in $B\in\sigalg{G}$ have the property $\rho^{\RV{X}}(B)=B$ for all $n$-place permuations $\rho$.
-
-Define $\sigalg{S}^n$ to be all subsets of $E$ such that for $B\in \sigalg{S}^n$, $n$-place permuations $\rho$, $\rho^{\RV{X}}(B)=B$. $\sigalg{S}^n$ is a $\sigma$-algebra, and it contains $\sigalg{G}^n$, so it also contains $\sigalg{H}^n$.
-
-Take $A\in\sigalg{S}^n$. By assumption, for any $\omega\in A$, $\rho^{\RV{X}}(\omega)\in A$ for all size $n$ swap functions $\rho^{\RV{X}}$. Consider $\omega\not\in A$, and suppose there is some swap function $\rho^{\RV{X}}$ such that $\rho^{\RV{X}}(\omega)\in A$. By definition, the permutation $\rho$ has an inverse $\rho^{-1}$ which is also a size $n$ permutation. By construction, $(\rho^{-1})^{\RV{X}}$ is also the inverse of $\rho^{\RV{X}}$. Thus $(\rho^{-1})^{\RV{X}}(\omega)\not\in A$ and so $\omega\not\in A$, a contradiction. Thus $E\setminus A\in \sigalg{G}^n$.
-
-For any invertible function $f:E\to E$, $f(E)=E$. Thus $E\in \sigalg{G}^n$.
-
-Finally, for a countable collection $A_1,A_2,...$ and any size $n$ swap function $\rho^{\RV{X}}$, $\rho^{\RV{X}}(\cup_{i=1}^{\infty} A_i) = \cup_{i=1}^\infty \rho^{\RV{X}}(A_i) = \cup_{i=1}^\infty A_i$. Thus $\sigalg{S}^n$ is a $\sigma$-algebra, and by the monotone class theorem it contains $\RV{H}^n$.
-\end{proof}
 
 \begin{lemma}[Independent and identically distributed random variables]\label{lem:iid_rvs}
-Suppose we have a forecast $(\prob{P},\RV{X})$ where $\RV{X}=\utimes_{i\in A} \RV{X}_i$ for some $\{\RV{X}_i|i\in \mathbb{N}\}$ and $X$ is standard measurable, and $\prob{P}$ is exchangeable with respect to $\RV{X}$. Furthermore, suppose we have $\RV{V}=\utimes_{i\in\mathbb{N}} f\circ \RV{X}_i$ for some measurable $f:X_1\to V_1$ such that $\RV{V}$ is independent and identically distributes - that is, $\prob{P}^{\RV{V}} = \otimes_{i\in\mathbb{N}} \prob{P}^{\RV{V}_1}$. Then, letting $\RV{Z}$ be the hypothesis from Lemma \ref{lem:partial_representation}, $\RV{V}\CI\RV{Z}$.
+Suppose we have a forecast $(\prob{P},\RV{X})$ where $\RV{X}= (\RV{X}_i)_{i\in\mathbb{N}}$, $X=X_0^\mathbb{N}$ is standard measurable, and $\prob{P}$ is exchangeable with respect to $\RV{X}$. Furthermore, suppose we have $\RV{V}=(f\circ \RV{X}_i)_{i\in\mathbb{N}}$ for some measurable $f:X_0\to V_0$ such that $\RV{V}$ is independent and identically distributed - that is, $\prob{P}^{\RV{V}} = \otimes_{i\in\mathbb{N}} \prob{P}^{\RV{V}_0}$. Then, letting $\RV{Z}$ be the hypothesis from Lemma \ref{lem:partial_representation}, $\RV{V}\CI\RV{Z}$.
 \end{lemma}
 
 \begin{proof}
@@ -557,7 +591,44 @@ Thus $\RV{V}\CI\RV{Z}$.
 
 \end{proof}
 
+\subsubsection{Proof of Theorem \ref{th:rep_dex_sdf}}
 
+
+\begin{lemma}[Independent and identically distributed random variables]\label{lem:iid_rvs}
+Suppose we have a forecast $(\prob{P},\RV{X})$ where $\RV{X}= (\RV{X}_i)_{i\in\mathbb{N}}$, $X=X_0^\mathbb{N}$ is standard measurable, and $\prob{P}$ is exchangeable with respect to $\RV{X}$. Furthermore, suppose we have $\RV{V}=(f\circ \RV{X}_i)_{i\in\mathbb{N}}$ for some measurable $f:X_0\to V_0$ such that $\RV{V}$ is independent and identically distributed - that is, $\prob{P}^{\RV{V}} = \otimes_{i\in\mathbb{N}} \prob{P}^{\RV{V}_0}$. Then, letting $\RV{Z}$ be the hypothesis from Lemma \ref{lem:partial_representation}, $\RV{V}\CI\RV{Z}$.
+\end{lemma}
+
+\begin{proof}
+
+We have by Lemma \ref{lem:partial_representation} that fo rany measurable $g:Z_1\to \mathbb{R}$,
+\begin{align}
+    \mathbb{E}[g(\RV{V}_1)|\sigma(\RV{Z})] = \lim_{n\to\infty} \frac{1}{n}\sum_i^n g(\RV{Z}_i)
+\end{align}
+
+However, by the strong law of large numbers (\citet{cinlar_probability_2011}, pg 119), because the $\RV{V}_i$ are independent and identically distributed
+
+\begin{align}
+    \mathbb{E}[g(\RV{V}_1)] &\overset{a.s.}{=} \lim_{n\to\infty}\frac{1}{n}\sum_i^n g(\RV{Z}_i)\\
+                            &= \mathbb{E}[g(\RV{V}_1)|\sigma(\RV{Z})]
+\end{align}
+
+Thus $\RV{V}\CI\RV{Z}$.
+
+\end{proof}
+
+The proof of the main theorem follows.
+
+\begin{reptheorem}{SeeDoRepresentation}[Representation of doubly exchangeable see-do forecasts]
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable $D:=D_0^B$ and standard measurable $X:=X_0^A$, $Y:=Y_0^B$, and where $\RV{X}=(\RV{X}_i)_{i\in A}$, $\RV{Y}=(\RV{Y}_i)_{i\in B}$ adn $\RV{D}=(\RV{D}_i)_{i\in B}$ for finite $B\subset \mathbb{N}$, $A\subseteq \mathbb{N}$ not necessarily finite, the following statements are equivalent:
+
+\begin{enumerate}
+    \item There exists $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ where $\kernel{T}'$ is an extension of $\kernel{T}$, $\RV{X}'=(\RV{X}'_i)_{i\in \mathbb{N}}$, $\RV{Y}'=(\RV{Y}'_i)_{i\in \mathbb{N}}$, $\RV{D}'=(\RV{D}'_i)_{i\in\mathbb{N}}$ and $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ has exchangeable observations (holding $\RV{Y}'$ and $\RV{D}'$ fixed) and exchangeable consequences (holding $\RV{X}'$ fixed).
+    \item There exists a a set $H$, a prior $\kernel{T}^{\RV{H}}\in\Delta(\sigalg{H})$ and Markov kernels $\kernel{T}^{\RV{X}_0|\RV{H}}$ and $\kernel{T}^{\RV{Y}_0|\RV{H}\RV{D}_0}$ such that for all $d\in D$, $\{J_i\in \sigalg{X}_0|i\in A\}$, $\{K_i\in \sigalg{Y}_0|i\in B\}$:
+    \begin{align}
+        \kernel{T}^{\RV{X}\RV{Y}|\RV{D}}_{d}((\bigtimes_{i\in A}J_i)\times (\bigtimes_{j\in B} K_j)) = \int_{H} \prod_{i\in A} \kernel{T}^{\RV{X}_0|\RV{H}}_h(J_i)\prod_{i\in B}\kernel{T}_{h,d_i}^{\RV{Y}_0|\RV{H}\RV{D}_0}(K_i)d\kernel{T}^{\RV{H}}(h)
+    \end{align}
+\end{enumerate}
+\end{reptheorem}
 
 \begin{proof}
 
@@ -626,56 +697,9 @@ This shows that $\RV{Y}\CI_{\kernel{T}} \RV{X}|\RV{D}\RV{Z}$, as desired.
 
 \end{proof}
 
-Using Lemma \ref{lem:rep_seedo_obs} it is possible to prove a version of De Finetti's representation theorem, which is a well known result \citep{de_finetti_foresight_1992,hewitt_symmetric_1955}. We are interested in establishing an analogous result for consequence maps. This requires the assumption of \emph{functional exchangeability}.
-
-Functional exchangeability is a generalisation of exchangeablility to Markov kernels. It captures the intuition that if we swap the order of the outputs (say, $\RV{Y}_1,\RV{Y}_2$ is swapped to $\RV{Y}_2, \RV{Y}_1$), we need to make analagous exchange of choices ($\RV{D}_1$, $\RV{D}_2$ becomes $\RV{D}_2$, $\RV{D}_1$) in order to maintain the correspondence of choices and outputs.
 
 
 
-\begin{theorem}[Representation of doubly exchangeable see-do forecasts]\label{th:rep_dex_sdf}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable $D$ and standard measurable $X$, $Y$, the following statements are equivalent (given finite $A\subset\mathbb{N}$, $B\subset\mathbb{N}$ not necessarily finite):
-
-\begin{enumerate}
-    \item $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is doubly exchangeable with respect to $\RV{D}=\utimes_{i\in A}\RV{D}_i$, $\RV{X}=\utimes_{i\in B} \RV{X}_i$, $\RV{Y}=\utimes_{i\in A} \RV{Y}_i$
-    \item There exists a set $H$, $\kernel{T}^{\RV{H}}\in \Delta(\sigalg{H})$ and Markov kernels $\kernel{T}^{\RV{X}_1|\RV{H}}$ and $\kernel{T}^{\RV{Y}_1|\RV{H}\RV{D}_1}$ such that
-    \begin{align}
-        \kernel{T}^{\RV{X}\RV{Y}|\RV{D}} = \begin{tikzpicture}
-            \path (0,0) node[dist,inner sep=-2pt] (H) {$\kernel{T}^{\RV{H}}$}
-            + (0,-1.4) node (D) {$\RV{D}_1$}
-            + (0,-1.9) node (D2) {$\RV{D}_2$}
-            + (0,-2.4) node (D3) {$...$}
-            + (0,-2.7) node (D4) {$\RV{D}_{|A|}$}
-            ++ (0.5,0) node[copymap] (copy0) {}
-            ++ (0.6,0) node[copymap,label={$B$}] (copy1) {}
-            ++ (1.2,0.5) node[kernel] (XH) {$\kernel{T}^{\RV{X}_1|\RV{H}}$}
-            + (0,-0.5) node[kernel] (XH2) {$\kernel{T}^{\RV{X}_1|\RV{H}}$}
-            + (0,-1.75) node[kernel] (YD) {$\kernel{T}^{\RV{Y}_1|\RV{H}\RV{D}_1}$}
-            + (-.9,-1.6) node[copymap,label={$A$}] (copy2) {}
-            + (0,-2.25) node[kernel] (YD2) {$\kernel{T}^{\RV{Y}_1|\RV{H}\RV{D}_1}$}
-            + (0,-2.95) node[kernel] (YD3) {$\kernel{T}^{\RV{Y}_1|\RV{H}\RV{D}_1}$}
-            ++ (1.2,-0.25) node (X1) {$\RV{X}$}
-            + (0,-1.5) node (Y) {$\RV{Y}$};
-            \draw (H) -- (copy1) (copy1) to [out=35,in=180] (XH) (copy1) to [out=-35,in=180] (XH2);
-            \draw ($(XH.east)$) to [out=-15,in=180] ($(X1.west) + (-0.2,0.25)$) ($(XH2.east)$) to [out=15,in=180] ($(X1.west)+(-0.2,-0.25)$);
-            \draw ($(X1.west) + (-0.2,0)$) to (X1);
-            \draw (copy0) to [out=-90,in=180] (copy2) -- ($(YD.west) + (0,0.15)$);
-            \draw (D) to [out=0,in=180] ($(YD.west)+(0,-0.15)$);
-            \draw (D2) to [out=0,in=180] ($(YD2.west)+(0,-0.15)$);
-            \draw (D4) to [out=0,in=180] ($(YD3.west)+(0,-0.15)$);
-            \draw (copy2) to [out=-45,in=180] ($(YD2.west) + (0,0.15)$);
-            \draw (copy2) to [out=-65,in=180] ($(YD3.west) + (0,0.15)$);
-            \draw ($(copy1.west)+(-0.1,0.8)$) rectangle ($(X1.west) + (-0.2,-0.55)$);
-            \draw ($(copy2.west)+(-0.1,0.5)$) rectangle ($(Y.west) + (-0.2,-1.75)$);
-            \draw ($(Y.west) + (-0.2,0)$) -- (Y);
-        \end{tikzpicture}
-    \end{align}
-    \item There exists a set $H$, $\mu\in \Delta(\sigalg{H})$ and Markov kernels $\kernel{T}^{\RV{H}}$, $\kernel{T}^{\RV{X}_1|\RV{H}}$ and $\kernel{T}^{\RV{Y}_1|\RV{H}\RV{D}_1}$ such that for all $\mathbf{d}_A\in D$, $\{J_i\in \sigalg{X}_1|i\in B\}$, $\{K_i\in \sigalg{Y}_1|i\in A\}$:
-    \begin{align}
-        \kernel{T}^{\RV{X}\RV{Y}|\RV{D}}_{\mathbf{d}_A}((\times_{i\in B}J_i)\times (\times_{j\in A} K_j)) = \int_{H} \prod_{i\in B} \kernel{T}^{\RV{X}_1|\RV{H}}_h(J_i)\prod_{i\in A}\kernel{T}_{h,d_i}^{\RV{Y}_1|\RV{H}\RV{D}_1}(K_i)d\kernel{T}^{\RV{H}}(h)
-    \end{align}
-
-\end{enumerate}
-\end{theorem}
 
 \begin{proof}
 $(2)$ and $(3)$ are string and integral notation for the same statement. 

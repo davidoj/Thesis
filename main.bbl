@@ -1,4 +1,4 @@
-\begin{thebibliography}{47}
+\begin{thebibliography}{49}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -80,6 +80,17 @@ Bruno de~Finetti.
 \newblock ISBN 978-1-4612-0919-5.
 \newblock \doi{10.1007/978-1-4612-0919-5_10}.
 \newblock URL \url{https://doi.org/10.1007/978-1-4612-0919-5_10}.
+
+\bibitem[Diaconis and Freedman(1980)]{diaconis_finite_1980}
+P.~Diaconis and D.~Freedman.
+\newblock Finite {Exchangeable} {Sequences}.
+\newblock \emph{The Annals of Probability}, 8\penalty0 (4):\penalty0 745--764,
+  August 1980.
+\newblock ISSN 0091-1798, 2168-894X.
+\newblock \doi{10.1214/aop/1176994663}.
+\newblock URL
+  \url{https://projecteuclid.org/journals/annals-of-probability/volume-8/issue-4/Finite-Exchangeable-Sequences/10.1214/aop/1176994663.full}.
+\newblock Publisher: Institute of Mathematical Statistics.
 
 \bibitem[Ferguson(1967)]{toutenburg_ferguson_1967}
 Thomas~S. Ferguson.
@@ -185,6 +196,16 @@ Richard~C. Jeffrey.
 \newblock \emph{The {Logic} of {Decision}}.
 \newblock University of Chicago Press, July 1965.
 \newblock ISBN 978-0-226-39582-1.
+
+\bibitem[Kerns and Székely(2006)]{kerns_definettis_2006}
+G.~Jay. Kerns and Gábor~J. Székely.
+\newblock Definetti’s {Theorem} for {Abstract} {Finite} {Exchangeable}
+  {Sequences}.
+\newblock \emph{Journal of Theoretical Probability}, 19\penalty0 (3):\penalty0
+  589--608, December 2006.
+\newblock ISSN 1572-9230.
+\newblock \doi{10.1007/s10959-006-0028-z}.
+\newblock URL \url{https://doi.org/10.1007/s10959-006-0028-z}.
 
 \bibitem[Krittanawong et~al.(2020)Krittanawong, Narasimhan, Wang, Hahn, Virk,
   Farrell, Zhang, and Tang]{krittanawong_association_2020}

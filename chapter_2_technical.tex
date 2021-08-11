@@ -326,6 +326,19 @@ for any $a\in V$, $B\in \sigalg{X}$:
 \end{align}
 \end{proof}
 
+\begin{lemma}[Products of functional kernels yield function composition]\label{lem:func_kern_product}
+Given measurable $f:X\to Y$ and $g:Y\to Z$, $\kernel{F}_f\kernel{F}_g = \kernel{F}_{g\circ f}$.
+\end{lemma}
+
+\begin{proof}
+\begin{align}
+    (\kernel{F}_{f}\kernel{F}_g)_x(A) &= \int_X (\kernel{F}_g)_y(A) d(\kernel{F}_f)_x(y)\\
+                                      &= \int_X \delta_{g(y)}(A) d\delta_{f(x)}(y)\\
+                                      &= \delta_{g(f(x))} (A)\\
+                                      &= (\kernel{F}_{g\circ f})_x(A) 
+\end{align}
+\end{proof}
+
 \subsubsection{Working With String Diagrams}\label{sssec:string_diagram_manipulation}
 
 

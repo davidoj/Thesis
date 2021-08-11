@@ -54,12 +54,18 @@
 \usepackage{isomath}
 \usepackage{mathtools}
 
+\makeatletter
+\newcommand{\newreptheorem}[2]
+  {\newtheorem*{rep@#1}{\rep@title}\newenvironment{rep#1}[1]
+  {\def\rep@title{#2 \ref*{##1}}\begin{rep@#1}}{\end{rep@#1}}}
+\makeatother
+
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
-
+\newreptheorem{theorem}{Theorem}
 
 \newtheorem{innercustomthm}{Theorem}
 \newenvironment{customthm}[1]
