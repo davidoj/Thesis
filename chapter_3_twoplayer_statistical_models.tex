@@ -157,18 +157,18 @@ A \emph{finite permutation} $\rho'$ on $B\subseteq\mathbb{N}$ is a map $B\to B$ 
 \end{definition}
 
 \begin{definition}[Swap function]\label{def:swap}
-Given measureable space $(E,\sigalg{E})$, a sequence of random variables $\RV{X}:=(\RV{X}_i)_{i\in A}$, a random variable $\RV{Y}$ with $\sigma(\RV{X})\cap \sigma(\RV{Y})=\{\emptyset,E\}$ and a finite permutation $\rho:A\to A$, the swap function $\rho^{\RV{X}}:E\to E$ that holds $\RV{Y}$ fixed is a $\sigalg{E}$-measurable function for which $\RV{X}_i\circ \rho^{\RV{X}}=\RV{X}_{\rho'(i)} $ for all $i\in A$, and $Y\circ\rho^{\RV{X}}=\RV{Y}$.
+Given measureable space $(E,\sigalg{E})$, a sequence of random variables $\RV{X}:=(\RV{X}_i)_{i\in A}$, a random variable $\RV{Y}$ with $\sigma(\RV{X})\cap \sigma(\RV{Y})=\{\emptyset,E\}$ and a finite permutation $\rho:A\to A$, the swap function $\rho^{\RV{X}}_{\RV{Y}}:E\to E$ that holds $\RV{Y}$ fixed is a $\sigalg{E}$-measurable function for which $\RV{X}_i\circ \rho^{\RV{X}}_{\RV{Y}}=\RV{X}_{\rho(i)} $ for all $i\in A$, and $\RV{Y}\circ\rho^{\RV{X}}_{\RV{Y}}=\RV{Y}$.
 \end{definition}
 
-For example, and as a proof of existence, if $E = Y\times X_0^{|A|}$, $\RV{X}_i:E\to X_0$ projects the $i$-th ``x'' element of the sequence $(y,x_1,...,x_i,...)\mapsto x_i$, $\RV{X}=(\RV{X}_i)_{i\in A}$ then for any finite permuation $\rho:A\to A$ the swap function is the the fuction $\rho^{\RV{X}}:(y,x_1,...,x_i,...)\mapsto (y,x_{\rho(1)},...,x_{\rho(i)},...)$.
+For example, and as a proof of existence, if $E = Y\times X_0^{|A|}$, $\RV{X}_i:E\to X_0$ projects the $i$-th ``x'' element of the sequence $(y,x_1,...,x_i,...)\mapsto x_i$, $\RV{X}=(\RV{X}_i)_{i\in A}$ then for any finite permuation $\rho:A\to A$ the swap function is the the fuction $\rho^{\RV{X}}_{\RV{Y}}:(y,x_1,...,x_i,...)\mapsto (y,x_{\rho(1)},...,x_{\rho(i)},...)$.
 
-If we are only interested in the sequence $\RV{X}$ then we can choose $\RV{Y}=\mathds{1}_E$, for which the second condition will always be satisfied.
+If we are only interested in permuting the sequence $\RV{X}$ then we can choose $\RV{Y}=\mathds{1}_E$, for which the second condition will be satisfied automatically. In this case, we will use the notation $\rho^{\RV{X}}$.
 
-Note that a swap function $\rho^{\RV{X}}$ also has an associated Markov kernel $\kernel{F}_{\rho^{\RV{X}}}$. The product of the swap kernel with the kernel associated with the original random variable $\RV{X}$ is the permuted version of $\RV{X}$:
+Note that a swap function $\rho^{\RV{X}}_{\RV{Y}}$ also has an associated Markov kernel $\kernel{F}_{\rho^{\RV{X}}_{\RV{Y}}}$. The product of the swap kernel with the kernel associated with the original random variable $\RV{X}$ is the permuted version of $\RV{X}$:
 
 \begin{align}
-    \kernel{F}_{\rho^{\RV{X}}} \kernel{F}_{(\RV{X},\RV{Y})} &= \kernel{F}_{\rho^{\RV{X}}} (\utimes_{i\in B} \kernel{F}_{\RV{X}_i})\utimes \kernel{F}_{\RV{Y}} \\
-    &= (\utimes_{i\in B} \kernel{F}_{\rho^{\RV{X}}} \kernel{F}_{\RV{X}_{i}})\utimes \kernel{F}_{\rho^{\RV{X}}} \kernel{F}_{\RV{Y}} \label{eq:determ_commute}\\
+    \kernel{F}_{\rho^{\RV{X}}_{\RV{Y}}} \kernel{F}_{(\RV{X},\RV{Y})} &= \kernel{F}_{\rho^{\RV{X}}_{\RV{Y}}} (\utimes_{i\in B} \kernel{F}_{\RV{X}_i})\utimes \kernel{F}_{\RV{Y}} \\
+    &= (\utimes_{i\in B} \kernel{F}_{\rho^{\RV{X}}_{\RV{Y}}} \kernel{F}_{\RV{X}_{i}})\utimes \kernel{F}_{\rho^{\RV{X}}_{\RV{Y}}} \kernel{F}_{\RV{Y}} \label{eq:determ_commute}\\
                                                &= (\utimes_{i\in B} \kernel{F}_{\RV{X}_{\rho(i)}})\utimes \kernel{F}_{\RV{Y}}\label{eq:function_composition}
 \end{align}
 
@@ -339,35 +339,22 @@ Functional exchangeability captures the intuition that if we swap the order of t
 
 The product of a functionally exchangeable see-do forecast and an exchangeable distribution over decisions is an exchangeable distribution. This allows us to apply the representation theorem (Theorem \ref{th:de_finetti_rep_thm}) to the product of a see-do forecast and an exchangeable distribution over decisions. To show the representation theorem, we will choose an exchangeable distribution over decisions with full support so that the independence properties for the product distribution hold for the see-do forecast also. 
 
-\begin{lemma}[Functionally exchangeable see-do models with exchangeable choices induce exchangeable see do models]\label{lem:f-ex2ex}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ functionally exchangeable with respect to $\RV{Y}=(\RV{Y}_i)_{i\in A}$ and $\RV{D}=(\RV{D}_i)_{i\in A}$ holding $\RV{X}$ fixed, some $\prob{P}^{\RV{D}}\in \Delta(\sigalg{D})$ exchangeable with respect to $\RV{D}$, then $\prob{P}^{\RV{D}}\kernel{T}\in \Delta(\sigalg{D}\otimes\sigalg{X}\otimes\sigalg{Y})$ is exchangeable with respect to $(\RV{D}_i,\RV{Y{_i}})_{i\in A}$ holding $\RV{X}$ fixed.
-
-Furthermore, defining the trivial choice $\RV{C}:\{*\}\times X\times Y\to *$, $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{X})$ is a see-do forecast exchangeable with respect to $\RV{G}$.
+\begin{lemma}[Functionally exchangeable see-do models with exchangeable choices induce exchangeable probability distributions]\label{lem:f-ex2ex}
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ functionally exchangeable with respect to $\RV{Y}=(\RV{Y}_i)_{i\in A}$ and $\RV{D}=(\RV{D}_i)_{i\in A}$ holding $\RV{X}$ fixed, some $\prob{P}^{\RV{D}}\in \Delta(\sigalg{D})$ exchangeable with respect to $\RV{D}$, then $\prob{P}^{\RV{D}}\kernel{T}\in \Delta(\sigalg{D}\otimes\sigalg{X}\otimes\sigalg{Y})$ is exchangeable with respect to $\RV{DY}:=(\RV{D}_i,\RV{Y}_i)_{i\in A}$ holding $\RV{X}$ fixed.
 \end{lemma}
 
 \begin{proof}
 
-For arbitrary $\rho:A\to A$, associated swap kernel $R^{\RV{D}}$ and $R^{\RV{X}}$:
+For arbitrary $\rho:A\to A$, associated swap kernels $\kernel{F}_{\rho^{\RV{D}}}$ and $\kernel{F}_{\rho^{\RV{D}\RV{X}}}$:
 
 \begin{align}
-    \prob{P}\kernel{T} R^{\RV{D}\RV{X}} &= (\prob{P} R^{\RV{D}}) \kernel{T} R^{\RV{D}\RV{X}}\\
-                                  &= \prob{P}(R^{\RV{D}}\kernel{T}R^{\RV{D}\RV{X}})\\
+    \prob{P}^{\RV{D}}\kernel{T} \kernel{F}_{\rho^{\RV{D}\RV{X}}} &= (\prob{P} \kernel{F}_{\rho^{\RV{D}}}) \kernel{T} \kernel{F}_{\rho^{\RV{D}\RV{X}}}\\
+                                  &= \prob{P}(\kernel{F}_{\rho^{\RV{D}}}\kernel{T}\kernel{F}_{\rho^{\RV{DX}}})\\
                                   &= \prob{P}\kernel{T}
 \end{align}
 
-This is sufficient for exchangeability of $(\prob{P}\kernel{T},\RV{C},\RV{G},\RV{O})$ with respect to $\RV{G}$.
+This is sufficient for exchangeability of $(\prob{P}^{\RV{D}}\kernel{T},\RV{C},\RV{G},\RV{O})$ with respect to $\RV{G}$.
 \end{proof}
-
-We will first prove a slight extension of Theorem \ref{th:de_finetti_rep_thm}: we will show that a see-do forecast with exchangeable observations induces a conditionally IID statistical model over observations. The main addition here is that we need to show that exchangeability ``holding the consequences $\RV{Y}$ fixed'' additionally implies conditional independence of $\RV{X}$ and $\RV{Y}$ given $(\RV{Z},\RV{D})$.
-
-\begin{lemma}[Representation of infinitely exchangeably extendable see-do forecasts]\label{lem:rep_seedo_obs}
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=\utimes_{i\in \mathbb{N}} \RV{X}_i$ for some $\{\RV{X}_i|i\in \mathbb{N}\}$ and $X\times Y$ is standard measurable, if $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is infinitely exchangeable with respect to $\{\RV{X}_i|i\in \mathbb{N}\}$ then there exists a function $f:X\to Z$ such that, defining $\RV{Z}:f\circ \RV{X}$:
-\begin{itemize}
-    \item $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in A$
-    \item $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kernel{T}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
-    \item $\RV{Y}\CI\RV{X}|\RV{Z}\utimes \RV{D}$
-\end{itemize}
-\end{lemma}
 
 Using Lemma \ref{lem:rep_seedo_obs} and Lemma \ref{lem:f-ex2ex} we show in Theorem \ref{th:rep_dex_sdf} that a see-do forecast exchangeable in observations and functionally exchangeable in decisions and consequences is the prodcut of a prior and a statistical model with independent and identically distributed observations and independent and functionally identical consequences.
 
@@ -390,12 +377,12 @@ Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable $D:
 \end{theorem}
 
 \begin{proof}
-A proof is given in Section 
+A proof is given in Section \ref{sec:rep_dex_sdf}.
 \end{proof}
 
 \subsubsection{Proof of Theorem \ref{th:de_finetti_rep_thm}}\label{sec:de_finetti_rep_thm}
 
-We start with a definition of partial relative frequencies, exchangeable $\sigma$-algebras and a 
+We start with a definition of partial relative frequencies and exchangeable $\sigma$-algebras.
 
 \begin{definition}[Partial relative frequencies]\label{def:partial_freq}
 Given a standard measurable space $(E,\sigalg{E})$ along with random variables $\RV{X}_i:E\to X_1$ for each $i\in \mathbb{N}$, for $A\in \sigalg{X}_1$ and $m\leq n\in \mathbb{N}$ define the size $n$, $m$-tuple \emph{partial frequency of} $A$ with respect to $\RV{X}:=\utimes_{i\in\mathbb{N}}\RV{X}_i$ to be $\RV{Z}^{m,n}_A:=\frac{(n-m)!}{n!}\sum_{I\subset [n]} \prod_{i\in I} \mathds{1}_A\circ \RV{X}_i$ where $I$ ranges over all $m$-sized ordered subsets of $n$.
@@ -434,7 +421,7 @@ Finally, for a countable collection $A_1,A_2,...$ and any size $n$ swap function
 
 The proof of the main theorem follows.
 
-\begin{reptheorem}{OrdinaryRepresentation}[Representation]
+\begin{reptheorem}{th:de_finetti_rep_thm}[Representation]
 Given a probability space $(\kernel{P},(O,\sigalg{O}))$ exchangeable with respect to $\RV{X}:=(\RV{X}_i)_{i\in \mathbb{N}}$ (where $\RV{X}_i:O\to X_0$ for all $i\in \mathbb{N}$) and $\RV{Y}:O\to Y$, where $O$ is standard measurable and $A$ is countably infinite, then there exists some $\RV{Z}:O\to Z$ such that $\sigma(\RV{Z})\subset \sigma(\RV{X})$ and both of the following hold:
 \begin{enumerate}
     \item $\RV{X}_i\CI_{\kernel{P}}\RV{X}_{A\setminus\{i\}}|\RV{Z}$ for all $i\in A$
@@ -445,11 +432,11 @@ Given a probability space $(\kernel{P},(O,\sigalg{O}))$ exchangeable with respec
 \begin{proof}
 Because all standard measurable spaces are isomorphic to $([0,1],\mathcal{B}([0,1]))$, without loss of generality we can assume $X_0=[0,1]$, $\sigalg{X}=\mathcal{B}([0,1])$ and $\RV{X}=[0,1]^{\mathbb{N}}$.
 
-Let $\mathbb{Q}$ be the rationals between $[0,1]$ and define $\RV{Z}_q^n:D\times X\times Y \to [0,1]$ by $\omega \mapsto \frac{1}{n}\sum_{i}^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega))$ Let $\sigalg{Z}^n_q=\sigma(\RV{Z}_q^n)$, i.e. $\RV{Z}^n$ is a 1-tuple partial frequency as in Definition \ref{def:partial_freq}.
+Let $\mathbb{Q}$ be the rationals between $[0,1]$ and define $\RV{Z}_q^n:D\times X\times Y \to [0,1]$ by $\omega \mapsto \frac{1}{n}\sum_{i}^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega))$ Let $\sigalg{Z}^n_q=\sigma(\RV{Z}_q^n)$, i.e. $\RV{Z}^n$ is a 1-tuple partial relative frequency as in Definition \ref{def:partial_freq}.
 
 $\RV{Z}^n\circ\rho^{\RV{X}n}=\RV{Z}^n$ for any size $n$ swap function $\rho^{\RV{X}n}$, so $\RV{Z}^n$ is $\sigalg{H}^n$-measurable.
 
-Let $\rho'_{ij}:\mathbb{N}\to\mathbb{N}$ swaps indices $i$ and $j$ for some $i,j\in[n]$ and otherwise acts as the identity. $\rho_{ij}:D\times X\times Y\to \Delta(\sigalg{D}\times \sigalg{X}\times \sigalg{Y})$ is the swap kernel associated with $\rho'_{ij}$ and $\{\RV{X}_i|i\in \mathbb{N}\}$, and $\rho^{\RV{X}}_{ij}$ the function associated with $\rho_{ij}$. For any $m$, $n$, $A\in \sigalg{H}^n$, $d\in D$: 
+Let $\rho_{ij}:\mathbb{N}\to\mathbb{N}$ swaps indices $i$ and $j$ for some $i,j\in[n]$ and otherwise acts as the identity. $\rho_{ij}:D\times X\times Y\to \Delta(\sigalg{D}\times \sigalg{X}\times \sigalg{Y})$ is the swap kernel associated with $\rho'_{ij}$ and $\{\RV{X}_i|i\in \mathbb{N}\}$, and $\rho^{\RV{X}}_{ij}$ the function associated with $\rho_{ij}$. For any $m$, $n$, $A\in \sigalg{H}^n$, $d\in D$: 
 
 \begin{align}
     \int_{A} \RV{Z}_q^{n} (\omega) d\prob{P}(\omega) &= \int_{A} \frac{1}{n}\sum_{i}^{n} (\mathds{1}_{[0,q)}\circ \RV{X}_i)(\omega)d\prob{P}(\omega)\\
@@ -489,7 +476,7 @@ it follows that for all $A\in \sigalg{H}$, $j\in \mathbb{N}$
     \int_A \RV{Z}_q(\omega) d\prob{P}(\omega) = \int_A \mathds{1}_{[0,q)}(\RV{X}_j(\omega))d\prob{P}(\omega)\label{eq:cond_expectation}
 \end{align}
 
-[\citet{cinlar_probability_2011} Thm 4.7.]. Thus $\RV{Z}_q = \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{X}_j|\sigalg{H}]$ for all $j\in \mathbb{N}$. This implies $\RV{Z}_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{X}_j|\sigalg{H}]$.
+\citep[Thm ~4.7]{cinlar_probability_2011}. Thus $\RV{Z}_q = \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{X}_j|\sigalg{H}]$ for all $j\in \mathbb{N}$. This implies $\RV{Z}_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{X}_j|\sigalg{H}]$.
 
 Define $\RV{Z} = \utimes_q\in \mathbb{Q} \RV{Z}_q$. As $\sigma(\RV{Z})\subset\sigalg{H}$, Equation \ref{eq:cond_expectation} establishes in addition that $\RV{Z}_q$ is a version of $\mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{X}_j|\sigma(Z)]$. 
 
@@ -507,7 +494,7 @@ Furthermore, the measure $\prob{P}_{h}^{\RV{X}_j|\RV{Z}}$ is uniquely defined by
     \prob{P}^{\RV{X}_j|\RV{H}} = \prob{P}^{\RV{X}_i|\RV{H}}
 \end{align}
 
-Completing the proof of property 1.
+Completing the proof of property 1: the $\RV{X}_i$'s are mutually independent.
 
 Next, we will show $\RV{X}_i\CI_\kernel{T} \RV{X}_{\mathbb{N}\setminus \{i\}} | \RV{H}$.
 
@@ -569,118 +556,94 @@ And thus $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in\mat
 \end{proof}
 
 
-\begin{lemma}[Independent and identically distributed random variables]\label{lem:iid_rvs}
-Suppose we have a forecast $(\prob{P},\RV{X})$ where $\RV{X}= (\RV{X}_i)_{i\in\mathbb{N}}$, $X=X_0^\mathbb{N}$ is standard measurable, and $\prob{P}$ is exchangeable with respect to $\RV{X}$. Furthermore, suppose we have $\RV{V}=(f\circ \RV{X}_i)_{i\in\mathbb{N}}$ for some measurable $f:X_0\to V_0$ such that $\RV{V}$ is independent and identically distributed - that is, $\prob{P}^{\RV{V}} = \otimes_{i\in\mathbb{N}} \prob{P}^{\RV{V}_0}$. Then, letting $\RV{Z}$ be the hypothesis from Lemma \ref{lem:partial_representation}, $\RV{V}\CI\RV{Z}$.
+\subsubsection{Proof of Theorem \ref{th:rep_dex_sdf}}\label{sec:rep_dex_sdf}
+
+
+% \begin{lemma}[Independent and identically distributed random variables]\label{lem:iid_rvs}
+% Suppose we have a forecast $(\prob{P},\RV{X})$ where $\RV{X}= (\RV{X}_i)_{i\in\mathbb{N}}$, $X=X_0^\mathbb{N}$ is standard measurable, and $\prob{P}$ is exchangeable with respect to $\RV{X}$. Furthermore, suppose we have $\RV{V}=(f\circ \RV{X}_i)_{i\in\mathbb{N}}$ for some measurable $f:X_0\to V_0$ such that $\RV{V}$ is independent and identically distributed - that is, $\prob{P}^{\RV{V}} = \otimes_{i\in\mathbb{N}} \prob{P}^{\RV{V}_0}$. Then, letting $\RV{Z}$ be the hypothesis from Theorem \ref{th:de_finetti_rep_thm}, $\RV{V}\CI\RV{Z}$.
+% \end{lemma}
+
+% \begin{proof}
+
+% We have by Theorem \ref{th:de_finetti_rep_thm} that for any measurable $g:Z_1\to \mathbb{R}$,
+% \begin{align}
+%     \mathbb{E}[g(\RV{V}_1)|\sigma(\RV{Z})] = \lim_{n\to\infty} \frac{1}{n}\sum_i^n g(\RV{Z}_i)
+% \end{align}
+
+% However, by the strong law of large numbers (\citet{cinlar_probability_2011}, pg 119), because the $\RV{V}_i$ are independent and identically distributed
+
+% \begin{align}
+%     \mathbb{E}[g(\RV{V}_1)] &\overset{a.s.}{=} \lim_{n\to\infty}\frac{1}{n}\sum_i^n g(\RV{Z}_i)\\
+%                             &= \mathbb{E}[g(\RV{V}_1)|\sigma(\RV{Z})]
+% \end{align}
+
+% Thus $\RV{V}\CI\RV{Z}$.
+
+% \end{proof}
+
+For the main theorem, we require a slight extension of Theorem \ref{th:de_finetti_rep_thm} - we need to show that if a see-do forecast is exchangeable with respect to $\RV{X}$ holding $\RV{Y}$ fixed then we have $\RV{X}\CI\RV{Y}|(\RV{Z,D})$ where $\RV{Z}$ is the hypothesis variable conditioning on which makes $\RV{X}$ IID and $\RV{D}$ is the decision variable.
+
+\begin{lemma}[Representation of infinitely exchangeably extendable see-do forecasts]\label{lem:rep_seedo_obs}
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ where $\RV{X}=(\RV{X}_i)_{i\in\mathbb{N}}$ and $X\times Y$ is standard measurable, if $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ is infinitely exchangeable with respect to $\{\RV{X}_i|i\in \mathbb{N}\}$ then there exists a function $f:X\to Z$ such that, defining $\RV{Z}:f\circ \RV{X}$:
+\begin{itemize}
+    \item $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}}|\RV{Z}$ for all $i\in A$
+    \item $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kernel{T}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in A$
+    \item $\RV{Y}\CI\RV{X}|\RV{Z}\utimes \RV{D}$
+\end{itemize}
 \end{lemma}
 
 \begin{proof}
-
-We have by Lemma \ref{lem:partial_representation} that fo rany measurable $g:Z_1\to \mathbb{R}$,
-\begin{align}
-    \mathbb{E}[g(\RV{V}_1)|\sigma(\RV{Z})] = \lim_{n\to\infty} \frac{1}{n}\sum_i^n g(\RV{Z}_i)
-\end{align}
-
-However, by the strong law of large numbers (\citet{cinlar_probability_2011}, pg 119), because the $\RV{V}_i$ are independent and identically distributed
-
-\begin{align}
-    \mathbb{E}[g(\RV{V}_1)] &\overset{a.s.}{=} \lim_{n\to\infty}\frac{1}{n}\sum_i^n g(\RV{Z}_i)\\
-                            &= \mathbb{E}[g(\RV{V}_1)|\sigma(\RV{Z})]
-\end{align}
-
-Thus $\RV{V}\CI\RV{Z}$.
-
-\end{proof}
-
-\subsubsection{Proof of Theorem \ref{th:rep_dex_sdf}}
-
-
-\begin{lemma}[Independent and identically distributed random variables]\label{lem:iid_rvs}
-Suppose we have a forecast $(\prob{P},\RV{X})$ where $\RV{X}= (\RV{X}_i)_{i\in\mathbb{N}}$, $X=X_0^\mathbb{N}$ is standard measurable, and $\prob{P}$ is exchangeable with respect to $\RV{X}$. Furthermore, suppose we have $\RV{V}=(f\circ \RV{X}_i)_{i\in\mathbb{N}}$ for some measurable $f:X_0\to V_0$ such that $\RV{V}$ is independent and identically distributed - that is, $\prob{P}^{\RV{V}} = \otimes_{i\in\mathbb{N}} \prob{P}^{\RV{V}_0}$. Then, letting $\RV{Z}$ be the hypothesis from Lemma \ref{lem:partial_representation}, $\RV{V}\CI\RV{Z}$.
-\end{lemma}
-
-\begin{proof}
-
-We have by Lemma \ref{lem:partial_representation} that fo rany measurable $g:Z_1\to \mathbb{R}$,
-\begin{align}
-    \mathbb{E}[g(\RV{V}_1)|\sigma(\RV{Z})] = \lim_{n\to\infty} \frac{1}{n}\sum_i^n g(\RV{Z}_i)
-\end{align}
-
-However, by the strong law of large numbers (\citet{cinlar_probability_2011}, pg 119), because the $\RV{V}_i$ are independent and identically distributed
-
-\begin{align}
-    \mathbb{E}[g(\RV{V}_1)] &\overset{a.s.}{=} \lim_{n\to\infty}\frac{1}{n}\sum_i^n g(\RV{Z}_i)\\
-                            &= \mathbb{E}[g(\RV{V}_1)|\sigma(\RV{Z})]
-\end{align}
-
-Thus $\RV{V}\CI\RV{Z}$.
-
-\end{proof}
-
-The proof of the main theorem follows.
-
-\begin{reptheorem}{SeeDoRepresentation}[Representation of doubly exchangeable see-do forecasts]
-Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable $D:=D_0^B$ and standard measurable $X:=X_0^A$, $Y:=Y_0^B$, and where $\RV{X}=(\RV{X}_i)_{i\in A}$, $\RV{Y}=(\RV{Y}_i)_{i\in B}$ adn $\RV{D}=(\RV{D}_i)_{i\in B}$ for finite $B\subset \mathbb{N}$, $A\subseteq \mathbb{N}$ not necessarily finite, the following statements are equivalent:
-
-\begin{enumerate}
-    \item There exists $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ where $\kernel{T}'$ is an extension of $\kernel{T}$, $\RV{X}'=(\RV{X}'_i)_{i\in \mathbb{N}}$, $\RV{Y}'=(\RV{Y}'_i)_{i\in \mathbb{N}}$, $\RV{D}'=(\RV{D}'_i)_{i\in\mathbb{N}}$ and $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ has exchangeable observations (holding $\RV{Y}'$ and $\RV{D}'$ fixed) and exchangeable consequences (holding $\RV{X}'$ fixed).
-    \item There exists a a set $H$, a prior $\kernel{T}^{\RV{H}}\in\Delta(\sigalg{H})$ and Markov kernels $\kernel{T}^{\RV{X}_0|\RV{H}}$ and $\kernel{T}^{\RV{Y}_0|\RV{H}\RV{D}_0}$ such that for all $d\in D$, $\{J_i\in \sigalg{X}_0|i\in A\}$, $\{K_i\in \sigalg{Y}_0|i\in B\}$:
-    \begin{align}
-        \kernel{T}^{\RV{X}\RV{Y}|\RV{D}}_{d}((\bigtimes_{i\in A}J_i)\times (\bigtimes_{j\in B} K_j)) = \int_{H} \prod_{i\in A} \kernel{T}^{\RV{X}_0|\RV{H}}_h(J_i)\prod_{i\in B}\kernel{T}_{h,d_i}^{\RV{Y}_0|\RV{H}\RV{D}_0}(K_i)d\kernel{T}^{\RV{H}}(h)
-    \end{align}
-\end{enumerate}
-\end{reptheorem}
-
-\begin{proof}
-
 Without loss of generality, assume $X_1=Y=[0,1]$.
 
 $\kernel{T}$ is a see-do forecast, so $\RV{X}\CI_{\kernel{T}}\RV{D}$. Thus there exists a marginal $\kernel{T}^{\RV{X}}$ independent of $\RV{D}$.
 
-From Lemma \ref{lem:partial_representation}, $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kernel{T}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in \mathbb{N}$ and $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}} |\RV{Z}$.
+From Theorem \ref{th:de_finetti_rep_thm}, $\kernel{T}^{\RV{X}_i|\RV{Z}}=\kernel{T}^{\RV{X}_j|\RV{Z}}$ for all $i,j\in \mathbb{N}$ and $\RV{X}_i\CI\RV{X}_{\mathbb{N}\setminus\{i\}} |\RV{Z}$.
 
-We will show $\RV{Y}\CI\RV{X}|\RV{Z}\utimes\RV{D}$. 
+We will show $\RV{Y}\CI\RV{X}|(\RV{Z},\RV{D})$. 
 
-For any swap function $\rho^{\RV{X}}$ there is, by definition, a permutation of indices $\rho'$ such that $\RV{X}\circ\rho^{\RV{X}}(\omega) = [\RV{X}_{\rho'(1)}(\omega),\RV{X}_{\rho'(2)}(\omega),...]$. Define $\rho'':[0,1]^{\mathbb{N}}\to[0,1]^{\mathbb{N}}$ to be the bijective map that performs the permutation in the codomain of $\RV{X}$, i.e. $\RV{X}\circ\rho^{\RV{X}} = \rho''\circ\RV{X}$.
+By the definition of $\RV{X}$ and $\RV{Y}$, $\sigma(\RV{X})\cap\sigma(\RV{Y})=\{\emptyset,E\}$. Thus we can define swap functions on $\RV{X}$ that hold $\RV{Y}$ fixed.
 
-Consider some $B\in \sigalg{B}([0,1])^\mathbb{N}$ and its preimage $\RV{X}^{-1}(B) = \{\omega|\RV{X}(\omega)\in B\}$, and some finite swap function $\rho^{\RV{X}}$. Then there exists $\rho''(B)\in [0,1]^{\mathbb{N}}$ such that $(\RV{X}\circ\rho^{\RV{X}})^{-1}(\rho''(B)) = \{\omega|\RV{X}(\rho^{\RV{X}}(\omega))\in \rho''(B)\} = \{\omega|\RV{X}\in B\}$. Thus $\sigma(\RV{X})=\sigma(\RV{X}\circ\rho^{\RV{X}})$ for any finite swap function $\rho^{\RV{X}}$.
+For any swap function $\rho^{\RV{X}}_{\RV{Y}}$ there is, by definition, a permutation of indices $\rho$ such that $\RV{X}\circ\rho^{\RV{X}}_{\RV{Y}}(\omega) = [\RV{X}_{\rho(1)}(\omega),\RV{X}_{\rho(2)}(\omega),...]$. Define $\rho':[0,1]^{\mathbb{N}}\to[0,1]^{\mathbb{N}}$ to be the bijective map that performs the permutation in the codomain of $\RV{X}$, i.e. $\RV{X}\circ\rho^{\RV{X}}_{\RV{Y}} = \rho'\circ\RV{X}$.
 
-Because $E=X\times Y$ and $\RV{X}$ forgets the $Y$-component of any $(x,y)\in E$, for any $A,B\in\sigalg{B}([0,1])$ there is some $C\subset X$ such that $\mathds{1}_{A}\circ\RV{Y}(\RV{X}^{-1}(B)) = \mathds{1}_{A}\circ\RV{Y} (C\times Y) = [0,1]$. Thus for any finite swap function $\rho^{\RV{X}}$, $\mathds{1}_{A}\circ\RV{Y}\circ \rho^{\RV{X}} = \mathds{1}_{A}\circ\RV{Y}$.
+Consider some $B\in \sigalg{B}([0,1])^\mathbb{N}$ and its preimage $\RV{X}^{-1}(B) = \{\omega|\RV{X}(\omega)\in B\}$, and some finite swap function $\rho^{\RV{X}}_{\RV{Y}}$. Then there exists $\rho'(B)\in [0,1]^{\mathbb{N}}$ such that $(\RV{X}\circ\rho^{\RV{X}}_{\RV{Y}})^{-1}(\rho'(B)) = \{\omega|\RV{X}(\rho^{\RV{X}}_{\RV{Y}}(\omega))\in \rho'(B)\} = \{\omega|\RV{X}\in B\}$. Thus $\sigma(\RV{X})=\sigma(\RV{X}\circ\rho^{\RV{X}}_{\RV{Y}})$ for any finite swap function $\rho^{\RV{X}}_{\RV{Y}}$.
+
+Because $E=X\times Y$ and $\RV{X}$ forgets the $Y$-component of any $(x,y)\in E$, for any $A,B\in\sigalg{B}([0,1])$ there is some $C\subset X$ such that $\mathds{1}_{A}\circ\RV{Y}(\RV{X}^{-1}(B)) = \mathds{1}_{A}\circ\RV{Y} (C\times Y) = [0,1]$. Thus for any finite swap function $\rho^{\RV{X}}_{\RV{Y}}$, $\mathds{1}_{A}\circ\RV{Y}\circ \rho^{\RV{X}}_{\RV{Y}} = \mathds{1}_{A}\circ\RV{Y}$.
 
 For $A\in \sigma(\RV{X})$:
 
 \begin{align}
-    \int_{A} \mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})] \circ\rho^{\RV{X}} d\kernel{T}_d &= \int_{\rho^{\RV{X}}(A)} \mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})] d(\kernel{T}R^{-1})_d\\
-                                                                         &= \int_{\rho^{\RV{X}}(A)} \mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})] d\kernel{T}_d \\
-                                                                         &= \int_{\rho^{\RV{X}}(A)} \mathds{1}_A\circ\RV{Y}d\kernel{T}_d\\
+    \int_{A} \mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})] \circ\rho^{\RV{X}}_{\RV{Y}} d\kernel{T}_d &= \int_{\rho^{\RV{X}}_{\RV{Y}}(A)} \mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})] d(\kernel{T}R^{-1})_d\\
+                                                                         &= \int_{\rho^{\RV{X}}_{\RV{Y}}(A)} \mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})] d\kernel{T}_d \\
+                                                                         &= \int_{\rho^{\RV{X}}_{\RV{Y}}(A)} \mathds{1}_A\circ\RV{Y}d\kernel{T}_d\\
                                                                          &= \int_A \mathds{1}_A\circ\RV{Y} d\kernel{T}_d
 \end{align}
 
-It follows that $\mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})] \circ\rho^{\RV{X}}$ is a version of $\mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})]$. Because there are only a countable number of finite swap functions, it also follows that a version of $\mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})]$ that is $\sigalg{H}$-measurable exists (i.e. for which $\mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})]\circ\rho^{\RV{X}} = \mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})]$, for all $\rho^{\RV{X}}$).
+It follows that $\mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})] \circ\rho^{\RV{X}}$ is a version of $\mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})]$. Because there are only a countable number of finite swap functions, it also follows that a version of $\mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})]$ that is $\sigalg{H}$-measurable exists (i.e. for which $\mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})]\circ\rho^{\RV{X}}_{\RV{Y}} = \mathbb{E}[\mathds{1}_A\circ\RV{Y}|\sigma(\RV{X})]$, for all $\rho^{\RV{X}}_{\RV{Y}}$).
 
-Consider also for some swap function $\rho^{\RV{X}}$, $B\in \sigalg{B}([0,1])$:
+Consider also for some swap function $\rho^{\RV{X}}_{ji,\RV{Y}}$ that swaps only the $i$ and $j$ indices, $B\in \sigalg{B}([0,1])$:
 
 \begin{align}
-    \int_{\RV{X}_i^{-1}(B)} \mathbb{E}[\RV{V}|\sigma(\RV{X}_j)] \circ \rho^{\RV{X}}_{ji} d\kernel{T}_d &= \int_{\rho^{\RV{X}}_{ji}(\RV{X}_i^{-1}(B))} \mathbb{E}[\RV{V}|\sigma(\RV{X}_j)] d(\kernel{T}R_{ij})_d\\
+    \int_{\RV{X}_i^{-1}(B)} \mathbb{E}[\RV{V}|\sigma(\RV{X}_j)] \circ \rho^{\RV{X}}_{ji,\RV{Y}} d\kernel{T}_d &= \int_{\rho^{\RV{X}}_{ji,\RV{Y}}(\RV{X}_i^{-1}(B))} \mathbb{E}[\RV{V}|\sigma(\RV{X}_j)] d(\kernel{T}R_{ij})_d\\
                                                                                &= \int_{\RV{X}^{-1}_{j}(B)} \mathbb{E}[\RV{V}|\sigma(\RV{X}_j)] d\kernel{T}_d\\
                                                                                &= \int_{\RV{X}_j^{-1}(B)} \RV{V} d\kernel{T}_d\\
-                                                                               &= \int_{\rho_{ji}^*(\RV{X}_j^{-1}(B))}\RV{V}\circ \rho^{\RV{X}}_{ji} d(\kernel{T}R_{ji})_d\\
+                                                                               &= \int_{\rho_{ji}^*(\RV{X}_j^{-1}(B))}\RV{V}\circ \rho^{\RV{X}}_{ji,\RV{Y}} d(\kernel{T}R_{ji})_d\\
                                                                                &= \int_{\RV{X}_i^{-1}(B)} \RV{V}d\kernel{T}_d
 \end{align}
 
-Thus $\mathbb{E}[\RV{V}|\sigma(\RV{X}_j)]\circ\rho^{\RV{X}}_{ji}$ is a version of $\mathbb{E}[\RV{V}|\sigma({\RV{X}_i})]$.
+Thus $\mathbb{E}[\RV{V}|\sigma(\RV{X}_j)]\circ\rho^{\RV{X}}_{ji,\RV{Y}}$ is a version of $\mathbb{E}[\RV{V}|\sigma({\RV{X}_i})]$.
 
 Define $\RV{W}^n_q := \frac{1}{n}\sum_{i\in [n]} \mathbb{E}[\mathds{1}_{[0,q]}\RV{Y}|\sigma(\RV{X}_i)]$. Note that for any size $n$ swap function $\rho^{\RV{X}}$, $\RV{W}^n_q\circ\rho^{\RV{X}}=\RV{W}_q^n$, therefore $\RV{W}_q^n$ is $\sigalg{H}^n$-measurable. 
 
-Consider $\omega,\omega'$ such that $\RV{W}_q^n(\omega)\neq \RV{W}_q^n(\omega')$. Then there exists no size $n$ swap function $\rho^{\RV{X}}$ such that $\RV{X}_{[n]}(\omega)=\RV{X}_{[n]}(\rho^{\RV{X}}(\omega'))$. Without loss of generality, suppose $\RV{X}_1(\omega)\leq\RV{X}_2(\omega)\leq...\leq\RV{X}_n(\omega)$ and $\RV{X}_1(\omega')\leq\RV{X}_2(\omega')\leq...\leq\RV{X}_n(\omega')$. Then there is some first index $j$ for which $\RV{X}_{j}(\omega)> \RV{X}_{j}(\omega')$, and some and some rational $r$ such that $\RV{X}_j(\omega)>r>\RV{X}_j(\omega')$. Then $\sum_{i}^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega)) > \sum_i^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega'))$ and so $\RV{Z}^n(\omega)\neq\RV{Z}^n(\omega')$ also.
+Consider $\omega,\omega'$ such that $\RV{W}_q^n(\omega)\neq \RV{W}_q^n(\omega')$. Then there exists no size $n$ swap function $\rho^{\RV{X}}_{\RV{Y}}$ such that $\RV{X}_{[n]}(\omega)=\RV{X}_{[n]}(\rho^{\RV{X}}_{\RV{Y}}(\omega'))$. Without loss of generality, suppose $\RV{X}_1(\omega)\leq\RV{X}_2(\omega)\leq...\leq\RV{X}_n(\omega)$ and $\RV{X}_1(\omega')\leq\RV{X}_2(\omega')\leq...\leq\RV{X}_n(\omega')$. Then there is some first index $j$ for which $\RV{X}_{j}(\omega)> \RV{X}_{j}(\omega')$, and some and some rational $r$ such that $\RV{X}_j(\omega)>r>\RV{X}_j(\omega')$. Then $\sum_{i}^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega)) > \sum_i^n \mathds{1}_{[0,q)}(\RV{X}_i(\omega'))$ and so $\RV{Z}^n(\omega)\neq\RV{Z}^n(\omega')$ also.
 
-Thus $\RV{W}_q^n$ is $\sigma(\RV{Z}^n)$ measurable. Define $\sigalg{I}^n:=\vee_{n\to\infty} \sigma(\RV{Z}^n)$. Then $\sigalg{I}^1\supset\sigalg{I}^2\supset...\supset\sigma(\RV{Z})=\cap_{i}^\infty \sigalg{I}^i$. In addition, but the $\sigalg{H}^n$-measurability of $\RV{Z}^{>n}$, $\sigalg{I}^n\subset\sigalg{H}^n$ and $\sigalg{I}\subset\sigalg{H}$.
+Thus $\RV{W}_q^n$ is $\sigma(\RV{Z}^n)$ measurable. Define $\sigalg{I}^n:=\vee_{n\to\infty} \sigma(\RV{Z}^n)$. Then $\sigalg{I}^1\supset\sigalg{I}^2\supset...\supset\sigma(\RV{Z})=\cap_{i}^\infty \sigalg{I}^i$. In addition, by the $\sigalg{H}^n$-measurability of $\RV{Z}^{>n}$, $\sigalg{I}^n\subset\sigalg{H}^n$ and $\sigalg{I}\subset\sigalg{H}$.
 
-For $A\in\sigalg{I}^n$, $d\in D$:
+Noting that $\rho^{\RV{X}}_{ji,\RV{Y}}$ is its own inverse, for $A\in\sigalg{I}^n$, $d\in D$:
 
 \begin{align}
     \int_A \RV{W}_q^n d\kernel{T}_d &= \frac{1}{n}\sum_{i\in[n]} \int_A \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{Y}|\sigma(\RV{X}_i)] d\kernel{T}_d\\
-                                  &= \frac{1}{n}\sum_{i\in[n]} \int_{\rho_{ij}^*(A)} \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{Y}|\sigma(\RV{X}_i)]\circ\rho_{ij}^*d(\kernel{T}R_{ij})_d\\
-                                  &= \int_{A} \mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{Y} \sigma(\RV{X}_j)]d\kernel{T}_d\\
+                                  &= \frac{1}{n}\sum_{i\in[n]} \int_{\rho^{\RV{X}}_{ji,\RV{Y}}(A)} \mathbb{E}[\mathds{1}_{[0,q)}\circ\RV{Y}|\sigma(\RV{X}_i)]\circ\rho^{\RV{X}}_{ji,\RV{Y}}d(\kernel{T}\kernel{F}_{\rho^{\RV{X}}_{ji,\RV{Y}}})_d\\
+                                  &= \int_{A} \mathbb{E}[\mathds{1}_{[0,q)}\circ \RV{Y} |\sigma(\RV{X}_j)]d\kernel{T}_d\\
                                   &= \int_{A} \mathds{1}_{[0,q)}\circ \RV{Y} d\kernel{T}_d
 \end{align}
 
@@ -693,17 +656,25 @@ So $\RV{W}_q$ is a $\sigma(\RV{Z})$-measurable version of $\mathbb{E}[\mathds{1}
                                                                                                  &= \kernel{T}_{\RV{D}(\omega),\RV{Z}(\omega)}^{\RV{Y}|\RV{Z}\RV{D}}([0,q))
 \end{align}
 
-This shows that $\RV{Y}\CI_{\kernel{T}} \RV{X}|\RV{D}\RV{Z}$, as desired.
+This shows that $\RV{Y}\CI_{\kernel{T}} \RV{X}|(\RV{D},\RV{Z})$, as desired.
 
 \end{proof}
 
+The proof of the main theorem follows.
 
+\begin{reptheorem}{th:rep_dex_sdf}[Representation of doubly exchangeable see-do forecasts]
+Given a see-do forecast $(\kernel{T},\RV{D},\RV{X},\RV{Y})$ with denumerable $D:=D_0^B$ and standard measurable $X:=X_0^A$, $Y:=Y_0^B$, and where $\RV{X}=(\RV{X}_i)_{i\in A}$, $\RV{Y}=(\RV{Y}_i)_{i\in B}$ and $\RV{D}=(\RV{D}_i)_{i\in B}$ for finite $B\subset \mathbb{N}$, $A\subseteq \mathbb{N}$ not necessarily finite, the following statements are equivalent:
 
-
+\begin{enumerate}
+    \item There exists $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ where $\kernel{T}'$ is an extension of $\kernel{T}$, $\RV{X}'=(\RV{X}'_i)_{i\in \mathbb{N}}$, $\RV{Y}'=(\RV{Y}'_i)_{i\in \mathbb{N}}$, $\RV{D}'=(\RV{D}'_i)_{i\in\mathbb{N}}$ and $(\kernel{T}',\RV{D}',\RV{X}',\RV{Y}')$ has exchangeable observations (holding $\RV{Y}'$ and $\RV{D}'$ fixed) and exchangeable consequences (holding $\RV{X}'$ fixed).
+    \item There exists a a set $H$, a prior $\kernel{T}^{\RV{H}}\in\Delta(\sigalg{H})$ and Markov kernels $\kernel{T}^{\RV{X}_0|\RV{H}}$ and $\kernel{T}^{\RV{Y}_0|\RV{H}\RV{D}_0}$ such that for all $d\in D$, $\{J_i\in \sigalg{X}_0|i\in A\}$, $\{K_i\in \sigalg{Y}_0|i\in B\}$:
+    \begin{align}
+        \kernel{T}^{\RV{X}\RV{Y}|\RV{D}}_{d}((\bigtimes_{i\in A}J_i)\times (\bigtimes_{j\in B} K_j)) = \int_{H} \prod_{i\in A} \kernel{T}^{\RV{X}_0|\RV{H}}_h(J_i)\prod_{i\in B}\kernel{T}_{h,d_i}^{\RV{Y}_0|\RV{H}\RV{D}_0}(K_i)d\kernel{T}^{\RV{H}}(h)
+    \end{align}
+\end{enumerate}
+\end{reptheorem}
 
 \begin{proof}
-$(2)$ and $(3)$ are string and integral notation for the same statement. 
-
 $(1)\implies (2)$:
 
 Define $\prob{P}\in \Delta(\sigalg{D_1}^{\mathbb{N}})$ such that $\prob{P}=\otimes_{i\in\mathbb{N}} \prob{P}^{\RV{D}_1}$ for some strictly positive $\prob{P}^{\RV{D}_1}$ (recall that $D$ and hence $D_1$ is denumerable). $\prob{P}$ is exchangeable and independent and identically distributed. Consider some infinite doubly exchangeable extension $\kernel{T}'$ of $\kernel{T}$. Then $\prob{P}\kernel{T}'$ is exchangeable with respect to $\RV{DY}':=\utimes_{i\in \mathbb{N}}\RV{D}'_i\utimes\RV{Y}'_i$ (Lemma \ref{lem:f-ex2ex}) and exchangeable with respect to $\RV{X}'=\utimes_{i\in\mathbb{N}} \RV{X}'_i$ as $\RV{X}$ is independent of $\RV{D}$.

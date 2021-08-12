@@ -51,17 +51,17 @@
 \contentsline {section}{\numberline {5.2}Interpretations of the choice set}{85}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Causal Bayesian Networks as see-do models}{85}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Unit Potential Outcomes models}{86}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}D-causation}{88}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.1}D-causation}{89}{subsection.5.4.1}%
 \contentsline {subsection}{\numberline {5.4.2}D-causation vs Limited Unresponsiveness}{90}{subsection.5.4.2}%
 \contentsline {subsection}{\numberline {5.4.3}Properties of D-causation}{93}{subsection.5.4.3}%
 \contentsline {subsection}{\numberline {5.4.4}Decision sequences and parallel decisions}{93}{subsection.5.4.4}%
-\contentsline {section}{\numberline {5.5}Existence of counterfactuals}{93}{section.5.5}%
+\contentsline {section}{\numberline {5.5}Existence of counterfactuals}{94}{section.5.5}%
 \contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{94}{section*.57}%
 \contentsline {paragraph}{Definition 7.1.2 (Submodel)}{94}{section*.58}%
-\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{94}{section*.59}%
-\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{94}{section*.60}%
+\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{95}{section*.59}%
+\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{95}{section*.60}%
 \contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{95}{section*.61}%
-\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{95}{section*.62}%
+\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{96}{section*.62}%
 \contentsline {chapter}{\numberline {6}Imitablity and inferring causes from data}{97}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Assumptions enabling learning}{97}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Imitability}{97}{section.6.2}%
