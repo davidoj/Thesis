@@ -1,4 +1,4 @@
-\documentclass{book}
+\documentclass{article}
 
 % If your paper is accepted, change the options for the package
 % aistats2020 as follows:
@@ -31,7 +31,8 @@
 \usepackage{microtype}      % microtypography
 
 % My packages
-
+\usepackage{tikzit}
+\input{diagrams.tikzstyles}
 \usepackage[mathscr]{euscript}
 \usepackage{graphicx}
 \usepackage {tikz}
@@ -53,6 +54,8 @@
 \usepackage{bm}
 \usepackage{isomath}
 \usepackage{mathtools}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
 
 \makeatletter
 \newcommand{\newreptheorem}[2]
@@ -66,6 +69,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newreptheorem{theorem}{Theorem}
+\newreptheorem{lemma}{Lemma}
 
 \newtheorem{innercustomthm}{Theorem}
 \newenvironment{customthm}[1]
@@ -75,6 +79,8 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Nxample}
+
 
 \DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
 
@@ -89,8 +95,9 @@
 \newcommand{\ID}[1]{\ensuremath{\text{Id}_{#1}}}
 \newcommand{\utimes}{\ensuremath{\underline{\otimes}}}
 \newcommand{\prob}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand{\disint}[1]{\ensuremath{\overline{\prob{#1}}}}
 \newcommand{\kernel}[1]{\ensuremath{\mathbb{#1}}}
-\newcommand{\seedo}{\ensuremath{\mathbb{T}}}
+\newcommand{\model}[1]{\ensuremath{\mathbb{#1}}}
 \newcommand{\diagram}[1]{\ensuremath{\mathscr{#1}}}
 \newcommand{\sigalg}[1]{\ensuremath{\mathcal{#1}}}
 \newcommand{\vecRV}[1]{\ensuremath{\mathsfbfit{#1}}}
@@ -98,6 +105,25 @@
 \newcommand{\prodSet}[1]{\ensuremath{\mathbf{#1}}}
 \newcommand{\indx}[1]{\ensuremath{\mathcal{#1}}}
 \newcommand{\nod}[1]{\ensuremath{\mathsfit{#1}}}
+\newcommand{\kto}{\ensuremath{\rightarrowtriangle}}
+\newcommand{\proc}[1]{\ensuremath{\mathscr{#1}}}
+\newcommand{\yields}{\ensuremath{\bowtie}}
+\newcommand{\submodel}{\ensuremath{\sqsubset}}
+\newcommand{\seedo}[5]{\ensuremath{\model{#1}^{\RV{#3}|\RV{#2}\square\RV{#5}|\RV{#4}}}}
+\newcommand{\rseedo}[6]{\ensuremath{\model{#1}^{\RV{#3}|\RV{#2}\framebox{#6}\RV{#5}|\RV{#4}}}}
+\newcommand{\set}{\ensuremath{\bowtie}}
+\newcommand{\cprod}{\ensuremath{\odot}}
+\newcommand{\bigcprod}{\ensuremath{\bigodot}}
+\newcommand{\combprod}{\ensuremath{\underline{\cprod}}}
+\newcommand{\combbreak}{\ensuremath{\wr}}
+\newcommand{\bigcombprod}{\ensuremath{\underline{\bigcprod}}}
+\newcommand{\varlessthan}{\ensuremath{\preccurlyeq}}
+\algnewcommand\algorithmicassert{\texttt{assert}}
+\algnewcommand\Assert[1]{\State \algorithmicassert(#1)}%
+
+
+\providecommand\longrightarrowRHD{\relbar\joinrel\relbar\joinrel\mathrel\RHD}
+\providecommand\longleftarrowRHD{\mathrel\LHD\joinrel\relbar\joinrel\relbar}
 
 \makeatletter
 \newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
@@ -105,7 +131,7 @@
 \makeatother
 
 \tikzset{
-	triangle/.style = {regular polygon, regular polygon sides=3 },
+    triangle/.style = {regular polygon, regular polygon sides=3 },
     node rotated/.style = {rotate=90},
     border rotated/.style = {shape border rotate=90},
     dist/.style = {triangle,draw,border rotated, inner sep=0pt},
@@ -115,11 +141,11 @@
     copymap/.style = {circle,fill,inner sep=1pt}}
 
 \newcommand\DCI{
-	\begin{tikzpicture}[scale=0.35]
-	\draw[->] (1,0) -- (0,0);
-	\draw (0.6,0) -- (0.6,0.75);
-	\draw (0.4,0) -- (0.4,0.75);
-	\end{tikzpicture}
+    \begin{tikzpicture}[scale=0.35]
+    \draw[->] (1,0) -- (0,0);
+    \draw (0.6,0) -- (0.6,0.75);
+    \draw (0.4,0) -- (0.4,0.75);
+    \end{tikzpicture}
 }
 
 \newcommand\splitter[1]{%
@@ -133,6 +159,13 @@
 \newcommand\stopper[1]{%
 \begin{tikzpicture}[scale=#1]
 \draw[-{Rays [n=8]}] (0,-1) -- (0,0);
+\end{tikzpicture}
+}
+
+\newcommand\swap[1]{%
+\begin{tikzpicture}[scale=#1]
+\draw (0,0) to [out=90, in=270] (0.5,1);
+\draw (0.5,0) to [out=90,in=270] (0,1);
 \end{tikzpicture}
 }
 

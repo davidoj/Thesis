@@ -3,10 +3,84 @@
 
 \chapter{Imitablity and inferring causes from data}\label{ch:inferring_causes}
 
-\section{A short theorem}
+\section{Does the decision set matter?}
 
-Suppose a see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is \emph{imitable}. That is, for each $h\in H$, there exists $\gamma\in\Delta(\sigalg{D})$ such that $(\RV{X},\RV{Y})$ (considered as a single sequence) is exchangeable with respect to $(\delta_h\otimes\gamma)\kernel{T}$.
+Graphical causal models, potential outcomes models and see-do models all have ``decision-like elements''. Graphical causal models have intervention operations, potential outcomes have potential outcome indices and see-do models, of course, have the choice set $D$. Sets of interventions and potential outcome indices are implicit in the model definitions but they are only sometimes explicitly declared as an element of the model. Explicitly declaring the set $D$ allows us to ask questions about it; for example, ``what is the size of the set?''
 
+Can we learn anything useful from this? Here we prove the following theorem: suppose we can partition the observations into several subsequences and we believe we can \emph{imitate} each one. If we further believe that the imitating strategies for each element of the partition together span the space of probability measures on the set $D$ and we find some variable $\RV{G}$ such that outcomes are independent of the environment conditional on that variable, then the outcome will be independent of the strategy we choose conditional on $\RV{G}$. If we have some knowledge about how to control $\RV{G}$, then we can deduce the effect of a strategy on the outcome from this knowledge of how a strategy affects $\RV{G}$ combined with our observations of how $\RV{G}$ relate to the outcomes.
+
+An example of where these assumptions may hold is if we consider a dataset of doctor identifiers, treatment decisions and patient outcomes. A decision maker (DM) who believes that the patients they see are similar to the patients seen by the other doctors in the dataset may believe that they can imitate the results the other doctors have achieved if they knew in detail how these doctors made their decisions, but they do not. They may also believe that the other doctors in the dataset take a wide enough variety of approaches that together their strategies span the space of strategies available to DM.
+
+Like the question ``what is the size of the set $D$?'', the question of whether the set of imitating strategies spans the space of probability measures on $D$ is a question we cannot even ask without positing a set $D$. Thus it seems that positing such a set actuallyk can be helpful.
+
+\subsection{Imitability}
+
+If we have an independent and identically distributed sequence of observations and, given knowledge of the true hypothesis $h^*\in H$, we can execute a strategy $\kernel{I}^{\RV{D}|\RV{H}}_h\in \Delta(\sigalg{D})$ that induces the consequences to be distributed identically to the observations, we say we can \emph{imitate} the observations, or that the model is \emph{imitable}.
+
+A motivation for imitability is to consider that, if the observations and consequences are each interchangeable sequences, then perhaps it is possible with careful selection of decisions to control the consequences just so that they are interchangeable with the observations as well. 
+
+The discussion is considerably simplified by noting that, because both the observations and consequences are independent and identical, the assumption that \emph{any} observation can be interchanged with any consequence is equivalent to the assumption that the first observation can be exchanged with the first consequence. In this way, we can avoid talking about sequences $(\RV{X}_i)_{i\in A}$ of observations and instead talk about the first observation $\RV{X}$ only, which we can understand to be the first in a sequence of conditionally IID observations, and likewise for consequences.
+
+\begin{definition}[Imitability]
+Suppose we have a see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ such that $X=W_0^{n}$, $Y=W_0^{m}$, $D=D_0^{m}$ $\RV{X}=(\RV{X}_i)_{i\in [n]}$, $\RV{D}=(\RV{D}_i)_{i\in [m]}$ and $\RV{Y}=(\RV{Y}_i)_{i\in B}$ and $H,D,X,Y$ are countable. Suppose also that $\RV{X}:=(\RV{X}_i)_{i\in [n]}$ is conditionally IID $(\RV{D}_i,\RV{W}_i)_{i\in[m]}$ conditionally IFI (Definition \ref{def:ciid_cifi}). If there exists some \emph{imitating strategy} $\kernel{R}:H\to\Delta(\sigalg{H}\otimes\sigalg{D})$ such that $(\RV{X},\RV{Y})$ (i.e. the sequences of $\RV{X}$ and $\RV{Y}$ joined together) is conditionally independent and identically distributed with respect to  the left extension $(\kernel{R}\kernel{T}^*,\RV{H},\{*\},\RV{X},\RV{Y})$ (Definition \ref{def:left_extension}), then $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is \emph{imitable}.
+\end{definition}
+
+\begin{lemma}[Imitability is equivalent to imitability of first observation]\label{lem:first_observation}
+A see-do model $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ for which the observations $\RV{X}:=(\RV{X}_i)_{i\in [n]}$ are conditionally IID and the consequences $(\RV{D}_i,\RV{Y}_i)_{i\in [m]}$ are conditionally IFI is imitable if and only if there exists some $\kernel{R}:H\to\Delta(\sigalg{H}\otimes\sigalg{D}_0)$ such that $(\kernel{R}\kernel{T}^*)^{\RV{Y}_0|\RV{H}}=\kernel{T}^{\RV{X}_0|\RV{H}}$.
+\end{lemma}
+
+\begin{proof}
+If $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is imitable, then there exists some $\kernel{R}:H\to\Delta(\sigalg{H}\otimes\sigalg{D})$ such that $(\RV{X},\RV{Y})$ is conditionally IID with respect to $(\kernel{R}\kernel{T}^*,\RV{H},\{*\},\RV{X},\RV{Y})$. By definition, this implies for any $i, j$, $(\kernel{R}\kernel{T}^*)^{\RV{Y}_i|\RV{H}}=\kernel{T}^{\RV{X}_j|\RV{H}}$, and in particular this holds for $i=j=0$.
+
+Suppose there exists some $\kernel{R}:H\to\Delta(\sigalg{H}\otimes\sigalg{D})$ such that $(\kernel{R}\kernel{T}^*)^{\RV{Y}_0|\RV{H}}=\kernel{T}^{\RV{X}_0|\RV{H}}$ and define $\kernel{R}^{\RV{H}\RV{D}_0|\RV{H}}:=\kernel{R}(\mathrm{Id}_{H\times D_0}\otimes \stopper{0.3}_{D_0^{m-1}}$ i.e. the marginal of $\kernel{R}$ that maps to $\kernel{H}$ and $\kernel{D}_0$ only. Then
+
+\begin{align}
+(\kernel{R}\kernel{T}^*)^{\RV{Y}_0|\RV{H}} &= \begin{tikzpicture}
+        \path (0,0) node (H) {$\RV{H}$}
+        ++ (1,0) node[kernel] (RT) {$\kernel{R}\kernel{T}^*$}
+        ++ (1,0) node (Y0) {$\RV{Y}_0$};
+        \draw (H) -- (RT) -- (Y0);
+        \draw[-{Rays[n=8]}] ($(RT.east) + (0,-0.15)$) -- ($(RT.east) + (0.5,-0.15)$);
+        \draw[-{Rays[n=8]}] ($(RT.east) + (0,0.15)$) -- ($(RT.east) + (0.5,0.15)$);
+    \end{tikzpicture}\\
+    &= \begin{tikzpicture}
+        \path (0,0) node (H) {$\RV{H}$}
+        ++ (0.5,0) node[copymap] (copy0) {}
+        ++ (1,0) node[kernel] (R) {$\kernel{R}^{\RV{H}\RV{D}_0|\RV{H}}$}
+        ++ (2,0) node[kernel] (RT) {$\kernel{T}^{\RV{Y}_0|\RV{H}\RV{D}_0}$}
+        + (0,-0.5) node[kernel] (R1p) {$\kernel{T}^{\RV{Y}_{[m]\setminus 0}|\RV{H}\RV{D}_{[m]\setminus 0}}$}
+        ++ (2,0) node (Y0) {$\RV{Y}_0$}
+        + (0,-0.5) node (Y1p) {};
+        \draw (H) -- (R) -- (RT) -- (Y0);
+        \draw (copy0) to [out=-75,in=180] (R1p);
+        \draw[-{Rays[n=8]}] (R1p) -- (Y1p);
+    \end{tikzpicture}\\
+    &= \kernel{R}^{\RV{H}\RV{D}_0|\RV{H}} \kernel{T}^{\RV{Y}_0|\RV{H}\RV{D}_0}
+\end{align}
+
+Because for all $i,j$, $\kernel{T}^{\RV{Y}_i|\RV{H}\RV{D}_i}=\kernel{T}^{\RV{Y}_j|\RV{H}\RV{D}_j}$ we have $\kernel{R}^{\RV{H}\RV{D}_0|\RV{H}}\kernel{T}^{\RV{Y}_i|\RV{H}\RV{D}_i}=(\kernel{R}\kernel{T}^*)^{\RV{Y}_0|\RV{H}}$ also. Thus defining $\kernel{R}':= \utimes_{i\in B} \kernel{R}^{\RV{H}\RV{D}_0|\RV{H}}$ we have 
+\begin{align}
+    (\kernel{R}'\kernel{T}^*)^{\RV{Y}_i|\RV{H}} &= \kernel{R}^{\RV{H}\RV{D}_0|\RV{H}}\kernel{T}^{\RV{Y}_i|\RV{H}\RV{D}_i}\\
+                                                &= (\kernel{R}'\kernel{T}^*)^{\RV{Y}_0|\RV{H}}
+\end{align}
+and $(\RV{D}_i,\RV{Y}_i)$ are mutually independent with respect to $\kernel{R}'$ by construction of $\kernel{R}'$ and assumption of mutual independence with respect to $\kernel{T}$, so $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is imitable with $\kernel{R}'$ the imitating strategy.
+\end{proof}
+
+A stronger version of imitability is \emph{conditional imitability}. With imitability we can imitate the whole observational data set, with conditional imitability we can partition the observations according to some feature and imitate the sequence of observations in each partition. We can think of such partitions as different ``environments'' as described in \citet{peters_causal_2016}.
+
+\begin{definition}[Conditional imitability]
+Suppose we have a see-do model $M_1:=(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ such that $X=W_0^n$, $Y=W_0^m$,$\RV{X}=(\RV{X}_i)_{i\in [n]}$, $\RV{D}=(\RV{D}_i)_{i\in[m]}$ and $\RV{Y}=(\RV{Y}_i)_{i\in[m]}$, $m,n\in\mathbb{N}$ and $H,D,X,Y$ are countable. Suppose also that $(\RV{X}_i)_{i\in [n]}$ is conditionally independent and identically distributed and $(\RV{D}_i,\RV{W}_i)_{i\in[m]}$ conditionally independent and functionally identical. For any $\RV{E}:=(f\circ\RV{X}_i)_{i\in[n]}$, $M_1$ is conditionally imitable with respect to $\RV{E}$ if the see-do model $M_2:=(\kernel{T}^{\RV{X}\RV{Y}|\RV{H}\RV{E}\RV{D}},(\RV{H},\RV{E}),\RV{D},\RV{X},\RV{Y})$ is imitable.
+\end{definition}
+
+\begin{theorem}[Extension of conditional independence under conditional imitability]
+Suppose we have a see-do model $M_1:=(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ conditionally imitable with respect to $\RV{E}:=(f\circ\RV{X}_i)_{i\in[n]}$ with imitating strategy $\kernel{R}:H\times E\to \Delta(\sigalg{H}\otimes\sigalg{E}\otimes\sigalg{D})$ and $\kernel{T}^{\RV{E}|\RV{H}}$ strictly positive. Suppose that for all $h\in H$, the set $\{\kernel{R}^{\RV{D}|\RV{H}\RV{E}}_{h,e}|e\in E\}$, considered as a set of vectors in $\mathbb{R}^{|D|}$, spans $\mathbb{R}^{|D|}$, and there exists some $\RV{G}:=(g\circ \RV{X}_i)_{i\in[n]}$ such that $\RV{X}_i\CI_{\kernel{T}}\RV{E}_i|\RV{G}_i$. Then, defining $\RV{G}'_i:=g\circ \RV{Y}_i$, we have $\RV{Y}_i\CI\RV{D}_i|\RV{G}'_i$ -- that is, $\RV{G}'_i$ \emph{controls} $\RV{Y}_i$.
+\end{theorem}
+
+\begin{proof}
+Call the imitating map $\kernel{I}:=\kernel{R}\kernel{T}^{\RV{X}\RV{Y}|\RV{H}\RV{E}\RV{D}}$ where $\kernel{I}:H\times E\to \Delta(\sigalg{X}\otimes\sigalg{Y})$. Note that, as $\RV{E}$ is a function of $\RV{X}$ only and $\RV{Y}\CI_{\kernel{T}}\RV{X}|(\RV{H},\RV{D})$, $\RV{Y}\CI_{\kernel{T}} \RV{E}|(\RV{H},\RV{D})$.  We go from $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ to $(\kernel{I},(\RV{H},\RV{E}),\RV{D},\RV{X},\RV{Y})$ by a strictly positive distintegration of $\kernel{T}$ followed by a left extension with $\kernel{R}$, Corollary \ref{corr:disint_space} and Lemma \ref{lem:le_pres_disint} together show that disintegrations of $\kernel{T}$ are also disintegrations of $\kernel{I}$.
+
+\todo[inline]{To be continued}
+\end{proof}
 
 \section{Assumptions enabling learning}
 

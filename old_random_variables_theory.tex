@@ -1,0 +1,1377 @@
+\subsection{Random Variables}\label{ssec:random_variables}
+
+The summary of this section is:
+\begin{itemize}
+\item Random variables are usually defined as measurable functions on a \emph{probability space}
+\item It's possible to define them as measurable functions on a \emph{Markov kernel space} instead
+\item It is useful to label wires with random variable names instead of names of spaces
+\end{itemize}
+
+Probability theory is primarily concerned with the behaviour of \emph{random variables}. This behaviour can be analysed via a collection of probability measures and Markov kernels representing joint, marginal and conditional distributions of random variables of interest. In the framework developed by Kolmogorov, this collection of joint, marginal and conditional distributions is modeled by a single underlying \emph{probability space}, and random variables by measurable functions on the probability space. 
+
+We use the same approach here, with a couple of additions. We are interested in variables whose outcomes depend both on random processes and decisions. Suppose that given a particular distribution over decision variables, a probability distribution over the decision variables and random variables is obtained. Such a model is described by a Markov kernel rather than a probability distribution. We therefore investigate \emph{Markov kernel spaces}.
+
+In the graphical notation that we are using, random variables can be thought of as a means of assigning unambiguous names to each wire in a set of diagrams. In order to do this, it is necessary to suppose that all diagrams in the set describe properties of an \emph{ambient Markov kernel} or \emph{ambient probability measure}. Consider the following example with the ambient probability measure $\mu\in\Delta(\mathcal{X}\otimes\mathcal{X})$. Suppose we have a Markov kernel $\kernel{K}:X\to \Delta(\mathcal{X})$ such that the following holds:
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node[dist] (m) {$\mu$}
+++ (0.7,0.15) node (E) {$X$}
+++ (0,-0.3) node (F) {$X$};
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture} = \begin{tikzpicture}
+\path (0,0) node[dist] (m) {$\mu$}
+++ (0.7,0.15) coordinate (copy0)
++(0,-0.3) node (Fs) {}
+++ (1.2,0) node (E) {$X$}
+++(-0.7,-0.3) node[kernel] (K) {$\kernel{K}$}
+++(0.7,0) node (F) {$X$};
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw (copy0) to [bend right] (K) (K) -- (F);
+\draw[-{Rays [n=8]}] ($(m.east) + (0,-0.15)$) -- (Fs);
+\end{tikzpicture}\label{eq:disint_example}
+\end{align}
+
+Suppose that we also assign the names $\RV{X}_1$ to the upper output wire and $\RV{X}_2$ to the lower output wire in the diagram of $\mu$:
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node[dist] (m) {$\mu$}
+++ (0.7,0.15) node (E) {$\RV{X}_1$}
+++ (0,-0.3) node (F) {$\RV{X}_2$};
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture}
+\end{align}
+
+Then it seems sensible to call $\kernel{K}$ ``the probability of $\RV{X}_2$ given $\RV{X}_1$''. We will make this precise, and it will match the usual notion of the probability of one variable given another (see \citet{cinlar_probability_2011} for a definition of this usual notion). 
+
+\begin{definition}[Markov kernel space]\label{def:kernel_space}
+A \emph{Markov kernel space} $(\kernel{K},(D,\mathcal{D}),(\Omega,\mathcal{F}))$ is a Markov kernel $\kernel{K}:D\to \Delta(\mathcal{F})$, called the \emph{ambient kernel}, along with the sample space $(\Omega,\mathcal{F})$ and the domain $(D,\mathcal{D})$. For brevity, we specify Markov kernel spaces omitting the $\sigma$-algebras in further definitions like so: $(\kernel{K},D,\Omega)$.
+\end{definition}
+
+\begin{definition}[Probability space]\label{def:prob_space}
+A \emph{probability space} is a Markov kernel space $(\kernel{K},(D,\mathcal{D}),(\Omega,\mathcal{F}))$ where $D=\{*\}$. There is a natural interpretation of such a space as a triple $(\prob{P},\Omega,\mathcal{F})$ where $\prob{P}:=\kernel{K}_*$, which corresponds to the standard definition of a probability space.
+\end{definition}
+
+\begin{definition}[Domain extension]\label{def:domain_extension}
+Given a Markov kernel space $(\kernel{K},D,\Omega)$, the \emph{domain extension} $\kernel{K}^*$ of $\kernel{K}$ is
+\begin{align}
+\prob{K}^* := \begin{tikzpicture}
+\path (0,0) node (O) {}
+++(0.5,0) coordinate (copy0)
+++ (0.5,0) node[kernel] (m) {$\kernel{K}$}
+++ (0.7,0.) node (E) {}
+++(0,-0.45) node (G) {};
+\draw (O) -- (m) -- (E);
+\draw (copy0) to [bend right] (G);
+\end{tikzpicture}\label{eq:canonical_extension}
+\end{align}
+Random variables on a kernel space are defined with respect to the domain extension of $\kernel{K}$.
+\end{definition}
+
+\begin{definition}[Random variable]\label{def:random_variable}
+Given a Markov kernel space $(\kernel{K},D,\Omega)$, a random variable $\RV{X}$ is a measurable function $\Omega\times D\to E$ for arbitrary measurable $E$.
+\end{definition}
+
+\begin{definition}[Domain variable]\label{def:domain_variable}
+Given a Markov kernel space $(\kernel{K},D,\Omega)$, the \emph{domain variable} $\RV{D}:\Omega\times D\to D$ is the random variable $\RV{D}:(x,d)\mapsto d$.
+\end{definition}
+
+Unlike random variables on probability spaces, random variables on Markov kernel spaces do not generally have unique marginal distributions. An analogous operation of \emph{marginalisation} can be defined, and the result is in general a Markov kernel. We will define marginalisation via coupled tensor products.
+
+\begin{definition}[Coupled tensor product $\utimes$]\label{def:ctensor}
+Given two Markov kernels $\kernel{M}$ and $\kernel{N}$ and two functions $f$ and $g$ with shared domain $E$, let $\kernel{M}\utimes\kernel{N}:=\splitter{0.1}(\kernel{M}\otimes\kernel{N})$ and $f\utimes g:=\splitter{0.1}(f\otimes g)$ where these expressions are interpreted using standard product notation. Graphically:
+\begin{align}
+\kernel{M}\utimes\kernel{N}&:=\begin{tikzpicture}
+\path (0,0) node (E) {$E$}
+++(0.5,0) coordinate (copy0)
++ (0.5,0.3) node[kernel] (M) {$\kernel{M}$}
++(1.2,0.3) node (X) {$\RV{X}$}
++ (0.5,-0.3) node[kernel] (N) {$\kernel{N}$}
++(1.2,-0.3) node (Y) {$\RV{Y}$};
+\draw (E) -- (copy0) to [bend left] (M) (copy0) to [bend right] (N);
+\draw (M) -- (X) (N) -- (Y);
+\end{tikzpicture}\\
+f\utimes g&:= \begin{tikzpicture}[scale=1.2]\path (0,0) node (E) {$E$}
+++(0.5,0) coordinate (copy0)
++ (0.5,0.3) node[expectation] (M) {$f$}
++ (0.5,-0.3) node[expectation] (N) {$g$};
+\draw (E) -- (copy0) to [bend left] (M) (copy0) to [bend right] (N);
+\end{tikzpicture}
+\end{align}
+\end{definition}
+
+The operation denoted by $\utimes$ is associative (Lemma \ref{lem:utimes_assoc}), so we can without ambiguity write $f\utimes g\utimes h=(f\utimes g)\utimes h = f\utimes(g\utimes h)$ for finite groups of functions or Markov kernels sharing a domain. 
+
+The notation $\utimes_{i\in [N]} f_i$ means $f_1\utimes f_2\utimes ...\utimes f_N$. This is unambiguous due to Lemma \ref{lem:utimes_assoc}.
+
+\begin{lemma}[$\utimes$ is associative]\label{lem:utimes_assoc}
+For Markov kernels $\kernel{L}:E\to \delta(\mathcal{F})$, $\kernel{M}:E\to \delta(\mathcal{G})$ and $\kernel{N}:E\to \delta(\mathcal{H})$, $(\kernel{L}\utimes\kernel{M})\utimes\kernel{N}=\kernel{L}\utimes(\kernel{M}\utimes\kernel{N})$.
+\end{lemma}
+
+\begin{proof}
+\begin{align}
+    \kernel{L}\utimes(\kernel{M}\utimes\kernel{N}) &= 
+    \begin{tikzpicture}[scale=0.8]
+    \path (0,0) node (X) {$E$} 
+    ++ (0.8,0) coordinate (copy0)
+    + (1.5,0.5) node[kernel] (X1) {$\kernel{L}$} + (2.5,0.5) node (F) {$F$}
+    ++ (0.5,-0.5) coordinate (copy1)
+    +(1,0.3) node[kernel] (X2) {$\kernel{M}$} + (2,0.3) node (G) {$G$}
+    +(1,-0.5) node[kernel] (X3) {$\kernel{N}$} + (2,-0.5) node (H) {$H$};
+    \draw (X) -- (copy0) to [bend left] (X1) (copy0) to [bend right] (copy1) to [bend left] (X2) (copy1) to [bend right] (X3);
+    \draw (X1) -- (F) (X2) -- (G) (X3) -- (H);
+    \end{tikzpicture}\\
+    &=
+    \begin{tikzpicture}[scale=0.8]
+    \path (0,0) node (X) {$E$} 
+    ++ (0.8,0) coordinate (copy0)
+    + (1.5,0.7) node[kernel] (X1) {$\kernel{L}$} + (2.5,0.7) node (F) {$F$}
+    + (0.5,0.3) coordinate (copy1)
+    ++ (0.5,-0.5) coordinate (next)
+    +(1,0.5) node[kernel] (X2) {$\kernel{M}$} + (2,0.5) node (G) {$G$}
+    +(1,-0.5) node[kernel] (X3) {$\kernel{N}$} + (2,-0.5) node (H) {$H$};
+    \draw (X) -- (copy0) to [bend left] (copy1) (copy0) to [bend right] (X3);
+    \draw (copy1) to [bend left] (X1) (copy1) to [bend right] (X2);
+    \draw (X1) -- (F) (X2) -- (G) (X3) -- (H);
+    \end{tikzpicture}\\
+    &= (\kernel{L}\utimes\kernel{M})\utimes\kernel{N}
+\end{align}
+This follows directly from Equation \ref{eq:ccom1}.
+\end{proof}
+
+\begin{definition}[Sequence notation]\label{def:vec_notation}
+Given random variables $\{\RV{X}_i\}_{i\in A}$, we will say $(\RV{X}_i,\RV{X}_j):=\RV{X}_i\utimes\RV{X}_j$ and $(\RV{X}_i)_{i\in A}=\utimes_{i\in A}\RV{X}_i$. This notation is used to match more closely with common usage of collections of random variables.
+\end{definition}
+
+\begin{definition}[Marginal distribution, marginal kernel]\label{def:marginal_distribution}
+Given a probability space $(\prob{P},\Omega,\mathcal{F})$ and the random variable $\RV{X}:\Omega\to G$ the \emph{marginal distribution} of $\RV{X}$ is the probability measure $\prob{P}^{\RV{X}}:= \prob{P}\kernel{F}^{\RV{X}}$.
+\end{definition}
+
+See Lemma \ref{lem:pushf_funk} for the proof that this matches the usual definition of marginal distribution in the case of probability spaces.
+
+Given a Markov kernel space $(\kernel{K},(\Omega,\mathcal{F}),(D,\mathcal{D}))$ and the random variable $\RV{X}:\Omega\to G$, the \emph{marginal kernel} is $\kernel{K}^{\RV{X}|\RV{D}}:=\kernel{K}^*\kernel{F}^{\RV{X}}$. Recall that $\kernel{K}^*$ is the domain extension of $\kernel{K}$ (Definition \ref{def:domain_extension})
+
+\begin{definition}[Joint distribution, joint kernel]\label{def:joint_distribution}
+Given a probability space $(\prob{P},\Omega,\mathcal{F})$ and the random variables $\RV{X}:\Omega\to G$ and $\RV{Y}:\Omega\to H$, the \emph{joint distribution} of $\RV{X}$ and $\RV{Y}$, $\prob{P}^{\RV{X}\RV{Y}}\in \Delta(\mathcal{G}\otimes\mathcal{H})$, is the marginal distribution of $\RV{X}\utimes\RV{Y}$. That is, $\prob{P}^{\RV{X}\RV{Y}}:=\prob{P} \kernel{F}^{\RV{X}\utimes\RV{Y}}$
+\end{definition}
+
+This is identical to the definition in \citet{cinlar_probability_2011} if we note that the random variable $(\RV{X},\RV{Y}):\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$ (\c{C}inlar's definition) is precisely the same thing as $\RV{X}\utimes\RV{Y}$.
+
+Analogously, the joint kernel $\kernel{K}^{\RV{X}\RV{Y}|\RV{D}}$ is the product $\kernel{K}^*\kernel{F}^{\RV{X}\utimes\RV{Y}}$.
+
+Joint distributions and kernels have a nice visual representation, as a result of Lemma \ref{lem:jdist_cprod} which follows.
+
+\begin{lemma}[Product marginalisation interchange]\label{lem:jdist_cprod}
+Given two functions, the kernel associated with their coupled product is equal to the coupled product of the kernels associated with each function.
+
+Given $\RV{X}:\Omega\to G$ and $\RV{Y}:\Omega\to H$, $\kernel{F}^{\RV{X}\utimes\RV{Y}}=\kernel{F}^\RV{X}\utimes\kernel{F}^\RV{Y}$
+\end{lemma}
+
+\begin{proof}
+For $a\in \Omega$, $B\in \mathcal{G}$, $C\in \mathcal{H}$,
+\begin{align}
+\kernel{F}^{\RV{X}\utimes\RV{Y}} (a;B\times C) &= \delta_{\RV{X}(a),\RV{Y}(a)}(B\times C)\\
+                                       &= \delta_{\RV{X}(a)}(B)\delta_{\RV{Y}(a)}(C)\\
+                                       &= (\delta_{\RV{X}(a)}\otimes\delta_{\RV{Y}(a)})(B\times C)\\
+                                       &= \kernel{F}^{\RV{X}}\utimes\kernel{F}^{\RV{Y}}
+\end{align}
+Equality follows from the monotone class theorem.
+\end{proof}
+
+\begin{corollary}\label{corr:rewrite_joint_dist}
+Given a Markov kernel space $(\kernel{K}, \Omega, D)$ and random variables $\RV{X}:\Omega\times D\to X$, $\RV{Y}:\Omega\times D\to Y$, the following holds:
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (O) {$D$}
+++(1,0) node[kernel] (K) {$\kernel{K}^{\RV{X}\RV{Y}|\RV{D}}$}
+++ (1,0.15) node (X) {$X$}
++(0,-0.3) node (Y) {$Y$};
+\draw (O) -- (K);
+\draw ($(K.east) + (0,0.15)$) -- (X);
+\draw ($(K.east) + (0,-0.15)$) -- (Y);
+\end{tikzpicture}=
+\begin{tikzpicture}
+\path (0,0) node (O) {$D$}
+++ (0.7, 0) node[kernel] (K) {$\kernel{K}$}
+++ (0.6,0) coordinate (copy0)
+++ (0.4,0.25) node[kernel] (X) {$\kernel{F}^{\RV{X}}$}
++(0,-0.5) node[kernel] (Y) {$\kernel{F}^{\RV{Y}}$}
+++(0.7,0) node (Xo) {$X$}
++(0,-0.5) node (Yo) {$Y$};
+\draw (O) -- (K) -- (copy0);
+\draw (copy0) to [bend left] (X) (X) -- (Xo);
+\draw (copy0) to [bend right] (Y) (Y) -- (Yo);
+\end{tikzpicture}
+\end{align}
+\end{corollary}
+
+We will now define wire labels for ``output'' wires.
+
+\begin{definition}[Wire labels - joint kernels]\label{def:wl_jprob}
+Suppose we have a Markov kernel space $(\kernel{K},D,\Omega)$, random variables $\RV{X}:\Omega\times D\to X$, $\RV{Y}:\Omega\times D\to Y$ and a Markov kernel $\kernel{L}:D\to \Delta(\mathcal{X}\times\mathcal{Y})$. The following \emph{output labelling} of $\mathbf{L}$:
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {$D$}
+++ (0.7,0) node[kernel] (m) {$\kernel{L}$}
+++ (0.7,0.15) node (E) {\color{blue}$\RV{X}$}
+++ (0,-0.3) node (F) {\color{blue}$\RV{Y}$};
+\draw (A) -- (m);
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture}
+\end{align}
+
+is \emph{valid} iff
+
+\begin{align}
+\kernel{L} = \kernel{K}_{\RV{X}\RV{Y}|\RV{D}}\label{eq:labels_express_joint}
+\end{align}
+
+and
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {$D$}
+++ (1,0) node[kernel] (m) {$\kernel{L}$}
+++ (1,0.15) node (E) {\color{blue}$\RV{X}$}
+++ (0,-0.3) node (F) {};
+\draw (A) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+\draw[-{Rays [n=8]}] ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture} = \kernel{K}^{\RV{X}|\RV{D}}\label{eq:labels_express_marginal_upper}
+\end{align}
+
+and
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {$D$}
+++ (1,0) node[kernel] (m) {$\kernel{L}$}
+++ (1,0.15) node (E) {}
+++ (0,-0.3) node (F) {\color{blue}$\RV{Y}$};
+\draw (A) -- (m);
+\draw[-{Rays [n=8]}] ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture} = \kernel{K}^{\RV{Y}|\RV{D}}\label{eq:labels_express_marginal_lower}
+\end{align}
+
+The second and third conditions are nontrivial: suppose $\RV{X}$ takes values in some product space $Range(\RV{X}) = W\times Z$, and $\RV{Y}$ takes values in $Y$. Then we could have $\kernel{L}=\kernel{K}^{\RV{X}\RV{Y}|\RV{D}}$ and draw the diagram
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {$D$}
+++ (0.7,0) node[kernel] (m) {$\kernel{L}$}
+++ (1,0.15) node (E) {$W$}
+++ (0.3,-0.3) node (F) {$Z\times Y$};
+\draw (A) -- (m);
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture}\label{eq:cannot_marginalise}
+\end{align}
+
+For \emph{this} diagram, properties \ref{eq:labels_express_marginal_upper} and \ref{eq:labels_express_marginal_lower} do not hold, even though \ref{eq:labels_express_joint} does.
+
+\end{definition}
+
+\begin{lemma}[Output label assignments exist]
+Given Markov kernel space $(\kernel{K},D,\Omega)$, random variables $\RV{X}:\Omega\times D\to X$ and $\RV{Y}:\Omega\times D\to Y$ then there exists a diagram of $\kernel{L}:=\kernel{K}^{\RV{X}\RV{Y}|\RV{D}}$ with a valid output labelling assigning ${\color{blue}\RV{X}}$ and ${\color{blue}\RV{Y}}$ to the output wires.
+\end{lemma}
+
+\begin{proof}
+By definition, $\kernel{L}$ has signature $D\to \Delta(\mathcal{X}\otimes\mathcal{Y})$. Thus, by the rule that tensor product spaces can be represented by parallel wires, we can draw
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {$D$}
+++ (0.7,0) node[kernel] (m) {$\kernel{L}$}
+++ (0.7,0.15) node (E) {$X$}
+++ (0,-0.3) node (F) {$Y$};
+\draw (A) -- (m);
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture}
+\end{align}
+
+By Corollary \ref{corr:rewrite_joint_dist}, we have
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {$D$}
+++ (0.7,0) node[kernel] (m) {$\kernel{L}$}
+++ (0.7,0.15) node (E) {$X$}
+++ (0,-0.3) node (F) {$Y$};
+\draw (A) -- (m);
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture} = \begin{tikzpicture}
+\path (0,0) node (O) {$D$}
+++ (0.7, 0) node[kernel] (K) {$\kernel{K}$}
+++ (0.6,0) coordinate (copy0)
+++ (0.4,0.25) node[kernel] (X) {$\kernel{F}^{\RV{X}}$}
++(0,-0.5) node[kernel] (Y) {$\kernel{F}^{\RV{Y}}$}
+++(0.7,0) node (Xo) {$X$}
++(0,-0.5) node (Yo) {$Y$};
+\draw (O) -- (K) -- (copy0);
+\draw (copy0) to [bend left] (X) (X) -- (Xo);
+\draw (copy0) to [bend right] (Y) (Y) -- (Yo);
+\end{tikzpicture}
+\end{align}
+
+Therefore 
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (O) {$D$}
+++ (0.7, 0) node[kernel] (K) {$\kernel{K}$}
+++ (0.6,0) coordinate (copy0)
+++ (0.4,0.25) node[kernel] (X) {$\kernel{F}^{\RV{X}}$}
++(0,-0.5) node[kernel] (Y) {$\kernel{F}^{\RV{Y}}$}
+++(0.7,0) node (Xo) {$X$}
++(0,-0.5) node (Yo) {};
+\draw (O) -- (K) -- (copy0);
+\draw (copy0) to [bend left] (X) (X) -- (Xo);
+\draw[-{Rays[n=8]}] (copy0) to [bend right] (Y) (Y) -- (Yo);
+\end{tikzpicture} &= \kernel{K}\kernel{F}^{\RV{X}}\\
+                 &= \kernel{K}^{\RV{X}|\RV{D}}
+\end{align}
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (O) {$D$}
+++ (0.7, 0) node[kernel] (K) {$\kernel{K}$}
+++ (0.6,0) coordinate (copy0)
+++ (0.4,0.25) node[kernel] (X) {$\kernel{F}^{\RV{X}}$}
++(0,-0.5) node[kernel] (Y) {$\kernel{F}^{\RV{Y}}$}
+++(0.7,0) node (Xo) {}
++(0,-0.5) node (Yo) {$Y$};
+\draw (O) -- (K) -- (copy0);
+\draw[-{Rays[n=8]}] (copy0) to [bend left] (X) (X) -- (Xo);
+\draw (copy0) to [bend right] (Y) (Y) -- (Yo);
+\end{tikzpicture} &= \kernel{K}\kernel{F}^{\RV{Y}}\\
+                 &= \kernel{K}^{\RV{Y}|\RV{D}}
+\end{align}
+\end{proof}
+
+In all further work, wire labels will be used without special colouring.
+
+\begin{definition}[Disintegration]\label{def:disintegration}
+Given a probability space $(\prob{P},\Omega,\mathcal{F})$, and random variables $\RV{X}$ and $\RV{Y}$, we say that $\kernel{M}:E\to \Delta(\mathcal{F})$ is a \emph{$\RV{Y}$ given $\RV{X}$ disintegration} of $\prob{P}$ iff
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node[dist] (m) {$\prob{P}^{\RV{X}\RV{Y}}$}
+++ (1,0.15) node (E) {$\RV{X}$}
+++ (0,-0.3) node (F) {$\RV{Y}$};
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture} = \begin{tikzpicture}
+\path (0,0) node[dist] (m) {$\prob{P}^{\RV{X}}$}
+++ (0.7,0.15) coordinate (copy0)
++(0.2,-0.3) node (T) {}
+++ (1.2,0) node (E) {$\RV{X}$}
+++(-0.7,-0.3) node[kernel] (K) {$\kernel{M}$}
+++(0.7,0) node (F) {$\RV{Y}$};
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw (copy0) to [bend right] (K) (K) -- (F);
+\draw[-{Rays [n=8]}] ($(m.east) + (0,-0.15)$) -- (T);
+\end{tikzpicture}\label{eq:ordinary_disint}
+\end{align}
+$\kernel{M}$ is a version of $\prob{P}^{\RV{Y}|\RV{X}}$, ``the probability of $\RV{Y}$ given $\RV{X}$''. Let $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ be the set of all kernels that satisfy \ref{eq:ordinary_disint} and $\prob{P}^{\RV{Y}|\RV{X}}$ an arbitrary member of $\prob{P}^{\RV{Y}|\RV{X}}$.
+
+Given a Markov kernel space $(\kernel{K},D,\Omega)$ and random variables $\RV{X}:\Omega\times D\to X$, $\RV{Y}:\Omega\times D\to Y$, $\kernel{M}:D\times E\to \Delta(\mathcal{F})$ is a \emph{$\RV{Y}$ given $\RV{DX}$ disintegration} of $\kernel{K}^{\RV{YX}|\RV{D}}$ iff
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (O) {}
+++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{YX}|\RV{D}}$}
+++ (1,0.15) node (E) {$\RV{X}$}
+++ (0,-0.3) node (F) {$\RV{Y}$};
+\draw (O) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture} = \begin{tikzpicture}
+\path (0,0) node (O) {}
+++ (0.3,0) coordinate (copy1)
+++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{YX}|\RV{D}}$}
+++ (1,0.15) coordinate (copy0)
++(0.2,-0.3) node (T) {}
+++ (1.2,0) node (E) {$\RV{X}$}
+++(-0.7,-0.3) node[kernel] (K) {$\kernel{M}$}
+++(0.7,0) node (F) {$\RV{Y}$};
+\draw (O) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+\draw (copy0) to [bend right] (K) (K) -- (F);
+\draw (copy1) to [out=290,in=180] ($(K.west) + (0,-0.15)$);
+\draw[-{Rays [n=8]}] ($(m.east) + (0,-0.15)$) -- (T);
+\end{tikzpicture}\label{eq:def_k_disint}
+\end{align}
+
+Write $\kernel{K}^{\{\RV{Y}|\RV{XD}\}}$ for the set of kernels satisfying \ref{eq:def_k_disint} and $\kernel{K}^{\RV{Y}|\RV{XD}}$ for an arbitrary member of $\kernel{K}^{\{\RV{Y}|\RV{XD}\}}$.
+\end{definition}
+
+\begin{definition}[Wire labels -- input]\label{def:wl_disint}
+
+An input wire is \emph{connected} to an output wire if it is possible to trace a path from the start of the input wire to the end of the output wire without passing through any boxes, erase maps or right facing triangles.
+
+If an input wire is connected to an output wire and that output wire has a valid label $\RV{X}$, then it is valid to label the input wire with $\RV{X}$.
+
+For example, if the following are valid output labels with respect to $(\prob{P},\Omega)$:
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {}
+++ (0.7,0) coordinate (copy0)
+++ (0.7,0) node[kernel] (m) {$\kernel{L}$}
+++ (0.7,0) node (E) {\color{blue}$\RV{X}$}
+++ (0,-0.3) node (F) {\color{blue}$\RV{Y}$};
+\draw (A) -- (m) -- (E);
+\draw (copy0) to [out=-60,in=180] (F);
+\end{tikzpicture}\label{dia:kernel_l}
+\end{align}
+
+i.e. if $\kernel{L}\in \prob{P}^{\{\RV{X}\RV{Y}|\RV{Y}\}}$, then the following is a valid input label:
+
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {\color{blue}$\RV{Y}$}
+++ (0.7,0) coordinate (copy0)
+++ (0.7,0) node[kernel] (m) {$\kernel{L}$}
+++ (0.7,0) node (E) {\color{blue}$\RV{X}$}
+++ (0,-0.3) node (F) {\color{blue}$\RV{Y}$};
+\draw (A) -- (m) -- (E);
+\draw (copy0) to [out=-60,in=180] (F);
+\end{tikzpicture}
+\end{align}
+
+An input wire in a diagram for $\kernel{M}$ may be labeled $\RV{X}$ \emph{if and only if} copy and identity maps can be inserted to yield a diagram in which the input wire labeled $\RV{X}$ is connected to an output wire with valid label $\RV{X}$.
+
+So, if $\kernel{M}\in \prob{P}^{\{\RV{X}|\RV{Y}\}}$, then it is straightforward to show that
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {}
+++ (0.7,0) coordinate (copy0)
+++ (0.7,0) node[kernel] (m) {$\kernel{M}$}
+++ (0.7,0) node (E) {\color{blue}$\RV{X}$}
+++ (0,-0.3) node (F) {\color{blue}$\RV{Y}$};
+\draw (A) -- (m) -- (E);
+\draw (copy0) to [out=-60,in=180] (F);
+\end{tikzpicture} \in \prob{P}^{\{\RV{X}\RV{Y}|\RV{Y}\}} \label{eq:const_from_m}
+\end{align}
+
+and hence the output labels are valid. Diagram \ref{eq:const_from_m} is constructed by taking the product of the copy map with $\kernel{M}\otimes\textbf{Id}$. Thus it is valid to label $\kernel{M}$ with
+
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (A) {\color{blue}$\RV{Y}$}
+++ (0.7,0) node[kernel] (m) {$\kernel{M}$}
+++ (0.7,0) node (E) {\color{blue}$\RV{X}$};
+\draw (A) -- (m) -- (E);
+\end{tikzpicture}
+\end{align}
+\end{definition}
+
+\begin{lemma}[Labeling of disintegrations]
+Given a kernel space $(\kernel{K},D,\Omega)$, random variables $\RV{X}$ and $\RV{Y}$, domain variable $\RV{D}$ and disintegration $\kernel{L}\in \kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}$, there is a diagram of $\kernel{L}$ with valid input labels ${\color{blue} \RV{X}}$ and ${\color{blue} \RV{D}}$ and valid output label ${\color{blue} \RV{Y}}$.
+\end{lemma}
+
+\begin{proof}
+Note that for any variable $\RV{W}:\Omega\times D\to W$ and the domain variable $\RV{D}:\Omega\times D\to D$ we have by definition of $\kernel{K}$:
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (O) {}
+++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{WD}|\RV{D}}$}
+++ (1,0.15) node (E) {$\RV{W}$}
+++ (0,-0.3) node (F) {$\RV{D}$};
+\draw (O) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\end{tikzpicture} &= \begin{tikzpicture}
+\path (0,0) node (O) {}
+++ (0.3,0) node[copymap] (copy1) {}
+++ (1,0) node[kernel] (m) {$\kernel{K}_{0}$}
+++ (0.7,0) node[copymap] (copy0) {}
++ (0,-0.5) node[copymap] (copy2) {}
+++ (0.7,0.3) node[kernel] (Fx) {$\kernel{F}^\RV{W}$}
+++(0,-0.8) node[kernel] (Fd) {$\kernel{F}^{\RV{D}}$}
+++(0.7,0) node (D) {$\RV{D}$}
+++ (0,0.8) node (X) {$\RV{W}$};
+\draw (O) -- (m) -- (copy0);
+\draw (copy0) to [bend left] ($(Fx.west)+(0,0.1)$) (copy0) to [bend right] ($(Fd.west)+(0,0.1)$);
+\draw (copy1) to [out=290,in=180] (copy2);
+\draw (copy2) to [bend left] ($(Fx.west)+(0,-0.1)$) (copy2) to [bend right] ($(Fd.west)+(0,-0.1)$);
+\draw (Fx) -- (X) (Fd) -- (D);
+\end{tikzpicture}\\
+&= \begin{tikzpicture}
+\path (0,0) node (O) {}
+++ (0.3,0) node[copymap] (copy1) {}
+++ (1,0) node[kernel] (m) {$\kernel{K}_{0}$}
+++ (0.7,0) node[copymap] (copy0) {}
++ (0,-0.5) node[copymap] (copy2) {}
+++ (0.7,0.3) node[kernel] (Fx) {$\kernel{F}^\RV{W}$}
+++(0,-0.8) coordinate (Fd)
+++(0.7,0) node (D) {$\RV{D}$}
+++ (0,0.8) node (X) {$\RV{W}$};
+\draw (O) -- (m) -- (copy0);
+\draw (copy0) to [bend left] ($(Fx.west)+(0,0.1)$);
+\draw (copy1) to [out=290,in=180] (copy2) -- (D);
+\draw (copy2) to [bend left] ($(Fx.west)+(0,-0.1)$);
+\draw (Fx) -- (X) (Fd) -- (D);
+\end{tikzpicture}\\
+&= \begin{tikzpicture}
+\path (0,0) node (O) {}
+++ (0.3,0) node[copymap] (copy1) {}
++ (0.2,0) node[copymap] (copy3) {}
+++ (1,0) node[kernel] (m) {$\kernel{K}_{0}$}
+++ (0.7,0) coordinate (hold)
+++ (0.7,-0.1) node[kernel] (Fx) {$\kernel{F}^\RV{W}$}
+++(0,-0.5) coordinate (Fd)
+++(0.7,0) node (D) {$\RV{D}$}
+++ (0,0.5) node (X) {$\RV{W}$};
+\draw (O) -- (m);
+\draw (m) to [out=0,in=180]  ($(Fx.west)+(0,0.1)$);
+\draw (copy1) to [out=290,in=180] (D);
+\draw (copy3) to [out=290,in=180] ($(Fx.west)+(0,-0.1)$);
+\draw (Fx) -- (X);
+\end{tikzpicture}\\
+&= \begin{tikzpicture}
+\path (0,0) node (O) {}
+++ (0.3,0) node[copymap] (copy1) {}
+++ (1,0) node[kernel] (m) {$\kernel{K}$}
+++ (0.7,0) coordinate (hold)
+++ (0.7,-0.) node[kernel] (Fx) {$\kernel{F}^\RV{W}$}
+++(0,-0.5) coordinate (Fd)
+++(0.7,0) node (D) {$\RV{D}$}
+++ (0,0.5) node (X) {$\RV{W}$};
+\draw (O) -- (m);
+\draw (m) to [out=0,in=180]  ($(Fx.west)+(0,0.0)$);
+\draw (copy1) to [out=290,in=180] (D);
+\draw (Fx) -- (X);
+\end{tikzpicture}\\
+&=\begin{tikzpicture}
+\path (0,0) node (O) {}
+++ (0.3,0) node[copymap] (copy1) {}
+++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{W}|\RV{D}}$}
+++(0,-0.5) coordinate (Fd)
+++(1,0) node (D) {$\RV{D}$}
+++ (0,0.5) node (X) {$\RV{W}$};
+\draw (O) -- (m) -- (X);
+\draw (copy1) to [out=290,in=180] (D);
+\end{tikzpicture}
+\end{align}
+\end{proof}
+
+We use the informal convention of labelling wires in quote marks $``\RV{X}''$ if that wire is ``supposed to'' carry the label $\RV{X}$ but the label may not be valid.
+
+\begin{lemma}[Iterated disintegration]\label{th:iterated_disint}
+Given a kernel space $(\kernel{K},D,\Omega)$, random variables $\RV{X}$, $\RV{Y}$ and $\RV{Z}$ and domain variable $\RV{D}$,
+\begin{align}
+\begin{tikzpicture}
+    \path (0,0.15) node (D) {$``\RV{X}''$}
+    + (0,-0.3) node (X) {$``\RV{D}''$}
+    ++ (.7,0) node[copymap] (copy0) {}
+    + (0,-0.3) node[copymap] (copy01) {}
+    ++ (.7,-0.15) node[kernel] (Yxd) {$\kernel{K}^{\RV{Y}|\RV{XD}}$}
+    ++ (0.7,0) node[copymap] (copy1) {}
+    ++(1.5,0) node[kernel] (Zxyd) {$\kernel{K}^{\RV{Z}|\RV{XYD}}$}
+    ++(1.5,0) node (Z) {$``\RV{Z}''$}
+    +(0,0.4) node (Y) {$``\RV{Y}''$};
+    \draw (D) -- ($(Yxd.west) + (0,0.15)$) (X) -- ($(Yxd.west) + (0,-0.15)$);
+    \draw (Yxd) -- (Zxyd);
+    \draw (copy0) to [out=90,in=180] ($(Zxyd.west)+(0,0.15)$);
+    \draw (copy01) to [out=-90,in = 180] ($(Zxyd.west)+(0,-0.15)$);
+    \draw (copy1) to [out=75,in=180] (Y) (Zxyd) -- (Z);
+\end{tikzpicture}\overset{a.s.}{=} \kernel{K}^{\RV{YZ}|\RV{XD}}
+\end{align}
+
+Equivalently, for $d\in D$ and $x\in X$, $A\in \sigalg{Y}$, $B\in\sigalg{Z}$,
+
+\begin{align}
+    (d,x;A\times B)\mapsto \int_A \kernel{K}^{\RV{Z}|\RV{XYD}}_{(x,y,d)}(B) d\kernel{K}^{\RV{Y}|\RV{XD}}_{(x,d)}(dy) \overset{a.s.}{=} \kernel{K}^{\RV{YZ}|\RV{XD}}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+
+Define
+\begin{align}
+    \kernel{L} := (d,x;A\times B)\mapsto \int_A \kernel{K}^{\RV{Z}|\RV{XYD}}_{(x,y,d)}(B) d\kernel{K}^{\RV{Y}|\RV{XD}}_{(x,d)}(dy)
+\end{align}
+
+We need to show that $\kernel{L}$ satisfies the disintegration property. That is
+
+
+\begin{align}
+    \kernel{K}^{\RV{XYZ}|\RV{D}} = \begin{tikzpicture}
+        \path (0,0) node (O) {``$\RV{D}$''}
+        ++ (0.6,0) node[copymap] (copy1) {}
+        ++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XYZ}|\RV{D}}$}
+        ++ (1,0.15) node[copymap] (copy0) {}
+        +(0.1,-0.3) node (T) {}
+        ++ (1.5,0) node (E) {``$\RV{X}$''}
+        ++(-0.9,-0.8) node[kernel] (K) {$\kernel{L}$}
+        ++(0.9,0.15) node (F) {``$\RV{Y}$''}
+        +(0,-0.3) node (G) {``$\RV{Z}$''};
+        \draw (O) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+        \draw (copy0) to [bend right] (K) ($(K.east)+(0,0.15)$) -- (F);
+        \draw ($(K.east) + (0,-0.15)$) -- (G);
+        \draw (copy1) to [out=290,in=180] ($(K.west) + (0,-0.15)$);
+        \draw[-{Rays [n=8]}] ($(m.east) + (0,-0.15)$) -- (T);
+    \end{tikzpicture}
+\end{align}
+Substituting in the definition of $\kernel{L}$:
+\begin{align}
+    \begin{tikzpicture}
+        \path (0,0) node (O) {``$\RV{D}$''}
+        ++ (0.6,0) node[copymap] (copy1) {}
+        ++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XYZ}|\RV{D}}$}
+        ++ (1,0.15) node[copymap] (copy0) {}
+        +(0.1,-0.3) node (T) {}
+        ++ (1.5,0) node (E) {``$\RV{X}$''}
+        ++(-0.7,-0.8) node[kernel] (K) {$\kernel{L}$}
+        ++(0.9,0.15) node (F) {``$\RV{Y}$''}
+        +(0,-0.3) node (G) {``$\RV{Z}$''};
+        \draw (O) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+        \draw (copy0) to [bend right] (K) ($(K.east)+(0,0.15)$) -- (F);
+        \draw ($(K.east) + (0,-0.15)$) -- (G);
+        \draw (copy1) to [out=290,in=180] ($(K.west) + (0,-0.15)$);
+        \draw[-{Rays [n=8]}] ($(m.east) + (0,-0.15)$) -- (T);
+    \end{tikzpicture} &= \begin{tikzpicture}
+    \path (0,0.15) node (D) {``$\RV{D}$''}
+    ++ (0.6,0) node[copymap] (copy0) {}
+    ++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XYZ}|\RV{D}}$}
+    ++ (.9,0.15) node[copymap] (copy1) {}
+    ++ (.9,-0.75) node[kernel] (Yxd) {$\kernel{K}^{\RV{Y}|\RV{XD}}$}
+    ++ (0.9,0) node[copymap] (copy2) {}
+    ++(0.9,-0.5) node[kernel] (Zxyd) {$\kernel{K}^{\RV{Z}|\RV{XYD}}$}
+    ++(1.5,0) node (Z) {$``\RV{Z}''$}
+    +(0,0.5) node (Y) {$``\RV{Y}''$}
+    +(0,1.25) node (X) {$``\RV{X}''$};
+    \draw (D) -- (m) (copy0) to [out=-45,in=180] ($(Yxd.west) + (0,-0.15)$);
+    \draw (copy1) to [out=-45,in=180] ($(Yxd.west) + (0,0.15)$);
+    \draw ($(m.east)+(0,0.15)$) -- (X) (Yxd) -- (Y) (Zxyd) -- (Z);
+    \draw[-{Rays[n=8]}] (m) -- ($(m.east) + (0.2,0)$);
+    \draw[-{Rays[n=8]}] ($(m.east) + (0,-0.15)$) -- ($(m.east)+(0.2,-0.15)$);
+    \draw (copy0) to [out=-90,in=180] ($(Zxyd.west)+(0,-0.15)$);
+    \draw (copy1) to [out=-90, in=180] ($(Yxd.south) + (0,-0.3)$);
+    \draw ($(Yxd.south)+(0,-0.3)$) -- (Zxyd);
+    \draw (copy2) to [out=-90,in=180] ($(Zxyd.west) + (0,0.15)$);
+\end{tikzpicture}\\
+    &= \begin{tikzpicture}
+    \path (0,0.15) node (D) {``$\RV{D}$''}
+    ++ (0.6,0) node[copymap] (copy0) {}
+    ++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XY}|\RV{D}}$}
+    ++ (.9,0.15) node[copymap] (copy1) {}
+    +  (1.8,0) node[copymap] (copy3) {}
+    ++ (.9,-0.75) node[kernel] (Yxd) {$\kernel{K}^{\RV{Y}|\RV{XD}}$}
+    ++ (0.8,0) node[copymap] (copy2) {}
+    ++(1,-0.5) node[kernel] (Zxyd) {$\kernel{K}^{\RV{Z}|\RV{XYD}}$}
+    ++(1.5,0) node (Z) {$``\RV{Z}''$}
+    +(0,0.5) node (Y) {$``\RV{Y}''$}
+    +(0,1.25) node (X) {$``\RV{X}''$};
+    \draw (D) -- (m) (copy0) to [out=-45,in=180] ($(Yxd.west) + (0,-0.15)$);
+    \draw (copy1) to [out=-45,in=180] ($(Yxd.west) + (0,0.15)$);
+    \draw ($(m.east)+(0,0.15)$) -- (X) (Yxd) -- (Y) (Zxyd) -- (Z);
+    \draw[-{Rays[n=8]}] (m) -- ($(m.east) + (0.2,0)$);
+    \draw (copy0) to [out=-90, in=180] ($(Zxyd.west)+(0,-0.15)$);
+    \draw (copy3) to [out=-90, in=180] ($(Zxyd.west) + (0,0.15)$);
+    \draw (copy2) to [out=-90, in=180] (Zxyd);
+\end{tikzpicture}\\
+    &= \begin{tikzpicture}
+    \path (0,0.15) node (D) {``$\RV{D}$''}
+    ++ (0.6,0) node[copymap] (copy0) {}
+    ++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{XY}|\RV{D}}$}
+    ++ (0.9,0) node[copymap] (copy2) {}
+    +  (0.1,0.15) node[copymap] (copy3) {}
+    ++(0.9,-0.5) node[kernel] (Zxyd) {$\kernel{K}^{\RV{Z}|\RV{XYD}}$}
+    ++(1.5,0) node (Z) {$``\RV{Z}''$}
+    +(0,0.5) node (Y) {$``\RV{Y}''$}
+    +(0,1.15) node (X) {$``\RV{X}''$};
+    \draw (D) -- (m);
+    \draw ($(m.east)+(0,0.15)$) -- ($(m.east)+(0.4,0.15)$) to [out=0,in=180] (X);
+    \draw[-{Rays[n=8]}] ($(m.east) + (0,-0.15)$) -- ($(m.east)+(0.2,-0.15)$);
+    \draw (m) -- (Y);
+    \draw (copy0) to [out=-90,in=180] ($(Zxyd.west)+(0,-0.15)$);
+    \draw (copy2) to [out=-90,in=180] ($(Zxyd.west) + (0,0.)$);
+    \draw (copy3) to [out=-90,in=180] ($(Zxyd.west) + (0,0.15)$);
+\end{tikzpicture}\\
+    &= \kernel{K}^{\RV{XYZ}|\RV{D}}
+\end{align}
+As required.
+
+\end{proof}
+
+\begin{lemma}\label{lem:representation_of_kernels}
+Suppose a kernel space $(\kernel{K},D,\Omega)$ for which disintegrations exist and a set of random variables $\{\RV{X}_i:D\times \Omega\to X_i|i\in [n]\}$, $\RV{X}_{[n]}:=\utimes_{i\in A}\RV{X}_i$ and $\RV{Y}:D\times \Omega \to \RV{Y}$ such that $\kernel{K}^{\RV{X}_A|\RV{Y}}$ exists. Consider an arbitrary non-repeating sequence $[\RV{X}_{i_1},\RV{X}_{i_2},...,\RV{X}_{i_{n}}]$ where $i_j=\rho(j)$ for some permuation $\rho:[n]\to[n]$ and a corresponding sequence $$[\RV{W}_{i_0},\RV{W}_{i_1},\RV{W}_{i_2},...\RV{W}_{i_{n-1}}]:=[\stopper{0.2},\utimes_{j\in\{i_1\}} \RV{X}_j,\utimes_{j\in \{i_1,i_2\}}\RV{X}_j,...,\utimes_{j\in\{i_1,i_2,...,i_{n-1}\}}\RV{X}_j]$$ Then $\kernel{K}^{\RV{X}_A|\RV{Y}}$ can be almost surely uniquely defined by the collection of kernels $\kernel{K}^{\RV{X}_{i_j}|\RV{W}_{i_{j-1}}\RV{Y}}$, $i\in A$, and in particular for any $\times_{j\in[n]} B_{i_j}$, $B_{i_j}\in \sigalg{X}_{i_j}$:
+
+\begin{align}
+    \kernel{K}^{\RV{X}_{\rho([n])}|\RV{Y}}_y(\times_{j\in[n]} B_{i_j}) &\overset{a.s.}{=} \int_{B_{i_1}}...\int_{B_{i_{n-1}}}\kernel{K}^{\RV{X}_{i_{n}}|\RV{W}_{i_{n-1}}\RV{Y}}_{x_{i_1},...,x_{i_{n-1}},y}(B_{i_n})...\kernel{K}^{\RV{X}_1|\RV{Y}}_y(dx_{i_1}) 
+\end{align}
+\end{lemma}
+
+\begin{proof}
+By application of Lemma \ref{th:iterated_disint}
+
+\begin{align}
+    \kernel{K}^{\RV{X}_{\rho([n])}|\RV{Y}}_y(\times_{j\in[n]} B_{i_j}) &= \int_{B_{i_1}} \kernel{K}^{\RV{X}_{\rho(\{2,..,n\})}|\RV{X}_{i_{1}}\RV{Y}}_{x_{i_1},y}(B_{i_n})...\kernel{K}^{\RV{X}_{i_1}|\RV{Y}}_y(dx_{i_1}) 
+\end{align}
+
+We can then apply Lemma \ref{th:iterated_disint} recursively to $\kernel{K}^{\RV{X}_{\rho(\{2,..,n\})}|\RV{X}_{i_{1}}\RV{Y}}_{x_{i_1},y}(B_{i_n})$ and so forth.
+\end{proof}
+
+\subsection{Existence of Disintegrations}
+
+The existence of disintegrations of standard measurable probability spaces is well known.
+
+\begin{theorem}[Disintegration existence - probability space]\label{th:disintegration_exist}
+Given a probability measure $\prob{P}\in \Delta(\mathcal{X}\otimes \mathcal{Y})$, if $(F,\mathcal{F})$ is standard then a disintegration $\prob{P}^{\RV{Y}|\RV{X}}:X\to \Delta(\mathcal{Y})$ exists \citep{cinlar_probability_2011}.
+\end{theorem}
+
+In particular, if for all $x\in X$, $\prob{P}^{\RV{X}}(\RV{X}\in\{x\})>0$, then $\prob{P}^{\RV{Y}|\RV{X}}_x(A) = \frac{\prob{P}^{\RV{X}\RV{Y}}(\{x\}\times A)}{\prob{P}^{\RV{X}}(\{x\})}$.
+
+For Markov kernel spaces, standard measurability is not known to guarantee that a disintegration exists. Consider the following general setup: a kernel space $(\kernel{K},(D,\sigalg{D}),(X\times Y,\sigalg{X}\otimes\sigalg{Y}))$ with $D, X$ and $Y$ all equal to $[0,1]$ and all Borel. Let $\RV{X},\RV{Y},\RV{D}:X\times Y\times D\to [0,1]$ project the first, second and third dimensions of $X\times Y\times D$ respectively. Let $\kernel{K}_d(A) = \lambda(A)$, the Lebesgue measure of $A$ on $[0,1]^2$ for all $d\in D$. 
+ 
+By Theorem \ref{th:disintegration_exist}, we have for each $d\in D$ a disintegration $Q(d):=(\kernel{K}_d)^{\RV{Y}|\RV{X}}$ of $(\kernel{K}_d)^{\RV{X}\RV{Y}}$, and it is fairly straightforward to show it that $Q(d)_x(A)=\lambda(A)$ for all $A\in \sigalg{B}([0,1])$ and $\lambda$-almost all $x\in [0,1]$. $Q(d)_x$ is clearly a probability measure for every $(d,x)\in [0,1]^2$, but $Q:D\times X\to \Delta(\sigalg{Y})$ given by $(d,x,A)\mapsto Q(d)_x(A)$ may fail to be a Markov kernel. 
+
+To see this, let $\mathds{1}_C:[0,1]\to \{0,1\}$ be the indicator function on a non-measurable set $C\subset[0,1]$, and define
+
+\begin{align}
+    Q(d)_{x}(A) = \left(1-\mathds{1}_C(x)\mathds{1}_{\{x\}}(d)\right)\lambda(A) + \mathds{1}_C(x)\mathds{1}_{\{x\}}(d)\delta_{0}(A)\label{eq:non_measurable_disint}
+\end{align}
+
+That is, $Q$ is the measure $\lambda{A}$ for all points $(x,d)$ except where $x=d$ and $d\in C$. Note that for each value of $d$, $Q$ differs from $\lambda(A)$ on at most a single point $x\in[0,1]$, which has measure $0$ under the Lebesgue measure $\lambda$. Thus $Q(d)$ is a version of $(\kernel{K}_d)^{\{\RV{Y}|\RV{X}\}}$. Consider the function
+
+\begin{align}
+    Q^{\{0\}}:(d,x)&\mapsto Q(d)_x(\{0\})\\
+    \left(Q^{\{0\}}\right)^{-1}(\{1\})&=\{(d,x):Q(d)_x(\{0\})=1\}\\
+    &= \{(d,x):d=x\And d\in C\}
+\end{align}
+
+Thus $Q^{\{0\}}$ is not measurable and consequently $Q$ fails to be a Markov kernel. The problem comes from the fact that $Q$ is defined by an uncountable collection of disintegrations $Q(d)$, each of which is individually measurable. In this case, the problem can be easily solved by defining $Q'$ without the non-measurable component in \ref{eq:non_measurable_disint}. What we would like are general conditions under which we know that we can choose an appropriate set of disintegrations $Q(d)$ in order for the resulting $Q$ to be a Markov kernel.
+
+This problem can be easily dealt with if we only require $\kernel{K}$ to be unique up to a set of measure 0 with respect to some ``background probability'' $\prob{P}^*\in\Delta(\sigalg{D}\otimes\sigalg{E})$, because we can simply take $\kernel{K}$ to be an arbitrary disintegration of $\prob{P}^*$ and then use Theorem \ref{th:iterated_disint} to find further disintegrations (see Lemma \ref{lem:agree_disint}. However, many common examples of causal models do admit a background probability. For example, with Causal Bayesian Networks, $do(\RV{X}=x)$ interventions are typically associated with a point probability measure $\delta_x$ on the intervened variable. If, for example, $X$ takes values in $[0,1]$ then there is no probability measure that assigns nonzero probability to every real number we can choose for a do-intervention $do(\RV{X}=x)$.
+
+For a more specific example with Causal Bayesian Networks, suppose we have $\RV{X}$ and $\RV{Y}$ in $[0,1]$, the graph $\mathcal{G}:=\RV{X}\rightarrow \RV{Y}$ and, as above, the observational distribution is $\prob{P}(\RV{X}\in A,\RV{Y}\in B)=\lambda(A)\lambda(B)$. Then, because elements of $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ are unique up to a set of $\kernel{P}$-measure 0, Equation \ref{eq:non_measurable_disint} is a version of $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ for each $d\in D$. Identify each $d\in D$ with an intervention $do(\RV{X}=x)$. According to the definition of \citet{pearl_causality:_2009} pg 24, the interventional distribution $\prob{P}(d)(\RV{X},\RV{Y})$ must have the following properties for evey $x\in X$:
+
+\begin{itemize}
+    \item $\prob{P}^{\RV{XY}}_{do(\RV{X}=x)}$ is Markov relative to $\mathcal{G}$ (this condition is trivial with the given $\mathcal{G}$)
+    \item $\prob{P}_{do(\RV{X}=x)}^\RV{X}=\delta_x$
+    \item $\prob{P}_{do(\RV{X}=x)}^{\RV{XY}|\RV{X}}``=''\prob{P}^{\RV{XY}|\RV{X}}$, $\prob{P}_{do(\RV{X}=x)}$-almost surely
+\end{itemize}
+
+The quotation marks have been added to the final condition, as there are at least two different ways to interpret it:
+
+\begin{itemize}
+    \item $\prob{P}_{do(\RV{X}=x)}^{\RV{XY}|\RV{X}}\in \prob{P}^{\{\RV{XY}|\RV{X}\}}$, $\prob{P}_{do(\RV{X}=x)}$-almost surely
+    \item Let $\kernel{T}^{\RV{XY}|\RV{X}}$ be a particular version of $\prob{P}^{\{\RV{XY}|\RV{X}\}}$. Then $\prob{P}_{do(\RV{X}=x)}^{\RV{XY}|\RV{X}}= \kernel{T}^{\{\RV{XY}|\RV{X}\}}$, $\prob{P}_{do(\RV{X}=x)}$-almost surely
+\end{itemize}
+
+In the first case, we can choose an arbitrary element of $\prob{P}^{\{\RV{XY}|\RV{X}\}}$ for each $x\in X$. Furthermore, because each $\{x\}\in \sigalg{X}$ has $\prob{P}$-measure 0 but $\prob{P}_{do(\RV{X}=x)}$-measure 1, it is easy to verify that the third condition is satisfied for
+
+\begin{align}
+    \prob{P}_{\do(\RV{X}=x),x'}^{\RV{XY}|\RV{X}}(A\times B) = \mathds{1}_C(x) \delta_x(A) \delta_1(B) + (1-\mathds{1}_C(x))\delta_x(A)\delta_0(B)
+\end{align}
+
+As it is by any function at all $X\times X\to \Delta(\sigalg{X}\otimes\sigalg{Y})$. In this example we have for every $x\in X$, $\RV{Y}$ is with probability 1 an indicator of membership of $x$ in the non-measurable set $C$. This is a nonsensical result, depsite the apparent simplicity of the original causal model.
+
+The second at least guarantees that $do(\RV{X}=x)\mapsto \prob{P}_{do{\RV{X}=x}}$ is measurable. However, it still allows for nonsense results. Letting $R$ be the Cantor set which has an uncountable number of elements and $\lambda(R)=0$, it is still consistent to define
+
+\begin{align}
+    \prob{P}_{\do(\RV{X}=x),x'}^{\RV{XY}|\RV{X}}(A\times B) = \mathds{1}_R(x)\delta_{x'}(A)\delta_1(B) + (1-\mathds{1}_R(x))\delta_x(A) \lambda(B) \label{eq:cbn_cont2}
+\end{align}
+
+While Equation \ref{eq:cbn_cont2} behaves ``as it is supposed to'' for mixtures of $do$ operations $\pi\in \Delta([0,1])$ absolutely continuous with respect to the Lebesgue measure $\lambda\gg \pi$, it also sets $\RV{Y}$ to 1 for any point interventions in the Cantor set, or any mixtures of $do$ operations absolutely continuous with respect to the Cantor set. This is possible because, in general, we don't have a rule for choosing a version of $\prob{P}^{\{\RV{XY}|\RV{X}\}}$ that assigns ``sensible'' values to all $\prob{P}$-measure 0 sets.
+
+It is straightforward to show that wherever $D$ is countable, arbitrary disintegrations of $(\kernel{K},(D,\sigalg{D}),(E,\sigalg{E}))$ exist. \textbf{This is an assumption we will typically make.}
+
+The following theorem establishes an alternative sufficient condition for the existence of disintegrations in a Markov kernel space. We introduce the notion of \emph{ratio continuity} and show that a kernel that is ratio continuous or a countable piecewise combination of ratio continuous kernels that disintegrations exist. This implies the existence of disintegrations wherever $D$ is countable.
+
+\begin{definition}[Ratio continuity]
+A Markov kernel $\kernel{K}:D\to \Delta(\sigalg{E})$ where $D$ is equipped with metric $m_D$ is \emph{ratio continuious} if for every $d\in D$ and $\epsilon>0$ there exists a $\delta>0$ such that for all $A\in \sigalg{E}$ $m_D(d,d')<\delta\implies 1-\epsilon \leq \frac{\kernel{K}_d(A)}{\kernel{K}_d'(A)} \leq \epsilon$.
+\end{definition}
+
+This is a very strong notion of continuity - it implies that any set $A$ has $\kernel{K}_d$-measure 0 if and only if it has $\kernel{K}_{d'}$-measure 0 for all $d'\in D$.
+
+\begin{theorem}[Existence of disintegrations on kernel spaces: uniform normalised continuous kernel]\label{th:existence_continous}
+Given a kernel space $(\kernel{K},(D,\sigalg{D}),(E,\sigalg{E}))$ with $(D,\sigalg{D})$, $(E,\sigalg{E})$ standard measurable and some random variables $\RV{X}:E\times D\to X$, and $\RV{Y}:E\times D\to Y$, if for all $A\in \sigalg{E}\otimes\sigalg{D}$ the maps
+\begin{align}
+    d\mapsto \kernel{K}_d(A)
+\end{align}
+
+are ratio continuous then for any $\RV{Y}:E\times D\to Y$ the disintegration $\kernel{K}^{\RV{Y}|\RV{X}\RV{D}}$ exists.
+\end{theorem}
+
+\begin{proof}
+By standard measurability, $X$ and $Y$ are separable. In particular, there is some sequence $H_i\subset X$ such that $\sigma(\{H_i|i\in\mathbb{N}\})=\sigalg{X}$. Then $\sigma(\{H_i|i\in[n]\})$ is finite and there exists some partition $\sigalg{J}_n\subset\sigma(\{H_i|i\in[n]\})$ such that $\sigma(\sigalg{J}_n)=\sigalg{X}$. Note that $\{\sigma(\sigalg{J}_n)|n\in\mathbb{N}\}$ is a filtration.
+
+For each $x\in X$ and $n\in \mathbb{N}$, there is a unique $J_i\in \sigalg{J}_n$ such that $x\in J_i$. Take arbitrary $A\in\sigalg{Y}$, $d\in D$ and define
+
+\begin{align}
+    R^{A,n}_d(x) = \sum_{H_i\in \sigalg{J}_n} \mathds{1}_{H_i}(x) \frac{\kernel{K}_{d}^{\RV{XY}}(H_i\times A)}{\kernel{K}_d^{\RV{XY}}(H_i\times Y)}
+\end{align} 
+
+defining $\frac{0}{0}=0$. Each $R^A_n$ is positive, $\sigma(\sigalg{J}_n)$-measurable and, because $\prob{P}\gg \kernel{K}_{d}^{\RV{XY}}$, 
+
+\begin{align}
+    \mathbb{E}[R^{A,n}_d(x)] &= \sum_i \kernel{K}_d^{\RV{XY}}(H_i\times A)\\
+    &= \kernel{K}_d^{\RV{XY}}(X\times A)\\
+    < \infty
+\end{align}
+
+Finally, taking $H_j\in\sigalg{J}_n$ and $H_i^{n+1}\in \sigalg{J}_{n+1}$:
+
+\begin{align}
+    \mathbb{E} [\mathds{1}_{H_j} R^{A,n}_d] &= \int \mathds{1}_{H_j} (x) \sum_i  \mathds{1}_{H_i}(x) \frac{\kernel{K}_{d}^{\RV{XY}}(H_i\times A)}{\kernel{K}_{d}^{\RV{XY}}(H_i\times Y)} d\kernel{K}_{d}^{\RV{XY}}(x,y)\\
+                                          &= \kernel{K}_{d}^{\RV{XY}}(H_j\times A) \label{eq:agrement_on_jsub}\\
+                                          &= \int \mathds{1}_{H_j}(x) \sum_i \mathds{1}_{H^{n+1}_i}(x) \frac{\kernel{K}_{d}^{\RV{XY}}(H^{n+1}_i\times A)}{\kernel{K}_{d}^{\RV{XY}}(H^{n+1}_i\times Y)} d\kernel{K}_{d}^{\RV{XY}}(x,y)\\
+                                          &= \mathbb{E}[\mathds{1}_{H_j}R^{A,n+1}_d]
+\end{align}
+
+thus $\mathbb{E}[R^{A,n+1}_d|\sigalg{D}_n] = R^{A,n+1}_d$, so the sequence $\{R^{A,n}_d|n\in \mathbb{N}\}$ is a positive martingale. Furthermore, it is uniformly integrable (Lemma \ref{lem:uniform_integrability}), so it converges to a measurable function $R^A_d$ almost surely and also in $L^1$. 
+
+For $H_\in \sigalg{X}$
+\begin{align}
+    \int_B R^A_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y) &= \lim_{n\to\infty} \int_B R^{A,n}_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y)\\
+\end{align}
+
+By Equation \ref{eq:agrement_on_jsub}, $\int_{H_j} R^A_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y) = \kernel{K}_{d}^{\RV{XY}}(H_j\times A)$ for all $H_j\in \cup{n\in \mathbb{N}}\sigalg{J}_n$. However, $\cup{n\in \mathbb{N}}\sigalg{J}_n$ is a p-system for $\sigalg{X}$ and so $\int_{B} R^A_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y) = \kernel{K}_{d}^{\RV{XY}}(B\times A)$ for all $B\in \sigalg{X}$.
+
+Suppose $D=[0,1]$. This will later be generalised to a general standard measurable space using the isomorphism between $[0,1]$ and any uncountable standard measurable space.
+
+Let $H^n(x)$ be $H_i\in\sigalg{D}_n$ such that $x\in H_i$. By ratio continuity of $\kernel{K}$, we can choose for every $d$ and every $\epsilon>0$ some $\delta$ such that $|d-d'|<\delta$ implies:
+
+\begin{align}
+    |R^{A,n}_d(x)-R^{A,n}_{d'}(x)| &\leq \left|\frac{(1+\epsilon)\kernel{K}_d^{\RV{XY}}(H(x)\times A)-\kernel{K}_d^{\RV{XY}}(H(x)\times A)(1-\epsilon)}{\kernel{K}_d^{\RV{XY}}(H(x)\times Y)(1+\epsilon)} \right|\\
+    &= \left|\frac{2\epsilon\kernel{K}_d^{\RV{XY}}(H(x)\times A)}{\kernel{K}_d^{\RV{XY}}(H(x)\times Y)(1+\epsilon)}\right|\\
+    &< 2\epsilon
+\end{align}
+For all $n\in \mathbb{N}$ and all $x\in X$.
+
+Because $R^{A,n}_d$ converges almost surely to $R^n_d$ and $R^{A,n}_{d'}$ converges almost surely to $R^{A,n}_{d'}$, for $x$ such that $R^{A,n}_d$ and $R^{A,n}_{d'}$ both converge we have
+
+\begin{align}
+    |R^{A}_d(x)-R^{A}_{d'}(x)| &\leq \inf_{n} \left|R^A_d(x)-R^{A,n}_d(x) + R^{A,n}_d(x)-R^{A,n}_{d'}(x) + R^{A,n}_{d'}-R^{A}_{d'}\right|\\
+                               &\leq \inf_n \left(|R^A_d(x)-R^{A,n}_d(x)|+|R^{A,n}_d(x)-R^{A,n}_{d'}(x)| + |R^{A,n}_{d'}-R^{A}_{d'}|\right)\\
+                               &\leq 2\epsilon
+\end{align}
+
+Thus for any $\epsilon>0$ there is some $\delta>0$ such $|d-d'|<\delta$ implies $|R^{A,n}_d-R^{A,n}_{d'}|\leq \epsilon$ except on some set $O_d\cup O_{d'}$ where $O_d$ is a set of $\kernel{K}_d^{\RV{X}}$ measure 0 and $O_{d'}$ is a set of $\kernel{K}_{d'}^{\RV{X}}$ measure 0. Note that $\kernel{K}_{d'}^{\RV{X}}(O_d) = |\kernel{K}_{d'}^{\RV{X}}(O_{d'})-\kernel{K}_{d}^{\RV{X}}(O_d)|\leq 0$ hence $\kernel{K}_{d'}^{\RV{X}}(O_d) = 0$ and vise versa.
+
+Let $\mathbb{Q}_D$ be the rationals between 0 and 1 and for each $r\in Q$ let $O_r$ be the set on which $R^{A,n}_d$ fails to converge, noting that $O:=\cup_{r\in F} O_r$ is of $\kernel{K}_{d}^{\RV{X}}$-measure 0 for all $d\in D$. 
+
+Choose some $y_0\in Y$ and define for arbitrary $A\in \sigalg{Y}$
+
+\begin{align}
+    S^{A,n|\RV{X}\RV{D}}:= (x,d)\mapsto \mathds{1}_{X\setminus O}(x) \sum_{i}^n\mathds{1}_{\left[\tfrac{di}{n},\tfrac{di+1}{n}\right]}(d) R^A_{\tfrac{di }{i}}(x) + \mathds{1}_{O}(x) \delta_{y_0}(A)
+\end{align}
+
+where $\prob{P}$ is an arbitrary element of $\Delta(\sigalg{Y})$. Each $S^{A,n|\RV{XD}}$ is measurable because it is a sum of measurable functions. Furthermore, it is clear that if $x\in X\setminus O$, $S^{A,n|\RV{X}\RV{D}}(d,x)\to R^A_d(x)$ as $n\to \infty$ and on $x\in O$, $S^{A,n|\RV{XD}}(d,x)\to \delta_{y_0}(A)$, and so the sequence $S^{A,n|\RV{XD}}$ goes to a limit:
+
+\begin{align}
+    S^{A|\RV{XD}}_d(x):= \mathds{1}_{X\setminus O}(x) R^A_d(x) + \mathds{1}_O(x) \delta_{y_0}(A)
+\end{align}
+
+Finally, note that for all $A\in\sigalg{Y}$, $B\in \sigalg{X}$
+
+\begin{align}
+    \int_B S^{A|\RV{X}\RV{D}}_d(x) d\kernel{K}^{\RV{X}}_d(x) &= \int_B (\mathds{1}_{X\setminus O}(x) R^A_d(x) + \mathds{1}_O(x) \delta_{y_0}(A)) d\kernel{K}_d^{\RV{X}}\\
+                                                               &= \int_B R^A_d(x) d\kernel{K}^{\RV{X}}_d(x)\\
+                                                               &= \kernel{K}_{d}^{\RV{XY}}(B\times A)
+\end{align}
+
+Thus $S^{A|\RV{XD}}=\mathbb{E}[\mathds{1}_A|\RV{XD}]$. All that remains to be shown is that $A\mapsto S^{A|\RV{XD}}_d(x)$ is a probability measure for all $x\in X$, $d\in D$. This is a standard argument that can be found, for example, in \citet{cinlar_probability_2011} pp. 151-152
+
+\todo[inline]{which I'll add here next}
+\end{proof}
+
+Theorem \ref{th:existence_continous} is made quite limiting by the requirement for ratio continuity - for example, it requires a kernel $\kernel{K}_d$ where the measure 0 sets are the same for every $d\in D$. This can be relaxed somewhat by the fact that a countable set of such kernels can be combined piecewise and still yield a disintegrable kernel.
+
+\begin{theorem}[Piecewise uniform normalized continuous kenrel]
+Given a kernel space $(\kernel{K},(D,\sigalg{D}),(E,\sigalg{E}))$ with $(D,\sigalg{D})$, $(E,\sigalg{E})$ standard measurable and some random variables $\RV{X}:E\times D\to X$, and $\RV{Y}:E\times D\to Y$ and a countable partition $\sigalg{J}$ of $X$, if there exists a set of kernels $\{\kernel{K}^i|i\in \mathbb{N}\}$ such that for all $d\in D$, $B\times A\in \sigalg{X}\otimes\sigalg{Y}$
+\begin{align}
+    \kernel{K}_d^{\RV{XY}}(B\times A) = \sum_{J_i\in \sigalg{J}} \mathds{1}_{J_i}(d)\kernel{K}_{d}^{i,\RV{XY}}(B\times A)
+\end{align}
+
+and each $\kernel{K}^i$ is uniform normalized continuous on $J_i$ then the disintegration $\kernel{K}^{\RV{Y}|\RV{XD}}$ exists.
+\end{theorem}
+
+\begin{proof}
+
+By Theorem \ref{th:existence_continous} we have for each $i$ a disintegration $\kernel{K}^{i,\RV{Y}|\RV{XD}}$. Define
+
+\begin{align}
+    T^{\RV{Y}|\RV{XD}}_{x,d}(A) := \sum_{J_i\in \sigalg{J}} \mathds{1}_{J_i}(d)\kernel{K}_{x,d}^{i,\RV{Y}|\RV{XD}}(A)
+\end{align}
+
+We have
+
+\begin{itemize} 
+    \item $A\mapsto T^{\RV{Y}|\RV{XD}}_{x,d}(A)$ is a probability measure for each $x,d\in X\times D$ because this is true for each $\kernel{K}^{i,\RV{Y}|\RV{XD}}$
+    \item $(x,d)\mapsto T^{\RV{Y}|\RV{XD}}_{x,d}(A)$ is measurable for each $A\in \sigalg{Y}$ because it is a sum of measurable functions
+    \item $(x,A)\mapsto T^{\RV{Y}|\RV{XD}}_{x,d}(A)$ is a version of $(\kernel{K}_d)^{\RV{Y}|\RV{X}}$ for each $d\in D$ because this is also true for each $\kernel{K}^{i,\RV{Y}|\RV{XD}}$
+\end{itemize}
+
+Thus $T^{\RV{Y}|\RV{XD}}$ is the required disintegration $\kernel{K}^{\RV{Y}|\RV{XD}}$.
+\end{proof}
+
+\begin{lemma}\label{lem:absolute_continuity}
+If $\prob{Q}\ll\prob{P}$ on $(E,\sigalg{E})$ then for all $\epsilon>0$ there is some $\delta>0$ such that for every $A\in\sigalg{E}$ $\prob{P}(A)<\epsilon\implies \prob{Q}(A)<\delta$
+\end{lemma}
+
+\begin{proof}
+\todo[inline]{todo}
+\end{proof}
+
+\begin{lemma}\label{lem:uniform_integrability}
+$Q^{A,n}_d$ as define in Theorem \ref{th:existence_continous} is uniformly integrable.
+\end{lemma}
+
+\begin{proof}
+\todo[inline]{todo; a proof for an analagous fact is given in \cite{cinlar_probability_2011}}
+\end{proof}
+
+\begin{theorem}[Existence of disintegrations on kernel spaces: purely atomic measures]
+Given a kernel space $(\kernel{K},(D,\sigalg{D}),(\Omega,\sigalg{E}))$ with $(D,\sigalg{D})$ and $(\Omega,\sigalg{E})$ standard measurable, if $\kernel{K}_d$ is purely atomic for all $d\in D$ then for any random variables $\RV{X},\RV{Y}\in \sigalg{E}\otimes\sigalg{D}$ and domain variable $\RV{D}:\Omega\times D\mapsto D$ a disintegration $\kernel{K}^{\RV{Y}|\RV{X}\RV{D}}$ exists.
+\end{theorem}
+
+\begin{proof}
+\todo[inline]{show...}
+\end{proof}
+
+\subsection{Kernel spaces related to one another}
+
+\begin{definition}[Left extension]\label{def:left_extension}
+Given a Markov kernel space $(\kernel{K},D,\Omega)$, a measurable set $(E,\sigalg{E})$ and a Markov kernel $\kernel{L}:E\to \Delta(\sigalg{D})$, the space $(\kernel{L}\kernel{K}^*,E,\Omega\times D)$ is \emph{left extension} of $(\kernel{K},D,\Omega)$.
+\end{definition}
+
+\begin{definition}[Random variables on a left extension]\label{def:left_extension_RVs}
+Any random variable $\RV{X}$ on the space $(\kernel{K},D,\Omega)$ has a related variable $\RV{X}'$ on $(\kernel{L}\kernel{K}^*,E,\Omega\times D)$ given by $\RV{X}\circ \Pi_{\Omega\times D}$ where $\Pi_{\Omega\times D}:\Omega\times D\times E\mapsto \Omega\times D$ is the projection $(\omega,d,e)\mapsto (\omega,d)$.
+\end{definition}
+
+We do not require any notion of ``right extension'', though it may be possible to define such a thing.
+
+Any Markov kernel $(\kernel{K},D,\Omega)$ can be left-extended to a probability space by choosing any $\prob{P}\in \Delta(\sigalg{D})$; the left extension $(\prob{P}\kernel{K}^*,\{*\},\Omega\times D)$ is a probability space (Definition \ref{def:prob_space}).
+
+\begin{lemma}[Left extension preserves disintegrations]\label{lem:le_pres_disint}
+Given a Markov kernel space $(\kernel{K},D,\Omega)$, some $(E,\sigalg{E})$ and any $\kernel{L}:E\to \Delta(\sigalg{D})$ and any random variables $\RV{X}:\Omega\times D\to X$, $\RV{Y}:\Omega\times D\to Y$ on $(\kernel{K},D,\Omega)$, let  $\RV{X}'$ and $\RV{Y}'$ be the corresponding random variables on $(\kernel{L}\kernel{K}^*,D,\Omega)$ (Definition \ref{def:left_extension_RVs}). Then $(\kernel{L}\kernel{K}^*)^{\{\RV{Y}'|\RV{X}'\RV{D}'\}}$ exists and $\kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}\subseteq (\kernel{L}\kernel{K}^*)^{\{\RV{Y}'|\RV{X}'\RV{D}'\}}$
+\end{lemma}
+
+\begin{proof}
+Let $\kernel{J}:=\kernel{L}\kernel{K}^*$ and let $\kernel{M}$ be an arbitrary version of $\kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}$. Then
+\begin{align}
+\begin{tikzpicture}
+\path (0,0) node (C) {$\RV{E}$}
+++ (1.3,0) node[kernel,inner sep=4pt] (m) {$\prob{J}^{\RV{X}\RV{Y}\RV{D}|\RV{E}}$}
+++ (1,0.3) node (E) {$\RV{X}$}
+++ (0,-0.3) node (F) {$\RV{Y}$}
+++ (0,-0.3) node (D) {$\RV{D}$};
+\draw ($(m.east) + (0,0.3)$) -- (E);
+\draw ($(m.east) + (0,0)$) -- (F);
+\draw ($(m.east) + (0,-0.3)$) -- (D);
+\draw (C)--(m);
+\end{tikzpicture} &= \begin{tikzpicture}
+\path (0,0) node (C) {$\RV{E}$}
+++ (1.,0) node[kernel] (O) {$\kernel{L}$}
++ (0.75,0) coordinate (copy0)
+++ (1.5,0) node[kernel] (m) {$\kernel{K}^{\RV{XY}|\RV{D}}$}
+++ (1,0.15) node (E) {$\RV{X}$}
+++ (0,-0.3) node (F) {$\RV{Y}$}
+++ (0,-0.3) node (D) {$\RV{D}$};
+\draw (O) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+\draw ($(m.east) + (0,-0.15)$) -- (F);
+\draw (copy0) to [out=-60,in=180] (D);
+\draw (C)--(O);
+\end{tikzpicture}\\
+ &= \begin{tikzpicture}\path (0,0) node (C) {$\RV{E}$}
+++ (1.,0) node[kernel] (O) {$\kernel{L}$}
+++ (0.3,0) coordinate (copy1)
+++ (1,0) node[kernel] (m) {$\kernel{K}^{\RV{X}|\RV{D}}$}
+++ (1,0.15) coordinate (copy0)
+++ (1.2,0) node (E) {$\RV{X}$}
+++(-0.7,-0.3) node[kernel] (K) {$\kernel{M}$}
+++(0.7,0) node (F) {$\RV{Y}$}
+++(0,-0.3) node (D) {$\RV{D}$};
+\draw (O) -- (m) ($(m.east) + (0,0.15)$) -- (E);
+\draw (copy0) to [bend right] ($(K.west) + (0,0.1)$) (K) -- (F);
+\draw (copy1) to [out=-45,in=180] ($(K.west) + (0,-0.1)$);
+\draw (copy1) to [out=-90,in=180] (D);
+\draw (C)--(O);
+\end{tikzpicture}\\
+ &= \begin{tikzpicture}
+\path (0,0) node (C) {$\RV{E}$}
+++ (1.,0) node[kernel] (m) {$\kernel{L}^{\RV{X}\RV{D}|\RV{E}}$}
+++ (0.7,0.15) coordinate (copy0)
++ (0,-0.3) coordinate (copy1)
++(0.2,-0.3) node (T) {}
+++ (1.2,0) node (E) {$\RV{X}$}
+++(-0.7,-0.3) node[kernel] (K) {$\kernel{M}$}
+++(0.7,0) node (F) {$\RV{Y}$}
+++ (0,-0.3) node (D) {$\RV{D}$};
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw (copy0) to [bend right] ($(K.west) + (0,0.1)$) (K) -- (F);
+\draw ($(m.east) + (0,-0.15)$) -- (copy1) -- ($(K.west) + (0,0)$);
+\draw (copy1) to [out = -60, in=180] (D);
+\draw (C) -- (m);
+\end{tikzpicture}
+\end{align}
+
+Thus $\kernel{M}\in \prob{J}^{\{\RV{Y}|\RV{X}\RV{D}\}}$.
+\end{proof}
+
+\begin{lemma}[Left extension with a strictly positive kernel yields agreement of disintegrations]\label{lem:agree_disint}
+Given a Markov kernel space $(\kernel{K},D,\Omega)$, a strictly positive kernel $\prob{L}:E\to \Delta(\sigalg{D})$ and any random variables $\RV{X}:\Omega\times D\to X$, $\RV{Y}:\Omega\times D\to Y$, $\kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}=(\prob{L}\prob{K}^*)^{\{\RV{Y}'|\RV{X}'\RV{D}'\}}$ (note that this set equality).
+\end{lemma}
+
+\begin{proof}
+Let $\prob{Q}:=\prob{L}\prob{K}^*$. By Lemma \ref{lem:le_pres_disint} we know that $\kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}\subseteq \prob{Q}^{\{\RV{Y}|\RV{X}\RV{D}\}}$. To show the converse, let $\kernel{N}$ be an arbitrary version of $\prob{Q}^{\{\RV{Y}|\RV{X}\RV{D}\}}$. We wish to show that $\kernel{N}\in \kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}$.
+
+
+Define $\kernel{R}_d$ as follows:
+\begin{align}
+    \kernel{R}_d &= \begin{tikzpicture}
+\path (0,0) node[dist] (D) {$\delta_d $}
+++ (0.7,0) coordinate (copy0)
+++(0.7,0) node[kernel] (K) {$\kernel{K}^{\RV{X}|\RV{D}}$}
+++(0.5,0) coordinate (copy1)
+++(0.8,0) node[kernel] (N) {$\kernel{N}$}
+++(1,0) node (Y) {$\RV{Y}$}
+++(0,-0.3) node (X) {$\RV{X}$}
+++(0,-0.3) node (Do) {$\RV{D}$};
+\draw (D) -- (K) -- (N) -- (Y);
+\draw (copy0) to [out=-90,in=180] (Do);
+\draw (copy1) to [out=-45,in=180] (X);
+\draw (copy0) to [out=90,in=180] ($(N.west)+(0,0.15)$);
+\end{tikzpicture}
+\end{align}
+
+We aim to show $\kernel{R}_d=\kernel{K}^{\RV{XYD}|\RV{D}}_d$ for all $d\in D$.
+
+For $A\in\sigalg{X}$,$B\in\sigalg{Y}$, $d\in D$, $e\in E$ we have $\prob{R}_d(A\times B\times \emptyset)=0=\kernel{K}^{\RV{X}\RV{Y}\RV{D}|\RV{D}}_d(A\times B\times \emptyset)$ and $\kernel{L}_e(\{d\})>0$, so:
+
+\begin{align}
+\prob{R}_d(A\times B\times \{d\}) &= \int_X \kernel{N}_{d,x}(A) \delta_x(B) d\kernel{K}^{\RV{X}|\RV{D}}_d(x)\\
+                            &= \frac{1}{\kernel{L}_e(\{d\})} \int_{\{d\}} d\kernel{L}_e(d') \int_X \kernel{N}_{d,x}(A) \delta_x(B) d\kernel{K}^{\RV{X}|\RV{D}}_d(x)\\
+                            &= \frac{1}{\kernel{L}_e(\{d\})} \int_D\int_X \kernel{N}_{d,x}(A) \delta_{d'}(\{d\}) \delta_x(B) d\kernel{K}^{\RV{X}|\RV{D}}_d(a) d\kernel{L}_e(d')\\
+                            &= \frac{1}{\kernel{L}_e(\{d\})} \int_D\int_X \kernel{N}_{d,x}(A) \delta_{d'}(\{d\}) \delta_x(B) d\kernel{K}^{\RV{X}|\RV{D}}_{d'}(a) d\kernel{L}_e(d')\\
+                            &= \frac{1}{\kernel{L}_e(\{d\})} \kernel{L}_e^{\RV{X}\RV{Y}\RV{D}|\RV{E}}(A\times B\times \{d\})\\
+                            &= \frac{1}{\kernel{L}_e(\{d\})} \int_D \kernel{K}_{d'}^{\RV{X}\RV{Y}\RV{D}|\RV{D}}(A\times B\times \{d\})d\kernel{L}_e(d')\\
+                            &= \frac{1}{\kernel{L}_e(\{d\})} \int_D \kernel{K}_{d'}^{\RV{X}\RV{Y}|\RV{D}}(A\times B) \delta_{d'}(\{d\})d\kernel{L}_e(d')\\
+                            &= \kernel{K}_{d}^{\RV{X}\RV{Y}|\RV{D}}(A\times B)\\
+                            &= \kernel{K}_d^{\RV{X}\RV{Y}|\RV{D}}(A\times B) \delta_d(\{d\})\\
+                            &= \int_D \kernel{K}_{d'}^{\RV{X}\RV{Y}} (A\times B) \delta_{d''}(\{d\}) d\splitter{0.1}_d(d',d'')\\
+                            &= \kernel{K}_d^{\RV{X}\RV{Y}\RV{D}|\RV{D}}(A\times B\times \{d\})
+\end{align}
+
+
+Equality follows from the monotone class theorem. Thus $\kernel{N}\in \kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}$.
+\end{proof}
+
+\begin{corollary}[Disintegration space]\label{corr:disint_space}
+Consider a kernel space $M_1:=(\kernel{K},D,\Omega)$ and a space $M_2:=(\kernel{K}^{\mathrm{Id}_\Omega|\RV{XD}},X\times D, \Omega)$ defined by some disintegration of $\kernel{K}$. Note that $M_1$ is a left extension of $M_2$, and thus we can identify variables in $M_1$ and $M_2$ as in Definition \ref{def:left_extension_RVs}. Under this identification disintegrations of the former will be disintegrations of the latter if $\kernel{K}^{\RV{X}|\RV{D}}$ is strictly positive.
+\end{corollary}
+
+\begin{proof}
+This follows directly from Lemma \ref{lem:agree_disint}
+\end{proof}
+
+Taking $E=\{*\}$ in Lemma \ref{lem:agree_disint} shows that left extending a kernel space with countable domain set $D$ to a probability space with strictly positive probabilities for every element of $D$ allows us to represent the set of kernel disintegrations $\kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}$ as probability distintegrations $\prob{P}^{\{\RV{Y}|\RV{X}\RV{D}\}}$. Note that, in general, any conditional probability $\prob{P}^{\RV{Y}|\RV{X}}$ that is \emph{not} conditioned on $\RV{D}$ is undefined in the kernel space $(\kernel{K},D,\Omega)$, though in some cases it can be defined as we discuss in the next section.
+
+\subsection{Conditional Independence}
+
+\begin{definition}[Kernels constant in an argument]
+    Given a kernel $(\kernel{K},D,\Omega)$ and random variables $\RV{Y}$ and $\RV{X}$, we say a verstion of the disintegration $\kernel{K}^{\RV{Y}|\RV{X}\RV{D}}$ is constant in $\RV{D}$ if for all $x\in X$, $d,d'\in D$, $\kernel{K}^{\RV{Y}|\RV{X}\RV{D}}_{(x,d)} = \kernel{K}^{\RV{Y}|\RV{X}\RV{D}}_{(x,d')}$.
+
+\end{definition}
+
+\begin{definition}[Domain Conditional Independence]
+Given a kernel space $(\kernel{K},D,\Omega)$, relative probability space $(\prob{P},\Omega\times D)$, variables $\RV{X}$,$\RV{Y}$ and domain variable $\RV{D}$, $\RV{X}$ is \emph{conditionally independent} of $\RV{D}$ given $\RV{Y}$, written $\RV{X}\CI_{\kernel{K}} \RV{D}|\RV{Y}$ if any of the following equivalent conditions hold:
+
+\todo[inline]{Almost sure equality}
+
+\begin{enumerate}
+    \item $\prob{P}^{\RV{X}\RV{D}|\RV{Y}} \sim \prob{P}^{\RV{X}|\RV{Y}}\utimes \prob{P}^{\RV{D}|\RV{Y}}$
+    \item For any version of $\prob{P}^{\{\RV{X}|\RV{Y}\}}$, $\prob{P}^{\RV{X}|\RV{Y}}\otimes\stopper{0.1}_D$ is a version of  $\kernel{K}^{\{\RV{X}|\RV{Y}\RV{D}\}}$
+    \item There exists a version of $\kernel{K}^{\{\RV{X}|\RV{Y}\RV{D}\}}\text{ constant in }\RV{D}$
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Definitions are equivalent]\label{th:ci_equivalence}
+(1)$\implies$(2):
+By Lemma \ref{lem:agree_disint}, $\prob{P}^{\{\RV{Y}|\RV{X}\RV{D}\}}=\kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}$. Thus it is sufficient to show that $\prob{P}^{\RV{X}|\RV{Y}}\otimes\stopper{0.1}$ is a version of $\prob{P}^{\{\RV{X}|\RV{Y}\RV{D}\}}$.
+
+\begin{align}
+\begin{tikzpicture}
+    \path (0,0) node[dist] (Pxd) {$\prob{P}^{\RV{Y}\RV{D}}$}
+    + (0.7,0.1) coordinate (copy0)
+    + (0.7,-0.1) coordinate (copy1)
+    ++ (1.5,0) node[kernel] (Pyxd) {$\prob{P}^{\RV{X}|\RV{Y}}$}
+    ++(1,0) node (Y) {$``\RV{X}''$}
+    +(0,0.3) node (D) {$``\RV{D}''$}
+    +(0,0.6) node (X) {$``\RV{Y}''$};
+    \draw ($(Pxd.east) + (0,0.1)$) -- ($(Pyxd.west)+(0,0.1)$);
+    \draw ($(Pxd.east) + (0,-0.1)$) -- (copy1);
+    \draw[-{Rays[n=8]}] (copy1) to [out=-80,in=180] ($(Pyxd.south)+(0,-0.3)$);
+    \draw (copy0) to [out=80,in=180] (X);
+    \draw (copy1) to [out=80,in=180] (D);
+    \draw (Pyxd) -- (Y);
+\end{tikzpicture} &= \begin{tikzpicture}
+    \path (0,0) node[dist] (Pxd) {$\prob{P}^{\RV{Y}\RV{D}}$}
+    + (0.7,0.1) coordinate (copy0)
+    + (0.7,-0.1) coordinate (copy1)
+    ++ (1.5,0) node[kernel] (Pyxd) {$\prob{P}^{\RV{X}|\RV{Y}}$}
+    ++(1,0) node (Y) {$``\RV{X}''$}
+    +(0,0.3) node (D) {$``\RV{D}''$}
+    +(0,0.6) node (X) {$``\RV{Y}''$};
+    \draw ($(Pxd.east) + (0,0.1)$) -- ($(Pyxd.west)+(0,0.1)$);
+    \draw ($(Pxd.east) + (0,-0.1)$) -- (copy1);
+    \draw (copy0) to [out=80,in=180] (X);
+    \draw (copy1) to [out=80,in=180] (D);
+    \draw (Pyxd) -- (Y);
+\end{tikzpicture} \\
+ &= \begin{tikzpicture}
+    \path (0,0) node[dist] (Pxd) {$\prob{P}^{\RV{Y}}$}
+    + (0.7,-0.2) coordinate (copy1)
+    ++ (1.5,-0.2) node[kernel] (Pyxd) {$\prob{P}^{\RV{X}|\RV{Y}}$}
+    + (0,0.5) node[kernel] (Pdx) {$\prob{P}^{\RV{D}|\RV{Y}}$}
+    ++(1,0) node (Y) {$``\RV{X}''$}
+    +(0,0.5) node (D) {$``\RV{D}''$}
+    +(0,1.2) node (X) {$``\RV{Y}''$};
+    \draw ($(Pxd.east) + (0,-0.2)$) -- ($(Pyxd.west)+(0,0)$);
+    \draw (copy1) to [out=90,in=180] (X);
+    \draw (copy1) to [out=80,in=180] (Pdx);
+    \draw (Pdx) -- (D);
+    \draw (Pyxd) -- (Y);
+\end{tikzpicture} \\
+&\overset{condition (1)}{=} \begin{tikzpicture}
+    \path (0,0) node[dist] (Pxd) {$\prob{P}^{\RV{Y}}$}
+    + (0.7,0) coordinate (copy1)
+    ++ (1.5,0) node[kernel] (Pyxd) {$\prob{P}^{\RV{X}\RV{D}|\RV{Y}}$}
+    ++(1,-0.15) node (Y) {$``\RV{X}''$}
+    +(0,0.3) node (D) {$``\RV{D}''$}
+    +(0,0.6) node (X) {$``\RV{Y}''$};
+    \draw (Pxd) -- (Pyxd);
+    \draw (copy1) to [out=90,in=180] (X);
+    \draw ($(Pyxd.east)+(0,0.15)$) -- (D);
+    \draw ($(Pyxd.east)+(0,-0.15)$) -- (Y);
+\end{tikzpicture}\\
+&= \begin{tikzpicture}
+    \path (0,0) node[dist] (Pxd) {$\prob{P}^{\RV{YDX}}$}
+    ++(1,-0.3) node (Y) {$\RV{X}$}
+    +(0,0.3) node (D) {$\RV{D}$}
+    +(0,0.6) node (X) {$\RV{Y}$};
+    \draw ($(Pxd.east) + (0,0.3)$) -- (X) ($(Pxd.east) + (0,-0.3)$) -- (Y) (Pxd) -- (D);
+\end{tikzpicture}
+\end{align}
+
+(2)$\implies$ (3)
+
+$\prob{P}^{\RV{X}|\RV{Y}}\otimes\stopper{0.1}_D$ is a version of $\kernel{K}^{\{\RV{X}|\RV{Y}\RV{D}\}}$ by assumption, and is clearly constant in $\RV{D}$.
+
+(3)$\implies$ (1)
+
+By lemma \ref{lem:agree_disint}, there also exists a version of $\prob{P}^{\{\RV{X}|\RV{Y}\RV{D}\}}$ constant in $\RV{D}$. Let $\kernel{M}:Y\times D\to \Delta(\sigalg{X})$ be such a version. For arbitrary $d_0\in D$, let $\kernel{N}:=\kernel{M}_{(\cdot,d_0)}:Y\to \Delta(\sigalg{X})$ be the map $x\mapsto \kernel{M}_{(x,d_0)}$. By constancy in $\RV{D}$, $\kernel{M} = \stopper{0.1}\otimes \kernel{N}$. We wish to show $\prob{P}^{\RV{X}|\RV{Y}}\utimes \prob{P}^{\RV{D}|\RV{Y}}\in \prob{P}^{\{\RV{XD}|\RV{Y}\}}$. By Theorem \ref{th:iterated_disint}, we have 
+
+\begin{align}
+\begin{tikzpicture}
+    \path (0,0) node[dist] (Pxd) {$\prob{P}^{\RV{Y}\RV{D}}$}
+    + (0.7,0.1) coordinate (copy0)
+    + (0.7,-0.1) coordinate (copy1)
+    ++ (1.5,0) node[kernel] (Pyxd) {$\kernel{N}$}
+    ++(1,0) node (Y) {$\RV{X}$}
+    +(0,0.3) node (D) {$\RV{D}$}
+    +(0,0.6) node (X) {$\RV{Y}$};
+    \draw ($(Pxd.east) + (0,0.1)$) -- ($(Pyxd.west)+(0,0.1)$);
+    \draw ($(Pxd.east) + (0,-0.1)$) -- (copy1);
+    \draw[-{Rays[n=8]}] (copy1) to [out=-80,in=180] ($(Pyxd.south)+(0,-0.3)$);
+    \draw (copy0) to [out=80,in=180] (X);
+    \draw (copy1) to [out=80,in=180] (D);
+    \draw (Pyxd) -- (Y);
+\end{tikzpicture} &= \begin{tikzpicture}
+    \path (0,0) node[dist] (Pxd) {$\prob{P}^{\RV{Y}}$}
+    + (0.7,0) coordinate (copy0)
+    ++ (1.5,0) node[kernel] (Dy) {$\prob{P}^{\RV{D}|\RV{Y}}$}
+    ++ (1.5,0) node[kernel] (Pyxd) {$\kernel{N}$}
+    ++(1,0) node (Y) {$\RV{X}$}
+    +(0,0.3) node (D) {$\RV{D}$}
+    +(0,0.6) node (X) {$\RV{Y}$};
+    \draw ($(Pxd.east) + (0,0.1)$) -- ($(Pyxd.west)+(0,0.1)$);
+    \draw ($(Pxd.east) + (0,-0.1)$) -- (copy1);
+    \draw[-{Rays[n=8]}] (copy1) to [out=-80,in=180] ($(Pyxd.south)+(0,-0.3)$);
+    \draw (copy0) to [out=80,in=180] (X);
+    \draw (copy1) to [out=80,in=180] (D);
+    \draw (Pyxd) -- (Y);
+\end{tikzpicture}
+\end{align}
+\end{theorem}
+
+\begin{definition}[Conditional probability existence]\label{def:conditional_probability_existence}
+Given a kernel space $(\kernel{K},D,\Omega)$ and random variables $\RV{X}$, $\RV{Y}$, we say $\kernel{K}^{\{\RV{Y}|\RV{X}\}}$ \emph{exists} if $\RV{Y}\CI_{\kernel{K}} \RV{D}|\RV{X}$. If $\kernel{K}^{\{\RV{Y}|\RV{X}\}}$ exists then it is by definition equal to $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ for any related probability space $(\prob{P},\Omega\times D)$.
+\end{definition}
+
+Note that $\kernel{K}^{\{\RV{Y}|\RV{X}\RV{D}\}}$ always exists.
+
+\begin{definition}[Conditional Independence]\label{def:conditional_independence}
+Given a kernel space $(\kernel{K},D,\Omega)$, some relative probability space $(\prob{P},\Omega\times D)$, variables $\RV{X}$,$\RV{Y}$ and $\RV{Z}$, $\RV{X}$ is \emph{conditionally independent} of $\RV{Z}$ given $\RV{Y}$, written $\RV{X}\CI_{\kernel{K}} \RV{Z}|\RV{Y}$ if $\kernel{K}^{\{\RV{XY}|\RV{Z}\}}$ exists and any of the following equivalent conditions hold:
+
+\todo[inline]{Almost sure equality}
+
+\begin{itemize}
+    \item $\prob{P}^{\RV{X}\RV{Z}|\RV{Y}} \sim \prob{P}^{\RV{X}|\RV{Y}}\utimes \prob{P}^{\RV{Z}|\RV{Y}}$
+    \item For any version of $\prob{P}^{\{\RV{X}|\RV{Y}\}}$, $\prob{P}^{\RV{X}|\RV{Y}}\otimes\stopper{0.1}_Z$ is a version of  $\kernel{K}^{\{\RV{X}|\RV{Y}\RV{Z}\}}$
+    \item There exists a version of $\kernel{K}^{\{\RV{X}|\RV{Y}\RV{Z}\}}\text{ constant in }\RV{Z}$
+\end{itemize}
+\end{definition}
+
+\begin{lemma}[Diagrammatic consequences of labels]
+
+In general, diagram labels are ``well behaved'' with regard to the application of any of the special Markov kernels: identities \ref{eq:identity}, swaps \ref{eq:swap}, discards \ref{eq:discard} and copies \ref{eq:copy} as well as with respect to the coherence theorem of the CD category. They are not ``well behaved'' with respect to composition.
+
+Fix some Markov kernel space $(\kernel{K},D,\Omega)$ and random variables $\RV{X}$, $\RV{Y}$, $\RV{Z}$ taking values in $X,Y,Z$ respectively. $\mathrm{Sat:}$ indicates that a labeled diagram satisfies definitions \ref{def:wl_jprob} and \ref{def:wl_disint} with respect to $(\mathscr{K},D,\Omega)$ and $\RV{X}$, $\RV{Y}$, $\RV{Z}$.  The following always holds:
+
+\begin{align}
+\mathrm{Sat:}
+\begin{tikzpicture}
+\path (0,0) node (A) {$\RV{X}$}
+++(0.8,0) node (X) {$\RV{X}$};
+\draw (A) -- (X);
+\end{tikzpicture}
+\end{align}
+
+and the following implications hold:
+\begin{align}
+\mathrm{Sat:}\;\begin{tikzpicture}
+\path (0,0) node (Z) {$\RV{Z}$} 
+++ (0.7,0) node[kernel] (M) {$\kernel{K}$}
+++ (0.7,0.15) node (X) {$\RV{X}$}
+++(0,-0.3) node (Y) {$\RV{Y}$};
+\draw (Z) -- (M) ($(M.east) + (0,0.15)$) -- (X);
+\draw ($(M.east) + (0,-0.15)$) -- (Y);
+\end{tikzpicture} &\implies \mathrm{Sat:}\; \begin{tikzpicture}
+\path (0,0) node (Z) {$\RV{Z}$} 
+++ (0.7,0) node[kernel] (M) {$\kernel{K}$}
+++ (0.7,0.15) node (X) {$\RV{X}$}
+++(0,-0.3) node (Y) {};
+\draw (Z) -- (M) ($(M.east) + (0,0.15)$) -- (X);
+\draw[-{Rays [n=8]}] ($(M.east) + (0,-0.15)$) -- (Y);
+\end{tikzpicture}\\
+\mathrm{Sat:}\;\begin{tikzpicture}
+\path (0,0) node (Z) {$\RV{Z}$} 
+++ (0.7,0) node[kernel] (M) {$\kernel{K}$}
+++ (0.7,0.15) node (X) {$\RV{X}$}
+++(0,-0.3) node (Y) {$\RV{Y}$};
+\draw (Z) -- (M) ($(M.east) + (0,0.15)$) -- (X);
+\draw ($(M.east) + (0,-0.15)$) -- (Y);
+\end{tikzpicture} &\implies \mathrm{Sat:}\; \begin{tikzpicture}
+\path (0,0) node (Z) {$\RV{Z}$} 
+++ (0.7,0) node[kernel] (M) {$\kernel{K}$}
+++ (0.7,0.15) node (X) {$\RV{Y}$}
+++(0,-0.3) node (Y) {$\RV{X}$};
+\draw (Z) -- (M) ($(M.east) + (0,0.15)$) to [out = 0, in = 180] (Y);
+\draw ($(M.east) + (0,-0.15)$) to [out = 0, in = 180] (X);
+\end{tikzpicture}\\
+\mathrm{Sat:}\begin{tikzpicture}
+\path (0,0) node (Z) {$\RV{Z}$} 
+++ (0.7,0) node[kernel] (M) {$\mathrm{L}$}
+++(0.6,0) node (X1) {$\RV{X}$};
+\draw (Z) -- (M) (M)--(X1);
+\end{tikzpicture}
+&\implies \mathrm{Sat:}\begin{tikzpicture}
+\path (0,0) node (Z) {$\RV{Z}$} 
+++ (0.7,0) node[kernel] (M) {$\mathrm{L}$}
+++ (0.7,0) coordinate (copy0)
+++(0.5,0.2) node (X1) {$\RV{X}$}
+++(0,-0.4) node (X2) {$\RV{X}$};
+\draw (Z) -- (M) (M) -- (copy0) to [bend left] (X1);
+\draw (copy0) to [bend right] (X2);
+\end{tikzpicture}\\
+\mathrm{Sat:}\begin{tikzpicture}
+\path (0,0) node (X) {$\RV{Z}$}
+++ (0.7,0) node[kernel] (K) {$\kernel{K}$}
+++(0.7,0) node (Y) {$\RV{Y}$};
+\draw (X) -- (K) -- (Y);
+\end{tikzpicture} &\implies \mathrm{Sat:}
+\begin{tikzpicture}
+\path (0,0) node (A) {$\RV{Z}$}
+++(0.5,0) coordinate (copy0)
++(1.2,0.3) node (X) {$\RV{Z}$}
+++(0.5,-0.3) node[kernel] (K) {$\kernel{K}$}
++(0.7,0) node (Y) {$\RV{Y}$};
+\draw (A) -- (copy0) to [bend left] (X);
+\draw (copy0) to [bend right] (K) (K) -- (Y);
+\end{tikzpicture}\label{eq:splitter_preserves_name}
+\end{align}
+\end{lemma}
+
+
+\begin{proof}
+\begin{itemize}
+    \item $\mathrm{Id}_X$ is a version of $\prob{P}_{\RV{X}|\RV{X}}$ for all $\prob{P}$; $\prob{P}_{\RV{X}}\mathrm{Id}_X = \prob{P}_{\RV{X}}$
+    \item $\kernel{K}\mathrm{Id}\otimes \stopper{0.2})(w;A) = \int_{X\times Y} \delta_x(A) \mathds{1}_Y(y) d\kernel{K}_w(x,y) = \kernel{K}_w(A\times Y) = \prob{P}_{\RV{X}|\RV{Z}}(w;A)$
+    \item $\int_{X\times Y} \delta_{\mathrm{swap(x,y)}}(A\times B)d\kernel{K}_w(x,y) = \prob{P}_{\RV{Y}\RV{X}|\RV{Z}}(w;A\times B)$
+    \item $\kernel{K}\splitter{0.1} (w;A\times B) = \int_{X} \delta_{x,x}(A\times B) d\kernel{K}_w(x) = \prob{P}_{\RV{X}\RV{X}|\RV{Z}} (w;A\times B)$
+\end{itemize}
+\ref{eq:splitter_preserves_name}: Suppose $\kernel{K}$ is a version of $\prob{P}_{\RV{Y}|\RV{Z}}$. Then
+\begin{align}
+\prob{P}_{\RV{Z}\RV{Y}} &= \begin{tikzpicture}
+\path (0,0) node[dist] (m) {$\prob{P}_{\RV{Z}}$}
+++ (0.7,0.15) coordinate (copy0)
+++ (1.2,0) node (E) {$\RV{Z}$}
+++(-0.7,-0.3) node[kernel] (K) {$\kernel{K}$}
+++(0.7,0) node (F) {$\RV{Y}$};
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw (copy0) to [bend right] (K) (K) -- (F);
+\end{tikzpicture}\\
+\prob{P}_{\RV{Z}\RV{Z}\RV{Y}} &= \begin{tikzpicture}
+\path (0,0) node[dist] (m) {$\prob{P}_{\RV{Z}}$}
+++ (0.7,0.15) coordinate (copy0)
++ (0.5,0) coordinate (copy1)
++ (1.2,0.3) node (Xm) {$\RV{Z}$}
+++ (1.2,0) node (E) {$\RV{Z}$}
+++(-0.7,-0.3) node[kernel] (K) {$\kernel{K}$}
+++(0.7,0) node (F) {$\RV{Y}$};
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw (copy0) to [bend right] (K) (K) -- (F);
+\draw (copy1) to [bend left] (Xm);
+\end{tikzpicture}\\
+&= \begin{tikzpicture}
+\path (0,0) node[dist] (m) {$\prob{P}_{\RV{Z}}$}
++ (0.5,0.15) coordinate (copy1)
+++ (0.7,0.15) coordinate (copy0)
++ (1.2,0.3) node (Xm) {$\RV{Z}$}
+++ (1.2,0) node (E) {$\RV{Z}$}
+++(-0.7,-0.3) node[kernel] (K) {$\kernel{K}$}
+++(0.7,0) node (F) {$\RV{Y}$};
+\draw ($(m.east) + (0,0.15)$) -- (E);
+\draw (copy0) to [bend right] (K) (K) -- (F);
+\draw (copy1) to [bend left] (Xm);
+\end{tikzpicture}
+\end{align}
+Therefore $\splitter{0.1}(\mathrm{Id}_X\otimes\kernel{K})$ is a version of $\prob{P}_{\RV{Z}\RV{Y}|\RV{Z}}$ by Definition \ref{def:conditional_probability_existence} 
+\end{proof}
+
+The following property, on the other hand, does \emph{not} generally hold:
+\begin{align}
+\mathrm{Sat:}\begin{tikzpicture}
+\path (0,0) node (X) {$\RV{Z}$}
+++ (0.7,0) node[kernel] (K) {$\kernel{K}$}
+++(0.7,0) node (Y) {$\RV{Y}$};
+\draw (X) -- (K) -- (Y);
+\end{tikzpicture},
+\begin{tikzpicture}
+\path (0,0) node (X) {$\RV{Y}$}
+++ (0.7,0) node[kernel] (K) {$\kernel{L}$}
+++(0.7,0) node (Y) {$\RV{X}$};
+\draw (X) -- (K) -- (Y);
+\end{tikzpicture}
+ &\implies \mathrm{Sat:}
+\begin{tikzpicture}
+\path (0,0) node (X) {$\RV{Z}$}
+++ (0.7,0) node[kernel] (K) {$\kernel{K}$}
+++(0.7,0) node[kernel] (L) {$\kernel{L}$}
+++(0.7,0) node (X1) {$\RV{X}$};
+\draw (X) -- (K) -- (Y) -- (L) -- (X1);
+\end{tikzpicture}\label{eq:composition}
+\end{align}
+
+Consider some ambient measure $\prob{P}$ with $\RV{Z}=\RV{X}$ and $\prob{P}_{\RV{Y}|\RV{X}}=x\mapsto \mathrm{Bernoulli}(0.5)$ for all $z\in Z$. Then $\prob{P}_{\RV{Z}|\RV{Y}}=y\mapsto \prob{P}_{\RV{Z}}$, $\forall y\in Y$ and therefore $\prob{P}_{\RV{Y}|\RV{Z}}\prob{P}_{\RV{Z}|\RV{Y}}=x\mapsto \prob{P}_{\RV{Z}}$ but $\prob{P}_{\RV{Z}|\RV{X}} = x\mapsto \delta_x\neq \kernel{\prob{P}_{\RV{Y}|\RV{Z}}\prob{P}_{\RV{Z}|\RV{Y}}}$.
