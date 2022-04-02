@@ -1,0 +1,77 @@
+%!TEX root = main.tex
+
+
+
+\section{Summary}
+
+Statistical models are ubiquitous in the analysis of inference problems. A statistical model features a set of \emph{states}, and each state is mapped to a probability distribution over \emph{outcomes}. If we want to model problems involving \emph{decisions} and \emph{consequences}, we need to consider different kinds of statistical models. We introduce two types of model for this purpose: \emph{two player statistical models} which differ from classical statistical model in that the state is assumed to consist of a decision and a \emph{hypothesis} (the two players are the decision maker ``player D'' and the hypothesis selector ``player H''). They model the consequences of decisions under various hypotheses. A \emph{see-do model} is a special case of two player statistical model that can be used in situtations where some \emph{observations} are available for review prior to selecting a decision. See-do models are the main focus of work here and problems involving observations, decisions and consequences will be discussed at length in Chapter \ref{ch:evaluating_decisions}.
+
+A common simplifying assumption made when using classical statistical models is that they are \emph{conditionally independent and identically distributed} (conditinally IID); this means that the model maps each state to an independent and identically distributed (IID) sequence of observations. This just a common choice, it is not a strict requirement. A similar assumption is likely to be useful for see-do models. If consequences depend on choices, then it does not make sense to assert that observations and consequences together form a single IID sequence of random variables, so we need to consider alternatives. We propose that models where observervations are an IID sequence and choices and consequences together are \emph{independent and functionally identical} (IFI; defined later in this chapter) are similar to conditionally IID statistical models. 
+
+Instead of directly assuming that a conditionally IID model is appropriate, \emph{De Finetti's representation theorem} shows that probability models where the sequence of observations is \emph{exchangeable} induce conditionally IID statistical models. The assumption of exchangeabile observations is preferable to the assumption of IID observations if a probability model is being used to represent subjective uncertainty. We investigate whether there is an analogous result relating ``exchangeability-like'' assumptions for see-do models to ``IID-like'' assumptions. We show that there is: in particular, a see-do ``forecast'' with exchangeable observations and \emph{functionally exchangeable} decision to consequence maps induces a see-do model with IID observations and IFI consequences.
+
+The assumption of functional exchangeability will appear again in Chapter \ref{ch:ints_counterfactuals} as part of the definition of \emph{counterfactual models}, and the joint assumptions of exchangeable observations and functionally exchangeable consequences to motivate the assumption of \emph{imitability} in Chapter \ref{ch:inferring_causes}, an assumption that in combination with a number of other assumptions allows for inference of consequences from data.
+
+\section{Modelling observations, choices and consequences}
+
+\subsection{Modelling observations with statistical models}
+
+Statistical models are a ubiquitous type of model in statistics and machine learning. They consist of a set of \emph{states} $(S,\sigalg{S})$, and for each state the model prescribes a single probability distribution on a given measurable set of \emph{outcomes} $(O,\sigalg{O})$.
+
+\begin{definition}[Statistical model]\label{def:statistical model}
+A statistical model is a set of states $(S,\sigalg{S})$, a set of outcomes $(O,\sigalg{O})$ and a stochastic map $\kernel{T}:S\to \Delta(\sigalg{O})$.
+\end{definition}
+
+\begin{definition}[State and outcome variables]\label{def:state_outcome}
+Given a statistical model $(\kernel{T},(O,\sigalg{O}),(S,\sigalg{S}))$, define the \emph{state variable} $\RV{S}:S\times O\to S$ as the projection from $S\times O\to S$ and define the \emph{outcome variable} $\RV{O}:S\times O\to O$ as the projection onto $O$.
+\end{definition}
+
+The common example of a potentially biased coin is modelled with a statistical model. We suppose our coin has some rate of heads $\theta\in [0,1]$, and we furthermore suppose that for each $\theta$ the result of flipping the coin can be modeled (in some sense) by the probability distribution $\text{Bernoulli}(\theta)$. The statistical model here is the set of states $S=[0,1]$ (corresponding to \emph{rates of heads}), the observation space $O=\{0,1\}^n$ with the discrete sigma-algebra (where $n$ is the number of flips observed) and the stochastic map $\kernel{B}:[0,1]\to \Delta(\mathscr{P}(0,1))$ which is given by $\kernel{B}:\theta\to \text{Bernoulli}(\theta)$.
+
+Almost any theoretical treatment of statistics or machine learning will at some point make use of statistical models to describe the problem they are addressing -- for a collection of examples from the last 100 years, see \cite{Goodfellow-et-al-2016,vapnik_nature_2013,bishop_pattern_2006,le_cam_comparison_1996,freedman_asymptotic_1963,wald_statistical_1950,de_finetti_foresight_1992,fisher_statistical_1992}. They are often simply assumed without a great deal of discussion of why this type of model is chosen, or what role they play.
+
+If we want to reason about how well some learning algorithm performs in some context, we typically require a reasonable model of the context in which the learning algorithm operates. The algorithms themselves may not give us such a model. Because learning almost always operates in a context with noise an uncertainty, we need models that can handle noise and uncertainty. Probability models are a very common choice for this. In addition, it is often assumed that we do not know with certainty the exact probability model that should be used to model a context. A statistical model assumes a certain number of states may prevail -- reflecting uncertainty in the ``mechanics of the world'' -- and given any state it gives us a probability distribution -- reflecting uncertainty remaining after the mechanics of the world are well-understood.
+
+Learning algorithms don't necessarily implement reasonable models of the world. For example, consider a linear regressor that takes a set of predictors $x\in X$ and targets $y\in Y$ and returns some $\beta\in B$ such that $(y-x^T\beta)^2$ is as small as possible. It is possible to interpret $B$ as a set of states, and consider the learner to be implementing the statistical model $(\kernel{T},B,\mathcal{L}_{X\to Y})$ where $\mathcal{L}_{X\to Y}$ is the set of liner function $X\to Y$ given by $\{x\mapsto x^T\beta|\beta\in B\}$ and $\kernel{T}$ maps a state $\beta\in B$ deterministically to the function $x\mapsto x^T\beta$. This is, formally, a statistical model, but it is not one that would typically be considered a good model of the world in the kinds of problems that a linear regressor is used to solve. One problem with this model is that it is deterministic - the outcome for any $\beta\in B$ will be a particular function $X\to Y$. However, it will almost never be the case that some set of targets $y$ will be an exact function of some set of predictors $x$, and insisting on an exact functional relationship will typically give very poor generalisation results if this demand can be satisfied at all.
+
+Suppose we want to ask whether the function $f$ given by a linear regressor is useful for some purpose. In order to address this question, we want to consider a more appropriate model of the world than the crude statistical model given above, and consider what behaviour we will see from the regressor under different assumptions imposed on this model. Statistical models typically are used to serve the purpose of a ``more appropriate model of the world''. In this example, we might consider a statistical model $(\kernel{T},H,O)$ where for each $h\in H$, $\kernel{T}_h\in \Delta(\sigalg{Y}\otimes\sigalg{X})$ such that $\kernel{T}_h^{\RV{Y}|\RV{X}}=\text{Normal}(\RV{X}^T\beta_h,\sigma_h)$. If we assume the data generating process is described by such a probability distribution for some $h$, we can ask questions like ``does the linear regressor output a $\beta$ such that $\RV{Y}-\RV{X}^T\beta<\epsilon$ with high probability for all $h\in H$?''
+
+\subsection{Modelling choices and consequences with two-player statistical models}
+
+The states in a statistical model are usually considered to be ``under the control of nature''. In the possibly biased coin example above, if we were to consider some ``player D'' acutally flipping the coin and trying to infer the bias, we would typically assume that their opinion about the coin's bias does not affect the coin's actual bias; they could decide it is biased towards heads when in fact it is completely unbiased. In some cases player D can make choices that affect the outcomes. Suppose player D has the option to choose how high to toss the coin -- perhaps they can aim for a toss height anywhere from 10 to 50cm. This plausibly affects the outcomes of their coin toss and, unlike the coin's bias, they gets to choose the height they intend to toss it. If they decide to toss it to a height of 15cm then 15cm is the height they have chosen to toss it to. Unlike the state, which can differ from whatever player D ultimately decides on, the choice made by player D is the same thing as whatever they ultimately decide on. We call features of the state that are not under player D's control \emph{hypotheses} and features that are under player D's control \emph{decisions}, and statistical models in which the state is the Cartesian product of a set of hypotheses and a set of decisions ``two player statistical models'' (the two players being nature or ``player H'' and the decision maker or ``player D'').
+
+\begin{definition}[Two player statistical model]\label{def:2p_stat}
+A \emph{two-player statistical model} is a tuple $(\kernel{T},\RV{H},\RV{D},\RV{O})$ where $(\kernel{T},(H\times D,\sigalg{H}\otimes\sigalg{D}), (O,\sigalg{O}))$ is a statistical model and $\RV{H}:H\times D\times O\to H$, $\RV{D}:H\times D\times O\to D$ and $\RV{O}:H\times D\times O\to O$ are measurable functions that project elements of $H\times D\times O$ to their respective codomains. $\RV{H}$ is called the \emph{hypothesis}, $\RV{D}$ the \emph{decision} and $\RV{O}$ the \emph{outcome}.
+\end{definition}
+
+Whenever we propose a two player statistical model, we will also assume for any random variables $\RV{X}: H\times D\times O\to X$ and $\RV{Y}:H\times D\times O\to Y$, a disintegration $\kernel{K}^{\RV{Y}|\RV{XDH}}:X\times D\times H\to \Delta(\sigalg{Y})$ exists (see Theorem \ref{th:existence_continous} for a sufficient condition).
+
+The problems that we will mostly study in this work, in addition to having a second player (``player D''), will often involve some data $\RV{X}$ that is observed before the second player is able to make a choice. Two player statistical models with \emph{observations} are called \emph{see-do models}.
+
+\begin{definition}[See-Do model]\label{def:seedo}
+A \emph{see-do model} $(\kernel{T},\RV{H},\RV{D},\RV{X},\RV{Y})$ is a two-player statistical model along with two additional random variables: the \emph{observation} $\RV{X}: H\times D\times O\to X$ and the \emph{consequence} $\RV{Y}:H\times D\times O\to Y$. The outcome variable is defined to be the coupled product of the observation and the consequence $\RV{O}=(\RV{X},\RV{Y})$, and we will leave this implicit when specifying a see-do model. A see-do model must observe the conditional independence:
+\begin{align}
+\RV{X}\CI_\kernel{T} \RV{D}|\RV{H} \label{eq:see_do_independence_requirement}
+\end{align}
+\end{definition}
+
+We can informally read the independence requirement as saying ``the observations are independent of the decision given the hypothesis''. This does not imply that probability models we construct from $\kernel{T}$ will necessarily have the property that $\RV{D}$ and $\RV{X}$ will be independent conditional on $\RV{H}$, and in fact this will often not be the case. In Chapter \ref{ch:ints_counterfactuals} we will argue that this requirement captures the intuition that observations are not ``affected'' by decisions. For now, we will observe that this independence requirement means that $\kernel{T}$ can be drawn with no path from $\RV{D}$ to $\RV{X}$.
+
+Explicitly, the independence on line \ref{eq:see_do_independence_requirement} implies that the kernel $\kernel{T}$ can be drawn as follows:
+
+\begin{align}
+\kernel{T}:= \begin{tikzpicture}
+                 \path (0,0) node (H) {$\RV{H}$}
+                 + (0,-1) node (D) {$\RV{D}$}
+                 ++ (0.5,0) node[copymap] (copy0) {}
+                 ++ (0.9,0) node[kernel] (XH) {$\kernel{T}^{\RV{X}|\RV{H}}$}
+                 + (0,-0.85)  node[kernel] (YHD) {$\kernel{T}^{\RV{Y}|\RV{HD}}$}
+                 ++ (1,0) node (X) {$\RV{X}$}
+                 + (0,-0.85) node (Y) {$\RV{Y}$};
+                 \draw (H) -- (XH) -- (X);
+                 \draw (copy0) to [out=-45,in=180] ($(YHD.west) + (0,0.15)$);
+                 \draw (D) to [out=0,in=180] ($(YHD.west) + (0,-0.15)$) (YHD) -- (Y);
+             \end{tikzpicture}
+\end{align}
+
+In this picture, again informally, $\RV{Y}$ takes input from $\RV{D}$ but $\RV{X}$ does not.    
