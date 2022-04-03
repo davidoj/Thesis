@@ -18,7 +18,14 @@ At a very general level, a model that helps us to compare choices is a set-value
 
 In practice, we will take the consequences $F$ to be a set of probability distributions on a common sample space. There is a large literature on whether this is always an appropriate way to represent consequences, and we will address a small slice of it in Section \ref{sec:how_represent_conseqeunces}, but arguing that this is always a reasonable choice is not our objective here. Rather, we observe that there is a long history of using probability theory for the purpose of representing uncertain knowledge, and probability theory in conjunction with the principle of expected utility is often used to compare the desirability of uncertain outcomes.
 
-While it doesn't frequently enter into the reasoning we present in the upcoming chapters, we spend some time here considering how probabilistic models are related to the ``real world phenomena'' that they are supposed to be models of. In particular, \emph{variables} are ``points of attachment'' between the model and the real world -- they point to the parts of the real world that correspond to features of the model. There are many standard accounts of how variables accomplish this in regular statistical models, but we need to elaborate on this account slightly to account for the inclusion of a domain $C$ of choices that are each associated with their own consequences. In Section \ref{sec:variable}, we present both the standard account of variables and how we propose to elaborate this account to include a domain of choices.
+While it doesn't often enter into the reasoning we present in the upcoming chapters, we spend some time here considering how probabilistic models are related to the ``real world phenomena'' that they are supposed to be models of. In particular, \emph{variables} are ``points of attachment'' between the model and the real world -- they point to the parts of the real world that correspond to features of the model. There are many standard accounts of how variables accomplish this in regular statistical models, but we need to elaborate on this account slightly to account for the inclusion of a domain $C$ of choices that are each associated with their own consequences. In Section \ref{sec:variable}, we present both the standard account of variables and how we propose to elaborate this account to include a domain of choices.
+
+\subsection{TL;DR}
+
+We model the consequences of a set of choices $C$, and we do this with a map $\prob{P}_\cdot:C\kto \Omega$ for some sample space $\Omega$. The range of this map $\prob{P}_C:=\{\prob{P}_\alpha|\alpha\in C\}$ is a probability set.
+
+In Chapter \ref{ch:evaluating_decisions}, we consider maps from the choice set $C$ to unique probability measures. A straightforward generalisation of this scheme is to map elements of $C$ to \emph{probability sets} rather than unique probability measures. We can still construct a probability set from the range of $\prob{P}_\cdot$, in this case it is the union $\prob{P}_C=\cup_{\alpha\in C} \prob{P}_\alpha$. In Chapter \ref{ch:sdt}, we consider this generalisation.
+
 
 \section{Variables}\label{sec:variable}
 
@@ -158,20 +165,9 @@ A decision procedure is a collection $\{\proc{S}_\alpha\}_{\alpha\in C}$ of meas
 
 Like measurement procedures, a decision procedure $\{\proc{S}_\alpha\}_{\alpha\in A}$ isn't a well-defined mathematical object; it's not really a ``set'', because the contents are real-world actions.
 
-\section{How should consequences be represented in decision problems?}\label{sec:how_represent_conseqeunces}
+\section{Representation theorems}\label{sec:how_represent_conseqeunces}
 
-Decision problems require certain types of additional knowledge, and see-do models or forecasts can represent knowledge of this type. We can ask if and when it is a sound choice to use these kinds of models for this purpose, or even whether reasonable postulates of rationality demand the use of see-do models for certain types of problem.
-
-In fact, we won't tackle the question of whether rational deliberation demands the use of see-do models here, though we will briefly survey some of the attempts at this question that have already been undertaken. Though we do not present an axiomatic justification of see-do models, we will argue that they build on well-established tools for inference from data and decision making under uncertainty:
-\begin{itemize}
-    \item In this chapter, we will show that see-do forecasts can be derived from representing the problem of choosing \emph{inference functions} as the problem of choosing between lotteries, a principle that has been widely used to formalize problems of choice under uncertainty since .... Pascal/Bernoulli? ... and continues to be a standard approach today \todo{sort this out, obviously}
-    \item Also in this chapter, we will show that see-do models are closely related to \emph{statistical decision theory}, as introduced by \citet{wald_statistical_1950}, which laid the foundations of statistical learning theory \citep{vapnik_nature_2013} which is a standard approach to studying the theory of machine learning today
-    \item In the Chapter \ref{ch:ints_counterfactuals}, we will show that there is a formal identity between interventional models and see-do models and, furthermore, there is also a formal identity between potential outcomes models and a subset of see-do models
-\end{itemize} 
-
-See-do models follow from the application of tried and true approaches to decision making to problems of causal inference, and subsume standard approaches to causal inference. This is a good reason to think that they are interesting to understand even without an axiomatic foundation.
-
-Nevertheless, there is a substantial body of literature on the question of axiomatic foundations for knowledge representation in decision problems. Most ``representation theorems'' in this literature aim to show that a particular means of representing knowledge is \emph{necessary} given a number set of assumptions that purport to define ``rational preferences'' or ``rational beliefs''. The question of whether a given set of axioms are in fact required to call an agents preferences or beliefs rational is a difficult one, and we will not have anything to add to that discussion here -- neither by commenting on axioms already proposed or by proposing our own. However, we are still interested in comparing see-do models with model types used in existing representation theorems. Understanding the relationship between the various model types proposed in this literature and see-do models can be illuminating, even without critiquing the systems of axioms proposed (which are in many cases quite complicated).
+There is a substantial body of literature on the question of axiomatic foundations for knowledge representation in decision problems. Most ``representation theorems'' in this literature aim to show, given a collection of assumptions that purport to define ``rational preferences'' over a collection of choices and outcomes can be represented by certain kinds of probabilistic models. The question of whether a given set of axioms are in fact required to call an agents preferences or beliefs rational is a difficult one, and we will not have anything to add to that discussion here -- neither by commenting on axioms already proposed or by proposing our own. However, we are still interested in comparing see-do models with model types used in existing representation theorems. Understanding the relationship between the various model types proposed in this literature and see-do models can be illuminating, even without critiquing the systems of axioms proposed (which are in many cases quite complicated).
 
 The following discussion will often make reference to \emph{preference relations}. A preference relation is a relation $\succ,\prec,\sim$ on a set $A$ such that for any $a,a'$ in $A$ we have:
 \begin{itemize}
@@ -184,14 +180,9 @@ This definition is meant to correspond to the common sense idea of having prefer
 
 \subsection{von Neumann-Morgenstern utility}
 
-\citet{von_neumann_theory_1944} proved that when the \emph{vNM axioms} hold (not defined here; see the original reference or \citet{steele_decision_2020}), an agent's preferences between ``lotteries'' (which for our purposes are probability distributions in $\Delta(\sigalg{Y})$) can be represented with a utility function $u:Y\to \mathbb{R}$ unique up to affine transformation along with the principle of expected utility, which is, for lotteries $\prob{P},\prob{P}'\in\Delta(\sigalg{Y})$ the rule that $\mathbb{E}_{\prob{P}}[u]> \mathbb{E}_{\prob{P}'}[u]$ is equivalent to the statement $\prob{P} \succ \prob{P}'$.
+\citet{von_neumann_theory_1944} proved that when the \emph{vNM axioms} hold (not defined here; see the original reference or \citet{steele_decision_2020}), an agent's preferences between ``lotteries'' (which for our purposes are probability distributions in $\Delta(\Omega)$) can be represented as the comparison of the expected value under each lottery of a utility function $u$ unique up to affine transformation. That is, for lotteries $\prob{P}_\alpha$ and $\prob{P}_{\alpha'}$, there exists some $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that $\mathbb{E}_{\prob{P}_\alpha}[u]> \mathbb{E}_{\prob{P}_{\alpha'}}[u]$ if and only if $\prob{P}_{\alpha} \succ \prob{P}_{\alpha'}$.
 
-If we consider a set of decisions $D$ and a do-forecast $\kernel{T}^{\RV{Y}|\RV{{D}}}$, then we can identify the set of lotteries with the evaluations of each decision under $\kernel{T}$ -- that is, the lotteries are $\{\kernel{T}^{\RV{Y}|\RV{D}}_d|d\in D\}$. We can then define preferences over decisions: $d$ is strictly preferred to $d'$ if and only if $\kernel{T}_{d}^{\RV{Y}|\RV{D}}$ is strictly preferred to $\kernel{T}_{d'}^{\RV{Y}|\RV{D}}$. Then, if preferences over the set of lotteries satisfies the \emph{vNM axioms}, there exists a utility function $u:Y\to \mathbb{R}$ such that
-\begin{itemize}
-    \item $d\succ d'$ if and only if $\kernel{T}_d^{\RV{Y}|\RV{D}}u>\kernel{T}_{d'}^{\RV{Y}|\RV{D}}u$
-\end{itemize}
-
-\todo[inline]{Is this worth stating as a theorem?}
+In the proposed setup, the set of lotteries forms a probability set -- what we call ``consequences''. The von Neumann-Morgenstern theorem establishes that preferences between consequences satisfy the vNM axioms, then these preferences can be represented as the expectation of some utility function. It does not provide reason to represent consequences with probability distributions in the first place, which is the main question we're interested in here.
 
 \subsection{Savage's decision theory}
 
