@@ -167,16 +167,16 @@ Like measurement procedures, a decision procedure $\{\proc{S}_\alpha\}_{\alpha\i
 
 \section{Representation theorems}\label{sec:how_represent_conseqeunces}
 
-There is a substantial body of literature on the question of axiomatic foundations for knowledge representation in decision problems. Most ``representation theorems'' in this literature aim to show, given a collection of assumptions that purport to define ``rational preferences'' over a collection of choices and outcomes can be represented by certain kinds of probabilistic models. The question of whether a given set of axioms are in fact required to call an agents preferences or beliefs rational is a difficult one, and we will not have anything to add to that discussion here -- neither by commenting on axioms already proposed or by proposing our own. However, we are still interested in comparing see-do models with model types used in existing representation theorems. Understanding the relationship between the various model types proposed in this literature and see-do models can be illuminating, even without critiquing the systems of axioms proposed (which are in many cases quite complicated).
+We have chosen to represent decision problems with probability functions $C\kto \Omega$ for some sample space $(\Omega,\sigalg{F})$ of ``consequences''. We haven't offered a deep justification for this choice. One question we might be inclined to ask is: what are we missing out on by making this choice? Representation theorems can help us to answer this question. A representation theorem proposes a collection of axioms regulating the kinds of preferences or beliefs we want our models to admit, and demonstrates that certain families of models can represent all preferences or beliefs consistent with these axioms. In particular, the representation theorems of Savage and Jeffreys both show that preferences among choices that satisfy their respective axiomatisations can be modeled with probability sets and utilities. Thus the question of what we're missing out on can be given the answer: we're missing out on the representation of preferences that satisfy neither set of axioms.
 
-The following discussion will often make reference to \emph{preference relations}. A preference relation is a relation $\succ,\prec,\sim$ on a set $A$ such that for any $a,a'$ in $A$ we have:
+The following discussion will often make reference to \emph{complete preference relations}. A preference relation is a relation $\succ,\prec,\sim$ on a set $A$ such that for any $a,a'$ in $A$ we have:
 \begin{itemize}
     \item Exactly one of $a\succ a'$, $a\prec a'$, $a\sim a'$ holds
     \item $(a\succ a')\iff(a'\prec a)$
     \item $a\succ a'$ and $a'\succ a''$ implies $a\succ a''$
 \end{itemize}
 
-This definition is meant to correspond to the common sense idea of having preferences over some large set of things, where $\succ$ can be read as ``strictly better than'', $\prec$ read as ``strictly worse than'' and $\sim$ read as ``as good as''. Given any two things from the set, I can say which one I prefer, or if I prefer neither (and all of these are mutually exclusive). If I prefer $a$ to $a'$ then I think $a'$ is worse than $a$. Furthermore, if I prefer $a$ to $a'$ and $a'$ to $a''$ then I prefer $a$ to $a''$.
+This definition is meant to correspond to the common sense idea of having preferences over some set of things, where $\succ$ can be read as ``strictly better than'', $\prec$ read as ``strictly worse than'' and $\sim$ read as ``as good as''. Given any two things from the set, I can say which one I prefer, or if I prefer neither (and all of these are mutually exclusive). If I prefer $a$ to $a'$ then I think $a'$ is worse than $a$. Furthermore, if I prefer $a$ to $a'$ and $a'$ to $a''$ then I prefer $a$ to $a''$.
 
 \subsection{von Neumann-Morgenstern utility}
 
@@ -186,52 +186,51 @@ In the proposed setup, the set of lotteries forms a probability set -- what we c
 
 \subsection{Savage's decision theory}
 
-The von Neumann-Morgenstern theorem shows that, if we take do-forecasts for granted and assuming the vNM axioms then we can represent preferences between decisions using expected utility. We are more interested in when we should use do-forecasts or see-do forecasts or see-do models. 
-
-\citet{savage_foundations_1954} proved a representation theorem for decision problems, which has more overlap with our original question - namely, what should we use to represent the knowledge we bring to a kind of idealised decision problem. Savage's decision problems featured \emph{states} $H$ (which we can be identified with hypotheses in Definition \ref{def:2p_stat}), \emph{acts} $D$ (which can be identified with decisions in \ref{def:2p_stat}) and \emph{outcomes} $O$ (which can be identified with outcomes in Definition \ref{def:2p_stat}). Savage takes it as a given that we have a deterministic two player statistical model $(\kernel{T},\RV{H},\RV{D},\RV{O})$, and furthermore for \emph{any} function $f:H\to O$ there exists some $d\in D$ such that $\kernel{T}_{h,d} = \delta_{f(h)}$, and furthermore we have a preference relation on $D$. He then shows that if the \emph{Savage axioms} hold for the preference relation on $D$ then there exists a unique probability measure $\prob{P}\in \Delta(\sigalg{H})$ and a utility $u:O\to \mathbb{R}$ unique up to affine transformation such that
-
+Unlike con Neumann-Morgenstern's theory, \citet{savage_foundations_1954} decision theory doesn't assume that probability models should be used to represent uncertainty over consequences. Instead, Savage decision theory posits as basic elements a measurable set of \emph{states} $(S,\sigalg{S})$, and sets of \emph{acts} $C$ (equivalent to choices in our language) and \emph{consequences} $F$. Furthermore, it is taken as a given that a known map $T:S\times C\to F$ is available. The preference relation $\succ$ is over acts $C$, and if the preference relation along with the map $T$ satisfies the \emph{savage axioms} (not given here, see \citet{savage_foundations_1954} or \citet{steele_decision_2020}), then there exists a unique probability function $\prob{P}\in \Delta(S)$ and a utility $u:F\to \mathbb{R}$ unique up to affine transformation such that
 \begin{align}
-(d\succ d')\iff (\prob{P}\otimes \delta_d)\kernel{T} u > (\prob{P}\otimes \delta_{d'})\kernel{T} u\label{eq:savage_utility}
+    \alpha\succ \alpha' \iff \int_S u(T(s,\alpha))\prob{P}(\mathrm{d}s) > \int_S u(T(s,\alpha'))\prob{P}(\mathrm{d}s)
 \end{align}
 
-The use of two player statistical models is baked into Savage's representation theorem as a basic assumption. However, he also shows that if the Savage axioms hold for preferences among outcomes, then it is possible to define a unique do-forecast
-
+Note that if we equip acts and consequences with measures $(C,\sigalg{C})$ and $(F,\sigalg{F})$, $T$ and $\prob{P}$ together induce the probability function $\prob{Q}_\cdot:C\kto F$ given by
 \begin{align}
-    \kernel{F}:=(\prob{P}\otimes \mathrm{Id}_D)\kernel{T}
+    \prob{Q}_\alpha &:= \int_S T(s,\alpha)\prob{P}(\mathrm{d}s)\\
+                    &=\prob{P}^{\RV{T}_\alpha}
 \end{align}
-
-(using the existing definitions for $\RV{D}$ and $\RV{O}$) such that
-
+where $\RV{T}_\alpha:S\to F$ is the function $s\mapsto T(s,\alpha)$. If so, we can then re-state Savage's criterion for preferences as
 \begin{align}
-    (d\succ d')\iff \kernel{F}_d\kernel{T} u > \kernel{F}_d u\label{eq:savage_utility2}
+    \alpha\succ \alpha' \iff \prob{Q}_\alpha u > \prob{Q}_{\alpha'} u
 \end{align}
+ If $\prob{Q}$ depends measurably on $S$, then it is a Markov kernel.
 
-\todo[inline]{Is this worth stating as a theorem?}
+Thus Savage's theorem establishes that the relationship between acts and consequences can be represented by a probability function, and furthermore this probability function is unique. 
+
+Savage's first axiom is:
+\begin{itemize}
+    \item P1: There is a complete preference relation $\succ,\prec,\sim$ on $C$
+\end{itemize}
+
+Our initial proposition was that the consequences $F$ are a set of things we know how to rank by preference, and acts $C$ are the things we want to rank. If we suppose that a complete preference relation on $F$, a complete preference relation on $C$ does not follow. P1 can be viewed as the requirement that the mathematical model offers a ``full solution'' to the decision problem at hand -- it provides us with a full ordering on the choices $C$, and (supposing a finite set) an unambiguous subset of choices that are all equally optimal. 
+
+Without P1, we may propose models that yield a collection of incomparable choices and choices between them must be made according to some informal principle. On the other hand, with P1 we may end up having to add additional constraints to our model which have informal motivations themselves. That is, P1 makes model construction more demanding while making decisions easier.
+
+Savage seems to take states $S$ and consequences $F$ as basic, while defining acts $C$ to be the set of all functions from states to consequences. However, it seems to be consistent with Savage's theory to consider acts $C$ and consequences $F$ as basic (as we do), and defining states to be the set of all functions from acts to consequences. In this view, the states can be identified with the extreme points of the set of all models we can consider.
+
+A detailed consideration of Savage's axiomatisation is out of the scope of this work.
 
 \subsection{Jeffrey's decision theory}
 
-The approach to decision making set out by \citet{jeffrey_logic_1990} and \citet{bolker_functions_1966} differs from Savage's approach in a number of ways. Firstly, the representation theorem proved by Bolker does not distinguish between hypotheses, outcomes and decisions. It assumes only an algebra of outcomes $(O,\sigalg{O})$ and a preference relation over these outcomes. If the preference relation satisfies the \emph{Jeffrey axioms} then there exists a utility $u:O\to\mathbb{R}$ and a probability distribution $\prob{P}\in \Delta(\sigalg{O})$ which are non-unique such that for $A,B\in \sigalg{O}$ and finite partition $C_1,...,C_n\in \sigalg{O}$ (the proof is given by \citet{bolker_functions_1966}):
-
-\begin{align}
-    (A \succ B) \iff (\prob{P}^{\RV{O}|\mathds{1}_A}_1u>\prob{P}^{\RV{O}|\mathds{1}_B}_1u) \label{eq:ev_dec_theory}
-\end{align}
-
-A key feature to note here is that instead of comparing two decisions by evaluating one Markov kernel at two different points (as in our theory and Savage's), Jeffrey compares two events by comparing two different Markov kernels $\prob{P}^{\RV{O}|\mathds{1}_A}$ and $\prob{P}^{\RV{O}|\mathds{1}_B}$.  In order to use such a model in a decision problem, Jeffrey suggests we can identify a subset of the events with the choices we can make: $D:=\{D_i\in \sigalg{O}|i\in A\}$ for some set $A$, so we get one Markov kernel for each decision we might make. 
-
-Whether we should model decisions as a set $D$ and consequence maps as Markov kernels with $D$ as the domain or as a collection of events and consequence maps as a corresponding collection of Markov kernels, or something else is a somewhat subtle issue that I don't fully understand.
-
-I think Jeffrey goes too far in saying decisions are events. Consider the problem of deciding whether or not to order a drink, and suppose that I choose to consider a set of options $D=\{d_1=\text{``order a drink and make sure that drink is water''}, d_2=\text{``order a drink''}, d_3=\text{``don't order a drink''}\}$. If I choose $d_1$, then it will certainly be true that I will order a drink and also true that I will order a drink of water, and in general an event ``A and B'' implies an event ``A''. However, $d_1$ and $d_2$ are distinct -- if I particularly want to drink water then I will choose $d_1$ and not $d_2$. This feature of decision making is reflected in our idealised decision problem at the start where we may make a single decision from our set of available choices.
-
-At the same time, it does seem that in the same way that events leave many features of the outcome underspecified, when we describe choices we very often leave features of what we precisely intend to do underspecified. Choices aren't necessarily underspecified: imagine a reinforcement learner in a simulated discrete time environment. At each timestep this learner takes its history so far and outputs some action and, if we examine the code governing how it interacts with its environment we can probably deduce \emph{all} the actions available to it at each timestep. In less controlled contexts, which is really most contexts we are familiar with, if we want to come up with a list of decisions we could make then all the decisions in this list are likely to leave a large number of things that we could in principle decide on underspecified. In the example above, it seems I could decide to:
+Jeffrey's decision theory is an alternative to Savage's that offers a slightly different axiomatisation. It is set out in \citet{jeffrey_logic_1990}, and the key representation theorem proved in \citet{bolker_functions_1966}. Two key differences between the theories are:
 \begin{itemize}
-    \item Order a drink
-    \item Order a glass of water
-    \item Order a glass of water and say please and thankyou when I do
-    \item Order a glass of water, say please and thankyou, carefully avoid scratching my itchy ear
+    \item Jeffrey's theory considers preferences to be a function $\sigalg{F}\to \mathbb{R}$ defined over the $\sigma$-algebra on the set of consequences $(F,\sigalg{F})$, and holds that choices are a subset of $\sigalg{F}$
+    \item The Bolker-Jeffrey representation theorem yields the existence of a generally nonunique probability $\prob{P}$ over $(F,\sigalg{F})$
 \end{itemize}
 
-And so forth. I could go on adding details for a very long time without exhausting the set of things I could in principle decide to do. I usually would not want to consider all these ``in principle'' choices I have available. Many of the details are more or less irrelevant and not worth spending the time to think about. Furthermore, even if I do consider all choices I have available in principle, it seems plausible that a less specific decision could be preferable. For example I might expect the ``automatic execution'' of some things things I didn't fully specify to be closer to optimal than the best guess I have of how to specify them (consider managing a competent employee; one might get better results by being less specific in requests).
+We are not trying to derive models from preferences, so we don't see the second difference as particuarly important. Recall that our fundamental problem is relating a set $C$ of things we can choose to a set $F$ of things we can compare. Jeffrey's theory uses a different strategy to accomplish this than Savages'; where Savage employs the function $T:C\times S\to F$ and axioms that constrain the preference relation on $C$, Jeffrey embeds the choices in the algebra $\sigalg{F}$ and proposes axioms that constrain preferences on $(F,\sigalg{F})$. The ultimate result is, for our purposes, very similar.
 
-I think the question of how one could structure the decisions set $D$ is an interesting one. I have so far treated it as ``just a set'' with no particular additional structure. Jeffrey suggests that decisions are a collection of events, and decisions do seem to have some event-like features, like the fact that they specify incompletely what I will do next and the fact that different specifications can apparently be joined with ``and''. However, the proposition that decisions are identical to events does not seem quite right because, as in the example above, deciding to do ``A and B'' does not imply deciding to do ``A''.
+The Bolker-Jeffrey representation theorem concludes: assuming a measurable set $(F,\sigalg{F})$ of consequences, if we have a complete preference relation on $\sigalg{F}$ that satisfies the \emph{Jeffrey axioms} then there exists a utility $u:\sigalg{F}\to\mathbb{R}$ and a probability distribution $\prob{P}\in \Delta(F)$ such that for $A,B\in \sigalg{F}$ and finite partition $D_1,...,D_n\in \sigalg{F}$ (the proof is given by \citet{bolker_functions_1966}):
+\begin{align}
+    (A \succ B) \iff \sum_{i}^n u(D_i) \prob{P}_A(D_i) > \sum_{i}^n u(D_i) \prob{P}_A(D_i) \label{eq:ev_dec_theory}
+\end{align}
+where $\prob{P}_A(D_i):=\frac{\prob{P}(A\cap D_i)}{\prob{P}(A)}$ for $\prob{P}(A)>0$, undefined otherwise (so if $A\succ B$, then $\prob{P}(A)>0$).
 
-I think this is also potentially an important question. In Chapter \ref{ch:inferring_causes} I discuss the assumption of \emph{imitability}, that it is within a decision maker's power to reproduce the observed data. Such an assumption, if it holds, licences a number of inferences from data to consequences. It may often be a plausible assumption considering the full set of decisions $D^*$ that a decision maker could make \emph{in principle}, but may be much less often plausible when considering the restricted set of decisions $D$ a decision maker is actually considering. Understanding how these may relate to one another may help to better understand assumptions like imitability.
+Now, Jeffrey says that \emph{choices} are special elements of $\sigalg{F}$ that we have the power to ``make true''. In this case, we have some $C\subset\sigalg{F}$ of choices that we want to compare, and the obvious probability function $\prob{P}_\cdot: C\to \Delta(\sigalg{F})$ given by $\alpha\mapsto \prob{P}_\alpha$. We are still in a slightly different position to Savage's original theory, as our ``utility function'' is a function defined on $\sigalg{F}$ rather than on $F$. However, we're interested in questions about the construction of the probability function $\prob{P}_\cdot$, and so this difference is not relevant to our work.
