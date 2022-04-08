@@ -169,26 +169,28 @@ Like measurement procedures, a decision procedure $\{\proc{S}_\alpha\}_{\alpha\i
 
 We have chosen to represent decision problems with probability functions $C\kto \Omega$ for some sample space $(\Omega,\sigalg{F})$ of ``consequences''. We haven't offered a deep justification for this choice. One question we might be inclined to ask is: what are we missing out on by making this choice? Representation theorems can help us to answer this question. A representation theorem proposes a collection of axioms regulating the kinds of preferences or beliefs we want our models to admit, and demonstrates that certain families of models can represent all preferences or beliefs consistent with these axioms. In particular, the representation theorems of Savage and Jeffreys both show that preferences among choices that satisfy their respective axiomatisations can be modeled with probability sets and utilities. Thus the question of what we're missing out on can be given the answer: we're missing out on the representation of preferences that satisfy neither set of axioms.
 
-The following discussion will often make reference to \emph{complete preference relations}. A preference relation is a relation $\succ,\prec,\sim$ on a set $A$ such that for any $a,a'$ in $A$ we have:
+The following discussion will often make reference to \emph{complete preference relations}. A preference relation is a relation $\succ,\prec,\sim$ on a set $A$ such that for any $a,b,c$ in $A$ we have:
 \begin{itemize}
-    \item Exactly one of $a\succ a'$, $a\prec a'$, $a\sim a'$ holds
-    \item $(a\succ a')\iff(a'\prec a)$
-    \item $a\succ a'$ and $a'\succ a''$ implies $a\succ a''$
+    \item Exactly one of $a\succ b$, $a\prec b$, $a\sim b$ holds
+    \item $(a\succ b)\iff(b\prec a)$
+    \item $a\succ b$ and $b\succ c$ implies $a\succ c$
 \end{itemize}
 
 This definition is meant to correspond to the common sense idea of having preferences over some set of things, where $\succ$ can be read as ``strictly better than'', $\prec$ read as ``strictly worse than'' and $\sim$ read as ``as good as''. Given any two things from the set, I can say which one I prefer, or if I prefer neither (and all of these are mutually exclusive). If I prefer $a$ to $a'$ then I think $a'$ is worse than $a$. Furthermore, if I prefer $a$ to $a'$ and $a'$ to $a''$ then I prefer $a$ to $a''$.
+
+In addition, we define $a\preceq b$ to mean $a\prec b$ or $a \sim b$.
 
 \subsection{von Neumann-Morgenstern utility}
 
 \citet{von_neumann_theory_1944} proved that when the \emph{vNM axioms} hold (not defined here; see the original reference or \citet{steele_decision_2020}), an agent's preferences between ``lotteries'' (which for our purposes are probability distributions in $\Delta(\Omega)$) can be represented as the comparison of the expected value under each lottery of a utility function $u$ unique up to affine transformation. That is, for lotteries $\prob{P}_\alpha$ and $\prob{P}_{\alpha'}$, there exists some $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that $\mathbb{E}_{\prob{P}_\alpha}[u]> \mathbb{E}_{\prob{P}_{\alpha'}}[u]$ if and only if $\prob{P}_{\alpha} \succ \prob{P}_{\alpha'}$.
 
-In the proposed setup, the set of lotteries forms a probability set -- what we call ``consequences''. The von Neumann-Morgenstern theorem establishes that preferences between consequences satisfy the vNM axioms, then these preferences can be represented as the expectation of some utility function. It does not provide reason to represent consequences with probability distributions in the first place, which is the main question we're interested in here.
+In vNM theory, the set of lotteries is is the set of all probability measures on $\Omega$. The von Neumann-Morgenstern theorem thus answers a slightly different question than the one we are interested in: it doesn't tell us when it is OK to use probability sets to represent uncertainty over the consequences of decisions, but instead it tells us when, given preferences over $\Delta(\Omega)$, these preferences can be represented by an essentially unique utility function $u$.
 
 \subsection{Savage's decision theory}
 
-Unlike con Neumann-Morgenstern's theory, \citet{savage_foundations_1954} decision theory doesn't assume that probability models should be used to represent uncertainty over consequences. Instead, Savage decision theory posits as basic elements a measurable set of \emph{states} $(S,\sigalg{S})$, and sets of \emph{acts} $C$ (equivalent to choices in our language) and \emph{consequences} $F$. Furthermore, it is taken as a given that a known map $T:S\times C\to F$ is available. The preference relation $\succ$ is over acts $C$, and if the preference relation along with the map $T$ satisfies the \emph{savage axioms} (not given here, see \citet{savage_foundations_1954} or \citet{steele_decision_2020}), then there exists a unique probability function $\prob{P}\in \Delta(S)$ and a utility $u:F\to \mathbb{R}$ unique up to affine transformation such that
+Unlike con Neumann-Morgenstern's theory, \citet{savage_foundations_1954} decision theory doesn't assume that probability models should be used to represent uncertainty over consequences. Instead, Savage decision theory posits as basic elements a measurable set of \emph{states} $(S,\sigalg{S})$, and sets of \emph{acts} $C$ (analogous to choices in our language) and \emph{consequences} $F$. Furthermore, it is taken as a given that a known map $T:S\times C\to F$ is available, and the set $\{T(\cdot,\alpha)|\alpha\in C\}$ is equal to the set of all functions $S\to F$. The preference relation $\succ$ is over acts $C$, and if the preference relation along with the map $T$ satisfies the \emph{savage axioms}, then there exists a unique probability function $\prob{P}\in \Delta(S)$ and a utility $u:F\to \mathbb{R}$ unique up to affine transformation such that
 \begin{align}
-    \alpha\succ \alpha' \iff \int_S u(T(s,\alpha))\prob{P}(\mathrm{d}s) > \int_S u(T(s,\alpha'))\prob{P}(\mathrm{d}s)
+    \alpha\preceq \alpha' \iff \int_S u(T(s,\alpha))\prob{P}(\mathrm{d}s) \leq \int_S u(T(s,\alpha'))\prob{P}(\mathrm{d}s)
 \end{align}
 
 Note that if we equip acts and consequences with measures $(C,\sigalg{C})$ and $(F,\sigalg{F})$, $T$ and $\prob{P}$ together induce the probability function $\prob{Q}_\cdot:C\kto F$ given by
@@ -204,33 +206,96 @@ where $\RV{T}_\alpha:S\to F$ is the function $s\mapsto T(s,\alpha)$. If so, we c
 
 Thus Savage's theorem establishes that the relationship between acts and consequences can be represented by a probability function, and furthermore this probability function is unique. 
 
-Savage's first axiom is:
-\begin{itemize}
-    \item P1: There is a complete preference relation $\succ,\prec,\sim$ on $C$
-\end{itemize}
+\subsubsection{Savage axioms}
 
-Our initial proposition was that the consequences $F$ are a set of things we know how to rank by preference, and acts $C$ are the things we want to rank. If we suppose that a complete preference relation on $F$, a complete preference relation on $C$ does not follow. P1 can be viewed as the requirement that the mathematical model offers a ``full solution'' to the decision problem at hand -- it provides us with a full ordering on the choices $C$, and (supposing a finite set) an unambiguous subset of choices that are all equally optimal. 
+Careful analysis of Savage's theorem is outside the scope of this work, but given the relevant of Savage's representation theorem we will reproduce the axioms from \citet{savage_foundations_1954} with a small amount of commentary. Keep in mind that Savage's theorem establishes that the following are sufficient for representation with a probability set, not necessary, and furthermore the probability set representation of preferences satisfying these axioms is unique. Thus we might be able to reject one or more axioms and still accept probability sets as a model of our decision problem (though I do not know which can be rejected, or what they might be replaced with).
 
-Without P1, we may propose models that yield a collection of incomparable choices and choices between them must be made according to some informal principle. On the other hand, with P1 we may end up having to add additional constraints to our model which have informal motivations themselves. That is, P1 makes model construction more demanding while making decisions easier.
+Given acts $C$, states $(S,\sigalg{S})$ and consequences $F$ and a map $T:S\times C\to F$, let all greek letters $\alpha,\beta$ etc. be elements of $C$. Savage's axioms are:
+\begin{enumerate}[P1:]
+    \item There is a complete preference relation $\preceq$ on $C$
+    \begin{enumerate}[D1:]
+        \item $\alpha\preceq \beta$ given $B\in \sigalg{S}$ if and only if $\alpha'\preceq \beta'$ for every $\alpha'$ and $\beta'$ such that $T(\alpha,s)=T(\alpha',s)$ for $s\in B$ and $T(\alpha',r)=T(\beta',r)$ for $r\not\in B$, and $\beta'\preceq \alpha'$ either for every such pair or for none.
+    \end{enumerate}
+    \item For every $\alpha,\beta$ and $B\in \sigalg{S}$, $\alpha\preceq \beta$ given $B$ or $\beta\preceq \alpha$ given $B$
+    \begin{enumerate}[D2:]
+        \item for $q,q'\in F$, $q\preceq q'$ if and only if $\alpha\preceq \alpha'$ where $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for all $s\in S$
+        \item $B\in \sigalg{S}$ is null if and only if $\alpha\preceq \beta$ given B for every $\alpha,\beta\in C$
+    \end{enumerate}
+    \item If $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for every $s\in B$, $B\in \sigalg{S}$ non-null, then $\alpha\preceq \alpha'$ given $B$ if and only if $q\preceq q'$
+    \begin{enumerate}[D4:]
+        \item For $A,B\in \sigalg{S}$, $A\leqslant B$ if and only if $\alpha_A\preceq \alpha_B$ or $q\preceq q'$ for all $\alpha_A,\alpha_B\in C$, $q,q'\in F$ such that $T(\alpha_A,s) = q$ for $s\in A$, $T(\alpha_A,s')=q'$ for $s'\not\in A$, $T(\alpha_B,s)=q$ for $s\in B$, $T(\alpha_B,s')=q'$ for $s'\not\in B$. Read $\leqslant$ as ``is less probable than''
+    \end{enumerate}
+    \item For every $A,B\in\sigalg{S}$, $A\leqslant B$ or $B\leqslant A$
+    \item For some $\alpha,\beta$, $\alpha\prec \beta$
+    \item Suppose $\alpha\not\preceq \beta$. Then for every $\gamma$ there is a finite partition of $S$ such that if $\alpha'$ agrees with $\alpha$ and $\beta'$ agrees with $\beta$ except on some element $B$ of the partition, $\alpha'$ and $\beta'$ being equal to $\gamma$ on $B$, then $\alpha\not\preceq \beta'$ and $\alpha'\not\preceq \beta$
+    \begin{enumerate}[D5:]
+        \item $\alpha\preceq q$ for $q\in F$ given $B$ if and only if $\alpha\preceq \beta$ given $B$ where $T(\beta,s)=q$ for all $s\in S$
+    \end{enumerate}
+    \item If $\alpha\preceq T(\beta,s)$ given $B$ for every $s\in B$, then $\alpha\preceq \beta$ given $B$
+    \begin{enumerate}[P7':]
+        \item The proposition given by inverting every expression in D5 and P7
+    \end{enumerate}
+\end{enumerate}
 
-Savage seems to take states $S$ and consequences $F$ as basic, while defining acts $C$ to be the set of all functions from states to consequences. However, it seems to be consistent with Savage's theory to consider acts $C$ and consequences $F$ as basic (as we do), and defining states to be the set of all functions from acts to consequences. In this view, the states can be identified with the extreme points of the set of all models we can consider.
+Our initial proposition was that the consequences $F$ are a set of things we know how to rank by preference, and acts $C$ are the things we want to rank. This is not exactly Savage's setup -- he assumes a preference relation over $C$ to begin with. Furthermore, Savage assumes that the set of acts corresponds to the set of function $S\to F$. Because we have a complete preference relation on $C$, the richness of $C$ can be used in conjunction with the other axioms to tease out a unique probability measure and essentially unique utility function. However, it is not obviously necessary that we must start with a predefined set of states $S$, and it seems overly demanding given $S$ to require a model that expresses preferences over every function $S\to F$. 
 
-A detailed consideration of Savage's axiomatisation is out of the scope of this work.
+We can understand P1 as a requirement that we want the model to answer any question we have about comparing two different acts, no matter what states $S$ we might restrict our attention to. I can imagine that a mathematical model that allowed us to compare some pairs of acts and choose between the remaining noncomparable ones in an ad-hoc manner could be useful in some situations (for example: the extra effort to make the relation complete seems unlikely to pay off), but P1 rules this out.
+
+D1 formalises the idea of one act $\alpha$ being not preferred to another $\beta$ given the knowledge that the true state lies in the set $B$ (in short: ``given $B$'' or ``conditional on $B$''). P2 is sometimes called the ``sure thing principle''. Roughly: for any $\alpha, \beta$ if $\alpha$ is better than $\beta$ on some states and no worse on any other, then it must be better than $\beta$. This can be viewed as a constraint on the kind of thing a state is -- the choice that we make cannot affect which state is likely to be the ``true'' state.
+
+D4 + P4 defines the ``probability preorder'' $\leqslant$ on $(S,\sigalg{S})$ and assumes it is complete.
+
+P5 is the requirement that the preference relation is non-trivial; not everything is equally desirable. This doesn't seem like it should be a practical requirement to me; we might hope that a model can distinguish between some of our options, but that doesn't mean we should assume it can. Savage claims that this requirement is ``innocuous'' because any exception must be trivial, but I'm not sure I agree.
+
+P6 is a requirement of continuity; for any $\alpha\preceq \beta$, we can divide $S$ finely enough to squeeze a ``small slice'' of any third outcome $\gamma$ into the gap between the two.
+
+P7 in combination with the other axioms forces preferences to be bounded.
 
 \subsection{Jeffrey's decision theory}
 
 Jeffrey's decision theory is an alternative to Savage's that offers a slightly different axiomatisation. It is set out in \citet{jeffrey_logic_1990}, and the key representation theorem proved in \citet{bolker_functions_1966}. Two key differences between the theories are:
 \begin{itemize}
-    \item Jeffrey's theory considers preferences to be a function $\sigalg{F}\to \mathbb{R}$ defined over the $\sigma$-algebra on the set of consequences $(F,\sigalg{F})$, and holds that choices are a subset of $\sigalg{F}$
-    \item The Bolker-Jeffrey representation theorem yields the existence of a generally nonunique probability $\prob{P}$ over $(F,\sigalg{F})$
+    \item Jeffrey's theory considers preferences to be a function $\sigalg{F}\to \mathbb{R}$ defined over a complete atomless Bolean algebra $\underline{\sigalg{F}}$ of propositions, and holds that choices are a subset of $\underline{\sigalg{F}}$
+    \item The Bolker-Jeffrey representation theorem yields the existence of a nonunique pair of a probability measure $\prob{P}$ over $$\underline{\sigalg{F}}$$ and a desirability $\mathrm{dex}$ also defined on $\underline{\sigalg{F}}$
 \end{itemize}
 
-We are not trying to derive models from preferences, so we don't see the second difference as particuarly important. Recall that our fundamental problem is relating a set $C$ of things we can choose to a set $F$ of things we can compare. Jeffrey's theory uses a different strategy to accomplish this than Savages'; where Savage employs the function $T:C\times S\to F$ and axioms that constrain the preference relation on $C$, Jeffrey embeds the choices in the algebra $\sigalg{F}$ and proposes axioms that constrain preferences on $(F,\sigalg{F})$. The ultimate result is, for our purposes, very similar.
+We are not trying to derive models from preferences, so we don't see the second difference as particuarly important. Recall that our fundamental problem is relating a set $C$ of things we can choose to a set $F$ of things we can compare. Jeffrey's theory uses a different strategy to accomplish this than Savages'; where Savage employs the function $T:C\times S\to F$ and axioms that constrain the preference relation on $C$, Jeffrey embeds the choices in the algebra $$\underline{\sigalg{F}}$$ and proposes axioms that constrain preferences on $$\underline{\sigalg{F}}$$. The ultimate result is, for our purposes, very similar.
 
-The Bolker-Jeffrey representation theorem concludes: assuming a measurable set $(F,\sigalg{F})$ of consequences, if we have a complete preference relation on $\sigalg{F}$ that satisfies the \emph{Jeffrey axioms} then there exists a utility $u:\sigalg{F}\to\mathbb{R}$ and a probability distribution $\prob{P}\in \Delta(F)$ such that for $A,B\in \sigalg{F}$ and finite partition $D_1,...,D_n\in \sigalg{F}$ (the proof is given by \citet{bolker_functions_1966}):
+The Bolker-Jeffrey representation theorem concludes: assuming a measurable set $(F,\sigalg{F})$ of consequences, if we have a complete preference relation on $\underline{\sigalg{F}}$ that satisfies the \emph{Bolker axioms} then there exists a desirability $\text{des}:$\underline{\sigalg{F}}\to\mathbb{R}$ and a probability distribution $\prob{P}\in \Delta($\underline{\sigalg{F}})$ such that for $A,B\in $\underline{\sigalg{F}}$ and finite partition $D_1,...,D_n\in $\underline{\sigalg{F}}$ (the proof is given by \citet{bolker_functions_1966}):
 \begin{align}
-    (A \succ B) \iff \sum_{i}^n u(D_i) \prob{P}_A(D_i) > \sum_{i}^n u(D_i) \prob{P}_A(D_i) \label{eq:ev_dec_theory}
+    (A preceq B) \iff \sum_{i}^n \text{des}(D_i) \prob{P}_A(D_i) \leq \sum_{i}^n \text{des}(D_i) \prob{P}_A(D_i) \label{eq:ev_dec_theory}
 \end{align}
 where $\prob{P}_A(D_i):=\frac{\prob{P}(A\cap D_i)}{\prob{P}(A)}$ for $\prob{P}(A)>0$, undefined otherwise (so if $A\succ B$, then $\prob{P}(A)>0$).
 
-Now, Jeffrey says that \emph{choices} are special elements of $\sigalg{F}$ that we have the power to ``make true''. In this case, we have some $C\subset\sigalg{F}$ of choices that we want to compare, and the obvious probability function $\prob{P}_\cdot: C\to \Delta(\sigalg{F})$ given by $\alpha\mapsto \prob{P}_\alpha$. We are still in a slightly different position to Savage's original theory, as our ``utility function'' is a function defined on $\sigalg{F}$ rather than on $F$. However, we're interested in questions about the construction of the probability function $\prob{P}_\cdot$, and so this difference is not relevant to our work.
+Now, Jeffrey says that \emph{choices} are special elements of $\sigalg{F}$ that we have the power to ``make true''. In this case, we have some $C\subset\underline{\sigalg{F}}$ of choices that we want to compare, and the obvious probability function $\prob{P}_\cdot: C\to \Delta(\underline{\sigalg{F}})$ given by $\alpha\mapsto \prob{P}_\alpha$. We are still in a slightly different position to Savage's original theory, as our ``utility function'' is a function defined on $\sigalg{F}$ rather than on $F$. However, we're interested in questions about the construction of the probability function $\prob{P}_\cdot$, and so this difference is not relevant to our work.
+
+\subsubsection{Bolker axioms}
+
+$\underline{\sigalg{F}}$ a complete, atomless Boolean algebra with the impossible proposition. An example of such a set is constructed from the set of Lebesgue measurable sets on $[0,1]$ identifying any two sets that differ by a set of measure zero identified \citet{bolker_simultaneous_1967}. This is not a $\sigma$-algebra.
+ 
+\begin{enumerate}[A1:]
+    \item $\preceq$ is a complete preference relation
+    \item $\underline{\sigalg{F}}$ is a complete, atomless Boolean algebra with the impossible proposition removed
+    \item For $A,B\in \underline{\sigalg{F}}$, if $A\cap B=\emptyset$, then
+    \begin{enumerate}[a)]
+        \item If $A\succ B$ then $A\succ A\cup B \succ B$
+        \item If $A\sim B$ then $A\sim A\cup B \sim B$
+    \end{enumerate}
+    \item Given $A\cap B=\emptyset$ and $A\sim B$, if $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$, then $A\cup G\sim B\cup G$ for every such $G$
+    \begin{enumerate}[D1:]
+        \item The supremum (infimum) of a subset $W\subset \underline{\sigalg{F}}$ is a set $G$ ($D$) such that for all $A\in W$, $G\subset A$ ($A\subset D$), and for any $E$ that also has this property, $G\subset E$ ($E\subset D$)
+    \end{enumerate}
+    \item Given $W:= \{W_i\}_{i\in M\subset \mathbb{N}}$ with $i<j\implies W_j\subset W_i$ and $W\subset \underline{\sigalg{F}}$ with supremum $G$ (infimum $D$), whenever $A\prec G \prec B$ ($A\prec D\prec B$) then there exists some $k\in M$ such that $i\geq k$ ($i\leq k$) implies $A\prec W_i \prec B$.
+\end{enumerate}
+
+The underlying set of events $\underline{\sigalg{F}}$ is a rather strange set here, and the construction rules out the case where we have prior knowledge of preferences over elements of some set of consequences $F$ that we are trying to import to the set of choices $C$. It may be more natural to consider preferences over subsets rather than preferences over elements of $F$ -- a preference like ``I prefer winning the bet to losing the bet'' picks out all the states in which I win and all the states in which I lose, and says the former is preferable to the latter. 
+
+Overall, the algebra $\underline{\sigalg{F}}$ seems to be more like the kinds of things over which we might regularly express preferences than Savage's set of acts $C$.  However, I have a hard time understanding the significance of ruling atoms out of $\underline{\sigalg{F}}$. In subsequent work, we follow the standard probabilistic practice of assuming a $\sigma$-algebra rather than a complete atomless boolean algebra.
+
+Like Savage's theory, A1 requires the preference relation to be complete.
+
+A3 is the assumption that the desirability of disjunctions of events lies between the desirability of each event; it is sometimes called ``averaging''. It notably rules out the following: if $A\succ B$ we cannot have $A\cup B\sim A$. In the Jeffrey-Bolker theory, propositions all have positive probabilities.
+
+A4 allows a probability order to be defined on $\underline{\sigalg{F}}$. The conditions $A\cap B=\emptyset$, $A\sim B$, $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$ can be seen as a test for $A$ and $B$ being ``equally probable''. A4 requires that if $A$ and $B$ are rated as equally probable by one such test, then they are rated as equally probable by all such tests.
+
+A5 is an axiom of continuity.

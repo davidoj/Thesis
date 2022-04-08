@@ -403,9 +403,108 @@ In this case, it seems much more reasonable to describe the fact that $\RV{B}$ h
 
 \section{Allowing dependence on observations}
 
-\subsection{Validity}
+We want to remove the assumption $\RV{D}_i\CI_{\prob{P}_C}^e \RV{Y}_{<i} C|\RV{D}_{<i}$. It turns out that this is fairly straightforward to do -- essentially, we require that causal contractibility holds for some $C'$ such that $\RV{D}_i\CI_{\prob{P}_{C'}}^e \RV{Y}_{<i} C|\RV{D}_{<i}$, and then we require that $\prob{P}_C$ extends $\prob{P}_{C'}$ in the appropriate way. Before we do this, however, we will introduce the idea of a \emph{comb}, which is an important generalisation of the idea of a conditional probability. The result we will eventually arrive at is that a model features response conditionals if it has a causally contractible comb of the appropriate type.
+
+To begin with an example, consider a probability set $\prob{P}_C$, variables $\RV{D}_{\mathbb{N}}$ and $\RV{Y}_{\mathbb{N}}$ and a subsequence $(\RV{D}_i,\RV{Y}_i)_{i\in [2]}$ of length 2. Lifting the assumption $\RV{D}_i\CI_{\prob{P}_C}^e \RV{Y}_{<i} C|\RV{D}_{<i}$ means that only the following holds:
+\begin{align}
+    \RV{Y}_i&\CI^e_{\prob{P}_C} \RV{Y}_{[\mathbb{N}]\setminus i},\RV{D}_{\mathbb{N}\setminus i}C|\RV{H}\RV{D}_i&\forall i\in \mathbb{N}\\
+    \land \RV{H} &\CI^e_{\prob{P}_C} \RV{D} C\\
+    \land \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \prob{P}^{\RV{Y}_0|\RV{H}\RV{D}_0} & \forall i\in \mathbb{N}
+\end{align}
+
+In this case, for arbitrary $\alpha\in C$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_{[2]}} &= \tikzfig{response_conditional_comb}
+\end{align}
+we still have response conditionals $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$ but now the $\RV{D}_i$'s can depend on the previous $\RV{Y}_i$'s.
+
+Given $\prob{P}_C^{\RV{Y}_1|\RV{D}_1\RV{H}}$ and $\prob{P}_C^{\RV{Y}_2|\RV{D}_2\RV{H}}$, we can define
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}} := \tikzfig{causally_contractible_comb}
+\end{align}
+and $\prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}$ is still ``$(\RV{D};\RV{Y})$-causally contractible'', but it is no longer a uniform conditional probability. It is is a \emph{uniform 2-comb}.
 
 \subsection{Combs}
+
+Where uniform conditional probabilities map probability distributions to probability distributions via the semidirect product, 2-combs map conditional probabilities to conditional probabilities via an ``insert'' operation. Similarly, higher order combs map  Graphically, the semidirect product looks like
+\begin{align}
+    \prob{P}_\alpha^{\RV{XY}}&=\prob{P}_\alpha^{\RV{X}}\cprod\prob{P}_C^{\RV{Y}|\RV{X}}\\
+    &= \tikzfig{conditional_semidirect_product}
+\end{align}
+and the insert operation looks like
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_{1}\RV{D}_2\RV{Y}_2|\RV{D}_1}&=\text{insert}(\prob{P}_\alpha^{\RV{D}_2|\RV{D}_1\RV{Y}_1},\prob{P}_C^{\RV{Y_{[2]}}\combbreak\RV{D}_{[2]}})\\
+    &= \tikzfig{comb_insert_complicated}\label{eq:comb_insert_complicated}\\
+    &= \tikzfig{comb_insert_gettingsimpler}\\
+    &= \tikzfig{comb_insert_simple}\label{eq:comb_insert_simple}
+\end{align}
+
+While Equation \ref{eq:comb_insert_complicated} is a well-formed string diagram in the category of Markov kernels, Equation \ref{eq:comb_insert_simple} is not. In the case that all the underlying sets are discrete, Equation \ref{eq:comb_insert_simple} can be defined using an extended string diagram notation appropriate for the category of real-valued matrices \citep{jacobs_causal_2019}. We're not going to go to introduce the extension here, but we will give an algebraic definition of the insert operation for discrete sets.
+
+\begin{definition}[Uniform $n$-Comb]
+Given a probability set $\prob{P}_C$ with variables $\RV{Y}_i:\Omega\to Y$ and $\RV{D}_i:\Omega\to D$ for $i\in [n]$ an uniform conditional probabilities $\{\RV{P}_C^{\RV{Y}_i|\RV{D}_{[i]}\RV{Y}_{[i-1]}}|i\in [n]\}$, the uniform $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}:D^n\kto Y^n$ is the Markov kernel given by the recursive definition
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{1}\combbreak \RV{D}_{1}} &= \prob{P}_C^{\RV{Y}_1|\RV{D}_1}\\
+    \prob{P}_C^{\RV{Y}_{[m]}\combbreak \RV{D}_{[m]}} &= \tikzfig{comb_inductive}
+\end{align}
+\end{definition}
+
+\begin{definition}[Uniform $\mathbb{N}$-comb]
+Given a probability set $\prob{P}_C$ with variables $\RV{Y}_i:\Omega\to Y$ and $\RV{D}_i:\Omega\to D$ for $i\in \mathbb{N}$ and uniform conditional probabilities $\{\RV{P}_C^{\RV{Y}_i|\RV{D}_{[i]}\RV{Y}_{[i-1]}}|i\in \mathbb{N}\}$, the uniform $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$ is the Markov kernel such that for all $n\in \mathbb{N}$
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}(\mathrm{id}_{Y^{n}}\otimes \mathrm{del}_{Y^{\mathbb{N}}}) &= \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}\otimes \mathrm{del}_{Y^{\mathbb{N}}}
+\end{align}
+\end{definition}
+
+\begin{theorem}[Existence of $\mathbb{N}$-combs]
+Given a probability set $\prob{P}_C$ with variables $\RV{Y}_i:\Omega\to Y$ and $\RV{D}_i:\Omega\to D$ for $i\in \mathbb{N}$ and uniform conditional probabilities $\{\RV{P}_C^{\RV{Y}_i|\RV{D}_{[i]}\RV{Y}_{[i-1]}}|i\in \mathbb{N}\}$, a uniform $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$ exists.
+\end{theorem}
+
+\begin{proof}
+For each $n\in \mathbb{N}$ $m<n$, we have
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(\mathrm{id}_{Y^{n-m}})\otimes \mathrm{del}_{Y^m}) &= \prob{P}_C^{\RV{Y}_{[n-m]}\combbreak \RV{D}_{[n-m]}}\otimes \mathrm{del}_{Y^m}\label{eq:marginalise_comb}
+\end{align}
+
+Take any $d\in D^{\mathbb{N}}$ and let $d_{|m}\in D^n$ be the first $n$ elements of $d$. By Equation \ref{eq:marginalise_comb}, for any $A_i\in \sigalg{Y}$, $i\in [m]$
+
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(\bigprod_{i\in [m]}A_i\times Y^{n-m}|d_{|n}) &= \prob{P}_C^{\RV{Y}_{[n-m]}\combbreak \RV{D}_{[n-m]}}(\bigprod_{i\in [m]}A_i|d_{|m})
+\end{align}
+
+Furthermore, for any permutation $\rho:[n]\to[n]$
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}\mathrm{swap}_{\rho}(\bigprod_{i\in [m]}A_{\rho(i)}\times Y^{n-m}|d_{|n}) &= \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(\bigprod_{i\in [m]}A_{i}\times Y^{n-m}|d_{|n})
+\end{align}
+
+Thus by the Kolmogorov Extension Theorem \citep{cinlar_probability_2011}, for each $d\in D^{\mathbb{N}}$ there is a unique probability measure $\prob{Q}_d\in \Delta(Y^{\mathbb{N}}$ and set of variables $\RV{Z}_i:Y^{\mathbb{N}}\to Y$, $i\in \mathbb{N}$ satisfying
+\begin{align}
+    \prob{Q}_d^{\RV{Z}_{n}}(\bigprod_{i\in [n]}A_i) &= \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}\mathrm{swap}_{\rho}(\bigprod_{i\in [n]}A_{\rho(i)}|d_{|n})\label{eq:q_is_Markov}
+\end{align}
+
+Furthermore, for each $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$, $n\in \mathbb{N}$ note that
+
+\begin{align}
+    \prob{Q}_d^{\RV{Z}_n}(\bigprod_{i\in[n]} A_i) &= \prob{Q}_d(\bigprod_{i\in[n]} A_i \times Y^{\mathbb{N}})\\
+    &\geq \prob{Q}_d(\bigprod_{i\in\mathbb{N}} A_i)
+\end{align}
+
+so by the Monotone convergence theorem, the sequence $\prob{Q}_d^{\RV{Z}_n}(\bigprod_{i\in[n]} A_i)$ converges to $\prob{Q}_d(\bigprod_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigprod_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \ref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
+
+Thus $d\mapsto Q_d$ is the desired $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$.
+\end{proof}
+
+We now define the insert operation for discrete sets only
+
+\begin{definition}[Comb insert]
+Given an $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$ and an $n-1$ comb $\prob{P}_\alpha^{\RV{D}_{[1,n]}|\RV{Y}_{[n-1]}}$
+\begin{align}
+    \mathrm{insert}(\prob{P}_\alpha^{\RV{D}_{[n-1]}|\RV{Y}_{[n-1]}},\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}})(y_n|d_1) &= \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(y_n|d_{[1,n]},d_1)\prob{P}_\alpha^{\RV{D}_{[1,n]}|\RV{Y}_{[n-1]}}(d_{[1,n]}|y_{[n-1]})
+\end{align}
+\end{definition}
+
+\subsection{Validity}
+
 
 \subsection{Representation of decision problems with dependence on observations}
 

@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel red] (2) at (-0.25, 0.75) {$\prob{P}_\alpha^{\RV{D}_2|\RV{D}_1\RV{Y}_1}$};
+		\node [style=none] (3) at (-0.75, 1) {};
+		\node [style=none] (4) at (-0.75, 0.5) {};
+		\node [style=RLabel tikzit] (9) at (4.25, -0.25) {$\RV{Y}_2$};
+		\node [style=RLabel tikzit] (10) at (4.25, 1.75) {$\RV{Y}_1$};
+		\node [style=Llabel tikzit] (11) at (-4.5, 0.75) {$\RV{D}_1$};
+		\node [style=RLabel tikzit] (12) at (4.25, 0.75) {$\RV{D}_2$};
+		\node [style=none] (17) at (3, 0.75) {};
+		\node [style=none] (18) at (3, 1.75) {};
+		\node [style=none] (20) at (-3.75, -1) {};
+		\node [style=none] (21) at (-2, -1) {};
+		\node [style=none] (22) at (-2, 1.75) {};
+		\node [style=none] (23) at (1.5, 1.75) {};
+		\node [style=none] (24) at (1.5, -1) {};
+		\node [style=none] (25) at (3, -1) {};
+		\node [style=none] (26) at (3, 3.25) {};
+		\node [style=none] (27) at (-3.75, 3.25) {};
+		\node [style=none] (29) at (-3.75, 0.75) {};
+		\node [style=none] (30) at (-2, 1) {};
+		\node [style=none] (31) at (-2, 0.5) {};
+		\node [style=none] (32) at (3, -0.25) {};
+		\node [style=none] (33) at (1.5, 0.75) {};
+		\node [style=none] (34) at (-0.25, 2.5) {$\prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (18.center) to (10);
+		\draw (17.center) to (12);
+		\draw (27.center) to (20.center);
+		\draw (27.center) to (26.center);
+		\draw (26.center) to (25.center);
+		\draw (25.center) to (24.center);
+		\draw (24.center) to (23.center);
+		\draw (23.center) to (22.center);
+		\draw (22.center) to (21.center);
+		\draw (21.center) to (20.center);
+		\draw (32.center) to (9);
+		\draw (2) to (33.center);
+		\draw (30.center) to (3.center);
+		\draw (31.center) to (4.center);
+		\draw (11) to (29.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

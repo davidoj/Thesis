@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (-5.25, 3.75) {$\prob{P}_C^{\RV{Y}_{[m-1]}\combbreak\RV{D}_{[m-1]}}$};
+		\node [style=small kernel tikzit] (1) at (0.75, 2) {$\prob{P}_C^{\RV{Y}_{[m]}|\RV{Y}_{[m-1]}\RV{D}_{[m]}}$};
+		\node [style=copymap tikzit] (2) at (-2.75, 3.75) {};
+		\node [style=copymap tikzit] (3) at (-8.25, 3.75) {};
+		\node [style=none] (4) at (-1.75, 2.5) {};
+		\node [style=none] (5) at (-1.75, 2) {};
+		\node [style=none] (6) at (-1.75, 1.5) {};
+		\node [style=Llabel tikzit] (7) at (-9.25, 1.5) {$\RV{D}_m$};
+		\node [style=Llabel tikzit] (8) at (-9.25, 3.75) {$\RV{D}_{[m-1]}$};
+		\node [style=RLabel tikzit] (9) at (3.75, 2) {$\RV{Y}_m$};
+		\node [style=RLabel tikzit] (10) at (3.75, 3.75) {$\RV{Y}_{[m-1]}$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0) to (2);
+		\draw [in=-165, out=-75] (2) to (4.center);
+		\draw [in=180, out=-60, looseness=0.75] (3) to (5.center);
+		\draw (3) to (0);
+		\draw (8) to (3);
+		\draw (7) to (6.center);
+		\draw [in=180, out=0] (1) to (9);
+		\draw (2) to (10);
+	\end{pgfonlayer}
+\end{tikzpicture}

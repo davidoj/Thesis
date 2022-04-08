@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (0.5, 4.75) {$\prob{P}^{\RV{Y}|\RV{X}}_C$};
+		\node [style=copymap tikzit] (1) at (-1.25, 4.75) {};
+		\node [style=RLabel tikzit] (2) at (3, 4.75) {$\RV{Y}$};
+		\node [style=RLabel tikzit] (3) at (3, 6) {$\RV{X}$};
+		\node [style=red small dist] (4) at (-3, 4.75) {$\prob{P}_\alpha^{\RV{X}}$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [in=-180, out=60] (1) to (3);
+		\draw (1) to (0);
+		\draw (0) to (2);
+		\draw (4) to (1);
+	\end{pgfonlayer}
+\end{tikzpicture}
