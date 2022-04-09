@@ -503,6 +503,28 @@ Given an $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$ and an $n-1
 \end{align}
 \end{definition}
 
+\subsection{Response conditionals in models with history dependence}
+
+The main theorem of this section, Theorem \ref{th:response_hdep} is an almost trivial extension of Theorem \ref{th:iid_rep}. Instead of starting with a probability set $\prob{P}_C$ with a uniform conditional $\prob{P}_C^{\RV{Y}|\RV{D}}$, we assume instead a collection of uniform conditionals $\prob{P}_C^{\RV{Y}_i|\RV{D}_{\leq i}\RV{Y}_{<i}}$ (this is a strictly weaker condition, as we can derive these as higher order conditionals from the assumption of $\prob{P}_C^{\RV{Y}|\RV{D}}$). Theorem \ref{th:response_hdep} then says if the $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}\combbreak\RV{D}}$ is causally contractible, then we have response conditionals $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$. Because $\prob{P}_C^{\RV{Y}\combbreak\RV{D}}$ is a Markov kernel with the same signature as $\prob{P}_C^{\RV{Y}|\RV{D}}$, the reasoning from Theorem \ref{th:response_hdep} carries over almost directly..
+
+Unlike causal contractibility in the history independent case, we are not aware of an equivalent condition to the causal contractibility of $\prob{P}_C^{\RV{Y}\combbreak\RV{D}}$ in terms of relabeled random variables. The difficulty is, because $\RV{D}_i$ can depend on $\RV{Y}_{<i}$, we usually don't have symmetry with respect to relabeling variables.
+
+\begin{theorem}[]\label{th:response_hdep}
+Suppose we have a sample space $(\Omega,\sigalg{F})$, a probability set $\prob{P}_C$ and variables $\RV{D}:=(\RV{D}_i)_{i\in \mathbb{N}}$ and $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$ with uniform $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$. $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$ is causally contractible if and only if $\Omega$ can be extended with some $\RV{H}:\Omega\times H\to H$ such that $\prob{P}^{\RV{H}}_C$ and $\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}$ exist for all $i\in \mathbb{N}$ and
+\begin{align}
+    \prob{P}_C^{\RV{Y}\combbreak\RV{D}} &= \tikzfig{do_model_representation}\\
+    &\iff\\
+    \RV{Y}_i&\CI^e_{\prob{P}_C} \RV{Y}_{\mathbb{N}\setminus i},\RV{D}_{\mathbb{N}\setminus i}C|\RV{H}\RV{D}_i&\forall i\in \mathbb{N}\\
+    \land \RV{H} &\CI^e_{\prob{P}_C} \RV{D} C\\
+    \land \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \prob{P}^{\RV{Y}_0|\RV{H}\RV{D}_0} & \forall i\in \mathbb{N}
+\end{align}
+Where $\Pi_{D,i}:D^\mathbb{N}\kto D$ is the $i$th projection map.
+\end{theorem}
+
+\begin{proof}
+Apply Lemma \todo{lemma I've yet to prove} to $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$.
+\end{proof}
+
 \subsection{Validity}
 
 \subsection{Combs are the output of the ``fix'' operation}
@@ -515,7 +537,6 @@ There is a relationship between combs and the ``fix'' operation defined in \cite
 \end{align}
 This is precisely the ``division by a conditional probability'' used in the fix operation. We speculate that the fix operation is precisely an alternative definition of an $n$-comb, but we have not proven this.
 
-\subsection{Representation of decision problems with dependence on observations}
 
 \section{Weaker assumptions than causal contractibility}
 
