@@ -1,0 +1,129 @@
+%!TEX root = main.tex
+
+
+\begin{definition}[Local]
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{local} if for all $n\in \mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^C})\in\mathbb{N}$ there exists $\kernel{L}:X^n\kto Y^n$ such that
+\begin{align}
+	\tikzfig{...} &= \tikzfig{...}\\
+	&\iff\\
+	\kernel{K}(\bigtimes_{i\in [n]} A_i\times Y^{\mathbb{N}}|x_{[n]},x_{[n]^C}) &= \kernel{L}(\bigtimes_{i\in [n]} A_i|x_{[n]})
+\end{align}
+\end{definition}
+
+\begin{definition}[Exchange commutativity]
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ \emph{commutes with exchange} if for all finite permutations $\rho:\mathbb{N}\to\mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^C})\in\mathbb{N}$
+\begin{align}
+	\kernel{K}\mathrm{swap}_{\rho_Y} &=  \mathrm{swap}_{\rho_X} \kernel{K}\\
+	&\iff\\
+	\kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{\rho(i)}|\bigotiimes_{i\in \mathbb{N}} x_i) &= \kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{i}|\bigotiimes_{i\in \mathbb{N}} x_{\rho(i)})
+\end{align}
+\end{definition}
+
+
+\begin{definition}[Causal contractibility]
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally contractible} if it is local and commutes with exchange.
+\end{definition}
+
+\begin{definition}[Finite set swap]
+Given two equally sized sequences $A=(a_i)_{i\in [n]}$, $B=(b_i)_{i\in [n]}$, ${A\leftrightarrow B}:\mathbb{N}\to \mathbb{N}$ is the permuation that sends the $i$th element of $A$ to the $i$th element of $B$ and vise versa. Note that $A\leftrightarrow B$ is its own inverse.
+\end{definition}
+
+\begin{theorem}[Equality of equally sized contractions]\label{th:equal_of_condits}
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally contractible} if and only if for any $A,B\subset \mathbb{N}$ where $|A|=|B|=n$ there exists $\kernel{L}:X^n\kto Y^n$ such that
+\begin{align}
+    \text{swap}_{[n]\leftrightarrow A} \kernel{K} \text{swap}_{A\leftrightarrow [n]} (\text{id}_{[n]}\otimes \text{del}_{[n]^C}) &= \text{swap}_{[n]\leftrightarrow B} \kernel{K} \text{swap}_{B\leftrightarrow [n]} (\text{id}_{[n]}\otimes \text{del}_{[n]^C})\\
+    &= \kernel{L}\otimes \mathrm{del}_{[n]^C}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Only if:
+By exchange commutativity
+\begin{align}
+	\text{swap}_{[n]\leftrightarrow A} \kernel{K} &= \kernel{K} \text{swap}_{A\leftrightarrow n}
+\end{align}
+multiply both sides by $\text{swap}_{A\leftrightarrow n}$ on the right and we have (because $\text{swap}_{[n]\leftrightarrow A}$ is its own inverse)
+\begin{align}
+		\text{swap}_{[n]\leftrightarrow A} \kernel{K}\text{swap}_{A\leftrightarrow n} &= \kernel{K}
+\end{align}
+Then by locality, there exists some $\kernel{L}:X^n\kto Y^n$ such that
+\begin{align}
+	\text{swap}_{[n]\leftrightarrow A} \kernel{K} \text{swap}_{A\leftrightarrow n} (\text{id}_{[n]}\otimes \text{del}_{[n]^C}) &= \text{swap}_{[n]\leftrightarrow B} \kernel{K} \text{swap}_{B\leftrightarrow n} (\text{id}_{[n]}\otimes \text{del}_{[n]^C})\\
+	&= \kernel{L}\otimes \mathrm{del}_{[n]^C}
+\end{align}
+The final equality follows by choosing $B=[n]$.
+If:
+Taking $A=B=[n]$ establishes locality immediately.
+
+For exchange commutativity, note that for all $x\in X^{\mathbb{N}}$, $n\in\mathbb{N}$, letting $B=[n]$ we have
+\begin{align}
+	\text{swap}_{A\leftrightarrow [n]} \kernel{K} \text{swap}_{A\leftrightarrow [n]} (\text{id}_{[n]}\otimes \text{del}_{[n]^C}) &= \kernel{K}  (\text{id}_{[n]}\otimes \text{del}_{[n]^C})
+\end{align}
+Then by lemma \ref{lem:infinitely_extended_kernels}
+\begin{align}
+	\text{swap}_{A\leftrightarrow [n]} \kernel{K} \text{swap}_{A\leftrightarrow [n]} &= \kernel{K}
+\end{align}
+Consider an arbitrary finite permutation $\rho:\mathbb{N}\to \mathbb{N}$. $\rho$ can be decomposed into a finite set of cyclic permutations on disjoint orbits. Each cyclic permutation is simply the composition of a sequence of 1-cycles of the form $A\leftrightarrow [n]$, and so $\rho$ itself can be written as a composition of a sequence of 1-cycles. Thus for any finite $\rho:\mathbb{N}\to\mathbb{N}$
+\begin{align}
+	\text{swap}_{\rho} \kernel{K} \text{swap}_{\rho} &= \kernel{K}
+\end{align}
+\end{proof}
+
+\begin{theorem}\label{th:table_rep_kernel}
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is causally contractible if and only if there exists a column exchangeable probability distribution $\mu \Delta(Y^{|X|\times \mathbb{N}})$ such that
+\begin{align}
+    \kernel{K} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel}\\
+    &\iff\\
+    \kernel{K}(A|(x_i)_{i\in \mathbb{N}}) &= \mu \Pi_{(x_i i)_{i\in\mathbb{N}}}(A)$\forall A\in \sigalg{Y}^{\mathbb{N}}
+\end{align}
+Where $\Pi_{(d_i i)_{i\in\mathbb{N}}}:Y^{|X|\times \mathbb{N}}\to Y^{\mathbb{N}}$ is the function 
+\begin{align}
+	(y_{j i})_{j\in |X|,i\in \mathbb{N}}\mapsto (y_{d_i i})_{i\in \mathbb{N}}
+\end{align}
+that projects the $(d_i,i)$ indices of $y$ for all $i\in \mathbb{N}$, and $\prob{F}_{\text{ev}}$ is the Markov kernel associated with the evaluation map
+\begin{align}
+    \text{ev}:D^\mathbb{N}\times Y^{D\times \mathbb{N}}&\to Y\\
+    ((d_i)_\mathbb{N},(y_{ij})_{i\in D,j\in \mathbb{N}})&\mapsto (y_{d_i i})_{i\in \mathbb{N}}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}\label{th:ciid_rep_kernel}
+A kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is causally contractible if and only if there exists some set $H$, $\mu\in \Delta(H)$ and $\kernel{L}:H\times X\kto Y$ such that
+\begin{align}
+    \kernel{K} &= \tikzfig{do_model_representation_kernel}\\
+    &\iff\\
+    \kernel{K}(\bigtimes_{i\in\mathbb{N}}A_i|(x_i)_{i\in\mathbb{N}}) &= \int_H \prod_{i\in\mathbb{N}} \kernel{L}(A_i|h,x_i)\mu(\mathrm{d}h)
+\end{align}
+Where $\Pi_{D,i}:D^\mathbb{N}\kto D$ projects the $i$th coordinate of a vector in $D^{\mathbb{N}}$.
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{lemma}[Infinitely extended kernels]
+...
+\end{lemma}
+
+
+\begin{theorem}[Posterior concentration]
+For a probability set $\prob{P}_C$ that is $(\RV{D};\RV{Y})$-causally contractible and any $\alpha$ such that
+\begin{align}
+	\prob{P}(\sum_{i\in\mathbb{N}} \llbracket \RV{D}_i = a \rrbracket > r) &= 1 &\forall a\in D,r\in\mathbb{R}
+\end{align}
+then
+\begin{align}
+	\lim_{n\to \infty}\prob{P}_\alpha^{\RV{H}|\RV{D}_{[n]}\RV{Y}_{[n]}}(A|d,y) \to \begin{cases}
+	1\\ 
+	0
+	\end{cases}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
