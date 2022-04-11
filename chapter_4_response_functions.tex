@@ -466,32 +466,7 @@ For each $n\in \mathbb{N}$ $m<n$, we have
     \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(\mathrm{id}_{Y^{n-m}})\otimes \mathrm{del}_{Y^m}) &= \prob{P}_C^{\RV{Y}_{[n-m]}\combbreak \RV{D}_{[n-m]}}\otimes \mathrm{del}_{Y^m}\label{eq:marginalise_comb}
 \end{align}
 
-Take any $d\in D^{\mathbb{N}}$ and let $d_{|m}\in D^n$ be the first $n$ elements of $d$. By Equation \ref{eq:marginalise_comb}, for any $A_i\in \sigalg{Y}$, $i\in [m]$
-
-\begin{align}
-    \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(\bigprod_{i\in [m]}A_i\times Y^{n-m}|d_{|n}) &= \prob{P}_C^{\RV{Y}_{[n-m]}\combbreak \RV{D}_{[n-m]}}(\bigprod_{i\in [m]}A_i|d_{|m})
-\end{align}
-
-Furthermore, for any permutation $\rho:[n]\to[n]$
-\begin{align}
-    \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}\mathrm{swap}_{\rho}(\bigprod_{i\in [m]}A_{\rho(i)}\times Y^{n-m}|d_{|n}) &= \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(\bigprod_{i\in [m]}A_{i}\times Y^{n-m}|d_{|n})
-\end{align}
-
-Thus by the Kolmogorov Extension Theorem \citep{cinlar_probability_2011}, for each $d\in D^{\mathbb{N}}$ there is a unique probability measure $\prob{Q}_d\in \Delta(Y^{\mathbb{N}}$ and set of variables $\RV{Z}_i:Y^{\mathbb{N}}\to Y$, $i\in \mathbb{N}$ satisfying
-\begin{align}
-    \prob{Q}_d^{\RV{Z}_{n}}(\bigprod_{i\in [n]}A_i) &= \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}\mathrm{swap}_{\rho}(\bigprod_{i\in [n]}A_{\rho(i)}|d_{|n})\label{eq:q_is_Markov}
-\end{align}
-
-Furthermore, for each $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$, $n\in \mathbb{N}$ note that
-
-\begin{align}
-    \prob{Q}_d^{\RV{Z}_n}(\bigprod_{i\in[n]} A_i) &= \prob{Q}_d(\bigprod_{i\in[n]} A_i \times Y^{\mathbb{N}})\\
-    &\geq \prob{Q}_d(\bigprod_{i\in\mathbb{N}} A_i)
-\end{align}
-
-so by the Monotone convergence theorem, the sequence $\prob{Q}_d^{\RV{Z}_n}(\bigprod_{i\in[n]} A_i)$ converges to $\prob{Q}_d(\bigprod_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigprod_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \ref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
-
-Thus $d\mapsto Q_d$ is the desired $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$.
+Therefore the existence of $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}$ is a consequence of Lemma \ref{lem:infinitely_extended_kernels}.
 \end{proof}
 
 We now define the insert operation for discrete sets only

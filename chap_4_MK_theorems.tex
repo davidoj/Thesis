@@ -88,7 +88,89 @@ that projects the $(d_i,i)$ indices of $y$ for all $i\in \mathbb{N}$, and $\prob
 \end{theorem}
 
 \begin{proof}
+Only if:
+For all $x_i\in X$, abuse notation to say that $\kernel{K}_x$ is a probability distribution $\delta_x \kernel{K}$.
 
+Choose $e:=(e_i)_{i\in\mathbb{N}}$ such that $e_{|D|i+j}$ is the $i$th element of $X$ for all $i,j\in \mathbb{N}$.
+
+Define
+\begin{align}
+    \mu((y_{ij})_{X\times \mathbb{N}}):=\kernel{K}_e((y_{|X|i+j})_{i\in X, j\in \mathbb{N}})
+\end{align}
+
+Now consider any $x:=(x_i)_{i\in \mathbb{N}}\in X^{\mathbb{N}}$. By definition of $e$, $e_{|D|x_i + i}=x_i$ for any $i,j\in \mathbb{N}$.
+
+Define
+\begin{align}
+    \prob{Q}:X\kto Y\\
+    \prob{Q}:= \tikzfig{lookup_representation_kernel}
+\end{align}
+
+and consider some ordered sequence $A\subset \mathbb{N}$ and $B:= ((|X|x_i+i))_{i\in A}$. Note that $e_B:=(e_{|X|x_i +i})_{i\in B}=x_A=(x_i)_{i\in A}$. Then 
+
+\begin{align}
+    \sum_{y\in \RV{Y}^{-1}(y_A)} \prob{Q}(y|x) &= \sum_{y\in \RV{Y}^{-1}(y_A)} \mu(y) \\
+    &= \sum_{y\in \RV{Y}^{-1}(y_A)} \prob{P}_e^{(\RV{Y}_{|D|d_i+i})_{A}}(y)\\
+    &= \prob{P}_e^{\RV{Y}_{B}}(y_A)\\
+    &= \prob{P}_{d}^{\RV{Y}_A}(y_A)&\text{by causal contractibility}
+\end{align}
+
+Because this holds for all $A\subset\mathbb{N}$, by the Kolmogorov extension theorem
+
+\begin{align}
+    \prob{Q}(y|d) &= \prob{P}_d^{\RV{Y}}(y)
+\end{align}
+
+And so $\prob{Q}$ is also a version of $\prob{P}_\square^{\RV{Y}|\RV{C}}$.
+
+Next we will show $\mu^{\RV{Y}^D}$ is exchangeable. Consider any subsequences $\RV{Y}^D_S$ and $\RV{Y}^D_T$ of $\RV{Y}^D$ with $|S|=|T|$. Let $\rho(S)$ be the ``expansion'' of the indices $S$, i.e. $\rho(S)=(|D|i+j)_{i\in S,j\in D}$. Then by construction of $e$, $e_{\rho(S)}=e_{\rho(T)}$ and therefore
+
+\begin{align}
+    \mu^{\RV{Y}^D}\Pi_S&= \prob{P}_e^{\RV{Y}_{\rho(S)}})\\
+    &= \prob{P}_e^{\RV{Y}_{\rho(T)}})&\text{by contractibility of }\prob{P}_C\text{ and the equality } e_{\rho(S)}=e_{\rho(T)}\\
+    &= \mu^{\RV{Y}^D}\Pi_T
+\end{align}
+
+
+If:
+Suppose 
+\begin{align}
+    \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{lookup_representation}
+\end{align}
+
+and consider any two deterministic decision functions $d,d'\in D^{\mathbb{N}}$ such that some subsequences are equal $d_S=d'_T$.
+
+Let $\RV{Y}^{d_S}=(\RV{Y}_{d_i i})_{i\in S}$.
+
+By definition,
+
+\begin{align}
+    \prob{P}_C^{\RV{Y}_S|\RV{D}}(y_S|d) &= \sum_{y^D_S\in Y^{|D|\times |S|}}\mu^{\RV{Y}^D} \Pi_S(y^D_S)\prob{F}_{\text{ev}}(y_S|d,y^D_S)\\
+    &= \sum_{y^D_S\in Y^{|D|\times |T|}}\prob{P}_C^{\RV{Y}^D_T}(y^D_S)\prob{F}_{\text{ev}}(y_S|d,y^D_S)&\text{ by contractibility of }\mu^{\RV{Y}^D}\Pi_T \\
+    &= \prob{P}_C^{\RV{Y}_T|\RV{D}}(y_S|d)
+\end{align}
+\end{proof}
+
+\begin{replemma}{lem:aug_cc}
+Given a $(\RV{D};\RV{Y})$-causally contractible model $\prob{P}_C'$ on $(\Omega',\sigalg{F}')$, there exists an \emph{augmented} model $\prob{P}_C$ on $(\Omega,\sigalg{F}):=((\Omega'\times Y^D,\sigalg{F}'\otimes\sigalg{Y}^D)$ such that $\prob{P}_C\Pi_{\Omega'}=\prob{P}_C'$ and, defining $\RV{Y}^D:\Omega\times Y^D\to Y^D$ as the projection onto $Y^D$
+\begin{align}
+    \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{lookup_representation_variablised}
+\end{align}
+\end{replemma}
+
+\begin{proof}
+Set $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}=\kernel{F}_{\mathrm{ev}}$ and $\prob{P}_C^{\RV{Y}^D|\RV{D}}=\mu^{\RV{Y}^D}\mathrm{erase}_{D^{\mathbb{N}}}\otimes \mathrm{erase}_D$ as in Theorem \ref{th:table_rep}. Then Equation \ref{eq:lup_rep_varb} follows Theorem \ref{th:table_rep}.
+
+Let $\RV{W}=\Pi_{\Omega'}$ and for each $\alpha\in C$, set 
+\begin{align}
+    \prob{P}_\alpha^{\RV{W}|\RV{Y}^D\RV{D}} &= \tikzfig{augmented_ccontracible}
+\end{align}
+Then
+\begin{align}
+    \prob{P}_\alpha^{\RV{W}} &= \tikzfig{augmented_ccon2}\\
+    &= \tikzfig{augmented_ccon3}\\
+    &= \prob{P}_\alpha'
+\end{align}
 \end{proof}
 
 \begin{theorem}\label{th:ciid_rep_kernel}
@@ -105,25 +187,42 @@ Where $\Pi_{D,i}:D^\mathbb{N}\kto D$ projects the $i$th coordinate of a vector i
 
 \end{proof}
 
-\begin{lemma}[Infinitely extended kernels]
-...
+\begin{lemma}[Infinitely extended kernels]\label{lem:infinitely_extended_kernels}
+Given a collection of Markov kernels $\kernel{K}_i:X^i\kto Y^i$ for all $i\in \mathbb{N}$, if we have for every $j>i$
+\begin{align}
+	\kernel{K}_j(\text{id}_{X_i}\otimes \text{del}_{X_{j-i}}) &= \kernel{K}_i\otimes \text{del}_{X_{j-i}}\label{eq:marginalise_comb}
+\end{align} 
+then there is a unique Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ such that for all $i,j\in \mathbb{N}$,$j>i$
+\begin{align}
+	\kernel{K}(\text{id}_{X_i}\otimes \text{del}_{X_{j-i}})&= \kernel{K}_i\otimes \text{del}_{X_{j-i}}
+\end{align}
 \end{lemma}
 
-
-\begin{theorem}[Posterior concentration]
-For a probability set $\prob{P}_C$ that is $(\RV{D};\RV{Y})$-causally contractible and any $\alpha$ such that
-\begin{align}
-	\prob{P}(\sum_{i\in\mathbb{N}} \llbracket \RV{D}_i = a \rrbracket > r) &= 1 &\forall a\in D,r\in\mathbb{R}
-\end{align}
-then
-\begin{align}
-	\lim_{n\to \infty}\prob{P}_\alpha^{\RV{H}|\RV{D}_{[n]}\RV{Y}_{[n]}}(A|d,y) \to \begin{cases}
-	1\\ 
-	0
-	\end{cases}
-\end{align}
-\end{theorem}
-
 \begin{proof}
+Take any $x\in X^{\mathbb{N}}$ and let $x_{|m}\in X^n$ be the first $n$ elements of $x$. By Equation \ref{eq:marginalise_comb}, for any $A_i\in \sigalg{Y}$, $i\in [m]$
 
+\begin{align}
+    \kernel{K}_n(\bigprod_{i\in [m]}A_i\times Y^{n-m}|x_{|n}) &= \kernel{K}_m(\bigprod_{i\in [m]}A_i|x_{|m})
+\end{align}
+
+Furthermore, by the definition of the $\mathrm{swap}$ map for any permutation $\rho:[n]\to[n]$
+\begin{align}
+    \kernel{K}_n\mathrm{swap}_{\rho}(\bigtimes_{i\in [m]}A_{\rho(i)}\times Y^{n-m}|x_{|n}) &= \kernel{K}_n(\bigtimes_{i\in [m]}A_{i}\times Y^{n-m}|x_{|n})
+\end{align}
+
+Thus by the Kolmogorov Extension Theorem \citep{cinlar_probability_2011}, for each $x\in X^{\mathbb{N}}$ there is a unique probability measure $\prob{Q}_x\in \Delta(Y^{\mathbb{N}}$ satisfying
+\begin{align}
+    \prob{Q}_d(\bigtimes_{i\in [n]}A_i\times Y^{\mathbb{N}}) &= \kernel{K}_n(\bigtimes_{i\in [n]}A_{\rho(i)}|d_{|n})\label{eq:q_is_Markov}
+\end{align}
+
+Furthermore, for each $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$, $n\in \mathbb{N}$ note that for $p>n$
+
+\begin{align}
+\prob{Q}_d(\bigprod_{i\in[n]} A_i \times Y^{\mathbb{N}})&\geq \prob{Q}_d(\bigprod_{i\in [p]} A_i\times Y^{\mathbb{N}})\\
+&\geq \prob{Q}_d(\bigprod_{i\in \mathbb{N}} A_i)
+\end{align}
+
+so by the Monotone convergence theorem, the sequence $\prob{Q}_d(\bigprod_{i\in[n]} A_i)$ converges as $n\to \infty$ to $\prob{Q}_d(\bigprod_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigprod_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \ref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
+
+Thus $d\mapsto Q_d$ is the desired $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$.
 \end{proof}
