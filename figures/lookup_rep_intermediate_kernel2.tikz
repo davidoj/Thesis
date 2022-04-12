@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (1.5, 0.5) {$\prob{F}_{\text{evs}}$};
+		\node [style=RLabel tikzit] (1) at (3.5, 0.5) {$Y$};
+		\node [style=none] (2) at (0.75, 0.75) {};
+		\node [style=none] (3) at (0.75, 0.25) {};
+		\node [style=none] (4) at (-4, 3) {};
+		\node [style=none] (5) at (-4, -1.25) {};
+		\node [style=none] (6) at (4.5, -1.25) {};
+		\node [style=none] (7) at (4.5, 3) {};
+		\node [style=none] (9) at (2.75, -0.5) {$i\in\mathbb{N}$};
+		\node [style=Llabel tikzit] (11) at (-2.25, -0.25) {$X$};
+		\node [style=semismall dist] (12) at (-2.25, 1.5) {$\mu$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0) to (1);
+		\draw (4.center) to (7.center);
+		\draw (5.center) to (6.center);
+		\draw (6.center) to (7.center);
+		\draw (4.center) to (5.center);
+		\draw [in=180, out=0] (11) to (3.center);
+		\draw [in=-180, out=0] (12) to (2.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

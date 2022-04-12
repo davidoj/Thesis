@@ -19,6 +19,7 @@
 \tikzstyle{plain circle}=[fill=white, draw=black, shape=circle]
 \tikzstyle{small kernel red}=[fill=white, draw=red, shape=rectangle, tikzit category=kernels, minimum width=0.5cm, minimum height=0.5cm]
 \tikzstyle{red small dist}=[fill=white, draw=red, shape=regular polygon, tikzit category=kernels, regular polygon sides=3, shape border rotate=90, minimum height=0.5cm, inner sep=-1pt]
+\tikzstyle{semismall dist}=[fill=white, draw=black, shape=regular polygon, tikzit category=kernels, regular polygon sides=3, shape border rotate=90]
 
 % Edge styles
 \tikzstyle{delmap}=[>={Rays[n=8]}, ->]
