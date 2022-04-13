@@ -1,6 +1,5 @@
 %!TEX root = main.tex
 
-
 \begin{definition}[Local]
 A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{local} if for all $n\in \mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^C})\in\mathbb{N}$ there exists $\kernel{L}:X^n\kto Y^n$ such that
 \begin{align}
@@ -280,25 +279,35 @@ Thus $d\mapsto Q_d$ is the desired $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \R
 \end{proof}
 
 
+\begin{theorem}[Conditional independence in causally contractible models]
+Suppose we have a probability set $\prob{P}_C$ on $\Omega$ with causally contractible $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$, $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$, $\RV{D}=(\RV{D}_i)_{i\in\mathbb{N}}$. We can extend $\Omega$ to $\Omega\times H$
+\end{theorem}
+
 
 \begin{replemma}{lem:aug_cc}
-Given a $(\RV{D};\RV{Y})$-causally contractible model $\prob{P}_C'$ on $(\Omega',\sigalg{F}')$, there exists an \emph{augmented} model $\prob{P}_C$ on $(\Omega,\sigalg{F}):=((\Omega'\times Y^D,\sigalg{F}'\otimes\sigalg{Y}^D)$ such that $\prob{P}_C\Pi_{\Omega'}=\prob{P}_C'$ and, defining $\RV{Y}^D:\Omega\times Y^D\to Y^D$ as the projection onto $Y^D$
+Suppose we have a probability set $\prob{P}_C'$ on $(\Omega',\sigalg{F}')$ with causally contractible $\mathbb{N}$-comb $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}''}$, $\RV{Y}'=(\RV{Y}'_i)_{i\in\mathbb{N}}$, $\RV{D}'=(\RV{D}'_i)_{i\in\mathbb{N}}$. Then there exists $H$ and an \emph{augmented} model $\prob{P}_C$ on $(\Omega,\sigalg{F}):=((\Omega'\times H,\sigalg{F}'\otimes\sigalg{H})$ such that $\prob{P}_C\Pi_{\Omega'}=\prob{P}_C'$ and, defining $\RV{H}:\Omega'\times H\to H$ as the projection onto $H$,
 \begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{lookup_representation_variablised}
+    \prob{P}_C^{\RV{Y}\combbreak \RV{D}} &= \tikzfig{do_model_representation}\label{eq:do_model_rep}
 \end{align}
 \end{replemma}
 
 \begin{proof}
-Set $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}=\kernel{F}_{\mathrm{ev}}$ and $\prob{P}_C^{\RV{Y}^D|\RV{D}}=\mu^{\RV{Y}^D}\mathrm{erase}_{D^{\mathbb{N}}}\otimes \mathrm{erase}_D$ as in Theorem \ref{th:table_rep}. Then Equation \ref{eq:lup_rep_varb} follows Theorem \ref{th:table_rep}.
-
-Let $\RV{W}=\Pi_{\Omega'}$ and for each $\alpha\in C$, set 
+Let $H$ be the hypothesis space from Theorem \ref{th:ciid_rep_kernel} and $\prob{P}_C^{\RV{H}}$ be some directing random measure for $\prob{P}_C^{\prime \RV{Y}\combbreak \RV{D}}$. Then by Theorem \ref{eq:do_model_rep}, Equation \ref{eq:do_model_rep} holds. Furthermore, by equality of combs, we have for all $\alpha\in C$
 \begin{align}
-    \prob{P}_\alpha^{\RV{W}|\RV{Y}^D\RV{D}} &= \tikzfig{augmented_ccontracible}
+	\prob{P}_\alpha^{\RV{YD}} &= \prob{P}_\alpha^{\prime \RV{Y'D'}}
 \end{align}
-Then
+
+Define $\RV{W}':\Omega'\to \Omega'$ as the identity function on $\Omega'$, $\RV{W}:\Omega'\times H\to \Omega'$ as the projection to $\Omega'$. For each $\alpha\in C$, define $\prob{P}_\alpha$ by
+
 \begin{align}
-    \prob{P}_\alpha^{\RV{W}} &= \tikzfig{augmented_ccon2}\\
-    &= \tikzfig{augmented_ccon3}\\
-    &= \prob{P}_\alpha'
+	\prob{P}_\alpha^{\RV{W}} &= \prob{P}_\alpha^{\RV{YD}}\odot \prob{P}_\alpha^{\prime \RV{W}'|\RV{Y'D'}} (\mathrm{del}_{Y^{\mathbb{N}D^{\mathbb{N}}H}}\otimes \mathrm{id}_{\Omega'})
+\end{align}
+
+Then
+
+\begin{align}
+	\prob{P}_\alpha^{\RV{W}} &= \prob{P}_\alpha\Pi_{\Omega'}\\
+	&= \prob{P}_\alpha^{\prime \RV{Y'D'}}\odot \prob{P}_\alpha^{\prime \RV{W}'|\RV{Y'D'}}(\mathrm{del}_{Y^{\mathbb{N}D^{\mathbb{N}}H}}\otimes \mathrm{id}_{\Omega'})\\
+	&= \prob{P}_\alpha^{\prime \RV{W}'}
 \end{align}
 \end{proof}

@@ -204,6 +204,8 @@ where $\RV{T}_\alpha:S\to F$ is the function $s\mapsto T(s,\alpha)$. If so, we c
 \end{align}
  If $\prob{Q}$ depends measurably on $S$, then it is a Markov kernel.
 
+\todo[inline]{this is a theorem}
+
 Thus Savage's theorem establishes that the relationship between acts and consequences can be represented by a probability function, and furthermore this probability function is unique. 
 
 \subsubsection{Savage axioms}
@@ -266,6 +268,8 @@ The Bolker-Jeffrey representation theorem concludes: assuming a measurable set $
     (A preceq B) \iff \sum_{i}^n \text{des}(D_i) \prob{P}_A(D_i) \leq \sum_{i}^n \text{des}(D_i) \prob{P}_A(D_i) \label{eq:ev_dec_theory}
 \end{align}
 where $\prob{P}_A(D_i):=\frac{\prob{P}(A\cap D_i)}{\prob{P}(A)}$ for $\prob{P}(A)>0$, undefined otherwise (so if $A\succ B$, then $\prob{P}(A)>0$).
+
+\todo[inline]{this is a theorem}
 
 Now, Jeffrey says that \emph{choices} are special elements of $\sigalg{F}$ that we have the power to ``make true''. In this case, we have some $C\subset\underline{\sigalg{F}}$ of choices that we want to compare, and the obvious probability function $\prob{P}_\cdot: C\to \Delta(\underline{\sigalg{F}})$ given by $\alpha\mapsto \prob{P}_\alpha$. We are still in a slightly different position to Savage's original theory, as our ``utility function'' is a function defined on $\sigalg{F}$ rather than on $F$. However, we're interested in questions about the construction of the probability function $\prob{P}_\cdot$, and so this difference is not relevant to our work.
 
