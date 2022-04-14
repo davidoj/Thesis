@@ -14,7 +14,7 @@ A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ \emph{commutes wi
 \begin{align}
 	\kernel{K}\mathrm{swap}_{\rho_Y} &=  \mathrm{swap}_{\rho_X} \kernel{K}\\
 	&\iff\\
-	\kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{\rho(i)}|\bigotiimes_{i\in \mathbb{N}} x_i) &= \kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{i}|\bigotiimes_{i\in \mathbb{N}} x_{\rho(i)})
+	\kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{\rho(i)}|\bigotimes_{i\in \mathbb{N}} x_i) &= \kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{i}|\bigotimes_{i\in \mathbb{N}} x_{\rho(i)})
 \end{align}
 \end{definition}
 
@@ -71,7 +71,7 @@ A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is causally contr
 \begin{align}
     \kernel{K} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel}\\
     &\iff\\
-    \kernel{K}(A|(x_i)_{i\in \mathbb{N}}) &= \mu \Pi_{(x_i i)_{i\in\mathbb{N}}}(A)$\forall A\in \sigalg{Y}^{\mathbb{N}}
+    \kernel{K}(A|(x_i)_{i\in \mathbb{N}}) &= \mu \Pi_{(x_i i)_{i\in\mathbb{N}}}(A)\forall A\in \sigalg{Y}^{\mathbb{N}}
 \end{align}
 Where $\Pi_{(d_i i)_{i\in\mathbb{N}}}:Y^{|X|\times \mathbb{N}}\to Y^{\mathbb{N}}$ is the function 
 \begin{align}
@@ -253,7 +253,7 @@ then there is a unique Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N
 Take any $x\in X^{\mathbb{N}}$ and let $x_{|m}\in X^n$ be the first $n$ elements of $x$. By Equation \ref{eq:marginalise_comb}, for any $A_i\in \sigalg{Y}$, $i\in [m]$
 
 \begin{align}
-    \kernel{K}_n(\bigprod_{i\in [m]}A_i\times Y^{n-m}|x_{|n}) &= \kernel{K}_m(\bigprod_{i\in [m]}A_i|x_{|m})
+    \kernel{K}_n(\bigtimes_{i\in [m]}A_i\times Y^{n-m}|x_{|n}) &= \kernel{K}_m(\bigtimes_{i\in [m]}A_i|x_{|m})
 \end{align}
 
 Furthermore, by the definition of the $\mathrm{swap}$ map for any permutation $\rho:[n]\to[n]$
@@ -269,27 +269,43 @@ Thus by the Kolmogorov Extension Theorem \citep{cinlar_probability_2011}, for ea
 Furthermore, for each $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$, $n\in \mathbb{N}$ note that for $p>n$
 
 \begin{align}
-\prob{Q}_d(\bigprod_{i\in[n]} A_i \times Y^{\mathbb{N}})&\geq \prob{Q}_d(\bigprod_{i\in [p]} A_i\times Y^{\mathbb{N}})\\
-&\geq \prob{Q}_d(\bigprod_{i\in \mathbb{N}} A_i)
+\prob{Q}_d(\bigtimes_{i\in[n]} A_i \times Y^{\mathbb{N}})&\geq \prob{Q}_d(\bigtimes_{i\in [p]} A_i\times Y^{\mathbb{N}})\\
+&\geq \prob{Q}_d(\bigtimes_{i\in \mathbb{N}} A_i)
 \end{align}
 
-so by the Monotone convergence theorem, the sequence $\prob{Q}_d(\bigprod_{i\in[n]} A_i)$ converges as $n\to \infty$ to $\prob{Q}_d(\bigprod_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigprod_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \ref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
+so by the Monotone convergence theorem, the sequence $\prob{Q}_d(\bigtimes_{i\in[n]} A_i)$ converges as $n\to \infty$ to $\prob{Q}_d(\bigtimes_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigtimes_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \ref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
 
 Thus $d\mapsto Q_d$ is the desired $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$.
 \end{proof}
 
 
-\begin{theorem}[Conditional independence in causally contractible models]
-Suppose we have a probability set $\prob{P}_C$ on $\Omega$ with causally contractible $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$, $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$, $\RV{D}=(\RV{D}_i)_{i\in\mathbb{N}}$. We can extend $\Omega$ to $\Omega\times H$
+\begin{theorem}[Conditional independence in augmented causally contractible model]
+Suppose we have a probability set $\prob{P}_C$ on $\Omega$ with causally contractible $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$, $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$, $\RV{D}=(\RV{D}_i)_{i\in\mathbb{N}}$, augmented with the hypothesis variable $\RV{H}$ as in Lemma \ref{lem:aug_cc}. Then for all $n$, $\RV{Y}_n\CI^e_{\prob{P}_C}(\RV{Y}_{<n},\RV{D}_{<n})|(\RV{H},\RV{D}_n)$.
 \end{theorem}
 
+\begin{proof}
+For all $\alpha\in C$, $n\in \mathbb{N}$
+\begin{align}
+	\prob{P}_\alpha^{\RV{Y}_{[n]}\RV{D}_{[n]}|\RV{H}} &= \tikzfig{cc_comb_factorisation}
+\end{align}
+Thus for all $\alpha$, by Theorem \ref{th:higher_order_conditionals}
+\begin{align}
+	\prob{P}_C^{\RV{Y}_n|\RV{D}_n\RV{H}}\otimes \mathrm{del}_{D^{n-1}\times Y^{n-1}} \overset{\prob{P}_\alpha}{\cong} \prob{P}_C^{\RV{Y}_n|\RV{D}_{[n]}\RV{Y}_{<n}\RV{H}}
+\end{align}
+which implies $\RV{Y}_n\CI^e_{\prob{P}_C}(\RV{Y}_{<n},\RV{D}_{<n})|(\RV{H},\RV{D}_n)$.
+\end{proof}
 
-\begin{replemma}{lem:aug_cc}
+
+\begin{theorem}[Conditional independence in non-data-dependant causally contractible model]
+Suppose we have a probability set $\prob{P}_C$ on $\Omega$ with causally contractible $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$, $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$, $\RV{D}=(\RV{D}_i)_{i\in\mathbb{N}}$, augmented with the hypothesis variable $\RV{H}$ as in Lemma \ref{lem:aug_cc}. Then for all $n$, $\RV{Y}_n\CI^e_{\prob{P}_C}(\RV{Y}_{<n},\RV{D}_{<n})|(\RV{H},\RV{D}_n)$.
+\end{theorem}
+
+\begin{lemma}\label{lem:aug_cc}
 Suppose we have a probability set $\prob{P}_C'$ on $(\Omega',\sigalg{F}')$ with causally contractible $\mathbb{N}$-comb $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}''}$, $\RV{Y}'=(\RV{Y}'_i)_{i\in\mathbb{N}}$, $\RV{D}'=(\RV{D}'_i)_{i\in\mathbb{N}}$. Then there exists $H$ and an \emph{augmented} model $\prob{P}_C$ on $(\Omega,\sigalg{F}):=((\Omega'\times H,\sigalg{F}'\otimes\sigalg{H})$ such that $\prob{P}_C\Pi_{\Omega'}=\prob{P}_C'$ and, defining $\RV{H}:\Omega'\times H\to H$ as the projection onto $H$,
 \begin{align}
     \prob{P}_C^{\RV{Y}\combbreak \RV{D}} &= \tikzfig{do_model_representation}\label{eq:do_model_rep}
 \end{align}
-\end{replemma}
+\end{lemma}
 
 \begin{proof}
 Let $H$ be the hypothesis space from Theorem \ref{th:ciid_rep_kernel} and $\prob{P}_C^{\RV{H}}$ be some directing random measure for $\prob{P}_C^{\prime \RV{Y}\combbreak \RV{D}}$. Then by Theorem \ref{eq:do_model_rep}, Equation \ref{eq:do_model_rep} holds. Furthermore, by equality of combs, we have for all $\alpha\in C$

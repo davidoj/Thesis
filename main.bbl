@@ -5,6 +5,21 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[Banerjee et~al.(2017)Banerjee, Chassang, and
+  Snowberg]{banerjee_chapter_2017}
+A.~V. Banerjee, S.~Chassang, and E.~Snowberg.
+\newblock Chapter 4 - {Decision} {Theoretic} {Approaches} to {Experiment}
+  {Design} and {External} {ValidityaaWe} thank {Esther} {Duflo} for her
+  leadership on the handbook and for extensive comments on earlier drafts.
+  {Chassang} and {Snowberg} gratefully acknowledge the support of {NSF} grant
+  {SES}-1156154.
+\newblock In Abhijit~Vinayak Banerjee and Esther Duflo, editors, \emph{Handbook
+  of {Economic} {Field} {Experiments}}, volume~1 of \emph{Handbook of {Field}
+  {Experiments}}, pages 141--174. North-Holland, January 2017.
+\newblock \doi{10.1016/bs.hefe.2016.08.005}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S2214658X16300071}.
+
 \bibitem[Bishop(2006)]{bishop_pattern_2006}
 Christopher Bishop.
 \newblock \emph{Pattern {Recognition} and {Machine} {Learning}}.
@@ -12,6 +27,14 @@ Christopher Bishop.
   2006.
 \newblock ISBN 978-0-387-31073-2.
 \newblock URL \url{https://www.springer.com/gp/book/9780387310732}.
+
+\bibitem[Bogachev and Malofeev(2020)]{bogachev_kantorovich_2020}
+Vladimir Bogachev and Ilya Malofeev.
+\newblock Kantorovich problems and conditional measures depending on a
+  parameter.
+\newblock \emph{Journal of Mathematical Analysis and Applications},
+  486:\penalty0 123883, June 2020.
+\newblock \doi{10.1016/j.jmaa.2020.123883}.
 
 \bibitem[Bolker(1966)]{bolker_functions_1966}
 Ethan~D. Bolker.
@@ -22,6 +45,17 @@ Ethan~D. Bolker.
 \newblock \doi{10.2307/1994401}.
 \newblock URL \url{https://www.jstor.org/stable/1994401}.
 \newblock Publisher: American Mathematical Society.
+
+\bibitem[Bolker(1967)]{bolker_simultaneous_1967}
+Ethan~D. Bolker.
+\newblock A {Simultaneous} {Axiomatization} of {Utility} and {Subjective}
+  {Probability}.
+\newblock \emph{Philosophy of Science}, 34\penalty0 (4):\penalty0 333--340,
+  1967.
+\newblock ISSN 0031-8248.
+\newblock URL \url{https://www.jstor.org/stable/186122}.
+\newblock Publisher: [The University of Chicago Press, Philosophy of Science
+  Association].
 
 \bibitem[Bongers et~al.(2016)Bongers, Peters, Schölkopf, and
   Mooij]{bongers_theoretical_2016}
@@ -44,15 +78,27 @@ Kenta Cho and Bart Jacobs.
 \newblock ISSN 0960-1295, 1469-8072.
 \newblock \doi{10.1017/S0960129518000488}.
 
-\bibitem[Clerc et~al.(2017)Clerc, Dahlqvist, Danos, and
-  Garnier]{clerc_pointless_2017}
-Florence Clerc, Fredrik Dahlqvist, Vincent Danos, and Ilias Garnier.
-\newblock Pointless learning.
-\newblock \emph{20th International Conference on Foundations of Software
-  Science and Computation Structures (FoSSaCS 2017)}, March 2017.
-\newblock \doi{10.1007/978-3-662-54458-7_21}.
+\bibitem[Constantinou and Dawid(2017)]{constantinou_extended_2017}
+Panayiota Constantinou and A.~Philip Dawid.
+\newblock Extended conditional independence and applications in causal
+  inference.
+\newblock \emph{The Annals of Statistics}, 45\penalty0 (6):\penalty0
+  2618--2653, 2017.
+\newblock ISSN 0090-5364.
+\newblock URL \url{http://www.jstor.org/stable/26362953}.
+\newblock Publisher: Institute of Mathematical Statistics.
+
+\bibitem[Dawid(2000)]{dawid_causal_2000}
+A.~P. Dawid.
+\newblock Causal {Inference} without {Counterfactuals}.
+\newblock \emph{Journal of the American Statistical Association}, 95\penalty0
+  (450):\penalty0 407--424, June 2000.
+\newblock ISSN 0162-1459.
+\newblock \doi{10.1080/01621459.2000.10474210}.
 \newblock URL
-  \url{https://www.research.ed.ac.uk/portal/en/publications/pointless-learning(694fb610-69c5-469c-9793-825df4f8ddec).html}.
+  \url{https://www.tandfonline.com/doi/abs/10.1080/01621459.2000.10474210}.
+\newblock Publisher: Taylor \& Francis \_eprint:
+  https://www.tandfonline.com/doi/pdf/10.1080/01621459.2000.10474210.
 
 \bibitem[Dawid(2002)]{dawid_influence_2002}
 A.~P. Dawid.
@@ -81,23 +127,12 @@ Bruno de~Finetti.
 \newblock \doi{10.1007/978-1-4612-0919-5_10}.
 \newblock URL \url{https://doi.org/10.1007/978-1-4612-0919-5_10}.
 
-\bibitem[Diaconis and Freedman(1980)]{diaconis_finite_1980}
-P.~Diaconis and D.~Freedman.
-\newblock Finite {Exchangeable} {Sequences}.
-\newblock \emph{The Annals of Probability}, 8\penalty0 (4):\penalty0 745--764,
-  August 1980.
-\newblock ISSN 0091-1798, 2168-894X.
-\newblock \doi{10.1214/aop/1176994663}.
-\newblock URL
-  \url{https://projecteuclid.org/journals/annals-of-probability/volume-8/issue-4/Finite-Exchangeable-Sequences/10.1214/aop/1176994663.full}.
-\newblock Publisher: Institute of Mathematical Statistics.
-
-\bibitem[Ferguson(1967)]{toutenburg_ferguson_1967}
-Thomas~S. Ferguson.
-\newblock \emph{Mathematical {Statistics}: {A} {Decision} {Theoretic}
-  {Approach}}.
-\newblock Academic Press, July 1967.
-\newblock ISBN 978-1-4832-2123-6.
+\bibitem[Feynman(1979)]{feynman_feynman_1979}
+R.P. Feynman.
+\newblock \emph{The {Feynman} lectures on physics}.
+\newblock Le cours de physique de {Feynman}. Intereditions, France, 1979.
+\newblock ISBN 978-2-7296-0030-3.
+\newblock INIS Reference Number: 13648743.
 
 \bibitem[Fisher({[1925] 1992})]{fisher_statistical_1992}
 R.~A. Fisher.
@@ -137,12 +172,32 @@ David~A. Freedman.
 \newblock URL \url{https://projecteuclid.org/euclid.aoms/1177703871}.
 \newblock Publisher: Institute of Mathematical Statistics.
 
+\bibitem[Fritz(2020)]{fritz_synthetic_2020}
+Tobias Fritz.
+\newblock A synthetic approach to {Markov} kernels, conditional independence
+  and theorems on sufficient statistics.
+\newblock \emph{Advances in Mathematics}, 370:\penalty0 107239, August 2020.
+\newblock ISSN 0001-8708.
+\newblock \doi{10.1016/j.aim.2020.107239}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S0001870820302656}.
+
 \bibitem[Goodfellow et~al.(2016)Goodfellow, Bengio, and
   Courville]{Goodfellow-et-al-2016}
 Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
 \newblock \emph{Deep Learning}.
 \newblock MIT Press, 2016.
 \newblock \url{http://www.deeplearningbook.org}.
+
+\bibitem[Greenland and Robins(1986)]{greenland_identifiability_1986}
+Sander Greenland and James~M Robins.
+\newblock Identifiability, {Exchangeability}, and {Epidemiological}
+  {Confounding}.
+\newblock \emph{International Journal of Epidemiology}, 15\penalty0
+  (3):\penalty0 413--419, September 1986.
+\newblock ISSN 0300-5771.
+\newblock \doi{10.1093/ije/15.3.413}.
+\newblock URL \url{https://doi.org/10.1093/ije/15.3.413}.
 
 \bibitem[Heckerman and Shachter(1995)]{heckerman_decision-theoretic_1995}
 D.~Heckerman and R.~Shachter.
@@ -152,35 +207,6 @@ D.~Heckerman and R.~Shachter.
 \newblock ISSN 1076-9757.
 \newblock \doi{10.1613/jair.202}.
 \newblock URL \url{https://www.jair.org/index.php/jair/article/view/10151}.
-
-\bibitem[Hernán and Taubman(2008)]{hernan_does_2008}
-M.~A. Hernán and S.~L. Taubman.
-\newblock Does obesity shorten life? {The} importance of well-defined
-  interventions to answer causal questions.
-\newblock \emph{International Journal of Obesity}, 32\penalty0 (S3):\penalty0
-  S8--S14, August 2008.
-\newblock ISSN 1476-5497.
-\newblock \doi{10.1038/ijo.2008.82}.
-\newblock URL \url{https://www.nature.com/articles/ijo200882}.
-
-\bibitem[Hewitt and Savage(1955)]{hewitt_symmetric_1955}
-Edwin Hewitt and Leonard~J. Savage.
-\newblock Symmetric {Measures} on {Cartesian} {Products}.
-\newblock \emph{Transactions of the American Mathematical Society}, 80\penalty0
-  (2):\penalty0 470--501, 1955.
-\newblock ISSN 0002-9947.
-\newblock \doi{10.2307/1992999}.
-\newblock URL \url{https://www.jstor.org/stable/1992999}.
-\newblock Publisher: American Mathematical Society.
-
-\bibitem[Hájek(2019)]{hajek_interpretations_2019}
-Alan Hájek.
-\newblock Interpretations of {Probability}.
-\newblock In Edward~N. Zalta, editor, \emph{The {Stanford} {Encyclopedia} of
-  {Philosophy}}. Metaphysics Research Lab, Stanford University, fall 2019
-  edition, 2019.
-\newblock URL
-  \url{https://plato.stanford.edu/archives/fall2019/entries/probability-interpret/}.
 
 \bibitem[Jacobs et~al.(2019)Jacobs, Kissinger, and Zanasi]{jacobs_causal_2019}
 Bart Jacobs, Aleks Kissinger, and Fabio Zanasi.
@@ -196,16 +222,6 @@ Richard~C. Jeffrey.
 \newblock \emph{The {Logic} of {Decision}}.
 \newblock University of Chicago Press, July 1965.
 \newblock ISBN 978-0-226-39582-1.
-
-\bibitem[Kerns and Székely(2006)]{kerns_definettis_2006}
-G.~Jay. Kerns and Gábor~J. Székely.
-\newblock Definetti’s {Theorem} for {Abstract} {Finite} {Exchangeable}
-  {Sequences}.
-\newblock \emph{Journal of Theoretical Probability}, 19\penalty0 (3):\penalty0
-  589--608, December 2006.
-\newblock ISSN 1572-9230.
-\newblock \doi{10.1007/s10959-006-0028-z}.
-\newblock URL \url{https://doi.org/10.1007/s10959-006-0028-z}.
 
 \bibitem[Krittanawong et~al.(2020)Krittanawong, Narasimhan, Wang, Hahn, Virk,
   Farrell, Zhang, and Tang]{krittanawong_association_2020}
@@ -230,15 +246,17 @@ L.~Le~Cam.
 \newblock Comparison of {Experiments} - {A} {Short} {Review}.pdf.
 \newblock \emph{IMS Lecture Notes - Monograph Series}, 30, 1996.
 
-\bibitem[Loomes and Sugden(1982)]{loomes_regret_1982}
-Graham Loomes and Robert Sugden.
-\newblock Regret {Theory}: {An} {Alternative} {Theory} of {Rational} {Choice}
-  {Under} {Uncertainty}.
-\newblock \emph{The Economic Journal}, 92\penalty0 (368):\penalty0 805--824,
-  1982.
-\newblock ISSN 0013-0133.
-\newblock \doi{10.2307/2232669}.
-\newblock URL \url{https://www.jstor.org/stable/2232669}.
+\bibitem[Menger(2003)]{menger_random_2003}
+Karl Menger.
+\newblock Random {Variables} from the {Point} of {View} of a {General} {Theory}
+  of {Variables}.
+\newblock In Karl Menger, Bert Schweizer, Abe Sklar, Karl Sigmund, Peter
+  Gruber, Edmund Hlawka, Ludwig Reich, and Leopold Schmetterer, editors,
+  \emph{Selecta {Mathematica}: {Volume} 2}, pages 367--381. Springer, Vienna,
+  2003.
+\newblock ISBN 978-3-7091-6045-9.
+\newblock \doi{10.1007/978-3-7091-6045-9_31}.
+\newblock URL \url{https://doi.org/10.1007/978-3-7091-6045-9_31}.
 
 \bibitem[Nilsson and Lauritzen(2013)]{nilsson_evaluating_2013}
 Dennis Nilsson and Steffen~L. Lauritzen.
@@ -261,34 +279,6 @@ Judea Pearl.
 \newblock \emph{Causality: {Models}, {Reasoning} and {Inference}}.
 \newblock Cambridge University Press, 2 edition, 2009.
 
-\bibitem[Pearl(2018)]{pearl_does_2018}
-Judea Pearl.
-\newblock Does {Obesity} {Shorten} {Life}? {Or} is it the {Soda}? {On}
-  {Non}-manipulable {Causes}.
-\newblock \emph{Journal of Causal Inference}, 6\penalty0 (2), 2018.
-\newblock \doi{10.1515/jci-2018-2001}.
-\newblock URL
-  \url{https://www.degruyter.com/view/j/jci.2018.6.issue-2/jci-2018-2001/jci-2018-2001.xml}.
-
-\bibitem[Pearl and Mackenzie(2018)]{pearl_book_2018}
-Judea Pearl and Dana Mackenzie.
-\newblock \emph{The {Book} of {Why}: {The} {New} {Science} of {Cause} and
-  {Effect}}.
-\newblock Basic Books, New York, 1 edition edition, May 2018.
-\newblock ISBN 978-0-465-09760-9.
-
-\bibitem[Peters et~al.(2016)Peters, Bühlmann, and
-  Meinshausen]{peters_causal_2016}
-Jonas Peters, Peter Bühlmann, and Nicolai Meinshausen.
-\newblock Causal inference by using invariant prediction: identification and
-  confidence intervals.
-\newblock \emph{Journal of the Royal Statistical Society: Series B (Statistical
-  Methodology)}, 78\penalty0 (5):\penalty0 947--1012, 2016.
-\newblock ISSN 1467-9868.
-\newblock \doi{10.1111/rssb.12167}.
-\newblock URL
-  \url{https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167}.
-
 \bibitem[Proctor(2012)]{proctor_history_2012}
 Robert~N. Proctor.
 \newblock The history of the discovery of the cigarette–lung cancer link:
@@ -306,6 +296,15 @@ Thomas~S Richardson and James~M Robins.
 \newblock \emph{Center for the Statistics and the Social Sciences, University
   of Washington Series. Working Paper}, 128\penalty0 (30):\penalty0 2013, 2013.
 
+\bibitem[Richardson et~al.(2017)Richardson, Evans, Robins, and
+  Shpitser]{richardson_nested_2017}
+Thomas~S. Richardson, Robin~J. Evans, James~M. Robins, and Ilya Shpitser.
+\newblock Nested {Markov} {Properties} for {Acyclic} {Directed} {Mixed}
+  {Graphs}.
+\newblock \emph{arXiv:1701.06686 [stat]}, January 2017.
+\newblock URL \url{http://arxiv.org/abs/1701.06686}.
+\newblock arXiv: 1701.06686.
+
 \bibitem[Rubin(2005)]{rubin_causal_2005}
 Donald~B. Rubin.
 \newblock Causal {Inference} {Using} {Potential} {Outcomes}.
@@ -320,13 +319,23 @@ Leonard~J. Savage.
 \newblock \emph{The {Foundations} of {Statistics}}.
 \newblock Wiley Publications in Statistics, 1954.
 
-\bibitem[Selinger(2010)]{selinger_survey_2010}
-Peter Selinger.
-\newblock A survey of graphical languages for monoidal categories.
-\newblock \emph{arXiv:0908.3347 [math]}, 813:\penalty0 289--355, 2010.
+\bibitem[Selinger(2011)]{selinger_survey_2011}
+P.~Selinger.
+\newblock A {Survey} of {Graphical} {Languages} for {Monoidal} {Categories}.
+\newblock In Bob Coecke, editor, \emph{New {Structures} for {Physics}}, Lecture
+  {Notes} in {Physics}, pages 289--355. Springer, Berlin, Heidelberg, 2011.
+\newblock ISBN 978-3-642-12821-9.
 \newblock \doi{10.1007/978-3-642-12821-9_4}.
-\newblock URL \url{http://arxiv.org/abs/0908.3347}.
-\newblock arXiv: 0908.3347.
+\newblock URL \url{https://doi.org/10.1007/978-3-642-12821-9_4}.
+
+\bibitem[Shahar(2009)]{shahar_association_2009}
+Eyal Shahar.
+\newblock The association of body mass index with health outcomes: causal,
+  inconsistent, or confounded?
+\newblock \emph{American Journal of Epidemiology}, 170\penalty0 (8):\penalty0
+  957--958, October 2009.
+\newblock ISSN 1476-6256.
+\newblock \doi{10.1093/aje/kwp292}.
 
 \bibitem[Shpitser and Pearl(2008)]{shpitser_complete_2008}
 Ilya Shpitser and Judea Pearl.
@@ -372,15 +381,19 @@ J.~Von~Neumann and O.~Morgenstern.
 \newblock Theory of games and economic behavior. Princeton University Press,
   Princeton, NJ, US, 1944.
 
+\bibitem[Vorob’ev(1962)]{vorobev_consistent_1962}
+N.~N. Vorob’ev.
+\newblock Consistent {Families} of {Measures} and {Their} {Extensions}.
+\newblock \emph{Theory of Probability \& Its Applications}, 7\penalty0 (2),
+  1962.
+\newblock \doi{10.1137/1107014}.
+\newblock URL
+  \url{http://www.mathnet.ru/php/archive.phtml?wshow=paper&jrnid=tvp&paperid=4710&option_lang=eng}.
+
 \bibitem[Wald(1950)]{wald_statistical_1950}
 Abraham Wald.
 \newblock \emph{Statistical decision functions}.
 \newblock Statistical decision functions. Wiley, Oxford, England, 1950.
-
-\bibitem[Walley(1991)]{walley_statistical_1991}
-Peter Walley.
-\newblock \emph{Statistical {Reasoning} with {Imprecise} {Probabilities}}.
-\newblock Chapman \& Hall, 1991.
 
 \bibitem[Wiblin(2016)]{wiblin_why_2016}
 Robert Wiblin.

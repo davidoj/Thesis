@@ -198,17 +198,6 @@ Appendix \ref{sec:ccontract_appendix}.
 
 We would prefer to talk about $\RV{Y}^D$ as a latent variable, rather than needing to refer to the the factorisation of a model in terms of $\mu^{\RV{Y}^D}$ in Equation \ref{eq:lup_rep}. This motivates the definition of an \emph{augmented} causally contractible model.
 
-\begin{lemma}[Augmented causally contractible model]\label{lem:aug_cc}
-Given a $(\RV{D};\RV{Y})$-causally contractible model $\prob{P}_C'$ on $(\Omega',\sigalg{F}')$, there exists an \emph{augmented} model $\prob{P}_C$ on $(\Omega,\sigalg{F}):=((\Omega'\times Y^D,\sigalg{F}'\otimes\sigalg{Y}^D)$ such that $\prob{P}_C\Pi_{\Omega'}=\prob{P}_C'$ and, defining $\RV{Y}^D:\Omega\times Y^D\to Y^D$ as the projection onto $Y^D$
-\begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{lookup_representation_variablised}\label{eq:lup_rep_varb}
-\end{align}
-\end{lemma}
-
-\begin{proof}
-Appendix \ref{sec:ccontract_appendix}.
-\end{proof}
-
 An augmented causally contractible model looks in some respects similar to a potential outcomes model - both have a distribution over an unobserved ``tabular'' variable $\RV{Y}^D$, and the value of $\RV{Y}_i$ given $\RV{D}$ is deterministically equal to the $\RV{Y}_i^\RV{D}$ (abusing notation). However, the $\RV{Y}^D$ in an augmented causally contractible model usually can't be interpreted as potential outcomes. For example, consider a series of bets on fair coin flips. Model the consequence $\RV{Y}_i$ as uniform on $\{0,1\}$ for any decision $\RV{D}_i$, for all $i$. Specifically, $D=Y=\{0,1\}$ and $\prob{P}_\alpha^{\RV{Y}_n}(y)=\prod_{i\in [n]} 0.5$ for all $n$, $y\in Y^n$, $\alpha\in R$. Then the construction of $\prob{P}^{\RV{Y}^D}$ following the method in Lemma \ref{th:table_rep} yields $\prob{P}^{Y^D_i}(y^D_i)=\prod_{j\in D} 0.5$ for all $y^D_i\in Y^D$. In this model $\RV{Y}^0_i$ and $\RV{Y}^1_i$ are independent and uniformly distributed. However, if we wanted $\RV{Y}^0_i$ to be interpretable as ``what would happen if I bet on outcome 0 on turn $i$'' and $\RV{Y}^1$ to represent ``what would happen if I bet on outcome 1 on turn $i$'', then we ought to have $\RV{Y}^0_i = 1-\RV{Y}^1_i$.
 
 The following is the main theorem of this section, that establishes the equivalence between causal contractibility and the existence of response conditionals. The argument in outline is: because $\prob{P}_C^{\RV{Y}^D}$ is a column exchangeable probability distribution we can apply De Finetti's theorem to show $\prob{P}_C^{\RV{Y}^D}$ is representable as a product of identical parallel copies of $\prob{P}_C^{\RV{Y}_1^D|\RV{H}}$ and a common prior $\prob{P}_C^{\RV{H}}$. This in turn can be used to show that $\prob{P}_C^{\RV{Y}|\RV{D}}$ can be represented as a product of identical parallel copies of $\prob{P}_C^{\RV{Y}_1|\RV{D}_1\RV{H}}$ and the same common prior $\prob{P}_C^{\RV{H}}$.
@@ -463,7 +452,7 @@ Given a probability set $\prob{P}_C$ with variables $\RV{Y}_i:\Omega\to Y$ and $
 \begin{proof}
 For each $n\in \mathbb{N}$ $m<n$, we have
 \begin{align}
-    \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(\mathrm{id}_{Y^{n-m}})\otimes \mathrm{del}_{Y^m}) &= \prob{P}_C^{\RV{Y}_{[n-m]}\combbreak \RV{D}_{[n-m]}}\otimes \mathrm{del}_{Y^m}\label{eq:marginalise_comb}
+    \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(\mathrm{id}_{Y^{n-m}})\otimes \mathrm{del}_{Y^m}) &= \prob{P}_C^{\RV{Y}_{[n-m]}\combbreak \RV{D}_{[n-m]}}\otimes \mathrm{del}_{Y^m}
 \end{align}
 
 Therefore the existence of $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}$ is a consequence of Lemma \ref{lem:infinitely_extended_kernels}.
@@ -472,9 +461,9 @@ Therefore the existence of $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\m
 We now define the insert operation for discrete sets only
 
 \begin{definition}[Comb insert]
-Given an $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$ and an $n-1$ comb $\prob{P}_\alpha^{\RV{D}_{[1,n]}|\RV{Y}_{[n-1]}}$
+Given an $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$ and an $n-1$ comb $\prob{P}_\alpha^{\RV{D}_{[1,n]}|\RV{Y}_{[n-1]}}$, $(D,\sigalg{D})$ and $(Y,\sigalg{Y})$ discrete, for all $y_i\in Y$ and $d_i\in D$
 \begin{align}
-    \mathrm{insert}(\prob{P}_\alpha^{\RV{D}_{[1,n]}\combbreak \RV{Y}_{[n-1]}},\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}})(y_n|d_1) &= \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(y_n|d_{[1,n]},d_1)\prob{P}_\alpha^{\RV{D}_{[1,n]}|\RV{Y}_{[n-1]}}(d_{[1,n]}|y_{[n-1]})
+    \mathrm{insert}(\prob{P}_\alpha^{\RV{D}_{[1,n]}\combbreak \RV{Y}_{[n-1]}},\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}})(y_{[n]},d_{[n-1]}|d_1) &= \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(y_n|d_{[1,n]},d_1)\prob{P}_\alpha^{\RV{D}_{[1,n]}\combbreak\RV{Y}_{[n-1]}}(d_{[1,n]}|y_{[n-1]})
 \end{align}
 \end{definition}
 

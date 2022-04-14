@@ -3,58 +3,59 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-Repeated entry---line 967 of file references.bib
+Repeated entry---line 197 of file references.bib
+ : @article{constantinou_extended_2017
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1162 of file references.bib
  : @phdthesis{shpitser_complete_2008
  :                                  ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1268 of file references.bib
- : @article{clerc_pointless_2017
- :                              ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 1462 of file references.bib
+Repeated entry---line 1662 of file references.bib
  : @article{fong_causal_2013
  :                          ,
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "kallenberg_basic_2005"
 Warning--I didn't find a database entry for "savage_foundations_1972"
 You've used 49 entries,
             2773 wiz_defined-function locations,
-            964 strings with 15399 characters,
-and the built_in function-call counts, 20697 in all, are:
-= -- 1979
-> -- 930
-< -- 45
-+ -- 325
-- -- 276
-* -- 1545
-:= -- 3307
-add.period$ -- 244
+            977 strings with 16153 characters,
+and the built_in function-call counts, 21331 in all, are:
+= -- 2056
+> -- 931
+< -- 49
++ -- 326
+- -- 277
+* -- 1586
+:= -- 3386
+add.period$ -- 250
 call.type$ -- 49
-change.case$ -- 227
+change.case$ -- 224
 chr.to.int$ -- 49
 cite$ -- 98
-duplicate$ -- 1011
-empty$ -- 1782
-format.name$ -- 355
-if$ -- 4363
+duplicate$ -- 1047
+empty$ -- 1839
+format.name$ -- 350
+if$ -- 4528
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 60
-newline$ -- 341
-num.names$ -- 208
-pop$ -- 420
+missing$ -- 58
+newline$ -- 344
+num.names$ -- 212
+pop$ -- 408
 preamble$ -- 1
-purify$ -- 187
+purify$ -- 184
 quote$ -- 0
-skip$ -- 709
+skip$ -- 738
 stack$ -- 0
-substring$ -- 604
-swap$ -- 96
-text.length$ -- 3
+substring$ -- 692
+swap$ -- 126
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 469
+type$ -- 479
 warning$ -- 0
-while$ -- 195
+while$ -- 204
 width$ -- 0
-write$ -- 817
+write$ -- 831
 (There were 3 error messages)

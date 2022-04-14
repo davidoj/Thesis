@@ -7,7 +7,11 @@ Our approach to causal inference is (like most other approaches) based on probab
 
 Less likely to be familiar to readers is the string diagram notation we use to represent probabilistic functions. This is a notation created for reasoning about abstract Markov categories, and is somewhat different to existing graphical languages. The main difference is that in our notation wires represent variables and boxes (which are like nodes in directed acyclic graphs) represent probabilistic functions. Standard directed acyclic graphs annotate nodes with variable names and represent probabilistic functions implicitly. The advantage of explicitly representing probabilistic functions is that we can write equations involving graphics. It is introduced in Section \ref{ssec:mken_diagrams}.
 
-We also extend the theory of probability to a theory of probability sets, which we introduce in Section \ref{sec:probability_sets}. We introduce the convention of \emph{uniform conditional probability}, which is similar but not identical to conditional probability, also make use of \emph{extended conditional independence} as introduced by \citet{constantinou_extended_2017}. We also introduce the assumption of \emph{validity}, which ensures that probability sets constructed by ``assembling'' collections of uniform conditionals are non-empty.
+We also extend the theory of probability to a theory of probability sets, which we introduce in Section \ref{sec:probability_sets}. This section goes over some ground already trodden by Section \ref{sec:standard_prob}; this structure was chosen so that people familiar with the Section \ref{sec:standard_prob} can skip to Section \ref{sec:probability_sets} for relevant generalisations to probability sets. Two key ideas introduced here are \emph{uniform conditional probability}, similar but not identical to conditional probability, and \emph{extended conditional independence} as introduced by \citet{constantinou_extended_2017}, similar but not identical to regular conditional independence.
+
+We finally introduce the assumption of \emph{validity}, which ensures that probability sets constructed by ``assembling'' collections of uniform conditionals are non-empty.
+
+This is a reference chapter -- a reader who is already quite familiar with probability theory may skip to Chapter \ref{ch:2p_statmodels}. Where necessary, references back to theorems and definitions in this chapter are given. In Chapter \ref{ch:evaluating_decisions}, we will introduce one additional probabilistic primitive: \emph{combs}, as we feel that additional context is helpful for understanding them.
 
 \section{Conventions}
 
@@ -18,7 +22,7 @@ We also extend the theory of probability to a theory of probability sets, which 
  \hline
  Iverson bracket & $\llbracket \cdot \rrbracket$ & Function equal to 1 if $\cdot$ is true, false otherwise \\ 
  Identity function & $\mathrm{idf}_X$ & Identity function $X\to X$\\
- Identity kernel & $\mathrm{id}_{X}$ & Kernel associated with the identity function $X\to X$
+ Identity kernel & $\mathrm{id}_{X}$ & Kernel associated with the identity function $X\to X$\\
  \hline
 \end{tabular}
 \end{center}
@@ -115,6 +119,29 @@ Given measurable $f:X\to Y$ and $g:Y\to Z$, $\kernel{F}_f\kernel{F}_g = \kernel{
 \end{align}
 \end{proof}
 
+\subsubsection{Variables, conditionals and marginals}
+
+\begin{definition}[Variable]
+Given a measurable space $(\Omega,\sigalg{F})$ and a measurable space of values $(X,\sigalg{X})$, an \emph{$X$-valued variable} is a measurable function $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$.
+\end{definition}
+
+\begin{definition}[Sequence of variables]
+Given a measurable space $(\Omega,\sigalg{F})$ and two variables $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$, $\RV{Y}:(\Omega,\sigalg{F})\to (Y,\sigalg{Y})$, $(\RV{X},\RV{Y}):\Omega\to X\times Y$ is the variable $\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$.
+\end{definition}
+
+\begin{definition}[Marginal distribution]\label{def:pushforward}
+Given a probability space $(\mu,\Omega,\sigalg{F})$ and a variable $\RV{X}:\Omega\to (X,\sigalg{X})$, the \emph{marginal distribution} of $\RV{X}$ with respect to $\mu$, $\mu^{\RV{X}}:\sigalg{X}\to [0,1]$ by $\mu^{\RV{X}}(A):=\mu(\RV{X}^{-1}(A))$ for any $A\in \sigalg{X}$.
+\end{definition}
+
+\begin{definition}[Conditional distribution]\label{def:disint}
+Given a probability space $(\mu,\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, the \emph{conditional distribution} of $\RV{Y}$ given $\RV{X}$ is any Markov kernel $\mu^{\RV{Y}|\RV{X}}:X\kto Y$ such that
+\begin{align}
+	\mu^{\RV{XY}}(A\times B)&=\int_{A} \mu^{\RV{Y}|\RV{X}}(B|x) \mathrm{d}\mu^{\RV{X}}(x) &\forall A\in \sigalg{X}, B\in \sigalg{Y}\\
+	&\iff\\
+	\mu^{\RV{XY}}&= \tikzfig{disint_def}\label{eq:conditional} 
+\end{align}
+\end{definition}
+
 \subsubsection{Markov kernel product notation}\label{ssec:product_notation}
 
 Three pairwise \emph{product} operations involving Markov kernels can be defined: measure-kernel products, kernel-kernel products and kernel-function products. These are analagous to row vector-matrix products, matrix-matrix products and matrix-column vector products respectively.
@@ -145,14 +172,37 @@ Given $\kernel{M}:X\kto Y$ and $f:Y\to Z$, the \emph{kernel-function product} $\
 for all $x\in X$.
 \end{definition}
 
-
 \begin{definition}[Tensor product]
-Given $\kernel{M}:X\kto Y$ and $\kernel{L}:W\kto Z$, the tensor product $\kernel{M}\oties\kernel{N}:X\times W\kto Y\times Z$ is given by
+Given $\kernel{M}:X\kto Y$ and $\kernel{L}:W\kto Z$, the tensor product $\kernel{M}\otimes\kernel{N}:X\times W\kto Y\times Z$ is given by
 \begin{align}
 	(\kernel{M}\otimes\kernel{L})(A\times B|x,w):=\kernel{M}(A|x)\kernel{L}(B|w)
 \end{align}
 For all $x\in X$, $w\in W$, $A\in \sigalg{Y}$ and $B\in \sigalg{Z}$.
 \end{definition}
+
+All products are associative \citep[Chapter 1]{cinlar_probability_2011}.
+
+One application of the product notation is that marginal distributions can be alternatively defined in terms of a kernel product, as shown in Lemma \ref{lem:pushf_kprod}.
+
+\begin{lemma}[Marginal distribution as a kernel product]\label{lem:pushf_kprod}
+Given a probability space $(\mu,\Omega,\sigalg{F})$ and a variable $\RV{X}:\Omega\to (X,\sigalg{X})$, define $\kernel{F}_{\RV{X}}:\Omega\kto X$ by $\kernel{F}_{\RV{X}}(A|\omega)=\delta_{\RV{X}(\omega)}(A)$, then
+\begin{align}
+	\mu^{\RV{X}} = \mu\kernel{F}_{\RV{X}}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Consider any $A\in \sigalg{X}$.
+\begin{align}
+	\mu \kernel{F}_{\RV{X}}(A) &= \int_\Omega \delta_{\RV{X}(\omega)}(A) \mathrm{d}\mu(\omega)\\
+	&= \int_{\RV{X}^{-1}(\omega)} \mathrm{d}\mu(\omega)\\
+	&= \mu^{\RV{X}}(A)
+\end{align}
+\end{proof}
+
+\subsubsection{Semidirect product}
+
+Given a marginal $\mu^{\RV{X}}$ and a conditional $\mu^{\RV{Y}|\RV{X}}$, the product of the two yields the marginal distribution of $\RV{Y}$: $\mu^{\RV{Y}}=\mu^{\RV{X}}\mu^{\RV{Y}|\RV{X}}$. We define another product -- the \emph{semidirect} product $\odot$ -- as the product that yields the joint distribution of $(\RV{X},\RV{Y})$: $\mu^{\RV{XY}}=\mu^{\RV{X}}\odot\mu^{\RV{Y}|\RV{X}}$. The semidirect product is associative (Lemma \ref{lem:sdp_assoc})
 
 \begin{definition}[Semidirect product]\label{def:copyproduct}
 Given $\prob{K}:X\kto Y$ and $\prob{L}:Y\times X\kto Z$, the semidirect product $\prob{K}\cprod\prob{L}:X\to Y\times Z$ is given by
@@ -161,7 +211,46 @@ Given $\prob{K}:X\kto Y$ and $\prob{L}:Y\times X\kto Z$, the semidirect product 
 \end{align}
 \end{definition}
 
-All products are associative \citep[Chapter 1]{cinlar_probability_2011}.
+
+\begin{lemma}[Semidirect product is associative]\label{lem:sdp_assoc}
+Given $\prob{K}:X\kto Y$, $\prob{L}:Y\times X\kto Z$ and $\prob{M}:Z\times Y\times X\kto W$
+\begin{align}
+    (\prob{K}\odot \prob{L})\odot \prob{Z} &= \prob{K}\odot(\prob{L}\odot\prob{Z})\\
+\end{align}
+\end{lemma}
+
+\begin{proof}
+\begin{align}
+    (\prob{K}\odot \prob{L})\odot \prob{M} &= \tikzfig{odot_assoc_1}\\
+                                            &=  \tikzfig{odot_assoc_2}\\
+                                            &= \prob{K}\odot (\prob{L}\odot \prob{M})
+\end{align}
+\end{proof}
+
+The semidirect product can be used to define a notion of almost sure equality: two kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are $\mu$-almost surely equal if $\mu\odot \kernel{K}=\mu\odot \kernel{L}$. This is identical to the notion of almost sure equality in \citet{cho_disintegration_2019}, who shows that under the assumption that $(Y,\sigalg{Y})$ is countably generated, $\kernel{K}\overset{\mu}{\cong}\kernel{L}$ if and only if $\kernel{K}=\kernel{L}$ $\mu$-almost everywhere.
+
+\begin{definition}[Almost sure equality]\label{def:asequal_pspace}
+Two Markov kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are almost surely equal $\overset{\prob{P}_C}{\cong}$ with respect to a probability space $(\mu,X,\sigalg{X})$, written $\kernel{K}\overset{\mu}{\cong}\kernel{L}$ if
+\begin{align}
+    \mu\odot \kernel{K}=\mu\odot \kernel{L}
+\end{align}
+\end{definition}
+
+\begin{theorem}
+Given $(\mu,X,\sigalg{X})$, $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$, $\kernel{K}\overset{\mu}{\cong}\kernel{L}$ if and only if, defining $U:=\{x|\exists A\in\sigalg{Y}: \kernel{K}(A|x)\neq\kernel{L}(A|x)\}$, $\mu(U)=0$.
+\end{theorem}
+
+\begin{proof}
+\citet{cho_disintegration_2019} proposition 5.4.
+\end{proof}
+
+We often want to talk about almost sure equality of two different versions $\kernel{K}$ and $\kernel{L}$ of a conditional distribution $\prob{P}^{\RV{Y}|\RV{X}}$ with respect to some ambient probability space $(\prob{P},\Omega,\sigalg{F})$. This simply means $\kernel{K}$ and $\kernel{L}$ satisfy Definition \ref{def:disint} with respect to $\prob{P}$, $\RV{X}$ and $\RV{Y}$, and they are almost surely equal with respect to the marginal $\prob{P}^{\RV{X}}$. Tthe relevant variables are usually obvious from the context and we leave them implicit and we will write $\kernel{K}\overset{\prob{P}}{\cong}\kernel{L}$. If the relevant marginal is ambiguous, we will instead write $\kernel{K}\overset{\prob{P}^{\RV{X}}}{\cong}\kernel{L}$
+
+\begin{definition}[Almost sure equality with respect to a pair of variables]
+Given $(\prob{P},\Omega,\sigalg{F})$ and $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, two Markov kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are $\RV{X}$-almost surely equal with respect to $\prob{P}$, written $\kernel{K}\overset{\prob{P}}{\cong}\kernel{L}$, if they are almost surely equal with respect to the marginal $\prob{P}^{\RV{X}}$.
+\end{definition}
+
+
 
 \section{String Diagrams}\label{ssec:mken_diagrams}
 
@@ -340,7 +429,7 @@ Thus, given $\kernel{K}_i:X\kto Y$ for $i\in A$,
 
 \subsection{Commutative comonoid axioms}
 
-Diagrams in Markov categories satisfy the commutative comonoid axioms (see Definition \ref{def:mcat})
+Diagrams in Markov categories satisfy the commutative comonoid axioms.
 
 \begin{align}
     \tikzfig{ccom_lhs} = \tikzfig{ccom_rhs}\label{eq:ccom_1}
@@ -364,7 +453,7 @@ and the naturality of \emph{del}, which means that
 
 \subsection{Manipulating String Diagrams}\label{sssec:string_diagram_manipulation}
 
-Planar deformations along with the applications of Equations \ref{eq:ccom1} through to Equation \ref{eq:nat} are almost the only rules we have for transforming one string diagram into an equivalent one. One further rule is given by Theorem \ref{th:fong_det_kerns}.
+Planar deformations along with the applications of Equations \ref{eq:ccom_1} through to Equation \ref{eq:nat} are almost the only rules we have for transforming one string diagram into an equivalent one. One further rule is given by Theorem \ref{th:fong_det_kerns}.
 
 \begin{theorem}[Copy map commutes for deterministic kernels \citep{fong_causal_2013}]\label{th:fong_det_kerns}
 For $\kernel{K}:X\kto Y$
@@ -433,7 +522,7 @@ Thus the action of the $\text{del}$ map is to marginalise over the deleted wire.
 	&= \kernel{K}(A|x)
 \end{align}
 
-\subsection{Probability Sets}\label{sec:prob_sets}
+\section{Probability Sets}\label{sec:probability_sets}
 
 
 A probability set is a set of probability measures. This section establishes a number of useful properties of conditional probability with respect to probability sets. Unlike conditional probability with respect to a probability space, conditional probabilities don't always exist for probability sets. Where they do, however, they are almost surely unique and we can marginalise and disintegrate them to obtain other conditional probabilities with respect to the same probability set.
@@ -477,7 +566,62 @@ we write this as $\kernel{K}\overset{\prob{P}_C}{\cong}\kernel{L}$, as the varia
 
 Equivalently, $\kernel{K}$ and $\kernel{L}$ are almost surely equal if the set $C:\{x|\exists B\in\sigalg{Y}:\kernel{K}(B|x)\neq\kernel{L}(B|x)\}$ has measure 0 with respect to $\prob{P}_\alpha^{\RV{X}}$ for all $\alpha\in C$.
 
-\subsubsection{Extended conditional independence}
+\subsection{Almost sure equality}
+
+Two Markov kernels are almost surely equal with respect to a probability set $\prob{P}_C$ if the semidirect product $\odot$ of all marginal probabilities of $\prob{P}_\alpha^\RV{X}$ with each Markov kernel is identical.
+
+\begin{definition}[Almost sure equality]\label{def:asequal}
+Two Markov kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are almost surely equal $\overset{\prob{P}_C}{\cong}$ with respect to a probability set $\prob{P}_C$ and variable $\RV{X}:\Omega\to X$ if for all $\prob{P}_\alpha \in \prob{P}_C$,
+\begin{align}
+    \prob{P}^{\RV{X}}_\alpha\odot \kernel{K}=\prob{P}^{\RV{X}}_\alpha\odot \kernel{L}
+\end{align}
+\end{definition}
+
+\begin{lemma}[Uniform conditional distributions are almost surely equal]
+If $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are both versions of $\prob{P}_C^{\RV{Y}|\RV{X}}$ then $\kernel{K}\overset{\prob{P}_C}{\cong}\kernel{L}$
+\end{lemma}
+
+\begin{proof}
+For all $\prob{P}_\alpha \in \prob{P}_C$
+\begin{align}
+    \prob{P}^{\RV{X}}_\alpha\odot \kernel{K} &= \prob{P}^{\RV{XY}}_\alpha\\
+    &= \prob{P}^{\RV{X}}_\alpha\odot \kernel{L}
+\end{align}
+\end{proof}
+
+\begin{lemma}[Substitution of almost surely equal Markov kernels]\label{lem:sub_asequal}
+Given $\prob{P}_C$, if $\kernel{K}:X\times Y \kto Z$ and $\kernel{L}:X\times Y \kto Z$ are almost surely equal $\kernel{K}\overset{\prob{P}_C}{\cong}\kernel{L}$, then for any $\prob{P}_\alpha\in \prob{P}_C$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{X}}\odot \kernel{K} &\overset{\prob{P}_C}{\cong} \prob{P}_\alpha^{\RV{Y}|\RV{X}}\odot \kernel{L}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+For any $\prob{P}_\alpha\in\prob{P}_C$
+\begin{align}
+    \prob{P}_\alpha^{\RV{XY}}\odot \kernel{K} &\overset{\prob{P}_C}{\cong} (\prob{P}_\alpha^{\RV{X}}\odot \prob{P}_C^{\RV{Y}|\RV{X}})\odot \kernel{K}\\
+                                              &\overset{\prob{P}_C}{\cong} \prob{P}_\alpha^{\RV{X}}\odot (\prob{P}_C^{\RV{Y}|\RV{X}}\odot \kernel{K})\\
+                                              &\overset{\prob{P}_C}{\cong} \prob{P}_\alpha^{\RV{X}}\odot (\prob{P}_C^{\RV{Y}|\RV{X}}\odot \kernel{L})
+\end{align}
+\end{proof}
+
+\begin{theorem}[Semidirect product of uniform conditional distributions is a joint uniform conditional distribution]\label{lem:joint_conditional}
+Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$ and uniform conditional distributions $\prob{P}_C^{\RV{Y}|\RV{X}}$ and $\prob{P}_C^{\RV{Z}|\RV{XY}}$, then $\prob{P}_C^{\RV{YZ}|\RV{X}}$ exists and is equal to
+\begin{align}
+    \prob{P}_C^{\RV{YZ}|\RV{X}} &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}|\RV{X}}\odot \prob{P}_C^{\RV{Z}|\RV{XY}}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+By definition, for any $\prob{P}_\alpha\in \prob{P}_C$
+\begin{align}
+    \prob{P}_\alpha^{\RV{XYZ}} &= \prob{P}_\alpha^{\RV{X}}\odot \prob{P}_\alpha^{\RV{YZ}|\RV{X}}\\
+                               &= \prob{P}_\alpha^{\RV{X}}\odot(\prob{P}_\alpha^{\RV{Y}|\RV{X}}\odot \prob{P}_\alpha^{\RV{Z}|\RV{YX}})\\
+                               &= \prob{P}_\alpha^{\RV{X}}\odot(\prob{P}_C^{\RV{Y}|\RV{X}}\odot \prob{P}_C^{\RV{Z}|\RV{YX}})
+\end{align}
+\end{proof}
+
+\subsection{Extended conditional independence}\label{sec:eci}
 
 Just like we defined uniform conditional probability as a version of ``conditional probability'' appropriate for probability sets, we need some version of ``conditional independence'' for probability sets. One such has already been given in some detail: it is the idea of \emph{extended conditional independence} defined in \citet{constantinou_extended_2017}.
 
@@ -542,7 +686,7 @@ Given a probability set $\prob{P}_C$ and variables $\RV{X}$, $\RV{Y}$ and $\RV{Z
 \begin{align}
     \prob{P}_C^{\RV{Y}|\RV{XZ}} &\overset{\prob{P}_C}{\cong} \tikzfig{eci_def}\\
     &\iff\\
-    \prob{P}_C^{\RV{Y}|\RV{XZ}}(A|x,z) &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}|\RV{Z}}(A|z)&\forall A\in \sigalg{Y},(x,z)\in X\times Z\label{eq:eci}
+    \prob{P}_C^{\RV{Y}|\RV{XZ}}(A|x,z) &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}|\RV{Z}}(A|z)&\forall A\in \sigalg{Y},(x,z)\in X\times Z\label{eq:uci}
 \end{align}
 \end{definition}
 
@@ -674,7 +818,7 @@ Given $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$ and a $\
 
 We use the notation $\prob{P}_C^{\RV{Y}|\RV{X}[M]}$ as shorthand to refer to the probability set $\prob{P}_C$ maximal with respect to $\prob{P}_C^{\RV{Y}|\RV{X}}$.
 
-Lemma \ref{lem:valid_extendability} shows that the semidirect product of any pair of valid conditoinal probabilities is itself a valid conditional. Suppose we have some collection of $\RV{X}_i|\RV{X}_{[i-1]}$-valid conditionals $\{\prob{P}_i^{\RV{X}_i|\RV{X}_{[i-1]}}|i\in [n]\}$; then recursively taking the semidirect product $\kernel{M}:=\prob{P}_1^{\RV{X}_1}\odot (\prob{P}_2^{\RV{X}_2|\RV{X}_{1}}\odot ...)$ yields a $\RV{X}_{[n]}$ valid distribution. Furthermore, the maximal probability set associated with $\kernel{M}$ is nonempty.
+Lemma \ref{lem:valid_extendability} shows that the semidirect product of any pair of valid conditional probabilities is itself a valid conditional. Suppose we have some collection of $\RV{X}_i|\RV{X}_{[i-1]}$-valid conditionals $\{\prob{P}_i^{\RV{X}_i|\RV{X}_{[i-1]}}|i\in [n]\}$; then recursively taking the semidirect product $\kernel{M}:=\prob{P}_1^{\RV{X}_1}\odot (\prob{P}_2^{\RV{X}_2|\RV{X}_{1}}\odot ...)$ yields a $\RV{X}_{[n]}$ valid distribution. Furthermore, the maximal probability set associated with $\kernel{M}$ is nonempty.
 
 Collections of recursive conditional probabilities often arise in causal modelling -- in particular, they are the foundation of the structural equation modelling approach \citet{richardson2013single,pearl_causality:_2009}.
 
@@ -696,3 +840,124 @@ so $\prob{P}_\square^{\RV{B}|\RV{WHC}}$ is invalid. Thus there is some valid $\m
 
 Validity rules out conditional probabilities like \ref{eq:bmi_example}. We conjecture that in many cases this condition is implicitly taken into account -- it is obviously silly to posit a model in which body mass index can be controlled independently of height and weight. We note, however, that presuming the authors intended their model to be interpreted according to the usual semantics of causal Bayesian networks, the invalid conditional probability \ref{eq:bmi_example} would be used to evaluate the causal effect of body mass index in the causal diagram found in \citet{shahar_association_2009}.
 \end{example}
+
+\subsection{Existence of conditional probabilities}
+
+
+\begin{lemma}[Conditional pushforward]\label{th:recurs_pushf}
+Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with conditional $\prob{P}_C^{\RV{X}|\RV{Y}}$ such that $\RV{Z}=f\circ \RV{Y}$ for some $f:Y\to Z$. Then there exists a conditional probability $\prob{P}_C^{\RV{Z}|\RV{X}}=\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$.
+\end{lemma}
+
+\begin{proof}
+Note that $(\RV{X},\RV{Z})=(\text{id}_X\otimes f)\circ (\RV{X},\RV{Y})$. Thus, by Lemma \ref{lem:pushf_kprod}, for any $\prob{P}_\alpha\in \prob{P}_C$
+
+\begin{align}
+    \prob{P}_\alpha^{\RV{XZ}} = \prob{P}_\alpha^{\RV{XY}}\kernel{F}_{\text{id}_X\otimes f}
+\end{align}
+
+Note also that for all $A\in\sigalg{X}$, $B\in \sigalg{Z}$, $x\in X$, $y\in Y$:
+
+\begin{align}
+\prob{F}_{\text{id}_X\otimes f}(A\times B|x,y)&=\delta_x(A)\delta_{f(y)}(B)\\
+&= \prob{F}_{\text{id}_X} (A|x)\otimes \prob{F}_f(B|y)\\
+\implies \prob{F}_{\text{id}_X\otimes f} &= \prob{F}_{\text{id}_X} \otimes \prob{F}_f
+\end{align}
+
+Thus
+
+\begin{align}
+    \prob{P}_\alpha^{\RV{XZ}} &= (\prob{P}_\alpha^{\RV{X}}\odot \prob{P}_C^{\RV{Y}|\RV{X}})\kernel{F}_{\text{id}_X}\otimes \kernel{F}_f\\
+    &= \tikzfig{conditional_pushforward}
+\end{align}
+
+Which implies $\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$ is a version of $\prob{P}_{\alpha}^{\RV{Z}|\RV{X}}$. Because this holds for all $\alpha$, it is therefore also a version of $\prob{P}_C^{\RV{Z}|\RV{X}}$.
+\end{proof}
+
+\begin{theorem}[Existence of regular conditionals]\label{th:reg_cond}
+Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$ with $Y$ standard measurable and a probability model $\prob{P}_{\alpha}$ on $(\Omega,\sigalg{F})$. Then there exists a conditional $\prob{P}_\alpha^{\RV{Y}|\RV{X}}$.
+\end{theorem}
+
+\begin{proof}
+This is a standard result, see for example \cite{cinlar_probability_2011} Theorem 2.18.
+\end{proof}
+
+\begin{theorem}[Existence of higher order valid conditionals with respect to probability sets]\label{th:ho_cond_psets}
+Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with regular conditional $\prob{P}_C^{\RV{YZ}|\RV{X}}$ and $Y$ and $Z$ standard measurable. Then there exists a regular $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
+\end{theorem}
+
+\begin{proof}
+Given a Borel measurable map $m:X\kto Y\times Z$ let $f:Y\times Z\to Y$ be the projection onto $Y$. Then $f\circ (\RV{Y},\RV{Z})=\RV{Y}$. \citet{bogachev_kantorovich_2020}, Theorem 3.5 proves that there exists a Borel measurable map $n:X\times Y\kto Y\times Z$  such that 
+\begin{align}
+    n(f^{-1}(y)|x,y) = 1\label{eq:proper}\\
+    m(\RV{Y}^{-1}(A)\cap B|x) = \int_A n(B|x,y) m\kernel{F}_{f}(dy|x)&\forall A\in \sigalg{Y},B\in\sigalg{Y\times Z}\label{eq:conditional1}
+\end{align}
+In particular, $\prob{P}_C^{\RV{YZ}|\RV{X}}$ is a Borel measurable map $X\kto Y\times Z$. Thus equation \ref{eq:conditional1} implies for all $A\in \sigalg{Y},B\in\sigalg{Y\times Z}$
+
+\begin{align}
+    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_C^{\RV{YZ}|\RV{X}}\kernel{F}_{f}(dy|x)\\
+    &=\int_A n(B|x,y) \prob{P}_C^{\RV{Y}|\RV{X}}(dy|x)\label{eq:rec_push}
+\end{align}
+
+Where Equation \ref{eq:rec_push} follows from Lemma \ref{th:recurs_pushf}.
+
+Then, for any $\prob{P}_\alpha\in\prob{P}_C$
+
+\begin{align}
+    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_{\alpha}^{\RV{Y}|\RV{X}}(dy|x)
+\end{align}
+
+which implies $n$ is a version of $\prob{P}_C^{\RV{YZ}|(\RV{Y}|\RV{X})}$. By Lemma \ref{th:recurs_pushf}, $n\kernel{F}_{f}$ is a version of $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
+\end{proof}
+
+We might be motivated to ask whether the higher order conditionals in Theorem \ref{th:ho_cond_psets} can be chosen to be valid. Despite Lemma \ref{lem:proper_implies_valid} showing that the existence of proper conditional probabilities implies the existence of valid ones, we cannot make use of this in the above theorem because Equation \ref{eq:proper} makes $n$ proper with respect to the ``wrong'' sample space $(Y\times Z, \sigalg{Y}\otimes\sigalg{Z})$ while what we would need is a proper conditional probability with respect to $(\Omega,\sigalg{F})$.
+
+We can choose higher order conditionals to be valid in the case of discrete sets, and whether we can choose them to be valid in more general measurable spaces is an open question.
+
+\begin{theorem}[Higher order conditionals]\label{th:higher_order_conditionals}
+Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with conditional $\prob{P}_C^{\RV{YZ}|\RV{X}}$. Then $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$ is a version of $\prob{P}_C^{\RV{Z}|\RV{Y}\RV{X}}$ 
+\end{theorem}
+
+\begin{proof}
+For arbitrary $\prob{P}_{\alpha}\in \prob{P}_C$
+\begin{align}
+    \prob{P}_\alpha^{\RV{YZ}|\RV{X}} &= \tikzfig{higher_order_disint}\\
+    \implies \prob{P}_\alpha^{\RV{XYZ}} &= \tikzfig{higher_order_disint_0}\\
+    &= \tikzfig{higher_order_disint_1}\\
+    &= \tikzfig{higher_order_disint_2}
+\end{align}
+Thus $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$ is a version of $\prob{P}_{\alpha}^{\RV{Z}|\RV{Y}\RV{X}}$ for all $\alpha$ and hence also a version of $\prob{P}_C^{\RV{Z}|\RV{Y}\RV{X}}$.
+\end{proof}
+
+
+\begin{theorem}
+Given probability gap model $\prob{P}_C$, $\RV{X}$, $\RV{Y}$, $\RV{Z}$ such that $\prob{P}_C^{\RV{Z}|\RV{YX}}$ exists, $\prob{P}_C^{\RV{Z}|\RV{Y}}$ exists iff $\RV{Z}\CI_{\prob{P}_C} \RV{X}|\RV{Y}$.
+\end{theorem}
+
+\begin{proof}
+If:
+If $\RV{Z}\CI_{\prob{P}_C} \RV{X}|\RV{Y}$ then by Theorem \ref{th:cho_ci_equiv}, for each $\prob{P}_\alpha\in \prob{P}_C$ there exists $\prob{P}_{\alpha}^{\RV{Z}|\RV{Y}}$ such that
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{WX}} &= \tikzfig{cond_indep_erase}
+\end{align}
+\end{proof}
+
+
+\begin{theorem}[Valid higher order conditionals]
+Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with regular conditional $\prob{P}_C^{\RV{YZ}|\RV{X}}$, $Y$ discrete and $Z$ standard measurable. Then there exists a valid regular $\prob{P}_C^{\RV{Z}|\RV{XY}}$.
+\end{theorem}
+
+\begin{proof}
+By Theorem \ref{th:ho_cond_psets}, we have a higher order conditional $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$ which, by Theorem \ref{th:higher_order_conditionals} is also a version of $\prob{P}_C^{\RV{Z}|\RV{XY}}$.
+
+We will show that there is a Markov kernel $\kernel{Q}$ almost surely equal to $\prob{P}_C^{\RV{Z}|\RV{XY}}$ which is also valid. For all $x,y\in X\times Y$, $A\in\sigalg{Z}$ such that $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A=\emptyset$, let $\kernel{Q}(A|x,y)=\prob{P}_C^{\RV{Z}|\RV{XY}}(A|x,y)$.
+
+By validity of $\prob{P}_C^{\RV{YZ}|\RV{X}}$, $x\in \RV{X}(\Omega)$ and $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A=\emptyset$ implies $\prob{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0$. Thus we need to show
+
+\begin{align}
+    \forall A\in \sigalg{Z}, x\in X, y\in Y: \prob{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0 \implies \left(\prob{Q}(A|x,y) = 0\right) \lor \left((\RV{X},\RV{Y})\yields \{(x,y)\} = \emptyset\right)
+\end{align}
+
+For all $x,y$ such that $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}(\{y\}|x)$ is positive, we have $\model{P}^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0\implies \prob{P}_\square^{\RV{Z}|\RV{XY}}(A|x,y)=0=:\kernel{Q}(A|x,y)$.
+
+Furthermore, where $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$, we either have $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A= \emptyset$ or can choose some $\omega\in (\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A$ and let $\kernel{Q}(\RV{Z}(\omega)|x,y) = 1$. This is an arbitrary choice, and may differ from the original $\prob{P}_C^{\RV{Z}|\RV{XY}}$. However, because $Y$ is discrete the union of all points $y$ where $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$ is a measure zero set, and so $\kernel{Q}$ differs from $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}$ on a measure zero set.
+\end{proof}

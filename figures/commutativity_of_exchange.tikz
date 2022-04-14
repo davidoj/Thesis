@@ -1,0 +1,41 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=medium kernel tikzit] (0) at (-6, 0.5) {$\prob{P}_C^{\RV{Y}_{\{1,2\}}|\RV{D}_{\{1,2\}}}$};
+		\node [style=RLabel tikzit] (2) at (-2.25, 1.25) {$\RV{Y}_1$};
+		\node [style=RLabel tikzit] (3) at (-2.25, 0) {$\RV{Y}_2$};
+		\node [style=none] (4) at (-5.25, 1.25) {};
+		\node [style=none] (5) at (-5.25, 0) {};
+		\node [style=none] (6) at (-8, 1.25) {};
+		\node [style=none] (7) at (-8, 0) {};
+		\node [style=none] (8) at (-10, 1.25) {};
+		\node [style=none] (9) at (-10, 0) {};
+		\node [style=none] (16) at (0, 0.5) {$=$};
+		\node [style=medium kernel tikzit] (17) at (5.5, 0.5) {$\prob{P}_C^{\RV{Y}_{\{1,2\}}|\RV{D}_{\{1,2\}}}$};
+		\node [style=RLabel tikzit] (19) at (9.75, 0) {$\RV{Y}_2$};
+		\node [style=RLabel tikzit] (20) at (9.75, 1.25) {$\RV{Y}_1$};
+		\node [style=none] (21) at (7.25, 1.25) {};
+		\node [style=none] (22) at (7.25, 0) {};
+		\node [style=none] (23) at (5, 1.25) {};
+		\node [style=none] (24) at (5, 0) {};
+		\node [style=none] (25) at (3, 1.25) {};
+		\node [style=none] (26) at (3, 0) {};
+		\node [style=Llabel tikzit] (29) at (-10.75, 1.25) {$\RV{D}_1$};
+		\node [style=Llabel tikzit] (30) at (-10.75, 0) {$\RV{D}_2$};
+		\node [style=Llabel tikzit] (31) at (2, 1.25) {$\RV{D}_1$};
+		\node [style=Llabel tikzit] (32) at (2, 0) {$\RV{D}_2$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [in=-180, out=0] (4.center) to (2);
+		\draw (5.center) to (3);
+		\draw [in=180, out=0] (21.center) to (19);
+		\draw [in=180, out=0, looseness=0.75] (22.center) to (20);
+		\draw [in=180, out=0] (8.center) to (7.center);
+		\draw [in=-180, out=0] (9.center) to (6.center);
+		\draw (25.center) to (23.center);
+		\draw (26.center) to (24.center);
+		\draw (29) to (8.center);
+		\draw (30) to (9.center);
+		\draw (31) to (25.center);
+		\draw (32) to (26.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
