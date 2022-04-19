@@ -3,24 +3,70 @@
 
 \chapter{Models with consequences}\label{ch:2p_statmodels}
 
-In chapter \ref{ch:tech_prereq} we introduced a collection of tools for constructing probabilistic models. Tools by themselves aren't enough to construct models: we also need a purpose. \emph{Why are we constructing probabilistic models}? Our provisional answer to this question is: we construct probabilistic models to help us compare different choices we could make on the basis of the outcomes we anticipate that they will bring about. We aren't claiming that this is the only reason to create a probabilistic model, but comparing different choices is an important job that lots of people regularly need to undertake, and it is a job for which causal models are often employed.
+This thesis seeks to further understand causal inference problems using probability sets. This chapter discusses why we choose to use probability sets to understand causal inference problems and clarifies how mathematical models based on probability sets related to the real-world problems that we are ultimately interested in. Section \ref{sec:whats_the_point} explains why we focus on understanding \emph{decision problems} or problems involving the comparison of choices. Section \ref{sec:probability_sets} explains why we probability sets are particularly usef for reasoning about this kind of problem.
 
-If we are going to buld models that facilitate the comparison of different choices on the basis of their consequences, then they must have a few properties:
+The reasons we provide for focussing on probability sets are not rigorous. We don't, for example, offer a set of axioms characterising a ``decision problem'' and show that any such problem can be represented by a probability set. In Section \ref{sec:how_represent_conseqeunces}, we consider some of the existing literature that addresses this question in a more rigorous manner. In particular, we show that the models of decision problems proposed by \citet{savage_foundations_1954} and by \citet{jeffrey_logic_1990} -- both of which are supported by axiomatic arguments -- induce probablity sets. In addition, we show that probability sets of the appopriate type in conjuction with the principle of expected utility induces a \emph{statistical decision problem} as introduced by \citet{wald_statistical_1950}.
 
-\begin{itemize}
-    \item We want a set of choices $C$ with at least a partial order on it, because this is how we mathematically represent ``comparison''
-    \item By supposition, we don't have a partial order on $C$ at the outset, otherwise our problem is already solved
-    \item However, we do have a partial order on \emph{consequences}, which are elements of some set $F$
-    \item In order to use the partial order on $F$ to induce a partial order on $C$, we need to associate one or more elements of $F$ with each element of $C$
-\end{itemize}
+Section \ref{sec:variable} clarifies the role of \emph{variables} and \emph{measurement procedures} in probabilistic models of decision problems. In this work, as is standard in probability theory, variables are defined as measurable functions on a sample space. However, as is standard in statistical practice, variables are also associated with measurement procedures that interact with the real world somehow, and yield numbers that can be reasoned about mathematically.
 
-At a very general level, a model that helps us to compare choices is a set-valued function $C\to \mathscr{P}(F)$. In order to say more about ``models for mathematically-assisted decisions'', we need to make some more specific assumptions about how these models are constructed - for example, we might take the set of consequences $F$ to be a set of probability distributions on a common sample space. However, even before we do this, the requirement for a domain of choices $C$ arises purely because we want to compare things mathematically.
+The contents of this chapter are somewhat tangential to much of the work in the upcoming chapters. It is likely to be helpful to readers seeking clarification about the interpretation of some common model features such as choices and variables. Readers who want to explore alternative approaches to thinking about causal inference problems may also be interested in this chapter, as it explains the thinking behind the approach in this work.
 
-In practice, we will take the consequences $F$ to be a set of probability distributions on a common sample space. There is a large literature on whether this is always an appropriate way to represent consequences, and we will address a small slice of it in Section \ref{sec:how_represent_conseqeunces}, but arguing that this is always a reasonable choice is not our objective here. Rather, we observe that there is a long history of using probability theory for the purpose of representing uncertain knowledge, and probability theory in conjunction with the principle of expected utility is often used to compare the desirability of uncertain outcomes.
+\section{What is the point of causal inference?}\label{sec:whats_the_point}
 
-While it doesn't often enter into the reasoning we present in the upcoming chapters, we spend some time here considering how probabilistic models are related to the ``real world phenomena'' that they are supposed to be models of. In particular, \emph{variables} are ``points of attachment'' between the model and the real world -- they point to the parts of the real world that correspond to features of the model. There are many standard accounts of how variables accomplish this in regular statistical models, but we need to elaborate on this account slightly to account for the inclusion of a domain $C$ of choices that are each associated with their own consequences. In Section \ref{sec:variable}, we present both the standard account of variables and how we propose to elaborate this account to include a domain of choices.
+Someone doing an introductory course in causal inference might encounter many problems about the identification of interventional probabilities or of treatment effects, all stated in the language of causal Bayesian networks, Potential Outcomes or some other mathematical framework for causal reasoning. However, the problems really came before the languages we can use to pose them: causal reasoning frameworks were invented because we wanted some way to talk rigorously about ``causal inference problems''.
 
-\subsection{TL;DR}
+There are many kinds of problems that can be posed using causal reasoning frameworks, but this work focuses exclusively on one of these. We consider problems in which we have a set of choices that we want to compare, and we are able to make comparisons only on the basis of a choice's consequences.
+
+There are any different words we could use to describe this kind of problem: we want to assess the consequences of choices, or the effects of interventions, or the results of manipulations or the control of outcomes. Many texts on causal inference affirm that there are other ``causal'' questions we might want to ask, and problems of control are particularly important. \citet{rubin_causal_2005} argues that causal inference often to informs a decision maker by providing ``scientific knowledge'', but does not make recommendations by itself. \citep{imbens_causal_2015} introduces causal inference as the study of ``outcomes of manipulations'' and both \citep{spirtes_causation_1993,pearl_causality:_2009} highlight the universal relevance of understanding how to control certain outcomes, while also arguing that clarifying commonsense ideas of causation is an important aim of causal inference.
+
+A short argument for our approach is: problems that involve comparing different choices on the basis of their consequences supported by data are an important class of problems, whether or not they shed any light on other issues like commonsense ideas of causality.
+
+\subsection{Modelling decision problems}
+
+Any model of a decision problem must have a number of basic properties. The fact that there is a set of choices to be compared with reference to their consequences implies:
+\begin{enumerate}
+    \item There is a set of choices $C$ that need to be compared
+    \item There is a set of consequences $F$ with a preorder on it
+\end{enumerate}
+Finally, the point of the model is to somehow enable use to use the preorder on $F$ to find a preorder on $C$. We suppose that this is achieved by means of a \emph{relation}
+\begin{enumerate}
+    \setcounter{enumitem}{2}
+    \item The model $M$ is a relation $\sim$ between $C$ and $F$
+\end{enumerate}
+
+A preorder is a transitive relation between elements of a set that does not necessarily render all elements comparable. We posit that transitivity is required for any reasonable notion of ``comparing elements of a set''. On the other hand, while a mathematical model that allows us to compare every available choice is more helpful than one that only allows us to compare some choices, it may still be somewhat helpful if all we can come up with is a preorder on choices.
+
+\begin{definition}[Preorder]
+A preorder on a set $F$ is a relation $\leq$ that is reflexive
+\begin{align}
+    a&\leq a &\forall a\in F
+\end{align}
+and transitive
+\begin{align}
+    a\leq b \land b\leq c &\implies a\leq c & \forall a,b,c\in F
+\end{align}
+\end{definition}
+
+
+\begin{lemma}[Induced preorder]
+If we have a set $F$ with a preorder $\leq$ and a set $C$ with a relation $\sim$ between $F$ and $C$, then the relation $\leqslant$ defined on $C$ by
+\begin{align}
+    c\leqslant c' \text{ if } f\leq f' \forall f\sim c, f'\sim c'
+\end{align}
+is a preorder.
+\end{lemma}
+
+\begin{proof}
+For any $c\in C$ and all $f:f\sim c$, $f\leq f$. Thus $c\leq c$, and the choice of $c$ was arbitrary so this holds for all $c$.
+
+Suppose $c\leqslant c'$ and $c'\leqslant c''$. Then for all $f\sim c$, $f'\sim c'$ and $f''\sim c''$, $f\leq f'\leq f''$ and so $c\leqslant c''$.
+\end{proof}
+
+A decision model is a triple $(C,F,M)$ of a set $C$, a set $F$ with a preorder and a relation $M$ between $C$ and $F$.  However, we are interested in a more specific family of decision models. In particular, we are interested in models in which the ``consequences'' $F$ are probability distributions on some sample space $(\Omega,\sigalg{F})$, and where the model $M$ is a probabilistic function $C\kto \Omega$.
+
+While it is hard to see how we can model a decision problem without a triple $(C,F,M)$, there are reasonable alternatives to probability to represent consequences of choices. For example, $M$ could relate each element $c$ of $C$ to a subset of an arbitrary $F$ representing ``possible consequences of $c$''. Alternatively, one could represent uncertain consequences using one of a variety of \emph{vague probability} models, such as a set of probability distributions \citep{walley_statistical_1991}. 
+
+\subsection{TL;DR}\label{sec:probability_sets}
 
 We model the consequences of a set of choices $C$, and we do this with a map $\prob{P}_\cdot:C\kto \Omega$ for some sample space $\Omega$. The range of this map $\prob{P}_C:=\{\prob{P}_\alpha|\alpha\in C\}$ is a probability set.
 
