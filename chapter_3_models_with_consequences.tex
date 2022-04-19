@@ -23,55 +23,51 @@ A short argument for our approach is: problems that involve comparing different 
 
 \subsection{Modelling decision problems}
 
-Any model of a decision problem must have a number of basic properties. The fact that there is a set of choices to be compared with reference to their consequences implies:
+People who need to make a decisions might (and often do) make them with no mathematical reasoning at all. However, this work is concerned with making decisions assisted by mathematical reasoning. In order to reason mathematically about a decision to be made, we assume that somehow, we have access to two sets:
 \begin{enumerate}
     \item There is a set of choices $C$ that need to be compared
-    \item There is a set of consequences $F$ with a preorder on it
-\end{enumerate}
-Finally, the point of the model is to somehow enable use to use the preorder on $F$ to find a preorder on $C$. We suppose that this is achieved by means of a \emph{relation}
-\begin{enumerate}
-    \setcounter{enumitem}{2}
-    \item The model $M$ is a relation $\sim$ between $C$ and $F$
+    \item There is a set of consequences $\Omega$ along with a utility function $u:\Omega\to \mathbb{R}$
 \end{enumerate}
 
-A preorder is a transitive relation between elements of a set that does not necessarily render all elements comparable. We posit that transitivity is required for any reasonable notion of ``comparing elements of a set''. On the other hand, while a mathematical model that allows us to compare every available choice is more helpful than one that only allows us to compare some choices, it may still be somewhat helpful if all we can come up with is a preorder on choices.
+We are interested in understanding how $C$ may be related to $\Omega$ so that the order on $\Omega$ might induce some order on $C$. There are a great number of different ways that we could think of relating elements of $C$ to $\Omega$. For example, we could use a binary relation between the two sets, which given a total order on $\Omega$ would induce a preorder on $C$. However, in this work we assume that the kind of relation is either
+\begin{itemize}
+    \item A Markov kernel $C\kto \Omega$
+    \item A set-valued function $C\to \mathscr{P}(\Delta(\Omega))$
+\end{itemize}
 
-\begin{definition}[Preorder]
-A preorder on a set $F$ is a relation $\leq$ that is reflexive
-\begin{align}
-    a&\leq a &\forall a\in F
-\end{align}
-and transitive
-\begin{align}
-    a\leq b \land b\leq c &\implies a\leq c & \forall a,b,c\in F
-\end{align}
+That is, for each choice $c\in C$, we have either a probability distribution in $\Delta(\Omega)$ or a set of probability distributions. Usually, we will not know for certain the conseuqences that arise from any given choice, and yet we may have some views about which consequences are more likely than others. Probability has a long and successful history of representing uncertain knowledge of this type. There are many works that aim to show that any method for representing uncertain knowledge that adheres to certain principles must be a probability distribution \citet{de_finetti_foresight_1992,horvitz_framework_1986}, along with criticism of these principles \citet{halpern_counter_1999}. A notable alternative to representing uncertainty with a single probability distribution represents uncertainty with a set of probability distributions, which is a kind of \emph{vague probability} model \citep{walley_statistical_1991}. 
+
+Perhaps more relevant to our aims are a number of works that establish conditions under which ``desirability'' relations over sets of choices or propositions must be represented by a probability distribution along with a utility function. These works are surveyed in Section \ref{sec:how_represent_conseqeunces}. Ultimately, however, the question of whether probability is the right choice to represent uncertain knowledge in decision models is not a key focus of this work. It is a conventional choice, and one that is accept here.
+
+On the other hand, an important if rather obvious point is: if choices must be evaluated, then a set of choices to evaluate must be available. The availability of a fundamental set of options is the feature that gives decision models their ``causal'' characteristics.
+
+\subsection{Formal definitions}\label{sec:probability_sets}
+
+We suppose that we are, at the outset, given a few basic ingredients: a set of choices $C$, a set of consequences $\Omega$ and a utility function $u:F\to \mathbb{R}$. We call these ingredients a ``decision problem''.
+
+\begin{definition}[Decision problem]
+A decision problem is a triple $(C,\Omega,u)$ consisting of a measurable set $(C,\sigalg{C})$ of choices, $(\Omega,\sigalg{F})$ consequences and a utility function $u:F\to \mathbb{R}$.
 \end{definition}
 
+Our task is to find a \emph{model} that relates $C$ to $\Omega$. We assume two forms of model -- a \emph{sharp model} associates each choice with a unique probability distribution, and a \emph{vague model} associates each choice with a set of probability distributions.
 
-\begin{lemma}[Induced preorder]
-If we have a set $F$ with a preorder $\leq$ and a set $C$ with a relation $\sim$ between $F$ and $C$, then the relation $\leqslant$ defined on $C$ by
-\begin{align}
-    c\leqslant c' \text{ if } f\leq f' \forall f\sim c, f'\sim c'
-\end{align}
-is a preorder.
-\end{lemma}
+\begin{definition}[Sharp model]
+Given a decision problem $(C,\Omega,u)$, a \emph{sharp model} is a Markov kernel $C\kto \Omega$.
+\end{definition}
 
-\begin{proof}
-For any $c\in C$ and all $f:f\sim c$, $f\leq f$. Thus $c\leq c$, and the choice of $c$ was arbitrary so this holds for all $c$.
+\begin{definition}[Vague model]
+Given a decision problem $(C,\Omega,u)$, a \emph{vague model} is a function $C\to \mathscr{P}(\Omega)$.
+\end{definition}
 
-Suppose $c\leqslant c'$ and $c'\leqslant c''$. Then for all $f\sim c$, $f'\sim c'$ and $f''\sim c''$, $f\leq f'\leq f''$ and so $c\leqslant c''$.
-\end{proof}
+Both sharp models and vague models have probability sets induced by the range of the model.
 
-A decision model is a triple $(C,F,M)$ of a set $C$, a set $F$ with a preorder and a relation $M$ between $C$ and $F$.  However, we are interested in a more specific family of decision models. In particular, we are interested in models in which the ``consequences'' $F$ are probability distributions on some sample space $(\Omega,\sigalg{F})$, and where the model $M$ is a probabilistic function $C\kto \Omega$.
+\begin{definition}[Induced probability set (sharp model)]
+Given a decision problem $(C,\Omega,u)$ and a sharp model $\prob{P}_\cdot:C\kto \Omega$, the induced probability set is $\prob{P}_C:=\{\prob{P}_\alpha|\alpha\in C\}$.
+\end{definition}
 
-While it is hard to see how we can model a decision problem without a triple $(C,F,M)$, there are reasonable alternatives to probability to represent consequences of choices. For example, $M$ could relate each element $c$ of $C$ to a subset of an arbitrary $F$ representing ``possible consequences of $c$''. Alternatively, one could represent uncertain consequences using one of a variety of \emph{vague probability} models, such as a set of probability distributions \citep{walley_statistical_1991}. 
-
-\subsection{TL;DR}\label{sec:probability_sets}
-
-We model the consequences of a set of choices $C$, and we do this with a map $\prob{P}_\cdot:C\kto \Omega$ for some sample space $\Omega$. The range of this map $\prob{P}_C:=\{\prob{P}_\alpha|\alpha\in C\}$ is a probability set.
-
-In Chapter \ref{ch:evaluating_decisions}, we consider maps from the choice set $C$ to unique probability measures. A straightforward generalisation of this scheme is to map elements of $C$ to \emph{probability sets} rather than unique probability measures. We can still construct a probability set from the range of $\prob{P}_\cdot$, in this case it is the union $\prob{P}_C=\cup_{\alpha\in C} \prob{P}_\alpha$. In Chapter \ref{ch:sdt}, we consider this generalisation.
-
+\begin{definition}[Induced probability set (vague model)]
+Given a decision problem $(C,\Omega,u)$ and a vague model $\prob{Q}_\cdot:C\kto \Omega$, the induced probability set is $\prob{P}_C:=\cup_{\alpha\in C} \prob{Q}_\alpha$.
+\end{definition}
 
 \section{Variables}\label{sec:variable}
 
