@@ -29,17 +29,16 @@ People who need to make a decisions might (and often do) make them with no mathe
     \item There is a set of consequences $\Omega$ along with a utility function $u:\Omega\to \mathbb{R}$
 \end{enumerate}
 
-We are interested in understanding how $C$ may be related to $\Omega$ so that the order on $\Omega$ might induce some order on $C$. There are a great number of different ways that we could think of relating elements of $C$ to $\Omega$. For example, we could use a binary relation between the two sets, which given a total order on $\Omega$ would induce a preorder on $C$. However, in this work we assume that the kind of relation is either
+Given some means of relating between $C$ and $\Omega$, the order on $\Omega$ will induce some order on $C$. There are a great number of different ways that of relating elements of $C$ to $\Omega$. For example, a binary relation between the two sets will, given a total order on $\Omega$, induce a preorder on $C$. However, in this work the assumption is made that the relevant kinds of relations are either
 \begin{itemize}
     \item A Markov kernel $C\kto \Omega$
-    \item A set-valued function $C\to \mathscr{P}(\Delta(\Omega))$
+    \item A Markov kernel $C\times H\kto \Omega$ for some set of hypotheses $H$
 \end{itemize}
+That is, for each choice $c\in C$ we have either a probability distribution in $\Delta(\Omega)$ or a set of probability distributions indexed by $h\in H$. Sections \ref{sec:cons_to_sdp} and \ref{sec:cc_theorem} discuss each choice in more detail. Where it is needed, we also assume that a utility function $\Omega\to \mathbb{R}$ is available and that choices are evaluated using the principle of expected utility.
 
-That is, for each choice $c\in C$, we have either a probability distribution in $\Delta(\Omega)$ or a set of probability distributions. Usually, we will not know for certain the conseuqences that arise from any given choice, and yet we may have some views about which consequences are more likely than others. Probability has a long and successful history of representing uncertain knowledge of this type. There are many works that aim to show that any method for representing uncertain knowledge that adheres to certain principles must be a probability distribution \citet{de_finetti_foresight_1992,horvitz_framework_1986}, along with criticism of these principles \citet{halpern_counter_1999}. A notable alternative to representing uncertainty with a single probability distribution represents uncertainty with a set of probability distributions, which is a kind of \emph{vague probability} model \citep{walley_statistical_1991}. 
+Usually, someone confronted with a decision problem will not know for certain the consequences that arise from any given choice, and yet they may have some views about which consequences are more likely than others. Probability has a long and successful history of representing uncertain knowledge of this type. There are many works that aim to show that any method for representing uncertain knowledge that adheres to certain principles must be a probability distribution \citet{de_finetti_foresight_1992,horvitz_framework_1986}, along with criticism of these principles \citet{halpern_counter_1999}. A notable alternative to representing uncertainty with a single probability distribution represents uncertainty with a set of probability distributions, which is a type of \emph{vague probability} model \citep{walley_statistical_1991}. 
 
-Perhaps more relevant to our aims are a number of works that establish conditions under which ``desirability'' relations over sets of choices or propositions must be represented by a probability distribution along with a utility function. These works are surveyed in Section \ref{sec:how_represent_conseqeunces}. Ultimately, however, the question of whether probability is the right choice to represent uncertain knowledge in decision models is not a key focus of this work. It is a conventional choice, and one that is accept here.
-
-An important if rather obvious point is: if some choices must be evaluated, then a set of choices to evaluate must be available. The availability of a set of options is the feature that gives decision models their ``causal'' characteristics.
+More relevant to the question of modelling decision problems are a number of works that establish conditions under which ``desirability'' or ``preference'' relations over sets of choices or propositions must be represented by a probability distribution along with a utility function. These works are surveyed in Section \ref{sec:how_represent_conseqeunces}. Ultimately, however, the question of whether probability is the right choice to represent uncertain knowledge in decision models is not a key focus of this work. It is a conventional choice, and one that is accepted here.
 
 \subsection{Formal definitions}\label{sec:probability_sets}
 
@@ -52,22 +51,19 @@ A decision problem is a triple $(C,\Omega,u)$ consisting of a measurable set $(C
 Our task is to find a \emph{model} that relates $C$ to $\Omega$. We assume two forms of model -- a \emph{sharp model} associates each choice with a unique probability distribution, and a \emph{vague model} associates each choice with a set of probability distributions.
 
 \begin{definition}[Sharp model]
-Given a decision problem $(C,\Omega,u)$, a \emph{sharp model} is a function $C\to \Delta(\Omega)$.
+Given a decision problem $(C,\Omega,u)$, a \emph{sharp model} is a function $C\kto \Omega$.
 \end{definition}
 
 \begin{definition}[Vague model]
-Given a decision problem $(C,\Omega,u)$, a \emph{vague model} is a function $C\to \mathscr{P}(\Omega)$.
+Given a decision problem $(C,\Omega,u)$, a \emph{vague model} is a function $C\times H\kto \Omega$ for some hypothesis set $H$.
 \end{definition}
 
 Both sharp models and vague models have probability sets induced by the range of the model.
 
-\begin{definition}[Induced probability set (sharp model)]
-Given a decision problem $(C,\Omega,u)$ and a sharp model $\prob{P}_\cdot:C\kto \Omega$, the induced probability set is $\prob{P}_C:=\{\prob{P}_\alpha|\alpha\in C\}$.
+\begin{definition}[Induced probability set]\label{def:induced_pset_1}
+Given a decision problem $(C,\Omega,u)$ and a model $\prob{P}_\cdot:C\times H\kto \Omega$, the induced probability set is $\prob{P}_{C\times H}:=\{\prob{P}_\alpha|\alpha\in C\times H\}$.
 \end{definition}
 
-\begin{definition}[Induced probability set (vague model)]
-Given a decision problem $(C,\Omega,u)$ and a vague model $\prob{Q}_\cdot:C\kto \Omega$, the induced probability set is $\prob{P}_C:=\cup_{\alpha\in C} \prob{Q}_\alpha$.
-\end{definition}
 
 \section{Representation theorems for decision problems }\label{sec:how_represent_conseqeunces}
 
@@ -257,25 +253,130 @@ Dependency hypotheses are quite an important idea in causal reasoning. Together 
 
 \subsection{Statistical decision theory}\label{sec:sdt}
 
-Statistical decision theory predates all of the theories discussed above; it was published in full by \citet{wald_statistical_1950}. While the preceding theories were all concerned with articulating a theory of rational decision under uncertainty, Wald presented statistical decision theory as a theory of statistical inference formulated as a two-player game. Statistical decision theory introduced many fundamental ideas that have since entered the ``water supply'' of machine learning theory such as \emph{decision rules} and \emph{risk} as a measure of the quality of a decision rule.
+Statistical decision theory (SDT), created by \citet{wald_statistical_1950}, predates all of the decision theories discussed above. Savage's theory appears to have developed in part to explain some features of SDT \citet{savage_theory_1951}, and Jeffrey's theory and subsequent causal decision theories were in turn influenced by Savage's decision theory. While the later decision theories were concerned with articulating why their theory fit the role of a theory for rational decision under uncertainty, Wald focused much more on the mathematical formalism and solutions to statistical problems. Statistical decision theory introduced many fundamental ideas that have since entered the ``water supply'' of machine learning theory, such as \emph{decision rules} and \emph{risk} as a measure of the quality of a decision rule.
 
-Statistical decision problems arise from a probability set combined with a utility in a manner that closely resembles the decision rule given by Equation \ref{eq:lewis_cdt}. 
+In contrast to the later decision theories, SDT has no explicit representation of the ``consequences'' of a decision. Rather, it is assumed that a loss function is given that maps decisions and hypotheses directly to a loss, which is a kind of desirability score similar to a utility (although it is minimised rather than maximised).
 
-A further property that may hold for some see-do models $\prob{P}^{\RV{X}|\RV{H}\square \RV{Y}|\RV{D}}$ is $\RV{Y}\CI^2_{\prob{P}} \RV{X}|(\RV{H},\RV{D})$. This expresses the view that the consequences are independent of the observations, once the hypothesis and the decision are fixed. Such a situation could hold in our scenario above, where the observations are trial data, the decisions are recommendations to care providers and the consequences are future patient outcomes. In such a situation, we might suppose that the trial data are informative about the consequences only via some parameter such as effect size; if the effect size can be deduced from $\RV{H}$ then our assumption corresponds to the conditional independence above.
+\begin{definition}[Statistical decision problem]
+A statistical decision problem is a tuple $(X, H, D, l, \prob{P}_\cdot)$ where $(X,\sigalg{X})$ is a set of outcomes, $(H,\sigalg{H})$ is a set of hypotheses, $(D,\sigalg{D})$ is a set of decisions, $l:D\times H\to \mathbb{R}$ is a loss function and $\prob{P}_\cdot:H\kto X$ is a Markov kernel from hypotheses to to outcomes.
+\end{definition}
 
-Given a see-do model $\prob{P}^{\RV{X}|\RV{H}\square \RV{Y}|\RV{D}}$ along with the principle of expected utility to evaluate strategies, and the assumption $\RV{Y}\CI^2_{\prob{P}} \RV{X}|(\RV{H},\RV{D})$ we obtain a statistical decision problem in the form introduced by \citet{wald_statistical_1950}.
+Statistical decision theory is concerned with the selection of \emph{decision rules}, rather than the selection of decisions directly. A decision rule maps observations to decisions, and may be deterministic or stochastic.
 
-A \emph{statistical model} (or \emph{statistical experiment}) is a collection of probability distributions $\{\prob{P}_\theta\}$ indexed by some set $\Theta$. A statistical decision problem gives us an observation variable $\RV{X}:\Omega\kto X$ and a statistical experiment $\{\prob{P}^{\RV{X}}_\theta\}_\Theta$, a decision set $D$ and a loss $l:\Theta\times D\to \mathbb{R}$. A strategy $\model{S}^{\RV{D}|\RV{X}}_\alpha$ is evaluated according to the risk functional $R(\theta,\alpha):=\sum_{x\in X}\sum_{d\in D} \prob{P}^{\RV{X}}_\theta(x) S^{\RV{D}|\RV{X}}_\alpha (d|x) l(h,d)$. A strategy $\model{S}^{\RV{D}|\RV{X}}_\alpha$ is considered more desirable than $\model{S}^{\RV{D}|\RV{X}}_\beta$ if $R(\theta,\alpha)<R(\theta,\beta)$.
+\begin{definition}[Decision rule]
+Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$, a decision rule is a Markov kernel $\kernel{D}_\alpha:\Omega\kto D$.
+\end{definition}
 
-Suppose we have a see-do model $\prob{P}^{\RV{X}|\RV{H}\square \RV{Y}|\RV{D}}$ with $\RV{Y}\CI_{\model{P}} \RV{X}|(\RV{H,D})$, and suppose that the random variable $\RV{Y}$ is a ``negative utility'' function taking values in $\mathbb{R}$ for which \emph{low} values are considered desirable. Define a loss $l:H\times D\to \mathbb{R}$ by $l(h,d) = \sum_{y\in \mathbb{R}} y\model{P}^{\RV{Y}|\RV{H}\RV{D}}(y|h,d)$, we have 
+Because decision rules in SDT play the role of what we call \emph{choices}, we denote the set of all available decision rules by $C$. A further feature of SDT that is unlike the later decision theories is that SDT does not offer a single rule for assessing the desirability of any choice in $C$. Instead, it offers a rule for assessing the desirability of a choice \emph{relative to a particular hypothesis}, and considers a number of different rules for turning this ``intermediate assessment'' into a final assessment of the available choices.
 
+\begin{definition}[Risk]
+Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$ and decision functions $C$, the \emph{risk} functional $R:C\times H\to \mathbb{R}$ is defined by
 \begin{align}
-    \mathbb{E}_{\model{P}_{\alpha}}[\RV{Y}|h] &= \sum_{x\in X} \sum_{d\in D} \sum_{y\in Y} \model{P}^{\RV{X}|\RV{H}}(x|h) \model{Q}_\alpha^{\RV{D}|\RV{X}}(d|x) \model{P}^{\RV{Y}|\RV{HD}}(y|h,d)\\
-    &= \sum_{x\in X} \sum_{d\in D} \model{P}^{\RV{X}|\RV{H}}(x|h) \model{Q}_\alpha^{\RV{D}|\RV{X}}(d|x) l(h,d)\\
-    &= R(h,\alpha)
+    R(\kernel{D}_\alpha,h):= \int_X \int_D l(d,h) \kernel{D}_\alpha(\mathrm{d}d|f)\kernel{P}_h(\mathrm{d}f)
 \end{align}
+\end{definition}
 
-If we are given a see-do model where we interpret $\{\model{P}^{\RV{X}|\RV{H}}(\cdot|h)|h\in H\}$ as a statistical experiment and $\RV{Y}$ as a negative utility, the expectation of the utility under the strategy forecast given in equation \ref{eq:see_do_query} is the risk of that strategy under hypothesis $h$.
+SDT offers two decision rules that can be used to determine a best decision function when the hypothesis is unknown. The first is to choose the decision function minimising the \emph{Bayes risk}, which requires a prior over hypotheses. The second decision rule is to choose the decision rule minimising the maximum risk, and this rule does not require a prior.
+
+\begin{definition}[Bayes risk]
+Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$, decision functions $C$ and a prior $\mu\in \Delta(\sigalg{H})$, the \emph{Bayes risk} is
+\begin{align}
+    R_\mu(\kernel{D}_\alpha) &:= \int_{H} R(\kernel{D}_\alpha,h)\mu(\mathrm{d}h)\\
+    &=\int_X \int_D l(d,h) \kernel{D}_\alpha(\mathrm{d}d|f)\kernel{P}_h(\mathrm{d}f)\mu(\mathrm{d}h)
+\end{align}
+\end{definition}
+
+\begin{definition}[Minimax rule]
+Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$ and decision functions $C$, a \emph{minimax decision function} is any decision function $\kernel{D}_\alpha$ satisfying
+\begin{align}
+    \sup_{h\in H}  R(\kernel{D}_\alpha,h) &= \inf_{\alpha' in C} \sup_{h\in H} R(\kernel{D}_{\alpha'},h)
+\end{align}
+\end{definition}
+
+\subsubsection{From consequences to statistical decision problems}\label{sec:cons_to_sdp}
+
+To create a model \emph{with consequences} that induces the SDT risk, we need to make a few assumptions. Recall that the basic model for a decision problem is either a Markov kernel $\prob{P}_{\cdot}:C\kto \Omega$ or $\prob{P}_{\cdot,\cdot}:C\times H\kto \Omega$ for some set of hypotheses $H$, and that a utility function $u$ is also available. Here, $\Omega$ represents both observations (if any are taken) and consequences of decisions. Statistical decision problems correspond to a particular instance of this general scheme. In particular, statistical decision problems are associated with probability functions in which:
+\begin{itemize}
+    \item The set of ``choices'' is identified with the set of decision rules
+    \item There is some $\RV{X}:\Omega\to X$ representing the observations made before any decision rule is enacted
+    \begin{itemize}
+        \item Given any hypothesis, observations are independent of the choice of decision rule
+    \end{itemize}
+    \item There are consequences $\RV{Y}:\Omega\to Y$ and decisions $\RV{D}:\Omega\to D$
+    \begin{itemize}
+        \item Given a hypothesis and a decision, the consequences $\RV{Y}$ are independent of both the choice of decision rule and the observations
+        \item Given a decision function, the decision $\RV{D}$ is independent of the hypothesis
+    \end{itemize}
+    \item The utility $u:Y\to \mathbb{R}$ is a function of the consequences
+\end{itemize}
+
+\begin{definition}[Probability set model of a statistical decision problem]
+A probability set model of a statistical decision problem is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences and $\RV{D}:\Omega\to D$ are the decisions. $\prob{P}_{C\times H}$ must observe the following conditional independences:
+\begin{align}
+    \RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}\\
+    \RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})\\
+    \RV{D}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}
+\end{align}
+where $\RV{C}:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (see Definition \ref{def:eci_orig} for the definition of extended conditional independence).
+\end{definition}
+
+In order to produce a statistical decision problem, we also need a loss. We identify the required loss with the negative expected utility, conditional on a particular decision.
+
+\begin{definition}[Induced loss]
+Given a probability set model of a statistical decision problem is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ and a utility $u:Y\to \mathbb{R}$, the induced loss $l:D\times H\to \mathbb{R}$ is defined as
+\begin{align}
+    l(d,h):= -\int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)
+\end{align}
+where the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}$'s existence is guaranteed by $\RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$.
+\end{definition}
+
+The probability set model induces a set of decision functions: for each $\alpha\in C$, there is a probability distribution $\prob{P}_\alpha^{\RV{D}|\RV{X}}$.
+
+\begin{theorem}[Induced risk]
+Given a probability set model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ of a statistical decision problem along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice of decision rule $\alpha\in C$ and hypothesis $h\in H$ pair is equal to the negative risk of the decision rule and hypothesis pair.
+\end{theorem}
+
+\begin{proof}
+The expected utility given $\alpha$ and $h$ is
+\begin{align}
+    \int_Y u(y)\prob{P}_{\alpha,h}^{\RV{Y}}(\mathrm{d}y) &= \int_Y  \int_D \int_{X} u(y)\prob{P}_{\alpha,h}^{\RV{Y}|\RV{DX}}(\mathrm{d}y|d,x)\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha,h}^{\RV{X}}(\mathrm{d}x) \\
+    &= \int_X  \int_D \int_{Y} u(y) \prob{P}_{\alpha,h}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha,h}^{\RV{X}}(\mathrm{d}x)\label{eq:because_of_ci}\\
+    &= \int_{X} \int_D \int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
+     &= -\int_D\int_X l(d,h)\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
+    &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}},h)
+\end{align}
+where Equation \ref{eq:because_of_ci} follows from $\RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}$.
+\end{proof}
+
+We can also define a ``Bayesian probability set model'', which is a probability set model $\prob{P}_C$ along with a prior $\prob{P}_C^{\RV{H}}$ over hypotheses. In this case, the expected utility of a decision rule is equal to the Bayes risk.
+
+\begin{definition}[Bayesian probability set model]
+A Bayesian probability set model of a statistical decision problem is a tuple $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences, $\RV{D}:\Omega\to D$ are the decisions and $\RV{H}:\Omega\to H$ is the hypothesis. $\prob{P}_C$ must observe the following conditional independences:
+\begin{align}
+    \RV{X}&\CI^e_{\prob{P}_{C}} \RV{C}|\RV{H}\\
+    \RV{Y}&\CI^e_{\prob{P}_{C}} (\RV{X,C})|(\RV{D},\RV{H})\\
+    \RV{D}&\CI^e_{\prob{P}_{C}} \RV{H}|\RV{C}\\
+    \RV{H}&\CI^e_{\prob{P}_C} \RV{C}
+\end{align}
+\end{definition}
+
+\begin{theorem}[Induced Bayes risk]
+Given a Bayesian probability set model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ of a statistical decision problem along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice of decision rule $\alpha\in C$ is equal to the negative Bayes risk of that decision rule relative to the prior $\prob{P}_C^{\RV{H}}$.
+\end{theorem}
+
+\begin{proof}
+The expected utility of $\alpha\in C$ is 
+\begin{align}
+    \int_Y u(y) \prob{P}_{\alpha}^{\RV{Y}}(\mathrm{d}y) &= \int_Y  \int_D \int_{X} \int_H u(y)\prob{P}_{\alpha}^{\RV{Y}|\RV{DXH}}(\mathrm{d}y|d,x,h)\prob{P}_{\alpha}^{\RV{D}|\RV{XH}}(\mathrm{d}d|x,h)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h) \\
+    &= \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{\alpha}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h)\label{eq:because_of_ci}\\
+    &=  \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{C}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_C^{\RV{H}}(\mathrm{d}h)\\
+     &= -\int_D\int_X\int_H l(d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_C^{\RV{H}}(\mathrm{d}h)\\
+    &= -\int_H R(\prob{P}_{\alpha}^{\RV{D}|\RV{X}},h)\prob{P}_C^{\RV{H}}(\mathrm{d}h)
+    &= -R_{\prob{P}_C^{\RV{H}}}(\prob{P}_{\alpha}^{\RV{D}|\RV{X}})
+\end{align}
+\end{proof}
+
+\subsubsection{Complete class theorem}\label{sec:cc_theorem}
 
 \section{Variables}\label{sec:variable}
 
