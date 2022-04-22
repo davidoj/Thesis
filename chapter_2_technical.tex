@@ -15,6 +15,10 @@ This is a reference chapter -- a reader who is already quite familiar with proba
 
 \section{Conventions}
 
+One of the unusual conventions in this thesis is the notation of uniform conditional probability. Given a set of probability distributions $\prob{P}_C:=\{\prob{P}_\alpha|\alpha\in C\}$ on a common sample space $(\Omega,\sigalg{F})$ with variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\prob{P}^{\RV{Y}|\RV{X}}_C$ represents a Markov kernel $X\kto Y$ that satisfies the definition of the distribution of $\RV{Y}$ given $\RV{X}$ (Definition \ref{def:disint}) for every $\alpha\in C$, while $\prob{P}_\alpha^{\RV{Y}|\RV{X}}$ is a conditional distribution only for $\alpha$. There are two unusual feature: firstly, it is more common to write a conditional distribution $\prob{P}(\RV{Y}|\RV{X})$ and secondly, the subscript indicating the ``domain of validity'' of the conditional probability is unusual.
+
+Because this thesis uses sets of probability measures rather than single probability measures, in general a conditional distribution may be valid only for some subset of the probability measures, and always including a subscript indicating which subset or element for which a conditional distribution is valid avoids any ambiguity about this. Avoiding notation of the form $\prob{P}(\RV{Y}|\RV{X})$ is an aesthetic preference; writing a conditional distribution like this suggests $\prob{P}(\RV{Y}|\RV{X})$ is the result of function composition between $\prob{P}$ and some function denoted ``$\RV{Y}|\RV{X}$''. However, conditional probabilities are not given by composition of functions like this.
+
 \begin{center}
 \begin{tabular}{ |c|c|c| } 
  \hline
@@ -121,7 +125,7 @@ Given measurable $f:X\to Y$ and $g:Y\to Z$, $\kernel{F}_f\kernel{F}_g = \kernel{
 
 \subsubsection{Variables, conditionals and marginals}
 
-\begin{definition}[Variable]
+\begin{definition}[Variable]\label{def:variable}
 Given a measurable space $(\Omega,\sigalg{F})$ and a measurable space of values $(X,\sigalg{X})$, an \emph{$X$-valued variable} is a measurable function $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$.
 \end{definition}
 
