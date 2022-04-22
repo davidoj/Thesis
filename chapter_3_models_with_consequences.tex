@@ -22,11 +22,11 @@ The formal definition of a variable in a probabilistic model is straightforward 
     \item \emph{Counterfactual}: informally, ``questions concerning imagining alternate worlds''; formally defined as queries that can be answered by a structural causal model (SCM)
 \end{enumerate}
 
-As with theories of rational decision making under uncertainty, adjudicating whether this is indeed a sound basis for causal inference is not the purpose of this thesis. The approach to causal inference presented here is motivated by the informal version of rung 2, rather than the informal version of rung 3 (the formal theory is founded on probability sets, not CBNs or SCMs). It is easy to doubt that rung 3 is the right informal starting point for a theory of causal inference: the argument that the ladder is hierarchical depends on the formal characterisation of rungs in terms of questions that can be posed \emph{with particular kinds of models}. This gets priorities backwards; the point is to find models that are fit for answering important questions, not to find questions that can be asked of important models.
+Given that counterfactual questions are suggested to be the most general kind of causal question, one might ask why this work focuses on questions of an interventional nature. There are two reasons for this. Firstly, the theory presented here doesn't start with CBNs or SCMs, so the motivation is relying only on the informal elements of the ladder rungs. I have much stronger intuitions about decision problems than counterfactual queries, and questions about the formal representation of decision problems are also much more studied than questions about the formal representation of counterfactual queries. This all means it's much easier to propose a formalisation of decision making than it is to propose a formalisation of counterfactual speculation.
 
-Furthermore, the informal questions that characterise rung 3 can be posed in language more reminiscent of rungs 2. Rung 2 is characterised, informally, by questions like ``if I take aspirin, will my headache go away?'' while rung 3 is characterised by questions like ``if I had taken the aspirin, would I still have a headache?''. However, the second question could be posed as ``if I wave a magic wand and transport myself to a world where I have taken aspiring, would I still have a headache?''. Such an intervention is fanciful, but it nevertheless sounds like an intervention. Thus, perhaps, one can characterise rung 3 by questions concerning interventions that may or may not be fanciful.
+Secondly, Rung 2 questions are far more prominent in the causal inference literature than rung 3. \citet{rubin_causal_2005} argues that causal inference often to informs a decision maker by providing ``scientific knowledge'', but does not make recommendations by itself. \citep{imbens_causal_2015} introduces causal inference as the study of ``outcomes of manipulations'' and \citep{spirtes_causation_1993} highlights the universal relevance of understanding how to control certain outcomes, while further arguing that clarifying commonsense ideas of causation is also an important aim of causal inference. \citet{hernan_whatif_2020} present causal knowledge as critical for assessing the consequences of actions. Problems that involve comparing different choices on the basis of their consequences are an important class of problems. They are worth better understanding, even if this work does not shed any light on counterfactual questions.
 
-Rung 2 questions are far more prominent in the causal inference literature than rung 3. \citet{rubin_causal_2005} argues that causal inference often to informs a decision maker by providing ``scientific knowledge'', but does not make recommendations by itself. \citep{imbens_causal_2015} introduces causal inference as the study of ``outcomes of manipulations'' and \citep{spirtes_causation_1993} highlights the universal relevance of understanding how to control certain outcomes, while further arguing that clarifying commonsense ideas of causation is also an important aim of causal inference. \citet{hernan_whatif_2020} present causal knowledge as critical for assessing the consequences of actions. Problems that involve comparing different choices on the basis of their consequences are an important class of problems. They are worth better understanding, even if this work does not shed any light on counterfactual questions.
+At the informal level, I also wonder whether counterfactual queries could all be formulated as decision problems with fanciful options. An example of an informal decision problem is ``I want my headache to go away; should I take Aspirin?'' while an example of a counterfactual query is ``if I had taken the Aspirin, would I still have a headache?''. However,  we could also pose a fanciful decision problem ``I want my headache to go away; should I perform a magic ritual to make it so that I have already taken Aspirin?''. This is not a nonsensical decision problem, as the act in question cannot actually be taken. Nevertheless, whatever means we have of evaluating the state of affairs under alternative histories can also be used to evaluate the consequences of magic rituals that alter history. So, speculatively, a formalisation of consequences of decisions may also serve as a formalisation of ``counterfactual consequences'' if it admits a sufficiently wide variety of options.
 
 \subsection{Modelling decision problems}
 
@@ -317,8 +317,10 @@ To create a model \emph{with consequences} that induces the SDT risk, we need to
     \item The utility $u:Y\to \mathbb{R}$ is a function of the consequences
 \end{itemize}
 
-\begin{definition}[Probability set model of a statistical decision problem]
-A probability set model of a statistical decision problem is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences and $\RV{D}:\Omega\to D$ are the decisions. $\prob{P}_{C\times H}$ must observe the following conditional independences:
+We call models satisfying these requirements \emph{see-do models}, because they feature observations (the ``see'' part) along with decisions and consequences (the ``do'' part), and the observations come ``before'' the decisions (hence see-do).
+
+\begin{definition}[See-do model]
+A probability set model of a statistical decision problem, or a \emph{see-do model} for short, is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences and $\RV{D}:\Omega\to D$ are the decisions. $\prob{P}_{C\times H}$ must observe the following conditional independences:
 \begin{align}
     \RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}\\
     \RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})\\
@@ -330,17 +332,17 @@ where $\RV{C}:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective pro
 In order to produce a statistical decision problem, we also need a loss. We identify the required loss with the negative expected utility, conditional on a particular decision.
 
 \begin{definition}[Induced loss]
-Given a probability set model of a statistical decision problem is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ and a utility $u:Y\to \mathbb{R}$, the induced loss $l:D\times H\to \mathbb{R}$ is defined as
+Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ and a utility $u:Y\to \mathbb{R}$, the induced loss $l:D\times H\to \mathbb{R}$ is defined as
 \begin{align}
-    l(d,h):= -\int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)
+    l(d,h)&:= -\int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)
 \end{align}
-where the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}$'s existence is guaranteed by $\RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$.
+where the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}$'s existence is guaranteed by $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$.
 \end{definition}
 
 The probability set model induces a set of decision functions: for each $\alpha\in C$, there is a probability distribution $\prob{P}_\alpha^{\RV{D}|\RV{X}}$.
 
 \begin{theorem}[Induced risk]
-Given a probability set model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ of a statistical decision problem along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice of decision rule $\alpha\in C$ and hypothesis $h\in H$ pair is equal to the negative risk of the decision rule and hypothesis pair.
+Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice of decision rule $\alpha\in C$ and hypothesis $h\in H$ pair is equal to the negative risk of the decision rule and hypothesis pair.
 \end{theorem}
 
 \begin{proof}
@@ -352,13 +354,13 @@ The expected utility given $\alpha$ and $h$ is
      &= -\int_D\int_X l(d,h)\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
     &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}},h)
 \end{align}
-where Equation \ref{eq:because_of_ci} follows from $\RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}$.
+where Equation \ref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}$.
 \end{proof}
 
 We can also define a ``Bayesian probability set model'', which is a probability set model $\prob{P}_C$ along with a prior $\prob{P}_C^{\RV{H}}$ over hypotheses. In this case, the expected utility of a decision rule is equal to the Bayes risk.
 
-\begin{definition}[Bayesian probability set model]
-A Bayesian probability set model of a statistical decision problem is a tuple $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences, $\RV{D}:\Omega\to D$ are the decisions and $\RV{H}:\Omega\to H$ is the hypothesis. $\prob{P}_C$ must observe the following conditional independences:
+\begin{definition}[Bayesian see-do model]
+A Bayesian see-do model is a tuple $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences, $\RV{D}:\Omega\to D$ are the decisions and $\RV{H}:\Omega\to H$ is the hypothesis. $\prob{P}_C$ must observe the following conditional independences:
 \begin{align}
     \RV{X}&\CI^e_{\prob{P}_{C}} \RV{C}|\RV{H}\\
     \RV{Y}&\CI^e_{\prob{P}_{C}} (\RV{X,C})|(\RV{D},\RV{H})\\
@@ -368,7 +370,7 @@ A Bayesian probability set model of a statistical decision problem is a tuple $(
 \end{definition}
 
 \begin{theorem}[Induced Bayes risk]
-Given a Bayesian probability set model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ of a statistical decision problem along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice of decision rule $\alpha\in C$ is equal to the negative Bayes risk of that decision rule relative to the prior $\prob{P}_C^{\RV{H}}$.
+Given a Bayesian see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ of a statistical decision problem along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice of decision rule $\alpha\in C$ is equal to the negative Bayes risk of that decision rule relative to the prior $\prob{P}_C^{\RV{H}}$.
 \end{theorem}
 
 \begin{proof}
@@ -383,7 +385,25 @@ The expected utility of $\alpha\in C$ is
 \end{align}
 \end{proof}
 
+\begin{theorem}[Extension to a Bayesian see-do model]
+Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ 
+\end{theorem}
+
 \subsubsection{Complete class theorem}\label{sec:cc_theorem}
+
+A Bayesian see-do model is a probability set $\prob{P}_C$ and a see-do model is a probability set $\prob{P}_{C\times H}$. We can obtain the former by combining the latter with a prior $\mu\in \Delta(H)$; call this an induced Bayesian model with respect to $\mu$. The \emph{complete class theorem} establishes that any \emph{admissible} decision rule for a see-do model $\prob{P}_{C\times H}$ must minimise the Bayes risk for the Bayesian model induced by some $\mu\in \Delta(H)$. This theorem is somewhat similar in content to the other representation theorems discussed in this chapter -- given a see-do model, a utility and any means of selecting an admissible decision function, there is a Bayesian ``representation'' of this selection rule obtained by extending the model with a prior.
+
+\begin{definition}[Admissible decision rule]\label{def:admissible_decision}
+
+\end{definition}
+
+\begin{definition}[Complete class]
+
+\end{definition}
+
+\begin{theorem}[Complete class theorem]
+
+\end{theorem}
 
 \section{Variables}\label{sec:variable}
 
