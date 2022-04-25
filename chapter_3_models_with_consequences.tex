@@ -22,13 +22,16 @@ The formal definition of a variable in a probabilistic model is straightforward 
     \item \emph{Counterfactual}: informally, ``questions concerning imagining alternate worlds''; formally defined as queries that can be answered by a structural causal model (SCM)
 \end{enumerate}
 
-Given that counterfactual questions are suggested to be the most general kind of causal question, one might ask why this work focuses on questions of an interventional nature. There are two reasons for this. Firstly, the theory presented here doesn't start with CBNs or SCMs, so the motivation is relying only on the informal elements of the ladder rungs. I have much stronger intuitions about decision problems than counterfactual queries, and questions about the formal representation of decision problems are also much more studied than questions about the formal representation of counterfactual queries. This all means it's much easier to propose a formalisation of decision making than it is to propose a formalisation of counterfactual speculation.
+Given that counterfactual questions are suggested to be the most general kind of causal question, one might ask why this work focuses on questions of an interventional nature. There are two reasons for this: Firstly, a class of informal questions is being used to motivate the theory of causal inference with probability sets. I have much stronger intuitions about informal decision problems than informal counterfactual queries. This does not seem to be a purely personal taste: questions about how decision problems should be represented have been studied much more than similar questions regarding counterfactual queries. Secondly, problems that involve comparing different choices on the basis of their consequences are an important class of problems on their own. Even within the causal inference literature, ``interventional'' questions and interpretations are much more prominent than counterfactual questions. For example, \citet{rubin_causal_2005} points out that causal inference often informs a decision maker by providing ``scientific knowledge'', but does not make recommendations by itself. \citep{imbens_causal_2015} introduces causal inference as the study of ``outcomes of manipulations'' and \citep{spirtes_causation_1993} highlights the universal relevance of understanding how to control certain outcomes, while further arguing that clarifying commonsense ideas of causation is also an important aim of causal inference. \citet{hernan_whatif_2020} present causal knowledge as critical for assessing the consequences of actions.
 
-Secondly, Rung 2 questions are far more prominent in the causal inference literature than rung 3. \citet{rubin_causal_2005} argues that causal inference often to informs a decision maker by providing ``scientific knowledge'', but does not make recommendations by itself. \citep{imbens_causal_2015} introduces causal inference as the study of ``outcomes of manipulations'' and \citep{spirtes_causation_1993} highlights the universal relevance of understanding how to control certain outcomes, while further arguing that clarifying commonsense ideas of causation is also an important aim of causal inference. \citet{hernan_whatif_2020} present causal knowledge as critical for assessing the consequences of actions. Problems that involve comparing different choices on the basis of their consequences are an important class of problems. They are worth better understanding, even if this work does not shed any light on counterfactual questions.
+Speculatively, counterfactual queries may be able to be interpreted as decision problems with fanciful options. Consider an informal decision problem and a counterfactual query addressing similar material:
+\begin{itemize}
+    \item Decision problem: I want my headache to go away. If I take Aspirin, will it do so?
+    \item Counterfactual query: I wish I didn't have headache. If I had taken the Aspirin, would I still have it?
+\end{itemize}
+If I haven't taken aspirin, then there's nothing I can actually choose to do to make it so that I had. However, if I imagine that I did have some option available that accomplished this, then the structure of the two questions seems rather similar. Both ask: if I take the option, what will the consequence be? Of course, it's hard to say what makes a correct answer to the second question, but this is a feature of counterfactual questions in general.
 
-At the informal level, I also wonder whether counterfactual queries could all be formulated as decision problems with fanciful options. An example of an informal decision problem is ``I want my headache to go away; should I take Aspirin?'' while an example of a counterfactual query is ``if I had taken the Aspirin, would I still have a headache?''. However,  we could also pose a fanciful decision problem ``I want my headache to go away; should I perform a magic ritual to make it so that I have already taken Aspirin?''. This is not a nonsensical decision problem, as the act in question cannot actually be taken. Nevertheless, whatever means we have of evaluating the state of affairs under alternative histories can also be used to evaluate the consequences of magic rituals that alter history. So, speculatively, a formalisation of consequences of decisions may also serve as a formalisation of ``counterfactual consequences'' if it admits a sufficiently wide variety of options.
-
-\subsection{Modelling decision problems}
+\subsection{Modelling decision problems}\label{sec:modelling_decision_problems}
 
 People who need to make a decisions might (and often do) make them with no mathematical reasoning at all. However, this work is concerned with making decisions assisted by mathematical reasoning. In order to reason mathematically about a decision to be made, we assume that somehow, we have access to two sets:
 \begin{enumerate}
@@ -265,7 +268,7 @@ Statistical decision theory (SDT), created by \citet{wald_statistical_1950}, pre
 In contrast to the later decision theories, SDT has no explicit representation of the ``consequences'' of a decision. Rather, it is assumed that a loss function is given that maps decisions and hypotheses directly to a loss, which is a kind of desirability score similar to a utility (although it is minimised rather than maximised).
 
 \begin{definition}[Statistical decision problem]
-A statistical decision problem is a tuple $(X, H, D, l, \prob{P}_\cdot)$ where $(X,\sigalg{X})$ is a set of outcomes, $(H,\sigalg{H})$ is a set of hypotheses, $(D,\sigalg{D})$ is a set of decisions, $l:D\times H\to \mathbb{R}$ is a loss function and $\prob{P}_\cdot:H\kto X$ is a Markov kernel from hypotheses to to outcomes.
+A statistical decision problem (SDP) is a tuple $(X, H, D, l, \prob{P}_\cdot)$ where $(X,\sigalg{X})$ is a set of outcomes, $(H,\sigalg{H})$ is a set of hypotheses, $(D,\sigalg{D})$ is a set of decisions, $l:D\times H\to \mathbb{R}$ is a loss function and $\prob{P}_\cdot:H\kto X$ is a Markov kernel from hypotheses to to outcomes.
 \end{definition}
 
 Statistical decision theory is concerned with the selection of \emph{decision rules}, rather than the selection of decisions directly. A decision rule maps observations to decisions, and may be deterministic or stochastic.
@@ -274,27 +277,33 @@ Statistical decision theory is concerned with the selection of \emph{decision ru
 Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$, a decision rule is a Markov kernel $\kernel{D}_\alpha:\Omega\kto D$.
 \end{definition}
 
-Because decision rules in SDT play the role of what we call \emph{choices}, we denote the set of all available decision rules by $C$. A further feature of SDT that is unlike the later decision theories is that SDT does not offer a single rule for assessing the desirability of any choice in $C$. Instead, it offers a rule for assessing the desirability of a choice \emph{relative to a particular hypothesis}, and considers a number of different rules for turning this ``intermediate assessment'' into a final assessment of the available choices.
+Because decision rules in SDT play the role of what we call \emph{choices}, we denote the set of all available decision rules by $C$. A further feature of SDT that is unlike the later decision theories is that SDT does not offer a single rule for assessing the desirability of any choice in $C$. Instead, it offers a definition of the risk, which assesses the desirability of a choice \emph{relative to a particular hypothesis}. The risk function completely characterises the problem of choosing a decision function. Two different rules are for turning this ``intermediate assessment'' into a final assessment of the available choices - Bayes optimality and minimax optimality. Bayes optimality reuquires a prior over hypotheses, while minimax optimality does not.
 
-\begin{definition}[Risk]
+\begin{definition}[SDP Risk]\label{def:risk}
 Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$ and decision functions $C$, the \emph{risk} functional $R:C\times H\to \mathbb{R}$ is defined by
 \begin{align}
     R(\kernel{D}_\alpha,h):= \int_X \int_D l(d,h) \kernel{D}_\alpha(\mathrm{d}d|f)\kernel{P}_h(\mathrm{d}f)
 \end{align}
 \end{definition}
 
-SDT offers two decision rules that can be used to determine a best decision function when the hypothesis is unknown. The first is to choose the decision function minimising the \emph{Bayes risk}, which requires a prior over hypotheses. The second decision rule is to choose the decision rule minimising the maximum risk, and this rule does not require a prior.
+It is possible to find risk functions in problems that aren't SDPs. The definitions of Bayes and Minimax optimality still apply to risk functions obtained on other manners. Thus Bayes optimality and minimax optimality are defined in terms of risk functions in general, not SDP risk functions.
 
 \begin{definition}[Bayes risk]
-Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$, decision functions $C$ and a prior $\mu\in \Delta(\sigalg{H})$, the \emph{Bayes risk} is
+Given decision functions $C$, hypotheses $(H,\sigalg{H})$, risk $R:C\times H\to \mathbb{R}$ and prior $\mu\in \Delta(H)$, the $\mu$-\emph{Bayes risk} is
 \begin{align}
-    R_\mu(\kernel{D}_\alpha) &:= \int_{H} R(\kernel{D}_\alpha,h)\mu(\mathrm{d}h)\\
-    &=\int_X \int_D l(d,h) \kernel{D}_\alpha(\mathrm{d}d|f)\kernel{P}_h(\mathrm{d}f)\mu(\mathrm{d}h)
+    R_\mu(\kernel{D}_\alpha) &:= \int_{H} R(\kernel{D}_\alpha,h)\mu(\mathrm{d}h)
 \end{align}
 \end{definition}
 
-\begin{definition}[Minimax rule]
-Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$ and decision functions $C$, a \emph{minimax decision function} is any decision function $\kernel{D}_\alpha$ satisfying
+\begin{definition}[Bayes optimal]
+Given decision functions $C$, hypotheses $(H,\sigalg{H})$, risk $R:C\times H\to \mathbb{R}$ and prior $\mu\in \Delta(H)$, $\alpha\in C$ is $\mu$-Bayes optimal if
+\begin{align}
+    R_\mu(\kernel{D}_\alpha) &= \inf_{\alpha'\in C} R_{\mu}(\kernel{D}_{\alpha'})
+\end{align}
+\end{definition}
+
+\begin{definition}[Minimax optimal]
+Given decision functions $C$, hypotheses $(H,\sigalg{H})$, risk $R:C\times H\to \mathbb{R}$, a \emph{minimax decision function} is any decision function $\kernel{D}_\alpha$ satisfying
 \begin{align}
     \sup_{h\in H}  R(\kernel{D}_\alpha,h) &= \inf_{\alpha' in C} \sup_{h\in H} R(\kernel{D}_{\alpha'},h)
 \end{align}
@@ -302,47 +311,36 @@ Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$ and decision
 
 \subsubsection{From consequences to statistical decision problems}\label{sec:cons_to_sdp}
 
-To create a model \emph{with consequences} that induces the SDT risk, we need to make a few assumptions. Recall that the basic model for a decision problem is either a Markov kernel $\prob{P}_{\cdot}:C\kto \Omega$ or $\prob{P}_{\cdot,\cdot}:C\times H\kto \Omega$ for some set of hypotheses $H$, and that a utility function $u$ is also available. Here, $\Omega$ represents both observations (if any are taken) and consequences of decisions. Statistical decision problems correspond to a particular instance of this general scheme. In particular, statistical decision problems are associated with probability functions in which:
-\begin{itemize}
-    \item The set of ``choices'' is identified with the set of decision rules
-    \item There is some $\RV{X}:\Omega\to X$ representing the observations made before any decision rule is enacted
-    \begin{itemize}
-        \item Given any hypothesis, observations are independent of the choice of decision rule
-    \end{itemize}
-    \item There are consequences $\RV{Y}:\Omega\to Y$ and decisions $\RV{D}:\Omega\to D$
-    \begin{itemize}
-        \item Given a hypothesis and a decision, the consequences $\RV{Y}$ are independent of both the choice of decision rule and the observations
-        \item Given a decision function, the decision $\RV{D}$ is independent of the hypothesis
-    \end{itemize}
-    \item The utility $u:Y\to \mathbb{R}$ is a function of the consequences
-\end{itemize}
-
-We call models satisfying these requirements \emph{see-do models}, because they feature observations (the ``see'' part) along with decisions and consequences (the ``do'' part), and the observations come ``before'' the decisions (hence see-do).
-
+Statistical decision theory ignores the notion of consequences beyond the loss received for a particular decision given a particular hypothesis. The kinds of probability set models studied here probabilistically map decisions to consequences, and the set of consequences is understood to have a utility function to allow for assessment of the desirability of different choices via the principle of expected utility. Not every probability set model induces a statistical decision problem in this manner. A family of models that does are what we call \emph{conditionally independent see-do models}. These models feature observations (the ``see'' part) along with decisions and consequences (the ``do'' part), and the observations come ``before'' the decisions (hence see-do). Examples of this type of model will be encountered again in Chapters \ref{ch:evaluating_decisions} and \ref{ch:other_causal_frameworks}. Furthermore, there is a hypothesis such that consequences are assumed to be independent of observations conditional on the decision and the hypothesis. This is why they are qualified as ``conditionally independent'' see-do models.
 \begin{definition}[See-do model]
 A probability set model of a statistical decision problem, or a \emph{see-do model} for short, is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences and $\RV{D}:\Omega\to D$ are the decisions. $\prob{P}_{C\times H}$ must observe the following conditional independences:
 \begin{align}
     \RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}\\
-    \RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})\\
     \RV{D}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}
 \end{align}
 where $\RV{C}:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (see Definition \ref{def:eci_orig} for the definition of extended conditional independence).
 \end{definition}
-
-In order to produce a statistical decision problem, we also need a loss. We identify the required loss with the negative expected utility, conditional on a particular decision.
-
+\begin{definition}[Conditionally independent see-do model]
+A conditionally independent see-do model is a see do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where the following additional conditional independence holds:
+\begin{align}
+    \RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})
+\end{align}
+\end{definition}
+We assume that a utility function is available depending on the consequence $\RV{Y}$ only, and identify the loss with the negative expected utility, conditional on a particular decision and hypothesis.
 \begin{definition}[Induced loss]
 Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ and a utility $u:Y\to \mathbb{R}$, the induced loss $l:D\times H\to \mathbb{R}$ is defined as
 \begin{align}
     l(d,h)&:= -\int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)
 \end{align}
-where the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}$'s existence is guaranteed by $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$.
 \end{definition}
+where the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}$'s existence is guaranteed by $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$.
 
-The probability set model induces a set of decision functions: for each $\alpha\in C$, there is a probability distribution $\prob{P}_\alpha^{\RV{D}|\RV{X}}$.
-
-\begin{theorem}[Induced risk]
-Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice of decision rule $\alpha\in C$ and hypothesis $h\in H$ pair is equal to the negative risk of the decision rule and hypothesis pair.
+A see-do model induces a set of decision functions: for each $\alpha\in C$, there is an associated probability distribution $\prob{P}_\alpha^{\RV{D}|\RV{X}}$. Using the above definition of loss, the expected loss of a decision function in a conditionally independent see-do model induces a risk function identical to the SDP risk.
+\begin{theorem}[Induced SDP risk]\label{th:ind_risk}
+Given a conditionally independent see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice $\alpha\in C$ and hypothesis $h\in H$ is equal to the negative SDP risk of the associated decision rule $\prob{P}_\alpha^{\RV{D}|\RV{X}}$ and hypothesis $h$.
+\begin{align}
+    \prob{P}_{\alpha,h}^{\RV{Y}}u &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}},h)
+\end{align}
 \end{theorem}
 
 \begin{proof}
@@ -357,53 +355,85 @@ The expected utility given $\alpha$ and $h$ is
 where Equation \ref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}$.
 \end{proof}
 
-We can also define a ``Bayesian probability set model'', which is a probability set model $\prob{P}_C$ along with a prior $\prob{P}_C^{\RV{H}}$ over hypotheses. In this case, the expected utility of a decision rule is equal to the Bayes risk.
+Theorem \ref{th:ind_risk} does \emph{not} hold for general see-do models. General see-do models allow for the utility to depend on $\RV{X}$ even after conditioning on $\RV{D}$ and $\RV{H}$, while the form of the loss function in SDT forces no direct dependence on observations. The generic ``see-do risk'' (Definition \ref{def:see_do_risk}) provides a notion of risk for the more general case, while Theorem \ref{th:ind_risk} shows it reduces to SDP risk in the case of conditionally independent see-do models with a utility that depends only on the consequences $\RV{Y}$.
+\begin{definition}[See-do risk]\label{def:see_do_risk}
+Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:\Omega\to \mathbb{R}$, the \emph{see-do risk} $R:C\times H\to \mathbb{R}$ is given by
+\begin{align}
+    R(\alpha,h) &:= -\prob{P}_{\alpha,h}u&\forall \alpha\in C,h\in H
+\end{align}
+\end{definition}
+
+Section \ref{sec:modelling_decision_problems} noted that two types of probability set model are considered: probability sets $\prob{P}_C$ indexed by choices alone, and probability sets $\prob{P}_{C\times H}$ jointly indexed by choices and hypotheses. See-do models are an instance of the second kind, jointly indexed by choices and hypotheses. Bayesian see-do models are of the former type, indexed by choices alone. A see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ and a prior over hypotheses $\mu\in \Delta(H)$ can by combined to form a Bayesian see-do model, and under the right conditions the risk of the Bayesian model reduces to the Bayes risk of the original see-do model.
 
 \begin{definition}[Bayesian see-do model]
 A Bayesian see-do model is a tuple $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences, $\RV{D}:\Omega\to D$ are the decisions and $\RV{H}:\Omega\to H$ is the hypothesis. $\prob{P}_C$ must observe the following conditional independences:
 \begin{align}
     \RV{X}&\CI^e_{\prob{P}_{C}} \RV{C}|\RV{H}\\
-    \RV{Y}&\CI^e_{\prob{P}_{C}} (\RV{X,C})|(\RV{D},\RV{H})\\
     \RV{D}&\CI^e_{\prob{P}_{C}} \RV{H}|\RV{C}\\
     \RV{H}&\CI^e_{\prob{P}_C} \RV{C}
 \end{align}
 \end{definition}
 
-\begin{theorem}[Induced Bayes risk]
-Given a Bayesian see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ of a statistical decision problem along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice of decision rule $\alpha\in C$ is equal to the negative Bayes risk of that decision rule relative to the prior $\prob{P}_C^{\RV{H}}$.
+\begin{definition}[Induced Bayesian see-do model]
+Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D},\RV{H})$ on $(\Omega,\sigalg{F})$ and a prior $\mu\in \Delta(H)$, the induced Bayesian see-do model $\prob{P}_C$ on $(\Omega\times H,\sigalg{F}\otimes \sigalg{H})$ is
+\begin{align}
+    \prob{P}_C(A) &= \int_{\RV{H}^{-1}(A)} \prob{P}_{C\times \{h\}}(\Pi_{\Omega}^{-1}(A))\mu(\mathrm{d}h)&\forall A\in \sigalg{F}\otimes\sigalg{H}
+\end{align}
+Where $\Pi_\Omega:\Omega\times H\to \Omega$ is the projection onto $\Omega$.
+\end{definition}
+
+\begin{theorem}[Induced SDP Bayes risk]
+Given a conditionally independence see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ along with a utility $u:Y\to \mathbb{R}$ and a prior $\mu\in \Delta(H)$, the expected utility for each choice $\alpha\in C$ under the induced Bayesian see-do model is equal to the negative $\mu$-Bayes risk of that decision rule.
 \end{theorem}
 
 \begin{proof}
+First, note that $h\mapsto \prob{P}_{C\times \{h\}}^{\RV{Y}|\RV{XD}}$ is a version of $\prob{P}_C^{\RV{Y}|\RV{XD}}$ and hence $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X},\RV{C})|(\RV{H},\RV{D})$, a property it inherits from the underlying see-do model.
+
+Also, note that $\prob{P}_C^{\RV{H}}=\mu$, by construction.
+
 The expected utility of $\alpha\in C$ is 
 \begin{align}
-    \int_Y u(y) \prob{P}_{\alpha}^{\RV{Y}}(\mathrm{d}y) &= \int_Y  \int_D \int_{X} \int_H u(y)\prob{P}_{\alpha}^{\RV{Y}|\RV{DXH}}(\mathrm{d}y|d,x,h)\prob{P}_{\alpha}^{\RV{D}|\RV{XH}}(\mathrm{d}d|x,h)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h) \\
+    \prob{P}_\alpha^{\RV{Y}} u &= \int_Y u(y) \prob{P}_{\alpha}^{\RV{Y}}(\mathrm{d}y) \\
+    &= \int_Y  \int_D \int_{X} \int_H u(y)\prob{P}_{\alpha}^{\RV{Y}|\RV{DXH}}(\mathrm{d}y|d,x,h)\prob{P}_{\alpha}^{\RV{D}|\RV{XH}}(\mathrm{d}d|x,h)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h) \\
     &= \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{\alpha}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h)\label{eq:because_of_ci}\\
-    &=  \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{C}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_C^{\RV{H}}(\mathrm{d}h)\\
-     &= -\int_D\int_X\int_H l(d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_C^{\RV{H}}(\mathrm{d}h)\\
-    &= -\int_H R(\prob{P}_{\alpha}^{\RV{D}|\RV{X}},h)\prob{P}_C^{\RV{H}}(\mathrm{d}h)
-    &= -R_{\prob{P}_C^{\RV{H}}}(\prob{P}_{\alpha}^{\RV{D}|\RV{X}})
+    &=  \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{C}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
+     &= -\int_D\int_X\int_H l(d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
+    &= -\int_H R(\prob{P}_{\alpha}^{\RV{D}|\RV{X}},h)\mu(\mathrm{d}h)\\
+    &= -R_{\mu}(\prob{P}_{\alpha}^{\RV{D}|\RV{X}})
 \end{align}
 \end{proof}
 
-\begin{theorem}[Extension to a Bayesian see-do model]
-Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ 
-\end{theorem}
-
 \subsubsection{Complete class theorem}\label{sec:cc_theorem}
 
-A Bayesian see-do model is a probability set $\prob{P}_C$ and a see-do model is a probability set $\prob{P}_{C\times H}$. We can obtain the former by combining the latter with a prior $\mu\in \Delta(H)$; call this an induced Bayesian model with respect to $\mu$. The \emph{complete class theorem} establishes that any \emph{admissible} decision rule for a see-do model $\prob{P}_{C\times H}$ must minimise the Bayes risk for the Bayesian model induced by some $\mu\in \Delta(H)$. This theorem is somewhat similar in content to the other representation theorems discussed in this chapter -- given a see-do model, a utility and any means of selecting an admissible decision function, there is a Bayesian ``representation'' of this selection rule obtained by extending the model with a prior.
+The \emph{complete class theorem} establishes that, under certain conditions, any \emph{admissible} decision rule (Definition \ref{def:admissible_decision}) for a see-do model $\prob{P}_{C\times H}$ with a utility $u$ must minimise the Bayes risk for a Bayesian model constructed from $\prob{P}_{C\times H}$ and a prior over hypotheses $\mu\in \Delta(H)$. This can be interpreted in a similar way to the decision theoretic representation discussed above: if you accept that the relevant assumptions apply to the decision problem at hand, than there is a Bayesian see-do model along with $u$ that captures the important features of this problem. The assumptions are that a see-do model $\prob{P}_{C\times H}$ with a utility $u$ that satisfies the relevant conditions is available, and that the principle used to evaluate decision rules should yield an admissible decision rule (though it may also be desired to satisfy other properties as well).
 
-\begin{definition}[Admissible decision rule]\label{def:admissible_decision}
+If there are auxiliary requirements for choosing the decision rule, the complete class theorem does not prove that it is easy to find a Bayesian model that will yield rules satisfying these requirements.
 
+See-do models (and statistical decision problems) have a lot of structure -- the loss, the assumption that consequences are conditionally independent of observations -- that is not actually critical to the complete class theorem. The complete class theorem is a theorem about risk function $R:C\times H\to \mathbb{R}$ that have certain properties. Theorem \ref{th:ind_risk} shows one way that a risk function can be derived from a see-do model along with a utility. However, it is also possible to derive risk functions from other classes of probability set models with utilities, and if the resulting risk function satisfies the appropriate conditions then the complete class theorem also applies to that class of model. For example, the complete class theorem also applies to see-do models without the assumption that consequences are conditionally independent of observations given the hypothesis and the decision, even though in this case the risk calculation is not the standard calculation for a statistical decision problem.
+
+\begin{definition}[Risk function]
+Given a set of choice $C$ and a set of hypotheses $H$, a risk function is a map $R:H\times C\to \mathbb{R}$.
+\end{definition}
+
+If the second set $H$ were, instead of hypotheses about nature, a set of options available to a second player playing a game, then a ``risk function'' defines a two-player zero-sum game \citet{toutenburg_ferguson_1967}.
+
+\begin{definition}[Admissible choice]\label{def:admissible_decision}
+Given a risk function $R:H\times C\to \mathbb{R}$, a choice r $\alpha\in C$ dominates a choice $\alpha'\in C$ if for all $h\in H$, $R(\alpha,h)\leq R(\alpha',h)$ and for at least on $h^*$, $R(\alpha,h)<R(\alpha,h^*)$. An \emph{admissible choice} is a choice $\alpha\in C$ such that there is no $\alpha'\in C$ dominating $\alpha$.
 \end{definition}
 
 \begin{definition}[Complete class]
-
+A \emph{complete class} is any $B\subset C$ such that, for any $\alpha'\not in B$ there is some $\alpha\in B$ that dominates $\alpha'$. A \emph{minimal complete class} is a complete class $B$ such that no proper subset of $B$ is complete
 \end{definition}
 
-\begin{theorem}[Complete class theorem]
-
+\begin{theorem}
+If a minimal complete class $B\subset C$ exists then $B$ is the set consisting of all the admissible decision rules.
 \end{theorem}
+
+\begin{proof}
+See \citet[~chap. 2]{toutenburg_ferguson_1967}
+\end{proof}
+
+
 
 \section{Variables}\label{sec:variable}
 
