@@ -357,9 +357,9 @@ where Equation \ref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\tim
 
 Theorem \ref{th:ind_risk} does \emph{not} hold for general see-do models. General see-do models allow for the utility to depend on $\RV{X}$ even after conditioning on $\RV{D}$ and $\RV{H}$, while the form of the loss function in SDT forces no direct dependence on observations. The generic ``see-do risk'' (Definition \ref{def:see_do_risk}) provides a notion of risk for the more general case, while Theorem \ref{th:ind_risk} shows it reduces to SDP risk in the case of conditionally independent see-do models with a utility that depends only on the consequences $\RV{Y}$.
 \begin{definition}[See-do risk]\label{def:see_do_risk}
-Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:\Omega\to \mathbb{R}$, the \emph{see-do risk} $R:C\times H\to \mathbb{R}$ is given by
+Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:X\times Y\to \mathbb{R}$, the \emph{see-do risk} $R:C\times H\to \mathbb{R}$ is given by
 \begin{align}
-    R(\alpha,h) &:= -\prob{P}_{\alpha,h}u&\forall \alpha\in C,h\in H
+    R(\alpha,h) &:= -\prob{P}_{\alpha,h}^{\RV{XY}}u&\forall \alpha\in C,h\in H
 \end{align}
 \end{definition}
 
@@ -383,7 +383,7 @@ Where $\Pi_\Omega:\Omega\times H\to \Omega$ is the projection onto $\Omega$.
 \end{definition}
 
 \begin{theorem}[Induced SDP Bayes risk]
-Given a conditionally independence see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ along with a utility $u:Y\to \mathbb{R}$ and a prior $\mu\in \Delta(H)$, the expected utility for each choice $\alpha\in C$ under the induced Bayesian see-do model is equal to the negative $\mu$-Bayes risk of that decision rule.
+Given a conditionally independent see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ along with a utility $u:Y\to \mathbb{R}$ and a prior $\mu\in \Delta(H)$, the expected utility for each choice $\alpha\in C$ under the induced Bayesian see-do model is equal to the negative $\mu$-Bayes risk of that decision rule.
 \end{theorem}
 
 \begin{proof}
@@ -418,7 +418,7 @@ Given a set of choice $C$ and a set of hypotheses $H$, a risk function is a map 
 If the second set $H$ were, instead of hypotheses about nature, a set of options available to a second player playing a game, then a ``risk function'' defines a two-player zero-sum game \citet{toutenburg_ferguson_1967}.
 
 \begin{definition}[Admissible choice]\label{def:admissible_decision}
-Given a risk function $R:H\times C\to \mathbb{R}$, a choice r $\alpha\in C$ dominates a choice $\alpha'\in C$ if for all $h\in H$, $R(\alpha,h)\leq R(\alpha',h)$ and for at least on $h^*$, $R(\alpha,h)<R(\alpha,h^*)$. An \emph{admissible choice} is a choice $\alpha\in C$ such that there is no $\alpha'\in C$ dominating $\alpha$.
+Given a risk function $R:C\times H\to \mathbb{R}$, a choice r $\alpha\in C$ dominates a choice $\alpha'\in C$ if for all $h\in H$, $R(\alpha,h)\leq R(\alpha',h)$ and for at least on $h^*$, $R(\alpha,h)<R(\alpha,h^*)$. An \emph{admissible choice} is a choice $\alpha\in C$ such that there is no $\alpha'\in C$ dominating $\alpha$.
 \end{definition}
 
 \begin{definition}[Complete class]
@@ -430,10 +430,68 @@ If a minimal complete class $B\subset C$ exists then $B$ is the set consisting o
 \end{theorem}
 
 \begin{proof}
-See \citet[~chap. 2]{toutenburg_ferguson_1967}
+See \citet[Theorem 2.1]{toutenburg_ferguson_1967}
 \end{proof}
 
+\begin{definition}[Risk set]
+Given a finite set of hypotheses $H$, a set of choices $C$ and a risk function $R:C\times H\to \mathbb{R}$, the risk set is the subset of $\mathbb{R}^{|H|}$ given by
+\begin{align}
+    S := \{(R(\alpha,h))_{h\in H}|\alpha\in C\}
+\end{align}
+\end{definition}
 
+\begin{theorem}[Complete class theorem]
+Given a risk function $R:C\times H\to \mathbb{R}$, if the risk set S is convex, bounded from below and closed downwards, and H is finite, then the set of Bayes optimal choices is a minimal complete class.
+\end{theorem}
+
+\begin{proof}
+See \citet[~Theorem 2.10.2]{toutenburg_ferguson_1967}
+\end{proof}
+
+\begin{lemma}\label{lem:convex_closed}
+Given $H$ and $C$ both finite and a risk function $R:C\times H\to \mathbb{R}$ and an associated probability set $\prob{P}_C$, if
+\begin{align}
+    \prob{P}_{\alpha,h} &= a \prob{P}_{\beta,h} + (1-a)\prob{P}_{\beta',h} \\
+    \implies R(\alpha,h)&=aR(\beta,h) + (1-a)R(\beta',h)&\forall h\in H\label{ass:convexity_implied}
+\end{align}
+and 
+\begin{align}
+    Q:= (\prob{P}_{\{\alpha\}\times H})_{\alpha\in C}
+\end{align}
+is convex closed, then the risk set $S$ is convex closed.
+\end{lemma}
+
+\begin{proof}
+Consider $y,y'\in S$, where
+\begin{align}
+    y &= (R(\alpha,h))_{h\in H}\\
+    y' &= (R(\alpha',h))_{h\in H}
+\end{align}
+Consider some $0\leq a\leq 1$ and define $y_a=ay + (1-a)y'$. By assumption of convexity of $Q$, there is some $\alpha_a\in C$ such that for all $h$
+\begin{align}
+    \prob{P}_{\alpha_a,h} &= a\prob{P}_{\alpha,h} + (1-a)\prob{P}_{\alpha',h}
+\end{align}
+but then by the assumption in Eq. \ref{ass:convexity_implied}
+\begin{align}
+    y_a &= (R(\alpha_a,h)_{h\in H})
+\end{align}
+Closure of $S$ follows from the fact that the function $\prob{P}_{\{\alpha\}\times H}\mapsto R(\alpha_a,h)_{h\in H}$ is a continuous function and $Q$ is a compact set
+\end{proof}
+
+\begin{example}
+Suppose we have a conditionally independent see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ along with a bounded utility $u:Y\to \mathbb{R}$ where $H,D,X$ and $Y$ are all finite, and $\{\prob{P}_\alpha^{\RV{D}|\RV{X}}|\alpha\in C\}$ is the set of all Markov kernels $X\kto D$. Then the risk set is convex and closed downwards, and so the set of Bayes optimal choices is exactly the set of admissible choices.
+
+The boundedness of the risk set $S$ follows from the boundedness of the utility $u$; if $u$ is bounded above by $k$, then $S$ is bounded below in every dimension by $-k$.
+
+The fact that $S$ is convex and closed follows from Lemma \ref{lem:convex_closed}, and the fact that $\prob{P}_C$ is the convex hull of
+\begin{align}
+     \prob{P}_{C_0} := \{\prob{P}_\alpha|\prob{P}_\alpha^{\RV{D}|\RV{X}}\text{ deterministic}\}
+\end{align}
+\end{example}
+
+\begin{example}
+As before, but suppose we have the see-do model is not conditionally independent. Then the risk set is still convex and closed downwards, and so the set of Bayes optimal choices is still the set of admissible choices.
+\end{example}
 
 \section{Variables}\label{sec:variable}
 
