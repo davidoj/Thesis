@@ -448,49 +448,73 @@ Given a risk function $R:C\times H\to \mathbb{R}$, if the risk set S is convex, 
 See \citet[~Theorem 2.10.2]{toutenburg_ferguson_1967}
 \end{proof}
 
+Two examples of the application of the complete class theorem will be presented (Examples \ref{ex:cc_sdt} and \ref{ex:cc_nonsdt}). In order to explain them, we need a few lemmas.
+
 \begin{lemma}\label{lem:convex_closed}
-Given $H$ and $C$ both finite and a risk function $R:C\times H\to \mathbb{R}$ and an associated probability set $\prob{P}_C$, if
+Given $H$ and $C$ both finite and a risk function $R:C\times H\to \mathbb{R}$ and an associated probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$, $\Omega$ finite, if the function
 \begin{align}
-    \prob{P}_{\alpha,h} &= a \prob{P}_{\beta,h} + (1-a)\prob{P}_{\beta',h} \\
-    \implies R(\alpha,h)&=aR(\beta,h) + (1-a)R(\beta',h)&\forall h\in H\label{ass:convexity_implied}
+    \prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}\mapsto R(\alpha,h)
 \end{align}
-and 
+is linear and 
 \begin{align}
-    Q:= (\prob{P}_{\{\alpha\}\times H})_{\alpha\in C}
+    Q:= ((\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}})_{h\in H})_{\alpha\in C}
 \end{align}
 is convex closed, then the risk set $S$ is convex closed.
 \end{lemma}
 
 \begin{proof}
-Consider $y,y'\in S$, where
+By linearity of 
 \begin{align}
-    y &= (R(\alpha,h))_{h\in H}\\
-    y' &= (R(\alpha',h))_{h\in H}
+    \prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}\mapsto R(\alpha,h)
 \end{align}
-Consider some $0\leq a\leq 1$ and define $y_a=ay + (1-a)y'$. By assumption of convexity of $Q$, there is some $\alpha_a\in C$ such that for all $h$
+we also have linearity of 
 \begin{align}
-    \prob{P}_{\alpha_a,h} &= a\prob{P}_{\alpha,h} + (1-a)\prob{P}_{\alpha',h}
+    (\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}})_{h\in H}\mapsto (R(\alpha,h))_{h\in H}
 \end{align}
-but then by the assumption in Eq. \ref{ass:convexity_implied}
-\begin{align}
-    y_a &= (R(\alpha_a,h)_{h\in H})
-\end{align}
-Closure of $S$ follows from the fact that the function $\prob{P}_{\{\alpha\}\times H}\mapsto R(\alpha_a,h)_{h\in H}$ is a continuous function and $Q$ is a compact set
+Furthermore, $Q$ is bounded when viewed as an element of $\mathbb{R}^{\Omega\times H\times C}$, and so $S$ is the linear image of a compact convex set, and is therefore also compact convex.
 \end{proof}
 
-\begin{example}
+\begin{lemma}\label{lem:linear}
+For a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D},\RV{H})$ with utility $u:X\times Y\to \mathbb{R}$, the map
+\begin{align}
+    \prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}\mapsto R(\alpha,h)
+\end{align}
+is linear.
+\end{lemma}
+
+\begin{proof}
+By definition,
+\begin{align}
+    R(\alpha,h) &= - \prob{P}_{\alpha,h}^{\RV{XY}} u\\
+    &= -\prob{P}_{C\times\{h\}}^{\RV{X}} \odot \prob{P}_{\alpha\times h}^{\RV{D}|\RV{X}} \odot \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{DX}} u
+\end{align}
+Which is a composition of kernel products involving $\prob{P}_{\alpha\times H}^{\RV{D}|\RV{X}}$, and kernel products are linear, hence this function is linear.
+\end{proof}
+
+The preceding theorem does \emph{not} hold for a utility defined on $\Omega$ rather than on $X\times Y$. In this case we have instead
+\begin{align}
+    -\prob{P}_{C\times\{h\}}^{\RV{X}} \odot \prob{P}_{\alpha\times h}^{\RV{D}|\RV{X}} \odot \prob{P}_{\alpha,h}^{\Omega|\RV{DX}} u
+\end{align}
+where $\alpha$ appears twice on the right hand side, rendering the map nonlinear.
+
+\begin{lemma}\label{lem:all_kernels_is_convex_hull}
+For finite $X$ and $D$, the set of all Markov kernels $X\kto D$ is convex closed.
+\end{lemma}
+
+\begin{proof}
+From \citet{blackwell_theory_1979}, the set of all Markov kernels $X\kto D$ is the convex hull of the set of all deterministic Markov kernels $X\kto D$. There are a finite number of deterministic Markov kernels, and so the convex hull of this set is closed.
+\end{proof}
+
+\begin{example}\label{ex:cc_sdt}
 Suppose we have a conditionally independent see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ along with a bounded utility $u:Y\to \mathbb{R}$ where $H,D,X$ and $Y$ are all finite, and $\{\prob{P}_\alpha^{\RV{D}|\RV{X}}|\alpha\in C\}$ is the set of all Markov kernels $X\kto D$. Then the risk set is convex and closed downwards, and so the set of Bayes optimal choices is exactly the set of admissible choices.
 
 The boundedness of the risk set $S$ follows from the boundedness of the utility $u$; if $u$ is bounded above by $k$, then $S$ is bounded below in every dimension by $-k$.
 
-The fact that $S$ is convex and closed follows from Lemma \ref{lem:convex_closed}, and the fact that $\prob{P}_C$ is the convex hull of
-\begin{align}
-     \prob{P}_{C_0} := \{\prob{P}_\alpha|\prob{P}_\alpha^{\RV{D}|\RV{X}}\text{ deterministic}\}
-\end{align}
+The fact that $S$ is convex and closed follows from Lemmas \ref{lem:convex_closed}, \ref{lem:linear} and \ref{lem:all_kernels_is_convex_hull}.
 \end{example}
 
-\begin{example}
-As before, but suppose we have the see-do model is not conditionally independent. Then the risk set is still convex and closed downwards, and so the set of Bayes optimal choices is still the set of admissible choices.
+\begin{example}\label{ex:cc_nonsdt}
+As before, but suppose we have the see-do model is not conditionally independent. Because none of the lemmas \ref{lem:convex_closed}, \ref{lem:linear} and \ref{lem:all_kernels_is_convex_hull} made use of the conditional independence assumption, the risk set is still convex and closed downwards and so the set of Bayes optimal choices is also exactly the set of admissible choices.
 \end{example}
 
 \section{Variables}\label{sec:variable}
