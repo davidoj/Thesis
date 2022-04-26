@@ -312,7 +312,7 @@ Given decision functions $C$, hypotheses $(H,\sigalg{H})$, risk $R:C\times H\to 
 \subsubsection{From consequences to statistical decision problems}\label{sec:cons_to_sdp}
 
 Statistical decision theory ignores the notion of consequences beyond the loss received for a particular decision given a particular hypothesis. The kinds of probability set models studied here probabilistically map decisions to consequences, and the set of consequences is understood to have a utility function to allow for assessment of the desirability of different choices via the principle of expected utility. Not every probability set model induces a statistical decision problem in this manner. A family of models that does are what we call \emph{conditionally independent see-do models}. These models feature observations (the ``see'' part) along with decisions and consequences (the ``do'' part), and the observations come ``before'' the decisions (hence see-do). Examples of this type of model will be encountered again in Chapters \ref{ch:evaluating_decisions} and \ref{ch:other_causal_frameworks}. Furthermore, there is a hypothesis such that consequences are assumed to be independent of observations conditional on the decision and the hypothesis. This is why they are qualified as ``conditionally independent'' see-do models.
-\begin{definition}[See-do model]
+\begin{definition}[See-do model]\label{def:see_do_model}
 A probability set model of a statistical decision problem, or a \emph{see-do model} for short, is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences and $\RV{D}:\Omega\to D$ are the decisions. $\prob{P}_{C\times H}$ must observe the following conditional independences:
 \begin{align}
     \RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}\\
@@ -320,7 +320,7 @@ A probability set model of a statistical decision problem, or a \emph{see-do mod
 \end{align}
 where $\RV{C}:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (see Definition \ref{def:eci_orig} for the definition of extended conditional independence).
 \end{definition}
-\begin{definition}[Conditionally independent see-do model]
+\begin{definition}[Conditionally independent see-do model]\label{def:ci_see_do_model}
 A conditionally independent see-do model is a see do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where the following additional conditional independence holds:
 \begin{align}
     \RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})
