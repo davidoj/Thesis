@@ -10,7 +10,7 @@
 		\node [style=none] (7) at (-4.75, 0.75) {};
 		\node [style=Llabel tikzit] (8) at (-9, 0) {$\RV{D}$};
 		\node [style=Llabel tikzit] (9) at (-9.25, -0.75) {$\RV{Y}^D$};
-		\node [style=RLabel tikzit] (10) at (1.5, -0.25) {$\RV{Y}$};
+		\node [style=RLabel tikzit] (10) at (1.5, -0.25) {$\RV{W}$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (0) to (3.center);

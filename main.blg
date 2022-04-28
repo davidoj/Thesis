@@ -1,0 +1,75 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: references.bib
+I was expecting a `,' or a `}'---line 94 of file references.bib
+ :  
+ :  file = {Snapshot:/home/davidj/snap/zotero-snap/common/Zotero/storage/EUU4BIE5/causal-inference-book.html:text/html},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 392 of file references.bib
+ : @article{constantinou_extended_2017
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 407 of file references.bib
+ : @article{kerns_definettis_2006
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1350 of file references.bib
+ : @book{savage_foundations_1954
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1357 of file references.bib
+ : @phdthesis{shpitser_complete_2008
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1857 of file references.bib
+ : @article{fong_causal_2013
+ :                          ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "savage_foundations_1972"
+Warning--empty institution in barenboim_foundations_2020
+Warning--empty booktitle in horvitz_framework_1986
+You've used 61 entries,
+            2773 wiz_defined-function locations,
+            1059 strings with 18420 characters,
+and the built_in function-call counts, 26356 in all, are:
+= -- 2547
+> -- 1147
+< -- 59
++ -- 403
+- -- 341
+* -- 1994
+:= -- 4185
+add.period$ -- 310
+call.type$ -- 61
+change.case$ -- 280
+chr.to.int$ -- 60
+cite$ -- 124
+duplicate$ -- 1287
+empty$ -- 2266
+format.name$ -- 436
+if$ -- 5576
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 73
+newline$ -- 428
+num.names$ -- 258
+pop$ -- 504
+preamble$ -- 1
+purify$ -- 230
+quote$ -- 0
+skip$ -- 894
+stack$ -- 0
+substring$ -- 857
+swap$ -- 148
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 591
+warning$ -- 2
+while$ -- 252
+width$ -- 0
+write$ -- 1032
+(There were 6 error messages)

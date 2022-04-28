@@ -1,6 +1,6 @@
 %!TEX root = main.tex
 
-\chapter{Repeatable Response Functions}\label{ch:evaluating_decisions}
+\chapter{Decision problems with repeatable phenomena}\label{ch:evaluating_decisions}
 
 Chapter \ref{ch:tech_prereq} introduced probability sets as generic tools for causal modelling, while Chapter \ref{ch:2p_statmodels} examined how probability set models fit into existing work addressing the question of how to construct mathematical models of decision problems. Both chapters deal with probability sets with minimal amounts of structure. Section \ref{sec:cons_to_sdp} introduced \emph{see-do} models, which feature observations, consequences, decisions and hypotheses and some assumptions relating these different elements, but no particular assumptions are made about (for example) the form of the observations. Causal models that solve ``practical problems'' typically have a lot more structure than this.
 
@@ -10,13 +10,13 @@ The key result is the representation of a sequence of subprocedures as a mixture
 
 Causal contractibility is a more complicated assumption than exchangeability, and it is not obvious how to assess when it is appropriate or not. One implications of causal contractibility is the equality of reduced conditionals (Theorem \ref{th:equal_of_condits}), which is argued to rule out causal contractibility in some situations where passive observations are mixed with data from active intervention. A second contribution is to show that when subprocedures are associated with \emph{interchangeable unique identifiers} and the inputs are deterministically controlled, then causal contractibility holds.
 
-Causal contractibility is a very strong assumption, and it appears to generally be unacceptable assumption when data from passive observations is mixed with data from active intervention. A weaker but more widely applicable assumption is examined: ``there is nothing new under the sun'' \todo{Ecclesiastes assumption?}. This is the assumption that, no matter what choice is made, some subsequence of observations can be found that are distributed identically to the consequences. In conjunction with a certain kind of prior knowledge, this assumption leads to a setup analogous to the more familiar assumption of ``unobserved confounders''.
+Causal contractibility is a very strong assumption, and it appears to generally be unacceptable assumption when data from passive observations is mixed with data from active intervention. A weaker but more widely applicable assumption is examined: ``what will be done has been done already, and will be done again'' \todo{Ecclesiastes' assumption?}. This is the assumption that, no matter what choice is made, some subsequence of observations can be found that are distributed identically to the consequences. This assumption leads to a certain kind of ``unobserved confounder''.
 
 \section{Relevance to previous work}
 
 This chapter draws on three different lines of work. The first is the study of representations of symmetric of probability models. The equivalence between infinite exchangeable probability models and mixtures of independent and identically distributed models was shown by \cite{de_finetti_foresight_1992}. This result has been extended in many ways, including to finite sequences \citet{kerns_definettis_2006,diaconis_finite_1980} and for partially exchangeable arrays \citet{aldous_representations_1981}. A comprehensive overview of results is presented in \citet{kallenberg_probabilistic_2005}. This work is only engaged shallowly with this literature, but the idea that symmetries of probabilistic models may imply representability as mixtures of ``fixed but unknown'' models is crucial, as is basic result of De Finetti.
 
-The second line of work is the study of exchangeability-like assumptions in causal models in particular. \citet{dawid_decision-theoretic_2020} defines \emph{post-treatment exchangeability}, closely related to \emph{exchange commutativity} (Definition \ref{def:caus_exch}), one of the two conditions constituting causal contractibility. \citet{greenland_identifiability_1986} discusses the assumption of ``exchangeability of individuals'' in a medical experiment that also suggests the key idea of exchange commutativity. \citet{banerjee_chapter_2017} also mention the condition that ``subjects are exchangeable conditional on covariates, so that experiments identical up to a permutation of labels are equivalent from the perspective of the experimenter'', which is similarly suggestive of exchange commutativity. While both of these are suggestive of exchange commutativity, exchanging \emph{individuals} is a transformation of measurement procedures, not an operation defined on a probability model, and so it does not automatically imply any particular properties of the model. Exchange commutativity, on the other hand, is a symmetry of Markov kernels which might be appealing in situations where measurement procedures with individuals exchanged are regarded as essentially the same. \citet{rubin_causal_2005} discusses the assumption of the exchangeability of potential outcomes. Relating this assumption to the present work is tricky because part of the aim of this chapter is to establish conditions under which things like potential outcomes can be said to exist.
+The second line of work is the study of exchangeability-like assumptions in causal models in particular. \citet{dawid_decision-theoretic_2020} defines \emph{post-treatment exchangeability}, closely related to \emph{exchange commutativity} (Definition \ref{def:caus_exch}), one of the two conditions constituting causal contractibility. \citet{greenland_identifiability_1986} discusses the assumption of ``exchangeability of individuals'' in a medical experiment that also suggests the key idea of exchange commutativity. \citet{banerjee_chapter_2017} also mention the condition that ``subjects are exchangeable conditional on covariates, so that experiments identical up to a permutation of labels are equivalent from the perspective of the experimenter'', which is similarly suggestive of exchange commutativity. While both of these are suggestive of exchange commutativity, exchanging \emph{individuals} is a transformation of measurement procedures, not an operation defined on a probability model, and so it does not automatically imply any particular properties of the model. Exchange commutativity, on the other hand, is a symmetry of Markov kernels which might be appealing in situations where measurement procedures with individuals exchanged are regarded as essentially the same. \citet{rubin_causal_2005} discusses the assumption of the exchangeability of potential outcomes.
 
 The other component of causal contractibility is \emph{consequence locality} (Definition \ref{def:caus_cont}). This is also suggested by existing work -- in particular, the stable unit treatment distribution assumption (SUTDA) in \citet{dawid_decision-theoretic_2020}, and the stable unit treatment value assumption (SUTVA) in \citep{rubin_causal_2005}:
 \begin{blockquote}
@@ -25,37 +25,13 @@ The other component of causal contractibility is \emph{consequence locality} (De
 
 Finally, the idea of \emph{combs} in probabilistic models was first proposed by \citet{chiribella_quantum_2008} and an application to causal models was developed by \citet{jacobs_causal_2019}.
 
+\section{Repeatable Response Functions}\label{sec:response_functions}
 
-\subsection{Diagrammatic representation of exchange commutativity and exchangeability}
+Start with a sequence of variable pairs $(\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ where $\RV{X}_i$ is the $i$th ``input'' and $\RV{Y}_i$ is the corresponding ``output'', each taking values in $X$ and $Y$ respectively. A ``repeatable response function'' is a probabilistic mapping $X\kto Y$ that is identical for all $(\RV{X}_i,\RV{Y}_i)$ pairs. Repeatable response functions are in general be unknown, in which case (under a Bayesian model $\prob{P}_C$), the response function is \emph{not} the conditional $\prob{P}_C^{\RV{Y}_i|\RV{X}_i}$ but rather the conditional $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}$ where $\RV{H}$ is an unobserved hypothesis variable. ``Repeatability'' also means that the same response function can be obtained no matter which actions have already been taken. That is, $\RV{Y}_i$ is independent of previous input-output pairs when conditioned on $\RV{H}$ and $\RV{X}_i$.
 
-String diagram statements of both sub-assumptions can give some intuition about what they mean. For clarity, these diagrams illustrate the assumptions with exactly two inputs and two outputs, while the general definitions are for any countable number of inputs and outputs.
+The result of this section is that the pairs in a sequence $(\RV{X},\RV{Y}):=(\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ modeled by $\prob{P}_C$ are related by repeatable repeatable response functions if and only if there is a causally contractible \emph{uniform comb} $\prob{P}_C^{\RV{Y}\combbreak\RV{X}}$. Combs are a generalisation of conditional probabilities and, and if we assume that actions are independent of previous data ($\RV{X}_i\CI_{\prob{P}_C}^e \RV{Y}_{<i} C|\RV{X}_{<i}$), this reduces to the assumption that the uniform conditional distribution $\prob{P}_C^{\RV{Y}|\RV{X}}$ is causally contractible.
 
-Exchange commutativity for two inputs and outputs is given by the following equality:
-
-\begin{align}
-    \tikzfig{commutativity_of_exchange}
-\end{align}
-
-While consequence locality for two inputs and outputs is given by the following pair of equalities:
-
-\begin{align}
-    \tikzfig{cons_locality_1}\\
-    \tikzfig{cons_locality_2}
-\end{align}
-
-\section{When do response functions exist?}\label{sec:response_functions}
-
-We model decision problems with probability sets $\prob{P}_C$ for some set of choices $C$. If we have a pair of variables $\RV{X}$ and $\RV{Y}$ such that the uniform conditional $\prob{P}_C^{\RV{Y}|\RV{X}}$ exists (Definition \ref{def:cprob_pset}), then the joint outcome $\prob{P}_\alpha^{\RV{XY}}$ of any choice $\alpha\in C$ can be computed from the marginal distribution $\prob{P}_\alpha^{\RV{X}}$ alone.
-
-We're interested in models that feature a particular kind of ``causal effect'' that we call a \emph{conditionally independent and identical response functions}, or just ``response functions'' for short\todo{is that OK?}. They are a causal analogue of conditionally independent and identical sequences of random variables. Concretely, a model with response functions is a probability set $\prob{P}_C$ with variables $\RV{Y}:=(\RV{Y}_i)_{i\in M}$, $(\RV{X}_i)_{i\in M}$ for some index set $M$ and some $\RV{H}$ such that $\RV{Y} \CI_{\prob{P}_C}^e C|\RV{X}_i\RV{H}$ and $\RV{H}\CI_{\prob{P}_C}^e \RV{X}_i C$ (see Section \ref{sec:eci} for extended conditional independence) and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{X}_j\RV{H}}$ for all $i,j\in M$ (the identical response conditional requirement).
-
-Put together, these conditions say: in the limit of infinite samples under an appropriate sampling regime $\alpha\in C$, the model converges to a probabilistic function $X\kto Y$ that represents ``the probability of $\RV{Y}_i$ given $\RV{X}_i$'' for any unobserved $(\RV{X}_i,\RV{Y}_i)$. For arbitrary $\alpha'\in C$, we may instead converge to a set containing this limiting distribution. We think -- although it usually isn't stated in these terms -- that given a causal Bayesian network, if the function ``$x\mapsto \prob{P}(\RV{Y}|\mathrm{do}(\RV{X}=x))$'' is identifiable, then it is an instance of the kind of function that we described in the previous sentences.
-
-We prove our result under the simplifying assumption that $\RV{X}_i\CI_{\prob{P}_C}^e \RV{Y}_{<i} C|\RV{X}_{<i}$. This is a limiting assumption -- for example, it excludes cases where $\RV{X}_i$ depends on $(\RV{X}_{<i},\RV{Y}_{<i})$. In the more general case where this does not hold, the conditions we provide must still hold for any $C'\subset C$ such that $\RV{X}_i\CI_{\prob{P}_C}^e \RV{Y}_{<i>} C|\RV{X}_{<i}$, but providing sufficient conditions in this case is the topic of further work.
-
-Under this assumption, we show that \emph{causal contractibility} is necessary and sufficient for the existence of response conditionals. Causal contractibility can be broken down into two sub-assumptions: \emph{exchange commutativity} and \emph{consequence locality}. The first is the assumption that the uniform conditional probability $\prob{P}_C^{\RV{Y}|\RV{X}}$ ``commutes'' with the permutation operation, and the second is the assumption that $\RV{X}_i$ ``has no effect'' on any $\RV{Y}_j$ for $j\neq i$.
-
-
+Because combs are unfamiliar, this section is structured so that the ``data-independent actions'' case is introduced first. Specifically, the representation theorem is proven for general Markov kernels in Section \ref{sec:ccontracibility}, and applied to models $\prob{P}_C$ with data-independent actions in Section \ref{sec:data_independent_actions}. Subsequently, combs are introduced in Section \ref{sec:data_dependent}, and the general result applied to models with data-dependent actions. The following section, Section \ref{sec:assessing}, discusses questions related to when the assumption of causal contractibility might be held to apply to a particular problem, as well as introducing ``Ecclesiastes' assumption'', a weaker assumption than causal contractibility which could be applied to problems where observations and active interventions are mixed.
 
 % Another way to see where we are going is to consider graphical statements of our and De Finetti's result.
 
@@ -74,31 +50,333 @@ Under this assumption, we show that \emph{causal contractibility} is necessary a
 % That is, there is some hypothesis $\RV{H}$ and conditional on $\RV{H}$ the measurements are independent and identically distributed. The proof of this is constructive -- $\RV{H}$ is a function of $\RV{S}$.
 
 
-\subsection{Causal contractibility}\label{sec:ccontracibility}
+\subsection{Representation of causally contractible Markov kernels}\label{sec:ccontracibility}
 
-Here we set out formal definitions of exchange commutativity and locality of consequences, as well as ``consequence contractibility'', which is the conjunction of both conditions.
+Here a representation theorem is proved for causally contractible Markov kernels. First, causal contractibility is defined, which is the conjunction of the assumptions of \emph{locality} and \emph{exchange commutativity}. 
 
-\begin{definition}[Locality of consequences]\label{def:caus_cont}
-Suppose we have a sample space $(\Omega,\sigalg{F})$ and a probability set $\prob{P}_C$  where $\RV{Y}:=\RV{Y}:=(\RV{Y}_i)_{M}$, $\RV{D}:=\RV{D}_M:=(\RV{D}_i)_M$, $M\subseteq \mathbb{N}$. If for any $A\subset M$, $\RV{Y}_A\CI^e_{\prob{P}_C} \RV{D}_{A^C} C |\RV{D}_A$ then $\prob{P}_C$ exhibits $(\RV{D};\RV{Y})$-\emph{local consequences}.
-\end{definition}
+The intuitive basis of the assumptions is easier to see for Markov kernels with just two input-output pairs. In that simplified case, exchange commutativity for two inputs and outputs is given by the following equality:
+\begin{align}
+    \tikzfig{commutativity_of_exchange}
+\end{align}
+It expresses the idea that swapping the inputs is equivalent to swapping the outputs. Locality is given by the following pair of equalities:
+\begin{align}
+    \tikzfig{cons_locality_1}\\
+    \tikzfig{cons_locality_2}
+\end{align}
+and expresses the notion that the outputs are independent of the non-corresponding input, conditional on the corresponding input.
 
-If $\prob{P}_C$ exhibits $(\RV{D};\RV{Y})$-local consequences then, given two different choices $\alpha$ and $\alpha'$ such that $\prob{P}_\alpha^{\RV{D}_A}=\prob{P}_{\alpha'}^{\RV{D}_A}$ then $\prob{P}_\alpha^{\RV{Y}_A}=\prob{P}_{\alpha'}^{\RV{Y}_A}$. However, $\prob{P}_C$ may exhibit consequence locality even if no such pair of choices exists.
-
-Note that consequence locality implies $\RV{Y}_M \CI^e_{\prob{P}_C} C |\RV{D}_M$, and hence we have the uniform conditional $\prob{P}_C^{\RV{Y}_M|\RV{D}_M}$. We assume the existence of such a conditional for the next definition.
-
-\begin{definition}[Swap map]
-Given $M\subset \mathbb{N}$ a finite permutation $\rho:M\to M$ and a variable $\RV{X}:\Omega\to X^M$ such that $\RV{X}=(\RV{X}_i)_{i\in M}$, define the Markov kernel $\text{swap}_{\rho(\RV{X})}:X^M\kto X^M$ by $(d_i)_{i\in\mathbb{N}}\mapsto \delta_{(d_{\rho(i)})_{i\in\mathbb{N}}}$.
+The general definitions follow.
+\begin{definition}[Locality]\label{def:caus_cont}
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{local} if for all $n\in \mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^C})\in\mathbb{N}$ there exists $\kernel{L}:X^n\kto Y^n$ such that
+\begin{align}
+    \tikzfig{local_lhs} &= \tikzfig{local_rhs}\\
+    &\iff\\
+    \kernel{K}(\bigtimes_{i\in [n]} A_i\times Y^{\mathbb{N}}|x_{[n]},x_{[n]^C}) &= \kernel{L}(\bigtimes_{i\in [n]} A_i|x_{[n]})
+\end{align}
 \end{definition}
 
 \begin{definition}[Exchange commutativity]\label{def:caus_exch}
-Suppose we have a sample space $(\Omega,\sigalg{F})$ and a probability set $\prob{P}_C$ with uniform conditional probability $\prob{P}_C^{\RV{Y}|\RV{D}}$ where $\RV{Y}:=\RV{Y}:=(\RV{Y}_i)_{M}$, $\RV{D}:=\RV{D}_M:=(\RV{D}_i)_M$, $M\subseteq \mathbb{N}$. If for any finite permutation $\rho:M\to M$
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ \emph{commutes with exchange} if for all finite permutations $\rho:\mathbb{N}\to\mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^C})\in\mathbb{N}$
 \begin{align}
-    \text{swap}_{\rho(\RV{D})} \prob{P}_{C}^{\RV{Y}|\RV{D}} &\overset{\prob{P}_C}{\cong} \prob{P}_{C}^{\RV{Y}|\RV{D}}\text{swap}_{\rho(\RV{Y})}
+    \kernel{K}\mathrm{swap}_{\rho,Y} &=  \mathrm{swap}_{\rho,X} \kernel{K}\\
+    &\iff\\
+    \kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{\rho(i)}|(x_i)_{i\in {\mathbb{N}}}) &= \kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{i}|(x_{\rho(i)})_{i\in {\mathbb{N}}})
 \end{align}
-Then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is $(\RV{D};\RV{Y})$-\emph{exchange commutative}.
 \end{definition}
 
-If $\prob{P}_C$ is $(\RV{D};\RV{Y})$-exchange commutative and we have $\alpha,\alpha'\in C$ such that $\prob{P}_\alpha^{\RV{C}} = \prob{P}_{\alpha'}^{\RV{C}}\text{swap}_{\rho(\RV{D})}$, then $\prob{P}_\alpha^{\RV{Y}} = \prob{P}_{\alpha'}^{\RV{Y}}\text{swap}_{\rho(\RV{Y})}$. However, $\prob{P}_C$ may commute with exchange even if there are no such $\alpha$ and $\alpha'\in C$.
+Causal contractibility is the conjunction of both assumptions.
+\begin{definition}[Causal contractibility]
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally contractible} if it is local and commutes with exchange.
+\end{definition}
+
+All swaps can be written as a product of transpositions, so proving that a property holds for all finite transpositions is enough to show it holds for all finite swaps. It's useful to define a notation for transpositions.
+\begin{definition}[Finite transposition]
+Given two equally sized sequences $A=(a_i)_{i\in [n]}$, $B=(b_i)_{i\in [n]}$, ${A\leftrightarrow B}:\mathbb{N}\to \mathbb{N}$ is the permutation that sends the $i$th element of $A$ to the $i$th element of $B$ and vise versa. Note that $A\leftrightarrow B$ is its own inverse.
+\end{definition}
+
+The name \emph{causal contractibility} is motivated by the fact that the assumption is equivalent to the assumption that all subsequences of input-output pairs have the same overall input-output relationship. This is the content of Theorem \ref{th:equal_of_condits}. See also Theorem \ref{th:equal_of_reduced_condits} for a version of this statement applied to models with data-independent actions that might be easier to understand.
+
+\begin{theorem}[Equality of equally sized contractions]\label{th:equal_of_condits}
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally contractible} if and only if for every $n\in \mathbb{N}$ there exists there exists $\kernel{L}_n:X^n\kto Y^n$ such that for all $A\subset \mathbb{N}$ where $|A|=n$
+\begin{align}
+    \text{swap}_{[n]\leftrightarrow A} \kernel{K} \text{swap}_{[n]\leftrightarrow A} (\text{id}_{[n]}\otimes \text{del}_{[n]^C}) &= \kernel{L}_n\otimes \mathrm{del}_{[n]^C}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Only if:
+By exchange commutativity
+\begin{align}
+    \text{swap}_{[n]\leftrightarrow A} \kernel{K} &= \kernel{K} \text{swap}_{A\leftrightarrow n}
+\end{align}
+multiply both sides by $\text{swap}_{A\leftrightarrow n}$ on the right and we have (because $\text{swap}_{[n]\leftrightarrow A}$ is its own inverse)
+\begin{align}
+        \text{swap}_{[n]\leftrightarrow A} \kernel{K}\text{swap}_{A\leftrightarrow n} &= \kernel{K}
+\end{align}
+Then by locality, there exists some $\kernel{L}:X^n\kto Y^n$ such that
+\begin{align}
+    \text{swap}_{[n]\leftrightarrow A} \kernel{K} \text{swap}_{A\leftrightarrow n} (\text{id}_{[n]}\otimes \text{del}_{[n]^C}) &= \kernel{K} (\text{id}_{[n]}\otimes \text{del}_{[n]^C})\\
+    &=\kernel{L}\otimes \mathrm{del}_{[n]^C}
+\end{align}
+If:
+Taking $A=[n]$ establishes locality immediately.
+
+For exchange commutativity, note that for all $x\in X^{\mathbb{N}}$, $n\in\mathbb{N}$, we have
+\begin{align}
+    \text{swap}_{A\leftrightarrow [n]} \kernel{K} \text{swap}_{A\leftrightarrow [n]} (\text{id}_{[n]}\otimes \text{del}_{[n]^C}) &= \kernel{K}  (\text{id}_{[n]}\otimes \text{del}_{[n]^C})
+\end{align}
+Then by Lemma \ref{lem:infinitely_extended_kernels}
+\begin{align}
+    \text{swap}_{A\leftrightarrow [n]} \kernel{K} \text{swap}_{A\leftrightarrow [n]} &= \kernel{K}
+\end{align}
+Consider an arbitrary finite permutation $\rho:\mathbb{N}\to \mathbb{N}$. $\rho$ can be decomposed into a finite set of cyclic permutations on disjoint orbits. Each cyclic permutation is simply the composition of a sequence of 1-cycles of the form $A\leftrightarrow [n]$, and so $\rho$ itself can be written as a composition of a sequence of 1-cycles. Thus for any finite $\rho:\mathbb{N}\to\mathbb{N}$
+\begin{align}
+    \text{swap}_{\rho} \kernel{K} \text{swap}_{\rho} &= \kernel{K}
+\end{align}
+\end{proof}
+
+Theorem \ref{th:table_rep_kernel} shows that a causally contractible Markov kernel can be represented as the product of a column exchangeable probability distribution and a ``lookup function''. This representation is identical to the representation of potential outcomes models (see, for example, \citet{rubin_causal_2005}), but Theorem \ref{th:table_rep_kernel} applies to arbitrary kernels and the resulting representation will usually not be interpretable as a potential outcomes models. This theorem allows De Finetti's theorem to be applied to the column exchangeable probability distribution, which is a key step in proving the main result (Theorem \ref{th:ciid_rep_kernel}).
+
+\begin{theorem}\label{th:table_rep_kernel}
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is causally contractible if and only if there exists a column exchangeable probability distribution $\mu \Delta(Y^{|X|\times \mathbb{N}})$ such that
+\begin{align}
+    \kernel{K} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel}\\
+    &\iff\\
+    \kernel{K}(A|(x_i)_{i\in \mathbb{N}}) &= \mu \Pi_{(x_i i)_{i\in\mathbb{N}}}(A)\forall A\in \sigalg{Y}^{\mathbb{N}}
+\end{align}
+Where $\Pi_{(d_i i)_{i\in\mathbb{N}}}:Y^{|X|\times \mathbb{N}}\to Y^{\mathbb{N}}$ is the function 
+\begin{align}
+    (y_{j i})_{j,i \in X\times  \mathbb{N}}\mapsto (y_{d_i i})_{i\in \mathbb{N}}
+\end{align}
+that projects the $(x_i,i)$ indices of $y$ for all $i\in \mathbb{N}$, and $\prob{F}_{\text{ev}}$ is the Markov kernel associated with the evaluation map
+\begin{align}
+    \text{ev}:X^\mathbb{N}\times Y^{X\times \mathbb{N}}&\to Y\\
+    ((x_i)_\mathbb{N},(y_{ji})_{j,i\in X\times \mathbb{N}})&\mapsto (y_{x_i i})_{i\in \mathbb{N}}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Only if:
+Choose $e:=(e_i)_{i\in\mathbb{N}}$ such that $e_{i+|X|j}$ is the $i$th element of $X$ for all $i,j\in \mathbb{N}$.
+
+Define
+\begin{align}
+    \mu(\bigtimes_{(i,j)\in X\times \mathbb{N}} A_{ij}):=\kernel{K}(\bigtimes_{(i,j)\in X\times \mathbb{N}} A_{ij}|e)& \forall A_{ij}\in \sigalg{Y}
+\end{align}
+
+Now consider any $x:=(x_i)_{i\in \mathbb{N}}\in X^{\mathbb{N}}$. By definition of $e$, $e_{x_i i}=x_i$ for any $i,j\in \mathbb{N}$.
+
+Define
+\begin{align}
+    \prob{Q}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}\\
+    \prob{Q}:= \tikzfig{lookup_representation_kernel}
+\end{align}
+and consider some $A\subset \mathbb{N}$, $|A|=n$ and $B:= (x_i,i))_{i\in A}$. Note that the subsequence of $e$ indexed by $B$, $e_B:=(e_{x_i i})_{i\in A}=x_A$. Thus given the swap map $\mathrm{swap}_{A\leftrightarrow B}:\mathbb{N}\to\mathbb{N}$ that sends the first element of $A$ to the first element of $B$ and so forth, $\mathrm{swap}_{A\leftrightarrow B} (e_B) = x_A$. For arbitrary $\{C_i\in \sigalg{Y}|i\in A\}$, define $C_A:=\mathrm{swap}_{[n]\leftrightarrow A} (\times_{i\in [n]} C_i\times Y^{\mathbb{N}})$. Then, for arbitrary $x\in X^{\mathbb{N}}$
+\begin{align}
+    \prob{Q}(C_A|x) &= \mu (\mathrm{ev}_x^{-1}(C_A))\label{eq:q_mu_rel}
+\end{align}
+
+The argument of $\mu$ is
+\begin{align}
+    \mathrm{ev}_x^{-1}(C_A)&=\{(y_{ji})_{j,i\in X\times\mathbb{N}}|(y_{x_i i})_{i\in\mathbb{N}}\in C_A\}\\
+    &= \bigtimes_{i\in \mathbb{N}} \bigtimes_{j\in X} D_{ji}
+\end{align}
+where
+\begin{align}
+    D_{ji} = \begin{cases}
+        C_i & (j,i)\in B\\
+        Y & \text{otherwise}
+    \end{cases}
+\end{align}
+and so
+\begin{align}
+    \text{swap}_{A\leftrightarrow B} (\mathrm{ev}_x^{-1}(C_A)) &= C_A\label{eq:swap_select_relation}
+\end{align}
+
+Substituting Equation \ref{eq:swap_select_relation} into \ref{eq:q_mu_rel}
+\begin{align}
+    \prob{Q}(C_A|x) &= \mu \text{swap}_{A\leftrightarrow B} (C_A)\\
+    &= \kernel{K} \text{swap}_{A\leftrightarrow B} (C_A|e)\\
+    &= \kernel{K}\text{swap}_{A\leftrightarrow B} (C_A|e_B,\text{swap}_{B\leftrightarrow A}(x)_B^C)&\text{by locality}\\
+    &= \kernel{K}\text{swap}_{A\leftrightarrow B} (C_A|\text{swap}_{B\leftrightarrow A}(x))\\
+    &= \text{swap}_{B\leftrightarrow A} \kernel{K}\text{swap}_{A\leftrightarrow B} (C_A|x)\\
+    &= \kernel{K}(C_A|x)&\text{by commutativity of exchange}
+\end{align}
+
+Because this holds for all $x$, $A\subset\mathbb{N}$, by Lemma \ref{lem:infinitely_extended_kernels}
+
+\begin{align}
+    \prob{Q} &= \kernel{K}
+\end{align}
+
+Next we will show $\mu$ is column exchangeable. Consider any column swap $\text{swap}_{c}:X\times \mathbb{N}\to X\times \mathbb{N}$ that acts as the identity on the $X$ component and a finite permutation on the $\mathbb{N}$ component. From the definition of $e$, $\text{swap}_c(e)=e$. Thus by commutativity of exchange, for any $A\in \sigalg{Y}^{\mathbb{N}}$
+\begin{align}
+ \kernel{K}(A|e) &= \text{swap}_c\kernel{K}\text{swap}_c(A|e)\\
+ &= \kernel{K}\text{swap}_c(A|\text{swap}_c(e))\\
+ &= \kernel{K}\text{swap}_c(A|e)
+\end{align}
+
+
+If:
+Suppose 
+\begin{align}
+    \kernel{K} &= \tikzfig{lookup_representation_kernel}
+\end{align}
+where $\mu$ is column exchangeable, and consider any two $x,x'\in X^{\mathbb{N}}$ such that some subsequences are equal $x_S=x'_T$ with $S,T\subset \mathbb{N}$ and $|S|=|T|=[n]$.
+
+For any $\{A_i\in\sigalg{Y}|i\in S\}$, let $A_S = \text{swap}_{[n]\leftrightarrow S} \times_{i\in [n]} A_i\times Y^{\mathbb{N}}$, $A_T = \text{swap}_{S\leftrightarrow T} (A_S)$, $B=(x_i i)_{i\in S}$ and $C=(x_i i)_{i\in T}=(x_{\text{swap}_{S\leftrightarrow T}}(i) i)_{i\in S}$. By Equations \ref{eq:q_mu_rel} and \ref{eq:swap_select_relation}
+\begin{align}
+    \kernel{K}(A_S|x) &= \mu \text{swap}_{S\leftrightarrow B} (A_S)\\
+    &= \mu \text{swap}_{T\leftrightarrow C} (A_T)&\text{ by column exchangeability of }\mu\\
+    &= \kernel{K}(A_T|\text{swap}_{S\leftrightarrow T}(x))\\
+    &=  \text{swap}_{S\leftrightarrow T}\kernel{K}(A_T| x)\\
+    &= \text{swap}_{S\leftrightarrow T} \kernel{K} \text{swap}_{S\leftrightarrow T} (A_S| x)
+\end{align}
+so $\kernel{K}$ is causally contractible by Theorem \ref{th:equal_of_condits}.
+\end{proof}
+
+Theorem \ref{th:ciid_rep_kernel} is the main result of this section. It shows that a causally contractible Markov kernel $X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is representable as a ``prior'' $\mu\in \Delta(H)$ and a ``parallel product'' of Markov kernels $H\times X\kto Y$. These will be the response conditionals when Theorem \ref{th:ciid_rep_kernel} is applied to probability set models.
+
+\begin{theorem}\label{th:ciid_rep_kernel}
+A kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is causally contractible if and only if there exists some set $H$, $\mu\in \Delta(H)$ and $\kernel{L}:H\times X\kto Y$ such that
+\begin{align}
+    \kernel{K} &= \tikzfig{do_model_representation_kernel}\\
+    &\iff\\
+    \kernel{K}(\bigtimes_{i\in\mathbb{N}}A_i|(x_i)_{i\in\mathbb{N}}) &= \int_H \prod_{i\in\mathbb{N}} \kernel{L}(A_i|h,x_i)\mu(\mathrm{d}h)
+\end{align}
+\end{theorem}
+
+\begin{proof}
+By Theorem \ref{th:table_rep_kernel}, we can represent the conditional probability $\kernel{K}$ as
+\begin{align}
+        \kernel{K} &= \tikzfig{lookup_representation_kernel}\label{eq:lookup_representation}
+\end{align}
+where $\mu$ is column exchangeable.
+
+As a preliminary, we will show
+\begin{align}
+    \kernel{F}_{\mathrm{ev}} &= \tikzfig{lookup_rep_intermediate_kernel}\label{eq:ev_alternate_rep}
+\end{align}
+where  $\mathrm{evs}_{Y^D\times D}:Y^D\times D\to Y$ is the single-shot evaluation function
+\begin{align}
+    (x,(y_i)_{i\in X})\mapsto y_x
+\end{align}
+
+Recall that $\mathrm{ev}$ is the function
+
+\begin{align}
+    ((x_i)_\mathbb{N},(y_{ji})_{j,i\in X\times \mathbb{N}})&\mapsto (y_{x_i i})_{i\in \mathbb{N}}
+\end{align}
+
+By definition, for any $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$
+
+\begin{align}
+    \kernel{F}_{\mathrm{ev}}(\bigtimes_{i\in \mathbb{N}}A_i|(x_i)_\mathbb{N},(y_{ji})_{i\in X\times \mathbb{N}}) &= \delta_{(y_{x_i i})_{i\in \mathbb{N}}}(\bigtimes_{i\in \mathbb{N}}A_i)\\
+        &= \prod_{i\in \mathbb{N}} \delta_{y_{x_i i}} (A_i)\\
+        &= \prod_{i\in \mathbb{N}} \kernel{F}_{\text{evs}} (A_i|x_i,(y_{ji})_{j\in X})\\
+        &= \left(\bigotimes_{i\in\mathbb{N}} \kernel{F}_{\mathrm{evs}} \right)(\bigtimes_{i\in \mathbb{N}}A_i|(x_i)_\mathbb{N},(y_{ji})_{j\in X\times \mathbb{N}})
+\end{align}
+
+Which is what we wanted to show.
+
+Only if:
+By the column exchangeability of $\mu$, from \citet{kallenberg_basic_2005} we have some $H$, a directing random measure $\nu\in \Delta(H)$ and a kernel $\kernel{L}:H\kto Y^X$ such that
+\begin{align}
+    \mu &= \tikzfig{de_finetti_representation_kernel}\label{eq:df_rep_mu}\\
+    &\iff\\
+    \mu(\bigtimes_{i\in \mathbb{N}} A_i) &= \int_H \prod_{i\in \mathbb{N}} \kernel{L}(A_i|h)\mu(\mathrm{d}h)&\forall A_i\in\sigalg{Y}^X
+\end{align}
+
+By Equations \ref{eq:lookup_representation} and \ref{eq:ev_alternate_rep}
+\begin{align}
+    \kernel{K} &= \tikzfig{do_model_representation}\label{eq:lup_rep_combined}
+\end{align}
+Where we can connect the outputs of $\mu$ to the inputs of $\kernel{F}_{\mathrm{evs}}$ ``inside the plate'' as the plates in Equations \ref{eq:ev_alternate_rep} and \ref{eq:df_rep_mu} are equal in number and each connected wire represents a single copy of $Y^D$.
+
+If:
+By assumption, for any $\{A_i\in \sigalg{Y}|i\in\mathbb{N}\}$, $x:=(x_i)_{i\in\mathbb{N}}\in X^{\mathbb{N}}$
+\begin{align}
+    \kernel{K}(\bigtimes_{i\in \mathbb{N}} A_i|x) &= \int_H \prod_{i\in \mathbb{N}}\kernel{L}(A_i|h,x_i)\mu(\mathrm{d}h)
+\end{align}
+
+Consider any $S,T\subset\mathbb{N}$ with $|S|=|T|$, and define $A_S:=\times_{i\in\mathbb{N}} B_i$ where $B_i=Y$ if $i\not\in S$, otherwise $A_i$ is an arbitrary element of $\sigalg{Y}$. Define $A_T:=\times_{i\in\mathbb{N}} B_{\mathrm{swap}_{S\leftrightarrow T}(i)}$.
+
+\begin{align}
+    \kernel{K}(A_S|x) &= \int_H \prod_{i\in S}\kernel{L}(A_i|h,x_i)\mu(\mathrm{d}h)\\
+                      &= \int_H\prod_{i\in T}\kernel{L}(A_i|h,x_{\mathrm{swap}_{S\leftrightarrow T}(i)})\mu(\mathrm{d}h)\\
+                      &= \mathrm{swap}_{S\leftrightarrow T}\kernel{K}(A_T|x)\\
+                      &= \mathrm{swap}_{S\leftrightarrow T}\kernel{K}\mathrm{swap}_{S\leftrightarrow T}(A_S|x)
+\end{align}
+So by Theorem \ref{th:equal_of_condits}, $\kernel{K}$ is causally contractible.
+\end{proof}
+
+\subsection{Causal contractibility with data-independent actions}
+
+Given a sequence of variables $(\RV{D}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ where the ``inputs'' are $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and the ``outputs'' are $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$, say the inputs are independent of previous observations if $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{D}_{<i}$ for all $i\in\mathbb{N}$. This models an experiment where it may be possible to choose different inputs $\RV{D}$, but all the inputs are determined before the outputs $\RV{Y}$ are known. If a model satisfies this, then the dependence of $\RV{Y}$ on $\RV{D}$ is a sequence of repeatable response functions if and only if the uniform conditional $\prob{P}_C^{\RV{Y}|\RV{D}}$ exists (Definition \ref{def:cprob_pset}) and is causally contractible.
+
+We call a model $\prob{P}_C$ with sequential outputs $\RV{Y}$ and a corresponding sequence of data-independent inputs $\RV{D}$ a ``sequential just-do model''.
+
+\begin{definition}[Sequential just-do model]
+A \emph{sequetntial just-do model} is a triple $(\prob{P}_C,\RV{D},\RV{Y})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{D}$ is a sequence of ``inputs'' $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}$ is a corresponding sequence of ``outputs'' $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$ where $\RV{D}_i':\Omega\to D$ and $\RV{Y}_i':\Omega\to Y$. Furthermore, it is required that $\RV{X}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{X}_{<i}$ for all $i\in \mathbb{N}$, and $\RV{Y}'\CI^e_{\prob{P}_C} C|\RV{D}'$.
+\end{definition}
+
+To apply Theorem \ref{th:ciid_rep_kernel} to a sequential just-do model, it is necessary to extend the model to a larger sample space including ``latent variables'' taking values in $Y^D$. A latent extension is a model over a larger collection of variables that reduces to the original model when we restrict our attention to the original collection of variables.
+
+\begin{definition}[Latent extension]
+Given a probability set $\prob{P}_C'$ on $(\Omega,\sigalg{F})$ and some measurable set $(G,\sigalg{G})$, a probability set $\prob{P}_C$ is a \emph{latent extension} of $\prob{P}_C'$ to $(\Omega\times G,\sigalg{F}\otimes \sigalg{G})$ if $\prob{P}_C \kernel{F}_{\Pi_{\Omega}} = \prob{P}_C'$.
+\end{definition}
+
+\begin{convention}[Variables on a latent extension]
+Given a probability set $\prob{P}_C'$ on $(\Omega,\sigalg{F})$ and a latent extension $\prob{P}_C$ on $(\Omega\times G,\sigalg{F}\otimes \sigalg{G})$, every variable on the original sample space is given a primed name $\RV{X}'$, $\RV{Y}'$ etc., and corresponds to an unprimed variable on the larger space $\RV{X}:=\Pi_\Omega\circ \RV{X}'$.
+\end{convention}
+
+Theorem \ref{th:data_ind_CC} applies Theorem \ref{th:ciid_rep_kernel} to the case of a model with data-independent actions and derives the required conditional independences and equalities to show that a sequential just-do model $(\prob{P}_C,\RV{D},\RV{Y})$ with causally contractible $\prob{P}_C^{\RV{Y}|\RV{X}}$ satisfies the required conditional independences and equalities of conditional distributions for $\RV{X}$ and $\RV{Y}$ to be related by repeatable response functions.
+
+\begin{theorem}[Data-independent causal contractibility]\label{th:data_ind_CC}
+Given a sequential just-do model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ is causally contractible if and only if there is a latent extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times Y^D,\sigalg{F}\otimes\sigalg{Y}^D)$ with some hypothesis $\RV{H}:\Omega\times Y^D\times H\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{X}_{<i},C)|(\RV{X}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{X}_j\RV{H}}$ for all $i,j\in \mathbb{N}$.
+\end{theorem}
+
+\begin{proof}
+If:
+First, define the extension $\prob{P}_C$. From Theorem \ref{th:table_rep_kernel} and causal contractibility of $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ there is some $\mu\in \Delta(Y^D)$ such that
+\begin{align}
+    \prob{P}_C^{\prime \RV{Y}'|\RV{D}'} &= \tikzfig{lookup_representation_variablised}\label{eq:lup_rep_varb}
+\end{align}
+Let $\prob{P}_C^{\RV{Y}^D}=\mu$, $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}=\kernel{F}_{\mathrm{ev}}$ and $\RV{Y}^D:=\Pi_{Y^D}$, the projection $\Omega\times Y^D\to \Omega$. Let $\RV{W}=\Pi_{\Omega}$ and for each $\alpha\in C$, set 
+\begin{align}
+    \prob{P}_\alpha^{\RV{W}|\RV{Y}^D\RV{D}} &= \tikzfig{augmented_ccontracible}
+\end{align}
+Then 
+\begin{align}
+    \prob{P}_\alpha^{\RV{W}} &= \tikzfig{augmented_ccon2}\\
+    &= \tikzfig{augmented_ccon3}\\
+    &= \prob{P}_\alpha^{\prime \text{id}_\Omega}
+    &= \prob{P}_\alpha
+\end{align}
+
+Before going further, it's necessary to check that there is some nonempty probability set $\prob{P}_C$ with these conditionals. By Theorem \ref{lem:valid_extendability}, because $\prob{P}_\alpha^{\RV{W}}&=\prob{P}_{\alpha}'$ it is sufficient to show that $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$ is valid. Because 
+\begin{align}
+    (\RV{W},\RV{Y}^D)(\Omega\times Y^D)&=\Omega\times Y^D\\
+    &=\RV{W}(\Omega\times Y^D)\times \RV{Y}^D(\Omega\times Y^D)
+\end{align}
+Validity is guaranteed for any $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$, because there are no jointly impossible events.
+
+Thus $\prob{P}_C$ is a latent extension of $\prob{P}_C'$, and so $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also causally contractible.
+
+
+Only if:
+If $\prob{P}_C$ is a latent extension of $\prob{P}_C'$, then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible if and only if $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ is causally contractible. Thus it is sufficient to show $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
+
+
+
+
+
+
+
+
+
+\end{proof}
+
 
 Theorem \ref{th:no_implication} shows that neither condition implies the other. 
 
@@ -125,13 +403,7 @@ Although locality of consequences seems to intuitively encompass an assumption o
     \item Nevertheless, the choice for the first experiment affects the result of the second experiment
 \end{itemize}
 
-We call the conjunction of exchange commutativity and consequence locality \emph{causal contractibility}.
-
-\begin{definition}[Causal contractibility]
-A probability set $\prob{P}_C$ is $(\RV{D};\RV{Y})$-\emph{causally contractible} if it is both exchange commutative and exhibits consequence locality.
-\end{definition}
-
-\begin{theorem}[Equality of reduced conditionals]\label{th:equal_of_condits}
+\begin{theorem}[Equality of reduced conditionals]\label{th:equal_of_reduced_condits}
 A probability set $\prob{P}_C$ that is $(\RV{D};\RV{Y})$-causally contractible has, for any $A,B\subset M$ with $|A|=|B|$
 \begin{align}
     \prob{P}_C^{\RV{Y}_A|\RV{D}_A} \overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}_B|\RV{D}_B}
@@ -197,12 +469,12 @@ Given a probability set $\prob{P}_C$ and variables $\RV{D}:=(\RV{D}_i)_{i\in \ma
 \begin{align}
     \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{lookup_representation}\label{eq:lup_rep}\\
     &\iff\\
-    \prob{P}_C^{\RV{Y}|\RV{D}}(y|(d_i)_{i\in \mathbb{N}}) &= \mu^{\RV{Y}^D} \Pi_{(d_i i)_{i\in\mathbb{N}}}(y)
+    \prob{P}_C^{\RV{Y}|\RV{D}}(y|(d_i)_{i\in \mathbb{N}}) &= \mu^{\RV{Y}^D} \kernel{F}_{\Pi_{(d_i i)_{i\in\mathbb{N}}}}(y)
 \end{align}
-Where $\Pi_{(d_i i)_{i\in\mathbb{N}}}:Y^{|D|\times \mathbb{N}}\to Y^{\mathbb{N}}$ is the function that projects the $(d_i,i)$ indices for all $i\in \mathbb{N}$ and $\prob{F}_{\text{ev}}$ is the Markov kernel associated with the evaluation map
+Where $\kernel{F}_{\Pi_{(d_i i)_{i\in\mathbb{N}}}}:Y^{|D|\times \mathbb{N}}\kto Y^{\mathbb{N}}$ is the Markov kernel associated with the function that projects the $(d_i,i)$ indices for all $i\in \mathbb{N}$ and $\prob{F}_{\text{ev}}$ is the Markov kernel associated with the evaluation map
 \begin{align}
     \text{ev}:D^\mathbb{N}\times Y^{D\times \mathbb{N}}&\to Y\\
-    ((d_i)_\mathbb{N},(y_{ij})_{i\in D,j\in \mathbb{N}})&\mapsto (y_{d_i i})_{i\in \mathbb{N}}
+    ((d_i)_\mathbb{N},(y_{ij})_{i\in D,j\in \mathbb{N}})&\mapsto (y_{d_i i})_{i\in \mathbb{N}}\label{eq:ev_function2}
 \end{align}
 \end{theorem}
 
@@ -232,6 +504,10 @@ Where $\Pi_{D,i}:D^\mathbb{N}\kto D$ is the $i$th projection map.
 \begin{proof}
 Appendix \ref{sec:ccontract_appendix}.
 \end{proof}
+
+\subsection{Data-independent actions}\label{sec:data_independent_actions}
+
+\subsection{Combs and response conditionals with data-dependent actions}\label{sec:data_dependent}
 
 \subsection{Elaborations and examples}
 
@@ -272,7 +548,7 @@ While it is formally possible to use a causally contractible model for a decisio
 \end{align}
 That is, causal contractibility implies that there is no difference between conditioning on observational results or on the results of active choices; active choices are as good for predicting observations as vise-versa. Normally one might consider randomised experimental results to be ``better'' than passive observations, but this is not compatible with the assumption of causal contractibility.
 
-\subsection{Assessing causal contractibility}\label{ssec:assessing}
+\section{Assessing causal contractibility}\label{sec:assessing}
 
 Assessing when a particular sequence of experiments should be modeled with a causally contractible model can be difficult. One way to justify the assumption is in two steps: first, all the repetitions of the experiment that yield the values of each of the $(\RV{D}_i,\RV{Y}_i)$ pairs are indistinguishable ``at the time of model construction'', and and they are still indistinguishable after learning the value of $\RV{D}$ -- because, for example, $\RV{D}$ is deterministic for each choice $\alpha\in C$. 
 
