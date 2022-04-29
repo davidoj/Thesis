@@ -33,28 +33,12 @@ The result of this section is that the pairs in a sequence $(\RV{X},\RV{Y}):=(\R
 
 Because combs are unfamiliar, this section is structured so that the ``data-independent actions'' case is introduced first. Specifically, the representation theorem is proven for general Markov kernels in Section \ref{sec:ccontracibility}, and applied to models $\prob{P}_C$ with data-independent actions in Section \ref{sec:data_independent_actions}. Subsequently, combs are introduced in Section \ref{sec:data_dependent}, and the general result applied to models with data-dependent actions. The following section, Section \ref{sec:assessing}, discusses questions related to when the assumption of causal contractibility might be held to apply to a particular problem, as well as introducing ``Ecclesiastes' assumption'', a weaker assumption than causal contractibility which could be applied to problems where observations and active interventions are mixed.
 
-% Another way to see where we are going is to consider graphical statements of our and De Finetti's result.
 
-% Take $S=\{0,1\}$ and identify the space $\Delta(S)$ of probability measures on $S$ with the interval $[0,1]$. De Finetti showed that any infinite exchangeable probability measure $\prob{P}_\alpha$ on $\{0,1\}^\mathbb{N}$ can be represented by a prior $\prob{P}_\alpha^{\RV{H}}\in [0,1]$ for some $\RV{H}:\Omega\to H$ and a conditional probability $\prob{P}^{\RV{S}_0|\RV{H}}:[0,1]\kto \{0,1\}$ such that
+\subsection{Causally contractible Markov kernels}\label{sec:ccontracibility}
 
-% \begin{align}
-%     \prob{P}_\alpha &= \tikzfig{de_finetti_rep0}\label{eq:definettirep}
-% \end{align}
+Here a representation theorem is proved for causally contractible Markov kernels. First, causal contractibility is defined, which is the conjunction of the sub-assumptions of \emph{locality} and \emph{exchange commutativity}. 
 
-% Here $\prob{P}^{\RV{S}_0|\RV{H}}$ can be defined concretely by $\prob{P}^{\RV{S}_0|\RV{H}}(1|h)=h$. Equivalently, the probability gap model on $S^\mathbb{N}$ defined by the assumption of exchangeability is equivalent to the probability gap model defined by the conditional probability
-
-% \begin{align}
-%     \prob{P}^{\RV{S}|\RV{H}} = \tikzfig{de_finetti_conditional}
-% \end{align}
-
-% That is, there is some hypothesis $\RV{H}$ and conditional on $\RV{H}$ the measurements are independent and identically distributed. The proof of this is constructive -- $\RV{H}$ is a function of $\RV{S}$.
-
-
-\subsection{Representation of causally contractible Markov kernels}\label{sec:ccontracibility}
-
-Here a representation theorem is proved for causally contractible Markov kernels. First, causal contractibility is defined, which is the conjunction of the assumptions of \emph{locality} and \emph{exchange commutativity}. 
-
-The intuitive basis of the assumptions is easier to see for Markov kernels with just two input-output pairs. In that simplified case, exchange commutativity for two inputs and outputs is given by the following equality:
+The intuitive basis of the two sub-assumptions is easier to see for Markov kernels with just two input-output pairs. In that simplified case, exchange commutativity for two inputs and outputs is given by the following equality:
 \begin{align}
     \tikzfig{commutativity_of_exchange}
 \end{align}
@@ -65,7 +49,10 @@ It expresses the idea that swapping the inputs is equivalent to swapping the out
 \end{align}
 and expresses the notion that the outputs are independent of the non-corresponding input, conditional on the corresponding input.
 
+\subsubsection{Definition of causal contractibility}
+
 The general definitions follow.
+
 \begin{definition}[Locality]\label{def:caus_cont}
 A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{local} if for all $n\in \mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^C})\in\mathbb{N}$ there exists $\kernel{L}:X^n\kto Y^n$ such that
 \begin{align}
@@ -89,17 +76,79 @@ Causal contractibility is the conjunction of both assumptions.
 A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally contractible} if it is local and commutes with exchange.
 \end{definition}
 
+\subsubsection{Properties of causal contractibility}
+
+A causally contractible Markov kernel over a sequence of pairs treats all subsequences as equivalent in a particular way (Theorem \ref{th:equal_of_condits}, although the sense in which this implies equivalence of subsequences might be more obvious from the statement of Theorem \ref{th:equal_of_reduced_condits} presented later). This feature is the motivation for the name \emph{causal contractibility}. Both sub-assumptions are independent -- Theorem \ref{th:no_implication} presents counterexamples.
+
+Before these theorems are proved, the following definition and Lemma will prove helpful.
+
 All swaps can be written as a product of transpositions, so proving that a property holds for all finite transpositions is enough to show it holds for all finite swaps. It's useful to define a notation for transpositions.
 \begin{definition}[Finite transposition]
 Given two equally sized sequences $A=(a_i)_{i\in [n]}$, $B=(b_i)_{i\in [n]}$, ${A\leftrightarrow B}:\mathbb{N}\to \mathbb{N}$ is the permutation that sends the $i$th element of $A$ to the $i$th element of $B$ and vise versa. Note that $A\leftrightarrow B$ is its own inverse.
 \end{definition}
 
-The name \emph{causal contractibility} is motivated by the fact that the assumption is equivalent to the assumption that all subsequences of input-output pairs have the same overall input-output relationship. This is the content of Theorem \ref{th:equal_of_condits}. See also Theorem \ref{th:equal_of_reduced_condits} for a version of this statement applied to models with data-independent actions that might be easier to understand.
+Lemma \ref{lem:infinitely_extended_kernels} is used to extend finite sequences to infinite ones, and is used in a number of upcoming theorems.
+
+\begin{lemma}[Infinitely extended kernels]\label{lem:infinitely_extended_kernels}
+Given a collection of Markov kernels $\kernel{K}_i:X^i\kto Y^i$ for all $i\in \mathbb{N}$, if we have for every $j>i$
+\begin{align}
+    \kernel{K}_j(\text{id}_{X_i}\otimes \text{del}_{X_{j-i}}) &= \kernel{K}_i\otimes \text{del}_{X_{j-i}}\label{eq:marginalise_comb}
+\end{align} 
+then there is a unique Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ such that for all $i,j\in \mathbb{N}$,$j>i$
+\begin{align}
+    \kernel{K}(\text{id}_{X_i}\otimes \text{del}_{X_{j-i}})&= \kernel{K}_i\otimes \text{del}_{X_{j-i}}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Take any $x\in X^{\mathbb{N}}$ and let $x_{|m}\in X^n$ be the first $n$ elements of $x$. By Equation \ref{eq:marginalise_comb}, for any $A_i\in \sigalg{Y}$, $i\in [m]$
+\begin{align}
+    \kernel{K}_n(\bigtimes_{i\in [m]}A_i\times Y^{n-m}|x_{|n}) &= \kernel{K}_m(\bigtimes_{i\in [m]}A_i|x_{|m})
+\end{align}
+
+Furthermore, by the definition of the $\mathrm{swap}$ map for any permutation $\rho:[n]\to[n]$
+\begin{align}
+    \kernel{K}_n\mathrm{swap}_{\rho}(\bigtimes_{i\in [m]}A_{\rho(i)}\times Y^{n-m}|x_{|n}) &= \kernel{K}_n(\bigtimes_{i\in [m]}A_{i}\times Y^{n-m}|x_{|n})
+\end{align}
+thus by the Kolmogorov Extension Theorem \citep{cinlar_probability_2011}, for each $x\in X^{\mathbb{N}}$ there is a unique probability measure $\prob{Q}_x\in \Delta(Y^{\mathbb{N}}$ satisfying
+\begin{align}
+    \prob{Q}_d(\bigtimes_{i\in [n]}A_i\times Y^{\mathbb{N}}) &= \kernel{K}_n(\bigtimes_{i\in [n]}A_{\rho(i)}|d_{|n})\label{eq:q_is_Markov}
+\end{align}
+
+Furthermore, for each $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$, $n\in \mathbb{N}$ note that for $p>n$
+\begin{align}
+\prob{Q}_d(\bigtimes_{i\in[n]} A_i \times Y^{\mathbb{N}})&\geq \prob{Q}_d(\bigtimes_{i\in [p]} A_i\times Y^{\mathbb{N}})\\
+&\geq \prob{Q}_d(\bigtimes_{i\in \mathbb{N}} A_i)
+\end{align}
+so by the Monotone convergence theorem, the sequence $\prob{Q}_d(\bigtimes_{i\in[n]} A_i)$ converges as $n\to \infty$ to $\prob{Q}_d(\bigtimes_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigtimes_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \ref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
+
+Thus $d\mapsto Q_d$ is the desired $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$.
+\end{proof}
+
+Theorem \ref{th:equal_of_condits} shows that, given a causally contractible kernel, the following operations yield equivalent results:
+\begin{itemize}
+    \item Marginalising all but the first $n$ outputs
+    \item Marginalising all outputs except for the positions $A\subset\mathbb{N}$ where $|A|=n$, and swapping the first $n$ inputs with the elements of $A$
+\end{itemize}
+
+\begin{definition}[Marginalising kernel]
+Given $(X,\sigalg{X})$ and $A\subset\mathbb{N}$, $\mathrm{marg}_A:X^\mathbb{N}\kto X^A$ is the Markov kernel given by
+\begin{align}
+    \bigotimes_{i\in \mathbb{N}} \text{switch}_{A,i}
+\end{align}
+where
+\begin{align}
+    \text{switch}_A &= \begin{cases}
+                        \text{id}_X&i\in A\\
+                        \text{del}_X&i\not\in A
+                        \end{cases}
+\end{align} 
+\end{definition}
 
 \begin{theorem}[Equality of equally sized contractions]\label{th:equal_of_condits}
-A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally contractible} if and only if for every $n\in \mathbb{N}$ there exists there exists $\kernel{L}_n:X^n\kto Y^n$ such that for all $A\subset \mathbb{N}$ where $|A|=n$
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally contractible} if and only if for every $n\in \mathbb{N}$ and every $A\subset\mathbb{N}$ there exists some $\kernel{L}:X^n\kto Y^n$ such that
 \begin{align}
-    \text{swap}_{[n]\leftrightarrow A} \kernel{K} \text{swap}_{[n]\leftrightarrow A} (\text{id}_{[n]}\otimes \text{del}_{[n]^C}) &= \kernel{L}_n\otimes \mathrm{del}_{[n]^C}
+    \kernel{K} \text{marg}_A &= \text{swap}_{[n]\leftrightarrow A} \kernel{L}\otimes \text{del}_{X^{\mathbb{N}}}
 \end{align}
 \end{theorem}
 
@@ -107,33 +156,106 @@ A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally
 Only if:
 By exchange commutativity
 \begin{align}
-    \text{swap}_{[n]\leftrightarrow A} \kernel{K} &= \kernel{K} \text{swap}_{A\leftrightarrow n}
+    \text{swap}_{[n]\leftrightarrow A} \kernel{K} &= \kernel{K} \text{swap}_{[n]\leftrightarrow A}
 \end{align}
-multiply both sides by $\text{swap}_{A\leftrightarrow n}$ on the right and we have (because $\text{swap}_{[n]\leftrightarrow A}$ is its own inverse)
+multiply both sides by $\text{swap}_{[n]\leftrightarrow A}$ on the right and, because $\text{swap}_{[n]\leftrightarrow A}$ is its own inverse,
 \begin{align}
-        \text{swap}_{[n]\leftrightarrow A} \kernel{K}\text{swap}_{A\leftrightarrow n} &= \kernel{K}
+        \text{swap}_{[n]\leftrightarrow A} \kernel{K}\text{swap}_{[n]\leftrightarrow A} &= \kernel{K}
 \end{align}
-Then by locality, there exists some $\kernel{L}:X^n\kto Y^n$ such that
+so
 \begin{align}
-    \text{swap}_{[n]\leftrightarrow A} \kernel{K} \text{swap}_{A\leftrightarrow n} (\text{id}_{[n]}\otimes \text{del}_{[n]^C}) &= \kernel{K} (\text{id}_{[n]}\otimes \text{del}_{[n]^C})\\
-    &=\kernel{L}\otimes \mathrm{del}_{[n]^C}
+    \kernel{K}\text{marg}_A &= \text{swap}_{[n]\leftrightarrow A} \kernel{K}\text{swap}_{[n]\leftrightarrow A}\text{marg}_A\\
+    &= \text{swap}_{[n]\leftrightarrow A} \kernel{K}\text{marg}_{[n]}
+\end{align}
+By locality, there exists some $\kernel{L}:X^n\kto Y^n$ such that
+\begin{align}
+    \kernel{K} \text{marg}_{[n]} &= \kernel{K}(\text{id}_{[n]}\otimes \text{del}_{X^{\mathbb{N}}})\\
+     &= \kernel{L}\otimes \mathrm{del}_{X^{\mathbb{N}}}
 \end{align}
 If:
-Taking $A=[n]$ establishes locality immediately.
+Taking $A=[n]$ for all $n$ establishes locality.
 
 For exchange commutativity, note that for all $x\in X^{\mathbb{N}}$, $n\in\mathbb{N}$, we have
 \begin{align}
-    \text{swap}_{A\leftrightarrow [n]} \kernel{K} \text{swap}_{A\leftrightarrow [n]} (\text{id}_{[n]}\otimes \text{del}_{[n]^C}) &= \kernel{K}  (\text{id}_{[n]}\otimes \text{del}_{[n]^C})
+    \text{swap}_{A\leftrightarrow [n]} \kernel{K} \text{marg}_A &= \text{swap}_{A\leftrightarrow [n]} \kernel{K} \text{swap}_{A\leftrightarrow [n]} (\text{id}_{[n]}\otimes \text{del}_{X^{\mathbb{N}}})\\
+     &= \kernel{K} \text{marg}_{[n]}\\
+     &= \kernel{K}(\text{id}_{[n]}\otimes \text{del}_{X^{\mathbb{N}}})
 \end{align}
 Then by Lemma \ref{lem:infinitely_extended_kernels}
 \begin{align}
     \text{swap}_{A\leftrightarrow [n]} \kernel{K} \text{swap}_{A\leftrightarrow [n]} &= \kernel{K}
 \end{align}
-Consider an arbitrary finite permutation $\rho:\mathbb{N}\to \mathbb{N}$. $\rho$ can be decomposed into a finite set of cyclic permutations on disjoint orbits. Each cyclic permutation is simply the composition of a sequence of 1-cycles of the form $A\leftrightarrow [n]$, and so $\rho$ itself can be written as a composition of a sequence of 1-cycles. Thus for any finite $\rho:\mathbb{N}\to\mathbb{N}$
+Consider an arbitrary finite permutation $\rho:\mathbb{N}\to \mathbb{N}$. $\rho$ can be decomposed into a finite set of cyclic permutations on disjoint orbits. Each cyclic permutation is simply the composition of some set of transpositions, and so $\rho$ itself can be written as a composition of a sequence of transpositions. Thus for any finite $\rho:\mathbb{N}\to\mathbb{N}$
 \begin{align}
     \text{swap}_{\rho} \kernel{K} \text{swap}_{\rho} &= \kernel{K}
 \end{align}
 \end{proof}
+
+Theorem \ref{th:no_implication} shows that neither locality nor exchange commutativity is implied by the other.
+
+\begin{theorem}\label{th:no_implication}
+Exchange commutativity does not imply locality or vise versa.
+\end{theorem}
+
+\begin{proof}
+First, a Markov kernel that exhibits exchange commutativity but not locality. Suppose $D=Y=\{0,1\}$ and $\kernel{K}:D^2\kto Y^2$ is given by
+\begin{align}
+    \kernel{K}(y_1,y_2|d_1,d_2) &= \llbracket (y_1,y_2)= (d_1+d_2,d_1+d_2) \rrbracket
+\end{align}
+then 
+\begin{align}
+    \kernel{K}(y_1,Y|d_1,d_2) &= \llbracket y_1 = d_1+d_2 \rrbracket
+\end{align}
+and there is no function depending on $y_1$ and $d_1$ only that is equal to this. Thus $\kernel{K}$ does not satisfy locality. 
+
+However, taking $\rho$ to be the unique nontrivial swap $\{0,1\}\to \{0,1\}$
+\begin{align}
+    \text{swap}_{\rho,D}\kernel{K}(y_1,y_2|d_1,d_2) &= \kernel{K}(y_1,y_2|d_2,d_1)\\
+    &= \llbracket (y_1,y_2)= (d_2+d_1,d_2+d_1) \rrbracket\\
+    &= \llbracket (y_1,y_2)= (d_1+d_2,d_1+d_2) \rrbracket\\
+    &= \llbracket (y_2,y_1)= (d_1+d_2,d_1+d_2) \rrbracket\\
+    &= \kernel{K}\text{swap}_{\rho,Y}(y_1,y_2|d_1,d_2)
+\end{align}
+so $\kernel{K}$ commutes with exchange.
+
+Next, a Markov kernel that satisfies locality but does not commute with exchange. Suppose again $D=Y=\{0,1\}$ and $\kernel{K}:D^2\kto Y^2$ is given by
+\begin{align}
+    \kernel{K}(y_1,y_2|d_1,d_2) &= \llbracket (y_1,y_2)= (0,1) \rrbracket
+\end{align}
+
+Then:
+\begin{align}
+    \kernel{K}(y_1|d_1,d_2) &= \llbracket y_1= 0 \rrbracket\\
+    &= \kernel{K}(y_1|d_1)\\
+    \kernel{K}(y_2|d_1,d_2)&= \llbracket y_2= 1 \rrbracket\\
+    &= \kernel{K}(y_2|d_2)
+\end{align}
+so $\kernel{K}$ satisfies locality.
+
+However, $\kernel{K}$ does not commute with exchange.
+\begin{align}
+    \text{swap}_{\rho(\RV{D})} \kernel{K}(y_1,y_2|d_1,d_2) &= \kernel{K}(y_1,y_2|d_2,d_1)\\
+    &=\llbracket (y_1,y_2)= (0,1) \rrbracket\\
+    &\neq \llbracket (y_2,y_1)= (0,1) \rrbracket\\
+    &= \kernel{K}\text{swap}_{\rho(\RV{D})}(y_1,y_2|d_1,d_2)
+\end{align}
+\end{proof}
+
+If we are modelling the treatment of several patients whom who have already been examined, we might assume consequence locality -- patient B's treatment does not affect patient A -- but not exchange commutativity -- we don't expect the same results from giving patient A's treatment to patient B as we would from giving patient A's treatment to patient A. 
+
+A model of economic interventions might exhibit exchange commutativity but not locality. If a government prints money to make exactly $n$ payments of \$10 000 are made to a number of undistinguished recipients, the government cannot say much about the impact of who exactly receives the payment. However, the amount of inflation created by the payments depends on the number of payments made; making 100 such payments will have a negligible effect on inflation, while making payments to everyone in the country will have a substantial effect, and this will in turn affect the outcomes of the people who did or did not receive payment. \citet{dawid_causal_2000} offers the alternative example of herd immunity in vaccination campaigns as a situation where commutativity of exchange holds but locality does not.
+
+Although locality seems to imply a lack of interference between inputs and outputs of different indices, it actually allows for some models with certain kinds of interference between actions and outcomes of different indices. For example: consider an experiment where I first flip a coin and record the results of this flip as the outcome of the ``step 1''. Subsequently, I can choose either to copy the outcome from step 1 to be the input for ``step 2'' (this is the choice $\RV{D}_1=0$), or flip a second coin use this as the input for step 2 (this is the choice $\RV{D}_1=1$). At the second step, I may further choose to copy the provisional results ($\RV{D}_2=0$) or invert them ($\RV{D}_2=1$). Then
+\begin{align}
+    \prob{P}_S^{\RV{Y}_1|\RV{D}}(y_1|d_1,d_2) &= 0.5\\
+    \prob{P}_S^{\RV{Y}_2|\RV{D}}(y_2|d_1,d_2) &= 0.5
+\end{align}
+\begin{itemize}
+    \item The marginal distribution of both experiments in isolation is $\text{Bernoulli}(0.5)$ no matter what choices I make, so a model of this experiment would satisfy Definition \ref{def:caus_cont}
+    \item Nevertheless, the choice at step 1 affects the result of step 2
+\end{itemize}
+
+\subsubsection{Representation theorems for causally contractible Markov kernels}
 
 Theorem \ref{th:table_rep_kernel} shows that a causally contractible Markov kernel can be represented as the product of a column exchangeable probability distribution and a ``lookup function''. This representation is identical to the representation of potential outcomes models (see, for example, \citet{rubin_causal_2005}), but Theorem \ref{th:table_rep_kernel} applies to arbitrary kernels and the resulting representation will usually not be interpretable as a potential outcomes models. This theorem allows De Finetti's theorem to be applied to the column exchangeable probability distribution, which is a key step in proving the main result (Theorem \ref{th:ciid_rep_kernel}).
 
@@ -237,12 +359,16 @@ so $\kernel{K}$ is causally contractible by Theorem \ref{th:equal_of_condits}.
 
 Theorem \ref{th:ciid_rep_kernel} is the main result of this section. It shows that a causally contractible Markov kernel $X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is representable as a ``prior'' $\mu\in \Delta(H)$ and a ``parallel product'' of Markov kernels $H\times X\kto Y$. These will be the response conditionals when Theorem \ref{th:ciid_rep_kernel} is applied to probability set models.
 
+\begin{definition}[Measurable set of probability distributions]
+Given a measurable set $(\Omega,\sigalg{F})$, the measurable set of distributions on $\Omega$, $\mathcal{M}_1(\Omega)$, is the set of all probability distributions on $\Omega$ equipped with the coarsest $\sigma$-algebra such that the evaulation maps $\eta_B:\nu\mapsto \nu(B)$ are measurable for all $B\in \sigalg{F}$.
+\end{definition}
+
 \begin{theorem}\label{th:ciid_rep_kernel}
-A kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is causally contractible if and only if there exists some set $H$, $\mu\in \Delta(H)$ and $\kernel{L}:H\times X\kto Y$ such that
+Given a kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$, let $H:=\mathcal{M}_1(Y^X)$ be the measurable set of probability distributions on $(Y^X,\sigalg{Y}^X)$. $\kernel{K}$ is causally contractible if and only if there is some $\RV{H}:Y^{X\times\mathbb{N}}\to H$ and $\kernel{L}:H\times X\kto Y$ such that
 \begin{align}
     \kernel{K} &= \tikzfig{do_model_representation_kernel}\\
     &\iff\\
-    \kernel{K}(\bigtimes_{i\in\mathbb{N}}A_i|(x_i)_{i\in\mathbb{N}}) &= \int_H \prod_{i\in\mathbb{N}} \kernel{L}(A_i|h,x_i)\mu(\mathrm{d}h)
+    \kernel{K}(\bigtimes_{i\in\mathbb{N}}A_i|(x_i)_{i\in\mathbb{N}}) &= \int_H \prod_{i\in\mathbb{N}} \kernel{L}(A_i|h,x_i)\mu\kernel{F}_{\RV{H}}(\mathrm{d}h)
 \end{align}
 \end{theorem}
 
@@ -263,35 +389,32 @@ where  $\mathrm{evs}_{Y^D\times D}:Y^D\times D\to Y$ is the single-shot evaluati
 \end{align}
 
 Recall that $\mathrm{ev}$ is the function
-
 \begin{align}
     ((x_i)_\mathbb{N},(y_{ji})_{j,i\in X\times \mathbb{N}})&\mapsto (y_{x_i i})_{i\in \mathbb{N}}
 \end{align}
-
 By definition, for any $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$
-
 \begin{align}
     \kernel{F}_{\mathrm{ev}}(\bigtimes_{i\in \mathbb{N}}A_i|(x_i)_\mathbb{N},(y_{ji})_{i\in X\times \mathbb{N}}) &= \delta_{(y_{x_i i})_{i\in \mathbb{N}}}(\bigtimes_{i\in \mathbb{N}}A_i)\\
         &= \prod_{i\in \mathbb{N}} \delta_{y_{x_i i}} (A_i)\\
         &= \prod_{i\in \mathbb{N}} \kernel{F}_{\text{evs}} (A_i|x_i,(y_{ji})_{j\in X})\\
         &= \left(\bigotimes_{i\in\mathbb{N}} \kernel{F}_{\mathrm{evs}} \right)(\bigtimes_{i\in \mathbb{N}}A_i|(x_i)_\mathbb{N},(y_{ji})_{j\in X\times \mathbb{N}})
 \end{align}
-
-Which is what we wanted to show.
+which is what we wanted to show.
 
 Only if:
-By the column exchangeability of $\mu$, from \citet{kallenberg_basic_2005} we have some $H$, a directing random measure $\nu\in \Delta(H)$ and a kernel $\kernel{L}:H\kto Y^X$ such that
+Define $\kernel{M}:H\kto Y^D$ by $\kernel{M}(A|h)=h(A)$ for all $A\in\sigalg{Y}^X$, $h\ijn H$. By the column exchangeability of $\mu$, from \citet[Prop. 1.4]{kallenberg_basic_2005} there is a directing random measure $\RV{H}:Y^{X\times\mathbb{N}}\to H$ such that
 \begin{align}
     \mu &= \tikzfig{de_finetti_representation_kernel}\label{eq:df_rep_mu}\\
     &\iff\\
-    \mu(\bigtimes_{i\in \mathbb{N}} A_i) &= \int_H \prod_{i\in \mathbb{N}} \kernel{L}(A_i|h)\mu(\mathrm{d}h)&\forall A_i\in\sigalg{Y}^X
+    \mu(\bigtimes_{i\in \mathbb{N}} A_i) &= \int_H \prod_{i\in \mathbb{N}} \kernel{M}(A_i|h) \mu\kernel{F}_{\RV{H}}(\mathrm{d}h)&\forall A_i\in\sigalg{Y}^X
 \end{align}
 
 By Equations \ref{eq:lookup_representation} and \ref{eq:ev_alternate_rep}
 \begin{align}
-    \kernel{K} &= \tikzfig{do_model_representation}\label{eq:lup_rep_combined}
+    \kernel{K} &= \tikzfig{do_model_representation_kernel_pre}\\
+    &:= \tikzfig{do_model_representation_kernel}\label{eq:lup_rep_combined}
 \end{align}
-Where we can connect the outputs of $\mu$ to the inputs of $\kernel{F}_{\mathrm{evs}}$ ``inside the plate'' as the plates in Equations \ref{eq:ev_alternate_rep} and \ref{eq:df_rep_mu} are equal in number and each connected wire represents a single copy of $Y^D$.
+Where we can connect the copied outputs of $\mu\kernel{F}_{\RV{H}}$ to the inputs of each $\kernel{M}$ ``inside the plate'' as the plates in Equations \ref{eq:ev_alternate_rep} and \ref{eq:df_rep_mu} are equal in number and each connected wire represents a single copy of $Y^D$.
 
 If:
 By assumption, for any $\{A_i\in \sigalg{Y}|i\in\mathbb{N}\}$, $x:=(x_i)_{i\in\mathbb{N}}\in X^{\mathbb{N}}$
@@ -317,7 +440,7 @@ Given a sequence of variables $(\RV{D}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ where the 
 We call a model $\prob{P}_C$ with sequential outputs $\RV{Y}$ and a corresponding sequence of data-independent inputs $\RV{D}$ a ``sequential just-do model''.
 
 \begin{definition}[Sequential just-do model]
-A \emph{sequetntial just-do model} is a triple $(\prob{P}_C,\RV{D},\RV{Y})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{D}$ is a sequence of ``inputs'' $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}$ is a corresponding sequence of ``outputs'' $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$ where $\RV{D}_i':\Omega\to D$ and $\RV{Y}_i':\Omega\to Y$. Furthermore, it is required that $\RV{X}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{X}_{<i}$ for all $i\in \mathbb{N}$, and $\RV{Y}'\CI^e_{\prob{P}_C} C|\RV{D}'$.
+A \emph{sequential just-do model} is a triple $(\prob{P}_C,\RV{D},\RV{Y})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{D}$ is a sequence of ``inputs'' $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}$ is a corresponding sequence of ``outputs'' $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$ where $\RV{D}_i':\Omega\to D$ and $\RV{Y}_i':\Omega\to Y$. Furthermore, it is required that $\RV{X}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{X}_{<i}$ for all $i\in \mathbb{N}$, and $\RV{Y}'\CI^e_{\prob{P}_C} C|\RV{D}'$.
 \end{definition}
 
 To apply Theorem \ref{th:ciid_rep_kernel} to a sequential just-do model, it is necessary to extend the model to a larger sample space including ``latent variables'' taking values in $Y^D$. A latent extension is a model over a larger collection of variables that reduces to the original model when we restrict our attention to the original collection of variables.
@@ -333,16 +456,16 @@ Given a probability set $\prob{P}_C'$ on $(\Omega,\sigalg{F})$ and a latent exte
 Theorem \ref{th:data_ind_CC} applies Theorem \ref{th:ciid_rep_kernel} to the case of a model with data-independent actions and derives the required conditional independences and equalities to show that a sequential just-do model $(\prob{P}_C,\RV{D},\RV{Y})$ with causally contractible $\prob{P}_C^{\RV{Y}|\RV{X}}$ satisfies the required conditional independences and equalities of conditional distributions for $\RV{X}$ and $\RV{Y}$ to be related by repeatable response functions.
 
 \begin{theorem}[Data-independent causal contractibility]\label{th:data_ind_CC}
-Given a sequential just-do model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ is causally contractible if and only if there is a latent extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times Y^D,\sigalg{F}\otimes\sigalg{Y}^D)$ with some hypothesis $\RV{H}:\Omega\times Y^D\times H\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{X}_{<i},C)|(\RV{X}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{X}_j\RV{H}}$ for all $i,j\in \mathbb{N}$.
+Given a sequential just-do model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ is causally contractible if and only if there is a latent extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times Y^{D\times\mathbb{N}},\sigalg{F}\otimes\sigalg{Y}^{D\times\mathbb{N}})$ with some hypothesis $\RV{H}:\Omega\times Y^{D\times\mathbb{N}}\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{X}_{<i},C)|(\RV{X}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{X}_j\RV{H}}$ for all $i,j\in \mathbb{N}$ and $\RV{H}\CI_{\prob{P}_C} (\RV{X},\RV{C})$.
 \end{theorem}
 
 \begin{proof}
 If:
-First, define the extension $\prob{P}_C$. From Theorem \ref{th:table_rep_kernel} and causal contractibility of $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ there is some $\mu\in \Delta(Y^D)$ such that
+First, define the extension $\prob{P}_C$. From Theorem \ref{th:table_rep_kernel} and causal contractibility of $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ there is some $\mu\in \Delta(Y^{D\times\mathbb{N}})$ such that
 \begin{align}
     \prob{P}_C^{\prime \RV{Y}'|\RV{D}'} &= \tikzfig{lookup_representation_variablised}\label{eq:lup_rep_varb}
 \end{align}
-Let $\prob{P}_C^{\RV{Y}^D}=\mu$, $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}=\kernel{F}_{\mathrm{ev}}$ and $\RV{Y}^D:=\Pi_{Y^D}$, the projection $\Omega\times Y^D\to \Omega$. Let $\RV{W}=\Pi_{\Omega}$ and for each $\alpha\in C$, set 
+Let $\prob{P}_C^{\RV{Y}^{D}|\RV{X}}=\mu\otimes \text{del}_{X^{\mathbb{N}}}$, $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}=\kernel{F}_{\mathrm{ev}}$ and $\RV{Y}^D:=\Pi_{Y^{D\times\mathbb{N}}}$, the projection $\Omega\times Y^{D\times\mathbb{N}}\to \Omega$. Let $\RV{W}=\Pi_{\Omega}$ and for each $\alpha\in C$, set 
 \begin{align}
     \prob{P}_\alpha^{\RV{W}|\RV{Y}^D\RV{D}} &= \tikzfig{augmented_ccontracible}
 \end{align}
@@ -356,52 +479,66 @@ Then
 
 Before going further, it's necessary to check that there is some nonempty probability set $\prob{P}_C$ with these conditionals. By Theorem \ref{lem:valid_extendability}, because $\prob{P}_\alpha^{\RV{W}}&=\prob{P}_{\alpha}'$ it is sufficient to show that $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$ is valid. Because 
 \begin{align}
-    (\RV{W},\RV{Y}^D)(\Omega\times Y^D)&=\Omega\times Y^D\\
-    &=\RV{W}(\Omega\times Y^D)\times \RV{Y}^D(\Omega\times Y^D)
+    (\RV{W},\RV{Y}^D)(\Omega\times Y^{D\times\mathbb{N}})&=\Omega\times Y^{D\times\mathbb{N}}\\
+    &=\RV{W}(\Omega\times Y^{D\times\mathbb{N}})\times \RV{Y}^D(\Omega\times Y^{D\times\mathbb{N}})
 \end{align}
-Validity is guaranteed for any $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$, because there are no jointly impossible events.
+there are no impossible events, and so validity is guaranteed for any $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$.
 
 Thus $\prob{P}_C$ is a latent extension of $\prob{P}_C'$, and so $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also causally contractible.
 
+From Theorem \ref{th:ciid_rep_kernel} and by construction of $\prob{P}_C$, there exists a directing random measure $\RV{H}^*:Y^{D\times\mathbb{N}}\to H$ such that, defining $\RV{H}=\RV{H}^*\circ\Pi_{D\times\mathbb{N}}$
+\begin{align}
+    \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{do_model_representation}
+\end{align}
+it remains to be shown that $\kernel{L}$ is a version of $\prob{P}^{\RV{Y}_i|\RV{D}_i\RV{H}}$ for all $i\in \mathbb{N}$ and $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{D}_{<i},C)|(\RV{D}_i,\RV{H})$.
+
+To show $\kernel{L}$ is a version of $\prob{P}^{\RV{Y}_i|\RV{H}\RV{D}_i}$ for all $i\in \mathbb{N}$:
+\begin{align}
+    \kernel{L}&=\tikzfig{kernel_l_broken_down}\\
+              &=\tikzfig{kernel_l_broken_down2}\\
+              &=\tikzfig{kernel_l_broken_down3}\label{eq:h_ci_x}\\
+              &=\tikzfig{kernel_l_broken_down4}\label{eq:Y_ci_h_yd}\\
+              &=\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}
+\end{align}
+Where \ref{eq:h_ci_x} follows from $\RV{H}\CI^e_{\prob{P}_C} (\RV{D}_i,\RV{C})$, which itself follows from $\RV{Y}^D_i\CI^e_{\prob{P}_C} (\RV{D}_i,\RV{C})$ which holds by construction. \ref{eq:Y_ci_h_yd} follows from $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{H},\RV{C})|(\RV{Y}^D_i,\RV{D}_i)$, which follows from $\RV{Y}_i$ being a deterministic function of $(\RV{Y}^D_i,\RV{D}_i)$.
+
+For independence, note that
+\begin{align}
+     \prob{P}_C^{\RV{Y}_{<i}|\RV{H}\RV{X}_{<i}\RV{X}_i} &= \tikzfig{independence_inductive_base_0}\\
+     &= \tikzfig{independence_inductive_base}
+\end{align}
+hence $\RV{Y}_{<i}\CI^e_{\prob{P}_C} (\RV{X}_i,\RV{C})|(\RV{H},\RV{X}_{<i})$
+
+Then
+\begin{align}
+    \prob{P}_C^{\RV{Y}_i\RV{Y}_{<i}|\RV{H}\RV{D}_i\RV{D}_{<i}} &= \tikzfig{independence_inductive}\\
+    \implies \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i\RV{D}_{<i}} &\overset{\prob{P}_C}{\cong} \tikzfig{independence_inductive_last}
+\end{align}
+by Theorem \ref{th:higher_order_conditionals}. Hence $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{X}_{<i},\RV{Y}_{<i},\RV{C})|(\RV{H},\RV{X}_i)$.
 
 Only if:
 If $\prob{P}_C$ is a latent extension of $\prob{P}_C'$, then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible if and only if $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ is causally contractible. Thus it is sufficient to show $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
 
-
-
-
-
-
-
-
-
-\end{proof}
-
-
-Theorem \ref{th:no_implication} shows that neither condition implies the other. 
-
-\begin{theorem}\label{th:no_implication}
-Exchange commutativity does not imply locality of consequences or vise versa.
-\end{theorem}
-
-\begin{proof}
-Appendix \ref{sec:ccontract_appendix}.
-\end{proof}
-
-If we are modelling the treatment of several patients whom who have already been examined, we might assume consequence locality -- patient B's treatment does not affect patient A -- but not exchange commutativity -- we don't expect the same results from giving patient A's treatment to patient B as we would from giving patient A's treatment to patient A. 
-
-A model of stimulus payments might exhibit exchange commutativity but not consequence locality. If exactly $n$ payments of \$10 000 are made, we might suppose that it doesn't matter much exactly who receives the payments, but the amount of inflation induced depends on the number of payments made; making 100 such payments will have a negligible effect on inflation, while making payments to everyone in the country will have a substantial effect. \citet{dawid_causal_2000} offers the example of herd immunity in vaccination campaigns as a situation where post-treatment exchangeability holds but locality of consequences does not.
-
-Although locality of consequences seems to intuitively encompass an assumption of non-interference, it still allows for some models in which exhibit certain kinds of interference between actions and outcomes of different indices. For example: I have an experiment where I first flip a coin and record the results of this flip as the outcome of the first step of the experiment, but I can choose either to record this same outcome as the provisional result of the second step (this is the choice $\RV{D}_1=0$), or choose to flip a second coin and record the result of that as the provisional result of the second step of the experiment (this is the choice $\RV{D}_1=1$). At the second step, I may further choose to copy the provisional results ($\RV{D}_2=0$) or invert them ($\RV{D}_2=1$). Then
-
+By assumption, for all $i\in \mathbb{N}$
 \begin{align}
-    \prob{P}_S^{\RV{Y}_1|\RV{D}}(y_1|d_1,d_2) &= 0.5\\
-    \prob{P}_S^{\RV{Y}_2|\RV{D}}(y_2|d_1,d_2) &= 0.5
+    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{X}_{[i]}\RV{Y}_{<i}} &\overset{\prob{P}_C}{\cong} \text{del}_{X^{i-1}\times Y^{i-1}}\otimes \prob{P}_C^{\RV{Y}_1|\RV{H}\RV{X}_1}
 \end{align}
-\begin{itemize}
-    \item The marginal distribution of both experiments in isolation is $\text{Bernoulli}(0.5)$ no matter what choices I make, so a model of this experiment would satisfies Definition \ref{def:caus_cont}
-    \item Nevertheless, the choice for the first experiment affects the result of the second experiment
-\end{itemize}
+
+Thus for all $n\in \mathbb{N}$ by repeated application of Theorem \ref{th:higher_order_conditionals}
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{[n]}|\RV{H}\RV{X}_{[n]}} &\overset{\prob{P}_C}{\cong} \tikzfig{do_model_representation_finite}
+\end{align}
+thus by Lemma \ref{lem:infinitely_extended_kernels}
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{\mathbb{N}}|\RV{H}\RV{X}_{\mathbb{N}}} &\overset{\prob{P}_C}{\cong} \tikzfig{do_model_representation_noprior}
+\end{align}
+and, because $\RV{H}\CI_{\prob{P}_C}^e(\RV{X},\RV{C})$
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{\mathbb{N}}|\RV{X}_{\mathbb{N}}} &\overset{\prob{P}_C}{\cong} \tikzfig{do_model_representation}
+\end{align}
+causal contractibility follows from Theorem \ref{th:ciid_rep_kernel}.
+\end{proof}
+
 
 \begin{theorem}[Equality of reduced conditionals]\label{th:equal_of_reduced_condits}
 A probability set $\prob{P}_C$ that is $(\RV{D};\RV{Y})$-causally contractible has, for any $A,B\subset M$ with $|A|=|B|$

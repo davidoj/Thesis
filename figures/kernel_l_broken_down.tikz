@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (-4, 2) {$\prob{P}_C^{\RV{Y}^D|\RV{H}}$};
+		\node [style=small kernel tikzit] (1) at (-1, 1) {$\kernel{F}_{\text{evs}}$};
+		\node [style=Llabel tikzit] (2) at (-5.5, 1) {$\RV{D}_i$};
+		\node [style=Llabel tikzit] (3) at (-5.5, 2) {$\RV{H}$};
+		\node [style=Llabel tikzit] (4) at (1.75, 1) {$\RV{Y}_i$};
+		\node [style=none] (5) at (-1.5, 1) {};
+		\node [style=none] (6) at (-1.5, 1.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [in=165, out=0] (0) to (6.center);
+		\draw (3) to (0);
+		\draw [in=180, out=0] (2) to (5.center);
+		\draw (1) to (4);
+	\end{pgfonlayer}
+\end{tikzpicture}

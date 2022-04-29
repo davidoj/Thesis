@@ -9,45 +9,7 @@
 
 
 
-\begin{lemma}[Infinitely extended kernels]\label{lem:infinitely_extended_kernels}
-Given a collection of Markov kernels $\kernel{K}_i:X^i\kto Y^i$ for all $i\in \mathbb{N}$, if we have for every $j>i$
-\begin{align}
-	\kernel{K}_j(\text{id}_{X_i}\otimes \text{del}_{X_{j-i}}) &= \kernel{K}_i\otimes \text{del}_{X_{j-i}}\label{eq:marginalise_comb}
-\end{align} 
-then there is a unique Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ such that for all $i,j\in \mathbb{N}$,$j>i$
-\begin{align}
-	\kernel{K}(\text{id}_{X_i}\otimes \text{del}_{X_{j-i}})&= \kernel{K}_i\otimes \text{del}_{X_{j-i}}
-\end{align}
-\end{lemma}
 
-\begin{proof}
-Take any $x\in X^{\mathbb{N}}$ and let $x_{|m}\in X^n$ be the first $n$ elements of $x$. By Equation \ref{eq:marginalise_comb}, for any $A_i\in \sigalg{Y}$, $i\in [m]$
-
-\begin{align}
-    \kernel{K}_n(\bigtimes_{i\in [m]}A_i\times Y^{n-m}|x_{|n}) &= \kernel{K}_m(\bigtimes_{i\in [m]}A_i|x_{|m})
-\end{align}
-
-Furthermore, by the definition of the $\mathrm{swap}$ map for any permutation $\rho:[n]\to[n]$
-\begin{align}
-    \kernel{K}_n\mathrm{swap}_{\rho}(\bigtimes_{i\in [m]}A_{\rho(i)}\times Y^{n-m}|x_{|n}) &= \kernel{K}_n(\bigtimes_{i\in [m]}A_{i}\times Y^{n-m}|x_{|n})
-\end{align}
-
-Thus by the Kolmogorov Extension Theorem \citep{cinlar_probability_2011}, for each $x\in X^{\mathbb{N}}$ there is a unique probability measure $\prob{Q}_x\in \Delta(Y^{\mathbb{N}}$ satisfying
-\begin{align}
-    \prob{Q}_d(\bigtimes_{i\in [n]}A_i\times Y^{\mathbb{N}}) &= \kernel{K}_n(\bigtimes_{i\in [n]}A_{\rho(i)}|d_{|n})\label{eq:q_is_Markov}
-\end{align}
-
-Furthermore, for each $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$, $n\in \mathbb{N}$ note that for $p>n$
-
-\begin{align}
-\prob{Q}_d(\bigtimes_{i\in[n]} A_i \times Y^{\mathbb{N}})&\geq \prob{Q}_d(\bigtimes_{i\in [p]} A_i\times Y^{\mathbb{N}})\\
-&\geq \prob{Q}_d(\bigtimes_{i\in \mathbb{N}} A_i)
-\end{align}
-
-so by the Monotone convergence theorem, the sequence $\prob{Q}_d(\bigtimes_{i\in[n]} A_i)$ converges as $n\to \infty$ to $\prob{Q}_d(\bigtimes_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigtimes_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \ref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
-
-Thus $d\mapsto Q_d$ is the desired $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$.
-\end{proof}
 
 
 \begin{theorem}[Conditional independence in augmented causally contractible model]
