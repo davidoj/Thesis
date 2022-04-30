@@ -402,7 +402,7 @@ By definition, for any $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$
 which is what we wanted to show.
 
 Only if:
-Define $\kernel{M}:H\kto Y^D$ by $\kernel{M}(A|h)=h(A)$ for all $A\in\sigalg{Y}^X$, $h\ijn H$. By the column exchangeability of $\mu$, from \citet[Prop. 1.4]{kallenberg_basic_2005} there is a directing random measure $\RV{H}:Y^{X\times\mathbb{N}}\to H$ such that
+Define $\kernel{M}:H\kto Y^D$ by $\kernel{M}(A|h)=h(A)$ for all $A\in\sigalg{Y}^X$, $h\in H$. By the column exchangeability of $\mu$, from \citet[Prop. 1.4]{kallenberg_basic_2005} there is a directing random measure $\RV{H}:Y^{X\times\mathbb{N}}\to H$ such that
 \begin{align}
     \mu &= \tikzfig{de_finetti_representation_kernel}\label{eq:df_rep_mu}\\
     &\iff\\
@@ -449,9 +449,9 @@ To apply Theorem \ref{th:ciid_rep_kernel} to a sequential just-do model, it is n
 Given a probability set $\prob{P}_C'$ on $(\Omega,\sigalg{F})$ and some measurable set $(G,\sigalg{G})$, a probability set $\prob{P}_C$ is a \emph{latent extension} of $\prob{P}_C'$ to $(\Omega\times G,\sigalg{F}\otimes \sigalg{G})$ if $\prob{P}_C \kernel{F}_{\Pi_{\Omega}} = \prob{P}_C'$.
 \end{definition}
 
-\begin{convention}[Variables on a latent extension]
+\begin{notation}[Variables on a latent extension]
 Given a probability set $\prob{P}_C'$ on $(\Omega,\sigalg{F})$ and a latent extension $\prob{P}_C$ on $(\Omega\times G,\sigalg{F}\otimes \sigalg{G})$, every variable on the original sample space is given a primed name $\RV{X}'$, $\RV{Y}'$ etc., and corresponds to an unprimed variable on the larger space $\RV{X}:=\Pi_\Omega\circ \RV{X}'$.
-\end{convention}
+\end{notation}
 
 Theorem \ref{th:data_ind_CC} applies Theorem \ref{th:ciid_rep_kernel} to the case of a model with data-independent actions and derives the required conditional independences and equalities to show that a sequential just-do model $(\prob{P}_C,\RV{D},\RV{Y})$ with causally contractible $\prob{P}_C^{\RV{Y}|\RV{X}}$ satisfies the required conditional independences and equalities of conditional distributions for $\RV{X}$ and $\RV{Y}$ to be related by repeatable response functions.
 
@@ -477,7 +477,7 @@ Then
     &= \prob{P}_\alpha
 \end{align}
 
-Before going further, it's necessary to check that there is some nonempty probability set $\prob{P}_C$ with these conditionals. By Theorem \ref{lem:valid_extendability}, because $\prob{P}_\alpha^{\RV{W}}&=\prob{P}_{\alpha}'$ it is sufficient to show that $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$ is valid. Because 
+Before going further, it's necessary to check that there is some nonempty probability set $\prob{P}_C$ with these conditionals. By Theorem \ref{lem:valid_extendability}, because $\prob{P}_\alpha^{\RV{W}}=\prob{P}_{\alpha}'$ it is sufficient to show that $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$ is valid. Because 
 \begin{align}
     (\RV{W},\RV{Y}^D)(\Omega\times Y^{D\times\mathbb{N}})&=\Omega\times Y^{D\times\mathbb{N}}\\
     &=\RV{W}(\Omega\times Y^{D\times\mathbb{N}})\times \RV{Y}^D(\Omega\times Y^{D\times\mathbb{N}})
@@ -592,7 +592,7 @@ However, the assumption that $\prob{P}_C^{\RV{YZ}|\RV{DE}}$ is causally contract
     \prob{P}^{\RV{Y}\RV{Z}_i|\RV{D}\RV{E}_i}_C &= \prob{P}^{\RV{Z}|\RV{E}}\\
     \implies \prob{P}^{\RV{Z}_i|\RV{E}_i\RV{D}\RV{Y}}_C &= \prob{P}^{\RV{Z}_{i}|\RV{E}_i\RV{E}_{\{i\}^C}\RV{Z}_{\{i\}^C}}
 \end{align}
-That is, the model must yield the same result when conditioned on either the observational results, or the results of other active interventions. It is rare to assume \emph{a priori} that observational and experimental data are equally informative (though such a conclusion could be drawn \emph{after} reviewing both types of data, see for example \todo{look up reference on other computer}.
+That is, the model must yield the same result when conditioned on either the observational results, or the results of other active interventions. It is rare to assume \emph{a priori} that observational and experimental data are equally informative. Such a conclusion could be drawn \emph{after} reviewing both sequences of data, see for example \citet{eckles_bias_2021}, or it might be rejected \citet{gordon_comparison_2018,gordon_close_2022}.
 
 If a sequential just-do model $(\prob{P}_C,(\RV{D},\RV{X}),\RV{Y})$ has $\prob{P}_C^{\RV{Y}|\RV{DX}}$ causally contractible as well as:
 \begin{itemize}
@@ -637,7 +637,7 @@ Finally, \citet{rubin_causal_2005} discusses two separate assumptions to justify
 \end{quote}
 Here ``the science'' means (roughly) \emph{the response function of each individual}, and exchangeability of these response functions is a similar assumption to permutability of individual identifiers (though we don't derive the exact correspondence here). Rubin's second condition is that treatment assignment is ignorable. Like Assumption 3, this assumption limits ``how much we can learn from the treatment assignment'', but again we don't derive the exact correspondence. Note that in Rubin's scheme the preliminary assumption of \emph{stable unit-treatment values} is made in order to establish the existence of individual response functions, which plays a similar role to Assumption 1.
 
-As an example of the application of Theorem \ref{th:cc_ind_treat}, consider an experiment where $n$ patients, each with an individual identifier $\RV{I}_i$, receive treatment $\RV{D}_i$ and experience outcome $\RV{Y}_i$. $\prob{P}_C^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{I}_{[n]}}$ can be extended to an infinite sequence $\prob{P}_C^{\RV{Y}|\RV{DI}}$ that is causally contractible (see Assumption 1), no matter which choice $\alpha\in C$ is decided on, all identifiers can be swapped without altering the distribution over consequences (see Assumption 2), and finally that the treatement vector $\RV{D}$ is a deterministic and invertible function of the choice $\alpha\in C$ then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible, and hence there are response functions $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$.
+As an example of the application of Theorem \ref{th:cc_ind_treat}, consider an experiment where $n$ patients, each with an individual identifier $\RV{I}_i$, receive treatment $\RV{D}_i$ and experience outcome $\RV{Y}_i$. $\prob{P}_C^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{I}_{[n]}}$ can be extended to an infinite sequence $\prob{P}_C^{\RV{Y}|\RV{DI}}$ that is causally contractible (see Assumption 1), no matter which choice $\alpha\in C$ is decided on, all identifiers can be swapped without altering the distribution over consequences (see Assumption 2), and finally that the treatment vector $\RV{D}$ is a deterministic and invertible function of the choice $\alpha\in C$ then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible, and hence there are response functions $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$.
 
 Theorem \ref{th:cc_ind_treat} can also be extended to the case where $\RV{D}$ is a function of the choice $\alpha$ and a ``random signal'' $\RV{R}$.
 
@@ -646,26 +646,26 @@ Given sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob
 \end{lemma}
 
 \begin{proof}
-For arbitrary $\nu\in \Delta(I^{\mathbb{N}})$, by assumption of causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{DI}}$ and Theorem \ref{th:iid_rep}
+For arbitrary $\nu\in \Delta(I^{\mathbb{N}})$, by assumption of causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{DI}}$ and Theorem \ref{th:ciid_rep_kernel}
 \begin{align}
     \prob{P}_C^{\RV{Y}|\RV{DI}} &= \tikzfig{index_independence_1}\\
     &= \tikzfig{index_independence_2}\\
     &= \tikzfig{index_independence_3}\\
     \implies \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{index_independence_4}
 \end{align}
-Applying Theorem \ref{th:iid_rep}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
+Applying Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
 \end{proof}
 
-An (infinite) \emph{index variable} is a variable that takes values in $\mathbb{N}^{\mathbb{N}}$ such that no number ever repeats.
+An \emph{identifier variable} is a variable $\RV{I}$ that takes values in the set of finite permutations of $\mathbb{N}$. It is associated with a sequence $(\RV{I}_i)_{i\in \mathbb{N}}$ where $\RV{I}_i=\RV{I}(i)$. Each $\RV{I}_i$ takes values in $\mathbb{N}$ and $\RV{I}_i\neq \RV{I}_j$ for all $j\neq i$.
 
-\begin{definition}[Index variable]
-Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ and $\RV{I}:\Omega\to \mathbb{N}^{\mathbb{N}}$ such that, defining $A\subset\mathscr{P}(\mathbb{N})$ to be the set of all permutations of $\mathbb{N}$, $\prob{P}_\alpha^{\RV{I}}(A)=1$, then $\RV{I}$ is an \emph{index variable}.
+\begin{definition}[Identifier variable]
+Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$, let $I$ be the set of finite permutations $\mathbb{N}\to \mathbb{N}$. A variable $\RV{I}:\Omega\to I$ be a variable taking values in $I$ is an \emph{identifier variable}.
 \end{definition}
 
 If a uniform conditional probability is invariant to permutations of an index variable, then it is independent of that index variable.
 
 \begin{lemma}\label{lem:ind}
-Given a probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \RV{C}|(\RV{D},\RV{I})$ and $\RV{I}$ is an index variable, if for each permutation $\rho:\mathbb{N}\to \mathbb{N}$
+Given a probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \RV{C}|(\RV{D},\RV{I})$ and $\RV{I}:\Omega\to I$ is an identifier variable, if for each finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{ID}} &= (\text{swap}_{\rho(I)}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{ID}}
 \end{align}
@@ -673,14 +673,14 @@ then $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\RV{C})|\RV{D}$.
 \end{lemma}
 
 \begin{proof}
-Taking $A\subset \mathbb{N}^{\mathbb{N}}$ to be the set of permutations of $\mathbb{N}$, note that for every $i\in A$, $B\in\sigalg{Y}^{\mathbb{N}}$, $d\in D^{\mathbb{N}}$ we can take $\rho_i:\mathbb{N}\to \mathbb{N}$ such that the image of $i$ under $\rho$ is $\mathbb{N}$; that is, $\rho_i(i)=\text{id}_{\mathbb{N}}$. Then
+By definition of the set $I$ of finite permutations, for every $\rho\in I$, $B\in\sigalg{Y}^{\mathbb{N}}$, $d\in D^{\mathbb{N}}$ there is a finite permutation $\rho^{-1}\in I$ such that $\rho\circ\rho^{-1}=\text{id}_{\mathbb{N}}$. Then
 \begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{ID}}(B|i,d) &= (\text{swap}_{\rho_i(I)}\otimes \text{Id}_X )\prob{P}_C^{\RV{Y}|\RV{ID}}(B|i,d)\\
+    \prob{P}_C^{\RV{Y}|\RV{ID}}(B|i,d) &= (\kernel{F}_{\rho^{-1}}\otimes \text{Id}_X )\prob{P}_C^{\RV{Y}|\RV{ID}}(B|\rho,d)\\
     &= \prob{P}_C^{\RV{Y}|\RV{ID}}(B|\text{id}_{\mathbb{N}},d)
 \end{align}
 Therefore
 \begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{ID}} &\overset{\prob{P}_C}{\cong} \text{erase}_{\mathbb{N}^{\mathbb{N}}}\otimes \kernel{K} 
+    \prob{P}_C^{\RV{Y}|\RV{ID}} &\overset{\prob{P}_C}{\cong} \text{erase}_{I}\otimes \kernel{K} 
 \end{align}
 where $\kernel{K}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is the kernel
 \begin{align}
@@ -688,14 +688,14 @@ where $\kernel{K}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is the kernel
 \end{align}
 \end{proof}
 
-The following theorem assumes that the set of choices $C$ is countable and there is a one-to-one function $f:C\to D^{\mathbb{N}}$. By assumption, $f$ cannot be surjective.
+The following theorem assumes that the set of choices $C$ is countable and there is a one-to-one function $f:C\to D^{\mathbb{N}}$. Thus, if $|D|>1$, $f$ cannot be surjective.
 
 \begin{theorem}\label{th:cc_ind_treat}
-Given a sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $C$ countable, $\prob{P}_C^{\RV{Y}|\RV{DI}}$ causally contractible $\RV{I}:\Omega\to \mathbb{N}^{\mathbb{N}}$ an index variable, if for each $\alpha\in C$, $\rho:\mathbb{N}\to \mathbb{N}$
+Given a sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $C$ countable, $\prob{P}_C^{\RV{Y}|\RV{DI}}$ causally contractible $\RV{I}:\Omega\to I$ an identifier variable, if for each $\alpha\in C$, $\rho\in I$
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= \text{swap}_{\rho,I}\prob{P}_\alpha^{\RV{Y}|\RV{I}}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}
 \end{align}
-and there is an invertible function $f:C\to D$ such that
+and there is a one-to-one function $f:C\to D^{\mathbb{N}}$ such that
 \begin{align}
     \prob{P}_\alpha^{\RV{D}} = \kernel{F}_f
 \end{align}
@@ -703,33 +703,44 @@ then $\prob{P}_C$ is $(\RV{D};\RV{Y})$-causally contractible.
 \end{theorem}
 
 \begin{proof}
-The map $\kernel{Q}:(B|i,\alpha)\mapsto \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|i)$ is itself a Markov kernel. By assumption, for any $\alpha$,
+The map $\kernel{Q}:(B|i,\alpha)\mapsto \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|i)$ is itself a Markov kernel. By assumption on $f$ there is a right inverse $f^\dagger$ such that, for any $\alpha$,
 \begin{align}
-    \kernel{Q} \overset{\prob{P}_\alpha}{\cong} (\text{id}_{\mathbb{N}^\mathbb{N}}\otimes\kernel{F}_f) \prob{P}_\alpha^{\RV{Y}|\RV{ID}}
+    \prob{P}_\alpha^{\RV{Y}|\RV{ID}} \overset{\prob{P}_\alpha}{\cong} (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})\kernel{Q}
 \end{align}
-Furthermore, by assumption
+Furthermore, by assumption, for any $\rho\in I$
 \begin{align}
-    (\text{swap}_{\rho(I)}\otimes \text{Id}_{C} )\kernel{Q} = \kernel{Q}
+    (\rho\otimes \text{id}_{C} )\kernel{Q} = \kernel{Q}
 \end{align}
 Therefore
 \begin{align}
-    (\text{swap}_{\rho(I)}\otimes \text{Id}_{C} ) \prob{P}_\alpha^{\RV{Y}|\RV{ID}}&= (\text{id}_{\mathbb{N}^\mathbb{N}}\otimes\kernel{F}_{f})(\text{id}_{\mathbb{N}^\mathbb{N}}\otimes\kernel{F}_{f^-1})(\text{swap}_{\rho(I)}\otimes \text{Id}_{C} ) \prob{Q}\\
-     &= (\text{id}_{\mathbb{N}^\mathbb{N}}\otimes\kernel{F}_{f^{-1}}) \prob{Q}\\
+    (\rho \otimes \text{id}_{C} ) \prob{P}_\alpha^{\RV{Y}|\RV{ID}}&= (\rho \otimes \text{id}_{C} ) (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})\kernel{Q}\\
+     &=  (\text{id}_{I}\otimes\kernel{F}_{f^\dagger}) (\rho \otimes \text{id}_{C} )\kernel{Q}\\
+     &= (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})\kernel{Q}\\
      &= \prob{P}_\alpha^{\RV{Y}|\RV{ID}}
 \end{align}
-Then by Lemma \ref{lem:ind} we have $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}C|\RV{D}$ and by Lemma \ref{lem:ind_to_cc} we have $(\RV{D};\RV{Y})$-causal contractibility.
+Then by Lemma \ref{lem:ind} the independence $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}C|\RV{D}$ holds, and by Lemma \ref{lem:ind_to_cc} $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
 \end{proof}
 
-If we suppose Theorem \ref{th:cc_ind_treat} applies to $C'\subset C$ such that $\RV{D}$ is deterministic for all $\alpha\in C'$, while $C$ consists of $C'$ and all ``random choices between elements of $C'$''; that is for all $\beta\in C$
-\begin{align}
-    \prob{P}_\beta &= \sum_{c\in C} k_c \prob{P}_c 
-\end{align} 
+Theorem \ref{th:cc_ind_treat} can be extended to the case where decisions $\RV{D}$ are one-to-one deterministic, or random mixtures of one-to-one deterministic.
 
-Then it follows that
+\begin{corollary}
+Given a sequential just-do model $(\prob{P}_{C'},(\RV{D},\RV{I}),\RV{Y})$ satisfying the conditions of Theorem \ref{th:cc_ind_treat} and a second model $(\prob{P}_{C},(\RV{D},\RV{I}),\RV{Y})$ such that for all $\alpha\in C$ there is some set of coefficients $k_i$ such that
 \begin{align}
-    \prob{P}_\beta^{\RV{Y}|\RV{D}} &= \sum_{c\in C} k_c \prob{P}_c^{\RV{Y}|\RV{D}}
+    \prob{P}_\alpha &= \sum_{c\in C'} k_c \prob{P}_c 
 \end{align}
-and hence $\prob{P}_C$ is still $(\RV{D};\RV{Y})$-causally contractible. Note that in order to actually implemented a random choice, we would typically consult a known random source $\RV{R}$ and set $\RV{D}$ deterministically on the basis of the value of $\RV{R}$.
+then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also causally contractible.
+\end{corollary}
+
+\begin{proof}
+For all $\alpha\in C$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{D}} &= \sum_{c\in C'} k_c \prob{P}_c^{\RV{Y}|\RV{D}}\\
+    &= \prob{P}_{C'}^{\RV{Y}|\RV{D}}
+\end{align}
+\end{proof}
+
+The weaker condition $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}.
+
 
 \subsubsection{Example: body mass index}
 
