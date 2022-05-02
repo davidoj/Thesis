@@ -697,25 +697,36 @@ Given a sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Ome
 \end{align}
 and there is a one-to-one function $f:C\to D^{\mathbb{N}}$ such that
 \begin{align}
-    \prob{P}_\alpha^{\RV{D}} = \kernel{F}_f
+    \prob{P}_\alpha^{\RV{D}}(A) &= \kernel{F}_f(A|\alpha)&\forall \alpha\in C,A\in \sigalg{D}^{\mathbb{N}}
 \end{align}
-then $\prob{P}_C$ is $(\RV{D};\RV{Y})$-causally contractible.
+then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
 \end{theorem}
 
 \begin{proof}
-The map $\kernel{Q}:(B|i,\alpha)\mapsto \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|i)$ is itself a Markov kernel. By assumption on $f$ there is a right inverse $f^\dagger$ such that, for any $\alpha$,
+By assumption of one-to-one-ness $f$ has left inverse $f^{\dagger}:D^{\mathbb{N}}\to C$ such that $f^{\dagger}f(\alpha) = \alpha$. Furthermore, for all $d\in f(C)^{-1}$, $ff^{\dagger}(d)=d$ and for all $\alpha\in C$, $\prob{P}_\alpha^{\RV{D}}(f(C)^{-1})=0$. Thus, relative to $\RV{D}$, $\kernel{F}_f\kernel{F}_{f^{\dagger}}\overset{\prob{P}_C}{\cong}\text{id}_{D^{\mathbb{N}}}$, i.e. $f^\dagger$ is an almost sure inverse of $f$.
+
+By the fact that $\kernel{F}_{f^\dagger}\kernel{F}_f=\text{id}_C$
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{ID}} \overset{\prob{P}_\alpha}{\cong} (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})\kernel{Q}
+    \prob{P}_\alpha^{\RV{Y}|\RV{ID}} \overset{\prob{P}_\alpha}{\cong} (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})(\text{id}_{I}\otimes\kernel{F}_{f})\prob{P}_\alpha^{\RV{Y}|\RV{ID}}
 \end{align}
+
+The map $\kernel{Q}:(B|i,\alpha)\mapsto \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|i)$ is itself a Markov kernel. For every $\alpha$, $\RV{D}$ is deterministic, hence $\RV{D}\CI_{\prob{P}_\alpha} \RV{I}$ for all $\alpha\in C$. Thus for each $\alpha$
+\begin{align}
+    (\text{id}_{I}\otimes\delta_\alpha) \kernel{Q}  \overset{\prob{P}_\alpha}{\cong}  (\text{id}_{I}\otimes\prob{P}_{\alpha}^{\RV{D}})\prob{P}_C^{\RV{Y}|\RV{ID}}\\
+    \implies (\text{id}_I\otimes \text{id}_C)\kernel{Q} \overset{\prob{P}_C}{\cong} (\text{id}_I\otimes \kernel{F}_f)\prob{P}_C^{\RV{Y}|\RV{ID}}\\
+    \implies \kernel{Q} \overset{\prob{P}_C}{\cong} (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})\prob{P}_C^{\RV{Y}|\RV{ID}}\\
+    \implies (\text{id}_{I}\otimes\kernel{F}_{f^\dagger}) \kernel{Q} \overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}|\RV{ID}}\label{eq:as_inverse}
+\end{align}
+Where Eq. \ref{eq:as_inverse} follows from the fact that $f^\dagger$ is an almost sure inverse of $f$.
 Furthermore, by assumption, for any $\rho\in I$
 \begin{align}
     (\rho\otimes \text{id}_{C} )\kernel{Q} = \kernel{Q}
 \end{align}
 Therefore
 \begin{align}
-    (\rho \otimes \text{id}_{C} ) \prob{P}_\alpha^{\RV{Y}|\RV{ID}}&= (\rho \otimes \text{id}_{C} ) (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})\kernel{Q}\\
-     &=  (\text{id}_{I}\otimes\kernel{F}_{f^\dagger}) (\rho \otimes \text{id}_{C} )\kernel{Q}\\
-     &= (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})\kernel{Q}\\
+    (\rho \otimes \text{id}_{C} ) \prob{P}_\alpha^{\RV{Y}|\RV{ID}}&= (\rho \otimes \text{id}_{C} ) (\text{id}_{I}\otimes\kernel{F}_{f})\kernel{Q}\\
+     &=  (\text{id}_{I}\otimes\kernel{F}_{f}) (\rho \otimes \text{id}_{C} )\kernel{Q}\\
+     &= (\text{id}_{I}\otimes\kernel{F}_{f})\kernel{Q}\\
      &= \prob{P}_\alpha^{\RV{Y}|\RV{ID}}
 \end{align}
 Then by Lemma \ref{lem:ind} the independence $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}C|\RV{D}$ holds, and by Lemma \ref{lem:ind_to_cc} $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
@@ -739,8 +750,51 @@ For all $\alpha\in C$
 \end{align}
 \end{proof}
 
+
 The weaker condition $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}.
 
+\begin{example}
+Take $Y=C=D=H=\{0,1\}$ and for any $i\neq 1$, $\RV{YID}\CI^e_{\prob{P}_C} \RV{C}$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$. Then $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$. 
+
+Let $g:I\to\{0,1\}$ be the function $j\mapsto j\text{mod} 2$, and for all $i\in \mathbb{N}$ set
+\begin{align}
+    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{I}_i\RV{D}_i}(y|h,j,d) &= \delta_1(h)(\delta_1(g(j))\delta_d(y)+\delta_0(g(j))\delta_{1-d}(y)) + \delta_0(h)(\delta_1(g(j))\delta_{1-d}(y)+\delta_0(g(j))\delta_{d}(y))
+\end{align}
+That is, if $\RV{H}=0$ then $\RV{Y}$ goes with $\RV{D}$ on odd $\RV{I}_i$ and goes the opposite of $\RV{D}$ on even $\RV{I}_i$, while if $\RV{H}=1$ then $\RV{Y}$ goes opposite of $\RV{D}$ on odd $\RV{I}_i$ and with $\RV{D}$ on even $\RV{I}_i$. Suppose also \begin{align}
+    \RV{Y}_i\CI_{\prob{P}_C}^e (\RV{X}_{<i},\RV{Y}_{<i},\RV{I}_{<i},\RV{C})|(\RV{X}_i,\RV{Y}_i,\RV{H})
+\end{align}
+Then $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is causally contractible. Set
+\begin{align}
+    \prob{P}_{C}^{\RV{H}}(h) = 0.5
+\end{align}
+and for $i>1$
+\begin{align}
+    \prob{P}_C^{\RV{D}_i|\RV{I}_i\RV{H}}(d|j,h) &= \delta_1(h)(\delta_{1}(g(j))\delta_1(d)+\delta_{0}(g(j))\delta_0(d)) + \delta_0(h)(\delta_{1}(g(j))\delta_0(d)+\delta_{0}(g(j))\delta_1(d))
+\end{align}
+that is, if $\RV{H}=0$ then $\RV{D}_i=1$ if $\RV{I}_i$ is odd, 0 otherwise, and when $\RV{H}=1$ then $\RV{D}_i=0$ if $\RV{I}_i$ is odd, 1 otherwise.
+
+Overall: for $i>1$, if $\RV{H}=0$ and $\RV{I}_i$ is odd then $\RV{D}_i=1$ and $\RV{Y}_i=1$ and if $\RV{I}_i$ is even then $\RV{D}_i=0$ and $\RV{Y}_i=1$. If $\RV{H}=1$ and $\RV{I}_i$ is odd then $\RV{D}_i=0$ and $\RV{Y}_i=1$, and if $\RV{I}_i$ is even then $\RV{D}_i=1$ and $\RV{Y}_i=1$. So for $i>1$, $\RV{Y}_i=1$ deterministically, and this remains true if instead of $\RV{I}$ a permutation of $\RV{I}$ is conditioned on.
+
+For $i=1$, suppose for all $i$, $\prob{P}_C^{g(\RV{I}_i)}(1)=0.5$ (a property preserved by permutation). Then
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_1|\RV{I}_1}(y|j) &= 0.5\sum_{h\in \{0,1\}} \delta_1(h)(\delta_1(g(j))\delta_\alpha(y)+\delta_0(g(j))\delta_{1-\alpha}(y)) + \delta_0(h)(\delta_1(g(j))\delta_{1-\alpha}(y)+\delta_0(g(j))\delta_{\alpha}(y))\\
+    &= 0.5(\delta_1(g(j))+\delta_0(g(j)))(\delta_\alpha(y)+\delta_{1-\alpha}(y))\\
+    &= 0.5(\delta_d(y)+\delta_{1-d}(y))\\
+    &= 
+\end{align}
+Thus by Theorem \ref{th:equal_of_condits}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is not causally contractible. However
+
+
+
+then for any $\rho\in I$, $y\in\{0,1\}$, $j\in I$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|j) &= \sum_{h\in \{0,1\}}\sum_{d\in\{0,1\}^{\mathbb{N}}} \prod_{i\in \mathbb{N}} \prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{D}_i\RV{H}}(y_i|j_i,d_i,h) \prob{P}_\alpha^{\RV{D}_i|\RV{I}_i\RV{H}}(d_i|j_i,h)\prob{P}_C^{\RV{H}}(h)\\
+    &= 0.5\delta_{(1)_{i\in\mathbb{N}}}(y_{>i})\\
+    &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|j)
+\end{align}
+
+
+\end{example}
 
 \subsubsection{Example: body mass index}
 
