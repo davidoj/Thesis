@@ -608,12 +608,12 @@ Then the model exhibits a kind of ``backdoor adjustment'' \citet[Chap. 1]{pearl_
 
 Equation \ref{eq:backdoor} is identical to the backdoor adjustment formula for an intervention on $\RV{D}_1$ targeting $\RV{Y}_1$ where $\RV{X}_1$ is a common cause of both.
 
-\subsubsection{Causal contractibility in sequences of active choices}\label{sec:assessing}
+\section{Causal contractibility in sequences of active choices}\label{sec:assessing}
 
 Assessing when a particular sequence of experiments should be modeled with a causally contractible model can be difficult. As noted, a purely observational sequence is causally contractible if it is exchangeable. However, the point of all this theory is to study models that offer different choices. The assumption of causal contractibility can be justified for a sequence of active interventions if the following are satisfied:
 \begin{enumerate}
     \item There exist variables $\RV{I}$ representing ``unique experiment identifiers'' which satisfy the assumption that $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is causally contractible (informally: it doesn't matter which order the experiments are conducted in, and treatments in each experiment do not affect any other experiments)
-    \item Given a permutation $\rho$ of identifiers, $\prob{P}_\alpha^{\RV{YD\rho(\RV{I})}}=\prob{P}_\alpha^{\RV{YDI}}$ (informally: unique identifiers are not themselves informative)
+    \item Given a permutation $\rho$ of identifiers, $\prob{P}_\alpha^{\RV{YD}\rho(\RV{I})}=\prob{P}_\alpha^{\RV{YDI}}$ (informally: unique identifiers are not themselves informative)
     \item The map $\alpha\to \prob{P}_\alpha^{\RV{D}}$ is deterministic Markov kernel associated with an invertible function $f:C\to D^{\mathbb{I}}$
 \end{enumerate}
 
@@ -635,7 +635,9 @@ Finally, \citet{rubin_causal_2005} discusses two separate assumptions to justify
 \begin{quote}
     indexing of the units is, by definition, a random permutation of $1,..., N$, and thus any distribution on the science must be row-exchangeable [...] The second critical fact is that if the treatment assignment mechanism is ignorable (e.g., randomized), then when the expression for the assignment mechanism (2) is evaluated at the observed data, it is free of dependence on $Y_{mis}$
 \end{quote}
-Here ``the science'' means (roughly) \emph{the response function of each individual}, and exchangeability of these response functions is a similar assumption to permutability of individual identifiers (though we don't derive the exact correspondence here). Rubin's second condition is that treatment assignment is ignorable. Like Assumption 3, this assumption limits ``how much we can learn from the treatment assignment'', but again we don't derive the exact correspondence. Note that in Rubin's scheme the preliminary assumption of \emph{stable unit-treatment values} is made in order to establish the existence of individual response functions, which plays a similar role to Assumption 1.
+Here ``the science'' means (roughly) \emph{the response function of each individual}, and exchangeability of these response functions is a similar assumption to permutability of individual identifiers (though we don't derive the exact correspondence here). Rubin's second condition is that treatment assignment is ignorable. Like Assumption 3, this assumption limits ``how much we can learn from the treatment assignment'', but again we don't derive the exact correspondence. Note that in Rubin's scheme the preliminary assumption of \emph{stable unit-treatment values} is made in order to establish the existence of individual response functions, which plays a similar role to Assumption 1. 
+
+Rubin's result also differs substantially from this one in that it applies to \emph{identification of potential outcomes in randomised experiments}, while this result is about the existence of response conditionals \emph{when there are different choices that can be made}.
 
 As an example of the application of Theorem \ref{th:cc_ind_treat}, consider an experiment where $n$ patients, each with an individual identifier $\RV{I}_i$, receive treatment $\RV{D}_i$ and experience outcome $\RV{Y}_i$. $\prob{P}_C^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{I}_{[n]}}$ can be extended to an infinite sequence $\prob{P}_C^{\RV{Y}|\RV{DI}}$ that is causally contractible (see Assumption 1), no matter which choice $\alpha\in C$ is decided on, all identifiers can be swapped without altering the distribution over consequences (see Assumption 2), and finally that the treatment vector $\RV{D}$ is a deterministic and invertible function of the choice $\alpha\in C$ then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible, and hence there are response functions $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$.
 
@@ -718,7 +720,7 @@ Define $\kernel{Q}$ by $\alpha\mapsto \prob{P}_\alpha$ and $\kernel{Q}^{\cdot|\c
 By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$, it is also the case that
 \begin{align}
     \kernel{Q}^{\RV{Y}|\RV{ID}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents}\\
-    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_idepped}\\
+    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_indepped}\\
     &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_subbed}
 \end{align}
 But
@@ -756,7 +758,7 @@ For all $\alpha\in C$
 \end{align}
 \end{proof}
 
-The condition $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ alone does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. 
+Dropping the assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ means that, in general, one or both of $\prob{P}_C^{\RV{Y}|\RV{D}}$ or $\prob{P}_C^{\RV{Y}|\RV{ID}}$ may be ill-defined (note that the independence is merely a sufficient condition, not a necessary condition for these uniform conditional probabilities). The condition $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ alone also does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. 
 
 Constructing the following example requires the hypotheses that any given identifier $i\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. This generates space of hypotheses $H=\{0,1\}^{\mathbb{N}}$, which needs to be equipped with an algebra of measurable sets. Equipped with the product topology, $H$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(H,\mathcal{B}(H))$ is a standard measurable space and because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
 
@@ -826,55 +828,55 @@ However, given any finite permutation $\rho:\mathbb{N}\to\mathbb{N}$
 
 \subsubsection{Example: body mass index}
 
-If we have a probability set $\prob{P}_C$ with $\RV{B}:=(\RV{B}_i)_{i\in M}$ representing body mass index and $\RV{Y}:=(\RV{Y}_i)_{i\in M}$ representing health outcomes of interest, the previous considerations don't support a judgement of causal contractibility for $(\RV{B};\RV{Y})$, because the choices we imagine we might have available do not allow $\RV{B}$ to be a deterministic invertible function of the choice. Note that we haven't established that causal contractibility cannot be appropriate, merely that we have no reason to accept it on the basis of arguments so far.
+Given a sequential just-do model $(\prob{P}_C,(\RV{B},\RV{I}),\RV{Y})$ with $\RV{B}:=(\RV{B}_i)_{i\in M}$ representing body mass index of individual $\RV{I}_i$ and $\RV{Y}:=(\RV{Y}_i)_{i\in M}$ representing health outcomes of interest for the same individual, \citet{hernan_does_2008} noted that there are multiple different choices that can influence an individual's body mass index $\RV{B}_i$ in the same way. Thus $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{B}$ might generally be rejected, and so there may be no uniform conditional $\prob{P}_C^{\RV{Y}|\RV{IB}}$. In this case, $\prob{P}_C^{\RV{Y}|\RV{IB}}$ cannot be causally contractible because it doesn't exist.
 
-Causal contractibility is the a priori assumption that there is a response function relating each pair from a sequence of pairs of variables. However, we could also consider the possibility that we conclude that there is such a response function after reviewing the data.
-
-Suppose we are in possession of a $(\RV{D};(\RV{B},\RV{Y}))$-causally contractible probability set $\prob{P}_C$, such that each $(\RV{D}_i,\RV{B}_i,\RV{Y}_i)$ is related by the response conditional $\prob{P}_C^{\RV{Y}_1\RV{B}_1|\RV{D}_1\RV{H}}$. Suppose that we also have an ``oracle'' available that performs an infinite number of samples under appropriate conditions and reveals the value $h\in H$ yielded by the variable $\RV{H}$. Then we can consider the new probability set $\prob{P}_{C,h}$ where for arbitrary $\RV{Z}:\Omega\to Z$, $A\in \sigalg{Z}$
+Suppose instead a model $(\prob{P}_C,(\RV{D},\RV{I}),(\RV{B},\RV{Y}))$ is given, with $\RV{D}=(\RV{D}_i)_{i\in M}$ representing ``decisions'', appropriately fine-grained to satisfy
 \begin{align}
-    \prob{P}_{C,h}^{\RV{Z}}(A) &= \prob{P}_C^{\RV{Z}|\RV{H}}(A|h)
+    &\RV{YBI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}\\
+    &\RV{YBI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}
 \end{align}
-
-Note that $\prob{P}_{C,h}$ remains $(\RV{D};(\RV{B},\RV{Y}))$-causally contractible with response conditionals $\prob{P}_{C,h}^{\RV{Y}_1\RV{B}_1|\RV{D}_1}$. Furthermore that by Theorem \ref{th:higher_order_conditionals}, we have $((\RV{D},\RV{B});\RV{Y})$-causal contractibility with response conditionals $\prob{P}_{C,h}^{\RV{Y}_1|\RV{D}_1\RV{B}_1}$. In this case, we could find that $\RV{Y}_i\CI_{\prob{P}_{C,h}}^e \RV{D}_i|\RV{B}_i$, and so by Lemma \ref{lem:ind_to_cc} $\prob{P}_{C,h}$ is also $(\RV{B};\RV{Y})$-causally contractible.
-
-In this case, it seems much more reasonable to describe the fact that $\RV{B}$ has a causal effect on $\RV{Y}$ as a \emph{finding}, rather than an \emph{assumption}. 
-
-
-\subsection{Combs and response conditionals with data-dependent actions}\label{sec:data_dependent}
-
-
-
-\section{Allowing dependence on observations}
-
-We want to remove the assumption $\RV{D}_i\CI_{\prob{P}_C}^e \RV{Y}_{<i} C|\RV{D}_{<i}$. It turns out that this is fairly straightforward to do -- essentially, we require that causal contractibility holds for some $C'$ such that $\RV{D}_i\CI_{\prob{P}_{C'}}^e \RV{Y}_{<i} C|\RV{D}_{<i}$, and then we require that $\prob{P}_C$ extends $\prob{P}_{C'}$ in the appropriate way. Before we do this, however, we will introduce the idea of a \emph{comb}, which is an important generalisation of the idea of a conditional probability. The result we will eventually arrive at is that a model features response conditionals if it has a causally contractible comb of the appropriate type.
-
-To begin with an example, consider a probability set $\prob{P}_C$, variables $\RV{D}_{\mathbb{N}}$ and $\RV{Y}_{\mathbb{N}}$ and a subsequence $(\RV{D}_i,\RV{Y}_i)_{i\in [2]}$ of length 2. Lifting the assumption $\RV{D}_i\CI_{\prob{P}_C}^e \RV{Y}_{<i} C|\RV{D}_{<i}$ means that only the following holds:
+and $\prob{P}_C^{\RV{YB}|\RV{ID}}$ causally contractible. Then by Theorem \ref{th:cc_ind_treat} $\prob{P}_C^{\RV{Y}|\RV{BD}}$ is also causally contractible. In general, there may be some $U\subset H$ such that for any $h\in U$ 
 \begin{align}
-    \RV{Y}_i&\CI^e_{\prob{P}_C} \RV{Y}_{[\mathbb{N}]\setminus i},\RV{D}_{\mathbb{N}\setminus i}C|\RV{H}\RV{D}_i&\forall i\in \mathbb{N}\\
+    \prob{P}_C^{\RV{Y}_i|\RV{B}_i\RV{D}_i\RV{H}}(y|b,d,h) &= \prob{P}_C^{\RV{Y}_i|\RV{B}_i\RV{H}}(y|b,h)\label{eq:conditional_conditional_independence}
+\end{align}
+then, \emph{conditioning on }$\RV{H}\in U$, the resulting $\prob{P}_{C,\RV{H}\in U}^{\RV{Y}|\RV{B}}$ is causally contractible.
+\todo[inline]{Defining conditioning}
+So it may be possible to derive the fact that there is a repeatable response conditional $\prob{P}_{C,\RV{H}\in U}^{\RV{Y}_i|\RV{H}\RV{B}_i}$ if $\RV{H}\in U$ is implied by available data, even if it is not assumed outright.
+
+\section{Combs and response conditionals with data-dependent actions}\label{sec:data_dependent}
+
+The results of the previous section concern ``just-do'' models where actions have not dependence on previous data. Decision problems of interest actually have actions that depend on data -- what's really wanted are ``see-do'' models of some variety (see Definition \ref{def:see_do_model}). Here, Theorem \ref{th:data_ind_CC} is generalised to sequential see-do models with the use of \emph{probability combs}. Combs are a generalisation of conditional probabilities which can be used to capture a certain notion of data-dependent choices.
+
+To begin with an example, consider a probability set $(\prob{P}_C,\RV{D},\RV{Y})$ with $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$ as usual, and take a subsequence $(\RV{D}_i,\RV{Y}_i)_{i\in [2]}$ of length 2. Suppose $\prob{P}_C$ features repeatable response conditionals in the sense that the following holds
+\begin{align}
+    \RV{Y}_i&\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i},\RV{C})|\RV{H}\RV{D}_i&\forall i\in \mathbb{N}\\
     \land \RV{H} &\CI^e_{\prob{P}_C} \RV{D} C\\
-    \land \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \prob{P}^{\RV{Y}_0|\RV{H}\RV{D}_0} & \forall i\in \mathbb{N}
+    \land \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \prob{P}_C^{\RV{Y}_0|\RV{H}\RV{D}_0} & \forall i\in \mathbb{N}
 \end{align}
 
-In this case, for arbitrary $\alpha\in C$
+Then, for arbitrary $\alpha\in C$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}_{[2]}} &= \tikzfig{response_conditional_comb}
 \end{align}
-we still have response conditionals $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$ but now the $\RV{D}_i$'s can depend on the previous $\RV{Y}_i$'s.
+note that $\RV{D}_2$ depends on $\RV{Y}_1$ and $\RV{D}_1$. Instead of multiplying by a distribution over $(\RV{D}_1,\RV{D}_2)$, $\prob{P}_\alpha^{\RV{D}_2|\RV{Y}_1\RV{D}_1}$ has been ``inserted'' between the response conditionals $\prob{P}_C^{\RV{Y}_1|\RV{D}_1\RV{H}}$ and $\prob{P}_C^{\RV{Y}_2|\RV{D}_2\RV{H}}$. A comb is a Markov kernel that yields a probability distribution when another Markov kernel of appropriate type is inserted in this manner.
 
-Given $\prob{P}_C^{\RV{Y}_1|\RV{D}_1\RV{H}}$ and $\prob{P}_C^{\RV{Y}_2|\RV{D}_2\RV{H}}$, we can define
+Given $\prob{P}_C^{\RV{Y}_1|\RV{D}_1\RV{H}}$ and $\prob{P}_C^{\RV{Y}_2|\RV{D}_2\RV{H}}$, define the comb
 \begin{align}
     \prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}} := \tikzfig{causally_contractible_comb}
 \end{align}
-and $\prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}$ is still ``$(\RV{D};\RV{Y})$-causally contractible'', but it is no longer a uniform conditional probability. It is is a \emph{uniform 2-comb}.
+then $\prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}$ is causally contractible. $\prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}$ is \emph{not} a uniform conditional probability; in general 
+\begin{align}
+    \prob{P}_\alpha^{\RV{D}_1\RV{D}_2} \prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}\neq \prob{P}_\alpha^{\RV{Y}_1\RV{Y}_2}
+\end{align}
 
 \subsection{Combs}
 
-Where uniform conditional probabilities map probability distributions to probability distributions via the semidirect product, 2-combs map conditional probabilities to conditional probabilities via an ``insert'' operation. Similarly, higher order combs map  Graphically, the semidirect product looks like
-\begin{align}
-    \prob{P}_\alpha^{\RV{XY}}&=\prob{P}_\alpha^{\RV{X}}\cprod\prob{P}_C^{\RV{Y}|\RV{X}}\\
-    &= \tikzfig{conditional_semidirect_product}
-\end{align}
-and the insert operation looks like
+Where uniform conditional probabilities map probability distributions to probability distributions via the semidirect product, 2-combs map conditional probabilities to conditional probabilities via an ``insert'' operation. More generally, higher order combs map lower order combs to lower order combs (where conditional probabilities are though of as 1-combs and probability distributions as 0-combs).  Graphically, the insert operation can be represented in with the following diagrams
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{XY}}&=\prob{P}_\alpha^{\RV{X}}\cprod\prob{P}_C^{\RV{Y}|\RV{X}}\\
+%     &= \tikzfig{conditional_semidirect_product}
+% \end{align}
+% and the insert operation looks like
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}_{1}\RV{D}_2\RV{Y}_2|\RV{D}_1}&=\text{insert}(\prob{P}_\alpha^{\RV{D}_2|\RV{D}_1\RV{Y}_1},\prob{P}_C^{\RV{Y_{[2]}}\combbreak\RV{D}_{[2]}})\\
     &= \tikzfig{comb_insert_complicated}\label{eq:comb_insert_complicated}\\
@@ -882,7 +884,7 @@ and the insert operation looks like
     &= \tikzfig{comb_insert_simple}\label{eq:comb_insert_simple}
 \end{align}
 
-While Equation \ref{eq:comb_insert_complicated} is a well-formed string diagram in the category of Markov kernels, Equation \ref{eq:comb_insert_simple} is not. In the case that all the underlying sets are discrete, Equation \ref{eq:comb_insert_simple} can be defined using an extended string diagram notation appropriate for the category of real-valued matrices \citep{jacobs_causal_2019}. We're not going to go to introduce the extension here, but we will give an algebraic definition of the insert operation for discrete sets.
+While Equation \ref{eq:comb_insert_complicated} is a well-formed string diagram in the category of Markov kernels, Equation \ref{eq:comb_insert_simple} is not. In the case that all the underlying sets are discrete, Equation \ref{eq:comb_insert_simple} can be defined using an extended string diagram notation appropriate for the category of real-valued matrices \citep{jacobs_causal_2019}, though we do not introduce this extension here.
 
 \begin{definition}[Uniform $n$-Comb]
 Given a probability set $\prob{P}_C$ with variables $\RV{Y}_i:\Omega\to Y$ and $\RV{D}_i:\Omega\to D$ for $i\in [n]$ an uniform conditional probabilities $\{\RV{P}_C^{\RV{Y}_i|\RV{D}_{[i]}\RV{Y}_{[i-1]}}|i\in [n]\}$, the uniform $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}:D^n\kto Y^n$ is the Markov kernel given by the recursive definition
@@ -921,7 +923,9 @@ Given an $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$ and an $n-1
 \end{align}
 \end{definition}
 
-\subsection{Response conditionals in models with history dependence}
+Unlike conditional probabilities, where marginalising yields other conditional probabilities, marginals of combs generally fail to be combs. The exception is when the ``last'' output wire is marginalised, in which case marginalising an $n$-comb yields an $n-1$-comb.
+
+\subsection{Response conditionals in models with data dependent actions}
 
 The main theorem of this section, Theorem \ref{th:response_hdep} is an almost trivial extension of Theorem \ref{th:iid_rep}. Instead of starting with a probability set $\prob{P}_C$ with a uniform conditional $\prob{P}_C^{\RV{Y}|\RV{D}}$, we assume instead a collection of uniform conditionals $\prob{P}_C^{\RV{Y}_i|\RV{D}_{\leq i}\RV{Y}_{<i}}$ (this is a strictly weaker condition, as we can derive these as higher order conditionals from the assumption of $\prob{P}_C^{\RV{Y}|\RV{D}}$). Theorem \ref{th:response_hdep} then says if the $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}\combbreak\RV{D}}$ is causally contractible, then we have response conditionals $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$. Because $\prob{P}_C^{\RV{Y}\combbreak\RV{D}}$ is a Markov kernel with the same signature as $\prob{P}_C^{\RV{Y}|\RV{D}}$, the reasoning from Theorem \ref{th:response_hdep} carries over almost directly..
 
@@ -943,7 +947,6 @@ Where $\Pi_{D,i}:D^\mathbb{N}\kto D$ is the $i$th projection map.
 Apply Lemma \todo{lemma I've yet to prove} to $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$.
 \end{proof}
 
-\subsection{Validity}
 
 \subsection{Combs are the output of the ``fix'' operation}
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{61}
+\begin{thebibliography}{66}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -38,8 +38,8 @@ Elias Bareinboim, Juan~D. Correa, Duligur Ibeling, and Thomas Icard.
 \newblock Technical report, 2020.
 \newblock URL \url{https://causalai.net/r60.pdf}.
 
-\bibitem[BLACKWELL(1979)]{blackwell_theory_1979}
-DAVID~A. BLACKWELL.
+\bibitem[Blackwell(1979)]{blackwell_theory_1979}
+David~A. Blackwell.
 \newblock \emph{Theory of {Games} and {Statistical} {Decisions}}.
 \newblock Dover Publications, New York, September 1979.
 \newblock ISBN 978-0-486-63831-7.
@@ -161,6 +161,18 @@ P.~Diaconis and D.~Freedman.
   \url{https://projecteuclid.org/journals/annals-of-probability/volume-8/issue-4/Finite-Exchangeable-Sequences/10.1214/aop/1176994663.full}.
 \newblock Publisher: Institute of Mathematical Statistics.
 
+\bibitem[Eckles and Bakshy(2021)]{eckles_bias_2021}
+Dean Eckles and Eytan Bakshy.
+\newblock Bias and {High}-{Dimensional} {Adjustment} in {Observational}
+  {Studies} of {Peer} {Effects}.
+\newblock \emph{Journal of the American Statistical Association}, 116\penalty0
+  (534):\penalty0 507--517, April 2021.
+\newblock ISSN 0162-1459.
+\newblock \doi{10.1080/01621459.2020.1796393}.
+\newblock URL \url{https://doi.org/10.1080/01621459.2020.1796393}.
+\newblock Publisher: Taylor \& Francis \_eprint:
+  https://doi.org/10.1080/01621459.2020.1796393.
+
 \bibitem[Ferguson(1967)]{toutenburg_ferguson_1967}
 Thomas~S. Ferguson.
 \newblock \emph{Mathematical {Statistics}: {A} {Decision} {Theoretic}
@@ -202,6 +214,24 @@ Tobias Fritz.
 \newblock URL
   \url{https://www.sciencedirect.com/science/article/pii/S0001870820302656}.
 
+\bibitem[Gordon et~al.(2018)Gordon, Zettelmeyer, Bhargava, and
+  Chapsky]{gordon_comparison_2018}
+Brett~R. Gordon, Florian Zettelmeyer, Neha Bhargava, and Dan Chapsky.
+\newblock A {Comparison} of {Approaches} to {Advertising} {Measurement}:
+  {Evidence} from {Big} {Field} {Experiments} at {Facebook}.
+\newblock {SSRN} {Scholarly} {Paper} ID 3033144, Social Science Research
+  Network, Rochester, NY, September 2018.
+\newblock URL \url{https://papers.ssrn.com/abstract=3033144}.
+
+\bibitem[Gordon et~al.(2022)Gordon, Moakler, and
+  Zettelmeyer]{gordon_close_2022}
+Brett~R. Gordon, Robert Moakler, and Florian Zettelmeyer.
+\newblock Close {Enough}? {A} {Large}-{Scale} {Exploration} of
+  {Non}-{Experimental} {Approaches} to {Advertising} {Measurement}.
+\newblock \emph{arXiv:2201.07055 [econ]}, January 2022.
+\newblock URL \url{http://arxiv.org/abs/2201.07055}.
+\newblock arXiv: 2201.07055.
+
 \bibitem[Greenland and Robins(1986)]{greenland_identifiability_1986}
 Sander Greenland and James~M Robins.
 \newblock Identifiability, {Exchangeability}, and {Epidemiological}
@@ -229,6 +259,16 @@ D.~Heckerman and R.~Shachter.
 \newblock ISSN 1076-9757.
 \newblock \doi{10.1613/jair.202}.
 \newblock URL \url{https://www.jair.org/index.php/jair/article/view/10151}.
+
+\bibitem[Hernán and Taubman(2008)]{hernan_does_2008}
+M.~A. Hernán and S.~L. Taubman.
+\newblock Does obesity shorten life? {The} importance of well-defined
+  interventions to answer causal questions.
+\newblock \emph{International Journal of Obesity}, 32\penalty0 (S3):\penalty0
+  S8--S14, August 2008.
+\newblock ISSN 1476-5497.
+\newblock \doi{10.1038/ijo.2008.82}.
+\newblock URL \url{https://www.nature.com/articles/ijo200882}.
 
 \bibitem[Hernán and Robins(2020)]{hernan_whatif_2020}
 Miguel~A. Hernán and James~M Robins.
@@ -502,6 +542,13 @@ Robert Wiblin.
 \newblock Why smoking in the developing world is an enormous problem and how
   you can help save lives, 2016.
 \newblock URL \url{https://80000hours.org/problem-profiles/tobacco/}.
+
+\bibitem[Willard(1970)]{willard_general_1970}
+Stephen Willard.
+\newblock \emph{General topology}.
+\newblock Reading, Mass., Addison-Wesley Pub. Co, 1970.
+\newblock ISBN 978-0-201-08707-9.
+\newblock URL \url{http://archive.org/details/generaltopology00will_0}.
 
 \bibitem[Woodward(2016)]{woodward_causation_2016}
 James Woodward.
