@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (3.75, -0.25) {$\prob{Q}^{\RV{Y}|\RV{IC}}$};
+		\node [style=RLabel tikzit] (1) at (6.5, -0.25) {$\RV{Y}$};
+		\node [style=Llabel tikzit] (2) at (-1.5, 0.25) {$\RV{I}$};
+		\node [style=none] (3) at (3, 0) {};
+		\node [style=none] (4) at (3, -0.5) {};
+		\node [style=Llabel tikzit] (5) at (-1.5, -1) {$\RV{D}$};
+		\node [style=small kernel tikzit] (8) at (0.5, 0.25) {$\kernel{F}_\rho$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0) to (1);
+		\draw (2) to (8);
+		\draw [in=180, out=0] (8) to (3.center);
+		\draw [in=180, out=0] (5) to (4.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

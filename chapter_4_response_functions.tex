@@ -695,39 +695,45 @@ Given a sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Ome
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}
 \end{align}
-and there is a one-to-one function $f:C\to D^{\mathbb{N}}$ such that
+and furthermore
 \begin{align}
-    \prob{P}_\alpha^{\RV{D}}(A) &= \kernel{F}_f(A|\alpha)&\forall \alpha\in C,A\in \sigalg{D}^{\mathbb{N}}
+    &\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}\\
+    &\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}
 \end{align}
 then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
 \end{theorem}
 
 \begin{proof}
-By assumption of one-to-one-ness $f$ has left inverse $f^{\dagger}:D^{\mathbb{N}}\to C$ such that $f^{\dagger}f(\alpha) = \alpha$. Furthermore, for all $d\in f(C)^{-1}$, $ff^{\dagger}(d)=d$ and for all $\alpha\in C$, $\prob{P}_\alpha^{\RV{D}}(f(C)^{-1})=0$. Thus, relative to $\RV{D}$, $\kernel{F}_f\kernel{F}_{f^{\dagger}}\overset{\prob{P}_C}{\cong}\text{id}_{D^{\mathbb{N}}}$, i.e. $f^\dagger$ is an almost sure inverse of $f$.
-
-By the fact that $\kernel{F}_{f^\dagger}\kernel{F}_f=\text{id}_C$
+For any $\alpha\in C$ by Theorem \ref{th:higher_order_conditionals}
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{ID}} \overset{\prob{P}_\alpha}{\cong} (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})(\text{id}_{I}\otimes\kernel{F}_{f})\prob{P}_\alpha^{\RV{Y}|\RV{ID}}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= \tikzfig{kernel_fac_with_idents}\\
+    &= \tikzfig{kernel_fac_with_idents_indepped}
 \end{align}
 
-The map $\kernel{Q}:(B|i,\alpha)\mapsto \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|i)$ is itself a Markov kernel. For every $\alpha$, $\RV{D}$ is deterministic, hence $\RV{D}\CI_{\prob{P}_\alpha} \RV{I}$ for all $\alpha\in C$. Thus for each $\alpha$
+Define $\kernel{Q}$ by $\alpha\mapsto \prob{P}_\alpha$ and $\kernel{Q}^{\cdot|\cdot\RV{C}}$ by $\alpha\mapsto \prob{P}_\alpha^{*}$ and $\kernel{Q}^{\RV{C}}$ is an arbitrary distribution in $\Delta(C)$ with full support. Note that the support of $\kernel{Q}^{\RV{IDY}}$ is the union of the support of $\prob{P}^{\RV{IDY}}_\alpha$ for all $\alpha$. Then
 \begin{align}
-    (\text{id}_{I}\otimes\delta_\alpha) \kernel{Q}  \overset{\prob{P}_\alpha}{\cong}  (\text{id}_{I}\otimes\prob{P}_{\alpha}^{\RV{D}})\prob{P}_C^{\RV{Y}|\RV{ID}}\\
-    \implies (\text{id}_I\otimes \text{id}_C)\kernel{Q} \overset{\prob{P}_C}{\cong} (\text{id}_I\otimes \kernel{F}_f)\prob{P}_C^{\RV{Y}|\RV{ID}}\\
-    \implies \kernel{Q} \overset{\prob{P}_C}{\cong} (\text{id}_{I}\otimes\kernel{F}_{f^\dagger})\prob{P}_C^{\RV{Y}|\RV{ID}}\\
-    \implies (\text{id}_{I}\otimes\kernel{F}_{f^\dagger}) \kernel{Q} \overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}|\RV{ID}}\label{eq:as_inverse}
+    \kernel{Q}^{\RV{Y}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_fac_with_idents_kernelised}
 \end{align}
-Where Eq. \ref{eq:as_inverse} follows from the fact that $f^\dagger$ is an almost sure inverse of $f$.
-Furthermore, by assumption, for any $\rho\in I$
+
+By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$, it is also the case that
 \begin{align}
-    (\rho\otimes \text{id}_{C} )\kernel{Q} = \kernel{Q}
+    \kernel{Q}^{\RV{Y}|\RV{ID}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents}\\
+    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_idepped}\\
+    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_subbed}
 \end{align}
-Therefore
+But
 \begin{align}
-    (\rho \otimes \text{id}_{C} ) \prob{P}_\alpha^{\RV{Y}|\RV{ID}}&= (\rho \otimes \text{id}_{C} ) (\text{id}_{I}\otimes\kernel{F}_{f})\kernel{Q}\\
-     &=  (\text{id}_{I}\otimes\kernel{F}_{f}) (\rho \otimes \text{id}_{C} )\kernel{Q}\\
-     &= (\text{id}_{I}\otimes\kernel{F}_{f})\kernel{Q}\\
-     &= \prob{P}_\alpha^{\RV{Y}|\RV{ID}}
+    \kernel{Q}^{\RV{Y}|\RV{ID}}=\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{Y}|\RV{ID}}\kernel{Q}^{\RV{C}}(\alpha)\\
+    &= \prob{P}_C^{\RV{Y}|\RV{ID}}
+    \implies \tikzfig{kernel_Q_fac_with_idents_subbed} &= \prob{P}_C^{\RV{Y}|\RV{ID}}
+\end{align}
+
+Furthermore, by assumption, for any permutation $\rho:\mathbb{N}\to\mathbb{N}$
+\begin{align}
+    \kernel{Q}^{\RV{Y}|\RV{IC}} &= \tikzfig{kernel_Q_with_swap}\\
+    \implies \prob{P}_C^{\RV{Y}|\RV{ID}} &= \tikzfig{kernel_Q_fac_with_idents_swapped}\\
+    &= \tikzfig{kernel_Q_fac_with_idents_swapped_exch}\\
+    &= \tikzfig{kernel_P_with_swap}
 \end{align}
 Then by Lemma \ref{lem:ind} the independence $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}C|\RV{D}$ holds, and by Lemma \ref{lem:ind_to_cc} $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
 \end{proof}
@@ -750,50 +756,72 @@ For all $\alpha\in C$
 \end{align}
 \end{proof}
 
+The condition $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ alone does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. 
 
-The weaker condition $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}.
+Constructing the following example requires the hypotheses that any given identifier $i\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. This generates space of hypotheses $H=\{0,1\}^{\mathbb{N}}$, which needs to be equipped with an algebra of measurable sets. Equipped with the product topology, $H$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(H,\mathcal{B}(H))$ is a standard measurable space and because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
 
 \begin{example}
-Take $Y=C=D=H=\{0,1\}$ and for any $i\neq 1$, $\RV{YID}\CI^e_{\prob{P}_C} \RV{C}$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$. Then $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$. 
+Take $Y=C=D=\{0,1\}$ and take $(H,\sigalg{H})$ to be $\{0,1\}^{\mathbb{N}}$ equipped with the product topology. For any $i\neq 1$, $\RV{Y}_i\RV{I}_i\RV{D}_i\CI^e_{\prob{P}_C} \RV{C}$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$ and $\RV{I}_i\CI^e_{\prob{P}_C} \RV{C}$.
 
-Let $g:I\to\{0,1\}$ be the function $j\mapsto j\text{mod} 2$, and for all $i\in \mathbb{N}$ set
+$\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ follows from the fact that $\RV{C}$ can be (almost surely) written as a function of $\RV{D}$.
+
+For all $i,\in \mathbb{N}$, $y,d\in \{0,1\}$, $h\in H$ set
 \begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{I}_i\RV{D}_i}(y|h,j,d) &= \delta_1(h)(\delta_1(g(j))\delta_d(y)+\delta_0(g(j))\delta_{1-d}(y)) + \delta_0(h)(\delta_1(g(j))\delta_{1-d}(y)+\delta_0(g(j))\delta_{d}(y))
+    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{I}_i\RV{D}_i}(y|h,j,d) &= \delta_1(p(j,h))\delta_d(y) + \delta_0(p(j,h))\delta_{1-d}(y)
 \end{align}
-That is, if $\RV{H}=0$ then $\RV{Y}$ goes with $\RV{D}$ on odd $\RV{I}_i$ and goes the opposite of $\RV{D}$ on even $\RV{I}_i$, while if $\RV{H}=1$ then $\RV{Y}$ goes opposite of $\RV{D}$ on odd $\RV{I}_i$ and with $\RV{D}$ on even $\RV{I}_i$. Suppose also \begin{align}
+where $p(j,h)$ projects the $j$-th component of $h$. That is, if $h$ maps $j$ to 1, $\RV{Y}$ goes with $\RV{D}$ while if $h$ maps $j$ to $0$, $\RV{Y}$ goes opposite $\RV{D}$. Suppose also 
+\begin{align}
     \RV{Y}_i\CI_{\prob{P}_C}^e (\RV{X}_{<i},\RV{Y}_{<i},\RV{I}_{<i},\RV{C})|(\RV{X}_i,\RV{Y}_i,\RV{H})
 \end{align}
-Then $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is causally contractible. Set
+Then $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is causally contractible. Set $\prob{P}_{C}^{\RV{H}}$ to be the uniform measure on $(H,\sigalg{H})$ and for $i>1$
 \begin{align}
-    \prob{P}_{C}^{\RV{H}}(h) = 0.5
+    \prob{P}_C^{\RV{D}_i|\RV{I}_i\RV{H}}(d|j,h) &= \delta_{p(j,h)}(d)
 \end{align}
-and for $i>1$
+that is, if $h$ maps $j$ to 1, $\RV{D}$ is 1 while if $h$ maps $j$ to $0$, $\RV{D}$ is 0. This also implies
 \begin{align}
-    \prob{P}_C^{\RV{D}_i|\RV{I}_i\RV{H}}(d|j,h) &= \delta_1(h)(\delta_{1}(g(j))\delta_1(d)+\delta_{0}(g(j))\delta_0(d)) + \delta_0(h)(\delta_{1}(g(j))\delta_0(d)+\delta_{0}(g(j))\delta_1(d))
-\end{align}
-that is, if $\RV{H}=0$ then $\RV{D}_i=1$ if $\RV{I}_i$ is odd, 0 otherwise, and when $\RV{H}=1$ then $\RV{D}_i=0$ if $\RV{I}_i$ is odd, 1 otherwise.
-
-Overall: for $i>1$, if $\RV{H}=0$ and $\RV{I}_i$ is odd then $\RV{D}_i=1$ and $\RV{Y}_i=1$ and if $\RV{I}_i$ is even then $\RV{D}_i=0$ and $\RV{Y}_i=1$. If $\RV{H}=1$ and $\RV{I}_i$ is odd then $\RV{D}_i=0$ and $\RV{Y}_i=1$, and if $\RV{I}_i$ is even then $\RV{D}_i=1$ and $\RV{Y}_i=1$. So for $i>1$, $\RV{Y}_i=1$ deterministically, and this remains true if instead of $\RV{I}$ a permutation of $\RV{I}$ is conditioned on.
-
-For $i=1$, suppose for all $i$, $\prob{P}_C^{g(\RV{I}_i)}(1)=0.5$ (a property preserved by permutation). Then
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_1|\RV{I}_1}(y|j) &= 0.5\sum_{h\in \{0,1\}} \delta_1(h)(\delta_1(g(j))\delta_\alpha(y)+\delta_0(g(j))\delta_{1-\alpha}(y)) + \delta_0(h)(\delta_1(g(j))\delta_{1-\alpha}(y)+\delta_0(g(j))\delta_{\alpha}(y))\\
-    &= 0.5(\delta_1(g(j))+\delta_0(g(j)))(\delta_\alpha(y)+\delta_{1-\alpha}(y))\\
-    &= 0.5(\delta_d(y)+\delta_{1-d}(y))\\
-    &= 
-\end{align}
-Thus by Theorem \ref{th:equal_of_condits}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is not causally contractible. However
-
-
-
-then for any $\rho\in I$, $y\in\{0,1\}$, $j\in I$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|j) &= \sum_{h\in \{0,1\}}\sum_{d\in\{0,1\}^{\mathbb{N}}} \prod_{i\in \mathbb{N}} \prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{D}_i\RV{H}}(y_i|j_i,d_i,h) \prob{P}_\alpha^{\RV{D}_i|\RV{I}_i\RV{H}}(d_i|j_i,h)\prob{P}_C^{\RV{H}}(h)\\
-    &= 0.5\delta_{(1)_{i\in\mathbb{N}}}(y_{>i})\\
-    &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|j)
+    \prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(p(\cdot,h)^{-1}(d)|d,h) &= 1\label{eq:all_eq_d}
 \end{align}
 
+Then, for $i>1$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i}(y|h,d) &= \sum_{j\in \mathbb{N}} \delta_1(p(j,h))\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h) + \delta_0(p(j,h))\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h)\\
+    &= \sum_{j\in \mathbb{N}} \delta_1(d)\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h) + \delta_0(d)\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h)&\text{by Eq \ref{eq:all_eq_d}}\\
+    &= \delta_1(y)\\
+    \implies \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i}(y|d) &= \delta_1(y)
+\end{align}
 
+For $q\in I$, set
+\begin{align}
+    \prob{P}_C^{\RV{I}|\RV{H}}(q|h)&= \begin{cases}
+        0.5 & q=(1,2,3,4,...) \text{ or } (1,3,2,4,...)\\
+        0&\text{otherwise}
+    \end{cases}
+\end{align}
+and set
+\begin{align}
+    \prob{P}_C^{\RV{H}|\RV{D}}(h) &= \begin{cases}
+        0.5 & h=(0,1,0,1,1,...)\text{ or }h=(0,0,1,1,1,...)\\
+        0 &\text{otherwise}
+    \end{cases}
+\end{align}
+Let $\overline{H}$ be the support of $\prob{P}_C^{\RV{H}|\RV{D}}(h)$.
+
+Then for $i=1$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_1|\RV{D}_1}(y|h,d) &= \sum_{h\in H} \sum_{j\in \mathbb{N}} \prob{P}_\alpha^{\RV{I}_1|\RV{D}_1\RV{H}}(j|d,h)\prob{P}_C^{\RV{H}|\RV{D}_1}(h|d)\left(\delta_1(p(j,h))\delta_d(y) + \delta_0(p(j,h))\delta_{1-d}(y)\right)\\
+    &= \sum_{h\in \overline{H}} 0.5( \delta_1(p(1,h))\delta_d(y) + \delta_0(p(1,h))\delta_{1-d}(y))\\
+    &= \delta_{1-d}(y))\\
+    &\neq  \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i}(y|h,d) & i\neq 1
+\end{align}
+Thus $\prob{P}_C^{\RV{Y}|\RV{D}}$ is not causally contractible by Theorem \ref{th:equal_of_condits}. 
+
+However, given any finite permutation $\rho:\mathbb{N}\to\mathbb{N}$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q) &= \sum_{h\in \overline{H}}\sum_{d\in\{0,1\}^{\mathbb{N}}} \prod_{i\in \mathbb{N}} \prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{D}_i\RV{H}}(y_i|q_i,d_i,h) \prob{P}_\alpha^{\RV{D}_i|\RV{I}_i\RV{H}}(d_i|q_i,h)\prob{P}_C^{\RV{H}}(h)\\
+    &= \delta_{1-\alpha}(y_1)\delta_{(1)_{i\in\mathbb{N}}}(y_{>1})\\
+    &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|\rho^{-1}(q))\\
+    &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q)
+\end{align}
 \end{example}
 
 \subsubsection{Example: body mass index}
