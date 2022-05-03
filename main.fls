@@ -1063,12 +1063,6 @@ INPUT ./figures/causally_contractible_comb.tikz
 INPUT ./figures/causally_contractible_comb.tikz
 INPUT ./figures/causally_contractible_comb.tikz
 INPUT ./figures/causally_contractible_comb.tikz
-INPUT ./figures/conditional_semidirect_product.tikz
-INPUT ./figures/conditional_semidirect_product.tikz
-INPUT ./figures/conditional_semidirect_product.tikz
-INPUT ./figures/conditional_semidirect_product.tikz
-INPUT ./figures/conditional_semidirect_product.tikz
-INPUT ./figures/conditional_semidirect_product.tikz
 INPUT ./figures/comb_insert_complicated.tikz
 INPUT ./figures/comb_insert_complicated.tikz
 INPUT ./figures/comb_insert_complicated.tikz
@@ -1093,12 +1087,6 @@ INPUT ./figures/comb_inductive.tikz
 INPUT ./figures/comb_inductive.tikz
 INPUT ./figures/comb_inductive.tikz
 INPUT ./figures/comb_inductive.tikz
-INPUT ./figures/do_model_representation.tikz
-INPUT ./figures/do_model_representation.tikz
-INPUT ./figures/do_model_representation.tikz
-INPUT ./figures/do_model_representation.tikz
-INPUT ./figures/do_model_representation.tikz
-INPUT ./figures/do_model_representation.tikz
 INPUT chapter_5_interventions_counterfactuals.tex
 INPUT chapter_5_interventions_counterfactuals.tex
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmbx7.tfm

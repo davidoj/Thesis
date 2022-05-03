@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  2 MAY 2022 15:29
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  3 MAY 2022 13:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1421,17 +1421,14 @@ Overfull \hbox (25.23602pt too wide) in paragraph at lines 636--637
 i-bu-tion on the sci-ence must be row-exchangeable
  []
 
-[79]
-Overfull \hbox (4.87152pt too wide) in paragraph at lines 645--646
-[][]\T1/lmr/bx/n/10 Lemma 4.2.17. []\T1/lmr/m/it/10 Given se-quen-tial just-do 
-model $\OT1/cmr/m/n/10 (\U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (\O
-T1/cmss/m/n/10 D\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 I\OT1/cmr/m/n/10 )\OML/cmm/
-m/it/10 ; \OT1/cmss/m/n/10 Y\OT1/cmr/m/n/10 )$ \T1/lmr/m/it/10 with $\U/msb/m/n
-/10 P[]$ \T1/lmr/m/it/10 causally
+
+Overfull \hbox (11.28647pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 4.3.  CAUSAL CONTRACTIBILITY IN SEQUENCES OF ACTIVE CHOICES \T1
+/lmr/m/n/10 79
  []
 
-(./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
-(./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
+[79] (./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz
+) (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
 (./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
 (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
 Overfull \hbox (11.29007pt too wide) has occurred while \output is active
@@ -1443,8 +1440,13 @@ Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 (./figures/kernel_fac_with_idents_indepped.tikz)
 (./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
+Overfull \hbox (11.28647pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 4.3.  CAUSAL CONTRACTIBILITY IN SEQUENCES OF ACTIVE CHOICES \T1
+/lmr/m/n/10 81
+ []
+
+[81] (./figures/kernel_fac_with_idents_kernelised.tikz)
 (./figures/kernel_fac_with_idents_kernelised.tikz)
-(./figures/kernel_fac_with_idents_kernelised.tikz) [81]
 (./figures/kernel_Q_fac_with_idents.tikz)
 (./figures/kernel_Q_fac_with_idents_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
@@ -1453,7 +1455,7 @@ Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
-Overfull \hbox (19.01276pt too wide) detected at line 729
+Overfull \hbox (19.01276pt too wide) detected at line 731
 []
  []
 
@@ -1464,18 +1466,27 @@ Overfull \hbox (19.01276pt too wide) detected at line 729
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped_exch.tikz)
 (./figures/kernel_P_with_swap.tikz)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 82 \T1/lmr/m/sl/10 CHAPTER 4.  DECISION PROBLEMS WITH REPEATABLE
  PHENOMENA
  []
 
-[82] [83]
-Overfull \hbox (89.4473pt too wide) detected at line 791
+[82]
+Overfull \hbox (11.28647pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 4.3.  CAUSAL CONTRACTIBILITY IN SEQUENCES OF ACTIVE CHOICES \T1
+/lmr/m/n/10 83
+ []
+
+[83]
+Overfull \hbox (89.4473pt too wide) detected at line 793
 []
  []
 
 
-Overfull \hbox (62.47636pt too wide) detected at line 815
+Overfull \hbox (62.47636pt too wide) detected at line 817
 []
  []
 
@@ -1486,50 +1497,45 @@ Overfull \hbox (11.29007pt too wide) has occurred while \output is active
  []
 
 [84]
-Overfull \hbox (63.64941pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 4.3.  COMBS AND RESPONSE CONDITIONALS WITH DATA-DEPENDENT ACTIO
-NS \T1/lmr/m/n/10 85
+Overfull \hbox (11.28647pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 4.3.  CAUSAL CONTRACTIBILITY IN SEQUENCES OF ACTIVE CHOICES \T1
+/lmr/m/n/10 85
  []
 
 [85] (./figures/response_conditional_comb.tikz)
 (./figures/response_conditional_comb.tikz)
 (./figures/causally_contractible_comb.tikz)
 (./figures/causally_contractible_comb.tikz)
-(./figures/conditional_semidirect_product.tikz)
-(./figures/conditional_semidirect_product.tikz)
-(./figures/comb_insert_complicated.tikz)
-(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz)
-(./figures/comb_insert_complicated.tikz)
-(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz)
-
 Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 86 \T1/lmr/m/sl/10 CHAPTER 4.  DECISION PROBLEMS WITH REPEATABLE
  PHENOMENA
  []
 
-[86] (./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz)
-Overfull \hbox (63.64941pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 4.3.  COMBS AND RESPONSE CONDITIONALS WITH DATA-DEPENDENT ACTIO
-NS \T1/lmr/m/n/10 87
- []
-
-[87]
-Overfull \hbox (61.58463pt too wide) detected at line 918
+[86] (./figures/comb_insert_complicated.tikz)
+(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz)
+(./figures/comb_insert_complicated.tikz)
+(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz)
+(./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [87]
+Overfull \hbox (61.58463pt too wide) detected at line 925
 []
  []
 
 
-LaTeX Warning: Reference `th:iid_rep' on page 88 undefined on input line 923.
+Overfull \hbox (14.65022pt too wide) in paragraph at lines 930--931
+\T1/lmr/m/n/10 Theorem []4.4.6[] gen-er-alises The-o-rem []4.2.15[] to mod-els 
+$\OT1/cmr/m/n/10 (\U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 D\OML/cm
+m/m/it/10 ; \OT1/cmss/m/n/10 Y\OT1/cmr/m/n/10 )$ \T1/lmr/m/n/10 with data-depen
+dent
+ []
 
-(./figures/do_model_representation.tikz)
-(./figures/do_model_representation.tikz)
+
 Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 88 \T1/lmr/m/sl/10 CHAPTER 4.  DECISION PROBLEMS WITH REPEATABLE
  PHENOMENA
  []
 
 [88]
-Overfull \hbox (3.85442pt too wide) in paragraph at lines 956--956
+Overfull \hbox (3.85442pt too wide) in paragraph at lines 959--959
 []\T1/lmr/bx/n/14.4 Weaker as-sump-tions than causal con-tractibil-
  []
 
@@ -1799,7 +1805,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 219.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 219.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 219.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B9C8FF011842EB5FAD8B15C78205A18C;4869.
+(rerunfilecheck)             Checksum: 9B8810CE41753B85A67DD69E5C5E0316;4916.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1813,12 +1819,12 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 219.
  ) 
 Here is how much of TeX's memory you used:
- 30877 strings out of 479819
- 591300 string characters out of 5895847
- 930606 words of memory out of 5000000
- 46873 multiletter control sequences out of 15000+600000
+ 30857 strings out of 479819
+ 590653 string characters out of 5895847
+ 924288 words of memory out of 5000000
+ 46862 multiletter control sequences out of 15000+600000
  643836 words of font info for 168 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 68i,17n,83p,1626b,1034s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,17n,83p,1626b,972s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (110 pages, 1197372 bytes).
+Output written on main.xdv (110 pages, 1185268 bytes).

@@ -76,7 +76,7 @@ Causal contractibility is the conjunction of both assumptions.
 A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally contractible} if it is local and commutes with exchange.
 \end{definition}
 
-\subsubsection{Properties of causal contractibility}
+\subsubsection{Properties of causally contractible Markov kernels}
 
 A causally contractible Markov kernel over a sequence of pairs treats all subsequences as equivalent in a particular way (Theorem \ref{th:equal_of_condits}, although the sense in which this implies equivalence of subsequences might be more obvious from the statement of Theorem \ref{th:equal_of_reduced_condits} presented later). This feature is the motivation for the name \emph{causal contractibility}. Both sub-assumptions are independent -- Theorem \ref{th:no_implication} presents counterexamples.
 
@@ -433,14 +433,14 @@ Consider any $S,T\subset\mathbb{N}$ with $|S|=|T|$, and define $A_S:=\times_{i\i
 So by Theorem \ref{th:equal_of_condits}, $\kernel{K}$ is causally contractible.
 \end{proof}
 
-\subsection{Causal contractibility with data-independent actions}
+\subsection{Causal contractibility with data-independent actions}\label{sec:data_independent_actions}
 
 Given a sequence of variables $(\RV{D}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ where the ``inputs'' are $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and the ``outputs'' are $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$, say the inputs are independent of previous observations if $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{D}_{<i}$ for all $i\in\mathbb{N}$. This models an experiment where it may be possible to choose different inputs $\RV{D}$, but all the inputs are determined before the outputs $\RV{Y}$ are known. If a model satisfies this, then the dependence of $\RV{Y}$ on $\RV{D}$ is a sequence of repeatable response functions if and only if the uniform conditional $\prob{P}_C^{\RV{Y}|\RV{D}}$ exists (Definition \ref{def:cprob_pset}) and is causally contractible.
 
 We call a model $\prob{P}_C$ with sequential outputs $\RV{Y}$ and a corresponding sequence of data-independent inputs $\RV{D}$ a ``sequential just-do model''.
 
 \begin{definition}[Sequential just-do model]
-A \emph{sequential just-do model} is a triple $(\prob{P}_C,\RV{D},\RV{Y})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{D}$ is a sequence of ``inputs'' $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}$ is a corresponding sequence of ``outputs'' $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$ where $\RV{D}_i':\Omega\to D$ and $\RV{Y}_i':\Omega\to Y$. Furthermore, it is required that $\RV{X}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{X}_{<i}$ for all $i\in \mathbb{N}$, and $\RV{Y}'\CI^e_{\prob{P}_C} C|\RV{D}'$.
+A \emph{sequential just-do model} is a triple $(\prob{P}_C,\RV{D},\RV{Y})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{D}$ is a sequence of ``inputs'' $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}$ is a corresponding sequence of ``outputs'' $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$ where $\RV{D}_i:\Omega\to D$ and $\RV{Y}_i:\Omega\to Y$. Furthermore, it is required that $\RV{X}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{X}_{<i}$ for all $i\in \mathbb{N}$, and $\RV{Y}\CI^e_{\prob{P}_C} C|\RV{D}$.
 \end{definition}
 
 To apply Theorem \ref{th:ciid_rep_kernel} to a sequential just-do model, it is necessary to extend the model to a larger sample space including ``latent variables'' taking values in $Y^D$. A latent extension is a model over a larger collection of variables that reduces to the original model when we restrict our attention to the original collection of variables.
@@ -465,7 +465,7 @@ First, define the extension $\prob{P}_C$. From Theorem \ref{th:table_rep_kernel}
 \begin{align}
     \prob{P}_C^{\prime \RV{Y}'|\RV{D}'} &= \tikzfig{lookup_representation_variablised}\label{eq:lup_rep_varb}
 \end{align}
-Let $\prob{P}_C^{\RV{Y}^{D}|\RV{X}}=\mu\otimes \text{del}_{X^{\mathbb{N}}}$, $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}=\kernel{F}_{\mathrm{ev}}$ and $\RV{Y}^D:=\Pi_{Y^{D\times\mathbb{N}}}$, the projection $\Omega\times Y^{D\times\mathbb{N}}\to \Omega$. Let $\RV{W}=\Pi_{\Omega}$ and for each $\alpha\in C$, set 
+Let $\prob{P}_C^{\RV{Y}^{D}|\RV{D}}=\mu\otimes \text{del}_{D^{\mathbb{N}}}$, $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}=\kernel{F}_{\mathrm{ev}}$ and $\RV{Y}^D:=\Pi_{Y^{D\times\mathbb{N}}}$, the projection $\Omega\times Y^{D\times\mathbb{N}}\to \Omega$. Let $\RV{W}=\Pi_{\Omega}$ and for each $\alpha\in C$, set 
 \begin{align}
     \prob{P}_\alpha^{\RV{W}|\RV{Y}^D\RV{D}} &= \tikzfig{augmented_ccontracible}
 \end{align}
@@ -562,7 +562,7 @@ For any $A,B\subset \mathbb{N}$, let $\text{swap}_{B\leftrightarrow A,D}:D^{\mat
 
 \subsubsection{Examples}
 
-Purely passive observations can be modelled with a probability set $\prob{P}_C$ where $|\prob{P}_C|=1$. In this case, a model that is exchangeable over the sequence of pairs $(\RV{D}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ has $\prob{P}_C^{\RV{Y}|\RV{D}}$ causally contractible. This follows from the fact that
+Purely passive observations can be modeled with a probability set $\prob{P}_C$ where $|\prob{P}_C|=1$. In this case, a model that is exchangeable over the sequence of pairs $(\RV{D}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ has $\prob{P}_C^{\RV{Y}|\RV{D}}$ causally contractible. This follows from the fact that
 
 \begin{align}
     \prob{P}_C^{\RV{YD}} &= \tikzfig{do_model_rep_onechoice_combined}
@@ -843,9 +843,11 @@ then, \emph{conditioning on }$\RV{H}\in U$, the resulting $\prob{P}_{C,\RV{H}\in
 \todo[inline]{Defining conditioning}
 So it may be possible to derive the fact that there is a repeatable response conditional $\prob{P}_{C,\RV{H}\in U}^{\RV{Y}_i|\RV{H}\RV{B}_i}$ if $\RV{H}\in U$ is implied by available data, even if it is not assumed outright.
 
-\section{Combs and response conditionals with data-dependent actions}\label{sec:data_dependent}
+\section{Response conditionals with data-dependent actions}\label{sec:data_dependent}
 
 The results of the previous section concern ``just-do'' models where actions have not dependence on previous data. Decision problems of interest actually have actions that depend on data -- what's really wanted are ``see-do'' models of some variety (see Definition \ref{def:see_do_model}). Here, Theorem \ref{th:data_ind_CC} is generalised to sequential see-do models with the use of \emph{probability combs}. Combs are a generalisation of conditional probabilities which can be used to capture a certain notion of data-dependent choices.
+
+Because combs are a bit more complicated to work with than conditional probabilities, most of the previous results have not yet been generalised to the data-dependent case, if such a generalisation is possible.
 
 To begin with an example, consider a probability set $(\prob{P}_C,\RV{D},\RV{Y})$ with $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$ as usual, and take a subsequence $(\RV{D}_i,\RV{Y}_i)_{i\in [2]}$ of length 2. Suppose $\prob{P}_C$ features repeatable response conditionals in the sense that the following holds
 \begin{align}
@@ -887,7 +889,7 @@ Where uniform conditional probabilities map probability distributions to probabi
 While Equation \ref{eq:comb_insert_complicated} is a well-formed string diagram in the category of Markov kernels, Equation \ref{eq:comb_insert_simple} is not. In the case that all the underlying sets are discrete, Equation \ref{eq:comb_insert_simple} can be defined using an extended string diagram notation appropriate for the category of real-valued matrices \citep{jacobs_causal_2019}, though we do not introduce this extension here.
 
 \begin{definition}[Uniform $n$-Comb]
-Given a probability set $\prob{P}_C$ with variables $\RV{Y}_i:\Omega\to Y$ and $\RV{D}_i:\Omega\to D$ for $i\in [n]$ an uniform conditional probabilities $\{\RV{P}_C^{\RV{Y}_i|\RV{D}_{[i]}\RV{Y}_{[i-1]}}|i\in [n]\}$, the uniform $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}:D^n\kto Y^n$ is the Markov kernel given by the recursive definition
+Given a probability set $\prob{P}_C$ with variables $\RV{Y}_i:\Omega\to Y$, $\RV{D}_i:\Omega\to D$ for $i\in [n]$ and uniform conditional probabilities $\{\RV{P}_C^{\RV{Y}_i|\RV{D}_{[i]}\RV{Y}_{[i-1]}}|i\in [n]\}$, the uniform $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}:D^n\kto Y^n$ is the Markov kernel given by the recursive definition
 \begin{align}
     \prob{P}_C^{\RV{Y}_{1}\combbreak \RV{D}_{1}} &= \prob{P}_C^{\RV{Y}_1|\RV{D}_1}\\
     \prob{P}_C^{\RV{Y}_{[m]}\combbreak \RV{D}_{[m]}} &= \tikzfig{comb_inductive}
@@ -914,49 +916,87 @@ For each $n\in \mathbb{N}$ $m<n$, we have
 Therefore the existence of $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}$ is a consequence of Lemma \ref{lem:infinitely_extended_kernels}.
 \end{proof}
 
-We now define the insert operation for discrete sets only
+For discrete sets, the insert operation has a compact definition
 
-\begin{definition}[Comb insert]
-Given an $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$ and an $n-1$ comb $\prob{P}_\alpha^{\RV{D}_{[1,n]}|\RV{Y}_{[n-1]}}$, $(D,\sigalg{D})$ and $(Y,\sigalg{Y})$ discrete, for all $y_i\in Y$ and $d_i\in D$
+\begin{definition}[Comb insert - discrete]
+Given an $n$-comb $\prob{P}_\alpha^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$ and an $n-1$ comb $\prob{P}_\alpha^{\RV{D}_{[2,n]}|\RV{Y}_{[n-1]}}$, $(D,\sigalg{D})$ and $(Y,\sigalg{Y})$ discrete, for all $y_i\in Y$ and $d_i\in D$
 \begin{align}
-    \mathrm{insert}(\prob{P}_\alpha^{\RV{D}_{[1,n]}\combbreak \RV{Y}_{[n-1]}},\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}})(y_{[n]},d_{[n-1]}|d_1) &= \prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(y_n|d_{[1,n]},d_1)\prob{P}_\alpha^{\RV{D}_{[1,n]}\combbreak\RV{Y}_{[n-1]}}(d_{[1,n]}|y_{[n-1]})
+    \mathrm{insert}(\prob{P}_\alpha^{\RV{D}_{[2,n]}\combbreak \RV{Y}_{[n-1]}},\prob{P}_\alpha^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}})(y_{[n]},d_{[2,n]}|d_1) &= \prob{P}_\alpha^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(y_n|d_{[2,n]},d_1)\prob{P}_\alpha^{\RV{D}_{[1,n]}\combbreak\RV{Y}_{[n-1]}}(d_{[2,n]}|y_{[n-1]})
 \end{align}
 \end{definition}
 
-Unlike conditional probabilities, where marginalising yields other conditional probabilities, marginals of combs generally fail to be combs. The exception is when the ``last'' output wire is marginalised, in which case marginalising an $n$-comb yields an $n-1$-comb.
-
 \subsection{Response conditionals in models with data dependent actions}
 
-The main theorem of this section, Theorem \ref{th:response_hdep} is an almost trivial extension of Theorem \ref{th:iid_rep}. Instead of starting with a probability set $\prob{P}_C$ with a uniform conditional $\prob{P}_C^{\RV{Y}|\RV{D}}$, we assume instead a collection of uniform conditionals $\prob{P}_C^{\RV{Y}_i|\RV{D}_{\leq i}\RV{Y}_{<i}}$ (this is a strictly weaker condition, as we can derive these as higher order conditionals from the assumption of $\prob{P}_C^{\RV{Y}|\RV{D}}$). Theorem \ref{th:response_hdep} then says if the $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}\combbreak\RV{D}}$ is causally contractible, then we have response conditionals $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$. Because $\prob{P}_C^{\RV{Y}\combbreak\RV{D}}$ is a Markov kernel with the same signature as $\prob{P}_C^{\RV{Y}|\RV{D}}$, the reasoning from Theorem \ref{th:response_hdep} carries over almost directly..
+Theorem \ref{th:response_hdep} generalises Theorem \ref{th:data_ind_CC} to models $(\prob{P}_C,\RV{D},\RV{Y})$ with data-dependent actions, where instead the assumption that the uniform comb $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$ is causally contractible replaces the assumption that the conditional probability $\prob{P}_C^{\RV{Y}| \RV{D}}$ is causally contractible.
 
-Unlike causal contractibility in the history independent case, we are not aware of an equivalent condition to the causal contractibility of $\prob{P}_C^{\RV{Y}\combbreak\RV{D}}$ in terms of relabeled random variables. The difficulty is, because $\RV{D}_i$ can depend on $\RV{Y}_{<i}$, we usually don't have symmetry with respect to relabeling variables.
+\begin{definition}[Sequential see-do model]
+A \emph{sequential see-do model} is a triple $(\prob{P}_C,\RV{D},\RV{Y})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{D}$ is a sequence of ``inputs'' $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}$ is a corresponding sequence of ``outputs'' $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$ where $\RV{D}_i:\Omega\to D$ and $\RV{Y}_i:\Omega\to Y$ and $\RV{Y}_i\CI^e_{\prob{P}_C} C|(\RV{D}_{[i]},\RV{Y}_{<i})$.
+\end{definition}
 
 \begin{theorem}[]\label{th:response_hdep}
-Suppose we have a sample space $(\Omega,\sigalg{F})$, a probability set $\prob{P}_C$ and variables $\RV{D}:=(\RV{D}_i)_{i\in \mathbb{N}}$ and $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$ with uniform $\mathbb{N}$-comb $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$. $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$ is causally contractible if and only if $\Omega$ can be extended with some $\RV{H}:\Omega\times H\to H$ such that $\prob{P}^{\RV{H}}_C$ and $\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}$ exist for all $i\in \mathbb{N}$ and
-\begin{align}
-    \prob{P}_C^{\RV{Y}\combbreak\RV{D}} &= \tikzfig{do_model_representation}\\
-    &\iff\\
-    \RV{Y}_i&\CI^e_{\prob{P}_C} \RV{Y}_{\mathbb{N}\setminus i},\RV{D}_{\mathbb{N}\setminus i}C|\RV{H}\RV{D}_i&\forall i\in \mathbb{N}\\
-    \land \RV{H} &\CI^e_{\prob{P}_C} \RV{D} C\\
-    \land \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \prob{P}^{\RV{Y}_0|\RV{H}\RV{D}_0} & \forall i\in \mathbb{N}
-\end{align}
-Where $\Pi_{D,i}:D^\mathbb{N}\kto D$ is the $i$th projection map.
+Given a sequential see-do model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}'}$ is causally contractible if and only if there is a latent extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times H,\sigalg{F}\otimes\sigalg{Y}^{D\times\mathbb{N}})$ with hypothesis $\RV{H}:\Omega\times H\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{X}_{<i},C)|(\RV{X}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{X}_j\RV{H}}$ for all $i,j\in \mathbb{N}$ and $\RV{H}\CI_{\prob{P}_C} (\RV{X},\RV{C})$.
 \end{theorem}
 
 \begin{proof}
-Apply Lemma \todo{lemma I've yet to prove} to $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$.
+If:
+By assumption, there is some $\kernel{L}:H\times D\kto Y$ such that
+\begin{align}
+    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \kernel{L}
+\end{align}
+and $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i})|(\RV{D}_i,\RV{H})$. Thus
+\begin{align}
+    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i\RV{Y}_{<i}\RV{D}_{<i}} &= \kernel{L}\otimes \text{erase}_{Y^{i-1}\times D^{i-1}}
+\end{align}
+and so
+\begin{align}
+    \prob{P}_C^{\RV{Y}\combbreak \RV{D}} &= \tikzfig{do_model_representation}\label{eq:comb_representation_w_CI}
+\end{align}
+and so by Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$ is causally contractible.
+
+Only if:
+First, define the extension $\prob{P}_C$. From Theorem \ref{th:ciid_rep_kernel} and causal contractibility of $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}'}$ there is some $H$, $\mu\in \Delta(H)$ and $\kernel{L}:H\times D\kto Y$ such that
+\begin{align}
+    \prob{P}_C^{\prime \RV{Y}'\combbreak\RV{D}'} &= \tikzfig{do_model_representation_mu}
+\end{align}
+thus, by the definition of the comb insert operation
+\begin{align}
+    \prob{P}_\alpha^{\prime\RV{D}'_{[n]} \RV{Y}'_{[n]}} &= \prob{P}_\alpha^{\RV{D}_1}\odot \text{insert}(\prob{P}_\alpha^{\prime \RV{D}'_{[2,n]}\combbreak\RV{Y}'_{[n-1]}}, \prob{P}_C^{\prime \RV{Y}'_{[n]}\combbreak\RV{D}'_{[n]}}) 
+\end{align}
+Let
+\begin{align}
+    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \kernel{L}\label{eq:identical_response_assumption}
+\end{align}
+and let $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i})|(\RV{D}_i,\RV{H})$, and for all $\alpha$ set $\prob{P}_\alpha^{\RV{W}|\RV{DY}}=\prob{P}_\alpha^{\prime \RV{W}'|\RV{D'Y'}}$ for all $\RV{W}':\Omega\to W$ and $\prob{P}_\alpha^{\RV{D}_i|\RV{Y}_{<i}\RV{D}_{<i}}=\prob{P}_\alpha^{\prime \RV{D}_i'|\RV{Y}_{<i}'\RV{D}_{<i}''}$.
+
+It remains to be shown that $\prob{P}_\alpha^{\RV{DY}}=\prob{P}_\alpha^{\prime \RV{DY}}$.
+
+By Equation \ref{eq:identical_response_assumption} and $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i})|(\RV{D}_i,\RV{H})$, it follows (for identical reasons as Equation \ref{eq:comb_representation_w_CI}) that
+\begin{align}
+    \prob{P}_C^{\RV{Y}\combbreak \RV{D}} &= \tikzfig{do_model_representation}\\
+    &= \tikzfig{do_model_representation_mu}\\
+    &= \prob{P}_C^{\prime \RV{Y}'\combbreak\RV{D}'}
+\end{align}
+
+And so for all $n\in \mathbb{N}$
+\begin{align}
+    \prob{P}_\alpha^{\RV{D}_{[n]} \RV{Y}_{[n]}} &=  \prob{P}_\alpha^{\RV{D}_1}\odot \text{insert}(\prob{P}_\alpha^{ \RV{D}_{[2,n]}\combbreak\RV{Y}_{[n-1]}}, \prob{P}_C^{\prime \RV{Y}_{[n]}\combbreak\RV{D}_{[n]}}) \\
+    &= \prob{P}_\alpha^{\RV{D}_1}\odot \text{insert}(\prob{P}_\alpha^{\prime \RV{D}'_{[2,n]}\combbreak\RV{Y}'_{[n-1]}}, \prob{P}_C^{\prime \RV{Y}'_{[n]}\combbreak\RV{D}'_{[n]}}) \\
+    &= \prob{P}_\alpha^{\prime\RV{D}'_{[n]} \RV{Y}'_{[n]}}
+\end{align}
 \end{proof}
+
+In contrast to the data-independent case where causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{X}}$ implies the equivalence of all subsequence conditionals $\prob{P}_C^{\RV{Y}_A|\RV{X}_A}$ for all equally sized $A\subset\mathbb{N}$, a causally contractible comb $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$ does not generally imply that subsequence combs $\prob{P}_C^{\RV{Y}_A\combbreak \RV{D}_A}$ and $\prob{P}_C^{\RV{Y}_B\combbreak \RV{D}_B}$ are equivalent with $|A|=|B|$.
 
 
 \subsection{Combs are the output of the ``fix'' operation}
 
 There is a relationship between combs and the ``fix'' operation defined in \citet{richardson_nested_2017}. In particular, suppose we have a probability $\prob{P}_\alpha$ and a comb $\prob{P}_\alpha^{\RV{Y}_{[2]}|\RV{D}_{[2]}}$. Then (assuming discrete sets)
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}_{[2]}|\RV{D}_{[2]}}(y_1,y_2|d_1,d_2) &= \prob{P}_\alpha^{\RV{Y}_1|\RV{D}_1}(y_1|d_1)\prob{P}_\alpha^{\RV{Y}_2|\RV{D}_2}(y_2|d_2)\\
+    \prob{P}_\alpha^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}(y_1,y_2|d_1,d_2) &= \prob{P}_\alpha^{\RV{Y}_1|\RV{D}_1}(y_1|d_1)\prob{P}_\alpha^{\RV{Y}_2|\RV{D}_2}(y_2|d_2)\\
     &= \frac{\prob{P}_\alpha^{\RV{Y}_1|\RV{D}_1}(y_1|d_1)\prob{P}_\alpha^{\RV{D}_2|\RV{Y}_1\RV{D}_1}(d_2|y_1,d_1)\prob{P}_\alpha^{\RV{Y}_2|\RV{D}_2}(y_2|d_2)}{\prob{P}_\alpha^{\RV{D}_2|\RV{Y}_1\RV{D}_1}(d_2|y_1,d_1)}\\
-    &= \frac{\prob{P}_\alpha^{\RV{Y}_[2]\RV{D}_2|\RV{D}_1}(y_1,y_2,d_2|d_1)}{\prob{P}_\alpha^{\RV{D}_2|\RV{Y}_1\RV{D}_1}(d_2|y_1,d_1)}
+    &= \frac{\prob{P}_\alpha^{\RV{Y}_{[2]}\RV{D}_2|\RV{D}_1}(y_1,y_2,d_2|d_1)}{\prob{P}_\alpha^{\RV{D}_2|\RV{Y}_1\RV{D}_1}(d_2|y_1,d_1)}
 \end{align}
-This is precisely the ``division by a conditional probability'' used in the fix operation. We speculate that the fix operation is precisely an alternative definition of an $n$-comb, but we have not proven this.
+This is precisely the ``division by a conditional probability'' used in the fix operation. We speculate that the output of the fix operation is, in general, an $n$-comb, but we have not proven this.
 
 
 \section{Weaker assumptions than causal contractibility}
