@@ -59,8 +59,8 @@
 \contentsline {section}{\numberline {4.4}Response conditionals with data-dependent actions}{86}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Combs}{87}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Response conditionals in models with data dependent actions}{88}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Combs are the output of the ``fix'' operation}{89}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}Weaker assumptions than causal contractibility}{89}{section.4.5}%
+\contentsline {subsection}{\numberline {4.4.3}Combs are the output of the ``fix'' operation}{90}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Weaker assumptions than causal contractibility}{90}{section.4.5}%
 \contentsline {chapter}{\numberline {5}See-do models, interventions and counterfactuals}{91}{chapter.5}%
 \contentsline {section}{\numberline {5.1}How do see-do models relate to other approaches to causal inference?}{91}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Interpretations of the choice set}{91}{section.5.2}%
