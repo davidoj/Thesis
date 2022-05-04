@@ -1010,7 +1010,22 @@ A weaker assumption that is often adopted is to consider causal contractibility 
 
 A third assumption that is the assumption that $\prob{P}_C^{\RV{Y}|\RV{U}}$ is causally contractible where $\RV{U}$ is unobserved. Consider this assumption in conjunction with the assumption that for all \emph{observational} samples and all $h\in H$, $\prob{P}^{\RV{U}_i|\RV{H}}(\cdot|h)$ has full support. This can be understood as the assumption that, whatever choice is made, all individual outcomes of choices are exchangeable with a random subsequence of observations (see Theorem \ref{th:condit_exchange}). That is, ``nothing truly new is being done''\footnote{Chapter 1 verse 9 of the biblical book of Ecclesiastes has the phrase ``Everything that will be done has been done already; there's nothing new under the sun'' (different translations have different precise wording). For this reason, we consider this assumption ``Ecclesiastes' assumption''}.
 
-\begin{theorem}[Conditional exchangeability]\label{th:condit_exchange}
+\todo[Define conditioning]
 
-\end{theorem}
+\begin{corollary}[Conditional exchangeability]\label{th:condit_exchange}
+Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{Y}|\RV{U}}$ causally contractible, $U$ discrete, for any $u\in U$, $A\subset \mathbb{N}$, $\prob{P}_{C|\RV{U}_A=u}^{\RV{Y}_A}$ is exchangeable where it is defined.
+\end{corollary}
+
+\begin{proof}
+By definition of conditioning, for $B\in \sigalg{Y}$, $u\in U$, if $\prob{P}_C^{\RV{U}}(u)>0$:
+\begin{align}
+    \prob{P}_{C|U_A=u}^{\RV{Y}_A}(B) &= \prob{P}_C^{\RV{Y}_A|\RV{U}_A}(A|u)
+\end{align}
+By Theorem \ref{th:table_rep_kernel}, the RHS is equal to
+\begin{align}
+    \prob{P}_C^{(\RV{Y}^U_{uj})_{j\in A}} 
+\end{align} 
+which is exchangeable by column exchangeability of $\prob{P}_C^{\RV{Y}^U}$.
+\end{proof}
+
 
