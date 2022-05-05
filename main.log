@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  3 MAY 2022 17:02
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  5 MAY 2022 15:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1394,19 +1394,28 @@ Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 (./figures/do_model_rep_onechoice_combined.tikz)
 (./figures/do_model_rep_onechoice.tikz) (./figures/do_model_rep_onechoice.tikz)
 [77]
+Overfull \hbox (24.81929pt too wide) in paragraph at lines 598--600
+[][]\T1/lmr/bx/n/10 Example 4.2.17 \T1/lmr/m/n/10 (Back-door ad-just-ment)\T1/l
+mr/bx/n/10 . []\T1/lmr/m/n/10 If a se-quen-tial just-do model $\OT1/cmr/m/n/10 
+(\U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (\OT1/cmss/m/n/10 D\OML/cm
+m/m/it/10 ; \OT1/cmss/m/n/10 X\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmss/m/n
+/10 Y\OT1/cmr/m/n/10 )$
+ []
+
+
 Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 78 \T1/lmr/m/sl/10 CHAPTER 4.  DECISION PROBLEMS WITH REPEATABLE
  PHENOMENA
  []
 
 [78]
-Overfull \hbox (1.66454pt too wide) in paragraph at lines 628--629
+Overfull \hbox (1.66454pt too wide) in paragraph at lines 631--632
 \T1/lmr/m/n/10 change-abil-ity'' for a de-ci-sion prob-lem re-gard-ing tak-ing 
 as-pirin to treat a headache
  []
 
 
-Overfull \hbox (25.23602pt too wide) in paragraph at lines 636--637
+Overfull \hbox (25.23602pt too wide) in paragraph at lines 639--640
 \OT1/cmr/m/n/10 1\OML/cmm/m/it/10 ; :::; N$\T1/lmr/m/n/10 , and thus any dis-tr
 i-bu-tion on the sci-ence must be row-exchangeable
  []
@@ -1445,7 +1454,7 @@ Overfull \hbox (11.28647pt too wide) has occurred while \output is active
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
-Overfull \hbox (19.01276pt too wide) detected at line 731
+Overfull \hbox (19.01276pt too wide) detected at line 734
 []
  []
 
@@ -1471,12 +1480,12 @@ Overfull \hbox (11.28647pt too wide) has occurred while \output is active
  []
 
 [83]
-Overfull \hbox (89.4473pt too wide) detected at line 793
+Overfull \hbox (89.4473pt too wide) detected at line 796
 []
  []
 
 
-Overfull \hbox (62.47636pt too wide) detected at line 817
+Overfull \hbox (62.47636pt too wide) detected at line 820
 []
  []
 
@@ -1506,12 +1515,12 @@ Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 (./figures/comb_insert_complicated.tikz)
 (./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz)
 (./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [87]
-Overfull \hbox (57.70961pt too wide) detected at line 925
+Overfull \hbox (57.70961pt too wide) detected at line 928
 []
  []
 
 
-Overfull \hbox (14.65022pt too wide) in paragraph at lines 930--931
+Overfull \hbox (14.65022pt too wide) in paragraph at lines 933--934
 \T1/lmr/m/n/10 Theorem []4.4.6[] gen-er-alises The-o-rem []4.2.15[] to mod-els 
 $\OT1/cmr/m/n/10 (\U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 D\OML/cm
 m/m/it/10 ; \OT1/cmss/m/n/10 Y\OT1/cmr/m/n/10 )$ \T1/lmr/m/n/10 with data-depen
@@ -1532,40 +1541,49 @@ Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 (./figures/do_model_representation_mu.tikz)
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation_mu.tikz) [89]
-Overfull \hbox (3.85442pt too wide) in paragraph at lines 1002--1002
+Overfull \hbox (3.85442pt too wide) in paragraph at lines 1005--1005
 []\T1/lmr/bx/n/14.4 Weaker as-sump-tions than causal con-tractibil-
  []
 
-) (./chapter_5_interventions_counterfactuals.tex
+
 Overfull \hbox (11.29007pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 90 \T1/lmr/m/sl/10 CHAPTER 4.  DECISION PROBLEMS WITH REPEATABLE
  PHENOMENA
  []
 
 [90]
-Chapter 5.
-[91
 
-]
-Overfull \hbox (37.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 92 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
-COUNTERFACTUALS
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1013 ...t only swap elements in the sequence $\(
+                                                  RV{Y}^o_\RV{Q},\RV{Y}^v_i)$.
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[91]
+Overfull \hbox (111.2077pt too wide) detected at line 1029
+[]
+ []
+
+
+LaTeX Warning: Reference `eq:q_is_fn' on page 92 undefined on input line 1036.
+
+) (./chapter_5_interventions_counterfactuals.tex
+Overfull \hbox (11.29007pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10 92 \T1/lmr/m/sl/10 CHAPTER 4.  DECISION PROBLEMS WITH REPEATABLE
+ PHENOMENA
  []
 
 [92]
+Chapter 5.
+[93
 
-LaTeX Warning: Reference `sec:single_double_representation' on page 93 undefine
-d on input line 71.
-
-[93]
-
-Package natbib Warning: Citation `savage_foundations_1972' on page 94 undefined
- on input line 77.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+]
 Overfull \hbox (37.26372pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 94 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
 COUNTERFACTUALS
@@ -1573,11 +1591,30 @@ COUNTERFACTUALS
 
 [94]
 
-LaTeX Warning: Reference `sec:cbns_without_d' on page 95 undefined on input lin
+LaTeX Warning: Reference `sec:single_double_representation' on page 95 undefine
+d on input line 71.
+
+[95]
+
+Package natbib Warning: Citation `savage_foundations_1972' on page 96 undefined
+ on input line 77.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (37.26372pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10 96 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
+COUNTERFACTUALS
+ []
+
+[96]
+
+LaTeX Warning: Reference `sec:cbns_without_d' on page 97 undefined on input lin
 e 88.
 
 
-LaTeX Warning: Reference `ssec:random_variables' on page 95 undefined on input 
+LaTeX Warning: Reference `ssec:random_variables' on page 97 undefined on input 
 line 90.
 
 
@@ -1593,7 +1630,7 @@ Overfull \hbox (36.9879pt too wide) detected at line 109
 
 Underfull \vbox (badness 8189) has occurred while \output is active []
 
- [95]
+ [97]
 Overfull \hbox (5.52379pt too wide) in paragraph at lines 134--135
 []\T1/lmr/m/n/10 By the as-sump-tion of lim-ited un-re-spon-sive-ness, for all 
 $\OML/cmm/m/it/10 d; d[]$ \T1/lmr/m/n/10 such that $\OML/cmm/m/it/10 y[]\OT1/cm
@@ -1614,48 +1651,48 @@ m/n/10 (\OML/cmm/m/it/10 s; d\OT1/cmr/m/n/10 ) =
 
 
 Overfull \hbox (37.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 96 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
-COUNTERFACTUALS
- []
-
-[96] [97]
-Overfull \hbox (37.26372pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 98 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND 
 COUNTERFACTUALS
  []
 
-[98]
-
-LaTeX Warning: Reference `def:conditional_independence' on page 99 undefined on
- input line 338.
-
-[99]
-
-LaTeX Warning: Reference `def:ctensor' on page 100 undefined on input line 391.
-
-
-
+[98] [99]
 Overfull \hbox (42.26372pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10 100 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND
  COUNTERFACTUALS
  []
 
-[100] [101]
+[100]
+
+LaTeX Warning: Reference `def:conditional_independence' on page 101 undefined o
+n input line 338.
+
+[101]
+
+LaTeX Warning: Reference `def:ctensor' on page 102 undefined on input line 391.
+
+
+
+Overfull \hbox (42.26372pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10 102 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND
+ COUNTERFACTUALS
+ []
+
+[102] [103]
 Underfull \hbox (badness 10000) in paragraph at lines 439--443
 
  []
 
 ) (./chapter_6_other_causal_inference.tex
 Overfull \hbox (42.26372pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10 102 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND
+\T1/lmr/m/n/10 104 \T1/lmr/m/sl/10 CHAPTER 5.  SEE-DO MODELS, INTERVENTIONS AND
  COUNTERFACTUALS
  []
 
-[102]
+[104]
 Chapter 6.
 ) (./main.bbl
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-7.
+1.
  (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1663,139 +1700,140 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [103
+ [105
 
 ]
-Underfull \hbox (badness 6284) in paragraph at lines 115--125
+Underfull \hbox (badness 6284) in paragraph at lines 120--130
 []\T1/lmr/m/n/10 A. P. Dawid.  Causal In-fer-ence with-out Coun-ter-fac-tu-als.
   \T1/lmr/m/it/10 Jour-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--125
+Underfull \hbox (badness 10000) in paragraph at lines 120--130
 \T1/lmr/m/it/10 nal of the Amer-i-can Sta-tis-ti-cal As-so-ci-a-tion\T1/lmr/m/n
 /10 , 95(450):407--424,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--125
+Underfull \hbox (badness 10000) in paragraph at lines 120--130
 \T1/lmr/m/n/10 June 2000.  ISSN 0162-1459.  doi: $10 . 1080 / 01621459 . 2000 .
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--125
+Underfull \hbox (badness 10000) in paragraph at lines 120--130
 \T1/lmr/m/n/10 10474210$.  URL []$\T1/lmtt/m/n/10 https : / / www . tandfonline
  . com / doi / abs / 10 . 1080 /
  []
 
 
-Underfull \hbox (badness 5893) in paragraph at lines 115--125
+Underfull \hbox (badness 5893) in paragraph at lines 120--130
 \T1/lmtt/m/n/10 01621459 . 2000 . 10474210$[]\T1/lmr/m/n/10 .  Pub-lisher: Tay-
 lor & Fran-cis _eprint:
  []
 
-
-Underfull \hbox (badness 1490) in paragraph at lines 154--163
+[106]
+Underfull \hbox (badness 1490) in paragraph at lines 159--168
 []\T1/lmr/m/n/10 P. Di-a-co-nis and D. Freed-man.  Fi-nite Ex-change-able Se-qu
 ences.  \T1/lmr/m/it/10 The
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--163
+Underfull \hbox (badness 10000) in paragraph at lines 159--168
 \T1/lmr/m/it/10 An-nals of Prob-a-bil-ity\T1/lmr/m/n/10 , 8(4):745--764, Au-gus
 t 1980.  ISSN 0091-
  []
 
 
-Underfull \hbox (badness 6078) in paragraph at lines 154--163
+Underfull \hbox (badness 6078) in paragraph at lines 159--168
 \T1/lmr/m/n/10 1798, 2168-894X.  doi: $10 . 1214 / aop / 1176994663$.  URL []$\
 T1/lmtt/m/n/10 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--163
+Underfull \hbox (badness 10000) in paragraph at lines 159--168
 \T1/lmtt/m/n/10 / / projecteuclid . org / journals / annals-[]of-[]probability 
 / volume-[]8 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--163
+Underfull \hbox (badness 10000) in paragraph at lines 159--168
 \T1/lmtt/m/n/10 issue-[]4 / Finite-[]Exchangeable-[]Sequences / 10 . 1214 / aop
  / 1176994663 .
  []
 
-[104]
-Underfull \hbox (badness 2245) in paragraph at lines 165--175
+
+Underfull \hbox (badness 2245) in paragraph at lines 170--180
 []\T1/lmr/m/n/10 Dean Eck-les and Ey-tan Bak-shy.  Bias and High-Dimensional Ad
 -just-
  []
 
 
-Underfull \hbox (badness 1264) in paragraph at lines 165--175
+Underfull \hbox (badness 1264) in paragraph at lines 170--180
 \T1/lmr/m/n/10 1459.  doi: $10 . 1080 / 01621459 . 2020 . 1796393$.  URL []$\T1
 /lmtt/m/n/10 https : / / doi . org /
  []
 
-[105]
-Underfull \hbox (badness 4193) in paragraph at lines 289--297
+[107]
+Underfull \hbox (badness 4193) in paragraph at lines 294--302
 \T1/lmr/m/n/10 CBO9781139025751$.  URL []$\T1/lmtt/m/n/10 https : / / www . cam
 bridge . org / core / books /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 289--297
+Underfull \hbox (badness 10000) in paragraph at lines 294--302
 \T1/lmtt/m/n/10 causal-[]inference-[]for-[]statistics-[]social-[]and-[]biomedic
 al-[]sciences /
  []
 
 Missing character: There is no ł in font ec-lmr10!
 Missing character: There is no ń in font ec-lmr10!
+[108]
 Missing character: There is no ’ in font ec-lmr10!
-[106]
-Underfull \hbox (badness 2334) in paragraph at lines 344--352
+
+Underfull \hbox (badness 2334) in paragraph at lines 349--357
 []$\T1/lmtt/m/n/10 http : / / journals . sagepub . com / doi / 10 . 1177 / 2047
 487320936787$[]\T1/lmr/m/n/10 .  Pub-
  []
 
 Missing character: There is no – in font ec-lmr10!
 
-Underfull \hbox (badness 1009) in paragraph at lines 410--418
+Underfull \hbox (badness 1009) in paragraph at lines 415--423
 \T1/lmr/m/it/10 Con-trol\T1/lmr/m/n/10 , 21(2):87--91, March 2012.  ISSN 0964-4
 563, 1468-3318.  doi:
  []
 
-[107]
-Underfull \hbox (badness 3503) in paragraph at lines 484--491
+[109]
+Underfull \hbox (badness 3503) in paragraph at lines 489--496
 []\T1/lmr/m/n/10 Brian Skyrms.  Causal De-ci-sion The-ory.  \T1/lmr/m/it/10 The
  Jour-nal of Phi-los-o-
  []
 
 
-Underfull \hbox (badness 1424) in paragraph at lines 484--491
+Underfull \hbox (badness 1424) in paragraph at lines 489--496
 \T1/lmr/m/it/10 phy\T1/lmr/m/n/10 , 79(11):695--711, Novem-ber 1982.  doi: $10 
 . 2307 / 2026547$.  URL
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 484--491
+Underfull \hbox (badness 10000) in paragraph at lines 489--496
 []$\T1/lmtt/m/n/10 https : / / www . pdcnet . org / pdc / bvdb . nsf / purchase
  ? openform & fp = jphil &
  []
 
-[108]
+[110]
 Missing character: There is no ’ in font ec-lmr10!
 
-Underfull \hbox (badness 3000) in paragraph at lines 522--529
+Underfull \hbox (badness 3000) in paragraph at lines 527--534
 []\T1/lmr/m/n/10 N. N. Vorobev.  Con-sis-tent Fam-i-lies of Mea-sures and Their
  Ex-ten-
  []
 
-) [109]
+) [111]
 
 Package natbib Warning: There were undefined citations.
 
-[110]
+[112]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 219.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 219.
  (./main.aux)
@@ -1816,12 +1854,12 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 219.
  ) 
 Here is how much of TeX's memory you used:
- 30878 strings out of 479819
- 591446 string characters out of 5895847
- 925722 words of memory out of 5000000
- 46866 multiletter control sequences out of 15000+600000
+ 30885 strings out of 479819
+ 591586 string characters out of 5895847
+ 924932 words of memory out of 5000000
+ 46873 multiletter control sequences out of 15000+600000
  643836 words of font info for 168 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  68i,17n,83p,1626b,972s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (110 pages, 1218072 bytes).
+Output written on main.xdv (112 pages, 1229728 bytes).

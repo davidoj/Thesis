@@ -1004,28 +1004,100 @@ That is (at least in this case), the result of ``division by a conditional proba
 
 \section{Weaker assumptions than causal contractibility}
 
-The results so far apply to purely observational models or to models where every ``input'' in the sequence is fixed at the point of choosing $\alpha$ (or a fixed random function is chosen at this point). Most of the interest in causal inference is how to use observational data -- which is plentiful -- to deduce causal consequences. One approach is to assume ``causal sufficiency'', which is tantamount to assuming causal contractibility of some $\prob{P}_C^{\RV{Y}|\RV{XD}}$ with $\RV{D}$ responsive to choices and $\RV{X}$ unresponsive (see Example \ref{ex:backdoor}). As has been discussed, however, this is often not a reasonable assumption; it implies interchangeability between samples arising from passive observations and from active choices.
+The results so far apply to purely observational models or to models where every ``input'' in the sequence is fixed at the point of choosing $\alpha$ (or a fixed random function is chosen at this point). Most of the interest in causal inference is how to use observational data -- which is plentiful -- to deduce consequences of choices. Suppose in the following that superscripter ``$o$'' refers to observational variables (obtained by some measurement procedure not responsive to choices) and ``$v$'' refers to interventional variables (obtained by some measurement procedure responsive to choices). That is $\RV{Y}^o:=(\RV{Y}_i^o)_{i\in \mathbb{N}}$ is a sequence of observantional variables, $\RV{Y}^v$ a sequence of interventional variables and $\RV{Y}^{o,v}:=(\RV{Y}^o_i,\RV{Y}^v_i)_{i\in\mathbb{N}}$ is a mixed sequence of both observational and interventional variables. $\RV{Y}_i^o$ and $\RV{Y}_i^v$ are assumed to take values in the same set $Y$.
 
-A weaker assumption that is often adopted is to consider causal contractibility with respect to $\prob{P}_C^{\RV{Y}|\RV{UD}}$, where $\RV{U}$ is unobserved. The fact that $\RV{U}$ is unobserved means that observational and internventional samples are not interchangeable, because the interchangeability applies to $(\RV{U}_i,\RV{D}_i,\RV{Y}_i)$ triples while only $(\RV{D}_i,\RV{Y}_i)$ pairs are actually observed.
+One approach to bridging the gap between observations and interventions is to assume ``causal sufficiency'', which is tantamount (in the data-independent case) to assuming causal contractibility of $\prob{P}_C^{\RV{Y}^{o,v}|\RV{X}^{o,v}\RV{D}^{o,v}}$ with $\RV{D}^v$ responsive to choices and $\RV{X}^v$ unresponsive (see Example \ref{ex:backdoor}). As discussed, this is rarely a reasonable assumption -- it implies interchangeability between observational and interventional samples.
 
-A third assumption that is the assumption that $\prob{P}_C^{\RV{Y}|\RV{U}}$ is causally contractible where $\RV{U}$ is unobserved. Consider this assumption in conjunction with the assumption that for all \emph{observational} samples and all $h\in H$, $\prob{P}^{\RV{U}_i|\RV{H}}(\cdot|h)$ has full support. This can be understood as the assumption that, whatever choice is made, all individual outcomes of choices are exchangeable with a random subsequence of observations (see Theorem \ref{th:condit_exchange}). That is, ``nothing truly new is being done''\footnote{Chapter 1 verse 9 of the biblical book of Ecclesiastes has the phrase ``Everything that will be done has been done already; there's nothing new under the sun'' (different translations have different precise wording). For this reason, we consider this assumption ``Ecclesiastes' assumption''}.
+A weaker assumption that is often adopted is to consider models satisfying causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{U}^{o,v}\RV{D}^{o,v}}$, where $\RV{U}^{o,v}$ is unobserved. That is, while $\RV{U}^{o,v}$ appears in the model, it is not associted with any measurement procedure. This model still asserts that $(\RV{U}^o_i,\RV{X}^o_i,\RV{Y}^o_i)$ triples are interchangeable with $(\RV{U}^v_i,\RV{X}^v_i,\RV{Y}^v_i)$ triples, but neither of these are measurement outcomes. On the other hand, $(\RV{D}_i^o,\RV{Y}_i^o)$ pairs are not generally interchangeable with $(\RV{D}_i^v,\RV{Y}_i^v)$.
 
-\todo[Define conditioning]
+Consider models that satisfy causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$, where no comment is made about whether $\RV{W}^{o,v}$ is observed, unobseved or some function of observed and unobserved variables. This is a generalisation of the class of models discussed in the previous paragraph.  In isolation, this assumption is not especially interesting -- for example, the support of $\RV{W}^{o}_i$ and $\RV{W}^v_i$ might be disjoint. Suppose also, then, that $W$ is finite and $\RV{W}^o_i$ has full support. This assumption amounts to the assumption that, no matter what choice is made, ``nothing truly new can be done'' (which we call ``Ecclesiastes' assumption''\footnote{Ecclesiastes 1:9 reads ``Everything that happens has happened before; nothing is new, nothing under the sun.''\citep{noauthor_holy_1995}}). More precisely, for any choice $\alpha\in C$ and any consequence $\RV{Y}_i^v$, there is a random subsequence $\RV{Q}$ of indices $(1,2,3,....)$ such that the distribution $\prob{P}_\alpha^{\RV{Y}^{o,v}}$ is unchanged by permutations that only swap elements in the sequence $(RV{Y}^o_\RV{Q},\RV{Y}^v_i)$.
 
-\begin{corollary}[Conditional exchangeability]\label{th:condit_exchange}
-Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{Y}|\RV{U}}$ causally contractible, $U$ discrete, for any $u\in U$, $A\subset \mathbb{N}$, $\prob{P}_{C|\RV{U}_A=u}^{\RV{Y}_A}$ is exchangeable where it is defined.
-\end{corollary}
+\begin{theorem}\label{th:condit_exchange}
+Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$ causally contractible, $W$ finite and $\prob{P}_C^{\RV{W}^o|\RV{H}}(w|h)>0$ for all $w,h$, define $q:W^{\mathbb{N}}\times W\to (\{*\}\cup \mathscr{P}(\mathbb{N})$ by 
+\begin{align}
+    q:((w^o_j)_{\mathbb{N}},w^v_i)&\mapsto \{j|w^o_j=w^v_i\}
+\end{align}
+and take $\RV{Q}:=q\circ(\RV{W}^o,\RV{W}^v_i)$ for arbitrary $i\in \mathbb{N}$. For an index set $U\in\mathbb{N}$ Take $\text{swap}_{\cdot}:Y^{\mathbb{N}}\times Y^{\mathbb{N}}\to Y^{\mathbb{N}}\times Y^{\mathbb{N}}$ to be an arbitrary finite swap that acts as the identity on all indices $(j,x)\not\in \RV{Q}\times \{o\}\cup\{(i,v)\}$. Then $\prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}} = \prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}$.
+\end{theorem}
 
 \begin{proof}
-By definition of conditioning, for $B\in \sigalg{Y}$, $u\in U$, if $\prob{P}_C^{\RV{U}}(u)>0$:
+Note that for $B_j\in \sigalg{W}$, where $\rho_q:\mathbb{N}\times\{i,v\}\to \mathbb{N}\times\{i,v\}$ is the permutation function associated with $\text{swap}_{q}$
 \begin{align}
-    \prob{P}_{C|U_A=u}^{\RV{Y}_A}(B) &= \prob{P}_C^{\RV{Y}_A|\RV{U}_A}(A|u)
+    \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}} (\bigtimes_{j\in\mathbb{N}} B_j) &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{\rho_q(w_l)} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\\
+    &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_l} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\label{eq:all_the_same}\\
+    &= \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}
 \end{align}
-By Theorem \ref{th:table_rep_kernel}, the RHS is equal to
+where Eq. \ref{eq:all_the_same} follows from the fact that for every $k,l\in q\times\{o\}\cup\{(i,v)\}$, $w_k=w_l$.
+
+Thus for $A\in \sigalg{Y}^{\mathbb{N}}$
 \begin{align}
-    \prob{P}_C^{(\RV{Y}^U_{uj})_{j\in A}} 
-\end{align} 
-which is exchangeable by column exchangeability of $\prob{P}_C^{\RV{Y}^U}$.
+    \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}}(A) &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{Q}\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}}](A)\\
+    &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \text{swap}_{\RV{Q}^{-1}} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}}](A)\\
+    &= \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\label{eq:by_cc1}
+\end{align}
+Where Eq. \ref{eq:by_cc1} follows from causal contractibility of $\prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}$.
 \end{proof}
 
+It also follows from Ecclesiastes' assumption and finite $W$ that if some $\RV{X}_i^o$, $\RV{Z}_i^o$ are \emph{deterministically} related given $\RV{W}$, then $\prob{P}_C^{\RV{Z}|\RV{X}}$ is causally contractible.
 
+\begin{theorem}\label{th:det_obs_to_cons}
+Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{X}^{o,v}\RV{Z}^{o,v}|\RV{W}^{o,v}}$ causally contractible, $W$ finite and $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)>0$ for all $w,h$, if $\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{H}}$ is deterministic then $\prob{P}_C^{\RV{Z}^{o,v}|\RV{X}^{o,v}}$ is causally contractible.
+\end{theorem}
+
+\begin{proof}
+Because $\prob{P}_\alpha^{\RV{W}_0^o}\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{W}^o_0\RV{H}}$ is deterministic, so is $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}$.
+
+Fix $h\in H$.  Suppose there is some $w,w'\in W$ such that
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) &\neq \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h)
+\end{align}
+then, by determinism, we can assume without loss of generality
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) = 1\\
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h) = 0
+\end{align}
+but $W$ is finite and $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)>0$ for all $w$, so there is some $a>0$ such that $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)\geq a$ for all $w$, and so
+\begin{align}
+    a \leq \sum_{w\in W} \prob{P}_C^{\RV{W}^o_0|\RV{X}^o_0,\RV{H}}(w|x,h)\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h)\leq 1-a
+\end{align}
+contradicting determinism of $\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{H}}$.
+
+Thus for all $w,w'$
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h)
+\end{align}
+i.e. $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{W}_0,\RV{C})|(\RV{X}_0,\RV{H})$. But then there is some $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}$ such that
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}\otimes \text{erase}_W\\
+    \implies \prob{P}_\alpha^{\RV{Z}^v_i|\RV{X}^v_i\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}
+\end{align}
+\end{proof}
+
+Theorem \ref{th:det_obs_to_cons} doesn't hold in the case of approximate determinism, however. Intuitively, approximate determinism can hold if there is some value of $\RV{W}$ for which $\RV{Z}$ is not conditionally independent given $\RV{H}$ and $\RV{X}$, but it only ocurrs very rarely in observations. On the other hand, values of $\RV{W}$ rare in observations might, under some choices, become common. 
+
+\begin{example}
+Say $\prob{P}_C^{\RV{Z}^o_i|\RV{X}^o_i\RV{H}}$ is \emph{approximately deterministic} if $\prob{P}_C^{\RV{Z}^o_i|\RV{X}^o_i\RV{H}}(A|x,h)\in [0,\epsilon]\cup[1-\epsilon,1]$ for all $A\in\sigalg{Z}$, $x,h\in X\times H$.
+
+Take $Z=X=W=H=\{0,1\}$. Set
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(1|1,1,1) = 1\\
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(1|1,0,1) = 0
+\end{align}
+and
+\begin{align}
+    \prob{P}_C^{\RV{W}^o_0|\RV{H}}(1|1)=1-\epsilon
+\end{align}
+then
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1) = 1-\epsilon
+\end{align}
+however, suppose there is some $\alpha$ such that
+\begin{align}
+    \prob{P}_\alpha^{\RV{W}^v_i|\RV{H}}(1|1)=0
+\end{align}
+then
+\begin{align}
+    \prob{P}_\alpha^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1) = 0\\
+    &\neq \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1)
+\end{align}
+\end{example}

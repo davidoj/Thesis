@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex main"] 1651561378 "main.aux" "main.bbl" "main" 1651561388
+["bibtex main"] 1651726803 "main.aux" "main.bbl" "main" 1651726812
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1651561388 36021 5bcf913fbc08de0e2386968ce99cc616 "xelatex"
-  "references.bib" 1651453738 208971 29d8696b31eda002048243b762ee0bfc ""
+  "main.aux" 1651726812 36367 7dcee2ede5ff40aaf2f5c0c059384c94 "xelatex"
+  "references.bib" 1651715503 209302 19e499036544eb9f859c63afb32bc7f1 ""
   (generated)
-  "main.blg"
   "main.bbl"
-["xdvipdfmx"] 1651561388 "main.xdv" "main.pdf" "main" 1651561388
-  "main.xdv" 1651561388 1218072 ae7d6193655835376742f46c78f598ea "xelatex"
+  "main.blg"
+["xdvipdfmx"] 1651726812 "main.xdv" "main.pdf" "main" 1651726812
+  "main.xdv" 1651726812 1229728 ab64cf01a1daac7177357e2f81ae3d62 "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1651561378 "main.tex" "main.xdv" "main" 1651561388
+["xelatex"] 1651726803 "main.tex" "main.xdv" "main" 1651726812
   "/etc/texmf/web2c/texmf.cnf" 1590547021 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -275,7 +275,7 @@
   "chapter_1_introduction.tex" 1626304629 13449 d74fe23c627e00becac15cbba6b5bac6 ""
   "chapter_2_technical.tex" 1651554442 71565 a1b48e9272418ef325acf37c57ddb5ca ""
   "chapter_3_models_with_consequences.tex" 1650976691 70946 b90b7a9a71f4ca27429a8e137e4bc65d ""
-  "chapter_4_response_functions.tex" 1651561368 79844 dba23ac972b4ab4db5f65f35c78c7b52 ""
+  "chapter_4_response_functions.tex" 1651726793 85847 a8f2c276b583a132470c47d413b0226a ""
   "chapter_5_interventions_counterfactuals.tex" 1627603770 38259 b42c961feac988abaa1c2050b7ee495a ""
   "chapter_6_other_causal_inference.tex" 1650450656 103 5991101f30143982828aedba71611c72 ""
   "diagrams.tikzstyles" 1649743179 2341 73783d7b804490fb2d99348ad69adc02 ""
@@ -367,14 +367,14 @@
   "figures/semidirect_K_L_3.tikz" 1648702267 360 3686059f95e7105183fdcf74d46259e3 ""
   "figures/swap_example.tikz" 1647221173 553 1ecdd38dfab1613056725ab746518393 ""
   "figures/swap_example_2.tikz" 1647221501 547 d2ef0ab9aef12b616ab922520a5f9b98 ""
-  "main.aux" 1651561388 36021 5bcf913fbc08de0e2386968ce99cc616 "xelatex"
-  "main.bbl" 1651561378 24348 d061cc592bddac2650a6c586df7b5c0c "bibtex main"
-  "main.out" 1651561388 4916 9b8810ce41753b85a67dd69e5c5e0316 "xelatex"
+  "main.aux" 1651726812 36367 7dcee2ede5ff40aaf2f5c0c059384c94 "xelatex"
+  "main.bbl" 1651726803 24590 9e51ec43ee4aa06419c6e39438db3a9a "bibtex main"
+  "main.out" 1651726812 4916 9b8810ce41753b85a67dd69e5c5e0316 "xelatex"
   "main.tex" 1651058136 7965 8bdf5641f88593af1b4d3b4a4e0a6e5f ""
-  "main.toc" 1651561388 7269 ef7109615d1cbd7d58f3f87753d57b4c "xelatex"
+  "main.toc" 1651726812 7271 029a386345b4c4691ae228213a696e90 "xelatex"
   (generated)
-  "main.toc"
+  "main.out"
   "main.log"
   "main.xdv"
-  "main.out"
   "main.aux"
+  "main.toc"
