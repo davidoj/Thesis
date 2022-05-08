@@ -50,7 +50,7 @@ Usually, someone confronted with a decision problem will not know for certain th
 
 More relevant to the question of modelling decision problems are a number of works that establish conditions under which ``desirability'' or ``preference'' relations over sets of choices or propositions must be represented by a probability distribution along with a utility function. These works are surveyed in Section \ref{sec:how_represent_conseqeunces}. Ultimately, however, the question of whether probability is the right choice to represent uncertain knowledge in decision models is not a key focus of this work. It is a conventional choice, and one that is accepted here.
 
-\subsection{Formal definitions}\label{sec:probability_sets}
+\subsection{Formal definitions}\label{sec:probability_set_models}
 
 We suppose that we are, at the outset, given a few basic ingredients: a set of choices $C$, a set of consequences $\Omega$ and a utility function $u:F\to \mathbb{R}$. We call these ingredients a ``decision problem''.
 
@@ -395,7 +395,7 @@ The expected utility of $\alpha\in C$ is
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}} u &= \int_Y u(y) \prob{P}_{\alpha}^{\RV{Y}}(\mathrm{d}y) \\
     &= \int_Y  \int_D \int_{X} \int_H u(y)\prob{P}_{\alpha}^{\RV{Y}|\RV{DXH}}(\mathrm{d}y|d,x,h)\prob{P}_{\alpha}^{\RV{D}|\RV{XH}}(\mathrm{d}d|x,h)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h) \\
-    &= \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{\alpha}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h)\label{eq:because_of_ci}\\
+    &= \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{\alpha}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h)\\
     &=  \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{C}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
      &= -\int_D\int_X\int_H l(d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
     &= -\int_H R(\prob{P}_{\alpha}^{\RV{D}|\RV{X}},h)\mu(\mathrm{d}h)\\
