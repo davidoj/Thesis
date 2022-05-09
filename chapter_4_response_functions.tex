@@ -8,13 +8,22 @@ Repeatability in classical statistical models is often expressed by the assumpti
 
 The key result of this chapter is that a model of choices that results in a sequence of variables is representable as a mixture of independent and identical response functions is equivalent to the assumption of \emph{causal contractibility}. Causal contractibility is defined in Section \ref{sec:ccontracibility} and compared to prior work on similar questions. A representation theorem for causally contractible Markov kernels is proved in Section \ref{sec:rep_theorem}. It is applied to probability sets modelling ``one-shot'' choices with no dependence on prior data in Section \ref{sec:data_independent_actions}, and generalised to ``adaptive'' choices where actions may depend on prior data in Section \ref{sec:data_dependent}; the latter generalisation requires the notion of \emph{combs}, introduced in Section \ref{sec:def_combs}.
 
-Causal contractibility is a more complicated assumption than exchangeability, and this chapter also considers the problem of assessing causal contractibility. In particular, Theorem \ref{th:cc_ind_treat} shows that if there are ``experimental subjects'' that are exchangeable in a particular way, and the input variables and choices are both equally informative in the sense that given either the inputs or the choice nothing relevant can be gained by learning the other, then causal contractibility holds. To my knowledge, this is the only example of a theorem of its type that proves the existence of ``causal effects'' in models featuring choices. Somewhat similar theorems exist that address the identification of potential outcomes, but they prove different things (the identifiability of a certain kind of latent variable, which is not identical to the consequences of a choice), and provide different conditions. A particular difference is that the conditions for Theorem \ref{th:cc_ind_treat} concern only \emph{observable} variables, and while randomisation of actions is sometimes an admissible condition, it is not a necessary one.
+Causal contractibility is a more complicated assumption than exchangeability. An alternaive to directly arguing for causal contractibility is given by Theorem \ref{th:cc_ind_treat}, which shows that if there are ``experimental identifiers'' that are exchangeable in the appropriate way, and if, given either the input variables or the choice nothing relevant can be gained by learning the other, then causal contractibility holds.  To my knowledge, this is the only example of a theorem of its type that proves the existence of ``causal effects'' in models featuring choices. Somewhat similar theorems exist that address the identification of potential outcomes, but they prove different things (the identifiability of a certain kind of latent variable, which is not identical to the consequences of a choice), and provide different conditions. A particular difference is that the conditions for Theorem \ref{th:cc_ind_treat} concern only \emph{observable} variables, and while randomisation of actions is sometimes an admissible condition, it is not a necessary one.
 
 The study of causal inference is often concerned with situations where Theorem \ref{th:cc_ind_treat} does not apply. A problem of particular interest involves going from ``passive observations'' to ``active interventions''. Section \ref{sec:weaker_assumptions} considers how this problem can be represented using probability set models, and why simple assumptions that would render it solvable are rarely acceptable.
 
+\section{Explanation of the main theorems}
+
+It is commonly accepted that a properly executed randomised experiment can enable the identification of causal effects, and this idea is supported by a handful of results in the potential outcomes tradition, such as those appearing in \citet{rubin_causal_2005,imbens_causal_2015}. It is also commonly accepted that the causal effects identified by randmised experiments are the appropriate thing to use to evaluate different choices, but this is based on tacit understanding rather than mathematical results. 
+
+Similarly, in the graphical models tradition there is a tacit understanding that randomised experiments and ``interventions'' should lead to the same model (see, for example, \citet[Chap. 4]{pearl_book_2018}).
+
+The fact is, however, that it's possible to have a precise understanding of ``causal effect'' along with a precise understanding of ``consequences of choices'' at the same time. Theorems \ref{th:data_ind_CC} and \ref{th:response_hdep} provide necessary and sufficient conditions for models with choices to contain independent and identical reponse functions. Theorem \ref{th:cc_ind_treat} provides a sufficient condition that might, in some situations, be easier to evaluate. These theorems establish that the existence of independent and identical response functions is a question that depends on which variables are identified as ``inputs'' and which we identify as ``outputs''.
+That is, a modeler who identifies some sequence of variables $\RV{D}_i$ as presumptive inputs and $\RV{Y}_i$ as presumptive outputs to independent and identical response functions must have substantial prior knowledge about the distribution of these variables under different choices.
+
 \section{Relevance to previous work}
 
-This chapter draws on three different lines of work. The first is the study of representations of symmetric of probability models. The equivalence between infinite exchangeable probability models and mixtures of independent and identically distributed models was shown by \cite{de_finetti_foresight_1992}. This result has been extended in many ways, including to finite sequences \citet{kerns_definettis_2006,diaconis_finite_1980} and for partially exchangeable arrays \citet{aldous_representations_1981}. A comprehensive overview of results is presented in \citet{kallenberg_probabilistic_2005}. This work is only engaged shallowly with this literature, but the idea that symmetries of probabilistic models may imply representability as mixtures of ``fixed but unknown'' models is crucial, as is the basic result of De Finetti.
+This chapter draws on three different lines of work. The first is the study of representations of symmetric of probability models. The equivalence between infinite exchangeable probability models and mixtures of independent and identically distributed models was shown by \cite{de_finetti_foresight_1992}. This result has been extended in many ways, including to finite sequences \citet{kerns_definettis_2006,diaconis_finite_1980} and for partially exchangeable arrays \citet{aldous_representations_1981}. A comprehensive overview of results is presented in \citet{kallenberg_probabilistic_2005}. Particularly similar to our result is the notion of ``partial exchangeability'' from \citet{diaconis_recent_1988}.
 
 The second line of work is the study of exchangeability-like assumptions in causal models. \citet{lindley_role_1981} discuss models consisting of a sequence of exchangeabile observations along with ``one more observation'', a structure that is similar to the models with observations and consequences discussed in section \ref{sec:weaker_assumptions}. Lindley discusses the application of this model to questions of causation, but does not explore this deeply due to the perceived difficulty of finding a satisfactory definition of causation. \citet{rubin_causal_2005}'s discussion of causal inference with potential outcomes discusses the assumption of exchangeable potential outcomes, and \citet{imbens_causal_2015} uses this assumption to prove several identification results. However, as Lindley observed, this is an assumption of exchangeability of unobservable variables, and it is difficult to see how judgements about the measurement procedures being modeled do or do not imply exchangeability amongst such variables. \citet{saarela_role_2020}, using structural causal models, proposes \emph{conditional exchangeability}, which refers to the invariance of a joint distribution over outcomes under ``surgical switches'' of the values of causal variables of interest. This definition depends on having a structural model, a property not shared by the current work.
 
@@ -27,20 +36,17 @@ The other component of causal contractibility is \emph{locality} (Definition \re
 
 Finally, the idea of \emph{combs} in probabilistic models was first proposed by \citet{chiribella_quantum_2008} and an application to causal models was developed by \citet{jacobs_causal_2019}.
 
-\section{Repeatable Response Functions}\label{sec:response_functions}
+\section{Independent and Identical Response Functions}\label{sec:response_functions}
 
-Start with a sequence of variable pairs $(\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ where $\RV{X}_i$ is the $i$th ``input'' and $\RV{Y}_i$ is the corresponding ``output'', each taking values in $X$ and $Y$ respectively. A ``repeatable response function'' is a probabilistic mapping $X\kto Y$ that is identical for all $(\RV{X}_i,\RV{Y}_i)$ pairs. Repeatable response functions are in general be unknown, in which case (under a Bayesian model $\prob{P}_C$), the response function is \emph{not} the conditional $\prob{P}_C^{\RV{Y}_i|\RV{X}_i}$ but rather the conditional $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}$ where $\RV{H}$ is an unobserved hypothesis variable. ``Repeatability'' also means that the same response function can be obtained no matter which actions have already been taken. That is, $\RV{Y}_i$ is independent of previous input-output pairs when conditioned on $\RV{H}$ and $\RV{X}_i$.
+Start with a sequence of variable pairs $(\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ where $\RV{X}_i$ is the $i$th ``input'' and $\RV{Y}_i$ is the corresponding ``output'', each taking values in $X$ and $Y$ respectively. $(\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ are related by a sequence of ``independent and identical response functions'' (``IIRs'') if there is some variable $\RV{H}$ (generally a latent variable) such that $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob_C^{\RV{Y}_j|\RV{X}_j\RV{H}}$ for all $i,j$ and for all $i$ $\RV{Y}_i\CI_{\prob{P}_C}^e (\RV{X}_{<i},\RV{Y}_{<i},\RV{C})|(\RV{H},\RV{X}_i)$.
 
-The result of this section is that the pairs in a sequence $(\RV{X},\RV{Y}):=(\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ modeled by $\prob{P}_C$ are related by repeatable repeatable response functions if and only if there is a causally contractible \emph{uniform comb} $\prob{P}_C^{\RV{Y}\combbreak\RV{X}}$. Combs are a generalisation of conditional probabilities and, and if we assume that actions are independent of previous data ($\RV{X}_i\CI_{\prob{P}_C}^e \RV{Y}_{<i} C|\RV{X}_{<i}$), this reduces to the assumption that the uniform conditional distribution $\prob{P}_C^{\RV{Y}|\RV{X}}$ is causally contractible.
-
-Because combs are unfamiliar, this section is structured so that the ``data-independent actions'' case is introduced first. Specifically, the representation theorem is proven for general Markov kernels in Section \ref{sec:ccontracibility}, and applied to models $\prob{P}_C$ with data-independent actions in Section \ref{sec:data_independent_actions}. Subsequently, combs are introduced in Section \ref{sec:data_dependent}, and the general result applied to models with data-dependent actions. The following section, Section \ref{sec:assessing}, discusses questions related to when the assumption of causal contractibility might be held to apply to a particular problem, as well as introducing ``Ecclesiastes' assumption'', a weaker assumption than causal contractibility which could be applied to problems where observations and active interventions are mixed.
-
+The result of this chapter is that the pairs in a sequence $(\RV{X},\RV{Y}):=(\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ modeled by $\prob{P}_C$ are related by IIRs if and only if there is a causally contractible \emph{uniform comb} $\prob{P}_C^{\RV{Y}\combbreak\RV{X}}$. Combs are a generalisation of conditional probabilities and, and if we assume that actions are data-independent ($\RV{X}_i\CI_{\prob{P}_C}^e \RV{Y}_{<i} C|\RV{X}_{<i}$), this reduces to the assumption that the uniform conditional distribution $\prob{P}_C^{\RV{Y}|\RV{X}}$ is causally contractible. Many of the results will focus on the simpler case where we deal with the conditional probability instead of the comb -. Specifically, a representation theorem (Theorem \ref{th:ciid_rep_kernel}) is proven for general Markov kernels in Section \ref{sec:ccontracibility}, and this applied to models $\prob{P}_C$ with data-independent actions in Section \ref{sec:data_independent_actions}. Section \ref{sec:assessing}, discusses questions related to when the assumption of causal contractibility might be held to apply to a particular problem. Combs are introduced in Section \ref{sec:data_dependent}, and Theorem \ref{th:ciid_rep_kernel} is applied to models with data-dependent actions.
 
 \subsection{Causally contractible Markov kernels}\label{sec:ccontracibility}
 
-Here a representation theorem is proved for causally contractible Markov kernels. First, causal contractibility is defined, which is the conjunction of the sub-assumptions of \emph{locality} and \emph{exchange commutativity}. 
+Causal contractibility is the conjunction of two properties of a Markov kernel $X^{\mathbb{N}}\kto Y^{\mathbb{N}}$: such a Markov kernel is causally contractible if it is \emph{local} and \emph{commutes with exchange}. 
 
-The intuitive basis of the two sub-assumptions is easier to see for Markov kernels with just two input-output pairs. In that simplified case, exchange commutativity for two inputs and outputs is given by the following equality:
+Graphical notation can offer an intuitive picture of these two sub-assumptions. In the simplified case where we have $\kernel{K}:X^2\kto Y^2$, exchange commutativity for two inputs and outputs is given by the following equality:
 \begin{align}
     \tikzfig{commutativity_of_exchange}
 \end{align}
@@ -80,7 +86,9 @@ A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{causally
 
 \subsubsection{Properties of causally contractible Markov kernels}
 
-A causally contractible Markov kernel over a sequence of pairs treats all subsequences as equivalent in a particular way (Theorem \ref{th:equal_of_condits}, although the sense in which this implies equivalence of subsequences might be more obvious from the statement of Theorem \ref{th:equal_of_reduced_condits} presented later). This feature is the motivation for the name \emph{causal contractibility}. Both sub-assumptions are independent -- Theorem \ref{th:no_implication} presents counterexamples.
+A causally contractible Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ can be mapped to a kernel over a ``contracted'' domain $Y^n$, $\kernel{K}_n:X^{\mathbb{N}}\kto Y^n$, using the appropriate $\text{del}$ map. Theorem \ref{th:equal_of_condits} establishes that any contraction of $\kernel{K}$ to the same domain $Y^n$ yields the same result (see also Theorem \ref{th:equal_of_reduced_condits}). This feature is the motivation for the name \emph{causal contractibility}. 
+
+Theorem \ref{th:no_implication} shows that exchange commutativity and locality are independent assumptions by constructing counterexamples.
 
 Before these theorems are proved, the following definition and Lemma will prove helpful.
 
@@ -243,7 +251,7 @@ However, $\kernel{K}$ does not commute with exchange.
 \end{align}
 \end{proof}
 
-A model of the treatment of several patients who have already been examined might satisfy consequence locality but not exchange commutativity. Patient B's treatment could be assumed not to affect patient A, but the same results would not be expected from giving patient A's treatment to patient B as from giving patient A's treatment to patient A. 
+Theorem \ref{th:no_implication} presents abstract counterexamples to show that the assumptions of exchange commutativity and locality are indpedent. For some more practical examples, a model of the treatment of several patients who have already been examined might satisfy consequence locality but not exchange commutativity. Patient B's treatment could be assumed not to affect patient A, but the same results would not be expected from giving patient A's treatment to patient B as from giving patient A's treatment to patient A. 
 
 A model of economic interventions might satisfy exchange commutativity but not locality. If a government prints money to make exactly $n$ payments of \$10 000 are made to a number of undistinguished recipients, the government cannot say much about the impact of who exactly receives the payment. However, the amount of inflation created by the payments depends on the number of payments made; making 100 such payments will have a negligible effect on inflation, while making payments to everyone in the country will have a substantial effect, and this will in turn affect the outcomes of the people who did or did not receive payment. \citet{dawid_causal_2000} offers the alternative example of herd immunity in vaccination campaigns as a situation where commutativity of exchange holds but locality does not.
 
@@ -436,6 +444,8 @@ So by Theorem \ref{th:equal_of_condits}, $\kernel{K}$ is causally contractible.
 \end{proof}
 
 \subsection{Causal contractibility with data-independent actions}\label{sec:data_independent_actions}
+
+Theorem \ref{th:ciid_rep_kernel} is proven for ``some causally contractible Markov kernel'', without a concrete role in a decision model. The simplest way to apply this to a decision model $\prob{P}_C$ is to assume that inputs are independent of previous observations -- that is, $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{D}_{<i}$. With this assumption, decision models with independent and identical response functions are those with \emph{causally contractible conditional probabilities} $\prob{P}_C^{\RV{Y}|\RV{D}}$. The assumption of data independence is a very limiting assumption -- see-do models, for example (Definition \ref{def:see_do_model}) do not satisfy it. The price to pay for the more general case is that we need to consider causally contractible \emph{combs} rather than causally contractible conditional probabilities, and this is addressed in Section \ref{sec:data_dependent}.
 
 Given a sequence of variables $(\RV{D}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ where the ``inputs'' are $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and the ``outputs'' are $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$, say the inputs are independent of previous observations if $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{D}_{<i}$ for all $i\in\mathbb{N}$. This models an experiment where it may be possible to choose different inputs $\RV{D}$, but all the inputs are determined before the outputs $\RV{Y}$ are known. If a model satisfies this, then the dependence of $\RV{Y}$ on $\RV{D}$ is a sequence of repeatable response functions if and only if the uniform conditional $\prob{P}_C^{\RV{Y}|\RV{D}}$ exists (Definition \ref{def:cprob_pset}) and is causally contractible.
 
@@ -850,9 +860,7 @@ So it may be possible to derive the fact that there is a repeatable response con
 
 \section{Response conditionals with data-dependent actions}\label{sec:data_dependent}
 
-The results of the previous section concern ``just-do'' models where actions have not dependence on previous data. Decision problems of interest actually have actions that depend on data -- what's really wanted are ``see-do'' models of some variety (see Definition \ref{def:see_do_model}). Here, Theorem \ref{th:data_ind_CC} is generalised to sequential see-do models with the use of \emph{probability combs}. Combs are a generalisation of conditional probabilities which can be used to capture a certain notion of data-dependent choices.
-
-Because combs are a bit more complicated to work with than conditional probabilities, most of the previous results have not yet been generalised to the data-dependent case, if such a generalisation is possible.
+The results of the previous section concern ``just-do'' models where actions have not dependence on previous data. Decision problems of interest actually have actions that depend on data -- what's really wanted are ``see-do'' models of some variety (see Definition \ref{def:see_do_model}). Here, Theorem \ref{th:data_ind_CC} is generalised to sequential see-do models with the use of \emph{probability combs}.
 
 To begin with an example, consider a probability set $(\prob{P}_C,\RV{D},\RV{Y})$ with $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$ as usual, and take a subsequence $(\RV{D}_i,\RV{Y}_i)_{i\in [2]}$ of length 2. Suppose $\prob{P}_C$ features repeatable response conditionals in the sense that the following holds
 \begin{align}
@@ -878,7 +886,9 @@ then $\prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}$ is causally contractible
 
 \subsection{Combs}\label{sec:def_combs}
 
-Where uniform conditional probabilities map probability distributions to probability distributions via the semidirect product, 2-combs map conditional probabilities to conditional probabilities via an ``insert'' operation. More generally, higher order combs map lower order combs to lower order combs (where conditional probabilities are though of as 1-combs and probability distributions as 0-combs).  Graphically, the insert operation can be represented in with the following diagrams
+Combs generalise conditional probabilities in this sense: given a conditional distribution and a marginal distribution of the right type, joining them together (with the semidirect product\ref{def:copyproduct}) I get a marginal distribution of a different type. Define ``1-combs'' as conditional probabilities and ``0-combs'' as conditional distributions. Then the previous observation can be restated as: given a 1-comb and a 0-comb of the right type,  joining them together yields a 0-comb of a different type. Higher order combs generalise this: given an $n$-comb and an $n-1$-comb of the right type, joining them yields an $n-1$ comb.
+
+Joining combs uses an ``insert'' operation (Definition \ref{def:insert_discrete}).  A graphical depiction of this operation gives some intuition for why it is called ``insert'':
 % \begin{align}
 %     \prob{P}_\alpha^{\RV{XY}}&=\prob{P}_\alpha^{\RV{X}}\cprod\prob{P}_C^{\RV{Y}|\RV{X}}\\
 %     &= \tikzfig{conditional_semidirect_product}
@@ -890,8 +900,9 @@ Where uniform conditional probabilities map probability distributions to probabi
     &= \tikzfig{comb_insert_gettingsimpler}\\
     &= \tikzfig{comb_insert_simple}\label{eq:comb_insert_simple}
 \end{align}
-
 While Equation \ref{eq:comb_insert_complicated} is a well-formed string diagram in the category of Markov kernels, Equation \ref{eq:comb_insert_simple} is not. In the case that all the underlying sets are discrete, Equation \ref{eq:comb_insert_simple} can be defined using an extended string diagram notation appropriate for the category of real-valued matrices \citep{jacobs_causal_2019}, though we do not introduce this extension here.
+
+Formal definitions of finite and infinite combs follow, which will be used in Section \ref{sec:data_dependent_representation} to generalise Theorem \ref{th:data_ind_CC} to the data-dependent case.
 
 \begin{definition}[Uniform $n$-Comb]
 Given a probability set $\prob{P}_C$ with variables $\RV{Y}_i:\Omega\to Y$, $\RV{D}_i:\Omega\to D$ for $i\in [n]$ and uniform conditional probabilities $\{\RV{P}_C^{\RV{Y}_i|\RV{D}_{[i]}\RV{Y}_{[i-1]}}|i\in [n]\}$, the uniform $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}:D^n\kto Y^n$ is the Markov kernel given by the recursive definition
@@ -923,14 +934,14 @@ Therefore the existence of $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\m
 
 For discrete sets, the insert operation has a compact definition
 
-\begin{definition}[Comb insert - discrete]
+\begin{definition}[Comb insert - discrete]\label{def:insert_discrete}
 Given an $n$-comb $\prob{P}_\alpha^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$ and an $n-1$ comb $\prob{P}_\alpha^{\RV{D}_{[2,n]}|\RV{Y}_{[n-1]}}$, $(D,\sigalg{D})$ and $(Y,\sigalg{Y})$ discrete, for all $y_i\in Y$ and $d_i\in D$
 \begin{align}
     \mathrm{insert}(\prob{P}_\alpha^{\RV{D}_{[2,n]}\combbreak \RV{Y}_{[n-1]}},\prob{P}_\alpha^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}})(y_{[n]},d_{[2,n]}|d_1) &= \prob{P}_\alpha^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(y_n|d_{[2,n]},d_1)\prob{P}_\alpha^{\RV{D}_{[1,n]}\combbreak\RV{Y}_{[n-1]}}(d_{[2,n]}|y_{[n-1]})
 \end{align}
 \end{definition}
 
-\subsection{Response conditionals in models with data dependent actions}
+\subsection{Response conditionals in models with data dependent actions}\label{sec:data_dependent_representation}
 
 Theorem \ref{th:response_hdep} generalises Theorem \ref{th:data_ind_CC} to models $(\prob{P}_C,\RV{D},\RV{Y})$ with data-dependent actions, where instead the assumption that the uniform comb $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$ is causally contractible replaces the assumption that the conditional probability $\prob{P}_C^{\RV{Y}| \RV{D}}$ is causally contractible.
 
