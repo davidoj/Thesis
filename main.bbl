@@ -1,4 +1,4 @@
-\begin{thebibliography}{67}
+\begin{thebibliography}{72}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -155,6 +155,11 @@ Bruno de~Finetti.
 \newblock \doi{10.1007/978-1-4612-0919-5_10}.
 \newblock URL \url{https://doi.org/10.1007/978-1-4612-0919-5_10}.
 
+\bibitem[Diaconis(1988)]{diaconis_recent_1988}
+P.~Diaconis.
+\newblock Recent progress on de {Finetti}’s notions of exchangeability.
+\newblock \emph{Bayesian Statistics}, 3:\penalty0 111--125, 1988.
+
 \bibitem[Diaconis and Freedman(1980)]{diaconis_finite_1980}
 P.~Diaconis and D.~Freedman.
 \newblock Finite {Exchangeable} {Sequences}.
@@ -275,6 +280,17 @@ M.~A. Hernán and S.~L. Taubman.
 \newblock \doi{10.1038/ijo.2008.82}.
 \newblock URL \url{https://www.nature.com/articles/ijo200882}.
 
+\bibitem[Hernán(2012)]{hernan_beyond_2012}
+Miguel~A Hernán.
+\newblock Beyond exchangeability: {The} other conditions for causal inference
+  in medical research.
+\newblock \emph{Statistical Methods in Medical Research}, 21\penalty0
+  (1):\penalty0 3--5, February 2012.
+\newblock ISSN 0962-2802.
+\newblock \doi{10.1177/0962280211398037}.
+\newblock URL \url{https://doi.org/10.1177/0962280211398037}.
+\newblock Publisher: SAGE Publications Ltd STM.
+
 \bibitem[Hernán and Robins(2020)]{hernan_whatif_2020}
 Miguel~A. Hernán and James~M Robins.
 \newblock \emph{Causal {Inference}: {What} {If}}.
@@ -334,6 +350,17 @@ Olav Kallenberg.
 \newblock \doi{10.1007/0-387-28861-9}.
 \newblock URL \url{http://link.springer.com/10.1007/0-387-28861-9}.
 
+\bibitem[Kasy(2016)]{kasy_why_2016}
+Maximilian Kasy.
+\newblock Why {Experimenters} {Might} {Not} {Always} {Want} to {Randomize}, and
+  {What} {They} {Could} {Do} {Instead}.
+\newblock \emph{Political Analysis}, 24\penalty0 (3):\penalty0 324--338, 2016.
+\newblock ISSN 1047-1987, 1476-4989.
+\newblock \doi{10.1093/pan/mpw012}.
+\newblock URL
+  \url{https://www.cambridge.org/core/journals/political-analysis/article/abs/why-experimenters-might-not-always-want-to-randomize-and-what-they-could-do-instead/79A12E7AB0921C50ECC1F1EA61EC1F8D}.
+\newblock Publisher: Cambridge University Press.
+
 \bibitem[Kerns and Székely(2006)]{kerns_definettis_2006}
 G.~Jay. Kerns and Gábor~J. Székely.
 \newblock Definetti’s {Theorem} for {Abstract} {Finite} {Exchangeable}
@@ -370,6 +397,15 @@ David Lewis.
 \newblock ISSN 0004-8402.
 \newblock \doi{10.1080/00048408112340011}.
 \newblock URL \url{https://doi.org/10.1080/00048408112340011}.
+
+\bibitem[Lindley and Novick(1981)]{lindley_role_1981}
+D.~V. Lindley and Melvin~R. Novick.
+\newblock The {Role} of {Exchangeability} in {Inference}.
+\newblock \emph{The Annals of Statistics}, 9\penalty0 (1):\penalty0 45--58,
+  1981.
+\newblock ISSN 0090-5364.
+\newblock URL \url{https://www.jstor.org/stable/2240868}.
+\newblock Publisher: Institute of Mathematical Statistics.
 
 \bibitem[Menger(2003)]{menger_random_2003}
 Karl Menger.
@@ -445,6 +481,13 @@ Donald~B. Rubin.
 \newblock ISSN 0162-1459.
 \newblock \doi{10.1198/016214504000001880}.
 \newblock URL \url{https://doi.org/10.1198/016214504000001880}.
+
+\bibitem[Saarela et~al.(2020)Saarela, Stephens, and Moodie]{saarela_role_2020}
+Olli Saarela, David~A. Stephens, and Erica E.~M. Moodie.
+\newblock The role of exchangeability in causal inference.
+\newblock June 2020.
+\newblock \doi{10.48550/arXiv.2006.01799}.
+\newblock URL \url{https://arxiv.org/abs/2006.01799v3}.
 
 \bibitem[Savage(1951)]{savage_theory_1951}
 L.~J. Savage.

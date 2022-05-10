@@ -15,7 +15,7 @@
 		\node [style=small dist tikzit] (15) at (-3.25, 1.75) {$\prob{P}_C^{\RV{H}}$};
 		\node [style=none] (17) at (2.25, 0) {};
 		\node [style=Llabel tikzit] (21) at (-3.25, -0.25) {$\RV{D}$};
-		\node [style=small dist tikzit] (22) at (0.75, -1.5) {$\nu_1$};
+		\node [style=small dist tikzit] (22) at (0.75, -1.5) {$\nu_i$};
 		\node [style=Llabel tikzit] (23) at (-3.25, -1.75) {$\RV{I}$};
 		\node [style=none] (24) at (-2.5, -1.75) {};
 	\end{pgfonlayer}
