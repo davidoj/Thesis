@@ -7,16 +7,16 @@
 		\node [style=none] (5) at (6.5, -2.25) {};
 		\node [style=none] (6) at (6.5, 1.75) {};
 		\node [style=copymap tikzit] (7) at (-0.75, 1) {};
-		\node [style=none] (8) at (4.5, -1.75) {$i\in\mathbb{N}$};
+		\node [style=none] (8) at (4.5, -1.75) {$i\in [n]$};
 		\node [style=none] (10) at (2.25, 1) {};
 		\node [style=none] (11) at (2.25, 0.5) {};
 		\node [style=copymap tikzit] (12) at (-0.75, -0.25) {};
 		\node [style=small kernel tikzit] (13) at (0.5, -0.25) {$\Pi_{D,i}$};
 		\node [style=small dist tikzit] (15) at (-3.25, 1.75) {$\prob{P}_C^{\RV{H}}$};
 		\node [style=none] (17) at (2.25, 0) {};
-		\node [style=Llabel tikzit] (21) at (-3.25, -0.25) {$\RV{D}$};
-		\node [style=small dist tikzit] (22) at (0.75, -1.5) {$\nu_i$};
-		\node [style=Llabel tikzit] (23) at (-3.25, -1.75) {$\RV{I}$};
+		\node [style=Llabel tikzit] (21) at (-3.25, -0.25) {$\RV{D}_{[n]}$};
+		\node [style=small dist tikzit] (22) at (0.75, -1.5) {$\delta_j$};
+		\node [style=Llabel tikzit] (23) at (-3.25, -1.75) {$\RV{I}_{[n]}$};
 		\node [style=none] (24) at (-2.5, -1.75) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}

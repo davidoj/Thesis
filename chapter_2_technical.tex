@@ -947,40 +947,50 @@ Thus
 Which implies $\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$ is a version of $\prob{P}_{\alpha}^{\RV{Z}|\RV{X}}$. Because this holds for all $\alpha$, it is therefore also a version of $\prob{P}_C^{\RV{Z}|\RV{X}}$.
 \end{proof}
 
+The following theorem is a standard result in many probability texts. In this work, the measurable spaces considered will all be standard measurable and so Theorem \ref{th:reg_cond} always applies. We will simply assume that conditional probabilities exist, and avoid referencing this theorem every time.
+
 \begin{theorem}[Existence of regular conditionals]\label{th:reg_cond}
 Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$ with $Y$ standard measurable and a probability model $\prob{P}_{\alpha}$ on $(\Omega,\sigalg{F})$. Then there exists a conditional $\prob{P}_\alpha^{\RV{Y}|\RV{X}}$.
 \end{theorem}
 
 \begin{proof}
-This is a standard result, see for example \cite{cinlar_probability_2011} Theorem 2.18.
+\citet[Theorem 2.18]{cinlar_probability_2011}
 \end{proof}
 
-\begin{theorem}[Existence of higher order valid conditionals with respect to probability sets]\label{th:ho_cond_psets}
-Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with regular conditional $\prob{P}_C^{\RV{YZ}|\RV{X}}$ and $Y$ and $Z$ standard measurable. Then there exists a regular $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
+The following theorem was proved by \citet{bogachev_kantorovich_2020}.
+
+\begin{theorem}\label{th:bogachev}
+Given a Borel measurable map $m:X\kto Y\times Z$ let $\Pi_Y:Y\times Z\to Y$ be the projection onto $Y$. Then there exists a Borel measurable map $n:X\times Y\kto Y\times Z$ such that 
+\begin{align}
+    n(\Pi_y^{-1}(y)|x,y) &= 1\label{eq:proper}\\
+    m(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) m\kernel{F}_{\Pi_Y}(dy|x)&\forall A\in \sigalg{Y},B\in\sigalg{Y\times Z}\label{eq:conditional1}
+\end{align}
 \end{theorem}
 
 \begin{proof}
-Given a Borel measurable map $m:X\kto Y\times Z$ let $f:Y\times Z\to Y$ be the projection onto $Y$. Then $f\circ (\RV{Y},\RV{Z})=\RV{Y}$. \citet{bogachev_kantorovich_2020}, Theorem 3.5 proves that there exists a Borel measurable map $n:X\times Y\kto Y\times Z$  such that 
-\begin{align}
-    n(f^{-1}(y)|x,y) = 1\label{eq:proper}\\
-    m(\RV{Y}^{-1}(A)\cap B|x) = \int_A n(B|x,y) m\kernel{F}_{f}(dy|x)&\forall A\in \sigalg{Y},B\in\sigalg{Y\times Z}\label{eq:conditional1}
-\end{align}
-In particular, $\prob{P}_C^{\RV{YZ}|\RV{X}}$ is a Borel measurable map $X\kto Y\times Z$. Thus equation \ref{eq:conditional1} implies for all $A\in \sigalg{Y},B\in\sigalg{Y\times Z}$
+ \citet[Theorem 3.5]{bogachev_kantorovich_2020}
+\end{proof}
+
+The following corollary implies that, given a uniform conditional, higher order conditionals can generically be found for probability sets.
+
+\begin{corollary}[Existence of higher order conditionals with respect to probability sets]\label{th:ho_cond_psets}
+Take a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with uniform conditional distribution $\prob{P}_C^{\RV{YZ}|\RV{X}}$, and $Y$ and $Z$ standard measurable. Then there exists a higher order uniform conditional $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
+\end{corollary}
+
+\begin{proof}
+Take $\prob{P}_C^{\RV{YZ}|\RV{X}}$ to be the Borel measurable map $m$ from Theorem \ref{th:bogachev}, and note that $\Pi_Y\circ (\RV{Y},\RV{Z})=\RV{Y}$. Then equation \ref{eq:conditional1} implies for all $A\in \sigalg{Y},B\in\sigalg{Y\times Z}$ there is some $n$ such that
 
 \begin{align}
-    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_C^{\RV{YZ}|\RV{X}}\kernel{F}_{f}(dy|x)\\
+    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_C^{\RV{YZ}|\RV{X}}\kernel{F}_{\Pi_Y}(dy|x)\\
     &=\int_A n(B|x,y) \prob{P}_C^{\RV{Y}|\RV{X}}(dy|x)\label{eq:rec_push}
 \end{align}
-
-Where Equation \ref{eq:rec_push} follows from Lemma \ref{th:recurs_pushf}.
+where Equation \ref{eq:rec_push} follows from Lemma \ref{th:recurs_pushf}.
 
 Then, for any $\prob{P}_\alpha\in\prob{P}_C$
-
 \begin{align}
     \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_{\alpha}^{\RV{Y}|\RV{X}}(dy|x)
 \end{align}
-
-which implies $n$ is a version of $\prob{P}_C^{\RV{YZ}|(\RV{Y}|\RV{X})}$. By Lemma \ref{th:recurs_pushf}, $n\kernel{F}_{f}$ is a version of $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
+which implies $n$ is a version of $\prob{P}_C^{\RV{YZ}|(\RV{Y}|\RV{X})}$. By Lemma \ref{th:recurs_pushf}, $n\kernel{F}_{\Pi_Y}$ is a version of $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
 \end{proof}
 
 We might be motivated to ask whether the higher order conditionals in Theorem \ref{th:ho_cond_psets} can be chosen to be valid. Despite Lemma \ref{lem:proper_implies_valid} showing that the existence of proper conditional probabilities implies the existence of valid ones, we cannot make use of this in the above theorem because Equation \ref{eq:proper} makes $n$ proper with respect to the ``wrong'' sample space $(Y\times Z, \sigalg{Y}\otimes\sigalg{Z})$ while what we would need is a proper conditional probability with respect to $(\Omega,\sigalg{F})$.
