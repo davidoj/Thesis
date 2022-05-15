@@ -634,36 +634,41 @@ Equation \ref{eq:backdoor} is identical to the backdoor adjustment formula for a
 
 \section{Causal contractibility in sequences of active choices}\label{sec:assessing}
 
-Assessing when a particular sequence of experiments should be modeled with a causally contractible model can be difficult. As noted, a purely observational sequence is causally contractible if it is exchangeable. However, the point of all this theory is to study models that offer different choices. The assumption of causal contractibility can be justified for a sequence of active interventions if the following are satisfied:
+\begin{example}[Confounding]\label{ex:confounding}
+Given a sequential just-do model $(\prob{P}_{C},\RV{D},\RV{Y})$, we might be tempted to reason as follows: each $(\RV{D}_i,\RV{Y}_i)$ pair comes from one sub-experiment out of a long sequence that all look \emph{a priori} identical, therefore $\prob{P}_C^{\RV{Y}|\RV{D}}$ should be causally contractible. Not so fast!
+
+Such a model could exhibit confounding. Suppose $(\prob{P}_{C},(\RV{D},\RV{U}),\RV{Y})$ really does feature a causally contractible $\prob{P}_C^{\RV{Y}|\RV{UD}}$ with single-valued $\RV{H}$ and all other variables binary. Take $\prob{P}_C^{\RV{Y}_i|\RV{U}_i\RV{D}_i}(1|\cdot,\cdot)$ as follows:
+\begin{center}
+\begin{tabular}{ c | c | c }
+  & $\RV{D}_i=0$ & $\RV{D}_i=1$ \\\hline 
+ $\RV{U}_i=0$ & 0 & 0 \\ \hline 
+ $\RV{U}_i=1$ & 1 & 1    
+\end{tabular}
+\end{center}
+and take $\prob{P}_\cdot^{\RV{D}_i|\RV{U}_i}(1|\cdot)$ to be
+\begin{center}
+\begin{tabular}{ c | c | c }
+  & $\alpha=0$ & $\alpha=1$ \\\hline 
+ $\RV{U}_i=0$ & 0 & 1 \\ \hline 
+ $\RV{U}_i=1$ & 1 & 0    
+\end{tabular}
+\end{center}
+then for any $i$, $\prob{P}_0^{\RV{Y}_i|\RV{D}_i}(1|0)=0$ but $\prob{P}_1^{\RV{Y}_i|\RV{D}_i}(1|0)=1$, so there cannot be a causally contractible $\prob{P}_C^{\RV{Y}|\RV{D}}$. Note that $\RV{U}$ need not be unobserved here.
+\end{example}
+
+So, a judgement of symmetry among sub-experiments is not enough for causal contractibility. What is enough?
+
+In the following, it is helpful to assume that each sub-experiment has a ``unique identifier'' $\RV{I}_i$, with the sequence of all sub-experiment labels given by $\RV{I}$. With this, if $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is assumed causally contractible, then it's possible to talk about the individual response functions $\prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{H}\RV{D}_i}$. These plays a role very similar to the $i$th vector of potential outcomes $\RV{Y}^D_i$. Because $\RV{I}_i$ is unique (i.e. never equal to $\RV{I}_j$ for $j\neq i$), only one observation of any individual is ever given, just like only one potential outcome is ever observed.
+
+Theorem \ref{th:cc_ind_treat} presents a set of sufficient conditions for causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{D}}$:
 \begin{enumerate}
     \item There exist variables $\RV{I}$ representing ``unique experiment identifiers'' which satisfy the assumption that $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is causally contractible (informally: it doesn't matter which order the experiments are conducted in, and treatments in each experiment do not affect any other experiments)
-    \item Given a permutation $\rho$ of identifiers, $\prob{P}_\alpha^{\RV{YD}\rho(\RV{I})}=\prob{P}_\alpha^{\RV{YDI}}$ (informally: unique identifiers are not themselves informative)
-    \item The map $\alpha\to \prob{P}_\alpha^{\RV{D}}$ is deterministic Markov kernel associated with an invertible function $f:C\to D^{\mathbb{I}}$
+    \item The identifiers themselves are not informative regarding outcomes: $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\RV{C})$
+    \item The inputs $\RV{D}$ are substitutable for the choice $\RV{C}$ with respect to $\RV{Y}$ and $\RV{I}$: $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ and $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$
 \end{enumerate}
+However, as we will show, even these conditions can be subtle to assess.
 
-Theorem \ref{th:cc_ind_treat} shows that, under these assumptions, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also causally contractible.
-
-The first assumption -- that causal contractibility is satisfied jointly conditioning on decisions $\RV{D}$ and identifers $\RV{I}$ -- seems to often be a background assumption in the literature, while assumptions similar to the second two are discussed explicitly. For example, \citet{greenland_identifiability_1986} explain
-\begin{quote}
-    Equivalence of response type may be thought of in terms of exchangeability of individuals: if the exposure states of the two individuals had been exchanged, the same data distribution would have resulted.
-\end{quote}
-Note that exchanging individuals involved in an experiment and exchanging the individuals' exposure states are two different things, and the former doesn't imply the latter -- for example, there might be some background trend such that individuals treated later experience different outcomes to individuals treated at the start. Assumptions 1 and 2 \emph{together} imply that permuting identifiers or permuting decisions both lead to the same distribution.
-
-\citet{dawid_decision-theoretic_2020} suggests (with some qualifications) that ``post-treatment exchangeability'' for a decision problem regarding taking aspirin to treat a headache may be acceptable if the data are from
-\begin{quote}
-    A group of individuals whom I can regard, in an intuitive sense, as similar to myself, with headaches similar to my own.
-\end{quote}
-This seems on the face of it similar to assumption 2: that I can permute the identifies ``me'' and ``someone else'' without changing the model.
-
-Finally, \citet{rubin_causal_2005} discusses two separate assumptions to justify causal identifiability:
-\begin{quote}
-    indexing of the units is, by definition, a random permutation of $1,..., N$, and thus any distribution on the science must be row-exchangeable [...] The second critical fact is that if the treatment assignment mechanism is ignorable (e.g., randomized), then when the expression for the assignment mechanism (2) is evaluated at the observed data, it is free of dependence on $Y_{mis}$
-\end{quote}
-Here ``the science'' means (roughly) \emph{the response function of each individual}, and exchangeability of these response functions is a similar assumption to permutability of individual identifiers (though we don't derive the exact correspondence here). Rubin's second condition is that treatment assignment is ignorable. Like Assumption 3, this assumption limits ``how much we can learn from the treatment assignment'', but again we don't derive the exact correspondence. Note that in Rubin's scheme the preliminary assumption of \emph{stable unit-treatment values} is made in order to establish the existence of individual response functions, which plays a similar role to Assumption 1. 
-
-Rubin's result also differs substantially from this one in that it applies to \emph{identification of potential outcomes in randomised experiments}, while this result is about the existence of response conditionals \emph{when there are different choices that can be made}.
-
-As an example of the application of Theorem \ref{th:cc_ind_treat}, consider an experiment where $n$ patients, each with an individual identifier $\RV{I}_i$, receive treatment $\RV{D}_i$ and experience outcome $\RV{Y}_i$. $\prob{P}_C^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{I}_{[n]}}$ can be extended to an infinite sequence $\prob{P}_C^{\RV{Y}|\RV{DI}}$ that is causally contractible (see Assumption 1), no matter which choice $\alpha\in C$ is decided on, all identifiers can be swapped without altering the distribution over consequences (see Assumption 2), and finally that the treatment vector $\RV{D}$ is a deterministic and invertible function of the choice $\alpha\in C$ then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible, and hence there are response functions $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$.
+As an example of the application of Theorem \ref{th:cc_ind_treat}, consider an experiment where $n$ patients, each with an individual identifier $\RV{I}_i$, receive treatment $\RV{D}_i$ and experience outcome $\RV{Y}_i$. $\prob{P}_C^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{I}_{[n]}}$ can be extended to an infinite sequence $\prob{P}_C^{\RV{Y}|\RV{DI}}$ that is causally contractible (see Assumption 1), and no matter which choice $\alpha\in C$ is given, all identifiers can be swapped without altering the distribution over consequences (see Assumption 2), and finally that the treatment vector $\RV{D}$ is a deterministic and invertible function of the choice $\alpha\in C$ then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible, and hence there are response functions $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$.
 
 Theorem \ref{th:cc_ind_treat} can also be extended to the case where $\RV{D}$ is a function of the choice $\alpha$ and a ``random signal'' $\RV{R}$.
 
@@ -741,61 +746,24 @@ Then by Lemma \ref{lem:ind_to_cc}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally cont
 
 Theorem \ref{th:cc_ind_treat} can be extended to the case where decisions $\RV{D}$ are a one-to-one deterministic function of the choice, or a random mixtures of one-to-one deterministic functions of the choice.
 
-\begin{corollary}\label{cor:extend_to_randomised}
-Given a sequential just-do model $(\prob{P}_{C'},(\RV{D},\RV{I}),\RV{Y})$ satisfying the conditions of Theorem \ref{th:cc_ind_treat} and a second model $(\prob{P}_{C},(\RV{D},\RV{I}),\RV{Y})$ such that for all $\alpha\in C$ there is some probability measure $\mu\in \Delta(C')$ such that
-\begin{align}
-    \prob{P}_\alpha &= \sum_{\beta\in C'} \mu(\beta) \prob{P}_\beta 
-\end{align}
-then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also causally contractible.
-\end{corollary}
+\begin{theorem}\label{cor:extend_to_randomised}
+Consider a sequential just-do model $(\prob{P}_{C'},\RV{D},\RV{Y})$ where $\prob{P}_{C'}^{\RV{Y}|\RV{D}}$ is causally contractible, and construct a second model $(\prob{P}_{C},\RV{D},\RV{Y})$ where $\prob{P}_C$ is the union of $\prob{P}_{C'}$ and its convex hull. Then $\prob{P}_{C}^{\RV{Y}|\RV{D}}$ is also causally contractible.
+\end{theorem}
 
 \begin{proof}
-For all $\alpha\in C$
+For all $\alpha\in C$, there is some probability measure $\mu:C'\to [0,1]$ such that
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{D}} &= \sum_{c\in C'} \mu(\beta) \prob{P}_\beta^{\RV{Y}|\RV{D}}\\
+    \prob{P}_\alpha^{\RV{Y}|\RV{D}} &= \sum_{\beta\in C'} \mu(\beta) \prob{P}_\beta^{\RV{Y}|\RV{D}}\\
     &= \prob{P}_{C'}^{\RV{Y}|\RV{D}}
 \end{align}
+thus
+\begin{align}
+    \prob{P}_C^{\RV{Y}|\RV{D}} = \prob{P}_{C'}^{\RV{Y}|\RV{D}}
+\end{align}
+and in particular, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
 \end{proof}
 
-Corollary \ref{cor:extend_to_randomised} can be used to argue that a randomised experiment of the right type is causally contractible. The following example is similar to the setup in \citet{kasy_why_2016}. In this, Kasy argues that as long as the experimenter controls the treatment assignment, causal effects are identified (i.e. the randomisation step is not strictly necessary). We largely agree; however, Kasy's argument depends on the assumption that the choice (i.e. the \emph{output} of the decision-making step) corresponds deterministically and 1-to-1 with the sequence of treatment assignments. This is a natural assumption to make when analysing experimental design as a decision problem, but in practice this is not how many experiments are conducted. Example \ref{ex:randomised_experiment} replicates Kasy's argument with our notation, while Example \ref{ex:bad_randomised_experiment} shows how things can go wrong if this assumption is not satisfied.
-
-We assume an infinite sequence, which is clearly unreasonable. Extending the representation theorems to the case of finite sequences, using for example the result of \citet{diaconis_finite_1980} with establishes that finite exchangeable distributions are approximately mixtures of independent and identically distributed sequences, would allow some implausible assumptions in the following example to be removed.
-
-\begin{example}\label{ex:randomised_experiment}
-A sequential experiment is modeled by a probability set $\prob{P}_C$ with treatment functions $\RV{D}:=(\RV{D}_i)_{i\in [N]}$, treatments $\RV{T}:=(\RV{T}_i)_{i\in [N]}$ covariates $\RV{X}:=(\RV{X}_i)_{i\in [N]}$ and outcomes $\RV{Y}:=(\RV{Y}_i)_{i\in[N]}$. Suppose this is extendable to a model with infinite sequences $(\RV{T}_i)_{i\in \mathbb{N}}$, covariates $(\RV{X}_i)_{i\in \mathbb{N}}$ and outcomes $(\RV{Y}_i)_{i\in \mathbb{N}}$ where $i>N$ means $\RV{T}_i$ is unobserved. The set of choices $C$ is the set of all probability distributions$\Delta(D^N)$ for some $N\subset\mathbb{N}$ (this is to ensure $C$ is countable). Let $C'\subset C$ be the deterministic elements of $C$.
-
-Each treatment $\RV{T}_i$ is given to a patient, and each patient provides a unique identifier $\RV{I}_i$ which for simplicity we assume is a number in $\mathbb{N}$ (instead of, say, a driver's license number and state of issue), and that (implausibly) there is a positive probability for $\RV{I}_i$ to take any value in $\mathbb{N}$ for any choice $\alpha$. The mechanism by which they received these identifiers is not known, and they are judged to offer no evidence regarding the treatment function, the administration of treatment or the outcomes of treatments. That is, $\RV{DXY}\CI^e_{\prob{P}_C} \RV{I}|\RV{C}$ (if each identifier is unique, this is equivalent to assuming that given any choice $\alpha$, the model is unchanged by permutation of identifiers -- see also Lemma \ref{lem:ind}).
-
-The experimental setup is: the analyst consults the model $\prob{P}_C$, and accordingly decides on possibly stochastic sequence $\alpha:=(\mu_i)_{i\in N}$ of decision functions $X\kto Y$. For $i\leq N$, if $\mu_i$ is deterministic with probability 1 on some $d_i$, the experimental administrator will assign patient $i$ a treatment $\RV{T}_i$ according to $d_i(\RV{X}_i)$. Otherwise, if it is stochastic, the administrator will consult a random number generator and apply some fixed rule dependent on the required probabilities in order to choose the appropriate decision function, then assign the treatment according to that function. For $i>N$, the administrator chooses a decision function with uniform probability, again according to the random number generator. Beyond specifying the decision function, the choice is deemed irrelevant to any of the outcomes, and beyond specifying the covariate-treatment relationship the decision functions are also deemed irrelevant to the outcomes - i.e. $\RV{YIXT}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ and $\RV{YI}\CI^e_{\prob{P}_C} (\RV{D},\RV{C})|(\RV{X},\RV{T})$.
-
-The randomisation procedure is deemed sufficient to ensure that for any mixed $\alpha\in C$ where $\alpha = \sum_{\beta\in C'} \mu(\beta) \beta$, $\prob{P}_\alpha = \sum_{\beta\in C'} \prob{P}_\beta$.
-
-Furthermore, the treatment function $\RV{D}_i$ and the identifier $\RV{I}_i$ are judged irrelevant to the outcomes of any patients other than $i$; that is, $\prob{P}_C^{\RV{YXTI}|\RV{DI}}$ is local, Definition \ref{def:caus_cont}. and given any subsequence of patients, covariates and treatments the same joint distribution over consequences is expected no matter where in the experiment these patients appeared. That is, for any $A,B\subset\mathbb{N}$, $|A|=|B|$
-\begin{align}
-    \prob{P}_C^{\RV{Y}_A\RV{X}_A\RV{T}_A|\RV{D}_A\RV{I}_A} &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}_B\RV{X}_B\RV{T}_B|\RV{D}_B\RV{I}_B}
-\end{align}
-Together, these assumptions imply $\prob{P}_C^{\RV{Y}|\RV{XTI}}$ is causally contractible, see Theorem \ref{th:equal_of_condits}.
-
-For the deterministic subset $C'\subset C$, $\RV{YI}\CI^e_{\prob{P}_{C'}} \RV{D}|\RV{C}$ as $\RV{D}$ is deterministic for all elements of $C'$. By application of Theorem \ref{th:cc_ind_treat}, $\prob{P}_{C'}^{\RV{YXT}|\RV{D}}$ is causally contractible, and by application of Corollary \ref{cor:extend_to_randomised}, so is $\prob{P}_{C}^{\RV{YXT}|\RV{D}}$
-
-By taking higher order conditionals, it follows that $\prob{P}_C^{\RV{Y}|\RV{XTD}}$ is also causally contractible, and by Lemma \ref{lem:ind_to_cc} applied with $\RV{YI}\CI^e_{\prob{P}_C} (\RV{D},\RV{C})|(\RV{X},\RV{T})$, $\prob{P}_C^{\RV{Y}|\RV{XT}}$ is also causally contractible. If, furthermore, the covariates $\RV{X}$ are exchangeable and unaffected by the choice $\RV{X}\CI^e_{\prob{P}_C} \RV{C}$, $\prob{P}_C^{\RV{Y}|\RV{T}}$ is also causally contractible.
-\end{example}
-
-Example \ref{ex:randomised_experiment} is causally contractible. However, changing it in a way that might seem minor from some points of view undermines this result.
-
-\begin{example}\label{ex:bad_randomised_experiment}
-The setup is precisely as in Example \ref{ex:randomised_experiment}, except given some nondeterministic $\alpha\in C$ the administrator will enact an ad-hoc ``randomisation'' procedure, while given a deterministic choice, the administrator will still assign treatment deterministically according to the functions given.
-
-By leaving the details of the randomisation up to the administrator, the analyst now has to contend with the fact that the patients may not be as indistinguishable to the administrator as they were to the analyst when constructing the model. For example, the administrator might examine the patients prior to selecting a decision function. If the administrator is not aware of the importance of patient indistinguishability, they may prefer to treat patients who they correctly anticipate will benefit. This means that the analyst must at least consider the possibility that for non-deterministic choices $\alpha$, $\prob{P}_\alpha^{\RV{Y}|\RV{T}}$ will converge to stronger correlation between $\RV{Y}$ and $\RV{T}$ than $\prob{P}_\beta^{\RV{Y}|\RV{T}}$ will for deterministic $\beta$ where the administrator has no discretion. That is, $\prob{P}_\alpha^{\RV{Y}|\RV{T}}\neq \prob{P}_\beta^{\RV{Y}|\RV{T}}$ and so there isn't even a uniform conditional distribution $\prob{P}_C^{\RV{Y}|\RV{T}}$, so there is no question of causal contractibility.
-\end{example}
-
-\citet{kasy_why_2016} mentions that causal identifiability requires a ``controlled experiment'', not necessarily a ``randomised controlled experiment''. The preceding two examples establish that a ``controlled experiment'' means that the inputs to the experiment are under the control \emph{of the analyst}. Even that doesn't quite capture it; if the analyst and the administrator are the same person and they nevertheless perform some ad-hoc ``randomisation'' of decision functions, the points raised in Example \ref{ex:bad_randomised_experiment} still apply. More precisely, if there is a decision procedure involving $\prob{P}_C$ and a choice $\alpha$ output by this procedure, then the inputs $\RV{D}$ must be controlled by this $\alpha$. 
-
-This requirement is not always satisfied for experiments in practice. Furthermore, this describes a situation in which the analyst is both the experiment designer and the consumer of the experiment data (in order to make some optimal decision down the line). If an experiment is conducted and the results are published in a paper for some reader to review, then the reader is in the position of the person who is here called the ``analyst'' -- while they don't get to design the experiment, it is on them to make use of the published experimental data in order to make decisions of their own. Importantly, they \emph{never} control the experimental inputs at all.
-
-Randomisation can play an important role in situations like this where the analyst has little control over experimental inputs, and so under normal circumstances may not accept causal contractibility. An informal argument for this is: suppose I accept causal contractibility for an experiment I control with either deterministic or random inputs. I don't accept it for a similar experiment you control with deterministic inputs, because I think there's some chance you knew something I didn't when you chose the inputs. However, whatever you do or don't know, a random input controlled by you is as good as a random input controlled by me, so if I accept causal contractibility in the latter case then I also accept it in the former.
-
-An \emph{identifier variable} is a variable $\RV{I}$ that takes values in the set of finite permutations of $\mathbb{N}$. It is associated with a sequence $(\RV{I}_i)_{i\in \mathbb{N}}$ where $\RV{I}_i=\RV{I}(i)$. Each $\RV{I}_i$ takes values in $\mathbb{N}$ and $\RV{I}_i\neq \RV{I}_j$ for all $j\neq i$.
+The assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}$ can be understood in terms of \emph{permutability of identifiers}. An \emph{identifier variable} is a variable $\RV{I}$ that takes values in the set of finite permutations of $\mathbb{N}$. It is associated with a sequence $(\RV{I}_i)_{i\in \mathbb{N}}$ where $\RV{I}_i=\RV{I}(i)$. Each $\RV{I}_i$ takes values in $\mathbb{N}$ and $\RV{I}_i\neq \RV{I}_j$ for all $j\neq i$.
 
 \begin{definition}[Identifier variable]
 Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$, let $I$ be the set of finite permutations $\mathbb{N}\to \mathbb{N}$. A variable $\RV{I}:\Omega\to I$ be a variable taking values in $I$ is an \emph{identifier variable}.
@@ -806,30 +774,64 @@ If a uniform conditional probability is invariant to permutations of an index va
 \begin{lemma}\label{lem:ind}
 Given a probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \RV{C}|(\RV{D},\RV{I})$ and $\RV{I}:\Omega\to I$ is an identifier variable, if for each finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{ID}} &= (\text{swap}_{\rho(I)}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{ID}}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{swap}_{\rho(I)}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}
 \end{align}
-then $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\RV{C})|\RV{D}$.
+then $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\RV{C}$.
 \end{lemma}
 
 \begin{proof}
 By definition of the set $I$ of finite permutations, for every $\rho\in I$, $B\in\sigalg{Y}^{\mathbb{N}}$, $d\in D^{\mathbb{N}}$ there is a finite permutation $\rho^{-1}\in I$ such that $\rho\circ\rho^{-1}=\text{id}_{\mathbb{N}}$. Then
 \begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{ID}}(B|i,d) &= (\kernel{F}_{\rho^{-1}}\otimes \text{Id}_X )\prob{P}_C^{\RV{Y}|\RV{ID}}(B|\rho,d)\\
-    &= \prob{P}_C^{\RV{Y}|\RV{ID}}(B|\text{id}_{\mathbb{N}},d)
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho) &= (\kernel{F}_{\rho^{-1}}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho)\\
+    &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\text{id}_{\mathbb{N}})
 \end{align}
 Therefore
 \begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{ID}} &\overset{\prob{P}_C}{\cong} \text{erase}_{I}\otimes \kernel{K} 
-\end{align}
-where $\kernel{K}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is the kernel
-\begin{align}
-    (B|d)\mapsto \prob{P}_C^{\RV{Y}|\RV{ID}}(B|\text{id}_{\mathbb{N}},d)
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &\overset{\prob{P}_C}{\cong} \text{erase}_{I}\otimes \prob{P}_\alpha^{\RV{Y}}
 \end{align}
 \end{proof}
 
+Theorem \ref{cor:extend_to_randomised} can be used to argue that, given a sequence of experiments causally contractible under deterministic choices, adding random mixtures of these choices also yields a causally contractible sequence. \citet{kasy_why_2016} argues that as long as the experimenter controls the treatment assignment, causal effects are identified (i.e. the randomisation step is not strictly necessary). Example \ref{ex:randomised_experiment} shows that this argument might be supported, but Example \ref{ex:bad_randomised_experiment} shows that there are subtle ways that might lead to this argument failing. We consider a simpler case than \citet{kasy_why_2016}, where there are no covariates to worry about.
+
+We assume an infinite sequence, which is clearly unreasonable. Extending the representation theorems to the case of finite sequences, using for example the result of \citet{diaconis_finite_1980} with establishes that finite exchangeable distributions are approximately mixtures of independent and identically distributed sequences, would allow some implausible assumptions in the following example to be removed.
+
+\begin{example}\label{ex:randomised_experiment}
+A sequential experiment is modeled by a probability set $\prob{P}_C$ with binary treatments $\RV{D}:=(\RV{D}_i)_{i\in \mathbb{N}}$ and binary outcomes $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$. The set of choices $C$ is the set of all probability distributions$\Delta(D^N)$ for some $N\subset\mathbb{N}$ (this is to ensure $C$ is countable).
+
+Each treatment $\RV{D}_i$ is given to a patient, and each patient provides a unique identifier $\RV{I}_i$ which for simplicity we assume is a number in $\mathbb{N}$ (instead of, say, a driver's license number and state of issue), and that (implausibly) there is a positive probability for $\RV{I}_i$ to take any value in $\mathbb{N}$ for any choice $\alpha$.
+
+The treatments are decided as follows: the analyst consults the model $\prob{P}_C$, and, according to $\prob{P}_C$ and some previously agreed upon decision rule, comes up with a possibly stochastic sequence  of treatment distributions $\alpha:=(\mu_i)_{i\in N}$ with each $\mu_i$ in $\Delta(\{0,1\})$. If $\mu_i$ is deterministic -- that is, it puts probability 1 on some treatment $d_i$, the experiment administrator will assign patient $i$ the treatment $d_i$. Otherwise, if $\mu_i$ is nondeterministic, the administrator will consult some agreed-upon random number generator that yields treatment assignments according to $\mu_i$.
+
+Let $C'\subset C$ be the deterministic elements of $C$, and assume that all elements of $C$ are a convex combination of elements of $C'$. The randomisation procedure is deemed sufficient to ensure that for any mixed $\alpha\in C$ where $\alpha = \sum_{\beta\in C'} \mu(\beta) \beta$, $\prob{P}_\alpha = \sum_{\beta\in C'} \prob{P}_\beta$.
+
+Furthermore, assume $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ is causally contractible for each $\alpha$. As discussed in Theorem \ref{th:equal_of_condits}, this means that for any $A,B\subset\mathbb{N}$, $|A|=|B|$, $\prob{P}_\alpha^{\RV{Y}_A|\RV{D}_A\RV{I}_A}=\prob{P}_C^{\RV{Y}_B|\RV{D}_B\RV{I}_B}$ and $\RV{Y}_A\CI^e_{\prob{P}_C} (\RV{D}_{A^C},\RV{I}_{A^C})|(\RV{D}_A,\RV{I}_A,\RV{C})$. Roughly: holding any subsequence of treatments and individuals fixed, the joint distribution of consequences is the same no matter where they appear in the sequence of experiments and no matter what treatments or individuals appear elsewhere.
+
+The analyst constructing the model has no particular knowledge about any identifier, and so \emph{for any choice} reasons the associated model should be invariant to permutations of identifiers. This implies $\RV{Y}\CI^e_{\prob{P}_C} \RV{I}|\RV{C}$ (see Lemma \ref{lem:ind}). The assumption that this holds given any choice can be tricky -- not only must the identifiers appear symmetric to the analyst constructing the model, but nothing breaking this symmetry may be learned from the choice $\alpha$, see the Example \ref{ex:bad_randomised_experiment} next and the discussion afterwards. In this case, the reasoning is supported by the fact that the rule for selecting $\alpha$ is known in advance.
+
+For the deterministic subset $C'\subset C$, $\RV{YI}\CI^e_{\prob{P}_{C'}} \RV{D}|\RV{C}$ as $\RV{D}$ is deterministic for all elements of $C'$, and $\RV{YI}\CI^e_{\prob{P}_{C'}} \RV{C}|\RV{D}$ is also because restricted to this subset, $\RV{D}$ is a one-to-one function of $\RV{C}$. By application of Theorem \ref{th:cc_ind_treat}, $\prob{P}_{C'}^{\RV{Y}|\RV{D}}$ is causally contractible, and by application of Corollary \ref{cor:extend_to_randomised}, so is $\prob{P}_{C}^{\RV{Y}|\RV{D}}$
+\end{example}
+
+Permutability of identifiers can fail when the rule for selecting $\alpha$ is not known in advance. The following example is extreme in order to illustrate the issue clearly. The distinction between the analyst and the administrator is also intended to make the example easier to parse. The key point is that, when the rule for selecting $\alpha$ is not known in advance, symmetries that are apparent at the time of model construction do not necessarily hold for every choice $\alpha$, and this remains true if e.g. the selection of choices leads to less extreme confounding or the analyst and the administrator are actually the same person.
+
+\begin{example}\label{ex:bad_randomised_experiment}
+The variables and treatment administration protocol is precisely as in Example \ref{ex:randomised_experiment} \emph{except} the administrator rather than the analyst selects the value of $\alpha$.
+
+The administrator 
+
+This change gives the administrator a degree of freedom: they can choose some $\alpha$ from the subset $F$, and moreover they can potentially do this with access to knowledge that the analyst lacks. Thus while they might all seem the same to the analyst, they will not all look the same to the administrator.
+
+In particular, suppose the administrator examines every patient before making the final selection of $\alpha\in F$ and gets a covariate $\RV{U}_i$ for each one. Then the choice from the administrator's point of view is not elements of $F$ but maps $X^{\mathbb{N}}\to F$. The administrator may introduce confounding for the effect of $\RV{D}$ on $\RV{Y}$. Suppose (for the sake of a simple example) they are certain to introduce confounding of precisely the form in example \ref{ex:confounding} -- that is, they will either force $\RV{D}_i$ perfectly correlated with $\RV{U}_i$ or perfectly anticorrelated, and $\RV{Y}_i$ is always perfectly correlated with $\RV{U}_i$. The assumption that fails is \emph{label permutability}. \todo[inline]{Finish this} In particular, if $\prob{P}_\alpha^{\RV{YD}|\RV{I}}(1,1|i)=1$ and $\prob{P}_\alpha^{\RV{YD}|\RV{I}}(1,1|j)=0$, then . If the analyst anticipates this, then they may reject label permutability because, by hypothesis, the administrator may preferentially assign some 
+\end{example}
+
+\citet{kasy_why_2016} mentions that causal identifiability requires a ``controlled experiment'', not necessarily a ``randomised controlled experiment''. The preceding two examples establish that a ``controlled experiment'' means that the inputs to the experiment are under the control \emph{of the analyst}. Even that doesn't quite capture it; if the analyst and the administrator are the same person and they nevertheless perform some ad-hoc ``randomisation'' of decision functions, the points raised in Example \ref{ex:bad_randomised_experiment} still apply. More precisely, if there is a decision procedure involving $\prob{P}_C$ and a choice $\alpha$ output by this procedure, then the inputs $\RV{D}$ must be controlled by this $\alpha$. 
+
+This requirement is not always satisfied for experiments in practice. Furthermore, this describes a situation in which the analyst is both the experiment designer and the consumer of the experiment data (in order to make some optimal decision down the line). If an experiment is conducted and the results are published in a paper for some reader to review, then the reader is in the position of the person who is here called the ``analyst'' -- while they don't get to design the experiment, it is on them to make use of the published experimental data in order to make decisions of their own. Importantly, they \emph{never} control the experimental inputs at all.
+
+Randomisation can play an important role in situations like this where the analyst has little control over experimental inputs, and so under normal circumstances may not accept causal contractibility. An informal argument for this is: suppose I accept causal contractibility for an experiment I control with either deterministic or random inputs. I don't accept it for a similar experiment you control with deterministic inputs, because I think there's some chance you knew something I didn't when you chose the inputs. However, whatever you do or don't know, a random input controlled by you is as good as a random input controlled by me, so if I accept causal contractibility in the latter case then I also accept it in the former.
+
 Dropping the assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ means that, in general, one or both of $\prob{P}_C^{\RV{Y}|\RV{D}}$ or $\prob{P}_C^{\RV{Y}|\RV{ID}}$ may be ill-defined (note that the independence is merely a sufficient condition, not a necessary condition for these uniform conditional probabilities). The condition $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ alone also does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. 
 
-Constructing the following example requires the hypotheses that any given identifier $i\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. Thus the space of hypotheses is a sequence of binary values $H=\{0,1\}^{\mathbb{N}}$. Equipped with the product topology, $H$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(H,\mathcal{B}(H))$ is a standard measurable space and because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
+Constructing the following example requires the hypotheses that any given identifier $i\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. Thus the space of hypotheses is a sequence of binary values $H=\{0,1\}^{\mathbb{N}}$. Equipped with the product topology, $H$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(H,\mathcal{B}(H))$ is a standard measurable space and, because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
 
 \begin{example}
 Take $Y=C=D=\{0,1\}$ and take $(H,\sigalg{H})$ to be $\{0,1\}^{\mathbb{N}}$ equipped with the product topology. For any $i\neq 1$, $\RV{Y}_i\RV{I}_i\RV{D}_i\CI^e_{\prob{P}_C} \RV{C}$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$ and $\RV{I}_i\CI^e_{\prob{P}_C} \RV{C}$.
@@ -894,6 +896,28 @@ However, given any finite permutation $\rho:\mathbb{N}\to\mathbb{N}$
     &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q)
 \end{align}
 \end{example}
+
+\subsection{Prior work}
+
+Assumption 1, that causal contractibility is satisfied jointly conditioning on decisions $\RV{D}$ and identifers $\RV{I}$, seems to be a background assumption in the literature, while assumptions similar to the second two are discussed explicitly. For example, \citet{greenland_identifiability_1986} explain
+\begin{quote}
+    Equivalence of response type may be thought of in terms of exchangeability of individuals: if the exposure states of the two individuals had been exchanged, the same data distribution would have resulted.
+\end{quote}
+Note that exchanging individuals involved in an experiment and exchanging the individuals' exposure states are two different things, and the former doesn't imply the latter -- for example, there might be some background trend such that individuals treated later experience different outcomes to individuals treated at the start. Assumptions 1 and 2 \emph{together} imply that permuting identifiers or permuting decisions both lead to the same distribution.
+
+\citet{dawid_decision-theoretic_2020} suggests (with some qualifications) that ``post-treatment exchangeability'' for a decision problem regarding taking aspirin to treat a headache may be acceptable if the data are from
+\begin{quote}
+    A group of individuals whom I can regard, in an intuitive sense, as similar to myself, with headaches similar to my own.
+\end{quote}
+This seems on the face of it similar to assumption 2: that I can permute the identifies ``me'' and ``someone else'' without changing the model.
+
+Finally, \citet{rubin_causal_2005} discusses two separate assumptions to justify causal identifiability:
+\begin{quote}
+    indexing of the units is, by definition, a random permutation of $1,..., N$, and thus any distribution on the science must be row-exchangeable [...] The second critical fact is that if the treatment assignment mechanism is ignorable (e.g., randomized), then when the expression for the assignment mechanism (2) is evaluated at the observed data, it is free of dependence on $Y_{mis}$
+\end{quote}
+Here ``the science'' means (roughly) \emph{the response function of each individual}, and exchangeability of these response functions is a similar assumption to permutability of individual identifiers (though we don't derive the exact correspondence here). Rubin's second condition is that treatment assignment is ignorable. Like Assumption 3, this assumption limits ``how much we can learn from the treatment assignment'', but again we don't derive the exact correspondence. Note that in Rubin's scheme the preliminary assumption of \emph{stable unit-treatment values} is made in order to establish the existence of individual response functions, which plays a similar role to Assumption 1. 
+
+Rubin's result also differs substantially from this one in that it applies to \emph{identification of potential outcomes in randomised experiments}, while this result is about the existence of response conditionals \emph{when there are different choices that can be made}.
 
 \subsubsection{Example: body mass index}
 
