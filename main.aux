@@ -14,8 +14,8 @@
 \fi}
 \global\let\hyper@last\relax 
 \gdef\HyperFirstAtBeginDocument#1{#1}
-\providecommand*\HyPL@Entry[1]{}
-\HyPL@Entry{0<</S/D>>}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{proctor_history_2012}
 \citation{oreskes_merchants_2011}
 \citation{fisher_cancer_1958}
@@ -135,12 +135,14 @@
 \newlabel{th:recurs_pushf}{{2.4.28}{31}{Conditional pushforward}{theorem.2.4.28}{}}
 \newlabel{th:reg_cond}{{2.4.29}{31}{Existence of regular conditionals}{theorem.2.4.29}{}}
 \citation{bogachev_kantorovich_2020}
-\newlabel{th:ho_cond_psets}{{2.4.30}{32}{Existence of higher order valid conditionals with respect to probability sets}{theorem.2.4.30}{}}
-\newlabel{eq:proper}{{2.129}{32}{Existence of conditional probabilities}{equation.2.4.129}{}}
-\newlabel{eq:conditional1}{{2.130}{32}{Existence of conditional probabilities}{equation.2.4.130}{}}
+\citation{bogachev_kantorovich_2020}
+\newlabel{th:bogachev}{{2.4.30}{32}{}{theorem.2.4.30}{}}
+\newlabel{eq:proper}{{2.129}{32}{}{equation.2.4.129}{}}
+\newlabel{eq:conditional1}{{2.130}{32}{}{equation.2.4.130}{}}
+\newlabel{th:ho_cond_psets}{{2.4.31}{32}{Existence of higher order conditionals with respect to probability sets}{theorem.2.4.31}{}}
 \newlabel{eq:rec_push}{{2.132}{32}{Existence of conditional probabilities}{equation.2.4.132}{}}
-\newlabel{lem:proper_implies_valid}{{2.4.31}{32}{}{theorem.2.4.31}{}}
-\newlabel{th:higher_order_conditionals}{{2.4.32}{33}{Higher order conditionals}{theorem.2.4.32}{}}
+\newlabel{lem:proper_implies_valid}{{2.4.32}{33}{}{theorem.2.4.32}{}}
+\newlabel{th:higher_order_conditionals}{{2.4.33}{33}{Higher order conditionals}{theorem.2.4.33}{}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Models with choices and consequences}{35}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -223,7 +225,7 @@
 \newlabel{sec:mprocs}{{3.3.2}{54}{Measurement procedures}{subsection.3.3.2}{}}
 \newlabel{def:equality}{{3.3.3}{54}{Equivalence of procedures}{theorem.3.3.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Observable variables}{56}{subsection.3.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Model variables}{57}{subsection.3.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Model variables}{56}{subsection.3.3.4}\protected@file@percent }
 \newlabel{def:unobserved_variable}{{3.3.7}{57}{Unobserved variable}{theorem.3.3.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Variable sequences and partial order}{57}{subsection.3.3.5}\protected@file@percent }
 \newlabel{def:variable_po}{{3.3.8}{57}{Variables determined by another variable}{theorem.3.3.8}{}}
@@ -237,6 +239,7 @@
 \citation{rubin_causal_2005,imbens_causal_2015}
 \citation{pearl_book_2018}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Informal explanation of the main theorems}{60}{section.4.1}\protected@file@percent }
+\citation{kasy_why_2016}
 \citation{de_finetti_foresight_1992}
 \citation{kerns_definettis_2006,diaconis_finite_1980}
 \citation{aldous_representations_1981}
@@ -246,22 +249,22 @@
 \citation{rubin_causal_2005}
 \citation{imbens_causal_2015}
 \citation{saarela_role_2020}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Relevance to previous work}{61}{section.4.2}\protected@file@percent }
+\newlabel{sec:prev_work}{{4.2}{61}{Relevance to previous work}{section.4.2}{}}
 \citation{hernan_beyond_2012,greenland_identifiability_1986,banerjee_chapter_2017,dawid_decision-theoretic_2020}
 \citation{dawid_decision-theoretic_2020}
 \citation{rubin_causal_2005}
 \citation{chiribella_quantum_2008}
 \citation{jacobs_causal_2019}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Relevance to previous work}{62}{section.4.2}\protected@file@percent }
-\newlabel{sec:prev_work}{{4.2}{62}{Relevance to previous work}{section.4.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Independent and Identical Response Functions}{63}{section.4.3}\protected@file@percent }
-\newlabel{sec:response_functions}{{4.3}{63}{Independent and Identical Response Functions}{section.4.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Independent and Identical Response Functions}{62}{section.4.3}\protected@file@percent }
+\newlabel{sec:response_functions}{{4.3}{62}{Independent and Identical Response Functions}{section.4.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Causally contractible Markov kernels}{63}{subsection.4.3.1}\protected@file@percent }
 \newlabel{sec:ccontracibility}{{4.3.1}{63}{Causally contractible Markov kernels}{subsection.4.3.1}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Definition of causal contractibility}{64}{section*.17}\protected@file@percent }
 \newlabel{def:caus_cont}{{4.3.1}{64}{Locality}{theorem.4.3.1}{}}
 \newlabel{def:caus_exch}{{4.3.2}{64}{Exchange commutativity}{theorem.4.3.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Properties of causally contractible Markov kernels}{64}{section*.18}\protected@file@percent }
 \citation{cinlar_probability_2011}
-\@writefile{toc}{\contentsline {subsubsection}{Properties of causally contractible Markov kernels}{65}{section*.18}\protected@file@percent }
 \newlabel{lem:infinitely_extended_kernels}{{4.3.5}{65}{Infinitely extended kernels}{theorem.4.3.5}{}}
 \newlabel{eq:marginalise_comb}{{4.10}{65}{Infinitely extended kernels}{equation.4.3.10}{}}
 \newlabel{eq:q_is_Markov}{{4.14}{65}{Properties of causally contractible Markov kernels}{equation.4.3.14}{}}
@@ -275,132 +278,140 @@
 \newlabel{eq:lup_rep_kernel}{{4.49}{69}{}{equation.4.3.49}{}}
 \newlabel{eq:q_mu_rel}{{4.58}{70}{Representation theorems for causally contractible Markov kernels}{equation.4.3.58}{}}
 \newlabel{eq:swap_select_relation}{{4.62}{70}{Representation theorems for causally contractible Markov kernels}{equation.4.3.62}{}}
+\newlabel{th:ciid_rep_kernel}{{4.3.11}{71}{}{theorem.4.3.11}{}}
 \citation{kallenberg_basic_2005}
-\newlabel{th:ciid_rep_kernel}{{4.3.11}{72}{}{theorem.4.3.11}{}}
 \newlabel{eq:lookup_representation}{{4.82}{72}{Representation theorems for causally contractible Markov kernels}{equation.4.3.82}{}}
 \newlabel{eq:ev_alternate_rep}{{4.83}{72}{Representation theorems for causally contractible Markov kernels}{equation.4.3.83}{}}
-\newlabel{eq:df_rep_mu}{{4.90}{73}{Representation theorems for causally contractible Markov kernels}{equation.4.3.90}{}}
+\newlabel{eq:df_rep_mu}{{4.90}{72}{Representation theorems for causally contractible Markov kernels}{equation.4.3.90}{}}
 \newlabel{eq:lup_rep_combined}{{4.94}{73}{Representation theorems for causally contractible Markov kernels}{equation.4.3.94}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Causal contractibility with data-independent actions}{74}{subsection.4.3.2}\protected@file@percent }
-\newlabel{sec:data_independent_actions}{{4.3.2}{74}{Causal contractibility with data-independent actions}{subsection.4.3.2}{}}
-\newlabel{th:data_ind_CC}{{4.3.15}{75}{Data-independent causal contractibility}{theorem.4.3.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Causal contractibility with data-independent actions}{73}{subsection.4.3.2}\protected@file@percent }
+\newlabel{sec:data_independent_actions}{{4.3.2}{73}{Causal contractibility with data-independent actions}{subsection.4.3.2}{}}
+\newlabel{th:data_ind_CC}{{4.3.15}{74}{Data-independent causal contractibility}{theorem.4.3.15}{}}
 \newlabel{eq:lup_rep_varb}{{4.100}{75}{Causal contractibility with data-independent actions}{equation.4.3.100}{}}
 \newlabel{eq:h_ci_x}{{4.110}{76}{Causal contractibility with data-independent actions}{equation.4.3.110}{}}
 \newlabel{eq:Y_ci_h_yd}{{4.111}{76}{Causal contractibility with data-independent actions}{equation.4.3.111}{}}
-\newlabel{th:equal_of_reduced_condits}{{4.3.16}{78}{Equality of subsequence conditionals}{theorem.4.3.16}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Examples}{78}{section*.20}\protected@file@percent }
-\newlabel{sec:examples}{{4.3.2}{78}{Examples}{section*.20}{}}
+\newlabel{th:equal_of_reduced_condits}{{4.3.16}{77}{Equality of subsequence conditionals}{theorem.4.3.16}{}}
 \citation{eckles_bias_2021}
 \citation{gordon_comparison_2018,gordon_close_2022}
+\@writefile{toc}{\contentsline {subsubsection}{Examples}{78}{section*.20}\protected@file@percent }
+\newlabel{sec:examples}{{4.3.2}{78}{Examples}{section*.20}{}}
 \citation{pearl_causality:_2009}
 \newlabel{ex:backdoor}{{4.3.17}{79}{Backdoor adjustment}{theorem.4.3.17}{}}
 \newlabel{eq:backdoor}{{4.138}{79}{Backdoor adjustment}{equation.4.3.138}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Causal contractibility in sequences of active choices}{79}{section.4.4}\protected@file@percent }
+\newlabel{sec:assessing}{{4.4}{79}{Causal contractibility in sequences of active choices}{section.4.4}{}}
+\newlabel{ex:confounding}{{4.4.1}{79}{Confounding}{theorem.4.4.1}{}}
+\newlabel{lem:ind_to_cc}{{4.4.2}{80}{}{theorem.4.4.2}{}}
+\newlabel{eq:follows_from_determinism}{{4.141}{81}{Causal contractibility in sequences of active choices}{equation.4.4.141}{}}
+\newlabel{eq:follows_from_equality}{{4.142}{81}{Causal contractibility in sequences of active choices}{equation.4.4.142}{}}
+\newlabel{th:cc_ind_treat}{{4.4.3}{81}{}{theorem.4.4.3}{}}
+\newlabel{cor:extend_to_randomised}{{4.4.4}{83}{}{theorem.4.4.4}{}}
+\citation{kasy_why_2016}
+\citation{kasy_why_2016}
+\citation{diaconis_finite_1980}
+\newlabel{lem:ind}{{4.4.6}{84}{}{theorem.4.4.6}{}}
+\newlabel{ex:randomised_experiment}{{4.4.7}{84}{}{theorem.4.4.7}{}}
+\newlabel{ex:bad_randomised_experiment}{{4.4.8}{85}{}{theorem.4.4.8}{}}
+\citation{kasy_why_2016}
+\citation{willard_general_1970}
+\newlabel{eq:all_eq_d}{{4.173}{88}{}{equation.4.4.173}{}}
 \citation{greenland_identifiability_1986}
 \citation{dawid_decision-theoretic_2020}
 \citation{rubin_causal_2005}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Causal contractibility in sequences of active choices}{80}{section.4.4}\protected@file@percent }
-\newlabel{sec:assessing}{{4.4}{80}{Causal contractibility in sequences of active choices}{section.4.4}{}}
-\newlabel{lem:ind_to_cc}{{4.4.1}{81}{}{theorem.4.4.1}{}}
-\newlabel{lem:ind}{{4.4.3}{82}{}{theorem.4.4.3}{}}
-\newlabel{th:cc_ind_treat}{{4.4.4}{83}{}{theorem.4.4.4}{}}
-\newlabel{cor:extend_to_randomised}{{4.4.5}{84}{}{theorem.4.4.5}{}}
-\citation{kasy_why_2016}
-\citation{willard_general_1970}
-\newlabel{ex:randomised_experiment}{{4.4.6}{85}{}{theorem.4.4.6}{}}
-\newlabel{eq:all_eq_d}{{4.169}{86}{}{equation.4.4.169}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Prior work}{89}{subsection.4.4.1}\protected@file@percent }
 \citation{hernan_does_2008}
-\@writefile{toc}{\contentsline {subsubsection}{Example: body mass index}{87}{section*.21}\protected@file@percent }
-\newlabel{eq:conditional_conditional_independence}{{4.186}{87}{Example: body mass index}{equation.4.4.186}{}}
-\@writefile{tdo}{\contentsline {todo}{Defining conditioning}{87}{section*.22}\protected@file@percent }
-\pgfsyspdfmark {pgfid217}{18318621}{18808441}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Response conditionals with data-dependent actions}{87}{section.4.5}\protected@file@percent }
-\newlabel{sec:data_dependent}{{4.5}{87}{Response conditionals with data-dependent actions}{section.4.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Combs}{88}{subsection.4.5.1}\protected@file@percent }
-\newlabel{sec:def_combs}{{4.5.1}{88}{Combs}{subsection.4.5.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Example: body mass index}{90}{section*.21}\protected@file@percent }
+\newlabel{eq:conditional_conditional_independence}{{4.190}{90}{Example: body mass index}{equation.4.4.190}{}}
+\@writefile{tdo}{\contentsline {todo}{Defining conditioning}{90}{section*.22}\protected@file@percent }
+\pgfsyspdfmark {pgfid217}{21857565}{17449875}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Response conditionals with data-dependent actions}{90}{section.4.5}\protected@file@percent }
+\newlabel{sec:data_dependent}{{4.5}{90}{Response conditionals with data-dependent actions}{section.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Combs}{91}{subsection.4.5.1}\protected@file@percent }
+\newlabel{sec:def_combs}{{4.5.1}{91}{Combs}{subsection.4.5.1}{}}
 \citation{jacobs_causal_2019}
-\newlabel{eq:comb_insert_complicated}{{4.194}{89}{Combs}{equation.4.5.194}{}}
-\newlabel{eq:comb_insert_simple}{{4.196}{89}{Combs}{equation.4.5.196}{}}
-\newlabel{def:insert_discrete}{{4.5.4}{90}{Comb insert - discrete}{theorem.4.5.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Response conditionals in models with data dependent actions}{90}{subsection.4.5.2}\protected@file@percent }
-\newlabel{sec:data_dependent_representation}{{4.5.2}{90}{Response conditionals in models with data dependent actions}{subsection.4.5.2}{}}
-\newlabel{th:response_hdep}{{4.5.6}{90}{}{theorem.4.5.6}{}}
-\newlabel{eq:comb_representation_w_CI}{{4.204}{91}{Response conditionals in models with data dependent actions}{equation.4.5.204}{}}
-\newlabel{eq:identical_response_assumption}{{4.207}{91}{Response conditionals in models with data dependent actions}{equation.4.5.207}{}}
+\newlabel{eq:comb_insert_complicated}{{4.198}{92}{Combs}{equation.4.5.198}{}}
+\newlabel{eq:comb_insert_simple}{{4.200}{92}{Combs}{equation.4.5.200}{}}
+\newlabel{def:insert_discrete}{{4.5.4}{93}{Comb insert - discrete}{theorem.4.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Response conditionals in models with data dependent actions}{93}{subsection.4.5.2}\protected@file@percent }
+\newlabel{sec:data_dependent_representation}{{4.5.2}{93}{Response conditionals in models with data dependent actions}{subsection.4.5.2}{}}
+\newlabel{th:response_hdep}{{4.5.6}{93}{}{theorem.4.5.6}{}}
+\newlabel{eq:comb_representation_w_CI}{{4.208}{94}{Response conditionals in models with data dependent actions}{equation.4.5.208}{}}
+\newlabel{eq:identical_response_assumption}{{4.211}{94}{Response conditionals in models with data dependent actions}{equation.4.5.211}{}}
 \citation{richardson_nested_2017}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Combs are the output of the ``fix'' operation}{92}{subsection.4.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}Weaker assumptions than causal contractibility}{92}{section.4.6}\protected@file@percent }
-\newlabel{sec:weaker_assumptions}{{4.6}{92}{Weaker assumptions than causal contractibility}{section.4.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Combs are the output of the ``fix'' operation}{95}{subsection.4.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Weaker assumptions than causal contractibility}{95}{section.4.6}\protected@file@percent }
+\newlabel{sec:weaker_assumptions}{{4.6}{95}{Weaker assumptions than causal contractibility}{section.4.6}{}}
 \citation{noauthor_holy_1995}
-\newlabel{th:condit_exchange}{{4.6.1}{93}{}{theorem.4.6.1}{}}
-\newlabel{eq:all_the_same}{{4.219}{94}{Weaker assumptions than causal contractibility}{equation.4.6.219}{}}
-\newlabel{eq:by_cc1}{{4.223}{94}{Weaker assumptions than causal contractibility}{equation.4.6.223}{}}
-\newlabel{th:det_obs_to_cons}{{4.6.2}{94}{}{theorem.4.6.2}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}See-do models, interventions and counterfactuals}{97}{chapter.5}\protected@file@percent }
+\newlabel{th:condit_exchange}{{4.6.1}{96}{}{theorem.4.6.1}{}}
+\newlabel{eq:all_the_same}{{4.223}{96}{Weaker assumptions than causal contractibility}{equation.4.6.223}{}}
+\newlabel{eq:by_cc1}{{4.227}{97}{Weaker assumptions than causal contractibility}{equation.4.6.227}{}}
+\newlabel{th:det_obs_to_cons}{{4.6.2}{97}{}{theorem.4.6.2}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}See-do models, interventions and counterfactuals}{99}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:ints_counterfactuals}{{5}{97}{See-do models, interventions and counterfactuals}{chapter.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}How do see-do models relate to other approaches to causal inference?}{97}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Interpretations of the choice set}{97}{section.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Causal Bayesian Networks as see-do models}{97}{section.5.3}\protected@file@percent }
+\newlabel{ch:ints_counterfactuals}{{5}{99}{See-do models, interventions and counterfactuals}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}How do see-do models relate to other approaches to causal inference?}{99}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Interpretations of the choice set}{99}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Causal Bayesian Networks as see-do models}{99}{section.5.3}\protected@file@percent }
 \citation{rubin_causal_2005}
 \citation{pearl_causality:_2009,rubin_causal_2005,richardson2013single}
 \citation{pearl_causality:_2009}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Unit Potential Outcomes models}{98}{section.5.4}\protected@file@percent }
-\@writefile{tdo}{\contentsline {todo}{This chapter is currently a disorganised cut and paste}{98}{section*.23}\protected@file@percent }
-\pgfsyspdfmark {pgfid238}{21857565}{20684718}
 \citation{rubin_causal_2005}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Unit Potential Outcomes models}{100}{section.5.4}\protected@file@percent }
+\@writefile{tdo}{\contentsline {todo}{This chapter is currently a disorganised cut and paste}{100}{section*.23}\protected@file@percent }
+\pgfsyspdfmark {pgfid238}{21857565}{24278047}
 \citation{wald_statistical_1950}
 \citation{savage_foundations_1954}
 \citation{richardson2013single}
 \citation{lattimore_replacing_2019}
 \citation{pearl_causality:_2009}
-\@writefile{tdo}{\contentsline {todo}{But the proof is still in my notebook}{99}{section*.24}\protected@file@percent }
-\pgfsyspdfmark {pgfid239}{18318621}{27715429}
-\@writefile{tdo}{\contentsline {todo}{Interestingly, it seems to be possible to construct a see-do model where the ``hypothesis'' is a quantum state, and quantum mechanics + locality seems to rule out parallel choices in such models in a manner similar to Bell's theorem. ``Seems to'' because I haven't actually proven any of these things.}{99}{section*.25}\protected@file@percent }
-\pgfsyspdfmark {pgfid240}{18318621}{25331467}
-\@writefile{tdo}{\contentsline {todo}{Where to discuss the connections to statistical decision theory?}{99}{section*.26}\protected@file@percent }
-\pgfsyspdfmark {pgfid241}{18318621}{20385124}
+\@writefile{tdo}{\contentsline {todo}{But the proof is still in my notebook}{101}{section*.24}\protected@file@percent }
+\pgfsyspdfmark {pgfid239}{18318621}{31628245}
+\@writefile{tdo}{\contentsline {todo}{Interestingly, it seems to be possible to construct a see-do model where the ``hypothesis'' is a quantum state, and quantum mechanics + locality seems to rule out parallel choices in such models in a manner similar to Bell's theorem. ``Seems to'' because I haven't actually proven any of these things.}{101}{section*.25}\protected@file@percent }
+\pgfsyspdfmark {pgfid240}{18318621}{29260116}
+\@writefile{tdo}{\contentsline {todo}{Where to discuss the connections to statistical decision theory?}{101}{section*.26}\protected@file@percent }
+\pgfsyspdfmark {pgfid241}{18318621}{24345440}
 \citation{wald_statistical_1950,savage_foundations_1972}
 \citation{nilsson_evaluating_2013}
 \citation{dawid_influence_2002}
 \citation{pearl_causality:_2009}
 \citation{heckerman_decision-theoretic_1995}
 \citation{heckerman_decision-theoretic_1995}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}D-causation}{101}{subsection.5.4.1}\protected@file@percent }
-\newlabel{def:d_cause}{{5.4.1}{102}{$D$-causation}{theorem.5.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}D-causation vs Limited Unresponsiveness}{102}{subsection.5.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}D-causation}{102}{subsection.5.4.1}\protected@file@percent }
+\newlabel{def:d_cause}{{5.4.1}{104}{$D$-causation}{theorem.5.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}D-causation vs Limited Unresponsiveness}{104}{subsection.5.4.2}\protected@file@percent }
+\@writefile{tdo}{\contentsline {todo}{define this}{104}{section*.27}\protected@file@percent }
+\pgfsyspdfmark {pgfid244}{23858492}{11263123}
+\pgfsyspdfmark {pgfid245}{5997853}{11277230}
+\pgfsyspdfmark {pgfid246}{10077468}{11051500}
 \citation{heckerman_decision-theoretic_1995}
-\@writefile{tdo}{\contentsline {todo}{define this}{103}{section*.27}\protected@file@percent }
-\pgfsyspdfmark {pgfid244}{20222211}{33437434}
-\pgfsyspdfmark {pgfid247}{34178333}{33451541}
-\pgfsyspdfmark {pgfid248}{38257948}{33225811}
-\@writefile{tdo}{\contentsline {todo}{define this}{103}{section*.28}\protected@file@percent }
-\pgfsyspdfmark {pgfid253}{20162173}{13622419}
-\pgfsyspdfmark {pgfid256}{34178333}{13636526}
-\pgfsyspdfmark {pgfid257}{38257948}{13410796}
-\newlabel{th:univ_d_causation}{{5.4.4}{104}{Universal $D$-causation}{theorem.5.4.4}{}}
-\newlabel{eq:decompose_condi_x}{{5.13}{104}{D-causation vs Limited Unresponsiveness}{equation.5.4.13}{}}
-\newlabel{eq:is_conditional}{{5.19}{104}{D-causation vs Limited Unresponsiveness}{equation.5.4.19}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Properties of D-causation}{105}{subsection.5.4.3}\protected@file@percent }
-\@writefile{tdo}{\contentsline {todo}{Pearl's ``front door adjustment'' and general identification results make use of composing ``sub-consequence-kernels'' like this. Show, if possible, that Pearl's ``sub-consequence-kernels'' obey $D$-causation like relations}{105}{section*.29}\protected@file@percent }
-\pgfsyspdfmark {pgfid285}{18318621}{16794599}
-\@writefile{tdo}{\contentsline {todo}{Does this ``weak D-causation'' respect mixing under the same conditions as regular D-causation?}{105}{section*.30}\protected@file@percent }
-\pgfsyspdfmark {pgfid286}{18318621}{14455408}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.4}Decision sequences and parallel decisions}{105}{subsection.5.4.4}\protected@file@percent }
+\@writefile{tdo}{\contentsline {todo}{define this}{105}{section*.28}\protected@file@percent }
+\pgfsyspdfmark {pgfid253}{20130555}{26863045}
+\pgfsyspdfmark {pgfid256}{34178333}{26877152}
+\pgfsyspdfmark {pgfid257}{38257948}{26651422}
+\newlabel{th:univ_d_causation}{{5.4.4}{105}{Universal $D$-causation}{theorem.5.4.4}{}}
+\newlabel{eq:decompose_condi_x}{{5.13}{106}{D-causation vs Limited Unresponsiveness}{equation.5.4.13}{}}
+\newlabel{eq:is_conditional}{{5.19}{106}{D-causation vs Limited Unresponsiveness}{equation.5.4.19}{}}
 \citation{pearl_causality:_2009}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}Existence of counterfactuals}{106}{section.5.5}\protected@file@percent }
-\@writefile{tdo}{\contentsline {todo}{I'm struggling with how to explain this well.}{106}{section*.31}\protected@file@percent }
-\pgfsyspdfmark {pgfid287}{21857565}{42043543}
-\@writefile{tdo}{\contentsline {todo}{The real solution here is that Pearl's ``variable sets'' are actually ``coupled variables'', see Definition \ref  {def:ctensor}, but I'd rather not change his definitions if I can avoid it}{106}{section*.32}\protected@file@percent }
-\pgfsyspdfmark {pgfid288}{21857565}{32977837}
-\@writefile{tdo}{\contentsline {todo}{put the following inside a quote environment somehow, the regular quote environment fails due to too much markup}{106}{section*.33}\protected@file@percent }
-\pgfsyspdfmark {pgfid289}{21857565}{30730241}
-\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{106}{section*.34}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.2 (Submodel)}{106}{section*.35}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{107}{section*.36}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{107}{section*.37}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{107}{section*.38}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{108}{section*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Properties of D-causation}{107}{subsection.5.4.3}\protected@file@percent }
+\@writefile{tdo}{\contentsline {todo}{Pearl's ``front door adjustment'' and general identification results make use of composing ``sub-consequence-kernels'' like this. Show, if possible, that Pearl's ``sub-consequence-kernels'' obey $D$-causation like relations}{107}{section*.29}\protected@file@percent }
+\pgfsyspdfmark {pgfid285}{18318621}{27615360}
+\@writefile{tdo}{\contentsline {todo}{Does this ``weak D-causation'' respect mixing under the same conditions as regular D-causation?}{107}{section*.30}\protected@file@percent }
+\pgfsyspdfmark {pgfid286}{18318621}{25304156}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.4}Decision sequences and parallel decisions}{107}{subsection.5.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Existence of counterfactuals}{107}{section.5.5}\protected@file@percent }
+\@writefile{tdo}{\contentsline {todo}{I'm struggling with how to explain this well.}{107}{section*.31}\protected@file@percent }
+\pgfsyspdfmark {pgfid287}{18318621}{15521018}
+\@writefile{tdo}{\contentsline {todo}{The real solution here is that Pearl's ``variable sets'' are actually ``coupled variables'', see Definition \ref  {def:ctensor}, but I'd rather not change his definitions if I can avoid it}{107}{section*.32}\protected@file@percent }
+\pgfsyspdfmark {pgfid288}{21857565}{42696294}
+\@writefile{tdo}{\contentsline {todo}{put the following inside a quote environment somehow, the regular quote environment fails due to too much markup}{108}{section*.33}\protected@file@percent }
+\pgfsyspdfmark {pgfid289}{21857565}{40385029}
+\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{108}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.2 (Submodel)}{108}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{108}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{108}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{109}{section*.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{109}{section*.39}\protected@file@percent }
 \bibstyle{plainnat}
 \bibdata{references}
 \bibcite{noauthor_holy_1995}{{1}{1995}{{noa}}{{}}}
@@ -410,10 +421,10 @@
 \bibcite{blackwell_theory_1979}{{5}{1979}{{Blackwell}}{{}}}
 \bibcite{bogachev_kantorovich_2020}{{6}{2020}{{Bogachev and Malofeev}}{{}}}
 \bibcite{bolker_functions_1966}{{7}{1966}{{Bolker}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Other causal modelling frameworks}{109}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Other causal modelling frameworks}{111}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:other_causal_frameworks}{{6}{109}{Other causal modelling frameworks}{chapter.6}{}}
+\newlabel{ch:other_causal_frameworks}{{6}{111}{Other causal modelling frameworks}{chapter.6}{}}
 \bibcite{bolker_simultaneous_1967}{{8}{1967}{{Bolker}}{{}}}
 \bibcite{bongers_theoretical_2016}{{9}{2016}{{Bongers et~al.}}{{Bongers, Peters, Schölkopf, and Mooij}}}
 \bibcite{cinlar_probability_2011}{{10}{2011}{{\c {C}inlar}}{{}}}
@@ -479,3 +490,4 @@
 \bibcite{willard_general_1970}{{70}{1970}{{Willard}}{{}}}
 \bibcite{woodward_causation_2016}{{71}{2016}{{Woodward}}{{}}}
 \bibcite{world_health_organisation_tobacco_nodate}{{72}{2018}{{World Health Organisation}}{{}}}
+\gdef \@abspage@last{119}
