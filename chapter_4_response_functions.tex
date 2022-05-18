@@ -611,7 +611,7 @@ then by commutativity of exchange
 However, the assumption that $\prob{P}_C^{\RV{YZ}|\RV{DE}}$ is causally contractible seems unreasonable in most situations. One implication of this assumption is (by Theorem \ref{th:equal_of_condits}):
 \begin{align}
     \prob{P}^{\RV{Y}\RV{Z}_i|\RV{D}\RV{E}_i}_C &= \prob{P}^{\RV{Z}|\RV{E}}\\
-    \implies \prob{P}^{\RV{Z}_i|\RV{E}_i\RV{D}\RV{Y}}_C &= \prob{P}^{\RV{Z}_{i}|\RV{E}_i\RV{E}_{\{i\}^C}\RV{Z}_{\{i\}^C}}
+    \implies \prob{P}^{\RV{Z}_i|\RV{E}_i\RV{D}\RV{Y}}_C &= \prob{P}^{\RV{Z}_{i}|\RV{E}_i\RV{E}_{\{i\}^C}\RV{Z}_{\{i\}^C}}\label{eq:interchangeability}
 \end{align}
 That is, the model must yield the same result when conditioned on either the observational results, or the results of other active interventions. It is rare to assume \emph{a priori} that observational and experimental data are equally informative. Such a conclusion could be drawn \emph{after} reviewing both sequences of data, see for example \citet{eckles_bias_2021}, or it might be rejected \citet{gordon_comparison_2018,gordon_close_2022}.
 
@@ -632,29 +632,139 @@ Then the model exhibits a kind of ``backdoor adjustment'' \citet[Chap. 1]{pearl_
 
 Equation \ref{eq:backdoor} is identical to the backdoor adjustment formula for an intervention on $\RV{D}_1$ targeting $\RV{Y}_1$ where $\RV{X}_1$ is a common cause of both.
 
-\section{Causal contractibility in sequences of active choices}\label{sec:assessing}
+\section{Assessing decision problems for causal contractibility}
 
-\begin{example}[Confounding]\label{ex:confounding}
-Given a sequential just-do model $(\prob{P}_{C},\RV{D},\RV{Y})$, we might be tempted to reason as follows: each $(\RV{D}_i,\RV{Y}_i)$ pair comes from one sub-experiment out of a long sequence that all look \emph{a priori} identical, therefore $\prob{P}_C^{\RV{Y}|\RV{D}}$ should be causally contractible. Not so fast!
+Causal contractibility is a condition that, if it holds, allows an analyst to reason as if there is a fixed probabilistic map $D\kto Y$ representing the relation between all pairs of ``$\RV{D}_i$-type'' variables and corresponding ``$\RV{Y}_i$-type'' variables, no matter what choice is selected. The question is: when should an analyst, confronted with a decision problem actually adopt a causally contractible model $\prob{P}_C$ to help them make their decision? This is not an easy question for several reasons. Two of these are:
+\begin{itemize}
+    \item The kind of symmetry required by exchange commutativity seems to us much harder to intuit than the kind of symmetry required by regular exchangeability
+    \item The conditions of exchange commutativity and locality must hold for each choice in $C$
+\end{itemize}
 
-Such a model could exhibit confounding. Suppose $(\prob{P}_{C},(\RV{D},\RV{U}),\RV{Y})$ really does feature a causally contractible $\prob{P}_C^{\RV{Y}|\RV{UD}}$ with single-valued $\RV{H}$ and all other variables binary. Take $\prob{P}_C^{\RV{Y}_i|\RV{U}_i\RV{D}_i}(1|\cdot,\cdot)$ as follows:
+``Ordinary'' exchangeability is often considered to be appropriate when modelling a measurement procedure that consists of a sequence of indistinguishable sub-procedures. A common example is a sequence of coin flips -- there is (usually) no reason to consider any coin flip to differ in any important way from any other. Thus, one can reason, swapping the labels of the coin flips yields a measurement procedure that is effectively identical. It follows that the model should be unchanged under a permutation of the variables representing the sequence of flips -- that is, it should be exchangeable\footnote{As \citet[pg. 461]{walley_statistical_1991} points out, the conclusion of exchangeability also requires the assumption that the measurement procedure should be modeled with a single probability distribution, which is an assumption that is being made in this chapter}. The basic judgement call is then: the subprocedures for each coin flip are effectively identical.
+
+Exchange commutativity requires a different kind of judgement. A common causal inference example features a decision procedure that yields a sequence of (treatment, outcome). Exchange commutativity asks us to compare the original procedure with an arbitrary procedure that shuffles the pairs. Then, \emph{given any fixed vector of treatment values}, the resulting pair of procedures must be effectively indistinguishable. Full causal contractibility adds the requirement that, comparing two procedures of this type and restricting our attention to a subsequence of outcomes, we can ignore any differences between treatment vectors that do not correspond to the subsequence of interest.
+
+This is not particularly easy to think about! \citet{greenland_identifiability_1986} mention the condition that the treatments of different patients could be swapped without changing the distribution over outcomes. This can be interpreted as saying: given two choices that induce deterministic treatment vectors, if the vector induced by the first is a permutation of the vector induced by the second, the resulting distributions of outcomes (appropriately permuted) should be identical. This is a consequence of exchange commutativity, but it is not equivalent: treatments (or ``inputs'') may not be deterministic for all choices, in which case it's not clear what ``swapping treatments'' means. If it's a hypothetical action that swaps treatments (see the discussion at the end of \ref{sec:whats_the_point}), it seems that some theory is needed to say what equivalence under such hypothetical actions imply for the actual choices to be evaluated.
+
+A further complication is due to the fact that, by necessity, a probability set $\prob{P}_C$ models a measurement procedure for each of a set of choices $C$. Someone constructing a model $\prob{P}_C$ to help them deal with decision problem may want to reason that their state of knowledge after selecting some choice $\alpha\in C$ is the same as their state of knowledge when they are constructing $\prob{P}_C$. That is, they don't want to worry about whether their choice ``depends on anything''. The fact that they don't want to worry about this doesn't mean that they don't have to! The theory of probability sets is formal, and it can be augmented with decision rules to yield a formal theory of making decisions, but the correspondence between $\prob{P}_C$ and the ``real things that constitute the decision problem'' is a judgement call, and it is possible to make poor calls. Example \ref{ex:confounding} is an example illustrating this. There are ways to deal with actions that ``depend on things'', see for example \citet{gallow_causal_2020}'s discussion of ``managing the news'', but the question of constructing appropriate models seems hard enough without the extra complication.
+
+Individual-level causal contractibility is an attempt to specify a method for model construction that involves judgements that are (mostly) easier to think about than regular causal contractibility and that may sometimes yield regular causal contractibility as a result (Theorem \ref{th:cc_ind_treat}). Notably, the assumption of individual-level causal contractibility can, under certain conditions, imply that a model is causally contractible conditional on an ``unobserved'' variable, analogous to the familiar assumption of hidden confounding. 
+
+\subsection{Causal contractibility can be undermined by a lack of control}\label{sec:assessing}
+
+It is much easier to construct a model $\prob{P}_C$ if the choice $\RV{C}$ doesn't ``depend on'' anything. However, this property is not guaranteed, as Example \ref{ex:confounding} shows -- the model need to be specified in the right way for the right kind of problem. 
+
+\begin{example}[Confounded choices]\label{ex:confounding}
+We set this up in terms of an ``analyst'' and an ``administrator'' not because it's necessary for the example but because it can help make it easier to understand. The analyst's job is to construct a model $\prob{P}_C$, evaluate different options $\alpha\in C$ and offer advice regarding the choice. The administrator's job is to actually choose some $\alpha\in C$ satisfying the analyst's advice and to carry out the associated procedure.
+
+This separation of concerns gives the administrator a degree of freedom in their choice: they can potentially choose $\alpha$ with access to information that the analyst lacks.
+
+In particular, suppose $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{i\in \mathbb{N}}$, $\RV{U}=(\RV{U}_i)_{i\in\mathbb{N}}$ and the set of choices $C=[0,1]^{\mathbb{N}}$ is a length $\mathbb{N}$ sequence of probability distributions in $\Delta(\{0,1\})$. The analyst, based on their knowledge of the experiment, constructs the model $\prob{P}_C$ where $\prob{P}_C^{\RV{Y}_i|\RV{U}_i\RV{D}_i}(1|\cdot,\cdot)$ is given by:
 \begin{center}
 \begin{tabular}{ c | c | c }
   & $\RV{D}_i=0$ & $\RV{D}_i=1$ \\\hline 
  $\RV{U}_i=0$ & 0 & 0 \\ \hline 
- $\RV{U}_i=1$ & 1 & 1    
+ $\RV{U}_i=1$ & 1 & 1   
 \end{tabular}
 \end{center}
-and take $\prob{P}_\cdot^{\RV{D}_i|\RV{U}_i}(1|\cdot)$ to be
-\begin{center}
-\begin{tabular}{ c | c | c }
-  & $\alpha=0$ & $\alpha=1$ \\\hline 
- $\RV{U}_i=0$ & 0 & 1 \\ \hline 
- $\RV{U}_i=1$ & 1 & 0    
-\end{tabular}
-\end{center}
-then for any $i$, $\prob{P}_0^{\RV{Y}_i|\RV{D}_i}(1|0)=0$ but $\prob{P}_1^{\RV{Y}_i|\RV{D}_i}(1|0)=1$, so there cannot be a causally contractible $\prob{P}_C^{\RV{Y}|\RV{D}}$. Note that $\RV{U}$ need not be unobserved here.
+and 
+\begin{align}
+    \prob{P}_C^{\RV{U}_i}(\{u\}) &= 0.5
+\end{align}
+and
+\begin{align}
+    \prob{P}_\alpha^{\RV{D}_i}(1) &= \alpha_i
+\end{align}
+where $\alpha=(\alpha_i)_{i\in\mathbb{N}}$ and the triples $(\RV{D}_i,\RV{U}_i,\RV{Y}_i)$ are mutually independent given $\RV{C}$. From the analyst's point of view, $\prob{P}_C^{\RV{Y}|\RV{UD}}$ is causally contractible, and $\RV{U}_i$ is identically uniform for all $i$. 
+
+The analyst recommends any $\alpha$ such that $\lim_{n\to\infty} \sum_i^n \frac{\alpha_i}{n} = 0.5$ (acknowledging that, in this contrived example, there's no obvious reason to do so). Suppose that the administrator operates by the following rule: \emph{first} they observe the binary result of $\proc{U}_i$, then they choose $\alpha_i$ equal to whatever they saw with an $\epsilon$ sized step towards $0.5$. That is, if they see $\proc{U}_i\yields 1$, they choose $\alpha_i=1-\epsilon$.
+
+Then, from the analyst's point of view, $\alpha_i=1-\epsilon\implies \prob{P}_{1-\epsilon}^{\RV{Y}_i|\RV{D}_i}(1|d) = 1$ for all $i$ and $\alpha_j=\epsilon\implies \prob{P}_{1-\epsilon}^{\RV{Y}_j|\RV{D}_j}(1|d) = 0$ for all $j$. This means that $\prob{P}_C^{\RV{Y}|\RV{D}}$ is not exchange commutative. The administrator's rule for choosing $\alpha$ means that, though the analyst does not know the outcome of $\proc{U}$, they know what it would be for any $\alpha$.
 \end{example}
+
+Example \ref{ex:confounding} features a situation where it is arguable whether or not the analyst was applying $\prob{P}_C$ to a ``decision problem''. In particular, they did not offer a particular choice $\alpha$ as a result of their analysis, but instead offered a subset of $C$. For example, the analyst might require that . Example \ref{ex:confounding} in fact satisfies this requirement.
+
+The original justification for having a set of choices $C$ is that $C$ is the set of things that, after deliberation aided by the model $\prob{P}_C$, the decision maker might select. Example \ref{ex:confounding} does not satisfy this understanding of the meaning of the set $C$ -- the analyst aided by $\prob{P}_C$ selects nothing or, in the previous paragraph, selects a subset of $C$ rather than an element of $C$. Thus this example suggests that one should be cautious about using a probability set $\prob{P}_C$ to evaluate choices without choosing anything definite based on this evaluation.
+
+\citet{kasy_why_2016} argues that ``randomised controlled trials are not needed for causal identifiability, only controlled trials'', and suggests that experiments should sometimes be designed with deterministic assignments of patients to treatment and control groups. From one point of view, if $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible, then causal contractibility holds whether the choice $\alpha$ yields a deterministic or nondeterministic distribution over $\RV{D}$. If the same model $\prob{P}_C$ is used to design a `trial' (say, for the first $n$ $(\RV{D}_i,\RV{Y}_i)$ pairs) and to select optimal actions for the pairs after this, there is no obvious reason to choose the first $n$ actions according to a random number generator -- one may be able to get better coverage of the actions of interest by choosing deterministically. Indeed, as \citet{kasy_why_2016} points out, if random choices are mixtures of deterministic choices, then the random choices can be at best as good as some deterministic choice (in his paper, Kasy considers situations with covariates, which we ignore for simplicity). 
+
+However, a typical trial involves an experimenter conducting the trial (which comprises the procedure for ``the first $n$ pairs'') and publishing a paper summarising their findings. A reader may then read the paper and use the results to make decisions (which comprises the procedure for ``the pairs after the first $n$''). It is the reader who is in the position of needing a model $\prob{P}_C$ accounting for both the experimental data and the data that arises as a consequence of her actions. In this case, the reader is in a position somewhat like the ``analyst'' in Example \ref{ex:confounding}, while the experimenter is the ``administrator'' from this example. Fixing the proportion of treatments in each class (like in Example \ref{ex:confounding}) leaves the experimenter with many degrees of freedom to select deterministic sequences of actions. On the other hand, if the experimenter may only select a target proportion of treatments, and must then assign treatments randomly given this target, they have much less freedom to influence the consequences of the experiment. An experimenter with many degrees of freedom might well be trusted to make choices in a manner that is transparent to any readers, but this does require an additional assumption on the part of the readers.
+
+\subsection{Individual-level causal contractibility}\label{sec:ilevel_ccontract}
+
+Individual-level causal contractibility is our attempt to formulate a set of conditions sufficient for causal contractibility that may be easier to think about than the bare assumption. It is inspired by the fact that many treatments of causal identifiability refer to sequences of ``individuals'', ``patients'', ``units'' or the like, all of which are considered to be ``essentially identical'' from the point of view of the decision maker. However, these individuals are not directly referenced by the models under consideration. What we do here is consider models that \emph{do} reference individuals -- in particular, we suppose that each sub-procedure produces an input variable, an output variable and a \emph{unique identifier} (which can be thought of as something like someone's license number and state of issue). Under some conditions, assuming causal contractibility with respect to inputs, identifiers and outputs can imply causal contractibility with respect to inputs and outputs only. This clearly hasn't solved the entire problem of assessing a problem for causal contractibility, as a causal contractibility assumption is required to get off the ground.\todo{it might still be helpful, though? I don't really know what to say}
+
+\subsubsection{References to individual-level causal contractibility}
+
+The role of individuals has often been mentioned in literature on causal inference. For example, \citet{greenland_identifiability_1986} explain
+\begin{quote}
+    Equivalence of response type may be thought of in terms of exchangeability of individuals: if the exposure states of the two individuals had been exchanged, the same data distribution would have resulted.
+\end{quote}
+Here, the idea of ``exchangeable individuals'' plays a role in the author's reasoning about model construction, but ``individuals'' are not actually referenced by the resulting model, and ``exchanging individuals'' does not correspond to a model transformation.
+
+\citet{dawid_decision-theoretic_2020} suggests (with some qualifications) that ``post-treatment exchangeability'' for a decision problem regarding taking aspirin to treat a headache may be acceptable if the data are from
+\begin{quote}
+    A group of individuals whom I can regard, in an intuitive sense, as similar to myself, with headaches similar to my own.
+\end{quote}
+As in the previous work, the similarity of individuals involved in an experiment is raised when justifying particular model constructions, but the individuals are not referenced by the model.
+
+\citet[pg. 98]{pearl_causality:_2009} writes
+\begin{quote}
+    Although the term unit in the potential-outcome literature normally stands for the identity of a specific individual in a population, a unit may also be thought of as the set of attributes that characterize that individual, the experimental conditions under study, the time of day, and so on – all of which are represented as components of the vector $u$ in structural modeling.
+\end{quote}
+Once again, the idea of an individual (or a particular set of conditions) is raised in the context of explaining modelling choices. Unlike the previous authors, Pearl introduces a vector $u$ to stand for the ``unit''. However, he subsequently assumes that $u$ is a sequence of \emph{independent samples} from some distribution. This seems to contradict an important feature of ``individuals'' or ``units'': individuals are typically supposed to be unique, a property that will usually not be satisfied by independently sampling from some distribution (at least, as long as the distribution is discrete).
+
+Finally, \citet{rubin_causal_2005} writes:
+\begin{quote}
+    Here there are $N$ units, which are physical objects at particular points in time (e.g., plots of land, individual people, one person at repeated points in time).
+\end{quote}
+Note that Rubin's explanation of \emph{units} guarantees that they are unique: they are particular things at particular times. These units are associated with input-output functions (the \emph{potential outcomes}), which are later assumed to be exchangeable:
+\begin{quote}
+    the indexing of the units is, by definition, a random permutation of $1,..., N$, and thus any distribution on the science must be row-exchangeable
+\end{quote}
+
+Our proposition is: can the intuition that unique individuals are an important for the motivation for causal models, be captured by considering models that feature ``unique identifier'' variables referencing these unique individuals?
+
+\subsubsection{Unique identifiers}
+
+A sequence of \emph{unique identifiers} is a vector of finite or infinite length such that no two coordinates are equal. We are interested in models that assign positive probability to any particular coordinate having any particular value. This is straightforward in the finite case. In the infinite case, note that a vector of $|\mathbb{N}|$ unique values with an arbitrary entry $k$ in the $j$th coordinate can be obtained by starting with $(i)_{i\in \mathbb{N}}$ and then transposing $j$ with $k$. More generally, we consider infinite length sequences of unique identifiers to be elements of the set of finite permutations $\mathbb{N}\to\mathbb{N}$.
+
+\begin{definition}[Measurable space of unique identifiers]
+The measurable space of unique identifiers $(I,\sigalg{I})$ is the set $I$ of finite permutations $\mathbb{N}\to \mathbb{N}$ with the discrete $\sigma$-algebra $\sigalg{I}$.
+\end{definition}
+
+The set $I$ is countable, as it is the countable union of finite subsets (i.e. the permutations that leave all but the first $n$ numbers unchanged for all $n$).
+
+\begin{definition}[Unique identifier]
+Given a sample space $(\Omega,\sigalg{F})$, a \emph{sequence of unique identifiers} $\sigalg{I}:\Omega\to I$ is a variable taking values in $I$.
+\end{definition}
+
+The values of each coordinate of sequence of unique identifiers is just called an identifier (for obvious reasons, we don't call it an identity).
+
+\begin{definition}[Identification]
+Given $\RV{I}$, define the $i$-th \emph{identifier} $\RV{I}_i=\mathrm{ev}(i,\RV{I})$, where $\mathrm{ev}:\mathbb{N}\times I\to \mathbb{N}$ is the evaluation map $(i,f)\mapsto f(i)$.
+\end{definition}
+
+For \emph{any} sample space $(\Omega,\sigalg{F})$ we can define a trivial $\sigalg{I}$ that maps every $\omega\in\Omega$ to $(1,2,3,....)=:(\mathbb{N})$. In this case, the identifiers are all known by the modeller at the outset. Using this sequence of identifiers renders exchange commutativity trivial, and isn't of much interest to us.
+
+\begin{example}
+Given a sequential just-do model $(\prob{P}_C, (\RV{D},\RV{I}),\RV{Y})$ where $\RV{I}$ is the identifier variable $\omega\mapsto (\mathbb{N})$, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ commutes with exchange.
+
+This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the identity, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ and $\text{swap}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ will have no common support; the first will be supported on $\RV{I}\yields (\mathbb{N})$ only, and the second only on $\RV{I}\yields \rho(\mathbb{N})$.
+\end{example}
+
+
+
+
+\subsubsection{Individual-level causal contractibility and unobserved confounding}
+
+Our first result is that some models with individual-level causal contractibility can be seen as models with unobserved confounding. A model $\prob{P}_C$ with individual-level causal contractibility features a causally contractible $\prob{P}_C^{\RV{Y}|\RV{ID}}$ for a sequence of outputs $\RV{Y}$, inputs $\RV{D}$ and individual identifiers $\RV{I}$. A model with unobserved confounding features causally contractible $\prob{P}_C^{\RV{Y}|\RV{UD}}$ where $\RV{Y}$ and $\RV{D}$ are as before and $\RV{U}$ is an ``unobserved confounder''. They key difference between $\RV{I}$ and $\RV{U}$ is that the individual identifier for each observation is unique, while unobserved variables (typically) have $|U|<N$ where $N$ is the number of observations.
+
+
+
+\subsubsection{Individual-level causal contractibility and ordinary causal contractibility}
+
+Our second key result is that individual-level causal contractibility along with the assumptions of exchangeability of individuals and sufficient control of inputs implies causal contractibility with respect to inputs and outputs.
 
 So, a judgement of symmetry among sub-experiments is not enough for causal contractibility. What is enough?
 
@@ -700,7 +810,7 @@ Applying Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causa
 \end{proof}
 
 \begin{theorem}\label{th:cc_ind_treat}
-Given a sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ countable, $\prob{P}_C^{\RV{Y}|\RV{DI}}$ causally contractible $\RV{I}:\Omega\to I$ an identifier variable, if
+Given a sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ countable, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ causally contractible for each $\alpha$, if
 \begin{align}
     &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}\\
     &\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}\\
@@ -731,7 +841,7 @@ By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$, it is also the case tha
 But
 \begin{align}
     \kernel{Q}^{\RV{Y}|\RV{ID}}=\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{Y}|\RV{ID}}\kernel{Q}^{\RV{C}}(\alpha)\\
-    &= \prob{P}_C^{\RV{Y}|\RV{ID}}
+    &= \prob{P}_C^{\RV{Y}|\RV{ID}}\\
     \implies \tikzfig{kernel_Q_fac_with_idents_subbed} &= \prob{P}_C^{\RV{Y}|\RV{ID}}
 \end{align}
 
@@ -816,46 +926,7 @@ Permutability of identifiers can fail when the rule for selecting $\alpha$ is no
 The following example involves the choice $\alpha$ depending on some covariate $\RV{U}$. It is not straightforward to express the idea that ``$\alpha$ depends on $\RV{U}$'' in a probability set model $\prob{P}_C$, and they are intended to apply to situations where the choice doesn't depend on anything not already expressed in the model (as in Example \ref{ex:randomised_experiment}). However, the fact that probability sets don't work well in situations where the choice depends on something not expressed in the model doesn't mean that you can't use a probability set to model such a situation, it just means that you shouldn't do it. This is what the following example shows.
 
 \begin{example}\label{ex:bad_randomised_experiment}
-The variables and treatment administration protocol is precisely as in Example \ref{ex:randomised_experiment} \emph{except} the administrator rather than the analyst selects the value of $\alpha$.
 
-This change gives the administrator a degree of freedom: they can choose some $\alpha$ from the set $C$, and moreover they can potentially do this with access to knowledge that the analyst lacks. Though all identifiers might seem the same to the analyst, they might not seem that way to the administrator.
-
-In this particular example, the analyst has no control whatsoever, so it stands to reason that they could model the administrator's choice and the ensuing consequences with a single probability distribution $\prob{Q}$. A probability set ``comparing'' different choics of the administrator can then be derived from this distribution: $\prob{P}_C:=\{\prob{Q}^{\RV{YD}|\RV{C}}(\cdot|\alpha)|\alpha\in C\}$. 
-
-In particular, suppose the analyst knows that the administrator will behave in one particular way. First, they will examine every patient and observe some binary feature $\RV{U}_i$ of each  before selecting $\RV{C}$. Furthermore, the analyst is certain the consequences and the the administrator's choice will be as follows:
-
-$\prob{Q}^{\RV{Y}_i|\RV{U}_i\RV{D}_i}(1|\cdot,\cdot)$:
-\begin{center}
-\begin{tabular}{ c | c | c }
-  & $\RV{D}_i=0$ & $\RV{D}_i=1$ \\\hline 
- $\RV{U}_i=0$ & 0 & 0 \\ \hline 
- $\RV{U}_i=1$ & 1 & 1   
-\end{tabular}
-\end{center}
-\begin{align}
-    \prob{Q}{\RV{C}_i|\RV{U}_i}(A|u) &= \begin{cases}
-    \delta_{1-\epsilon}(A)&A\in \sigalg{B}([0,1]),u=1\\
-    \delta_{\epsilon}(A)&A\in \sigalg{B}([0,1]),u=0
-    \end{cases}
-\end{align}
-where
-\begin{align}
-    \prob{Q}^{\RV{D}_i|\RV{C}_i}(A|c) &= \delta_1(A)c + \delta_0(A)(1-c)&A\subset\{0,1\},c\in \{\epsilon,1-\epsilon\}
-\end{align}
-and
-\begin{align}
-    \prob{Q}^{\RV{U}_i}(\{u\}) &= 0.5& u\in \{0,1\}
-\end{align}
-this implies
-\begin{align}
-    \prob{Q}^{\RV{Y}_i|\RV{C}_i}(A|c) &= \begin{cases}
-    \delta_1(A) & c=1-\epsilon,A\subset \{0,1\}\\
-    \delta_0(A) & c=\epsilon,A\subset \{0,1\}
-    \end{cases}
-\end{align}
-
-
-In this case, index permutability will fail.
 \end{example}
 
 \citet{kasy_why_2016} mentions that causal identifiability requires a ``controlled experiment'', not necessarily a ``randomised controlled experiment''. The preceding two examples establish that a ``controlled experiment'' means that the inputs to the experiment are under the control \emph{of the analyst}. Even that doesn't quite capture it; if the analyst and the administrator are the same person and they nevertheless perform some ad-hoc ``randomisation'' of decision functions, the points raised in Example \ref{ex:bad_randomised_experiment} still apply. More precisely, if there is a decision procedure involving $\prob{P}_C$ and a choice $\alpha$ output by this procedure, then the inputs $\RV{D}$ must be controlled by this $\alpha$. 
@@ -934,25 +1005,7 @@ However, given any finite permutation $\rho:\mathbb{N}\to\mathbb{N}$
 
 \subsection{Prior work}
 
-Assumption 1, that causal contractibility is satisfied jointly conditioning on decisions $\RV{D}$ and identifers $\RV{I}$, seems to be a background assumption in the literature, while assumptions similar to the second two are discussed explicitly. For example, \citet{greenland_identifiability_1986} explain
-\begin{quote}
-    Equivalence of response type may be thought of in terms of exchangeability of individuals: if the exposure states of the two individuals had been exchanged, the same data distribution would have resulted.
-\end{quote}
-Note that exchanging individuals involved in an experiment and exchanging the individuals' exposure states are two different things, and the former doesn't imply the latter -- for example, there might be some background trend such that individuals treated later experience different outcomes to individuals treated at the start. Assumptions 1 and 2 \emph{together} imply that permuting identifiers or permuting decisions both lead to the same distribution.
 
-\citet{dawid_decision-theoretic_2020} suggests (with some qualifications) that ``post-treatment exchangeability'' for a decision problem regarding taking aspirin to treat a headache may be acceptable if the data are from
-\begin{quote}
-    A group of individuals whom I can regard, in an intuitive sense, as similar to myself, with headaches similar to my own.
-\end{quote}
-This seems on the face of it similar to assumption 2: that I can permute the identifies ``me'' and ``someone else'' without changing the model.
-
-Finally, \citet{rubin_causal_2005} discusses two separate assumptions to justify causal identifiability:
-\begin{quote}
-    indexing of the units is, by definition, a random permutation of $1,..., N$, and thus any distribution on the science must be row-exchangeable [...] The second critical fact is that if the treatment assignment mechanism is ignorable (e.g., randomized), then when the expression for the assignment mechanism (2) is evaluated at the observed data, it is free of dependence on $Y_{mis}$
-\end{quote}
-Here ``the science'' means (roughly) \emph{the response function of each individual}, and exchangeability of these response functions is a similar assumption to permutability of individual identifiers (though we don't derive the exact correspondence here). Rubin's second condition is that treatment assignment is ignorable. Like Assumption 3, this assumption limits ``how much we can learn from the treatment assignment'', but again we don't derive the exact correspondence. Note that in Rubin's scheme the preliminary assumption of \emph{stable unit-treatment values} is made in order to establish the existence of individual response functions, which plays a similar role to Assumption 1. 
-
-Rubin's result also differs substantially from this one in that it applies to \emph{identification of potential outcomes in randomised experiments}, while this result is about the existence of response conditionals \emph{when there are different choices that can be made}.
 
 \subsubsection{Example: body mass index}
 
@@ -1130,20 +1183,20 @@ That is (at least in this case), the result of ``division by a conditional proba
 
 \section{Weaker assumptions than causal contractibility}\label{sec:weaker_assumptions}
 
-The results so far apply to purely observational models or to models where every ``input'' in the sequence is fixed at the point of choosing $\alpha$ (or a fixed random function is chosen at this point). Most of the interest in causal inference is how to use observational data -- which is plentiful -- to deduce consequences of choices. Suppose in the following that superscripter ``$o$'' refers to observational variables (obtained by some measurement procedure not responsive to choices) and ``$v$'' refers to interventional variables (obtained by some measurement procedure responsive to choices). That is $\RV{Y}^o:=(\RV{Y}_i^o)_{i\in \mathbb{N}}$ is a sequence of observantional variables, $\RV{Y}^v$ a sequence of interventional variables and $\RV{Y}^{o,v}:=(\RV{Y}^o_i,\RV{Y}^v_i)_{i\in\mathbb{N}}$ is a mixed sequence of both observational and interventional variables. $\RV{Y}_i^o$ and $\RV{Y}_i^v$ are assumed to take values in the same set $Y$.
+The results so far apply to purely observational models or to models where every ``input'' in the sequence is fixed at the point of choosing $\alpha$ (or a fixed random function is chosen at this point). Most of the interest in causal inference is how to use observational data -- which is plentiful -- to deduce consequences of choices. Suppose in the following that superscript ``$o$'' refers to observational variables (obtained by some measurement procedure not responsive to choices) and ``$v$'' refers to interventional variables (obtained by some measurement procedure responsive to choices). That is $\RV{Y}^o:=(\RV{Y}_i^o)_{i\in \mathbb{N}}$ is a sequence of observational variables, $\RV{Y}^v$ a sequence of interventional variables and $\RV{Y}^{o,v}:=(\RV{Y}^o_i,\RV{Y}^v_i)_{i\in\mathbb{N}}$ is a mixed sequence of both observational and interventional variables. $\RV{Y}_i^o$ and $\RV{Y}_i^v$ are assumed to take values in the same set $Y$.
 
 One approach to bridging the gap between observations and interventions is to assume ``causal sufficiency'', which is tantamount (in the data-independent case) to assuming causal contractibility of $\prob{P}_C^{\RV{Y}^{o,v}|\RV{X}^{o,v}\RV{D}^{o,v}}$ with $\RV{D}^v$ responsive to choices and $\RV{X}^v$ unresponsive (see Example \ref{ex:backdoor}). As discussed, this is rarely a reasonable assumption -- it implies interchangeability between observational and interventional samples.
 
-A weaker assumption that is often adopted is to consider models satisfying causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{U}^{o,v}\RV{D}^{o,v}}$, where $\RV{U}^{o,v}$ is unobserved. That is, while $\RV{U}^{o,v}$ appears in the model, it is not associted with any measurement procedure. This model still asserts that $(\RV{U}^o_i,\RV{X}^o_i,\RV{Y}^o_i)$ triples are interchangeable with $(\RV{U}^v_i,\RV{X}^v_i,\RV{Y}^v_i)$ triples, but neither of these are measurement outcomes. On the other hand, $(\RV{D}_i^o,\RV{Y}_i^o)$ pairs are not generally interchangeable with $(\RV{D}_i^v,\RV{Y}_i^v)$.
+A weaker assumption that is often adopted is to consider models satisfying causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{U}^{o,v}\RV{D}^{o,v}}$, where $\RV{U}^{o,v}$ is unobserved. That is, while $\RV{U}^{o,v}$ appears in the model, it is not associated with any measurement procedure. This model still asserts that $(\RV{U}^o_i,\RV{X}^o_i,\RV{Y}^o_i)$ triples are interchangeable with $(\RV{U}^v_i,\RV{X}^v_i,\RV{Y}^v_i)$ triples, but neither of these are measurement outcomes. On the other hand, $(\RV{D}_i^o,\RV{Y}_i^o)$ pairs are not generally interchangeable with $(\RV{D}_i^v,\RV{Y}_i^v)$.
 
-Consider models that satisfy causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$, where no comment is made about whether $\RV{W}^{o,v}$ is observed, unobseved or some function of observed and unobserved variables. This is a generalisation of the class of models discussed in the previous paragraph.  In isolation, this assumption is not especially interesting -- for example, the support of $\RV{W}^{o}_i$ and $\RV{W}^v_i$ might be disjoint. Suppose also, then, that $W$ is finite and $\RV{W}^o_i$ has full support. This assumption amounts to the assumption that, no matter what choice is made, ``nothing truly new can be done'' (which we call ``Ecclesiastes' assumption''\footnote{Ecclesiastes 1:9 reads ``Everything that happens has happened before; nothing is new, nothing under the sun.''\citep{noauthor_holy_1995}}). More precisely, for any choice $\alpha\in C$ and any consequence $\RV{Y}_i^v$, there is a random subsequence $\RV{Q}$ of indices $(1,2,3,....)$ such that the distribution $\prob{P}_\alpha^{\RV{Y}^{o,v}}$ is unchanged by permutations that only swap elements in the sequence $(RV{Y}^o_\RV{Q},\RV{Y}^v_i)$.
+Consider models that satisfy causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$, where no comment is made about whether $\RV{W}^{o,v}$ is observed, unobserved or some function of observed and unobserved variables. This is a generalisation of the class of models discussed in the previous paragraph.  In isolation, this assumption is not especially interesting -- for example, the support of $\RV{W}^{o}_i$ and $\RV{W}^v_i$ might be disjoint. Suppose also, then, that $W$ is finite and $\RV{W}^o_i$ has full support. This assumption amounts to the assumption that, no matter what choice is made, ``nothing truly new can be done'' (which we call ``Ecclesiastes' assumption''\footnote{Ecclesiastes 1:9 reads ``Everything that happens has happened before; nothing is new, nothing under the sun.''\citep{noauthor_holy_1995}}). More precisely, for any choice $\alpha\in C$ and any consequence $\RV{Y}_i^v$, there is a random subsequence $\RV{Q}$ of indices $(1,2,3,....)$ such that the distribution $\prob{P}_\alpha^{\RV{Y}^{o,v}}$ is unchanged by permutations that only swap elements in the sequence $(RV{Y}^o_\RV{Q},\RV{Y}^v_i)$.
 
 \begin{theorem}\label{th:condit_exchange}
 Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$ causally contractible, $W$ finite and $\prob{P}_C^{\RV{W}^o|\RV{H}}(w|h)>0$ for all $w,h$, define $q:W^{\mathbb{N}}\times W\to (\{*\}\cup \mathscr{P}(\mathbb{N})$ by 
 \begin{align}
     q:((w^o_j)_{\mathbb{N}},w^v_i)&\mapsto \{j|w^o_j=w^v_i\}
 \end{align}
-and take $\RV{Q}:=q\circ(\RV{W}^o,\RV{W}^v_i)$ for arbitrary $i\in \mathbb{N}$. For an index set $U\in\mathbb{N}$ Take $\text{swap}_{\cdot}:Y^{\mathbb{N}}\times Y^{\mathbb{N}}\to Y^{\mathbb{N}}\times Y^{\mathbb{N}}$ to be an arbitrary finite swap that acts as the identity on all indices $(j,x)\not\in \RV{Q}\times \{o\}\cup\{(i,v)\}$. Then $\prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}} = \prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}$.
+and take $\RV{Q}:=q\circ(\RV{W}^o,\RV{W}^v_i)$ for arbitrary $i\in \mathbb{N}$. For an index set $U\in\mathbb{N}$ take $\text{swap}_{\cdot}:Y^{\mathbb{N}}\times Y^{\mathbb{N}}\to Y^{\mathbb{N}}\times Y^{\mathbb{N}}$ to be an arbitrary finite swap that acts as the identity on all indices $(j,x)\not\in \RV{Q}\times \{o\}\cup\{(i,v)\}$. Then $\prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}} = \prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}$.
 \end{theorem}
 
 \begin{proof}

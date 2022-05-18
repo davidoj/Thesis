@@ -42,7 +42,7 @@
 \contentsline {subsection}{\numberline {3.3.1}Variables and measurement procedures}{53}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Measurement procedures}{54}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Observable variables}{56}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Model variables}{56}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.4}Model variables}{57}{subsection.3.3.4}%
 \contentsline {subsection}{\numberline {3.3.5}Variable sequences and partial order}{57}{subsection.3.3.5}%
 \contentsline {subsection}{\numberline {3.3.6}Decision procedures}{57}{subsection.3.3.6}%
 \contentsline {chapter}{\numberline {4}Decision problems with independent and identical phenomena}{59}{chapter.4}%
@@ -68,15 +68,15 @@
 \contentsline {section}{\numberline {5.2}Interpretations of the choice set}{99}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Causal Bayesian Networks as see-do models}{99}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Unit Potential Outcomes models}{100}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}D-causation}{102}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.1}D-causation}{103}{subsection.5.4.1}%
 \contentsline {subsection}{\numberline {5.4.2}D-causation vs Limited Unresponsiveness}{104}{subsection.5.4.2}%
 \contentsline {subsection}{\numberline {5.4.3}Properties of D-causation}{107}{subsection.5.4.3}%
 \contentsline {subsection}{\numberline {5.4.4}Decision sequences and parallel decisions}{107}{subsection.5.4.4}%
-\contentsline {section}{\numberline {5.5}Existence of counterfactuals}{107}{section.5.5}%
+\contentsline {section}{\numberline {5.5}Existence of counterfactuals}{108}{section.5.5}%
 \contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{108}{section*.34}%
 \contentsline {paragraph}{Definition 7.1.2 (Submodel)}{108}{section*.35}%
-\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{108}{section*.36}%
-\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{108}{section*.37}%
+\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{109}{section*.36}%
+\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{109}{section*.37}%
 \contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{109}{section*.38}%
-\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{109}{section*.39}%
+\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{110}{section*.39}%
 \contentsline {chapter}{\numberline {6}Other causal modelling frameworks}{111}{chapter.6}%
