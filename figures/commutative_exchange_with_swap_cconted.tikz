@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=Llabel tikzit] (0) at (-2.75, 1.5) {$X$};
+		\node [style=small kernel tikzit] (1) at (0.25, 1.5) {$\kernel{L}$};
+		\node [style=small kernel tikzit] (2) at (2.75, 1.5) {$\kernel{M}$};
+		\node [style=RLabel tikzit] (3) at (6.25, 1.5) {$Y$};
+		\node [style=copymap tikzit] (4) at (-1.75, 1.5) {};
+		\node [style=none] (5) at (2.25, 1.75) {};
+		\node [style=none] (6) at (2.25, 1.25) {};
+		\node [style=none] (7) at (0, 0.75) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [in=195, out=0] (7.center) to (6.center);
+		\draw [in=180, out=0] (1) to (5.center);
+		\draw (0) to (4);
+		\draw (4) to (1);
+		\draw (2) to (3);
+		\draw [in=-180, out=-30] (4) to (7.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

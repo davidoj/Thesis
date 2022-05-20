@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=Llabel tikzit] (0) at (-4.5, 0.25) {$X$};
+		\node [style=small kernel tikzit] (1) at (-1, 0.25) {$\prob{Q}^{\RV{J}}$};
+		\node [style=small kernel tikzit] (2) at (1.5, 0.25) {$\prob{Q}^{\RV{Y}|\RV{JX}}$};
+		\node [style=RLabel tikzit] (3) at (3.75, 0.25) {$Y$};
+		\node [style=copymap tikzit] (4) at (-2.75, 0.25) {};
+		\node [style=none] (5) at (1, 0.5) {};
+		\node [style=none] (6) at (1, 0) {};
+		\node [style=none] (7) at (-1, -0.75) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (4) to (1);
+		\draw (4) to (0);
+		\draw [in=-180, out=-45] (4) to (7.center);
+		\draw [in=195, out=0] (7.center) to (6.center);
+		\draw [in=180, out=0] (1) to (5.center);
+		\draw (2) to (3);
+	\end{pgfonlayer}
+\end{tikzpicture}

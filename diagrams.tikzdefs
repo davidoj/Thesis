@@ -53,3 +53,10 @@
 \newcommand{\combbreak}{\ensuremath{\wr}}
 \newcommand{\bigcombdot}{\ensuremath{\underline{\bigcprod}}}
 \newcommand{\proc}[1]{\ensuremath{\mathscr{#1}}}
+
+\newcommand\swap[1]{%
+\begin{tikzpicture}[scale=#1]
+\draw (0,0) to [out=0, in=180] (1,0.5);
+\draw (0,0.5) to [out=0, in=180] (1,0);
+\end{tikzpicture}
+}
