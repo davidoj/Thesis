@@ -3,76 +3,75 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-I was expecting a `,' or a `}'---line 257 of file references.bib
+I was expecting a `,' or a `}'---line 273 of file references.bib
  :  
  :  file = {Snapshot:/home/davidj/snap/zotero-snap/common/Zotero/storage/EUU4BIE5/causal-inference-book.html:text/html},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Repeated entry---line 555 of file references.bib
+Repeated entry---line 571 of file references.bib
  : @article{constantinou_extended_2017
  :                                    ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 570 of file references.bib
+Repeated entry---line 586 of file references.bib
  : @article{kerns_definettis_2006
  :                               ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1513 of file references.bib
+Repeated entry---line 1529 of file references.bib
  : @book{savage_foundations_1954
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 1520 of file references.bib
+Repeated entry---line 1536 of file references.bib
  : @phdthesis{shpitser_complete_2008
  :                                  ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 2020 of file references.bib
+Repeated entry---line 2036 of file references.bib
  : @article{fong_causal_2013
  :                          ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "savage_foundations_1972"
 Warning--to sort, need author, editor, or key in noauthor_holy_1995
 Warning--empty author and editor in noauthor_holy_1995
 Warning--empty institution in barenboim_foundations_2020
 Warning--empty booktitle in horvitz_framework_1986
 Warning--empty journal in saarela_role_2020
-You've used 72 entries,
+You've used 69 entries,
             2773 wiz_defined-function locations,
-            1140 strings with 21082 characters,
-and the built_in function-call counts, 30994 in all, are:
-= -- 3007
-> -- 1349
-< -- 67
-+ -- 474
-- -- 401
-* -- 2374
-:= -- 4915
-add.period$ -- 368
-call.type$ -- 72
-change.case$ -- 331
-chr.to.int$ -- 71
-cite$ -- 150
-duplicate$ -- 1506
-empty$ -- 2656
-format.name$ -- 512
-if$ -- 6545
+            1119 strings with 20493 characters,
+and the built_in function-call counts, 29713 in all, are:
+= -- 2877
+> -- 1286
+< -- 64
++ -- 453
+- -- 383
+* -- 2280
+:= -- 4709
+add.period$ -- 351
+call.type$ -- 69
+change.case$ -- 316
+chr.to.int$ -- 68
+cite$ -- 144
+duplicate$ -- 1448
+empty$ -- 2557
+format.name$ -- 485
+if$ -- 6276
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 84
-newline$ -- 508
-num.names$ -- 298
-pop$ -- 584
+missing$ -- 81
+newline$ -- 485
+num.names$ -- 286
+pop$ -- 564
 preamble$ -- 1
-purify$ -- 272
+purify$ -- 260
 quote$ -- 0
-skip$ -- 1043
+skip$ -- 997
 stack$ -- 0
-substring$ -- 1009
-swap$ -- 164
+substring$ -- 978
+swap$ -- 159
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 702
+type$ -- 669
 warning$ -- 5
-while$ -- 294
+while$ -- 283
 width$ -- 0
-write$ -- 1221
+write$ -- 1168
 (There were 6 error messages)

@@ -45,38 +45,25 @@
 \contentsline {subsection}{\numberline {3.3.4}Model variables}{57}{subsection.3.3.4}%
 \contentsline {subsection}{\numberline {3.3.5}Variable sequences and partial order}{57}{subsection.3.3.5}%
 \contentsline {subsection}{\numberline {3.3.6}Decision procedures}{57}{subsection.3.3.6}%
-\contentsline {chapter}{\numberline {4}Decision problems with independent and identical phenomena}{59}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Informal explanation of the main theorems}{60}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Relevance to previous work}{61}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Independent and Identical Response Functions}{62}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Causally contractible Markov kernels}{63}{subsection.4.3.1}%
-\contentsline {subsubsection}{Definition of causal contractibility}{64}{section*.17}%
-\contentsline {subsubsection}{Properties of causally contractible Markov kernels}{64}{section*.18}%
-\contentsline {subsubsection}{Representation theorems for causally contractible Markov kernels}{69}{section*.19}%
-\contentsline {subsection}{\numberline {4.3.2}Causal contractibility with data-independent actions}{73}{subsection.4.3.2}%
-\contentsline {subsubsection}{Examples}{78}{section*.20}%
-\contentsline {section}{\numberline {4.4}Causal contractibility in sequences of active choices}{79}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Prior work}{89}{subsection.4.4.1}%
-\contentsline {subsubsection}{Example: body mass index}{90}{section*.21}%
-\contentsline {section}{\numberline {4.5}Response conditionals with data-dependent actions}{90}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Combs}{91}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Response conditionals in models with data dependent actions}{93}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Combs are the output of the ``fix'' operation}{95}{subsection.4.5.3}%
-\contentsline {section}{\numberline {4.6}Weaker assumptions than causal contractibility}{95}{section.4.6}%
-\contentsline {chapter}{\numberline {5}See-do models, interventions and counterfactuals}{99}{chapter.5}%
-\contentsline {section}{\numberline {5.1}How do see-do models relate to other approaches to causal inference?}{99}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Interpretations of the choice set}{99}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Causal Bayesian Networks as see-do models}{99}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Unit Potential Outcomes models}{100}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}D-causation}{103}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}D-causation vs Limited Unresponsiveness}{104}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Properties of D-causation}{107}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}Decision sequences and parallel decisions}{107}{subsection.5.4.4}%
-\contentsline {section}{\numberline {5.5}Existence of counterfactuals}{108}{section.5.5}%
-\contentsline {paragraph}{Definition 7.1.1 (Causal Model)}{108}{section*.34}%
-\contentsline {paragraph}{Definition 7.1.2 (Submodel)}{108}{section*.35}%
-\contentsline {paragraph}{Definition 7.1.3 (Effect of Action)}{109}{section*.36}%
-\contentsline {paragraph}{Definition 7.1.4 (Potential Response)}{109}{section*.37}%
-\contentsline {paragraph}{Definition 7.1.6 (Probabilistic Causal Model)}{109}{section*.38}%
-\contentsline {paragraph}{Definition 7.1.5 (Counterfactual)}{110}{section*.39}%
-\contentsline {chapter}{\numberline {6}Other causal modelling frameworks}{111}{chapter.6}%
+\contentsline {chapter}{\numberline {4}Repeatable decision problems}{59}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Previous work}{60}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Response functions}{61}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Causally contractible Markov kernels}{62}{subsection.4.2.1}%
+\contentsline {subsubsection}{Properties of causally contractible Markov kernels}{64}{section*.17}%
+\contentsline {subsection}{\numberline {4.2.2}Representation theorems}{68}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Data-independent actions}{76}{subsection.4.2.3}%
+\contentsline {subsubsection}{Examples}{80}{section*.18}%
+\contentsline {subsubsection}{Example: body mass index}{81}{section*.19}%
+\contentsline {section}{\numberline {4.3}Assessing decision problems for exchange commutativity}{82}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Causal contractibility can be undermined by a lack of control}{84}{subsection.4.3.1}%
+\contentsline {section}{\numberline {4.4}Response conditionals with data-dependent actions}{86}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Combs}{86}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Response conditionals in models with data dependent actions}{88}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Combs are the output of the ``fix'' operation}{90}{subsection.4.4.3}%
+\contentsline {chapter}{\numberline {5}Other causal modelling frameworks}{91}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Weaker assumptions than causal contractibility}{91}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Individual-level causal contractibility}{94}{subsection.5.1.1}%
+\contentsline {subsubsection}{References to individual-level causal contractibility}{94}{section*.22}%
+\contentsline {subsubsection}{Unique identifiers}{95}{section*.23}%
+\contentsline {subsubsection}{Individual-level causal contractibility and unobserved confounding}{96}{section*.24}%
+\contentsline {subsubsection}{Individual-level causal contractibility and ordinary causal contractibility}{97}{section*.25}%

@@ -1,6 +1,6 @@
 %!TEX root = main.tex
 
-\chapter{Decision problems with independent and identical phenomena}\label{ch:evaluating_decisions}
+\chapter[Repeatable decision problems]{Models of repeatable decision problems}\label{ch:evaluating_decisions}
 
 Chapter \ref{ch:tech_prereq} introduced probability sets as generic tools for causal modelling, while Chapter \ref{ch:2p_statmodels} examined how probability set models can be used to construct mathematical models of decision problems. In general, few assumptions were made about the structure of the models in question. Section \ref{sec:cons_to_sdp} added some structure with \emph{see-do} models, which featured variables representing observations and consequences, and non-stochastic variables representing decisions and hypotheses. Extended conditional independence properties defined the roles of these different variables in the model. However, observations and consequences in see-do models could be just about anything -- they need not take values in the same set, nor be related to one another in any particular way, nor do observations need to form a sequence. Causal inference in practice often concerns the question of making choices in a context where observations and consequences are independent and identical, and the subject of this chapter is to examine probability sets that model decision problems with this kind of repeatability.
 
@@ -9,21 +9,6 @@ Repeatability in classical statistical models is often expressed by the assumpti
 The key result of this chapter is that a model of choices that results in a sequence of variables is representable as a mixture of independent and identical response functions is equivalent to the assumption of \emph{causal contractibility}. Causal contractibility is defined in Section \ref{sec:ccontracibility} and compared to prior work on similar questions. A representation theorem for causally contractible Markov kernels is proved in Section \ref{sec:rep_theorem}. It is applied to probability sets modelling ``one-shot'' choices with no dependence on prior data in Section \ref{sec:data_independent_actions}, and generalised to ``adaptive'' choices where actions may depend on prior data in Section \ref{sec:data_dependent}; the latter generalisation requires the notion of \emph{combs}, introduced in Section \ref{sec:def_combs}.
 
 Causal contractibility is a more complicated assumption than exchangeability. An alternative to directly arguing for causal contractibility is given by Theorem \ref{th:cc_ind_treat}, which shows that if there are ``experimental identifiers'' that are exchangeable in the appropriate way, and if, given either the input variables or the choice nothing relevant can be gained by learning the other, then causal contractibility holds.  To my knowledge, this is the only example of a theorem of its type that proves the existence of ``causal effects'' in models featuring choices. Somewhat similar theorems exist that address the identification of potential outcomes, but they prove different things (the identifiability of a certain kind of latent variable, which is not identical to the consequences of a choice), and provide different conditions. A particular difference is that the conditions for Theorem \ref{th:cc_ind_treat} concern only \emph{observable} variables, and while randomization of actions is sometimes an admissible condition, it is not a necessary one.
-
-% \section{Informal explanation of the main theorems}
-
-% Two widely accepted facts about causal inference are:
-% \begin{enumerate}
-%     \item Randomized experiments are able to identify ``causal effects'' (more specifically: average treatment effects or interventional probabilities)
-%     \item The ``causal effects'' identified by randomized experiments represent in some sense the consequences of choices
-% \end{enumerate}
-% However the reasons given for this are incomplete. Results about the identifiability of potential outcomes such as those in \citet{rubin_causal_2005,imbens_causal_2015} rely on a tacit understanding of the relevance of potential outcomes to consequences of choices, and the same is true for the ``intervention'' operation in causal graphical models (see, for an example, \citet[Chap. 4]{pearl_book_2018}). Other arguments (considered in more detail in Section \ref{sec:prev_work}) consider the symmetry associated with physically swapping experimental subjects without altering the relevant model, or the idea that the process that gave rise to our observations is in some sense similar to the process that gives rise to the consequences of our choices, which begs the question: \emph{in what sense} are they similar?
-
-% A theory of causal inference seemingly ought to be able to explain these basic facts. Introducing them as \emph{postulates} seems to be a mistake -- it is possible, sometimes, to learn about the likely consequences of choices without randomized experimental data, and introducing a postulate depending on randomized experiment seems to demand a rigorous definition of ``randomized experiment''.
-
-% Causal contractibility is a notion of ``identifiability of causal effects'' that arises in decision problems that addresses both 1 and 2 together. It entails, roughly speaking, that the conditional probability arising from the long run limit of observations is the same as the function that should be used to evaluate actions under any prospective choice (see Theorem \ref{th:data_ind_CC}).
-
-% Theorem \ref{th:cc_ind_treat} provides sufficient (though not a necessary) conditions for causal contractibility. Roughly speaking again, these conditions are: a model $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible if it is a sequence of experiments that all look alike \emph{and} the sequence of inputs is completely determined by the choice. These conditions can be satisfied with or without randomisation when the experimental design, execution and any subsequent decision making are all jointly controlled (a fact noted previously by \citet{kasy_why_2016}), but not when, for example, the decision making is being handled at a different time to the experimental design or execution. Randomisation can help in these situations because (again, roughly speaking) if you know something I don't then you can take good actions for reasons I can't understand, but no matter what you know a completely random action from you is as good as a completely random action from me, and so random experiments conducted by you are as good as random experiments conducted by me.
 
 \section{Previous work}\label{sec:prev_work}
 
@@ -40,23 +25,30 @@ A stronger assumption than commutativity of exchange is \emph{causal contractibi
 
 Finally, the idea of \emph{combs} in probabilistic models was first proposed by \citet{chiribella_quantum_2008} and an application to causal models was developed by \citet{jacobs_causal_2019}.
 
-\section{Conditionally independent and identical response functions}\label{sec:response_functions}
+\section[Response functions]{Conditionally independent and identical response functions}\label{sec:response_functions}
 
-Suppose a decision maker is implementing a decision procedure where they'll make a choice and receive a sequence of paired values $(\proc{D}_i,\proc{Y}_i)$, with their objective depending on the values yielded by the $\proc{Y}_i$ subprocedures only. This is deliberately vague about the details of the procedure: perhaps the first $m$ pairs come from data collected by someone else, and the next $n$ after they've taken their own actions, or perhaps the entire sequence is from a single experiment performed by the decision maker. In any case, we want to know when the decision maker, using a model $\prob{P}_C$, can use the relative frequencies of the first $m$ pairs as a good guide to their decision making for subsequent pairs.
+Suppose a decision maker is implementing a decision procedure where they'll make a choice and subsequently receive a sequence of paired values $(\proc{D}_i,\proc{Y}_i)$, with their objective depending on the output values yielded by $\proc{Y}_i$s only. Usually the $\proc{D}_i$s, which we call ``inputs'', are under the decision maker's control to some extent, but this might not always be the case. For example, perhaps the first $m$ pairs come from data collected by someone else, where the decision maker has no control over inputs, and the next $n$ depend on their own actions where they have complete control over the inputs. 
 
-Our rough answer to this question is: the decision maker can do this if the model $\prob{P}_C$ relates the $(\RV{D}_i,\RV{Y}_i)$ pairs (corresponding to the subprocedures previously mentioned) with \emph{conditionally independent and identical response functions}. That is (again a bit roughly), there is some hypothesis $\RV{H}$ representing ``the most the decision maker can expect to know about the relationship'' and, conditioning on $\RV{H}\yields h$, each $(\RV{D}_i,\RV{Y}_i)$ pair is related by the same probabilistic map $\prob{P}_C^{\RV{Y}_1|\RV{D}_1\RV{H}}(\cdot|\cdot,h)$. Under appropriate sampling conditions, $\RV{H}$ is a collection of limiting relative frequencies.
+Suppose the decision maker uses a probability set $\prob{P}_C$ to model such a procedure, and variables $(\RV{D}_i,\RV{Y}_i)$ are associated with the inputs and outputs. There are two different relationships between $\RV{D}_i$ and $\RV{Y}_i$ that might be of interest to the decision maker:
+\begin{itemize}
+    \item For some choice, what are the \emph{likely consequences} with regard to $\RV{Y}_i$?
+    \item What is the \emph{relative frequency} of different $(\RV{D}_i,\RV{Y}_i)$ pairs across all the different values of $i$?
+\end{itemize}
+The first is what the decision maker wants to know in order to make a good decision, and the second is what they can learn as they accumulate data. A decision maker might be particularly happy to if they have good reason to expect that, no matter what choice they make, the likely consequences with regard to $\RV{Y}_i$ for a given value of $\RV{D}_i$ should be a probability distribution that in the long term limit matches the relative frequency of different values of $\RV{Y}_j$ for the same values of $\RV{D}_j$ averaged over $j$. In this situation, a decision maker that already knows how their choices affect $\RV{D}_i$ can use the accumulated data to improve their guess about how $\RV{Y}_i$ will respond to each choice.
 
-The main result of this chapter is that a model $\prob{P}_C$ features conditionally independent and identical response functions $\prob{P}_C^{\RV{Y}_1|\RV{D}_1\RV{H}}$ if and only if the \emph{comb} $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$ \emph{commutes with exchange} (see Section \ref{sec:def_combs} for an explanation of combs and Section \ref{sec:data_dependent} for the result). For models where the inputs $\RV{D}$ do not depend on previous data, this reduces to the simpler condition that $\prob{P}_C^{\RV{Y}| \RV{D}}$ commutes with exchange, see Section \ref{sec:data_independent_actions}.
+A decision maker in this position may choose a model $\prob{P}_C$ with \emph{conditionally independent and identical response functions} relating the $(\RV{D}_i,\RV{Y}_i)$ pairs. In such a model there is some hypothesis $\RV{H}$ such that $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$ is identical for all values of $i$. This conditional distribution $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$ represents the ``likely consequences with regard to $\RV{Y}_i$ of some $\RV{D}_i$'' ' and, under some conditions, is a deterministic function of the limiting relative frequencies of the $(\RV{D}_i,\RV{Y}_i)$ pairs (see Theorem \ref{th:data_ind_CC}).
 
-Exchange commutativity has similar implications to assumptions of causal sufficiency or conditional ignorability, and it is similarly difficult to assess. In procedures that mix passive observation with actively interacting with the world, it implies a kind of interchangeability between observational data and data arising as the consequences of actions that will often be unacceptable. A key difficulty is the fact that the kinds of symmetry we would like to have for exchange commutativity may be blocked by the decision maker's ability to make choices. Section \ref{sec:weaker_assumptions} considers one option for weakening the assumption of exchange commutativity: rather than asserting it holds over all data pairs, it could be assumed to hold for a random subset of them. This leads to nontrivial conclusions, though it is not clear how practically useful they are.
+In this chapter, we introduce \emph{causal contractibility} and show it is a key property of decision models with conditionally independent and identical response functions. In particular, a Markov kernel relating two sequences is a mixture of independent and identical response functions if an only if it is causally contractible (Theorem \ref{th:ciid_rep_kernel}). Section \ref{sec:data_independent_actions} shows how the assumption of a causally contractible conditional distribution implies conditionally independent and identical response functions.
 
-The work described in Section \ref{sec:ilevel_ccontract} is no longer considered a promising line of inquiry. It introduces \emph{individual identifiers}, which can be used to express a symmetry that, in conjunction with other assumptions, yields exchange commutativity. The problem is that this symmetry does not seem meaningfully easier to assess than exchange commutativity in the first place.
+One of the implications of of the assumption in Section \ref{sec:data_independent_actions} is that what we call ``inputs'' are independent of all other data pairs conditional on the hypothesis $\RV{H}$. This rules out, for example, a model where inputs are learned from prior experience. Section \ref{sec:data_dependent} removes this assumptions.
 
-\subsection{Symmetric Markov kernels - definitions and explanation}\label{sec:ccontracibility}
+A further extension is to consider models where the hypothesis and inputs are dependent. Theorem \ref{th:ciid_rep_kernel_nolocal} addresses one such situation, where the hypothesis depends on a symmetric function of the inputs. This can arise in models where inputs are thought to be chosen in a strategic but unknown way, or when there are ``population saturation effects'' such as herd immunity. More examples of this kind of dependence are addressed in Chapter \ref{ch:other_causal_frameworks}, where we examine potential outcomes models as a case of variable dependence between the hypothesis and the inputs.
 
-The assumptions of \emph{exchange commutativity} and \emph{locality} are introduced as properties of Markov kernels. We do this because in Sections \ref{sec:data_independent_actions} and \ref{sec:data_dependent}  we apply the key result to Markov kernels representing two different ``features'' of a probability set (conditional probabilities and combs respectively).
+\subsection[Causally contractible Markov kernels]{Causally contractible Markov kernels - definitions and explanation}\label{sec:ccontracibility}
 
-Exchange commutativity expresses a sense in which a Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ can be symmetric: if it yields the same result from shuffling inputs as it does from shuffling outputs. The stronger assumption of causal contractibility is the conjunction of exchange commutativity and \emph{locality}. Locality is the assumption that subsets of outputs are probabilistically independent of the non-corresponding inputs, conditioned on the corresponding inputs.
+The assumptions of \emph{exchange commutativity} and \emph{locality} together make \emph{causal contractibility}. The general result proved in this section is applied to ``data-independent'' decision problems in Section \ref{sec:data_independent_actions} and do ``data-dependent'' problems in Section \ref{sec:data_dependent}.
+
+Exchange commutativity expresses a sense in which a Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ can be symmetric: if it yields the same result from shuffling inputs as it does from shuffling outputs. Locality is the assumption that subsets of outputs are probabilistically independent of the non-corresponding inputs, conditioned on the corresponding inputs.
 
 Graphical notation can offer an intuitive picture of these two assumptions. In the simplified case of a sequence of length 2 (that is, $\kernel{K}:X^2\kto Y^2$), exchange commutativity for two inputs and outputs is given by the following equality:
 \begin{align}
@@ -263,7 +255,7 @@ However, $\kernel{K}$ does not commute with exchange.
 
 Theorem \ref{th:no_implication} presents abstract counterexamples to show that the assumptions of exchange commutativity and locality are independent. For some more practical examples, a model of the treatment of several patients who are known to have different illnesses might satisfy consequence locality but not exchange commutativity. Patient B's treatment can be assumed not to affect patient A, but the same results would not be expected from giving patient A's treatment to patient B as from giving patient A's treatment to patient A.
 
-A model of strategic behaviour might satisfy exchange commutativity but not locality. Suppose a decision maker is observing people playing a game where they press a red or green button, and (for reasons mysterious to the decision maker), receive a payout randomly of 0 or \$100. The decision maker might reason that the results should be the same no matter who presses a button (including if the decision maker presses one), but also that people will be more likely to press the red button if the red button tends to give a higher payout. In this case, the decision maker's prediction for the payout of the $i$th attempt given the red button has been pressed will be higher if the proportion of red button presses in the entire dataset is higher. There are other reasons why exchange commutativity might hold but not locality -- \citet{dawid_causal_2000} offers the alternative example of herd immunity in vaccination campaigns as a situation where commutativity of exchange holds but locality does not.
+A model of strategic behaviour might satisfy exchange commutativity but not locality. Suppose a decision maker is observing people playing a game where they press a red or green button, and (for reasons mysterious to the decision maker), receive a payout randomly of 0 or \$100. The decision maker might reason that the results should be the same no matter who presses a button, but also that people will be more likely to press the red button if the red button tends to give a higher payout. In this case, the decision maker's prediction for the payout of the $i$th attempt given the red button has been pressed will be higher if the proportion of red button presses in the entire dataset is higher. There are other reasons why exchange commutativity might hold but not locality -- \citet{dawid_causal_2000} offers the alternative example of herd immunity in vaccination campaigns. In this case, the overall proportion of the population vaccinated will affect the disease prevalence over and above an individual's vaccination status.
 
 As an aside, although locality could be described as an assumption that there is no interference between inputs and outputs of different indices, it actually allows for some models with certain kinds of interference between actions and outcomes of different indices. For example: consider an experiment where I first flip a coin and record the results of this flip as the outcome of the ``step 1''. Subsequently, I can choose either to copy the outcome from step 1 to be the input for ``step 2'' (this is the choice $\RV{D}_1=0$), or flip a second coin use this as the input for step 2 (this is the choice $\RV{D}_1=1$). At the second step, I may further choose to copy the provisional results ($\RV{D}_2=0$) or invert them ($\RV{D}_2=1$). Then
 \begin{align}
@@ -275,11 +267,11 @@ As an aside, although locality could be described as an assumption that there is
     \item Nevertheless, the choice at step 1 affects the result of step 2
 \end{itemize}
 
-\subsection{Representation theorems for symmetric Markov kernels}\label{sec:rep_theorem}
+\subsection[Representation theorems]{Representation theorems for causally contractible Markov kernels}\label{sec:rep_theorem}
 
 Theorem \ref{th:table_rep_kernel} shows that a causally contractible Markov kernel can be represented as the product of a column exchangeable probability distribution and a ``lookup function''. This representation is identical to the representation of potential outcomes models (see, for example, \citet{rubin_causal_2005}), but Theorem \ref{th:table_rep_kernel} applies to arbitrary kernels and the resulting representation will usually not be interpretable as a potential outcomes models. This theorem allows De Finetti's theorem to be applied to the column exchangeable probability distribution, which is a key step in proving the main result (Theorem \ref{th:ciid_rep_kernel}).
 
-Theorem \ref{th:ciid_rep_kernel_nolocal} then extends Theorem \ref{th:ciid_rep_kernel} to the case of a Markov kernel with commutativity of exchange only. In this case the latent conditioning variable may depend on a symmetric function of the inputs.
+Theorem \ref{th:ciid_rep_kernel_nolocal} then extends Theorem \ref{th:ciid_rep_kernel} to the case of a Markov kernel with commutativity of exchange only. In this case the latent conditioning variable may depend on a symmetric function of the inputs, assuming the distribution of inputs is dominated by some exchangeable distribution.
 
 \begin{theorem}\label{th:table_rep_kernel}
 A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is causally contractible if and only if there exists a column exchangeable probability distribution $\mu \Delta(Y^{|X|\times \mathbb{N}})$ such that
@@ -472,6 +464,7 @@ Swap maps are deterministic, so by Theorem \ref{th:fong_det_kerns}
     &= \tikzfig{commutative_exchange_with_swap_cconted}\label{eq:ccont}
 \end{align}
 where Equation \ref{eq:sym} follows from symmetry of $\kernel{L}$ and \ref{eq:ccont} follows from causal contractibility of $\kernel{M}(\cdot|z,\cdot)$
+
 Only if:
 Construct the probability space $(\prob{Q},X^{\mathbb{N}}\times Y^{\mathbb{N}},\sigalg{X}^{\mathbb{N}}\otimes\sigalg{Y}^{\mathbb{N}})$ with $\prob{P}=\mu\odot\kernel{K}$.
 
@@ -497,22 +490,27 @@ Given a kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$, let $(H,\sigalg{H
 \begin{align}
     \kernel{K} &\overset{\nu}{\cong} \tikzfig{do_model_representation_kernel_nolocal}\\
     &\iff\\
-    \kernel{K}(\bigtimes_{i\in\mathbb{N}}A_i|x) &\overset{\nu}{\cong} \int_H \prod_{i\in\mathbb{N}} \kernel{L}(A_i|h,x_i)\kernel{M}(\mathrm{d}h|x)
+    \kernel{K}(\bigtimes_{i\in\mathbb{N}}A_i|x) &\overset{\nu}{\cong} \int_H \prod_{i\in\mathbb{N}} \kernel{M}(A_i|h,x_i)\kernel{L}(\mathrm{d}h|x)
 \end{align}
 for arbitrary exchangeable $\nu$, where $\Pi_i:X^{\mathbb{N}}\kto X$ is the Markov kernel associated with the $i$-th projection map.
 \end{theorem}
 
 \begin{proof}
 Only if:
-By Lemma \ref{lem:exch_prod_ciid}, $\kernel{K}=(\mathrm{id}_{X^{\mathbb{N}}}\odot \kernel{R})\kernel{N}$ where $\kernel{N}:J\times X^{\mathbb{N}}\kto Y$ is such that $\kernel{N}(\cdot|z,\cdot)$ is causally contractible for each $z\in J$. Thus by Theorem \ref{th:ciid_rep_kernel}, for each $z$ we have
+By Lemma \ref{lem:exch_prod_ciid}, $\kernel{K}=(\mathrm{id}_{X^{\mathbb{N}}}\odot \kernel{L})\kernel{M}$ where $\kernel{M}:J\times X^{\mathbb{N}}\kto Y$ is such that $\kernel{M}(\cdot|z,\cdot)$ is causally contractible for each $z\in J$. Thus by Theorem \ref{th:ciid_rep_kernel}, for each $z$ we have
 \begin{align}
-    \kernel{N}_z:&=\kernel{N}(\cdot|z,\cdot)\\
+    \kernel{M}_z:&=\kernel{M}(\cdot|z,\cdot)\\
       &= \tikzfig{do_model_representation_kernel_z}
 \end{align}
-Where, in particular, $\kernel{L}$ is the same for all $z$. Thus defining $\kernel{M}:x\mapsto \mu_{\kernel{R}_x}$,
+Where, in particular, $\kernel{L}$ is the same for all $z$. Thus
+\begin{align}
+    \kernel{M} = \tikzfig{do_model_representation_kernel_zcut}
+\end{align}
+Hence
 \begin{align}
     \kernel{K} &\overset{\nu}{\cong} \tikzfig{do_model_representation_kernel_nolocal}
 \end{align}
+
 If:
 Apply Lemma \ref{lem:exch_prod_ciid} identifying $\kernel{M}$ with $\kernel{L}$. By Theorem \ref{th:ciid_rep_kernel},
 \begin{align}
@@ -523,7 +521,7 @@ is causally contractible for every $h\in H$.
 
 \subsection{Data-independent actions}\label{sec:data_independent_actions}
 
-Theorems \ref{th:ciid_rep_kernel} and \ref{th:ciid_rep_kernel_nolocal} are proven for ``some causally contractible Markov kernel'', without a concrete role in a decision model. The simplest way to apply this to a decision model $\prob{P}_C$ is to assume that inputs are independent of previous observations -- that is, for inputs $\RV{D}$ and outputs $\RV{Y}$, $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{D}_{<i}$. With this assumption, decision models with independent and identical response functions are those with \emph{exchange commutative conditional probabilities} $\prob{P}_C^{\RV{Y}|\RV{D}}$. The assumption of data independence is a very limiting assumption -- see-do models, for example (Definition \ref{def:see_do_model}) do not satisfy it. In the more general case we need to consider exchange commutative \emph{combs} rather than conditional probabilities, and this is addressed in Section \ref{sec:data_dependent}.
+Theorem \ref{th:ciid_rep_kernel} is proven for ``some causally contractible Markov kernel'', without a concrete role in a decision model. The simplest way to apply this to a decision model $\prob{P}_C$ is to assume that inputs are independent of previous observations -- that is, for inputs $\RV{D}$ and outputs $\RV{Y}$, $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{D}_{<i}$. With this assumption, decision models with independent and identical response functions are those with \emph{exchange commutative conditional probabilities} $\prob{P}_C^{\RV{Y}|\RV{D}}$. The assumption of data independence is a very limiting assumption -- see-do models, for example (Definition \ref{def:see_do_model}) do not satisfy it. In the more general case we need to consider exchange commutative \emph{combs} rather than conditional probabilities, and this is addressed in Section \ref{sec:data_dependent}.
 
 Given a sequence of variables $(\RV{D}_i,\RV{Y}_i)_{i\in \mathbb{N}}$ where the ``inputs'' are $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and the ``outputs'' are $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$, say the inputs are independent of previous observations if $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{D}_{<i}$ for all $i\in\mathbb{N}$. This models an experiment where it may be possible to choose different inputs $\RV{D}$, but all the inputs are determined before the outputs $\RV{Y}$ are known. If a model satisfies this, then the dependence of $\RV{Y}$ on $\RV{D}$ is a sequence of independent and identical response functions if and only if the uniform conditional $\prob{P}_C^{\RV{Y}|\RV{D}}$ exists (Definition \ref{def:cprob_pset}) and is causally contractible.
 
@@ -533,51 +531,49 @@ Call a model $\prob{P}_C$ with sequential outputs $\RV{Y}$ and a corresponding s
 A \emph{sequential just-do model} is a triple $(\prob{P}_C,\RV{D},\RV{Y})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{D}$ is a sequence of ``inputs'' $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}$ is a corresponding sequence of ``outputs'' $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$ where $\RV{D}_i:\Omega\to D$ and $\RV{Y}_i:\Omega\to Y$. Furthermore, it is required that $\RV{X}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},C)|\RV{X}_{<i}$ for all $i\in \mathbb{N}$, and $\RV{Y}\CI^e_{\prob{P}_C} C|\RV{D}$.
 \end{definition}
 
-% We'll need to extend the model to a larger sample space including ``latent variables'' taking values in $Y^D$. A latent extension is a model over a larger collection of variables that reduces to the original model when we restrict our attention to the original collection of variables.
-
-% \begin{definition}[Latent extension]
-% Given a probability set $\prob{P}_C'$ on $(\Omega,\sigalg{F})$ and some measurable set $(G,\sigalg{G})$, a probability set $\prob{P}_C$ is a \emph{latent extension} of $\prob{P}_C'$ to $(\Omega\times G,\sigalg{F}\otimes \sigalg{G})$ if $\prob{P}_C \kernel{F}_{\Pi_{\Omega}} = \prob{P}_C'$.
-% \end{definition}
-
-% \begin{notation}[Variables on a latent extension]
-% Given a probability set $\prob{P}_C'$ on $(\Omega,\sigalg{F})$ and a latent extension $\prob{P}_C$ on $(\Omega\times G,\sigalg{F}\otimes \sigalg{G})$, every variable on the original sample space is given a primed name $\RV{X}'$, $\RV{Y}'$ etc., and corresponds to an unprimed variable on the larger space $\RV{X}:=\Pi_\Omega\circ \RV{X}'$.
-% \end{notation}
-
-Theorem \ref{th:data_ind_CC} applies Theorem \ref{th:ciid_rep_kernel} to the case of a model with data-independent actions and derives the required conditional independences and equalities to show that a sequential just-do model $(\prob{P}_C,\RV{D},\RV{Y})$ with causally contractible $\prob{P}_C^{\RV{Y}|\RV{X}}$ satisfies the required conditional independences and equalities of conditional distributions for $\RV{X}$ and $\RV{Y}$ to be related by independent and identical response functions.
+Theorem \ref{th:data_ind_CC} applies Theorem \ref{th:ciid_rep_kernel} to the case of a model with data-independent actions and derives the required conditional independences and equalities to show that a sequential just-do model $(\prob{P}_C,\RV{D},\RV{Y})$ with causally contractible $\prob{P}_C^{\RV{Y}|\RV{D}}$ satisfies the required conditional independences and equalities of conditional distributions for $\RV{D}$ and $\RV{Y}$ to be related by independent and identical response functions. There is a requirement that all values of $D$ appear infinitely often; if this were not present, then in general the measure $\RV{H}$ would not be a function of the observed variables.
 
 \begin{theorem}[Data-independent causal contractibility]\label{th:data_ind_CC}
-Given a sequential just-do model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ is causally contractible if and only if there is a latent extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times Y^{D\times\mathbb{N}},\sigalg{F}\otimes\sigalg{Y}^{D\times\mathbb{N}})$ with some hypothesis $\RV{H}:\Omega\times Y^{D\times\mathbb{N}}\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{X}_{<i},C)|(\RV{X}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{X}_j\RV{H}}$ for all $i,j\in \mathbb{N}$ and $\RV{H}\CI_{\prob{P}_C} (\RV{X},\RV{C})$.
+Given a sequential just-do model $(\prob{P}_C,\RV{D},\RV{Y})$ on $(\Omega,\sigalg{F})$ with $D$ countable, let $E\subset D^{\mathbb{N}}$ be the set of all sequences $d$ such that each $x\in D$ appears in $d$ infinitely often. If for all $\alpha\in C$ $\prob{P}_\alpha^{\RV{D}}(E)=1$, then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible if and only if there is some directing random measure $\RV{H}:\Omega\to H$ such that $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{D}_j\RV{H}}$ for all $i,j\in \mathbb{N}$ and $\RV{H}\CI_{\prob{P}_C} (\RV{D},\RV{C})$.
 \end{theorem}
 
 \begin{proof}
 If:
-% First, define the extension $\prob{P}_C$. From Theorem \ref{th:table_rep_kernel} and causal contractibility of $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ there is some $\mu\in \Delta(Y^{D\times\mathbb{N}})$ such that
-% \begin{align}
-%     \prob{P}_C^{\prime \RV{Y}'|\RV{D}'} &= \tikzfig{lookup_representation_variablised}\label{eq:lup_rep_varb}
-% \end{align}
-% Let $\prob{P}_C^{\RV{Y}^{D}|\RV{D}}=\mu\otimes \text{del}_{D^{\mathbb{N}}}$, $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}=\kernel{F}_{\mathrm{ev}}$ and $\RV{Y}^D:=\Pi_{Y^{D\times\mathbb{N}}}$, the projection $\Omega\times Y^{D\times\mathbb{N}}\to \Omega$. Let $\RV{W}=\Pi_{\Omega}$ and for each $\alpha\in C$, set 
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{W}|\RV{Y}^D\RV{D}} &= \tikzfig{augmented_ccontracible}
-% \end{align}
-% Then 
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{W}} &= \tikzfig{augmented_ccon2}\\
-%     &= \tikzfig{augmented_ccon3}\\
-%     &= \prob{P}_\alpha^{\prime \text{id}_\Omega}
-%     &= \prob{P}_\alpha
-% \end{align}
+First, construct the variable $\RV{Y}^D$. Let $\#_{\RV{D}_k=j}^i$ be $1$ if $\RV{D}_k=j$ and it is exactly the $i$th coordinate of $\RV{D}$ that does so, and $0$ otherwise. Then for $i\in \mathbb{N}$ and $j\in D$
+\begin{align}
+    \RV{Y}^D_{ij} = \sum_{k=1}^{\infty} \#_{\RV{D}_k=j}^i \RV{Y}_k
+\end{align}
+That is, the $(i,j)$-th coordinate of $\RV{Y}^D$ is equal to the coordinate $\RV{Y}_k$ for which the corresponding $\RV{D}_k=j$ and there have been $i-1$ preceding instances where a coordinate of $\RV{D}$ has been equal to $j$. Note that $\RV{Y}^D_{ij}$ is equal to some $\RV{Y}_k$ with probability 1, by the assumption that all values of $D$ occur infinitely often almost surely.
 
-% Before going further, it's necessary to check that there is some nonempty probability set $\prob{P}_C$ with these conditionals. By Theorem \ref{lem:valid_extendability}, because $\prob{P}_\alpha^{\RV{W}}=\prob{P}_{\alpha}'$ it is sufficient to show that $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$ is valid. Because 
-% \begin{align}
-%     (\RV{W},\RV{Y}^D)(\Omega\times Y^{D\times\mathbb{N}})&=\Omega\times Y^{D\times\mathbb{N}}\\
-%     &=\RV{W}(\Omega\times Y^{D\times\mathbb{N}})\times \RV{Y}^D(\Omega\times Y^{D\times\mathbb{N}})
-% \end{align}
-% there are no impossible events, and so validity is guaranteed for any $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$.
+Note that $\#_{\RV{D}_k=j}^i$ and $\#_{\RV{D}_l=j}^i$ are mutually exclusive for $k\neq l$. Thus there is a random permutation $\RV{R}$ taking values in the set of functions $\mathbb{N}\to \mathbb{N}$ (including infinite permutations) such that
+\begin{align}
+    \RV{Y}^D &= (\RV{Y}_{\text{ef}(\RV{R}, i)})\
+    := \RV{Y}_{\RV{R}}
+\end{align}
+where $\text{ef}$ is the function evaluation map $\text{ef}(f,x)=f(x)$. By construction, $\RV{D}_{\RV{R}}\text{ mod }|D|=d_{i\text{ mod }|D|}$ i.e. the $i\text{ mod }|D|$'th element of $D$.
 
-% Thus $\prob{P}_C$ is a latent extension of $\prob{P}_C'$, and so $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also causally contractible.
-
-
-From Theorem \ref{th:ciid_rep_kernel} and by construction of $\prob{P}_C$, there exists a directing random measure $\RV{H}^*:(Y\times D)^{\mathbb{N}}\to H$ such that, defining $\RV{H}=\RV{H}^*\circ\Pi_{D\times\mathbb{N}}$
+Now,
+\begin{align}
+    \prob{P}^{\RV{Y}_{\RV{R}}|\RV{D}_{\RV{R}}}_\alpha(A|d) &= \int_R \prob{P}_\alpha^{\RV{Y}_\rho|\RV{D}_{\rho}}(A|d)\prob{P}_\alpha^{\RV{R}}(mathrm{d}\rho)\label{eq:need_ccont}\\
+\end{align}
+For each $\rho$, define $\rho^n:\mathbb{N}\to \mathbb{N}$ as the permutation that agrees with $\rho$ on the first $n$ indices and is the identity otherwise. By causal contractibility, for $n\in \mathbb{N}$
+\begin{align}
+    \prob{P}^{\RV{Y}_{\rho^n([n])}|\RV{D}_{\rho^n([n])}} &= \prob{P}^{\RV{Y}_{\rho([n])}|\RV{D}_{\rho([n])}}\\
+    &= \prob{P}^{\RV{Y}_{[n]}|\RV{D}_{[n]}}
+\end{align}
+By Lemma \ref{lem:infinitely_extended_kernels}, it must therefore be the case that
+\begin{align}
+    \prob{P}^{\RV{Y}|\RV{D}} = \prob{P}^{\RV{Y}_{\rho}|\RV{D}_{\rho}}
+\end{align}
+Then from Equation \ref{eq:need_ccont}
+\begin{align}
+    \prob{P}^{\RV{Y}_{\RV{R}}|\RV{D}_{\RV{R}}}_\alpha(A|d) &= \int_R \prob{P}_\alpha^{\RV{Y}_\rho|\RV{D}_{\rho}}(A|d)\prob{P}_\alpha^{\RV{R}}(mathrm{d}\rho)
+\end{align}
+Define $e:=(e_i)_{i\in\mathbb{N}}$ such that $e_{i+|D|j}$ is the $i$th element of $D$ for all $i,j\in \mathbb{N}$. Then
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}^D}(A) &= \prob{P}_C^{\RV{Y}|\RV{D}}(A|e)
+\end{align}
+By exchange commutativity and invariance of $e_i$ to permutations of period $|D|$, $\prob{P}_\alpha^{\RV{Y}^D}$ is column exchangeable. Thus from \citet[Prop. 1.4]{kallenberg_basic_2005}, there exists a directing random measure $\RV{H}^*:Y^{D\times\mathbb{N}}\to H$ such that, defining $\RV{H}=\RV{H}^*\circ\Pi_{D\times\mathbb{N}}$
 \begin{align}
     \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{do_model_representation}
 \end{align}
@@ -608,8 +604,6 @@ Then
 by Theorem \ref{th:higher_order_conditionals}. Hence $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{X}_{<i},\RV{Y}_{<i},\RV{C})|(\RV{H},\RV{X}_i)$.
 
 Only if:
-If $\prob{P}_C$ is a latent extension of $\prob{P}_C'$, then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible if and only if $\prob{P}_C^{\prime \RV{Y}'|\RV{D}'}$ is causally contractible. Thus it is sufficient to show $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
-
 By assumption, for all $i\in \mathbb{N}$
 \begin{align}
     \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{X}_{[i]}\RV{Y}_{<i}} &\overset{\prob{P}_C}{\cong} \text{del}_{X^{i-1}\times Y^{i-1}}\otimes \prob{P}_C^{\RV{Y}_1|\RV{H}\RV{X}_1}
@@ -702,6 +696,23 @@ Then the model exhibits a kind of ``backdoor adjustment'' \citet[Chap. 1]{pearl_
 
 Equation \ref{eq:backdoor} is identical to the backdoor adjustment formula for an intervention on $\RV{D}_1$ targeting $\RV{Y}_1$ where $\RV{X}_1$ is a common cause of both.
 
+\subsubsection{Example: body mass index}
+
+Given a sequential just-do model $(\prob{P}_C,(\RV{B},\RV{I}),\RV{Y})$ with $\RV{B}:=(\RV{B}_i)_{i\in M}$ representing body mass index of individual $\RV{I}_i$ and $\RV{Y}:=(\RV{Y}_i)_{i\in M}$ representing health outcomes of interest for the same individual, \citet{hernan_does_2008} noted that there are multiple different choices that can influence an individual's body mass index $\RV{B}_i$ in the same way. Thus $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{B}$ might generally be rejected, and so there may be no uniform conditional $\prob{P}_C^{\RV{Y}|\RV{IB}}$. In this case, $\prob{P}_C^{\RV{Y}|\RV{IB}}$ cannot be causally contractible because it doesn't exist.
+
+Suppose instead a model $(\prob{P}_C,(\RV{D},\RV{I}),(\RV{B},\RV{Y}))$ is given, with $\RV{D}=(\RV{D}_i)_{i\in M}$ representing ``decisions'', appropriately fine-grained to satisfy
+\begin{align}
+    &\RV{YBI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}\\
+    &\RV{YBI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}
+\end{align}
+and $\prob{P}_C^{\RV{YB}|\RV{ID}}$ causally contractible. Then by Theorem \ref{th:cc_ind_treat} $\prob{P}_C^{\RV{Y}|\RV{BD}}$ is also causally contractible. In general, there may be some $U\subset H$ such that for any $h\in U$ 
+\begin{align}
+    \prob{P}_C^{\RV{Y}_i|\RV{B}_i\RV{D}_i\RV{H}}(y|b,d,h) &= \prob{P}_C^{\RV{Y}_i|\RV{B}_i\RV{H}}(y|b,h)\label{eq:conditional_conditional_independence}
+\end{align}
+then, \emph{conditioning on }$\RV{H}\in U$, the resulting $\prob{P}_{C,\RV{H}\in U}^{\RV{Y}|\RV{B}}$ is causally contractible.
+\todo[inline]{Defining conditioning}
+So it may be possible to derive the fact that there is a independent and identical response conditional $\prob{P}_{C,\RV{H}\in U}^{\RV{Y}_i|\RV{H}\RV{B}_i}$ if $\RV{H}\in U$ is implied by available data, even if it is not assumed outright.
+
 \section{Assessing decision problems for exchange commutativity}
 
 Exchange commutativity is a condition that, if it holds, allows a decision maker to use the map $D\kto Y$ calculated from relative frequencies to determine the optimal course of action. The question is: when should a decision maker consider this assumption reasonable?, confronted with a decision problem actually adopt a causally contractible model $\prob{P}_C$ to help them make their decision? This is not an easy question for several reasons. Two of these are:
@@ -759,340 +770,6 @@ The original justification for having a set of choices $C$ is that $C$ is the se
 \citet{kasy_why_2016} argues that ``randomised controlled trials are not needed for causal identifiability, only controlled trials'', and suggests that experiments should sometimes be designed with deterministic assignments of patients to treatment and control groups. From one point of view, if $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible, then causal contractibility holds whether the choice $\alpha$ yields a deterministic or nondeterministic distribution over $\RV{D}$. If the same model $\prob{P}_C$ is used to design a `trial' (say, for the first $n$ $(\RV{D}_i,\RV{Y}_i)$ pairs) and to select optimal actions for the pairs after this, there is no obvious reason to choose the first $n$ actions according to a random number generator -- one may be able to get better coverage of the actions of interest by choosing deterministically. Indeed, as \citet{kasy_why_2016} points out, if random choices are mixtures of deterministic choices, then the random choices can be at best as good as some deterministic choice (in his paper, Kasy considers situations with covariates, which we ignore for simplicity). 
 
 However, a typical trial involves an experimenter conducting the trial (which comprises the procedure for ``the first $n$ pairs'') and publishing a paper summarising their findings. A reader may then read the paper and use the results to make decisions (which comprises the procedure for ``the pairs after the first $n$''). It is the reader who is in the position of needing a model $\prob{P}_C$ accounting for both the experimental data and the data that arises as a consequence of her actions. In this case, the reader is in a position somewhat like the ``analyst'' in Example \ref{ex:confounding}, while the experimenter is the ``administrator'' from this example. Fixing the proportion of treatments in each class (like in Example \ref{ex:confounding}) leaves the experimenter with many degrees of freedom to select deterministic sequences of actions. On the other hand, if the experimenter may only select a target proportion of treatments, and must then assign treatments randomly given this target, they have much less freedom to influence the consequences of the experiment. An experimenter with many degrees of freedom might well be trusted to make choices in a manner that is transparent to any readers, but this does require an additional assumption on the part of the readers.
-
-\subsection{Individual-level causal contractibility}\label{sec:ilevel_ccontract}
-
-Individual-level causal contractibility is our attempt to formulate a set of conditions sufficient for causal contractibility that may be easier to think about than the bare assumption. It is inspired by the fact that many treatments of causal identifiability refer to sequences of ``individuals'', ``patients'', ``units'' or the like, all of which are considered to be ``essentially identical'' from the point of view of the decision maker. However, these individuals are not directly referenced by the models under consideration. What we do here is consider models that \emph{do} reference individuals -- in particular, we suppose that each sub-procedure produces an input variable, an output variable and a \emph{unique identifier} (which can be thought of as something like someone's license number and state of issue). Under some conditions, assuming causal contractibility with respect to inputs, identifiers and outputs can imply causal contractibility with respect to inputs and outputs only. This clearly hasn't solved the entire problem of assessing a problem for causal contractibility, as a causal contractibility assumption is required to get off the ground.\todo{it might still be helpful, though? I don't really know what to say}
-
-\subsubsection{References to individual-level causal contractibility}
-
-The role of individuals has often been mentioned in literature on causal inference. For example, \citet{greenland_identifiability_1986} explain
-\begin{quote}
-    Equivalence of response type may be thought of in terms of exchangeability of individuals: if the exposure states of the two individuals had been exchanged, the same data distribution would have resulted.
-\end{quote}
-Here, the idea of ``exchangeable individuals'' plays a role in the author's reasoning about model construction, but ``individuals'' are not actually referenced by the resulting model, and ``exchanging individuals'' does not correspond to a model transformation.
-
-\citet{dawid_decision-theoretic_2020} suggests (with some qualifications) that ``post-treatment exchangeability'' for a decision problem regarding taking aspirin to treat a headache may be acceptable if the data are from
-\begin{quote}
-    A group of individuals whom I can regard, in an intuitive sense, as similar to myself, with headaches similar to my own.
-\end{quote}
-As in the previous work, the similarity of individuals involved in an experiment is raised when justifying particular model constructions, but the individuals are not referenced by the model.
-
-\citet[pg. 98]{pearl_causality:_2009} writes
-\begin{quote}
-    Although the term unit in the potential-outcome literature normally stands for the identity of a specific individual in a population, a unit may also be thought of as the set of attributes that characterize that individual, the experimental conditions under study, the time of day, and so on – all of which are represented as components of the vector $u$ in structural modeling.
-\end{quote}
-Once again, the idea of an individual (or a particular set of conditions) is raised in the context of explaining modelling choices. Unlike the previous authors, Pearl introduces a vector $u$ to stand for the ``unit''. However, he subsequently assumes that $u$ is a sequence of \emph{independent samples} from some distribution. This seems to contradict an important feature of ``individuals'' or ``units'': individuals are typically supposed to be unique, a property that will usually not be satisfied by independently sampling from some distribution (at least, as long as the distribution is discrete).
-
-Finally, \citet{rubin_causal_2005} writes:
-\begin{quote}
-    Here there are $N$ units, which are physical objects at particular points in time (e.g., plots of land, individual people, one person at repeated points in time).
-\end{quote}
-Note that Rubin's explanation of \emph{units} guarantees that they are unique: they are particular things at particular times. These units are associated with input-output functions (the \emph{potential outcomes}), which are later assumed to be exchangeable:
-\begin{quote}
-    the indexing of the units is, by definition, a random permutation of $1,..., N$, and thus any distribution on the science must be row-exchangeable
-\end{quote}
-
-Our proposition is: can the intuition that unique individuals are an important for the motivation for causal models, be captured by considering models that feature ``unique identifier'' variables referencing these unique individuals?
-
-\subsubsection{Unique identifiers}
-
-A sequence of \emph{unique identifiers} is a vector of finite or infinite length such that no two coordinates are equal. We are interested in models that assign positive probability to any particular coordinate having any particular value. This is straightforward in the finite case. In the infinite case, note that a vector of $|\mathbb{N}|$ unique values with an arbitrary entry $k$ in the $j$th coordinate can be obtained by starting with $(i)_{i\in \mathbb{N}}$ and then transposing $j$ with $k$. More generally, we consider infinite length sequences of unique identifiers to be elements of the set of finite permutations $\mathbb{N}\to\mathbb{N}$.
-
-\begin{definition}[Measurable space of unique identifiers]
-The measurable space of unique identifiers $(I,\sigalg{I})$ is the set $I$ of finite permutations $\mathbb{N}\to \mathbb{N}$ with the discrete $\sigma$-algebra $\sigalg{I}$.
-\end{definition}
-
-The set $I$ is countable, as it is the countable union of finite subsets (i.e. the permutations that leave all but the first $n$ numbers unchanged for all $n$).
-
-\begin{definition}[Unique identifier]
-Given a sample space $(\Omega,\sigalg{F})$, a \emph{sequence of unique identifiers} $\sigalg{I}:\Omega\to I$ is a variable taking values in $I$.
-\end{definition}
-
-The values of each coordinate of sequence of unique identifiers is just called an identifier (for obvious reasons, we don't call it an identity).
-
-\begin{definition}[Identification]
-Given $\RV{I}$, define the $i$-th \emph{identifier} $\RV{I}_i=\mathrm{ev}(i,\RV{I})$, where $\mathrm{ev}:\mathbb{N}\times I\to \mathbb{N}$ is the evaluation map $(i,f)\mapsto f(i)$.
-\end{definition}
-
-For \emph{any} sample space $(\Omega,\sigalg{F})$ we can define a trivial $\sigalg{I}$ that maps every $\omega\in\Omega$ to $(1,2,3,....)=:(\mathbb{N})$. In this case, the identifiers are all known by the modeller at the outset. Using this sequence of identifiers renders exchange commutativity trivial, and isn't of much interest to us.
-
-\begin{example}
-Given a sequential just-do model $(\prob{P}_C, (\RV{D},\RV{I}),\RV{Y})$ where $\RV{I}$ is the identifier variable $\omega\mapsto (\mathbb{N})$, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ commutes with exchange.
-
-This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the identity, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ and $\text{swap}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ will have no common support; the first will be supported on $\RV{I}\yields (\mathbb{N})$ only, and the second only on $\RV{I}\yields \rho(\mathbb{N})$.
-\end{example}
-
-
-
-
-\subsubsection{Individual-level causal contractibility and unobserved confounding}
-
-Our first result is that some models with individual-level causal contractibility can be seen as models with unobserved confounding. A model $\prob{P}_C$ with individual-level causal contractibility features a causally contractible $\prob{P}_C^{\RV{Y}|\RV{ID}}$ for a sequence of outputs $\RV{Y}$, inputs $\RV{D}$ and individual identifiers $\RV{I}$. A model with unobserved confounding features causally contractible $\prob{P}_C^{\RV{Y}|\RV{UD}}$ where $\RV{Y}$ and $\RV{D}$ are as before and $\RV{U}$ is an ``unobserved confounder''. They key difference between $\RV{I}$ and $\RV{U}$ is that the individual identifier for each observation is unique, while unobserved variables (typically) have $|U|<N$ where $N$ is the number of observations.
-
-
-
-\subsubsection{Individual-level causal contractibility and ordinary causal contractibility}
-
-Our second key result is that individual-level causal contractibility along with the assumptions of exchangeability of individuals and sufficient control of inputs implies causal contractibility with respect to inputs and outputs.
-
-So, a judgement of symmetry among sub-experiments is not enough for causal contractibility. What is enough?
-
-In the following, it is helpful to assume that each sub-experiment has a ``unique identifier'' $\RV{I}_i$, with the sequence of all sub-experiment labels given by $\RV{I}$. With this, if $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is assumed causally contractible, then it's possible to talk about the individual response functions $\prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{H}\RV{D}_i}$. These plays a role very similar to the $i$th vector of potential outcomes $\RV{Y}^D_i$. Because $\RV{I}_i$ is unique (i.e. never equal to $\RV{I}_j$ for $j\neq i$), only one observation of any individual is ever given, just like only one potential outcome is ever observed.
-
-Theorem \ref{th:cc_ind_treat} presents a set of sufficient conditions for causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{D}}$:
-\begin{enumerate}
-    \item There exist variables $\RV{I}$ representing ``unique experiment identifiers'' which satisfy the assumption that $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is causally contractible (informally: it doesn't matter which order the experiments are conducted in, and treatments in each experiment do not affect any other experiments)
-    \item The identifiers themselves are not informative regarding outcomes: $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\RV{C})$
-    \item The inputs $\RV{D}$ are substitutable for the choice $\RV{C}$ with respect to $\RV{Y}$ and $\RV{I}$: $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ and $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$
-\end{enumerate}
-However, as we will show, even these conditions can be subtle to assess.
-
-As an example of the application of Theorem \ref{th:cc_ind_treat}, consider an experiment where $n$ patients, each with an individual identifier $\RV{I}_i$, receive treatment $\RV{D}_i$ and experience outcome $\RV{Y}_i$. $\prob{P}_C^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{I}_{[n]}}$ can be extended to an infinite sequence $\prob{P}_C^{\RV{Y}|\RV{DI}}$ that is causally contractible (see Assumption 1), and no matter which choice $\alpha\in C$ is given, all identifiers can be swapped without altering the distribution over consequences (see Assumption 2), and finally that the treatment vector $\RV{D}$ is a deterministic and invertible function of the choice $\alpha\in C$ then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible, and hence there are response functions $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$.
-
-Theorem \ref{th:cc_ind_treat} can also be extended to the case where $\RV{D}$ is a function of the choice $\alpha$ and a ``random signal'' $\RV{R}$.
-
-\begin{lemma}\label{lem:ind_to_cc}
-Given sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob{P}_C^{\RV{Y}|\RV{DI}}$ causally contractible, if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\RV{C})|\RV{D}$ and for any $j\in I$, $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0$, then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also causally contractible.
-\end{lemma}
-
-\begin{proof}
-For arbitrary $\nu\in \Delta(I^{\mathbb{N}})$ such that $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i} \gg \nu$, by assumption of causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{DI}}$ and Theorem \ref{th:ciid_rep_kernel}
-\begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{DI}} &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_1}\\
-    &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_2}
-\end{align}
-Where $\Pi_{D,i}:D^{\mathbb{N}}\kto D$ projects the $i$th coordinate, and similarly for $\Pi_{Y,i}$.
-
-In particular, for any $i\in \mathbb{N}$, $j\in I$, this holds for some $\nu$ such that $\nu(\Pi_{Y,i}^{-1} (j)=1$ and by extension for any finite $A\subset \mathbb{N}$ we can find $\nu$ such that $\nu(\Pi_{Y,i}^{-1} (j)=1$ for all $i\in A$, $j\in I$. Thus for any $n\in \mathbb{N}$
-\begin{align}
-    \prob{P}_C^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{I}_{[n]}} &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_3}\label{eq:follows_from_determinism}\\
-    &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_4}\label{eq:follows_from_equality}
-\end{align}
-
-where Equation \ref{eq:follows_from_determinism} follows from Theorem \ref{th:fong_det_kerns} and Equation \ref{eq:follows_from_equality} follows from the fact that Equation \ref{eq:follows_from_determinism} holds for arbitrary $j\in I$.
-
-Thus by Lemma \ref{lem:infinitely_extended_kernels}
-\begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{index_independence_5}
-\end{align}
-Applying Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
-\end{proof}
-
-\begin{theorem}\label{th:cc_ind_treat}
-Given a sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ countable, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ causally contractible for each $\alpha$, if
-\begin{align}
-    &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}\\
-    &\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}\\
-    &\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}\\
-    &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
-\end{align}
-then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
-\end{theorem}
-
-\begin{proof}
-For any $\alpha\in C$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= \tikzfig{kernel_fac_with_idents}\\
-    &= \tikzfig{kernel_fac_with_idents_indepped}
-\end{align}
-
-Define $\kernel{Q}$ by $\alpha\mapsto \prob{P}_\alpha$ and $\kernel{Q}^{\cdot|\cdot\RV{C}}$ by $\alpha\mapsto \prob{P}_\alpha^{*}$ and $\kernel{Q}^{\RV{C}}$ is an arbitrary distribution in $\Delta(C)$ with full support. Note that the support of $\kernel{Q}^{\RV{IDY}}$ is the union of the support of $\prob{P}^{\RV{IDY}}_\alpha$ for all $\alpha$. Then
-\begin{align}
-    \kernel{Q}^{\RV{Y}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_fac_with_idents_kernelised}
-\end{align}
-
-By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$, it is also the case that
-\begin{align}
-    \kernel{Q}^{\RV{Y}|\RV{ID}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents}\\
-    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_indepped}\\
-    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_subbed}
-\end{align}
-But
-\begin{align}
-    \kernel{Q}^{\RV{Y}|\RV{ID}}=\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{Y}|\RV{ID}}\kernel{Q}^{\RV{C}}(\alpha)\\
-    &= \prob{P}_C^{\RV{Y}|\RV{ID}}\\
-    \implies \tikzfig{kernel_Q_fac_with_idents_subbed} &= \prob{P}_C^{\RV{Y}|\RV{ID}}
-\end{align}
-
-Furthermore, by assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}$, so there is some $\kernel{K}:C\kto Y$ such that
-\begin{align}
-    \kernel{Q}^{\RV{Y}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_indepped}\\
-    \implies \prob{P}_C^{\RV{Y}|\RV{ID}} &= \tikzfig{kernel_Q_fac_with_idents_swapped}\\
-    &= \tikzfig{kernel_P_indep}
-\end{align}
-Then by Lemma \ref{lem:ind_to_cc}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
-\end{proof}
-
-Theorem \ref{th:cc_ind_treat} can be extended to the case where decisions $\RV{D}$ are a one-to-one deterministic function of the choice, or a random mixtures of one-to-one deterministic functions of the choice.
-
-\begin{theorem}\label{cor:extend_to_randomised}
-Consider a sequential just-do model $(\prob{P}_{C'},\RV{D},\RV{Y})$ where $\prob{P}_{C'}^{\RV{Y}|\RV{D}}$ is causally contractible, and construct a second model $(\prob{P}_{C},\RV{D},\RV{Y})$ where $\prob{P}_C$ is the union of $\prob{P}_{C'}$ and its convex hull. Then $\prob{P}_{C}^{\RV{Y}|\RV{D}}$ is also causally contractible.
-\end{theorem}
-
-\begin{proof}
-For all $\alpha\in C$, there is some probability measure $\mu:C'\to [0,1]$ such that
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{D}} &= \sum_{\beta\in C'} \mu(\beta) \prob{P}_\beta^{\RV{Y}|\RV{D}}\\
-    &= \prob{P}_{C'}^{\RV{Y}|\RV{D}}
-\end{align}
-thus
-\begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{D}} = \prob{P}_{C'}^{\RV{Y}|\RV{D}}
-\end{align}
-and in particular, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
-\end{proof}
-
-The assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}$ can be understood in terms of \emph{permutability of identifiers}. An \emph{identifier variable} is a variable $\RV{I}$ that takes values in the set of finite permutations of $\mathbb{N}$. It is associated with a sequence $(\RV{I}_i)_{i\in \mathbb{N}}$ where $\RV{I}_i=\RV{I}(i)$. Each $\RV{I}_i$ takes values in $\mathbb{N}$ and $\RV{I}_i\neq \RV{I}_j$ for all $j\neq i$.
-
-\begin{definition}[Identifier variable]
-Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$, let $I$ be the set of finite permutations $\mathbb{N}\to \mathbb{N}$. A variable $\RV{I}:\Omega\to I$ be a variable taking values in $I$ is an \emph{identifier variable}.
-\end{definition}
-
-If a uniform conditional probability is invariant to permutations of an index variable, then it is independent of that index variable.
-
-\begin{lemma}\label{lem:ind}
-Given a probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \RV{C}|(\RV{D},\RV{I})$ and $\RV{I}:\Omega\to I$ is an identifier variable, if for each finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{swap}_{\rho(I)}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}
-\end{align}
-then $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\RV{C}$.
-\end{lemma}
-
-\begin{proof}
-By definition of the set $I$ of finite permutations, for every $\rho\in I$, $B\in\sigalg{Y}^{\mathbb{N}}$, $d\in D^{\mathbb{N}}$ there is a finite permutation $\rho^{-1}\in I$ such that $\rho\circ\rho^{-1}=\text{id}_{\mathbb{N}}$. Then
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho) &= (\kernel{F}_{\rho^{-1}}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho)\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\text{id}_{\mathbb{N}})
-\end{align}
-Therefore
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &\overset{\prob{P}_C}{\cong} \text{erase}_{I}\otimes \prob{P}_\alpha^{\RV{Y}}
-\end{align}
-\end{proof}
-
-Theorem \ref{cor:extend_to_randomised} can be used to argue that, given a sequence of experiments causally contractible under deterministic choices, adding random mixtures of these choices also yields a causally contractible sequence. \citet{kasy_why_2016} argues that as long as the experimenter controls the treatment assignment, causal effects are identified (i.e. the randomisation step is not strictly necessary). Example \ref{ex:randomised_experiment} shows that this argument might be supported, but Example \ref{ex:bad_randomised_experiment} shows that there are subtle ways that might lead to this argument failing. We consider a simpler case than \citet{kasy_why_2016}, where there are no covariates to worry about.
-
-We assume an infinite sequence, which is clearly unreasonable. Extending the representation theorems to the case of finite sequences, using for example the result of \citet{diaconis_finite_1980} with establishes that finite exchangeable distributions are approximately mixtures of independent and identically distributed sequences, would allow some implausible assumptions in the following example to be removed.
-
-\begin{example}\label{ex:randomised_experiment}
-A sequential experiment is modeled by a probability set $\prob{P}_C$ with binary treatments $\RV{D}:=(\RV{D}_i)_{i\in \mathbb{N}}$ and binary outcomes $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$. The set of choices $C$ is the set of all probability distributions$\Delta(D^N)$ for some $N\subset\mathbb{N}$ (this is to ensure $C$ is countable).
-
-Each treatment $\RV{D}_i$ is given to a patient, and each patient provides a unique identifier $\RV{I}_i$ which for simplicity we assume is a number in $\mathbb{N}$ (instead of, say, a driver's license number and state of issue), and that (implausibly) there is a positive probability for $\RV{I}_i$ to take any value in $\mathbb{N}$ for any choice $\alpha$.
-
-The treatments are decided as follows: the analyst consults the model $\prob{P}_C$, and, according to $\prob{P}_C$ and some previously agreed upon decision rule, comes up with a possibly stochastic sequence  of treatment distributions $\alpha:=(\mu_i)_{i\in N}$ with each $\mu_i$ in $\Delta(\{0,1\})$. If $\mu_i$ is deterministic -- that is, it puts probability 1 on some treatment $d_i$, the experiment administrator will assign patient $i$ the treatment $d_i$. Otherwise, if $\mu_i$ is nondeterministic, the administrator will consult some agreed-upon random number generator that yields treatment assignments according to $\mu_i$.
-
-Let $C'\subset C$ be the deterministic elements of $C$, and assume that all elements of $C$ are a convex combination of elements of $C'$. The randomisation procedure is deemed sufficient to ensure that for any mixed $\alpha\in C$ where $\alpha = \sum_{\beta\in C'} \mu(\beta) \beta$, $\prob{P}_\alpha = \sum_{\beta\in C'} \prob{P}_\beta$.
-
-Furthermore, assume $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ is causally contractible for each $\alpha$. As discussed in Theorem \ref{th:equal_of_condits}, this means that for any $A,B\subset\mathbb{N}$, $|A|=|B|$, $\prob{P}_\alpha^{\RV{Y}_A|\RV{D}_A\RV{I}_A}=\prob{P}_C^{\RV{Y}_B|\RV{D}_B\RV{I}_B}$ and $\RV{Y}_A\CI^e_{\prob{P}_C} (\RV{D}_{A^C},\RV{I}_{A^C})|(\RV{D}_A,\RV{I}_A,\RV{C})$. Roughly: holding any subsequence of treatments and individuals fixed, the joint distribution of consequences is the same no matter where they appear in the sequence of experiments and no matter what treatments or individuals appear elsewhere.
-
-The analyst constructing the model has no particular knowledge about any identifier, and so \emph{for any choice} reasons the associated model should be invariant to permutations of identifiers. This implies $\RV{Y}\CI^e_{\prob{P}_C} \RV{I}|\RV{C}$ (see Lemma \ref{lem:ind}). The assumption that this holds given any choice can be tricky -- not only must the identifiers appear symmetric to the analyst constructing the model, but nothing breaking this symmetry may be learned from the choice $\alpha$, see the Example \ref{ex:bad_randomised_experiment} next and the discussion afterwards. In this case, the reasoning is supported by the fact that the rule for selecting $\alpha$ is known in advance.
-
-For the deterministic subset $C'\subset C$, $\RV{YI}\CI^e_{\prob{P}_{C'}} \RV{D}|\RV{C}$ as $\RV{D}$ is deterministic for all elements of $C'$, and $\RV{YI}\CI^e_{\prob{P}_{C'}} \RV{C}|\RV{D}$ is also because restricted to this subset, $\RV{D}$ is a one-to-one function of $\RV{C}$. By application of Theorem \ref{th:cc_ind_treat}, $\prob{P}_{C'}^{\RV{Y}|\RV{D}}$ is causally contractible, and by application of Corollary \ref{cor:extend_to_randomised}, so is $\prob{P}_{C}^{\RV{Y}|\RV{D}}$
-\end{example}
-
-Permutability of identifiers can fail when the rule for selecting $\alpha$ is not known in advance. The following example is extreme in order to illustrate the issue clearly. The distinction between the analyst and the administrator is also intended to make the example easier to parse. The key point is that, when the rule for selecting $\alpha$ is not known in advance, symmetries that are apparent at the time of model construction do not necessarily hold for every choice $\alpha$, and this remains true if e.g. the selection of choices leads to less extreme confounding or the analyst and the administrator are actually the same person.
-
-The following example involves the choice $\alpha$ depending on some covariate $\RV{U}$. It is not straightforward to express the idea that ``$\alpha$ depends on $\RV{U}$'' in a probability set model $\prob{P}_C$, and they are intended to apply to situations where the choice doesn't depend on anything not already expressed in the model (as in Example \ref{ex:randomised_experiment}). However, the fact that probability sets don't work well in situations where the choice depends on something not expressed in the model doesn't mean that you can't use a probability set to model such a situation, it just means that you shouldn't do it. This is what the following example shows.
-
-\begin{example}\label{ex:bad_randomised_experiment}
-
-\end{example}
-
-\citet{kasy_why_2016} mentions that causal identifiability requires a ``controlled experiment'', not necessarily a ``randomised controlled experiment''. The preceding two examples establish that a ``controlled experiment'' means that the inputs to the experiment are under the control \emph{of the analyst}. Even that doesn't quite capture it; if the analyst and the administrator are the same person and they nevertheless perform some ad-hoc ``randomisation'' of decision functions, the points raised in Example \ref{ex:bad_randomised_experiment} still apply. More precisely, if there is a decision procedure involving $\prob{P}_C$ and a choice $\alpha$ output by this procedure, then the inputs $\RV{D}$ must be controlled by this $\alpha$. 
-
-This requirement is not always satisfied for experiments in practice. Furthermore, this describes a situation in which the analyst is both the experiment designer and the consumer of the experiment data (in order to make some optimal decision down the line). If an experiment is conducted and the results are published in a paper for some reader to review, then the reader is in the position of the person who is here called the ``analyst'' -- while they don't get to design the experiment, it is on them to make use of the published experimental data in order to make decisions of their own. Importantly, they \emph{never} control the experimental inputs at all.
-
-Randomisation can play an important role in situations like this where the analyst has little control over experimental inputs, and so under normal circumstances may not accept causal contractibility. An informal argument for this is: suppose I accept causal contractibility for an experiment I control with either deterministic or random inputs. I don't accept it for a similar experiment you control with deterministic inputs, because I think there's some chance you knew something I didn't when you chose the inputs. However, whatever you do or don't know, a random input controlled by you is as good as a random input controlled by me, so if I accept causal contractibility in the latter case then I also accept it in the former.
-
-Dropping the assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ means that, in general, one or both of $\prob{P}_C^{\RV{Y}|\RV{D}}$ or $\prob{P}_C^{\RV{Y}|\RV{ID}}$ may be ill-defined (note that the independence is merely a sufficient condition, not a necessary condition for these uniform conditional probabilities). The condition $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ alone also does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. 
-
-Constructing the following example requires the hypotheses that any given identifier $i\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. Thus the space of hypotheses is a sequence of binary values $H=\{0,1\}^{\mathbb{N}}$. Equipped with the product topology, $H$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(H,\mathcal{B}(H))$ is a standard measurable space and, because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
-
-\begin{example}
-Take $Y=C=D=\{0,1\}$ and take $(H,\sigalg{H})$ to be $\{0,1\}^{\mathbb{N}}$ equipped with the product topology. For any $i\neq 1$, $\RV{Y}_i\RV{I}_i\RV{D}_i\CI^e_{\prob{P}_C} \RV{C}$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$ and $\RV{I}_i\CI^e_{\prob{P}_C} \RV{C}$.
-
-$\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ follows from the fact that $\RV{C}$ can be (almost surely) written as a function of $\RV{D}$.
-
-For all $i,\in \mathbb{N}$, $y,d\in \{0,1\}$, $h\in H$ set
-\begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{I}_i\RV{D}_i}(y|h,j,d) &= \delta_1(p(j,h))\delta_d(y) + \delta_0(p(j,h))\delta_{1-d}(y)
-\end{align}
-where $p(j,h)$ projects the $j$-th component of $h$. That is, if $h$ maps $j$ to 1, $\RV{Y}$ goes with $\RV{D}$ while if $h$ maps $j$ to $0$, $\RV{Y}$ goes opposite $\RV{D}$. Suppose also 
-\begin{align}
-    \RV{Y}_i\CI_{\prob{P}_C}^e (\RV{X}_{<i},\RV{Y}_{<i},\RV{I}_{<i},\RV{C})|(\RV{X}_i,\RV{Y}_i,\RV{H})
-\end{align}
-Then $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is causally contractible. Set $\prob{P}_{C}^{\RV{H}}$ to be the uniform measure on $(H,\sigalg{H})$ and for $i>1$
-\begin{align}
-    \prob{P}_C^{\RV{D}_i|\RV{I}_i\RV{H}}(d|j,h) &= \delta_{p(j,h)}(d)
-\end{align}
-that is, if $h$ maps $j$ to 1, $\RV{D}$ is 1 while if $h$ maps $j$ to $0$, $\RV{D}$ is 0. This also implies
-\begin{align}
-    \prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(p(\cdot,h)^{-1}(d)|d,h) &= 1\label{eq:all_eq_d}
-\end{align}
-
-Then, for $i>1$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i}(y|h,d) &= \sum_{j\in \mathbb{N}} \delta_1(p(j,h))\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h) + \delta_0(p(j,h))\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h)\\
-    &= \sum_{j\in \mathbb{N}} \delta_1(d)\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h) + \delta_0(d)\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h)&\text{by Eq \ref{eq:all_eq_d}}\\
-    &= \delta_1(y)\\
-    \implies \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i}(y|d) &= \delta_1(y)
-\end{align}
-
-For $q\in I$, set
-\begin{align}
-    \prob{P}_C^{\RV{I}|\RV{H}}(q|h)&= \begin{cases}
-        0.5 & q=(1,2,3,4,...) \text{ or } (1,3,2,4,...)\\
-        0&\text{otherwise}
-    \end{cases}
-\end{align}
-and set
-\begin{align}
-    \prob{P}_C^{\RV{H}|\RV{D}}(h) &= \begin{cases}
-        0.5 & h=(0,1,0,1,1,...)\text{ or }h=(0,0,1,1,1,...)\\
-        0 &\text{otherwise}
-    \end{cases}
-\end{align}
-Let $\overline{H}$ be the support of $\prob{P}_C^{\RV{H}|\RV{D}}(h)$.
-
-Then for $i=1$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_1|\RV{D}_1}(y|h,d) &= \sum_{h\in H} \sum_{j\in \mathbb{N}} \prob{P}_\alpha^{\RV{I}_1|\RV{D}_1\RV{H}}(j|d,h)\prob{P}_C^{\RV{H}|\RV{D}_1}(h|d)\left(\delta_1(p(j,h))\delta_d(y) + \delta_0(p(j,h))\delta_{1-d}(y)\right)\\
-    &= \sum_{h\in \overline{H}} 0.5( \delta_1(p(1,h))\delta_d(y) + \delta_0(p(1,h))\delta_{1-d}(y))\\
-    &= \delta_{1-d}(y))\\
-    &\neq  \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i}(y|h,d) & i\neq 1
-\end{align}
-Thus $\prob{P}_C^{\RV{Y}|\RV{D}}$ is not causally contractible by Theorem \ref{th:equal_of_condits}. 
-
-However, given any finite permutation $\rho:\mathbb{N}\to\mathbb{N}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q) &= \sum_{h\in \overline{H}}\sum_{d\in\{0,1\}^{\mathbb{N}}} \prod_{i\in \mathbb{N}} \prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{D}_i\RV{H}}(y_i|q_i,d_i,h) \prob{P}_\alpha^{\RV{D}_i|\RV{I}_i\RV{H}}(d_i|q_i,h)\prob{P}_C^{\RV{H}}(h)\\
-    &= \delta_{1-\alpha}(y_1)\delta_{(1)_{i\in\mathbb{N}}}(y_{>1})\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|\rho^{-1}(q))\\
-    &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q)
-\end{align}
-\end{example}
-
-\subsection{Prior work}
-
-
-
-\subsubsection{Example: body mass index}
-
-Given a sequential just-do model $(\prob{P}_C,(\RV{B},\RV{I}),\RV{Y})$ with $\RV{B}:=(\RV{B}_i)_{i\in M}$ representing body mass index of individual $\RV{I}_i$ and $\RV{Y}:=(\RV{Y}_i)_{i\in M}$ representing health outcomes of interest for the same individual, \citet{hernan_does_2008} noted that there are multiple different choices that can influence an individual's body mass index $\RV{B}_i$ in the same way. Thus $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{B}$ might generally be rejected, and so there may be no uniform conditional $\prob{P}_C^{\RV{Y}|\RV{IB}}$. In this case, $\prob{P}_C^{\RV{Y}|\RV{IB}}$ cannot be causally contractible because it doesn't exist.
-
-Suppose instead a model $(\prob{P}_C,(\RV{D},\RV{I}),(\RV{B},\RV{Y}))$ is given, with $\RV{D}=(\RV{D}_i)_{i\in M}$ representing ``decisions'', appropriately fine-grained to satisfy
-\begin{align}
-    &\RV{YBI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}\\
-    &\RV{YBI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}
-\end{align}
-and $\prob{P}_C^{\RV{YB}|\RV{ID}}$ causally contractible. Then by Theorem \ref{th:cc_ind_treat} $\prob{P}_C^{\RV{Y}|\RV{BD}}$ is also causally contractible. In general, there may be some $U\subset H$ such that for any $h\in U$ 
-\begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{B}_i\RV{D}_i\RV{H}}(y|b,d,h) &= \prob{P}_C^{\RV{Y}_i|\RV{B}_i\RV{H}}(y|b,h)\label{eq:conditional_conditional_independence}
-\end{align}
-then, \emph{conditioning on }$\RV{H}\in U$, the resulting $\prob{P}_{C,\RV{H}\in U}^{\RV{Y}|\RV{B}}$ is causally contractible.
-\todo[inline]{Defining conditioning}
-So it may be possible to derive the fact that there is a independent and identical response conditional $\prob{P}_{C,\RV{H}\in U}^{\RV{Y}_i|\RV{H}\RV{B}_i}$ if $\RV{H}\in U$ is implied by available data, even if it is not assumed outright.
 
 \section{Response conditionals with data-dependent actions}\label{sec:data_dependent}
 
@@ -1251,102 +928,3 @@ There is a relationship between combs and the ``fix'' operation defined in \cite
 That is (at least in this case), the result of ``division by a conditional probability'' used in the fix operation is a comb. We speculate that the output of the fix operation is, in general, an $n$-comb, but we have not proven this.
 
 
-\section{Weaker assumptions than causal contractibility}\label{sec:weaker_assumptions}
-
-The results so far apply to purely observational models or to models where every ``input'' in the sequence is fixed at the point of choosing $\alpha$ (or a fixed random function is chosen at this point). Most of the interest in causal inference is how to use observational data -- which is plentiful -- to deduce consequences of choices. Suppose in the following that superscript ``$o$'' refers to observational variables (obtained by some measurement procedure not responsive to choices) and ``$v$'' refers to interventional variables (obtained by some measurement procedure responsive to choices). That is $\RV{Y}^o:=(\RV{Y}_i^o)_{i\in \mathbb{N}}$ is a sequence of observational variables, $\RV{Y}^v$ a sequence of interventional variables and $\RV{Y}^{o,v}:=(\RV{Y}^o_i,\RV{Y}^v_i)_{i\in\mathbb{N}}$ is a mixed sequence of both observational and interventional variables. $\RV{Y}_i^o$ and $\RV{Y}_i^v$ are assumed to take values in the same set $Y$.
-
-One approach to bridging the gap between observations and interventions is to assume ``causal sufficiency'', which is tantamount (in the data-independent case) to assuming causal contractibility of $\prob{P}_C^{\RV{Y}^{o,v}|\RV{X}^{o,v}\RV{D}^{o,v}}$ with $\RV{D}^v$ responsive to choices and $\RV{X}^v$ unresponsive (see Example \ref{ex:backdoor}). As discussed, this is rarely a reasonable assumption -- it implies interchangeability between observational and interventional samples.
-
-A weaker assumption that is often adopted is to consider models satisfying causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{U}^{o,v}\RV{D}^{o,v}}$, where $\RV{U}^{o,v}$ is unobserved. That is, while $\RV{U}^{o,v}$ appears in the model, it is not associated with any measurement procedure. This model still asserts that $(\RV{U}^o_i,\RV{X}^o_i,\RV{Y}^o_i)$ triples are interchangeable with $(\RV{U}^v_i,\RV{X}^v_i,\RV{Y}^v_i)$ triples, but neither of these are measurement outcomes. On the other hand, $(\RV{D}_i^o,\RV{Y}_i^o)$ pairs are not generally interchangeable with $(\RV{D}_i^v,\RV{Y}_i^v)$.
-
-Consider models that satisfy causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$, where no comment is made about whether $\RV{W}^{o,v}$ is observed, unobserved or some function of observed and unobserved variables. This is a generalisation of the class of models discussed in the previous paragraph.  In isolation, this assumption is not especially interesting -- for example, the support of $\RV{W}^{o}_i$ and $\RV{W}^v_i$ might be disjoint. Suppose also, then, that $W$ is finite and $\RV{W}^o_i$ has full support. This assumption amounts to the assumption that, no matter what choice is made, ``nothing truly new can be done'' (which we call ``Ecclesiastes' assumption''\footnote{Ecclesiastes 1:9 reads ``Everything that happens has happened before; nothing is new, nothing under the sun.''\citep{noauthor_holy_1995}}). More precisely, for any choice $\alpha\in C$ and any consequence $\RV{Y}_i^v$, there is a random subsequence $\RV{Q}$ of indices $(1,2,3,....)$ such that the distribution $\prob{P}_\alpha^{\RV{Y}^{o,v}}$ is unchanged by permutations that only swap elements in the sequence $(RV{Y}^o_\RV{Q},\RV{Y}^v_i)$.
-
-\begin{theorem}\label{th:condit_exchange}
-Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$ causally contractible, $W$ finite and $\prob{P}_C^{\RV{W}^o|\RV{H}}(w|h)>0$ for all $w,h$, define $q:W^{\mathbb{N}}\times W\to (\{*\}\cup \mathscr{P}(\mathbb{N})$ by 
-\begin{align}
-    q:((w^o_j)_{\mathbb{N}},w^v_i)&\mapsto \{j|w^o_j=w^v_i\}
-\end{align}
-and take $\RV{Q}:=q\circ(\RV{W}^o,\RV{W}^v_i)$ for arbitrary $i\in \mathbb{N}$. For an index set $U\in\mathbb{N}$ take $\text{swap}_{\cdot}:Y^{\mathbb{N}}\times Y^{\mathbb{N}}\to Y^{\mathbb{N}}\times Y^{\mathbb{N}}$ to be an arbitrary finite swap that acts as the identity on all indices $(j,x)\not\in \RV{Q}\times \{o\}\cup\{(i,v)\}$. Then $\prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}} = \prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}$.
-\end{theorem}
-
-\begin{proof}
-Note that for $B_j\in \sigalg{W}$, where $\rho_q:\mathbb{N}\times\{i,v\}\to \mathbb{N}\times\{i,v\}$ is the permutation function associated with $\text{swap}_{q}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}} (\bigtimes_{j\in\mathbb{N}} B_j) &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{\rho_q(w_l)} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\\
-    &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_l} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\label{eq:all_the_same}\\
-    &= \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}
-\end{align}
-where Eq. \ref{eq:all_the_same} follows from the fact that for every $k,l\in q\times\{o\}\cup\{(i,v)\}$, $w_k=w_l$.
-
-Thus for $A\in \sigalg{Y}^{\mathbb{N}}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}}(A) &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{Q}\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}}](A)\\
-    &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \text{swap}_{\RV{Q}^{-1}} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}}](A)\\
-    &= \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\label{eq:by_cc1}
-\end{align}
-Where Eq. \ref{eq:by_cc1} follows from causal contractibility of $\prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}$.
-\end{proof}
-
-It also follows from Ecclesiastes' assumption and finite $W$ that if some $\RV{X}_i^o$, $\RV{Z}_i^o$ are \emph{deterministically} related given $\RV{W}$, then $\prob{P}_C^{\RV{Z}|\RV{X}}$ is causally contractible.
-
-\begin{theorem}\label{th:det_obs_to_cons}
-Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{X}^{o,v}\RV{Z}^{o,v}|\RV{W}^{o,v}}$ causally contractible, $W$ finite and $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)>0$ for all $w,h$, if $\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{H}}$ is deterministic then $\prob{P}_C^{\RV{Z}^{o,v}|\RV{X}^{o,v}}$ is causally contractible.
-\end{theorem}
-
-\begin{proof}
-Because $\prob{P}_\alpha^{\RV{W}_0^o}\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{W}^o_0\RV{H}}$ is deterministic, so is $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}$.
-
-Fix $h\in H$.  Suppose there is some $w,w'\in W$ such that
-\begin{align}
-    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) &\neq \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h)
-\end{align}
-then, by determinism, we can assume without loss of generality
-\begin{align}
-    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) = 1\\
-    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h) = 0
-\end{align}
-but $W$ is finite and $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)>0$ for all $w$, so there is some $a>0$ such that $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)\geq a$ for all $w$, and so
-\begin{align}
-    a \leq \sum_{w\in W} \prob{P}_C^{\RV{W}^o_0|\RV{X}^o_0,\RV{H}}(w|x,h)\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h)\leq 1-a
-\end{align}
-contradicting determinism of $\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{H}}$.
-
-Thus for all $w,w'$
-\begin{align}
-    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h)
-\end{align}
-i.e. $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{W}_0,\RV{C})|(\RV{X}_0,\RV{H})$. But then there is some $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}$ such that
-\begin{align}
-    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}\otimes \text{erase}_W\\
-    \implies \prob{P}_\alpha^{\RV{Z}^v_i|\RV{X}^v_i\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}
-\end{align}
-\end{proof}
-
-Theorem \ref{th:det_obs_to_cons} doesn't hold in the case of approximate determinism, however. Intuitively, approximate determinism can hold if there is some value of $\RV{W}$ for which $\RV{Z}$ is not conditionally independent given $\RV{H}$ and $\RV{X}$, but it only ocurrs very rarely in observations. On the other hand, values of $\RV{W}$ rare in observations might, under some choices, become common. 
-
-\begin{example}
-Say $\prob{P}_C^{\RV{Z}^o_i|\RV{X}^o_i\RV{H}}$ is \emph{approximately deterministic} if $\prob{P}_C^{\RV{Z}^o_i|\RV{X}^o_i\RV{H}}(A|x,h)\in [0,\epsilon]\cup[1-\epsilon,1]$ for all $A\in\sigalg{Z}$, $x,h\in X\times H$.
-
-Take $Z=X=W=H=\{0,1\}$. Set
-\begin{align}
-    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(1|1,1,1) = 1\\
-    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(1|1,0,1) = 0
-\end{align}
-and
-\begin{align}
-    \prob{P}_C^{\RV{W}^o_0|\RV{H}}(1|1)=1-\epsilon
-\end{align}
-then
-\begin{align}
-    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1) = 1-\epsilon
-\end{align}
-however, suppose there is some $\alpha$ such that
-\begin{align}
-    \prob{P}_\alpha^{\RV{W}^v_i|\RV{H}}(1|1)=0
-\end{align}
-then
-\begin{align}
-    \prob{P}_\alpha^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1) = 0\\
-    &\neq \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1)
-\end{align}
-\end{example}

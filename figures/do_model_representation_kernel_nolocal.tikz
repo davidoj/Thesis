@@ -1,6 +1,6 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (3, 0.5) {$\kernel{L}$};
+		\node [style=small kernel tikzit] (0) at (3, 0.5) {$\kernel{M}$};
 		\node [style=RLabel tikzit] (1) at (4.75, 0.5) {$Y$};
 		\node [style=none] (2) at (-0.75, 1.75) {};
 		\node [style=none] (3) at (-0.75, -1.5) {};
@@ -10,7 +10,7 @@
 		\node [style=none] (7) at (4.5, -1) {$i\in\mathbb{N}$};
 		\node [style=none] (8) at (2.5, 0.75) {};
 		\node [style=none] (9) at (2.5, 0.25) {};
-		\node [style=small kernel tikzit] (10) at (-2.5, 0.75) {$\kernel{M}$};
+		\node [style=small kernel tikzit] (10) at (-2.5, 0.75) {$\kernel{L}$};
 		\node [style=copymap tikzit] (11) at (-4.25, 0.75) {};
 		\node [style=copymap tikzit] (12) at (-0.75, -0.5) {};
 		\node [style=small kernel tikzit] (13) at (0.5, -0.5) {$\Pi_i$};

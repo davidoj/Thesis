@@ -1,0 +1,415 @@
+%!TEX root = main.tex
+
+\chapter{Other causal modelling frameworks}\label{ch:other_causal_frameworks}
+
+
+\section{Weaker assumptions than causal contractibility}\label{sec:weaker_assumptions}
+
+The results so far apply to purely observational models or to models where every ``input'' in the sequence is fixed at the point of choosing $\alpha$ (or a fixed random function is chosen at this point). Most of the interest in causal inference is how to use observational data -- which is plentiful -- to deduce consequences of choices. Suppose in the following that superscript ``$o$'' refers to observational variables (obtained by some measurement procedure not responsive to choices) and ``$v$'' refers to interventional variables (obtained by some measurement procedure responsive to choices). That is $\RV{Y}^o:=(\RV{Y}_i^o)_{i\in \mathbb{N}}$ is a sequence of observational variables, $\RV{Y}^v$ a sequence of interventional variables and $\RV{Y}^{o,v}:=(\RV{Y}^o_i,\RV{Y}^v_i)_{i\in\mathbb{N}}$ is a mixed sequence of both observational and interventional variables. $\RV{Y}_i^o$ and $\RV{Y}_i^v$ are assumed to take values in the same set $Y$.
+
+One approach to bridging the gap between observations and interventions is to assume ``causal sufficiency'', which is tantamount (in the data-independent case) to assuming causal contractibility of $\prob{P}_C^{\RV{Y}^{o,v}|\RV{X}^{o,v}\RV{D}^{o,v}}$ with $\RV{D}^v$ responsive to choices and $\RV{X}^v$ unresponsive (see Example \ref{ex:backdoor}). As discussed, this is rarely a reasonable assumption -- it implies interchangeability between observational and interventional samples.
+
+A weaker assumption that is often adopted is to consider models satisfying causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{U}^{o,v}\RV{D}^{o,v}}$, where $\RV{U}^{o,v}$ is unobserved. That is, while $\RV{U}^{o,v}$ appears in the model, it is not associated with any measurement procedure. This model still asserts that $(\RV{U}^o_i,\RV{X}^o_i,\RV{Y}^o_i)$ triples are interchangeable with $(\RV{U}^v_i,\RV{X}^v_i,\RV{Y}^v_i)$ triples, but neither of these are measurement outcomes. On the other hand, $(\RV{D}_i^o,\RV{Y}_i^o)$ pairs are not generally interchangeable with $(\RV{D}_i^v,\RV{Y}_i^v)$.
+
+Consider models that satisfy causal contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$, where no comment is made about whether $\RV{W}^{o,v}$ is observed, unobserved or some function of observed and unobserved variables. This is a generalisation of the class of models discussed in the previous paragraph.  In isolation, this assumption is not especially interesting -- for example, the support of $\RV{W}^{o}_i$ and $\RV{W}^v_i$ might be disjoint. Suppose also, then, that $W$ is finite and $\RV{W}^o_i$ has full support. This assumption amounts to the assumption that, no matter what choice is made, ``nothing truly new can be done'' (which we call ``Ecclesiastes' assumption''\footnote{Ecclesiastes 1:9 reads ``Everything that happens has happened before; nothing is new, nothing under the sun.''\citep{noauthor_holy_1995}}). More precisely, for any choice $\alpha\in C$ and any consequence $\RV{Y}_i^v$, there is a random subsequence $\RV{Q}$ of indices $(1,2,3,....)$ such that the distribution $\prob{P}_\alpha^{\RV{Y}^{o,v}}$ is unchanged by permutations that only swap elements in the sequence $(RV{Y}^o_\RV{Q},\RV{Y}^v_i)$.
+
+\begin{theorem}\label{th:condit_exchange}
+Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$ causally contractible, $W$ finite and $\prob{P}_C^{\RV{W}^o|\RV{H}}(w|h)>0$ for all $w,h$, define $q:W^{\mathbb{N}}\times W\to (\{*\}\cup \mathscr{P}(\mathbb{N})$ by 
+\begin{align}
+    q:((w^o_j)_{\mathbb{N}},w^v_i)&\mapsto \{j|w^o_j=w^v_i\}
+\end{align}
+and take $\RV{Q}:=q\circ(\RV{W}^o,\RV{W}^v_i)$ for arbitrary $i\in \mathbb{N}$. For an index set $U\in\mathbb{N}$ take $\text{swap}_{\cdot}:Y^{\mathbb{N}}\times Y^{\mathbb{N}}\to Y^{\mathbb{N}}\times Y^{\mathbb{N}}$ to be an arbitrary finite swap that acts as the identity on all indices $(j,x)\not\in \RV{Q}\times \{o\}\cup\{(i,v)\}$. Then $\prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}} = \prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}$.
+\end{theorem}
+
+\begin{proof}
+Note that for $B_j\in \sigalg{W}$, where $\rho_q:\mathbb{N}\times\{i,v\}\to \mathbb{N}\times\{i,v\}$ is the permutation function associated with $\text{swap}_{q}$
+\begin{align}
+    \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}} (\bigtimes_{j\in\mathbb{N}} B_j) &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{\rho_q(w_l)} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\\
+    &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_l} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\label{eq:all_the_same}\\
+    &= \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}
+\end{align}
+where Eq. \ref{eq:all_the_same} follows from the fact that for every $k,l\in q\times\{o\}\cup\{(i,v)\}$, $w_k=w_l$.
+
+Thus for $A\in \sigalg{Y}^{\mathbb{N}}$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}}(A) &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{Q}\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}}](A)\\
+    &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \text{swap}_{\RV{Q}^{-1}} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}}](A)\\
+    &= \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\label{eq:by_cc1}
+\end{align}
+Where Eq. \ref{eq:by_cc1} follows from causal contractibility of $\prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}$.
+\end{proof}
+
+It also follows from Ecclesiastes' assumption and finite $W$ that if some $\RV{X}_i^o$, $\RV{Z}_i^o$ are \emph{deterministically} related given $\RV{W}$, then $\prob{P}_C^{\RV{Z}|\RV{X}}$ is causally contractible.
+
+\begin{theorem}\label{th:det_obs_to_cons}
+Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{X}^{o,v}\RV{Z}^{o,v}|\RV{W}^{o,v}}$ causally contractible, $W$ finite and $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)>0$ for all $w,h$, if $\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{H}}$ is deterministic then $\prob{P}_C^{\RV{Z}^{o,v}|\RV{X}^{o,v}}$ is causally contractible.
+\end{theorem}
+
+\begin{proof}
+Because $\prob{P}_\alpha^{\RV{W}_0^o}\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{W}^o_0\RV{H}}$ is deterministic, so is $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}$.
+
+Fix $h\in H$.  Suppose there is some $w,w'\in W$ such that
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) &\neq \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h)
+\end{align}
+then, by determinism, we can assume without loss of generality
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) = 1\\
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h) = 0
+\end{align}
+but $W$ is finite and $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)>0$ for all $w$, so there is some $a>0$ such that $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)\geq a$ for all $w$, and so
+\begin{align}
+    a \leq \sum_{w\in W} \prob{P}_C^{\RV{W}^o_0|\RV{X}^o_0,\RV{H}}(w|x,h)\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h)\leq 1-a
+\end{align}
+contradicting determinism of $\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{H}}$.
+
+Thus for all $w,w'$
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h)
+\end{align}
+i.e. $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{W}_0,\RV{C})|(\RV{X}_0,\RV{H})$. But then there is some $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}$ such that
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}\otimes \text{erase}_W\\
+    \implies \prob{P}_\alpha^{\RV{Z}^v_i|\RV{X}^v_i\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}
+\end{align}
+\end{proof}
+
+Theorem \ref{th:det_obs_to_cons} doesn't hold in the case of approximate determinism, however. Intuitively, approximate determinism can hold if there is some value of $\RV{W}$ for which $\RV{Z}$ is not conditionally independent given $\RV{H}$ and $\RV{X}$, but it only ocurrs very rarely in observations. On the other hand, values of $\RV{W}$ rare in observations might, under some choices, become common. 
+
+\begin{example}
+Say $\prob{P}_C^{\RV{Z}^o_i|\RV{X}^o_i\RV{H}}$ is \emph{approximately deterministic} if $\prob{P}_C^{\RV{Z}^o_i|\RV{X}^o_i\RV{H}}(A|x,h)\in [0,\epsilon]\cup[1-\epsilon,1]$ for all $A\in\sigalg{Z}$, $x,h\in X\times H$.
+
+Take $Z=X=W=H=\{0,1\}$. Set
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(1|1,1,1) = 1\\
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(1|1,0,1) = 0
+\end{align}
+and
+\begin{align}
+    \prob{P}_C^{\RV{W}^o_0|\RV{H}}(1|1)=1-\epsilon
+\end{align}
+then
+\begin{align}
+    \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1) = 1-\epsilon
+\end{align}
+however, suppose there is some $\alpha$ such that
+\begin{align}
+    \prob{P}_\alpha^{\RV{W}^v_i|\RV{H}}(1|1)=0
+\end{align}
+then
+\begin{align}
+    \prob{P}_\alpha^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1) = 0\\
+    &\neq \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1)
+\end{align}
+\end{example}
+
+
+\subsection{Individual-level causal contractibility}\label{sec:ilevel_ccontract}
+
+Individual-level causal contractibility is our attempt to formulate a set of conditions sufficient for causal contractibility that may be easier to think about than the bare assumption. It is inspired by the fact that many treatments of causal identifiability refer to sequences of ``individuals'', ``patients'', ``units'' or the like, all of which are considered to be ``essentially identical'' from the point of view of the decision maker. However, these individuals are not directly referenced by the models under consideration. What we do here is consider models that \emph{do} reference individuals -- in particular, we suppose that each sub-procedure produces an input variable, an output variable and a \emph{unique identifier} (which can be thought of as something like someone's license number and state of issue). Under some conditions, assuming causal contractibility with respect to inputs, identifiers and outputs can imply causal contractibility with respect to inputs and outputs only. This clearly hasn't solved the entire problem of assessing a problem for causal contractibility, as a causal contractibility assumption is required to get off the ground.\todo{it might still be helpful, though? I don't really know what to say}
+
+\subsubsection{References to individual-level causal contractibility}
+
+The role of individuals has often been mentioned in literature on causal inference. For example, \citet{greenland_identifiability_1986} explain
+\begin{quote}
+    Equivalence of response type may be thought of in terms of exchangeability of individuals: if the exposure states of the two individuals had been exchanged, the same data distribution would have resulted.
+\end{quote}
+Here, the idea of ``exchangeable individuals'' plays a role in the author's reasoning about model construction, but ``individuals'' are not actually referenced by the resulting model, and ``exchanging individuals'' does not correspond to a model transformation.
+
+\citet{dawid_decision-theoretic_2020} suggests (with some qualifications) that ``post-treatment exchangeability'' for a decision problem regarding taking aspirin to treat a headache may be acceptable if the data are from
+\begin{quote}
+    A group of individuals whom I can regard, in an intuitive sense, as similar to myself, with headaches similar to my own.
+\end{quote}
+As in the previous work, the similarity of individuals involved in an experiment is raised when justifying particular model constructions, but the individuals are not referenced by the model.
+
+\citet[pg. 98]{pearl_causality:_2009} writes
+\begin{quote}
+    Although the term unit in the potential-outcome literature normally stands for the identity of a specific individual in a population, a unit may also be thought of as the set of attributes that characterize that individual, the experimental conditions under study, the time of day, and so on – all of which are represented as components of the vector $u$ in structural modeling.
+\end{quote}
+Once again, the idea of an individual (or a particular set of conditions) is raised in the context of explaining modelling choices. Unlike the previous authors, Pearl introduces a vector $u$ to stand for the ``unit''. However, he subsequently assumes that $u$ is a sequence of \emph{independent samples} from some distribution. This seems to contradict an important feature of ``individuals'' or ``units'': individuals are typically supposed to be unique, a property that will usually not be satisfied by independently sampling from some distribution (at least, as long as the distribution is discrete).
+
+Finally, \citet{rubin_causal_2005} writes:
+\begin{quote}
+    Here there are $N$ units, which are physical objects at particular points in time (e.g., plots of land, individual people, one person at repeated points in time).
+\end{quote}
+Note that Rubin's explanation of \emph{units} guarantees that they are unique: they are particular things at particular times. These units are associated with input-output functions (the \emph{potential outcomes}), which are later assumed to be exchangeable:
+\begin{quote}
+    the indexing of the units is, by definition, a random permutation of $1,..., N$, and thus any distribution on the science must be row-exchangeable
+\end{quote}
+
+Our proposition is: can the intuition that unique individuals are an important for the motivation for causal models, be captured by considering models that feature ``unique identifier'' variables referencing these unique individuals?
+
+\subsubsection{Unique identifiers}
+
+A sequence of \emph{unique identifiers} is a vector of finite or infinite length such that no two coordinates are equal. We are interested in models that assign positive probability to any particular coordinate having any particular value. This is straightforward in the finite case. In the infinite case, note that a vector of $|\mathbb{N}|$ unique values with an arbitrary entry $k$ in the $j$th coordinate can be obtained by starting with $(i)_{i\in \mathbb{N}}$ and then transposing $j$ with $k$. More generally, we consider infinite length sequences of unique identifiers to be elements of the set of finite permutations $\mathbb{N}\to\mathbb{N}$.
+
+\begin{definition}[Measurable space of unique identifiers]
+The measurable space of unique identifiers $(I,\sigalg{I})$ is the set $I$ of finite permutations $\mathbb{N}\to \mathbb{N}$ with the discrete $\sigma$-algebra $\sigalg{I}$.
+\end{definition}
+
+The set $I$ is countable, as it is the countable union of finite subsets (i.e. the permutations that leave all but the first $n$ numbers unchanged for all $n$).
+
+\begin{definition}[Unique identifier]
+Given a sample space $(\Omega,\sigalg{F})$, a \emph{sequence of unique identifiers} $\sigalg{I}:\Omega\to I$ is a variable taking values in $I$.
+\end{definition}
+
+The values of each coordinate of sequence of unique identifiers is just called an identifier (for obvious reasons, we don't call it an identity).
+
+\begin{definition}[Identification]
+Given $\RV{I}$, define the $i$-th \emph{identifier} $\RV{I}_i=\mathrm{ev}(i,\RV{I})$, where $\mathrm{ev}:\mathbb{N}\times I\to \mathbb{N}$ is the evaluation map $(i,f)\mapsto f(i)$.
+\end{definition}
+
+For \emph{any} sample space $(\Omega,\sigalg{F})$ we can define a trivial $\sigalg{I}$ that maps every $\omega\in\Omega$ to $(1,2,3,....)=:(\mathbb{N})$. In this case, the identifiers are all known by the modeller at the outset. Using this sequence of identifiers renders exchange commutativity trivial, and isn't of much interest to us.
+
+\begin{example}
+Given a sequential just-do model $(\prob{P}_C, (\RV{D},\RV{I}),\RV{Y})$ where $\RV{I}$ is the identifier variable $\omega\mapsto (\mathbb{N})$, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ commutes with exchange.
+
+This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the identity, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ and $\text{swap}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ will have no common support; the first will be supported on $\RV{I}\yields (\mathbb{N})$ only, and the second only on $\RV{I}\yields \rho(\mathbb{N})$.
+\end{example}
+
+
+
+
+\subsubsection{Individual-level causal contractibility and unobserved confounding}
+
+Our first result is that some models with individual-level causal contractibility can be seen as models with unobserved confounding. A model $\prob{P}_C$ with individual-level causal contractibility features a causally contractible $\prob{P}_C^{\RV{Y}|\RV{ID}}$ for a sequence of outputs $\RV{Y}$, inputs $\RV{D}$ and individual identifiers $\RV{I}$. A model with unobserved confounding features causally contractible $\prob{P}_C^{\RV{Y}|\RV{UD}}$ where $\RV{Y}$ and $\RV{D}$ are as before and $\RV{U}$ is an ``unobserved confounder''. They key difference between $\RV{I}$ and $\RV{U}$ is that the individual identifier for each observation is unique, while unobserved variables (typically) have $|U|<N$ where $N$ is the number of observations.
+
+
+
+\subsubsection{Individual-level causal contractibility and ordinary causal contractibility}
+
+Our second key result is that individual-level causal contractibility along with the assumptions of exchangeability of individuals and sufficient control of inputs implies causal contractibility with respect to inputs and outputs.
+
+So, a judgement of symmetry among sub-experiments is not enough for causal contractibility. What is enough?
+
+In the following, it is helpful to assume that each sub-experiment has a ``unique identifier'' $\RV{I}_i$, with the sequence of all sub-experiment labels given by $\RV{I}$. With this, if $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is assumed causally contractible, then it's possible to talk about the individual response functions $\prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{H}\RV{D}_i}$. These plays a role very similar to the $i$th vector of potential outcomes $\RV{Y}^D_i$. Because $\RV{I}_i$ is unique (i.e. never equal to $\RV{I}_j$ for $j\neq i$), only one observation of any individual is ever given, just like only one potential outcome is ever observed.
+
+Theorem \ref{th:cc_ind_treat} presents a set of sufficient conditions for causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{D}}$:
+\begin{enumerate}
+    \item There exist variables $\RV{I}$ representing ``unique experiment identifiers'' which satisfy the assumption that $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is causally contractible (informally: it doesn't matter which order the experiments are conducted in, and treatments in each experiment do not affect any other experiments)
+    \item The identifiers themselves are not informative regarding outcomes: $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\RV{C})$
+    \item The inputs $\RV{D}$ are substitutable for the choice $\RV{C}$ with respect to $\RV{Y}$ and $\RV{I}$: $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ and $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$
+\end{enumerate}
+However, as we will show, even these conditions can be subtle to assess.
+
+As an example of the application of Theorem \ref{th:cc_ind_treat}, consider an experiment where $n$ patients, each with an individual identifier $\RV{I}_i$, receive treatment $\RV{D}_i$ and experience outcome $\RV{Y}_i$. $\prob{P}_C^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{I}_{[n]}}$ can be extended to an infinite sequence $\prob{P}_C^{\RV{Y}|\RV{DI}}$ that is causally contractible (see Assumption 1), and no matter which choice $\alpha\in C$ is given, all identifiers can be swapped without altering the distribution over consequences (see Assumption 2), and finally that the treatment vector $\RV{D}$ is a deterministic and invertible function of the choice $\alpha\in C$ then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible, and hence there are response functions $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{H}}$.
+
+Theorem \ref{th:cc_ind_treat} can also be extended to the case where $\RV{D}$ is a function of the choice $\alpha$ and a ``random signal'' $\RV{R}$.
+
+\begin{lemma}\label{lem:ind_to_cc}
+Given sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob{P}_C^{\RV{Y}|\RV{DI}}$ causally contractible, if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\RV{C})|\RV{D}$ and for any $j\in I$, $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0$, then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also causally contractible.
+\end{lemma}
+
+\begin{proof}
+For arbitrary $\nu\in \Delta(I^{\mathbb{N}})$ such that $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i} \gg \nu$, by assumption of causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{DI}}$ and Theorem \ref{th:ciid_rep_kernel}
+\begin{align}
+    \prob{P}_C^{\RV{Y}|\RV{DI}} &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_1}\\
+    &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_2}
+\end{align}
+Where $\Pi_{D,i}:D^{\mathbb{N}}\kto D$ projects the $i$th coordinate, and similarly for $\Pi_{Y,i}$.
+
+In particular, for any $i\in \mathbb{N}$, $j\in I$, this holds for some $\nu$ such that $\nu(\Pi_{Y,i}^{-1} (j)=1$ and by extension for any finite $A\subset \mathbb{N}$ we can find $\nu$ such that $\nu(\Pi_{Y,i}^{-1} (j)=1$ for all $i\in A$, $j\in I$. Thus for any $n\in \mathbb{N}$
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{I}_{[n]}} &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_3}\label{eq:follows_from_determinism}\\
+    &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_4}\label{eq:follows_from_equality}
+\end{align}
+
+where Equation \ref{eq:follows_from_determinism} follows from Theorem \ref{th:fong_det_kerns} and Equation \ref{eq:follows_from_equality} follows from the fact that Equation \ref{eq:follows_from_determinism} holds for arbitrary $j\in I$.
+
+Thus by Lemma \ref{lem:infinitely_extended_kernels}
+\begin{align}
+    \prob{P}_C^{\RV{Y}|\RV{D}} &= \tikzfig{index_independence_5}
+\end{align}
+Applying Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
+\end{proof}
+
+\begin{theorem}\label{th:cc_ind_treat}
+Given a sequential just-do model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ countable, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ causally contractible for each $\alpha$, if
+\begin{align}
+    &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}\\
+    &\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}\\
+    &\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}\\
+    &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
+\end{align}
+then $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
+\end{theorem}
+
+\begin{proof}
+For any $\alpha\in C$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= \tikzfig{kernel_fac_with_idents}\\
+    &= \tikzfig{kernel_fac_with_idents_indepped}
+\end{align}
+
+Define $\kernel{Q}$ by $\alpha\mapsto \prob{P}_\alpha$ and $\kernel{Q}^{\cdot|\cdot\RV{C}}$ by $\alpha\mapsto \prob{P}_\alpha^{*}$ and $\kernel{Q}^{\RV{C}}$ is an arbitrary distribution in $\Delta(C)$ with full support. Note that the support of $\kernel{Q}^{\RV{IDY}}$ is the union of the support of $\prob{P}^{\RV{IDY}}_\alpha$ for all $\alpha$. Then
+\begin{align}
+    \kernel{Q}^{\RV{Y}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_fac_with_idents_kernelised}
+\end{align}
+
+By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$, it is also the case that
+\begin{align}
+    \kernel{Q}^{\RV{Y}|\RV{ID}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents}\\
+    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_indepped}\\
+    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_subbed}
+\end{align}
+But
+\begin{align}
+    \kernel{Q}^{\RV{Y}|\RV{ID}}=\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{Y}|\RV{ID}}\kernel{Q}^{\RV{C}}(\alpha)\\
+    &= \prob{P}_C^{\RV{Y}|\RV{ID}}\\
+    \implies \tikzfig{kernel_Q_fac_with_idents_subbed} &= \prob{P}_C^{\RV{Y}|\RV{ID}}
+\end{align}
+
+Furthermore, by assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}$, so there is some $\kernel{K}:C\kto Y$ such that
+\begin{align}
+    \kernel{Q}^{\RV{Y}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_indepped}\\
+    \implies \prob{P}_C^{\RV{Y}|\RV{ID}} &= \tikzfig{kernel_Q_fac_with_idents_swapped}\\
+    &= \tikzfig{kernel_P_indep}
+\end{align}
+Then by Lemma \ref{lem:ind_to_cc}, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
+\end{proof}
+
+Theorem \ref{th:cc_ind_treat} can be extended to the case where decisions $\RV{D}$ are a one-to-one deterministic function of the choice, or a random mixtures of one-to-one deterministic functions of the choice.
+
+\begin{theorem}\label{cor:extend_to_randomised}
+Consider a sequential just-do model $(\prob{P}_{C'},\RV{D},\RV{Y})$ where $\prob{P}_{C'}^{\RV{Y}|\RV{D}}$ is causally contractible, and construct a second model $(\prob{P}_{C},\RV{D},\RV{Y})$ where $\prob{P}_C$ is the union of $\prob{P}_{C'}$ and its convex hull. Then $\prob{P}_{C}^{\RV{Y}|\RV{D}}$ is also causally contractible.
+\end{theorem}
+
+\begin{proof}
+For all $\alpha\in C$, there is some probability measure $\mu:C'\to [0,1]$ such that
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{D}} &= \sum_{\beta\in C'} \mu(\beta) \prob{P}_\beta^{\RV{Y}|\RV{D}}\\
+    &= \prob{P}_{C'}^{\RV{Y}|\RV{D}}
+\end{align}
+thus
+\begin{align}
+    \prob{P}_C^{\RV{Y}|\RV{D}} = \prob{P}_{C'}^{\RV{Y}|\RV{D}}
+\end{align}
+and in particular, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible.
+\end{proof}
+
+The assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}$ can be understood in terms of \emph{permutability of identifiers}. An \emph{identifier variable} is a variable $\RV{I}$ that takes values in the set of finite permutations of $\mathbb{N}$. It is associated with a sequence $(\RV{I}_i)_{i\in \mathbb{N}}$ where $\RV{I}_i=\RV{I}(i)$. Each $\RV{I}_i$ takes values in $\mathbb{N}$ and $\RV{I}_i\neq \RV{I}_j$ for all $j\neq i$.
+
+\begin{definition}[Identifier variable]
+Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$, let $I$ be the set of finite permutations $\mathbb{N}\to \mathbb{N}$. A variable $\RV{I}:\Omega\to I$ be a variable taking values in $I$ is an \emph{identifier variable}.
+\end{definition}
+
+If a uniform conditional probability is invariant to permutations of an index variable, then it is independent of that index variable.
+
+\begin{lemma}\label{lem:ind}
+Given a probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \RV{C}|(\RV{D},\RV{I})$ and $\RV{I}:\Omega\to I$ is an identifier variable, if for each finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{swap}_{\rho(I)}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}
+\end{align}
+then $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\RV{C}$.
+\end{lemma}
+
+\begin{proof}
+By definition of the set $I$ of finite permutations, for every $\rho\in I$, $B\in\sigalg{Y}^{\mathbb{N}}$, $d\in D^{\mathbb{N}}$ there is a finite permutation $\rho^{-1}\in I$ such that $\rho\circ\rho^{-1}=\text{id}_{\mathbb{N}}$. Then
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho) &= (\kernel{F}_{\rho^{-1}}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho)\\
+    &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\text{id}_{\mathbb{N}})
+\end{align}
+Therefore
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &\overset{\prob{P}_C}{\cong} \text{erase}_{I}\otimes \prob{P}_\alpha^{\RV{Y}}
+\end{align}
+\end{proof}
+
+Theorem \ref{cor:extend_to_randomised} can be used to argue that, given a sequence of experiments causally contractible under deterministic choices, adding random mixtures of these choices also yields a causally contractible sequence. \citet{kasy_why_2016} argues that as long as the experimenter controls the treatment assignment, causal effects are identified (i.e. the randomisation step is not strictly necessary). Example \ref{ex:randomised_experiment} shows that this argument might be supported, but Example \ref{ex:bad_randomised_experiment} shows that there are subtle ways that might lead to this argument failing. We consider a simpler case than \citet{kasy_why_2016}, where there are no covariates to worry about.
+
+We assume an infinite sequence, which is clearly unreasonable. Extending the representation theorems to the case of finite sequences, using for example the result of \citet{diaconis_finite_1980} with establishes that finite exchangeable distributions are approximately mixtures of independent and identically distributed sequences, would allow some implausible assumptions in the following example to be removed.
+
+\begin{example}\label{ex:randomised_experiment}
+A sequential experiment is modeled by a probability set $\prob{P}_C$ with binary treatments $\RV{D}:=(\RV{D}_i)_{i\in \mathbb{N}}$ and binary outcomes $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$. The set of choices $C$ is the set of all probability distributions$\Delta(D^N)$ for some $N\subset\mathbb{N}$ (this is to ensure $C$ is countable).
+
+Each treatment $\RV{D}_i$ is given to a patient, and each patient provides a unique identifier $\RV{I}_i$ which for simplicity we assume is a number in $\mathbb{N}$ (instead of, say, a driver's license number and state of issue), and that (implausibly) there is a positive probability for $\RV{I}_i$ to take any value in $\mathbb{N}$ for any choice $\alpha$.
+
+The treatments are decided as follows: the analyst consults the model $\prob{P}_C$, and, according to $\prob{P}_C$ and some previously agreed upon decision rule, comes up with a possibly stochastic sequence  of treatment distributions $\alpha:=(\mu_i)_{i\in N}$ with each $\mu_i$ in $\Delta(\{0,1\})$. If $\mu_i$ is deterministic -- that is, it puts probability 1 on some treatment $d_i$, the experiment administrator will assign patient $i$ the treatment $d_i$. Otherwise, if $\mu_i$ is nondeterministic, the administrator will consult some agreed-upon random number generator that yields treatment assignments according to $\mu_i$.
+
+Let $C'\subset C$ be the deterministic elements of $C$, and assume that all elements of $C$ are a convex combination of elements of $C'$. The randomisation procedure is deemed sufficient to ensure that for any mixed $\alpha\in C$ where $\alpha = \sum_{\beta\in C'} \mu(\beta) \beta$, $\prob{P}_\alpha = \sum_{\beta\in C'} \prob{P}_\beta$.
+
+Furthermore, assume $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ is causally contractible for each $\alpha$. As discussed in Theorem \ref{th:equal_of_condits}, this means that for any $A,B\subset\mathbb{N}$, $|A|=|B|$, $\prob{P}_\alpha^{\RV{Y}_A|\RV{D}_A\RV{I}_A}=\prob{P}_C^{\RV{Y}_B|\RV{D}_B\RV{I}_B}$ and $\RV{Y}_A\CI^e_{\prob{P}_C} (\RV{D}_{A^C},\RV{I}_{A^C})|(\RV{D}_A,\RV{I}_A,\RV{C})$. Roughly: holding any subsequence of treatments and individuals fixed, the joint distribution of consequences is the same no matter where they appear in the sequence of experiments and no matter what treatments or individuals appear elsewhere.
+
+The analyst constructing the model has no particular knowledge about any identifier, and so \emph{for any choice} reasons the associated model should be invariant to permutations of identifiers. This implies $\RV{Y}\CI^e_{\prob{P}_C} \RV{I}|\RV{C}$ (see Lemma \ref{lem:ind}). The assumption that this holds given any choice can be tricky -- not only must the identifiers appear symmetric to the analyst constructing the model, but nothing breaking this symmetry may be learned from the choice $\alpha$, see the Example \ref{ex:bad_randomised_experiment} next and the discussion afterwards. In this case, the reasoning is supported by the fact that the rule for selecting $\alpha$ is known in advance.
+
+For the deterministic subset $C'\subset C$, $\RV{YI}\CI^e_{\prob{P}_{C'}} \RV{D}|\RV{C}$ as $\RV{D}$ is deterministic for all elements of $C'$, and $\RV{YI}\CI^e_{\prob{P}_{C'}} \RV{C}|\RV{D}$ is also because restricted to this subset, $\RV{D}$ is a one-to-one function of $\RV{C}$. By application of Theorem \ref{th:cc_ind_treat}, $\prob{P}_{C'}^{\RV{Y}|\RV{D}}$ is causally contractible, and by application of Corollary \ref{cor:extend_to_randomised}, so is $\prob{P}_{C}^{\RV{Y}|\RV{D}}$
+\end{example}
+
+Permutability of identifiers can fail when the rule for selecting $\alpha$ is not known in advance. The following example is extreme in order to illustrate the issue clearly. The distinction between the analyst and the administrator is also intended to make the example easier to parse. The key point is that, when the rule for selecting $\alpha$ is not known in advance, symmetries that are apparent at the time of model construction do not necessarily hold for every choice $\alpha$, and this remains true if e.g. the selection of choices leads to less extreme confounding or the analyst and the administrator are actually the same person.
+
+The following example involves the choice $\alpha$ depending on some covariate $\RV{U}$. It is not straightforward to express the idea that ``$\alpha$ depends on $\RV{U}$'' in a probability set model $\prob{P}_C$, and they are intended to apply to situations where the choice doesn't depend on anything not already expressed in the model (as in Example \ref{ex:randomised_experiment}). However, the fact that probability sets don't work well in situations where the choice depends on something not expressed in the model doesn't mean that you can't use a probability set to model such a situation, it just means that you shouldn't do it. This is what the following example shows.
+
+\begin{example}\label{ex:bad_randomised_experiment}
+
+\end{example}
+
+
+
+
+Dropping the assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ means that, in general, one or both of $\prob{P}_C^{\RV{Y}|\RV{D}}$ or $\prob{P}_C^{\RV{Y}|\RV{ID}}$ may be ill-defined (note that the independence is merely a sufficient condition, not a necessary condition for these uniform conditional probabilities). The condition $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ alone also does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. 
+
+Constructing the following example requires the hypotheses that any given identifier $i\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. Thus the space of hypotheses is a sequence of binary values $H=\{0,1\}^{\mathbb{N}}$. Equipped with the product topology, $H$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(H,\mathcal{B}(H))$ is a standard measurable space and, because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
+
+\begin{example}
+Take $Y=C=D=\{0,1\}$ and take $(H,\sigalg{H})$ to be $\{0,1\}^{\mathbb{N}}$ equipped with the product topology. For any $i\neq 1$, $\RV{Y}_i\RV{I}_i\RV{D}_i\CI^e_{\prob{P}_C} \RV{C}$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$ and $\RV{I}_i\CI^e_{\prob{P}_C} \RV{C}$.
+
+$\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ follows from the fact that $\RV{C}$ can be (almost surely) written as a function of $\RV{D}$.
+
+For all $i,\in \mathbb{N}$, $y,d\in \{0,1\}$, $h\in H$ set
+\begin{align}
+    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{I}_i\RV{D}_i}(y|h,j,d) &= \delta_1(p(j,h))\delta_d(y) + \delta_0(p(j,h))\delta_{1-d}(y)
+\end{align}
+where $p(j,h)$ projects the $j$-th component of $h$. That is, if $h$ maps $j$ to 1, $\RV{Y}$ goes with $\RV{D}$ while if $h$ maps $j$ to $0$, $\RV{Y}$ goes opposite $\RV{D}$. Suppose also 
+\begin{align}
+    \RV{Y}_i\CI_{\prob{P}_C}^e (\RV{X}_{<i},\RV{Y}_{<i},\RV{I}_{<i},\RV{C})|(\RV{X}_i,\RV{Y}_i,\RV{H})
+\end{align}
+Then $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is causally contractible. Set $\prob{P}_{C}^{\RV{H}}$ to be the uniform measure on $(H,\sigalg{H})$ and for $i>1$
+\begin{align}
+    \prob{P}_C^{\RV{D}_i|\RV{I}_i\RV{H}}(d|j,h) &= \delta_{p(j,h)}(d)
+\end{align}
+that is, if $h$ maps $j$ to 1, $\RV{D}$ is 1 while if $h$ maps $j$ to $0$, $\RV{D}$ is 0. This also implies
+\begin{align}
+    \prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(p(\cdot,h)^{-1}(d)|d,h) &= 1\label{eq:all_eq_d}
+\end{align}
+
+Then, for $i>1$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i}(y|h,d) &= \sum_{j\in \mathbb{N}} \delta_1(p(j,h))\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h) + \delta_0(p(j,h))\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h)\\
+    &= \sum_{j\in \mathbb{N}} \delta_1(d)\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h) + \delta_0(d)\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h)&\text{by Eq \ref{eq:all_eq_d}}\\
+    &= \delta_1(y)\\
+    \implies \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i}(y|d) &= \delta_1(y)
+\end{align}
+
+For $q\in I$, set
+\begin{align}
+    \prob{P}_C^{\RV{I}|\RV{H}}(q|h)&= \begin{cases}
+        0.5 & q=(1,2,3,4,...) \text{ or } (1,3,2,4,...)\\
+        0&\text{otherwise}
+    \end{cases}
+\end{align}
+and set
+\begin{align}
+    \prob{P}_C^{\RV{H}|\RV{D}}(h) &= \begin{cases}
+        0.5 & h=(0,1,0,1,1,...)\text{ or }h=(0,0,1,1,1,...)\\
+        0 &\text{otherwise}
+    \end{cases}
+\end{align}
+Let $\overline{H}$ be the support of $\prob{P}_C^{\RV{H}|\RV{D}}(h)$.
+
+Then for $i=1$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_1|\RV{D}_1}(y|h,d) &= \sum_{h\in H} \sum_{j\in \mathbb{N}} \prob{P}_\alpha^{\RV{I}_1|\RV{D}_1\RV{H}}(j|d,h)\prob{P}_C^{\RV{H}|\RV{D}_1}(h|d)\left(\delta_1(p(j,h))\delta_d(y) + \delta_0(p(j,h))\delta_{1-d}(y)\right)\\
+    &= \sum_{h\in \overline{H}} 0.5( \delta_1(p(1,h))\delta_d(y) + \delta_0(p(1,h))\delta_{1-d}(y))\\
+    &= \delta_{1-d}(y))\\
+    &\neq  \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i}(y|h,d) & i\neq 1
+\end{align}
+Thus $\prob{P}_C^{\RV{Y}|\RV{D}}$ is not causally contractible by Theorem \ref{th:equal_of_condits}. 
+
+However, given any finite permutation $\rho:\mathbb{N}\to\mathbb{N}$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q) &= \sum_{h\in \overline{H}}\sum_{d\in\{0,1\}^{\mathbb{N}}} \prod_{i\in \mathbb{N}} \prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{D}_i\RV{H}}(y_i|q_i,d_i,h) \prob{P}_\alpha^{\RV{D}_i|\RV{I}_i\RV{H}}(d_i|q_i,h)\prob{P}_C^{\RV{H}}(h)\\
+    &= \delta_{1-\alpha}(y_1)\delta_{(1)_{i\in\mathbb{N}}}(y_{>1})\\
+    &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|\rho^{-1}(q))\\
+    &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q)
+\end{align}
+\end{example}
