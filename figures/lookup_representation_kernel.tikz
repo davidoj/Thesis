@@ -1,15 +1,17 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (0, -0.25) {$\prob{F}_{\mathrm{ev}}$};
-		\node [style=Llabel tikzit] (2) at (-3.25, -0.5) {$X$};
-		\node [style=RLabel tikzit] (3) at (3, -0.25) {$Y$};
-		\node [style=none] (4) at (-0.75, 0) {};
-		\node [style=none] (5) at (-0.75, -0.5) {};
-		\node [style=medium dist tikzit] (6) at (-4, 1.5) {$\mu$};
+		\node [style=small kernel tikzit] (0) at (0, -0.25) {$\prob{F}_{\mathrm{lu}}$};
+		\node [style=Llabel tikzit] (2) at (-4.75, -0.5) {$\RV{D}$};
+		\node [style=RLabel tikzit] (3) at (3, -0.25) {$\RV{Y}$};
+		\node [style=none] (4) at (-0.5, 0) {};
+		\node [style=none] (5) at (-0.5, -0.5) {};
+		\node [style=small kernel tikzit] (6) at (-3.25, 0.75) {$\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$};
+		\node [style=Llabel tikzit] (7) at (-4.75, 0.75) {$\RV{W}$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (2) to (5.center);
 		\draw (0) to (3);
+		\draw (7) to (6);
 		\draw [in=180, out=0] (6) to (4.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

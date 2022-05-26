@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (-0.25, 0.75) {$\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$};
+		\node [style=none] (1) at (-0.75, 1) {};
+		\node [style=none] (2) at (-0.75, 0.5) {};
+		\node [style=Llabel tikzit] (3) at (-2.25, 1.25) {$\RV{W}$};
+		\node [style=Llabel tikzit] (4) at (-2.25, 0.25) {$\RV{D}$};
+		\node [style=RLabel tikzit] (5) at (1.75, 0.75) {$\RV{Y}$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [in=-180, out=0] (3) to (1.center);
+		\draw [in=180, out=0] (4) to (2.center);
+		\draw (0) to (5);
+	\end{pgfonlayer}
+\end{tikzpicture}

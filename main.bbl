@@ -1,4 +1,4 @@
-\begin{thebibliography}{69}
+\begin{thebibliography}{70}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -42,6 +42,11 @@ Elias Bareinboim, Juan~D. Correa, Duligur Ibeling, and Thomas Icard.
 \newblock On {Pearl's} hierarchy and the foundations of causal inference.
 \newblock Technical report, 2020.
 \newblock URL \url{https://causalai.net/r60.pdf}.
+
+\bibitem[Barto(1998)]{barto_reinforcement_1998}
+Richard S. Sutton {and} Andrew~G. Barto.
+\newblock Reinforcement {Learning}: {An} {Introduction}, 1998.
+\newblock URL \url{http://jmvidal.cse.sc.edu/lib/sutton98a.html}.
 
 \bibitem[Blackwell(1979)]{blackwell_theory_1979}
 David~A. Blackwell.

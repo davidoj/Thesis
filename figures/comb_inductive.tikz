@@ -1,7 +1,7 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (-5.25, 3.75) {$\prob{P}_C^{\RV{Y}_{[m-1]}\combbreak\RV{D}_{[m-1]}}$};
-		\node [style=small kernel tikzit] (1) at (0.75, 2) {$\prob{P}_C^{\RV{Y}_{[m]}|\RV{Y}_{[m-1]}\RV{D}_{[m]}}$};
+		\node [style=small kernel tikzit] (0) at (-5.25, 3.75) {$\prob{P}^{\RV{Y}_{[m-1]}\combbreak\RV{D}_{[m-1]}}$};
+		\node [style=small kernel tikzit] (1) at (0.75, 2) {$\prob{P}^{\RV{Y}_{[m]}|\RV{Y}_{[m-1]}\RV{D}_{[m]}}$};
 		\node [style=copymap tikzit] (2) at (-2.75, 3.75) {};
 		\node [style=copymap tikzit] (3) at (-8.25, 3.75) {};
 		\node [style=none] (4) at (-1.75, 2.5) {};

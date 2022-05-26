@@ -48,22 +48,23 @@
 \contentsline {chapter}{\numberline {4}Repeatable decision problems}{59}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Previous work}{60}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Response functions}{61}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Causally contractible Markov kernels}{62}{subsection.4.2.1}%
-\contentsline {subsubsection}{Properties of causally contractible Markov kernels}{64}{section*.17}%
-\contentsline {subsection}{\numberline {4.2.2}Representation theorems}{68}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Data-independent actions}{76}{subsection.4.2.3}%
-\contentsline {subsubsection}{Examples}{80}{section*.18}%
-\contentsline {subsubsection}{Example: body mass index}{81}{section*.19}%
-\contentsline {section}{\numberline {4.3}Assessing decision problems for exchange commutativity}{82}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Causal contractibility can be undermined by a lack of control}{84}{subsection.4.3.1}%
-\contentsline {section}{\numberline {4.4}Response conditionals with data-dependent actions}{86}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Combs}{86}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Response conditionals in models with data dependent actions}{88}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Combs are the output of the ``fix'' operation}{90}{subsection.4.4.3}%
-\contentsline {chapter}{\numberline {5}Other causal modelling frameworks}{91}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Weaker assumptions than causal contractibility}{91}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Individual-level causal contractibility}{94}{subsection.5.1.1}%
-\contentsline {subsubsection}{References to individual-level causal contractibility}{94}{section*.22}%
-\contentsline {subsubsection}{Unique identifiers}{95}{section*.23}%
-\contentsline {subsubsection}{Individual-level causal contractibility and unobserved confounding}{96}{section*.24}%
-\contentsline {subsubsection}{Individual-level causal contractibility and ordinary causal contractibility}{97}{section*.25}%
+\contentsline {section}{\numberline {4.3}Causally contractible Markov kernels}{63}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Properties of causally contractible Markov kernels}{64}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Representation theorems}{69}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Data-independent inputs}{76}{subsection.4.3.3}%
+\contentsline {subsubsection}{Examples}{80}{section*.17}%
+\contentsline {subsubsection}{Example: body mass index}{82}{section*.18}%
+\contentsline {section}{\numberline {4.4}Varying inputs}{82}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Data-dependent inputs}{82}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Combs}{83}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Response conditionals in models with data dependent actions}{85}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Combs are the output of the ``fix'' operation}{87}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Assessing decision problems for exchange commutativity}{87}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Causal contractibility can be undermined by a lack of control}{89}{subsection.4.6.1}%
+\contentsline {chapter}{\numberline {5}Other causal modelling frameworks}{93}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Weaker assumptions than causal contractibility}{93}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Individual-level causal contractibility}{96}{subsection.5.1.1}%
+\contentsline {subsubsection}{References to individual-level causal contractibility}{96}{section*.21}%
+\contentsline {subsubsection}{Unique identifiers}{97}{section*.22}%
+\contentsline {subsubsection}{Individual-level causal contractibility and unobserved confounding}{98}{section*.23}%
+\contentsline {subsubsection}{Individual-level causal contractibility and ordinary causal contractibility}{99}{section*.24}%

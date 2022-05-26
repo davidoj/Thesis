@@ -146,11 +146,13 @@ Given a probability space $(\mu,\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega
 \end{align}
 \end{definition}
 
+\begin{notation}[Single-valued variable]\label{no:single_valued}
+We let $*$ stand for any single-valued variable $*:\Omega\to \{*\}$.
+\end{notation}
+
 \subsubsection{Markov kernel product notation}\label{ssec:product_notation}
 
 Three pairwise \emph{product} operations involving Markov kernels can be defined: measure-kernel products, kernel-kernel products and kernel-function products. These are analagous to row vector-matrix products, matrix-matrix products and matrix-column vector products respectively.
-
- , $\RV{T}:Y\to T$, $\kernel{M}:X\to \Delta(\sigalg{Y})$ and $\kernel{N}:Y\to \Delta(\sigalg{Z})$
 
 \begin{definition}[Measure-kernel product]
 Given $\mu\in \Delta(\mathcal{X})$ and $\kernel{M}:X\kto Y$, the \emph{measure-kernel product} $\mu\kernel{M}\in \Delta(Y)$ is given by
@@ -420,7 +422,7 @@ The $n$-fold copy map $\text{copy}^n_X:X\kto X^n$ is given by the recursive defi
 \end{align}
 \end{definition}
 
-\paragraph{Plates}
+\paragraph{Plates}\label{pgph:plates}
 
 In a string diagram, a plate that is annotated $i\in A$ means the tensor product of the $|A|$ elements that appear inside the plate. A wire crossing from outside a plate boundary to the inside of a plate indicates an $|A|$-fold copy map, which we indicate by placing a dot on the plate boundary. For our purposes, we do not define anything that allows wires to cross from the inside of a plate to the outside; wires must terminate within the plate.
 
@@ -795,7 +797,7 @@ The qualification ``$\RV{Y}$ is a causal variable'' is usually not an explicit c
 
 When working backwards like this, we can run into a couple of problems: we may end up with a probability set where some probabilities are non-unique, or we might inadvertently define an empty probability set. \emph{Validity} is a condition that can ensure that we at least avoid the second problem.
 
-Thus, if we start with a probability set, we know how to check if certain uniform conditional probabilities exist or not. However, there is a particular line of reasoning that comes up most often in the graphical models tradition of causal inference where we start with collections of conditional probabilities and assemble them into probability models as needed. A simple example of this is the causal Bayesian network given by the graph $\RV{X}\longrightarrowRHD \RV{Y}$ and some observational probability distribution $\prob{P}^{\RV{XY}}\in\Delta(X\times Y)$. Using the standard notion of ``hard interventions on $\RV{X}$'', this model induces a probability set which we could informally describe as the set $\prob{P}_\square:=\{\prob{P}_a^{\RV{XY}}|a\in X\cup\{*\}\}$ where $*$ is a special element corresponding to the observational setting. The graph $\RV{X}\longrightarrowRHD \RV{Y}$ implies the existence of the uniform conditional probability $\prob{P}_\square^{\RV{Y}|\RV{X}}$ under the nominated set of interventions, while the usual rules of hard interventions imply that $\prob{P}_a^{\RV{X}} = \delta_a$ for $a\in X$.
+Thus, if we start with a probability set, we know how to check if certain uniform conditional probabilities exist or not. However, there is a particular line of reasoning that comes up most often in the graphical models tradition of causal inference where we start with collections of conditional probabilities and assemble them into probability models as needed. A simple example of this is the causal Bayesian network given by the graph $\RV{X}\longrightarrowRHD \RV{Y}$ and some observational probability distribution $\prob{P}^{\RV{XY}}\in\Delta(X\times Y)$. Using the standard notion of ``hard interventions on $\RV{X}$'', this model induces a probability set which we could informally describe as the set $\prob{P}_\square:=\{\prob{P}_a^{\RV{XY}}|a\in X\cup\{o\}\}$ where $o$ is a special element corresponding to the observational setting. The graph $\RV{X}\longrightarrowRHD \RV{Y}$ implies the existence of the uniform conditional probability $\prob{P}_\square^{\RV{Y}|\RV{X}}$ under the nominated set of interventions, while the usual rules of hard interventions imply that $\prob{P}_a^{\RV{X}} = \delta_a$ for $a\in X$.
 
 Reasoning ``backwards'' like this -- from uniform conditionals and marginals back to probability sets -- must be done with care. The probability set associated with a collection of conditionals and marginals may be empty or nonunique. Uniqueness may not always be required, but an empty probability set is clearly not a useful model.
 

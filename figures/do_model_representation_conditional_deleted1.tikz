@@ -1,0 +1,39 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (13) at (0.25, 0.75) {$\kernel{L}$};
+		\node [style=none] (14) at (-2.25, 2) {};
+		\node [style=none] (15) at (-2.25, -1.25) {};
+		\node [style=none] (16) at (3.5, -1.25) {};
+		\node [style=none] (17) at (3.5, 2) {};
+		\node [style=copymap tikzit] (18) at (-2.25, 1) {};
+		\node [style=none] (19) at (1.75, -0.75) {$i\in A$};
+		\node [style=none] (20) at (-0.25, 1) {};
+		\node [style=none] (21) at (-0.25, 0.5) {};
+		\node [style=Llabel tikzit] (22) at (-1.25, -0.5) {$\RV{D}_i$};
+		\node [style=Llabel tikzit] (23) at (-4.25, 1) {$\RV{H}$};
+		\node [style=RLabel tikzit] (24) at (2.25, 0.75) {$\RV{Y}_i$};
+		\node [style=none] (27) at (-2.25, -2) {};
+		\node [style=none] (28) at (-2.25, -4) {};
+		\node [style=none] (29) at (3.5, -4) {};
+		\node [style=none] (30) at (3.5, -2) {};
+		\node [style=none] (32) at (1.75, -3.5) {$i\in \mathbb{N}\setminus A$};
+		\node [style=Llabel tikzit] (35) at (-1.25, -2.75) {$\RV{D}_i$};
+		\node [style=none] (36) at (2.5, -2.75) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (14.center) to (17.center);
+		\draw (15.center) to (16.center);
+		\draw (16.center) to (17.center);
+		\draw (14.center) to (18);
+		\draw (18) to (20.center);
+		\draw (18) to (15.center);
+		\draw [in=-180, out=0] (22) to (21.center);
+		\draw (23) to (18);
+		\draw (13) to (24);
+		\draw (27.center) to (30.center);
+		\draw (28.center) to (29.center);
+		\draw (29.center) to (30.center);
+		\draw (27.center) to (28.center);
+		\draw [style=delmap] (35) to (36.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,6 +1,6 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (0.75, 0.75) {$\prob{F}_{\text{evs}}$};
+		\node [style=small kernel tikzit] (0) at (0.75, 0.75) {$\prob{F}_{\text{lus}}$};
 		\node [style=RLabel tikzit] (2) at (2.75, 0.75) {$Y$};
 		\node [style=none] (3) at (0, 1) {};
 		\node [style=none] (4) at (0, 0.5) {};
@@ -10,7 +10,7 @@
 		\node [style=none] (9) at (3.75, 3.25) {};
 		\node [style=none] (11) at (2, -0.25) {$i\in\mathbb{N}$};
 		\node [style=Llabel tikzit] (12) at (-3.5, 2) {$Y^D$};
-		\node [style=Llabel tikzit] (13) at (-3.5, 0) {$X$};
+		\node [style=Llabel tikzit] (13) at (-3.5, 0) {$D$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (0) to (2);

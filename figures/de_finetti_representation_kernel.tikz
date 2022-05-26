@@ -9,8 +9,11 @@
 		\node [style=copymap tikzit] (7) at (-0.75, 0.5) {};
 		\node [style=none] (8) at (4.5, -1) {$i\in\mathbb{N}$};
 		\node [style=none] (10) at (2.5, 0.5) {};
-		\node [style=small kernel tikzit] (12) at (-2.25, 0.5) {$\kernel{F}_{\RV{H}}$};
+		\node [style=small kernel tikzit] (12) at (-3, 0.5) {$\kernel{F}_{\RV{H}}$};
 		\node [style=semismall dist] (13) at (-4.5, 0.5) {$\mu$};
+		\node [style=copymap tikzit] (14) at (-1.75, 0.5) {};
+		\node [style=none] (15) at (-0.75, 3.5) {};
+		\node [style=RLabel tikzit] (16) at (4.75, 3.5) {$H$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [in=180, out=0] (0) to (2);
@@ -22,5 +25,7 @@
 		\draw (7) to (4.center);
 		\draw (12) to (7);
 		\draw (13) to (12);
+		\draw [in=180, out=75, looseness=0.50] (14) to (15.center);
+		\draw (15.center) to (16);
 	\end{pgfonlayer}
 \end{tikzpicture}

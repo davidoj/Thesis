@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  23 MAY 2022 16:07
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  24 MAY 2022 16:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -954,33 +954,33 @@ File: l3backend-xdvipdfmx.def 2020-02-03 L3 backend support: xdvipdfmx
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 192.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 194.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
-92.
+94.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 192.
-LaTeX Font Info:    ... okay on input line 192.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 194.
+LaTeX Font Info:    ... okay on input line 194.
 \AtBeginShipoutBox=\box89
-Package hyperref Info: Link coloring OFF on input line 192.
+Package hyperref Info: Link coloring OFF on input line 194.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -993,15 +993,15 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count322
 )
-LaTeX Info: Redefining \ref on input line 192.
-LaTeX Info: Redefining \pageref on input line 192.
-LaTeX Info: Redefining \nameref on input line 192.
+LaTeX Info: Redefining \ref on input line 194.
+LaTeX Info: Redefining \pageref on input line 194.
+LaTeX Info: Redefining \nameref on input line 194.
 
 (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 192.
+LaTeX Info: Redefining \microtypecontext on input line 194.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: No adjustment of tracking.
@@ -1013,7 +1013,7 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 )
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Trying to load font information for U+msa on input line 195
+LaTeX Font Info:    Trying to load font information for U+msa on input line 197
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1022,7 +1022,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 195
+LaTeX Font Info:    Trying to load font information for U+msb on input line 197
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1032,18 +1032,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Trying to load font information for U+stmry on input line 1
-95.
+97.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
 LaTeX Font Info:    Trying to load font information for U+wasy on input line 19
-5.
+7.
 
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
 
 LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
-(Font)              using `U/stmry/m/n' instead on input line 195.
+(Font)              using `U/stmry/m/n' instead on input line 197.
 
 (/usr/share/texlive/texmf-dist/tex/generic/stringenc/se-ascii-print.def
 File: se-ascii-print.def 2019/11/29 v1.12 stringenc: Printable ASCII characters
@@ -1261,55 +1261,65 @@ Underfull \vbox (badness 1137) has occurred while \output is active []
  [59
 
 ]
-[60] [61] [62] (./figures/commutativity_of_exchange.tikz)
+[60] [61] (./figures/do_model_representation_conditional.tikz)
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <20.74> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 49.
+
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <14.4> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 49.
+
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <12> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 49.
+
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <17.28> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 49.
+
+
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_mu.tikz)
+(./figures/do_model_representation_mu.tikz) [62]
+(./figures/do_model_representation_mu_nonuniform.tikz)
+(./figures/do_model_representation_mu_nonuniform.tikz)
+Overfull \hbox (12.01886pt too wide) in paragraph at lines 64--65
+[]\T1/lmr/m/n/10 Dropping the as-sump-tion $\OT1/cmss/m/n/10 D[] [][] Y[]\OMS/c
+msy/m/n/10 j\OT1/cmr/m/n/10 (\OT1/cmss/m/n/10 C\OML/cmm/m/it/10 ; \OT1/cmss/m/n
+/10 H\OT1/cmr/m/n/10 )$ \T1/lmr/m/n/10 yields mod-els with \T1/lmr/m/it/10 data
+-dependent
+ []
+
+(./figures/commutativity_of_exchange.tikz)
 (./figures/commutativity_of_exchange.tikz) (./figures/cons_locality_1.tikz)
 (./figures/cons_locality_2.tikz) (./figures/cons_locality_1.tikz)
-(./figures/cons_locality_2.tikz)
-Overfull \hbox (1.77837pt too wide) in paragraph at lines 61--63
+(./figures/cons_locality_2.tikz) [63]
+Overfull \hbox (1.77837pt too wide) in paragraph at lines 80--82
 \T1/lmr/m/n/10 and ex-presses the idea that the out-puts are in-de-pen-dent of 
 the non-corresponding
  []
 
-(./figures/local_lhs.tikz) (./figures/local_rhs.tikz)
-LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <20.74> not available
-(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 72.
-
-LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <14.4> not available
-(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 72.
-
-LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <12> not available
-(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 72.
-
-LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <17.28> not available
-(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 72.
-
- (./figures/local_lhs.tikz) (./figures/local_rhs.tikz) [63] [64] [65] [66] [67]
-
-(./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [68]
+(./figures/local_lhs.tikz) (./figures/local_rhs.tikz) (./figures/local_lhs.tikz
+) (./figures/local_rhs.tikz) [64] [65] [66] [67] [68]
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz) [69]
-Overfull \hbox (0.96878pt too wide) detected at line 340
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz)
+Overfull \hbox (0.96878pt too wide) detected at line 359
 []
  []
 
-(./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [70]
+[70] (./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [71]
 (./figures/do_model_representation_kernel.tikz)
 (./figures/do_model_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_rep_intermediate_kernel.tikz)
-(./figures/lookup_rep_intermediate_kernel.tikz) [71]
+(./figures/lookup_rep_intermediate_kernel.tikz) [72]
 (./figures/de_finetti_representation_kernel.tikz)
 (./figures/de_finetti_representation_kernel.tikz)
 (./figures/do_model_representation_kernel_pre.tikz)
 (./figures/do_model_representation_kernel.tikz)
 (./figures/do_model_representation_kernel_pre.tikz)
-(./figures/do_model_representation_kernel.tikz)
-Underfull \vbox (badness 4886) has occurred while \output is active []
-
- [72]
+(./figures/do_model_representation_kernel.tikz) [73]
 (./figures/commutative_exchange.tikz) (./figures/commutative_exchange.tikz)
 (./figures/commutative_exchange_with_swap.tikz)
 (./figures/commutative_exchange_with_swap_past_copy.tikz)
@@ -1319,39 +1329,40 @@ Underfull \vbox (badness 4886) has occurred while \output is active []
 (./figures/commutative_exchange_with_swap_past_copy.tikz)
 (./figures/commutative_exchange_with_swap_symmed.tikz)
 (./figures/commutative_exchange_with_swap_cconted.tikz)
-Overfull \hbox (35.85838pt too wide) detected at line 465
+Overfull \hbox (35.85838pt too wide) detected at line 484
 []
  []
 
-[73] (./figures/commutative_exchange_Q.tikz)
+[74] (./figures/commutative_exchange_Q.tikz)
 (./figures/commutative_exchange_Q.tikz)
 (./figures/do_model_representation_kernel_nolocal.tikz)
-(./figures/do_model_representation_kernel_nolocal.tikz) [74]
+(./figures/do_model_representation_kernel_nolocal.tikz)
 (./figures/do_model_representation_kernel_z.tikz)
 (./figures/do_model_representation_kernel_z.tikz)
 (./figures/do_model_representation_kernel_zcut.tikz)
-(./figures/do_model_representation_kernel_zcut.tikz)
+(./figures/do_model_representation_kernel_zcut.tikz) [75]
 (./figures/do_model_representation_kernel_nolocal.tikz)
 (./figures/do_model_representation_kernel_nolocal.tikz)
 (./figures/do_model_representation_kernel_truncated.tikz)
-(./figures/do_model_representation_kernel_truncated.tikz) [75] [76]
-(./figures/do_model_representation.tikz)
-(./figures/do_model_representation.tikz) [77]
-(./figures/kernel_l_broken_down.tikz) (./figures/kernel_l_broken_down2.tikz)
-(./figures/kernel_l_broken_down3.tikz) (./figures/kernel_l_broken_down4.tikz)
-(./figures/kernel_l_broken_down.tikz) (./figures/kernel_l_broken_down2.tikz)
-(./figures/kernel_l_broken_down3.tikz) (./figures/kernel_l_broken_down4.tikz)
-(./figures/independence_inductive_base_0.tikz)
-(./figures/independence_inductive_base.tikz)
-(./figures/independence_inductive_base_0.tikz)
-(./figures/independence_inductive_base.tikz)
-(./figures/independence_inductive.tikz)
-(./figures/independence_inductive_last.tikz)
-(./figures/independence_inductive.tikz)
-(./figures/independence_inductive_last.tikz)
-Underfull \vbox (badness 6001) has occurred while \output is active []
+(./figures/do_model_representation_kernel_truncated.tikz)
+Overfull \hbox (12.80688pt too wide) in paragraph at lines 541--541
+[]\T1/lmr/bx/n/12 Conditionally in-de-pen-dent and iden-ti-cal re-sponse func-
+ []
 
- [78]
+[76] [77] (./figures/do_model_representation.tikz)
+(./figures/do_model_representation.tikz) (./figures/kernel_l_broken_down.tikz)
+(./figures/kernel_l_broken_down2.tikz) (./figures/kernel_l_broken_down3.tikz)
+(./figures/kernel_l_broken_down4.tikz) (./figures/kernel_l_broken_down.tikz)
+(./figures/kernel_l_broken_down2.tikz) (./figures/kernel_l_broken_down3.tikz)
+(./figures/kernel_l_broken_down4.tikz)
+(./figures/independence_inductive_base_0.tikz)
+(./figures/independence_inductive_base.tikz)
+(./figures/independence_inductive_base_0.tikz)
+(./figures/independence_inductive_base.tikz) [78]
+(./figures/independence_inductive.tikz)
+(./figures/independence_inductive_last.tikz)
+(./figures/independence_inductive.tikz)
+(./figures/independence_inductive_last.tikz)
 (./figures/do_model_representation_finite.tikz)
 (./figures/do_model_representation_finite.tikz)
 (./figures/do_model_representation_noprior.tikz)
@@ -1362,8 +1373,8 @@ Underfull \vbox (badness 6001) has occurred while \output is active []
 (./figures/do_model_rep_onechoice_combined.tikz)
 (./figures/do_model_rep_onechoice.tikz) (./figures/do_model_rep_onechoice.tikz)
 [80]
-Overfull \hbox (24.81929pt too wide) in paragraph at lines 683--685
-[][]\T1/lmr/bx/n/10 Example 4.2.17 \T1/lmr/m/n/10 (Back-door ad-just-ment)\T1/l
+Overfull \hbox (24.81929pt too wide) in paragraph at lines 704--706
+[][]\T1/lmr/bx/n/10 Example 4.3.17 \T1/lmr/m/n/10 (Back-door ad-just-ment)\T1/l
 mr/bx/n/10 . []\T1/lmr/m/n/10 If a se-quen-tial just-do model $\OT1/cmr/m/n/10 
 (\U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (\OT1/cmss/m/n/10 D\OML/cm
 m/m/it/10 ; \OT1/cmss/m/n/10 X\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmss/m/n
@@ -1371,86 +1382,93 @@ m/m/it/10 ; \OT1/cmss/m/n/10 X\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmss/m/n
  []
 
 [81]
-Overfull \hbox (12.48546pt too wide) in paragraph at lines 716--716
-[]\T1/lmr/bx/n/14.4 Assessing de-ci-sion prob-lems for ex-change com-
+Overfull \hbox (3.07741pt too wide) in paragraph at lines 739--739
+\T1/lmr/bx/n/14.4 sponse func-tions with data-dependent in-puts 
  []
 
-[82]
-Overfull \hbox (30.03914pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 4.3.  ASSESSING DECISION PROBLEMS FOR EXCHANGE COMMUTATIVITY \T
-1/lmr/m/n/10 83
- []
-
-[83] [84]
-Overfull \hbox (30.03914pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 4.3.  ASSESSING DECISION PROBLEMS FOR EXCHANGE COMMUTATIVITY \T
-1/lmr/m/n/10 85
- []
-
-[85] (./figures/response_conditional_comb.tikz)
+[82] (./figures/response_conditional_comb.tikz)
 (./figures/response_conditional_comb.tikz)
 (./figures/causally_contractible_comb.tikz)
-(./figures/causally_contractible_comb.tikz) [86]
+(./figures/causally_contractible_comb.tikz)
 (./figures/comb_insert_complicated.tikz)
 (./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz)
 (./figures/comb_insert_complicated.tikz)
 (./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz)
-(./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [87]
-Overfull \hbox (57.70961pt too wide) detected at line 854
+[83] (./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [84]
+Overfull \hbox (57.70961pt too wide) detected at line 814
 []
  []
 
 
-Overfull \hbox (14.65022pt too wide) in paragraph at lines 859--860
-\T1/lmr/m/n/10 Theorem []4.4.6[] gen-er-alises The-o-rem []4.2.15[] to mod-els 
+Overfull \hbox (14.65022pt too wide) in paragraph at lines 819--820
+\T1/lmr/m/n/10 Theorem []4.5.6[] gen-er-alises The-o-rem []4.3.15[] to mod-els 
 $\OT1/cmr/m/n/10 (\U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 D\OML/cm
 m/m/it/10 ; \OT1/cmss/m/n/10 Y\OT1/cmr/m/n/10 )$ \T1/lmr/m/n/10 with data-depen
 dent
  []
 
-[88] (./figures/do_model_representation.tikz)
 (./figures/do_model_representation.tikz)
+(./figures/do_model_representation.tikz) [85]
 (./figures/do_model_representation_mu.tikz)
 (./figures/do_model_representation_mu.tikz)
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation_mu.tikz)
 (./figures/do_model_representation.tikz)
-(./figures/do_model_representation_mu.tikz) [89])
-(./chapter_5_other_causal_inference.tex [90]
+(./figures/do_model_representation_mu.tikz) [86]
+Overfull \hbox (12.48546pt too wide) in paragraph at lines 891--891
+[]\T1/lmr/bx/n/14.4 Assessing de-ci-sion prob-lems for ex-change com-
+ []
+
+
+Overfull \hbox (30.03914pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 4.6.  ASSESSING DECISION PROBLEMS FOR EXCHANGE COMMUTATIVITY \T
+1/lmr/m/n/10 87
+ []
+
+[87] [88]
+Overfull \hbox (30.03914pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 4.6.  ASSESSING DECISION PROBLEMS FOR EXCHANGE COMMUTATIVITY \T
+1/lmr/m/n/10 89
+ []
+
+[89]) (./chapter_5_other_causal_inference.tex [90]
+Overfull \hbox (30.03914pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 4.6.  ASSESSING DECISION PROBLEMS FOR EXCHANGE COMMUTATIVITY \T
+1/lmr/m/n/10 91
+ []
+
+[91] [92
+
+]
 Chapter 5.
 
 Overfull \hbox (3.85442pt too wide) in paragraph at lines 6--6
 []\T1/lmr/bx/n/14.4 Weaker as-sump-tions than causal con-tractibil-
  []
 
-[91
-
-]
+[93]
 Overfull \hbox (111.2077pt too wide) detected at line 30
 []
  []
 
-[92]
+[94]
 Overfull \hbox (4.41414pt too wide) in paragraph at lines 45--46
 [][]\T1/lmr/bx/n/10 Theorem 5.1.2. []\T1/lmr/m/it/10 Given just-do model $\U/ms
 b/m/n/10 P[]$ \T1/lmr/m/it/10 with $\U/msb/m/n/10 P[]$ \T1/lmr/m/it/10 causally
  con-tractible,
  []
 
-[93]
+[95]
 Overfull \hbox (1.66454pt too wide) in paragraph at lines 119--120
 \T1/lmr/m/n/10 change-abil-ity'' for a de-ci-sion prob-lem re-gard-ing tak-ing 
 as-pirin to treat a headache
  []
 
-[94]
+[96]
 Missing character: There is no – in font ec-lmr10!
- [95] [96] (./figures/index_independence_1.tikz)
+ [97] [98] (./figures/index_independence_1.tikz)
 (./figures/index_independence_2.tikz) (./figures/index_independence_1.tikz)
-(./figures/index_independence_2.tikz) [97]
+(./figures/index_independence_2.tikz) [99]
 Overfull \hbox (0.57549pt too wide) in paragraph at lines 211--212
 []\T1/lmr/m/n/10 In par-tic-u-lar, for any $\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10
  2 \U/msb/m/n/10 N$\T1/lmr/m/n/10 , $\OML/cmm/m/it/10 j \OMS/cmsy/m/n/10 2 \OML
@@ -1462,7 +1480,7 @@ lmr/m/n/10 such that $\OML/cmm/m/it/10 ^^W\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^E
 (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
 (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
 (./figures/index_independence_5.tikz) (./figures/index_independence_5.tikz)
-[98] (./figures/kernel_fac_with_idents.tikz)
+[100] (./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
 (./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
@@ -1475,17 +1493,17 @@ lmr/m/n/10 such that $\OML/cmm/m/it/10 ^^W\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^E
 (./figures/kernel_Q_fac_with_idents_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
-(./figures/kernel_Q_fac_with_idents_subbed.tikz) [99]
+(./figures/kernel_Q_fac_with_idents_subbed.tikz) [101]
 (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
 (./figures/kernel_P_indep.tikz) (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
-(./figures/kernel_P_indep.tikz) [100] [101] [102]
+(./figures/kernel_P_indep.tikz) [102] [103] [104]
 Overfull \hbox (84.4473pt too wide) detected at line 381
 []
  []
 
-[103]
+[105]
 Overfull \hbox (62.47636pt too wide) detected at line 405
 []
  []
@@ -1500,155 +1518,155 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [104]
-Underfull \hbox (badness 6284) in paragraph at lines 120--130
+ [106]
+Underfull \hbox (badness 6284) in paragraph at lines 125--135
 []\T1/lmr/m/n/10 A. P. Dawid.  Causal In-fer-ence with-out Coun-ter-fac-tu-als.
   \T1/lmr/m/it/10 Jour-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--130
+Underfull \hbox (badness 10000) in paragraph at lines 125--135
 \T1/lmr/m/it/10 nal of the Amer-i-can Sta-tis-ti-cal As-so-ci-a-tion\T1/lmr/m/n
 /10 , 95(450):407--424,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--130
+Underfull \hbox (badness 10000) in paragraph at lines 125--135
 \T1/lmr/m/n/10 June 2000.  ISSN 0162-1459.  doi: $10 . 1080 / 01621459 . 2000 .
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--130
+Underfull \hbox (badness 10000) in paragraph at lines 125--135
 \T1/lmr/m/n/10 10474210$.  URL []$\T1/lmtt/m/n/10 https : / / www . tandfonline
  . com / doi / abs / 10 . 1080 /
  []
 
 
-Underfull \hbox (badness 5893) in paragraph at lines 120--130
+Underfull \hbox (badness 5893) in paragraph at lines 125--135
 \T1/lmtt/m/n/10 01621459 . 2000 . 10474210$[]\T1/lmr/m/n/10 .  Pub-lisher: Tay-
 lor & Fran-cis _eprint:
  []
 
-[105]
+[107]
 Missing character: There is no ’ in font ec-lmr10!
 
-Underfull \hbox (badness 1490) in paragraph at lines 154--163
+Underfull \hbox (badness 1490) in paragraph at lines 159--168
 []\T1/lmr/m/n/10 P. Di-a-co-nis and D. Freed-man.  Fi-nite Ex-change-able Se-qu
 ences.  \T1/lmr/m/it/10 The
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--163
+Underfull \hbox (badness 10000) in paragraph at lines 159--168
 \T1/lmr/m/it/10 An-nals of Prob-a-bil-ity\T1/lmr/m/n/10 , 8(4):745--764, Au-gus
 t 1980.  ISSN 0091-
  []
 
 
-Underfull \hbox (badness 6078) in paragraph at lines 154--163
+Underfull \hbox (badness 6078) in paragraph at lines 159--168
 \T1/lmr/m/n/10 1798, 2168-894X.  doi: $10 . 1214 / aop / 1176994663$.  URL []$\
 T1/lmtt/m/n/10 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--163
+Underfull \hbox (badness 10000) in paragraph at lines 159--168
 \T1/lmtt/m/n/10 / / projecteuclid . org / journals / annals-[]of-[]probability 
 / volume-[]8 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--163
+Underfull \hbox (badness 10000) in paragraph at lines 159--168
 \T1/lmtt/m/n/10 issue-[]4 / Finite-[]Exchangeable-[]Sequences / 10 . 1214 / aop
  / 1176994663 .
  []
 
 
-Underfull \hbox (badness 2245) in paragraph at lines 165--175
+Underfull \hbox (badness 2245) in paragraph at lines 170--180
 []\T1/lmr/m/n/10 Dean Eck-les and Ey-tan Bak-shy.  Bias and High-Dimensional Ad
 -just-
  []
 
 
-Underfull \hbox (badness 1264) in paragraph at lines 165--175
+Underfull \hbox (badness 1264) in paragraph at lines 170--180
 \T1/lmr/m/n/10 1459.  doi: $10 . 1080 / 01621459 . 2020 . 1796393$.  URL []$\T1
 /lmtt/m/n/10 https : / / doi . org /
  []
 
-[106]
-Underfull \hbox (badness 4193) in paragraph at lines 301--309
+[108]
+Underfull \hbox (badness 4193) in paragraph at lines 306--314
 \T1/lmr/m/n/10 CBO9781139025751$.  URL []$\T1/lmtt/m/n/10 https : / / www . cam
 bridge . org / core / books /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--309
+Underfull \hbox (badness 10000) in paragraph at lines 306--314
 \T1/lmtt/m/n/10 causal-[]inference-[]for-[]statistics-[]social-[]and-[]biomedic
 al-[]sciences /
  []
 
-[107]
+[109]
 Missing character: There is no ł in font ec-lmr10!
 Missing character: There is no ń in font ec-lmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 345--354
+Underfull \hbox (badness 10000) in paragraph at lines 350--359
 \T1/lmtt/m/n/10 www . cambridge . org / core / journals / political-[]analysis 
 / article / abs /
  []
 
 
-Overfull \hbox (111.18622pt too wide) in paragraph at lines 345--354
+Overfull \hbox (111.18622pt too wide) in paragraph at lines 350--359
 \T1/lmtt/m/n/10 why-[]experimenters-[]might-[]not-[]always-[]want-[]to-[]random
 ize-[]and-[]what-[]they-[]could-[]do-[]instead /
  []
 
 Missing character: There is no ’ in font ec-lmr10!
 
-Underfull \hbox (badness 2334) in paragraph at lines 367--375
+Underfull \hbox (badness 2334) in paragraph at lines 372--380
 []$\T1/lmtt/m/n/10 http : / / journals . sagepub . com / doi / 10 . 1177 / 2047
 487320936787$[]\T1/lmr/m/n/10 .  Pub-
  []
 
-[108]
+[110]
 Missing character: There is no – in font ec-lmr10!
 
-Underfull \hbox (badness 1009) in paragraph at lines 428--436
+Underfull \hbox (badness 1009) in paragraph at lines 433--441
 \T1/lmr/m/it/10 Con-trol\T1/lmr/m/n/10 , 21(2):87--91, March 2012.  ISSN 0964-4
 563, 1468-3318.  doi:
  []
 
-[109]
-Underfull \hbox (badness 3503) in paragraph at lines 509--516
+[111]
+Underfull \hbox (badness 3503) in paragraph at lines 514--521
 []\T1/lmr/m/n/10 Brian Skyrms.  Causal De-ci-sion The-ory.  \T1/lmr/m/it/10 The
  Jour-nal of Phi-los-o-
  []
 
 
-Underfull \hbox (badness 1424) in paragraph at lines 509--516
+Underfull \hbox (badness 1424) in paragraph at lines 514--521
 \T1/lmr/m/it/10 phy\T1/lmr/m/n/10 , 79(11):695--711, Novem-ber 1982.  doi: $10 
 . 2307 / 2026547$.  URL
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 509--516
+Underfull \hbox (badness 10000) in paragraph at lines 514--521
 []$\T1/lmtt/m/n/10 https : / / www . pdcnet . org / pdc / bvdb . nsf / purchase
  ? openform & fp = jphil &
  []
 
 Missing character: There is no ’ in font ec-lmr10!
 
-Underfull \hbox (badness 3000) in paragraph at lines 547--554
+Underfull \hbox (badness 3000) in paragraph at lines 552--559
 []\T1/lmr/m/n/10 N. N. Vorobev.  Con-sis-tent Fam-i-lies of Mea-sures and Their
  Ex-ten-
  []
 
-[110]) [111] [112]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 220.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 220.
+[112]) [113] [114]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 222.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 222.
  (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 220.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 220.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 222.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 222.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E5CCCD3EC73CCEB24FDB287DA27A0C60;4182.
+(rerunfilecheck)             Checksum: 6E487BACBF611F4DAE88883F724B3467;4320.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1656,15 +1674,15 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 220.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 222.
  ) 
 Here is how much of TeX's memory you used:
- 30865 strings out of 479819
- 592369 string characters out of 5895847
- 924431 words of memory out of 5000000
- 46820 multiletter control sequences out of 15000+600000
+ 30893 strings out of 479819
+ 593404 string characters out of 5895847
+ 927948 words of memory out of 5000000
+ 46834 multiletter control sequences out of 15000+600000
  637857 words of font info for 166 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  68i,17n,83p,1626b,1257s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (112 pages, 1222140 bytes).
+Output written on main.xdv (114 pages, 1248032 bytes).
