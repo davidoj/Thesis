@@ -28,50 +28,48 @@ Repeated entry---line 2049 of file references.bib
  : @article{fong_causal_2013
  :                          ,
 I'm skipping whatever remains of this entry
-Warning--to sort, need author, editor, or key in noauthor_holy_1995
-Warning--empty author and editor in noauthor_holy_1995
 Warning--empty institution in barenboim_foundations_2020
 Warning--empty booktitle in horvitz_framework_1986
 Warning--empty journal in saarela_role_2020
-You've used 70 entries,
+You've used 67 entries,
             2773 wiz_defined-function locations,
-            1125 strings with 20654 characters,
-and the built_in function-call counts, 30010 in all, are:
-= -- 2903
-> -- 1296
-< -- 65
-+ -- 457
+            1106 strings with 20122 characters,
+and the built_in function-call counts, 29153 in all, are:
+= -- 2818
+> -- 1294
+< -- 62
++ -- 454
 - -- 386
-* -- 2295
-:= -- 4754
-add.period$ -- 354
-call.type$ -- 70
-change.case$ -- 320
-chr.to.int$ -- 69
-cite$ -- 146
-duplicate$ -- 1463
-empty$ -- 2589
-format.name$ -- 489
-if$ -- 6340
+* -- 2244
+:= -- 4638
+add.period$ -- 343
+call.type$ -- 67
+change.case$ -- 312
+chr.to.int$ -- 66
+cite$ -- 137
+duplicate$ -- 1407
+empty$ -- 2481
+format.name$ -- 485
+if$ -- 6147
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 81
-newline$ -- 490
-num.names$ -- 290
-pop$ -- 576
+missing$ -- 79
+newline$ -- 473
+num.names$ -- 282
+pop$ -- 551
 preamble$ -- 1
-purify$ -- 263
+purify$ -- 257
 quote$ -- 0
-skip$ -- 1011
+skip$ -- 973
 stack$ -- 0
-substring$ -- 980
-swap$ -- 160
+substring$ -- 957
+swap$ -- 156
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 680
-warning$ -- 5
-while$ -- 286
+type$ -- 652
+warning$ -- 3
+while$ -- 278
 width$ -- 0
-write$ -- 1180
+write$ -- 1139
 (There were 6 error messages)

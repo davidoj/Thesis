@@ -1,7 +1,7 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=small kernel tikzit] (0) at (-3.75, 2.25) {$\prob{P}^{\RV{X}|\RV{W}}$};
-		\node [style=small kernel tikzit] (1) at (2.25, 0.5) {$\prob{P}^{\RV{Z}|\RV{WXY}$}};
+		\node [style=small kernel tikzit] (1) at (2.25, 0.5) {$\prob{P}^{\RV{Z}|\RV{WXY}}$};
 		\node [style=copymap tikzit] (2) at (-1.25, 2.25) {};
 		\node [style=copymap tikzit] (3) at (-6.75, 2.25) {};
 		\node [style=none] (4) at (-0.25, 1) {};

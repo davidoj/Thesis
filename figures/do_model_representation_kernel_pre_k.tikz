@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (0.75, 1.75) {$\kernel{F}_{\text{ev}}$};
+		\node [style=RLabel tikzit] (1) at (2.5, 1.75) {$Y$};
+		\node [style=none] (2) at (-3.75, 3) {};
+		\node [style=none] (3) at (-3.75, -0.25) {};
+		\node [style=none] (4) at (3.5, -0.25) {};
+		\node [style=none] (5) at (3.5, 3) {};
+		\node [style=copymap tikzit] (6) at (-3.75, 2) {};
+		\node [style=none] (7) at (2.25, 0.25) {$i\in\mathbb{N}$};
+		\node [style=none] (8) at (0.25, 2) {};
+		\node [style=none] (9) at (0.25, 1.5) {};
+		\node [style=RLabel tikzit] (10) at (-3.25, 0.75) {$X$};
+		\node [style=medium dist tikzit] (11) at (-7.5, 2) {$\nu$};
+		\node [style=small kernel tikzit] (12) at (-6, 2) {$\kernel{F}_{\RV{H}}$};
+		\node [style=small kernel tikzit] (13) at (-2, 2) {$\kernel{M}$};
+		\node [style=copymap tikzit] (14) at (-5, 2) {};
+		\node [style=none] (15) at (-2.75, 4) {};
+		\node [style=RLabel tikzit] (16) at (2.25, 4) {$H$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0) to (1);
+		\draw (2.center) to (5.center);
+		\draw (3.center) to (4.center);
+		\draw (4.center) to (5.center);
+		\draw (2.center) to (6);
+		\draw [in=-180, out=0] (10) to (9.center);
+		\draw (6) to (3.center);
+		\draw (11) to (12);
+		\draw (12) to (6);
+		\draw (13) to (8.center);
+		\draw (13) to (6);
+		\draw [in=-180, out=75, looseness=0.75] (14) to (15.center);
+		\draw (15.center) to (16);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  24 MAY 2022 16:15
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  27 MAY 2022 20:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1165,13 +1165,13 @@ m/n/10 (\OML/cmm/m/it/10 ^^V;
 (./figures/semidirect_K_L.tikz) (./figures/semidirect_K_L_2.tikz)
 (./figures/semidirect_K_L_3.tikz) (./figures/semidirect_K_L.tikz)
 (./figures/semidirect_K_L_2.tikz) (./figures/semidirect_K_L_3.tikz)
-Overfull \hbox (1.14407pt too wide) in paragraph at lines 541--542
+Overfull \hbox (1.14407pt too wide) in paragraph at lines 543--544
 [][]\T1/lmr/bx/n/10 Definition 2.4.2 \T1/lmr/m/n/10 (Marginal prob-a-bil-ity wi
 th re-spect to a prob-a-bil-ity set)\T1/lmr/bx/n/10 . []\T1/lmr/m/n/10 Given
  []
 
 [20]
-Overfull \hbox (6.01617pt too wide) in paragraph at lines 551--552
+Overfull \hbox (6.01617pt too wide) in paragraph at lines 553--554
 [][]\T1/lmr/bx/n/10 Definition 2.4.4 \T1/lmr/m/n/10 (Higher or-der con-di-tion-
 als)\T1/lmr/bx/n/10 . []\T1/lmr/m/n/10 Given a prob-a-bil-ity space $\OT1/cmr/m
 /n/10 (\OML/cmm/m/it/10 ^^V; 
@@ -1182,14 +1182,14 @@ als)\T1/lmr/bx/n/10 . []\T1/lmr/m/n/10 Given a prob-a-bil-ity space $\OT1/cmr/m
 (./figures/disintegration_existence.tikz) [21] [22]
 (./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz)
 (./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz)
-Overfull \hbox (5.13853pt too wide) in paragraph at lines 658--659
+Overfull \hbox (5.13853pt too wide) in paragraph at lines 660--661
 []\T1/lmr/m/n/10 Extended con-di-tional in-de-pen-dence as in-tro-duced by []Co
 n-stanti-nou and Dawid[]
  []
 
 [23] (./figures/eci_def.tikz) (./figures/eci_def.tikz) (./figures/eci_def.tikz)
 (./figures/eci_def.tikz) [24]
-Overfull \hbox (11.62228pt too wide) in paragraph at lines 717--718
+Overfull \hbox (11.62228pt too wide) in paragraph at lines 719--720
 []\T1/lmr/m/n/10 Contraction: $\OT1/cmss/m/n/10 X [][] Z\OML/cmm/m/it/10 C\OMS/
 cmsy/m/n/10 j\OT1/cmss/m/n/10 W$ \T1/lmr/m/n/10 and $\OT1/cmss/m/n/10 X [][] Y\
 OML/cmm/m/it/10 C\OMS/cmsy/m/n/10 j\OT1/cmr/m/n/10 (\OT1/cmss/m/n/10 Z\OML/cmm/
@@ -1213,7 +1213,7 @@ Missing character: There is no ’ in font ec-lmr10!
 (./figures/higher_order_disint.tikz) (./figures/higher_order_disint_0.tikz)
 (./figures/higher_order_disint_1.tikz) (./figures/higher_order_disint_2.tikz)
 [33] (./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz)
-Overfull \hbox (55.24345pt too wide) detected at line 1061
+Overfull \hbox (55.24345pt too wide) detected at line 1063
 []
  []
 
@@ -1261,214 +1261,210 @@ Underfull \vbox (badness 1137) has occurred while \output is active []
  [59
 
 ]
-[60] [61] (./figures/do_model_representation_conditional.tikz)
-LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <20.74> not available
-(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 49.
-
-LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <14.4> not available
-(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 49.
-
-LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <12> not available
-(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 49.
-
-LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <17.28> not available
-(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 49.
-
-
-(./figures/do_model_representation_conditional.tikz)
-(./figures/do_model_representation_mu.tikz)
-(./figures/do_model_representation_mu.tikz) [62]
-(./figures/do_model_representation_mu_nonuniform.tikz)
-(./figures/do_model_representation_mu_nonuniform.tikz)
-Overfull \hbox (12.01886pt too wide) in paragraph at lines 64--65
-[]\T1/lmr/m/n/10 Dropping the as-sump-tion $\OT1/cmss/m/n/10 D[] [][] Y[]\OMS/c
-msy/m/n/10 j\OT1/cmr/m/n/10 (\OT1/cmss/m/n/10 C\OML/cmm/m/it/10 ; \OT1/cmss/m/n
-/10 H\OT1/cmr/m/n/10 )$ \T1/lmr/m/n/10 yields mod-els with \T1/lmr/m/it/10 data
--dependent
- []
-
-(./figures/commutativity_of_exchange.tikz)
+[60] [61] [62] (./figures/commutativity_of_exchange.tikz)
 (./figures/commutativity_of_exchange.tikz) (./figures/cons_locality_1.tikz)
 (./figures/cons_locality_2.tikz) (./figures/cons_locality_1.tikz)
-(./figures/cons_locality_2.tikz) [63]
-Overfull \hbox (1.77837pt too wide) in paragraph at lines 80--82
+(./figures/cons_locality_2.tikz)
+Overfull \hbox (1.77837pt too wide) in paragraph at lines 68--70
 \T1/lmr/m/n/10 and ex-presses the idea that the out-puts are in-de-pen-dent of 
 the non-corresponding
  []
 
-(./figures/local_lhs.tikz) (./figures/local_rhs.tikz) (./figures/local_lhs.tikz
-) (./figures/local_rhs.tikz) [64] [65] [66] [67] [68]
-(./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [69]
-(./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz)
-Overfull \hbox (0.96878pt too wide) detected at line 359
-[]
+(./figures/local_lhs.tikz) (./figures/local_rhs.tikz)
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <20.74> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 87.
+
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <14.4> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 87.
+
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <12> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 87.
+
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <17.28> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 87.
+
+ (./figures/local_lhs.tikz) (./figures/local_rhs.tikz) [63]
+Overfull \hbox (3.7019pt too wide) in paragraph at lines 103--103
+[]\T1/lmr/bx/n/12 Properties of causally con-tractible input-output mod-
+ []
+
+[64] [65] (./figures/exch_com_lhs.tikz) (./figures/exch_com_rhs.tikz)
+(./figures/exch_com_lhs.tikz) (./figures/exch_com_rhs.tikz)
+(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz)
+(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz) [66] [67] [68]
+[69]
+Overfull \hbox (4.78976pt too wide) in paragraph at lines 317--318
+[][]\T1/lmr/bx/n/10 Definition 4.3.14 \T1/lmr/m/n/10 (Di-rect-ing ran-dom mea-s
+ure)\T1/lmr/bx/n/10 . []\T1/lmr/m/n/10 Given a se-quen-tial input-output
+ []
+
+LaTeX Font Info:    Trying to load font information for U+dsrom on input line 3
+23.
+(/usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
+File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
+)
+Overfull \hbox (4.98997pt too wide) in paragraph at lines 330--331
+[][]\T1/lmr/bx/n/10 Definition 4.3.15 \T1/lmr/m/n/10 (Weakly data-in-de-pen-den
+t)\T1/lmr/bx/n/10 . []\T1/lmr/m/n/10 A se-quen-tial input-output model
  []
 
 [70] (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [71]
-(./figures/do_model_representation_kernel.tikz)
-(./figures/do_model_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_rep_intermediate_kernel.tikz)
-(./figures/lookup_rep_intermediate_kernel.tikz) [72]
-(./figures/de_finetti_representation_kernel.tikz)
-(./figures/de_finetti_representation_kernel.tikz)
-(./figures/do_model_representation_kernel_pre.tikz)
-(./figures/do_model_representation_kernel.tikz)
-(./figures/do_model_representation_kernel_pre.tikz)
-(./figures/do_model_representation_kernel.tikz) [73]
-(./figures/commutative_exchange.tikz) (./figures/commutative_exchange.tikz)
-(./figures/commutative_exchange_with_swap.tikz)
-(./figures/commutative_exchange_with_swap_past_copy.tikz)
-(./figures/commutative_exchange_with_swap_symmed.tikz)
-(./figures/commutative_exchange_with_swap_cconted.tikz)
-(./figures/commutative_exchange_with_swap.tikz)
-(./figures/commutative_exchange_with_swap_past_copy.tikz)
-(./figures/commutative_exchange_with_swap_symmed.tikz)
-(./figures/commutative_exchange_with_swap_cconted.tikz)
-Overfull \hbox (35.85838pt too wide) detected at line 484
+Overfull \hbox (32.61264pt too wide) detected at line 345
 []
  []
 
-[74] (./figures/commutative_exchange_Q.tikz)
-(./figures/commutative_exchange_Q.tikz)
-(./figures/do_model_representation_kernel_nolocal.tikz)
-(./figures/do_model_representation_kernel_nolocal.tikz)
-(./figures/do_model_representation_kernel_z.tikz)
-(./figures/do_model_representation_kernel_z.tikz)
-(./figures/do_model_representation_kernel_zcut.tikz)
-(./figures/do_model_representation_kernel_zcut.tikz) [75]
-(./figures/do_model_representation_kernel_nolocal.tikz)
-(./figures/do_model_representation_kernel_nolocal.tikz)
-(./figures/do_model_representation_kernel_truncated.tikz)
-(./figures/do_model_representation_kernel_truncated.tikz)
-Overfull \hbox (12.80688pt too wide) in paragraph at lines 541--541
+
+Overfull \hbox (7.24493pt too wide) in paragraph at lines 358--360
+\T1/lmr/m/n/10 such that $\OT1/cmss/m/n/10 D[]$ \T1/lmr/m/n/10 is the $\OML/cmm
+/m/it/10 i$\T1/lmr/m/n/10 th oc-cur-rence of $\OML/cmm/m/it/10 j$\T1/lmr/m/n/10
+ ). De-fine $\OT1/cmss/m/n/10 R[] \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 ! \OMS/cms
+y/m/n/10 7! [][] \OT1/cmr/m/n/10 #[](\OML/cmm/m/it/10 !\OT1/cmr/m/n/10 )$
+ []
+
+[71] (./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [72]
+Overfull \hbox (2.55568pt too wide) in paragraph at lines 444--445
+\T1/lmr/m/n/10 pen-dent and iden-ti-cal re-sponse func-tions (Def []4.2.1[]) an
+d weak data-independence
+ []
+
+[73] (./figures/do_model_representation_conditional.tikz)
+(./figures/lookup_rep_intermediate_kernel.tikz)
+(./figures/lookup_rep_intermediate_kernel.tikz)
+(./figures/de_finetti_representation_conditional.tikz)
+(./figures/de_finetti_representation_conditional.tikz) [74]
+(./figures/de_finetti_representation_conditional_w.tikz)
+(./figures/de_finetti_representation_conditional_w.tikz)
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel_h.tikz)
+(./figures/lookup_representation_kernel_h.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz) [75]
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional_permuted.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional_permuted.tikz)
+(./figures/do_model_representation_conditional_deleted.tikz)
+(./figures/do_model_representation_conditional_deleted1.tikz)
+(./figures/do_model_representation_conditional_deleted.tikz)
+(./figures/do_model_representation_conditional_deleted1.tikz)
+Overfull \hbox (12.80688pt too wide) in paragraph at lines 531--531
 []\T1/lmr/bx/n/12 Conditionally in-de-pen-dent and iden-ti-cal re-sponse func-
  []
 
-[76] [77] (./figures/do_model_representation.tikz)
-(./figures/do_model_representation.tikz) (./figures/kernel_l_broken_down.tikz)
-(./figures/kernel_l_broken_down2.tikz) (./figures/kernel_l_broken_down3.tikz)
-(./figures/kernel_l_broken_down4.tikz) (./figures/kernel_l_broken_down.tikz)
-(./figures/kernel_l_broken_down2.tikz) (./figures/kernel_l_broken_down3.tikz)
-(./figures/kernel_l_broken_down4.tikz)
-(./figures/independence_inductive_base_0.tikz)
-(./figures/independence_inductive_base.tikz)
-(./figures/independence_inductive_base_0.tikz)
-(./figures/independence_inductive_base.tikz) [78]
-(./figures/independence_inductive.tikz)
-(./figures/independence_inductive_last.tikz)
-(./figures/independence_inductive.tikz)
-(./figures/independence_inductive_last.tikz)
-(./figures/do_model_representation_finite.tikz)
-(./figures/do_model_representation_finite.tikz)
-(./figures/do_model_representation_noprior.tikz)
-(./figures/do_model_representation_noprior.tikz)
+[76] (./figures/do_model_representation_with_h.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_with_h.tikz)
+(./figures/do_model_representation_with_h.tikz) [77]
+(./figures/do_model_representation_with_h.tikz)
+(./figures/do_model_representation_with_h.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation.tikz)
-(./figures/do_model_representation.tikz) [79]
-(./figures/do_model_rep_onechoice_combined.tikz)
-(./figures/do_model_rep_onechoice_combined.tikz)
-(./figures/do_model_rep_onechoice.tikz) (./figures/do_model_rep_onechoice.tikz)
-[80]
-Overfull \hbox (24.81929pt too wide) in paragraph at lines 704--706
-[][]\T1/lmr/bx/n/10 Example 4.3.17 \T1/lmr/m/n/10 (Back-door ad-just-ment)\T1/l
-mr/bx/n/10 . []\T1/lmr/m/n/10 If a se-quen-tial just-do model $\OT1/cmr/m/n/10 
-(\U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (\OT1/cmss/m/n/10 D\OML/cm
-m/m/it/10 ; \OT1/cmss/m/n/10 X\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmss/m/n
-/10 Y\OT1/cmr/m/n/10 )$
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation_permuted.tikz)
+(./figures/do_model_representation_permuted.tikz)
+(./figures/do_model_representation_deleted.tikz)
+(./figures/do_model_representation_deleted1.tikz)
+(./figures/do_model_representation_deleted.tikz)
+(./figures/do_model_representation_deleted1.tikz) [78] [79]
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+Overfull \hbox (80.81445pt too wide) detected at line 642
+[]
  []
 
-[81]
-Overfull \hbox (3.07741pt too wide) in paragraph at lines 739--739
+[80]
+Overfull \hbox (6.47412pt too wide) detected at line 650
+[]
+ []
+
+[81] [82] [83] [84]
+Overfull \hbox (3.07741pt too wide) in paragraph at lines 775--775
 \T1/lmr/bx/n/14.4 sponse func-tions with data-dependent in-puts 
  []
 
-[82] (./figures/response_conditional_comb.tikz)
 (./figures/response_conditional_comb.tikz)
+(./figures/response_conditional_comb.tikz)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [85]
 (./figures/causally_contractible_comb.tikz)
 (./figures/causally_contractible_comb.tikz)
 (./figures/comb_insert_complicated.tikz)
 (./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz)
 (./figures/comb_insert_complicated.tikz)
 (./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz)
-[83] (./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [84]
-Overfull \hbox (57.70961pt too wide) detected at line 814
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [86]
+(./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [87] [88]
+[89] (./figures/local_lhs.tikz) (./figures/local_rhs.tikz)
+(./figures/local_lhs.tikz) (./figures/local_rhs.tikz) [90]
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [91]
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [92]
+Overfull \hbox (0.96878pt too wide) detected at line 1047
 []
  []
 
-
-Overfull \hbox (14.65022pt too wide) in paragraph at lines 819--820
-\T1/lmr/m/n/10 Theorem []4.5.6[] gen-er-alises The-o-rem []4.3.15[] to mod-els 
-$\OT1/cmr/m/n/10 (\U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 D\OML/cm
-m/m/it/10 ; \OT1/cmss/m/n/10 Y\OT1/cmr/m/n/10 )$ \T1/lmr/m/n/10 with data-depen
-dent
- []
-
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [93]
+(./figures/lookup_representation_kernel_k.tikz)
+(./figures/lookup_representation_kernel_k.tikz)
+(./figures/do_model_representation_kernel_k.tikz)
+(./figures/do_model_representation_kernel_k.tikz)
+(./figures/lookup_rep_intermediate_kernel.tikz)
+(./figures/lookup_rep_intermediate_kernel.tikz) [94]
+(./figures/de_finetti_representation_kernel.tikz)
+(./figures/de_finetti_representation_kernel.tikz)
+(./figures/do_model_representation_kernel_pre.tikz)
+(./figures/do_model_representation_kernel_k.tikz)
+(./figures/do_model_representation_kernel_pre.tikz)
+(./figures/do_model_representation_kernel_k.tikz) [95]
+(./figures/do_model_representation_kernel.tikz)
+(./figures/do_model_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [96]
 (./figures/do_model_representation.tikz)
-(./figures/do_model_representation.tikz) [85]
-(./figures/do_model_representation_mu.tikz)
-(./figures/do_model_representation_mu.tikz)
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation_mu_k.tikz)
+(./figures/do_model_representation_mu_k.tikz)
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation_mu.tikz)
 (./figures/do_model_representation.tikz)
-(./figures/do_model_representation_mu.tikz) [86]
-Overfull \hbox (12.48546pt too wide) in paragraph at lines 891--891
-[]\T1/lmr/bx/n/14.4 Assessing de-ci-sion prob-lems for ex-change com-
- []
-
-
-Overfull \hbox (30.03914pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 4.6.  ASSESSING DECISION PROBLEMS FOR EXCHANGE COMMUTATIVITY \T
-1/lmr/m/n/10 87
- []
-
-[87] [88]
-Overfull \hbox (30.03914pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 4.6.  ASSESSING DECISION PROBLEMS FOR EXCHANGE COMMUTATIVITY \T
-1/lmr/m/n/10 89
- []
-
-[89]) (./chapter_5_other_causal_inference.tex [90]
-Overfull \hbox (30.03914pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10 4.6.  ASSESSING DECISION PROBLEMS FOR EXCHANGE COMMUTATIVITY \T
-1/lmr/m/n/10 91
- []
-
-[91] [92
-
-]
+(./figures/do_model_representation_mu.tikz) [97])
+(./chapter_5_other_causal_inference.tex [98]
 Chapter 5.
 
-Overfull \hbox (3.85442pt too wide) in paragraph at lines 6--6
-[]\T1/lmr/bx/n/14.4 Weaker as-sump-tions than causal con-tractibil-
- []
+LaTeX Warning: Reference `th:det_obs_to_cons' on page 99 undefined on input lin
+e 77.
 
-[93]
-Overfull \hbox (111.2077pt too wide) detected at line 30
-[]
- []
 
-[94]
-Overfull \hbox (4.41414pt too wide) in paragraph at lines 45--46
-[][]\T1/lmr/bx/n/10 Theorem 5.1.2. []\T1/lmr/m/it/10 Given just-do model $\U/ms
-b/m/n/10 P[]$ \T1/lmr/m/it/10 with $\U/msb/m/n/10 P[]$ \T1/lmr/m/it/10 causally
- con-tractible,
- []
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 107.
 
-[95]
+[99
+
+]
 Overfull \hbox (1.66454pt too wide) in paragraph at lines 119--120
 \T1/lmr/m/n/10 change-abil-ity'' for a de-ci-sion prob-lem re-gard-ing tak-ing 
 as-pirin to treat a headache
  []
 
-[96]
 Missing character: There is no – in font ec-lmr10!
- [97] [98] (./figures/index_independence_1.tikz)
+[100] [101] [102] (./figures/index_independence_1.tikz)
 (./figures/index_independence_2.tikz) (./figures/index_independence_1.tikz)
-(./figures/index_independence_2.tikz) [99]
+(./figures/index_independence_2.tikz)
 Overfull \hbox (0.57549pt too wide) in paragraph at lines 211--212
 []\T1/lmr/m/n/10 In par-tic-u-lar, for any $\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10
  2 \U/msb/m/n/10 N$\T1/lmr/m/n/10 , $\OML/cmm/m/it/10 j \OMS/cmsy/m/n/10 2 \OML
@@ -1479,11 +1475,11 @@ lmr/m/n/10 such that $\OML/cmm/m/it/10 ^^W\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^E
 
 (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
 (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
-(./figures/index_independence_5.tikz) (./figures/index_independence_5.tikz)
-[100] (./figures/kernel_fac_with_idents.tikz)
+[103] (./figures/index_independence_5.tikz)
+(./figures/index_independence_5.tikz) (./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
 (./figures/kernel_fac_with_idents.tikz)
-(./figures/kernel_fac_with_idents_indepped.tikz)
+(./figures/kernel_fac_with_idents_indepped.tikz) [104]
 (./figures/kernel_fac_with_idents_kernelised.tikz)
 (./figures/kernel_fac_with_idents_kernelised.tikz)
 (./figures/kernel_Q_fac_with_idents.tikz)
@@ -1493,24 +1489,24 @@ lmr/m/n/10 such that $\OML/cmm/m/it/10 ^^W\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^E
 (./figures/kernel_Q_fac_with_idents_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
-(./figures/kernel_Q_fac_with_idents_subbed.tikz) [101]
+(./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
 (./figures/kernel_P_indep.tikz) (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
-(./figures/kernel_P_indep.tikz) [102] [103] [104]
+(./figures/kernel_P_indep.tikz) [105] [106] [107] [108]
 Overfull \hbox (84.4473pt too wide) detected at line 381
 []
  []
 
-[105]
+
 Overfull \hbox (62.47636pt too wide) detected at line 405
 []
  []
 
-) (./main.bbl
+[109]) (./main.bbl
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-1.
+7.
  (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1518,155 +1514,154 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [106]
-Underfull \hbox (badness 6284) in paragraph at lines 125--135
+ [110]
+Underfull \hbox (badness 6284) in paragraph at lines 126--136
 []\T1/lmr/m/n/10 A. P. Dawid.  Causal In-fer-ence with-out Coun-ter-fac-tu-als.
   \T1/lmr/m/it/10 Jour-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--135
+Underfull \hbox (badness 10000) in paragraph at lines 126--136
 \T1/lmr/m/it/10 nal of the Amer-i-can Sta-tis-ti-cal As-so-ci-a-tion\T1/lmr/m/n
 /10 , 95(450):407--424,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--135
+Underfull \hbox (badness 10000) in paragraph at lines 126--136
 \T1/lmr/m/n/10 June 2000.  ISSN 0162-1459.  doi: $10 . 1080 / 01621459 . 2000 .
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--135
+Underfull \hbox (badness 10000) in paragraph at lines 126--136
 \T1/lmr/m/n/10 10474210$.  URL []$\T1/lmtt/m/n/10 https : / / www . tandfonline
  . com / doi / abs / 10 . 1080 /
  []
 
 
-Underfull \hbox (badness 5893) in paragraph at lines 125--135
+Underfull \hbox (badness 5893) in paragraph at lines 126--136
 \T1/lmtt/m/n/10 01621459 . 2000 . 10474210$[]\T1/lmr/m/n/10 .  Pub-lisher: Tay-
 lor & Fran-cis _eprint:
  []
 
-[107]
 Missing character: There is no ’ in font ec-lmr10!
 
-Underfull \hbox (badness 1490) in paragraph at lines 159--168
+Underfull \hbox (badness 1490) in paragraph at lines 160--169
 []\T1/lmr/m/n/10 P. Di-a-co-nis and D. Freed-man.  Fi-nite Ex-change-able Se-qu
 ences.  \T1/lmr/m/it/10 The
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--168
+Underfull \hbox (badness 10000) in paragraph at lines 160--169
 \T1/lmr/m/it/10 An-nals of Prob-a-bil-ity\T1/lmr/m/n/10 , 8(4):745--764, Au-gus
 t 1980.  ISSN 0091-
  []
 
 
-Underfull \hbox (badness 6078) in paragraph at lines 159--168
+Underfull \hbox (badness 6078) in paragraph at lines 160--169
 \T1/lmr/m/n/10 1798, 2168-894X.  doi: $10 . 1214 / aop / 1176994663$.  URL []$\
 T1/lmtt/m/n/10 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--168
+Underfull \hbox (badness 10000) in paragraph at lines 160--169
 \T1/lmtt/m/n/10 / / projecteuclid . org / journals / annals-[]of-[]probability 
 / volume-[]8 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--168
+Underfull \hbox (badness 10000) in paragraph at lines 160--169
 \T1/lmtt/m/n/10 issue-[]4 / Finite-[]Exchangeable-[]Sequences / 10 . 1214 / aop
  / 1176994663 .
  []
 
-
-Underfull \hbox (badness 2245) in paragraph at lines 170--180
+[111]
+Underfull \hbox (badness 2245) in paragraph at lines 171--181
 []\T1/lmr/m/n/10 Dean Eck-les and Ey-tan Bak-shy.  Bias and High-Dimensional Ad
 -just-
  []
 
 
-Underfull \hbox (badness 1264) in paragraph at lines 170--180
+Underfull \hbox (badness 1264) in paragraph at lines 171--181
 \T1/lmr/m/n/10 1459.  doi: $10 . 1080 / 01621459 . 2020 . 1796393$.  URL []$\T1
 /lmtt/m/n/10 https : / / doi . org /
  []
 
-[108]
-Underfull \hbox (badness 4193) in paragraph at lines 306--314
+[112]
+Underfull \hbox (badness 4193) in paragraph at lines 287--295
 \T1/lmr/m/n/10 CBO9781139025751$.  URL []$\T1/lmtt/m/n/10 https : / / www . cam
 bridge . org / core / books /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 306--314
+Underfull \hbox (badness 10000) in paragraph at lines 287--295
 \T1/lmtt/m/n/10 causal-[]inference-[]for-[]statistics-[]social-[]and-[]biomedic
 al-[]sciences /
  []
 
-[109]
 Missing character: There is no ł in font ec-lmr10!
 Missing character: There is no ń in font ec-lmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 350--359
+Underfull \hbox (badness 10000) in paragraph at lines 331--340
 \T1/lmtt/m/n/10 www . cambridge . org / core / journals / political-[]analysis 
 / article / abs /
  []
 
 
-Overfull \hbox (111.18622pt too wide) in paragraph at lines 350--359
+Overfull \hbox (111.18622pt too wide) in paragraph at lines 331--340
 \T1/lmtt/m/n/10 why-[]experimenters-[]might-[]not-[]always-[]want-[]to-[]random
 ize-[]and-[]what-[]they-[]could-[]do-[]instead /
  []
 
+[113]
 Missing character: There is no ’ in font ec-lmr10!
 
-Underfull \hbox (badness 2334) in paragraph at lines 372--380
+Underfull \hbox (badness 2334) in paragraph at lines 353--361
 []$\T1/lmtt/m/n/10 http : / / journals . sagepub . com / doi / 10 . 1177 / 2047
 487320936787$[]\T1/lmr/m/n/10 .  Pub-
  []
 
-[110]
 Missing character: There is no – in font ec-lmr10!
 
-Underfull \hbox (badness 1009) in paragraph at lines 433--441
+Underfull \hbox (badness 1009) in paragraph at lines 414--422
 \T1/lmr/m/it/10 Con-trol\T1/lmr/m/n/10 , 21(2):87--91, March 2012.  ISSN 0964-4
 563, 1468-3318.  doi:
  []
 
-[111]
-Underfull \hbox (badness 3503) in paragraph at lines 514--521
+[114]
+Underfull \hbox (badness 3503) in paragraph at lines 495--502
 []\T1/lmr/m/n/10 Brian Skyrms.  Causal De-ci-sion The-ory.  \T1/lmr/m/it/10 The
  Jour-nal of Phi-los-o-
  []
 
 
-Underfull \hbox (badness 1424) in paragraph at lines 514--521
+Underfull \hbox (badness 1424) in paragraph at lines 495--502
 \T1/lmr/m/it/10 phy\T1/lmr/m/n/10 , 79(11):695--711, Novem-ber 1982.  doi: $10 
 . 2307 / 2026547$.  URL
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 514--521
+Underfull \hbox (badness 10000) in paragraph at lines 495--502
 []$\T1/lmtt/m/n/10 https : / / www . pdcnet . org / pdc / bvdb . nsf / purchase
  ? openform & fp = jphil &
  []
 
+[115]
 Missing character: There is no ’ in font ec-lmr10!
 
-Underfull \hbox (badness 3000) in paragraph at lines 552--559
+Underfull \hbox (badness 3000) in paragraph at lines 533--540
 []\T1/lmr/m/n/10 N. N. Vorobev.  Con-sis-tent Fam-i-lies of Mea-sures and Their
  Ex-ten-
  []
 
-[112]) [113] [114]
+) [116] [117]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 222.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 222.
  (./main.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 222.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 222.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 6E487BACBF611F4DAE88883F724B3467;4320.
+(rerunfilecheck)             Checksum: C29344DC99860CAE5E446FD6CC8F231D;4035.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1677,12 +1672,12 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 222.
  ) 
 Here is how much of TeX's memory you used:
- 30893 strings out of 479819
- 593404 string characters out of 5895847
- 927948 words of memory out of 5000000
- 46834 multiletter control sequences out of 15000+600000
- 637857 words of font info for 166 fonts, out of 8000000 for 9000
+ 30924 strings out of 479819
+ 593895 string characters out of 5895847
+ 939288 words of memory out of 5000000
+ 46849 multiletter control sequences out of 15000+600000
+ 638721 words of font info for 175 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 68i,17n,83p,1626b,1257s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,20n,83p,1626b,1059s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (114 pages, 1248032 bytes).
+Output written on main.xdv (117 pages, 1308024 bytes).

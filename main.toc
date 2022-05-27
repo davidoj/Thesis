@@ -46,25 +46,29 @@
 \contentsline {subsection}{\numberline {3.3.5}Variable sequences and partial order}{57}{subsection.3.3.5}%
 \contentsline {subsection}{\numberline {3.3.6}Decision procedures}{57}{subsection.3.3.6}%
 \contentsline {chapter}{\numberline {4}Repeatable decision problems}{59}{chapter.4}%
+\contentsline {paragraph}{Chapter outline}{60}{section*.17}%
 \contentsline {section}{\numberline {4.1}Previous work}{60}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Response functions}{61}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Causally contractible Markov kernels}{63}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Properties of causally contractible Markov kernels}{64}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Representation theorems}{69}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.3}Causal contractibility}{63}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Causally contractible sequences}{64}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Representation theorem}{69}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Data-independent inputs}{76}{subsection.4.3.3}%
-\contentsline {subsubsection}{Examples}{80}{section*.17}%
-\contentsline {subsubsection}{Example: body mass index}{82}{section*.18}%
-\contentsline {section}{\numberline {4.4}Varying inputs}{82}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Data-dependent inputs}{82}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Combs}{83}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Response conditionals in models with data dependent actions}{85}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Combs are the output of the ``fix'' operation}{87}{subsection.4.5.3}%
-\contentsline {section}{\numberline {4.6}Assessing decision problems for exchange commutativity}{87}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Causal contractibility can be undermined by a lack of control}{89}{subsection.4.6.1}%
-\contentsline {chapter}{\numberline {5}Other causal modelling frameworks}{93}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Weaker assumptions than causal contractibility}{93}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Individual-level causal contractibility}{96}{subsection.5.1.1}%
-\contentsline {subsubsection}{References to individual-level causal contractibility}{96}{section*.21}%
-\contentsline {subsubsection}{Unique identifiers}{97}{section*.22}%
-\contentsline {subsubsection}{Individual-level causal contractibility and unobserved confounding}{98}{section*.23}%
-\contentsline {subsubsection}{Individual-level causal contractibility and ordinary causal contractibility}{99}{section*.24}%
+\contentsline {subsection}{\numberline {4.3.4}Examples and discussion}{80}{subsection.4.3.4}%
+\contentsline {paragraph}{Passive observations and strategic behaviour}{80}{section*.18}%
+\contentsline {paragraph}{Two kinds of data}{81}{section*.19}%
+\contentsline {paragraph}{Weaker assumptions}{82}{section*.20}%
+\contentsline {paragraph}{Backdoor adjustment}{83}{section*.21}%
+\contentsline {paragraph}{Choices should be under the decision maker's control}{83}{section*.22}%
+\contentsline {section}{\numberline {4.4}Data-dependent inputs}{85}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Combs}{86}{subsection.4.4.1}%
+\contentsline {subsubsection}{Aside: combs might be the output of the ``fix'' operation}{89}{section*.24}%
+\contentsline {subsection}{\numberline {4.4.2}Representation of data-dependent inputs}{89}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Causally contractible Markov kernels}{90}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Representation of causally contractible kernels}{90}{subsection.4.5.1}%
+\contentsline {section}{\numberline {4.6}Discussion}{98}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Other causal modelling frameworks}{99}{chapter.5}%
+\contentsline {subsection}{\numberline {5.0.1}Individual-level causal contractibility}{100}{subsection.5.0.1}%
+\contentsline {subsubsection}{References to individual-level causal contractibility}{100}{section*.27}%
+\contentsline {subsubsection}{Unique identifiers}{101}{section*.28}%
+\contentsline {subsubsection}{Individual-level causal contractibility and unobserved confounding}{102}{section*.29}%
+\contentsline {subsubsection}{Individual-level causal contractibility and ordinary causal contractibility}{102}{section*.30}%

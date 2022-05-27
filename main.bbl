@@ -1,14 +1,9 @@
-\begin{thebibliography}{70}
+\begin{thebibliography}{67}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
-
-\bibitem[noa(1995)]{noauthor_holy_1995}
-\emph{Holy {Bible} : {Contemporary} {English} {Version}}.
-\newblock New York : American Bible Society, [1995] ©1995, 1995.
-\newblock URL \url{https://search.library.wisc.edu/catalog/999953290302121}.
 
 \bibitem[Aldous(1981)]{aldous_representations_1981}
 David~J. Aldous.
@@ -36,17 +31,23 @@ A.~V. Banerjee, S.~Chassang, and E.~Snowberg.
 \newblock URL
   \url{https://www.sciencedirect.com/science/article/pii/S2214658X16300071}.
 
+\bibitem[Banerjee et~al.(2020)Banerjee, Chassang, Montero, and
+  Snowberg]{banerjee_theory_2020}
+Abhijit~V. Banerjee, Sylvain Chassang, Sergio Montero, and Erik Snowberg.
+\newblock A {Theory} of {Experimenters}: {Robustness}, {Randomization}, and
+  {Balance}.
+\newblock \emph{American Economic Review}, 110\penalty0 (4):\penalty0
+  1206--1230, April 2020.
+\newblock ISSN 0002-8282.
+\newblock \doi{10.1257/aer.20171634}.
+\newblock URL \url{https://www.aeaweb.org/articles?id=10.1257/aer.20171634}.
+
 \bibitem[Bareinboim et~al.(2020)Bareinboim, Correa, Ibeling, and
   Icard]{barenboim_foundations_2020}
 Elias Bareinboim, Juan~D. Correa, Duligur Ibeling, and Thomas Icard.
 \newblock On {Pearl's} hierarchy and the foundations of causal inference.
 \newblock Technical report, 2020.
 \newblock URL \url{https://causalai.net/r60.pdf}.
-
-\bibitem[Barto(1998)]{barto_reinforcement_1998}
-Richard S. Sutton {and} Andrew~G. Barto.
-\newblock Reinforcement {Learning}: {An} {Introduction}, 1998.
-\newblock URL \url{http://jmvidal.cse.sc.edu/lib/sutton98a.html}.
 
 \bibitem[Blackwell(1979)]{blackwell_theory_1979}
 David~A. Blackwell.
@@ -219,16 +220,6 @@ Tobias Fritz.
 \newblock URL
   \url{https://www.sciencedirect.com/science/article/pii/S0001870820302656}.
 
-\bibitem[Gallow(2020)]{gallow_causal_2020}
-J.~Dmitri Gallow.
-\newblock The {Causal} {Decision} {Theorist}'s {Guide} to {Managing} the
-  {News}.
-\newblock \emph{The Journal of Philosophy}, 117\penalty0 (3):\penalty0
-  117--149, March 2020.
-\newblock \doi{10.5840/jphil202011739}.
-\newblock URL
-  \url{https://www.pdcnet.org/pdc/bvdb.nsf/purchase?openform&fp=jphil&id=jphil_2020_0117_0003_0117_0149}.
-
 \bibitem[Gordon et~al.(2018)Gordon, Zettelmeyer, Bhargava, and
   Chapsky]{gordon_comparison_2018}
 Brett~R. Gordon, Florian Zettelmeyer, Neha Bhargava, and Dan Chapsky.
@@ -265,16 +256,6 @@ J.~Y. Halpern.
 \newblock ISSN 1076-9757.
 \newblock \doi{10.1613/jair.536}.
 \newblock URL \url{https://www.jair.org/index.php/jair/article/view/10223}.
-
-\bibitem[Hernán and Taubman(2008)]{hernan_does_2008}
-M.~A. Hernán and S.~L. Taubman.
-\newblock Does obesity shorten life? {The} importance of well-defined
-  interventions to answer causal questions.
-\newblock \emph{International Journal of Obesity}, 32\penalty0 (S3):\penalty0
-  S8--S14, August 2008.
-\newblock ISSN 1476-5497.
-\newblock \doi{10.1038/ijo.2008.82}.
-\newblock URL \url{https://www.nature.com/articles/ijo200882}.
 
 \bibitem[Hernán(2012)]{hernan_beyond_2012}
 Miguel~A Hernán.
