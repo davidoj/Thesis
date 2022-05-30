@@ -40,10 +40,10 @@ If I haven't taken aspirin, then there's nothing I can actually choose to do to 
 People who need to make a decisions might (and often do) make them with no mathematical reasoning at all. However, this work is concerned with making decisions assisted by mathematical reasoning. In order to reason mathematically about a decision to be made, we assume that somehow, we have access to two sets:
 \begin{enumerate}
     \item There is a set of choices $C$ that need to be compared
-    \item There is a set of consequences $\Omega$ along with a utility function $u:\Omega\to \mathbb{R}$
+    \item There is a set of consequences $\Omega$ along with a utility function $u:\Omega\to \mathbb{R}$, which measures the goodness of each $\omega\in \Omega$
 \end{enumerate}
 
-Given some means of relating between $C$ and $\Omega$, the order on $\Omega$ will induce some order on $C$. There are a great number of different ways that of relating elements of $C$ to $\Omega$. For example, a binary relation between the two sets will, given a total order on $\Omega$, induce a preorder on $C$. However, in this work the assumption is made that the relevant kinds of relations are either
+Given some means of relating between $C$ and $\Omega$, the order on $\Omega$ induced by $u$ will induce some order on $C$. There are a great number of different ways that of relating elements of $C$ to elements of $\Omega$. For example, a binary relation between the two sets will, given a total order on $\Omega$, induce a preorder on $C$. However, in this work the assumption is made that the relevant kinds of relations are either
 \begin{itemize}
     \item A Markov kernel $C\kto \Omega$
     \item A Markov kernel $C\times H\kto \Omega$ for some set of hypotheses $H$
@@ -56,7 +56,7 @@ More relevant to the question of modelling decision problems are a number of wor
 
 \subsection{Formal definitions}\label{sec:probability_set_models}
 
-We suppose that we are, at the outset, given a few basic ingredients: a set of choices $C$, a set of consequences $\Omega$ and a utility function $u:\Omega\to \mathbb{R}$. We call these ingredients a ``decision problem''.
+As mentioned above, we suppose that we are given a few basic ingredients: a set of choices $C$, a set of consequences $\Omega$ and a utility function $u:\Omega\to \mathbb{R}$. We call these ingredients a ``decision problem''.
 
 \begin{definition}[Decision problem]
 A decision problem is a triple $(C,\Omega,u)$ consisting of a measurable set $(C,\sigalg{C})$ of choices, $(\Omega,\sigalg{F})$ consequences and a utility function $u:\Omega\to \mathbb{R}$.
@@ -72,16 +72,20 @@ Given a decision problem $(C,\Omega,u)$, a \emph{choices only model} is a functi
 Given a decision problem $(C,\Omega,u)$, a model with \emph{choices and hypotheses} is a function $C\times H\kto \Omega$ for some hypothesis set $H$.
 \end{definition}
 
-Both types of models induce probability sets.
+By convention, we use $\prob{P}_\cdot$ with the subscript $\cdot$ to denote a model, subscripts $\prob{P}_\alpha$ where $\alpha$ is an element of the domain to refer to the model evaluated at $\alpha$, and the subscript $\prob{P}_{C\times H}$ to refer to the image of the model.
 
-\begin{definition}[Induced probability set]\label{def:induced_pset_1}
-Given a decision problem $(C,\Omega,u)$ and a model $\prob{P}_\cdot:C\times H\kto \Omega$, the induced probability set is $\prob{P}_{C\times H}:=\{\prob{P}_\alpha|\alpha\in C\times H\}$.
-\end{definition}
+\begin{notation}[Model]
+Given a decision problem $(C,\Omega,u)$ and a model $\prob{P}_\cdot:C\times H\kto \Omega$, $\prob{P}_\alpha:=\prob{P}_\cdot(\alpha)$.
+\end{notation}
+
+\begin{notation}[Image of a model]\label{def:induced_pset_1}
+Given a decision problem $(C,\Omega,u)$ and a model $\prob{P}_\cdot:C\times H\kto \Omega$, the $\prob{P}_{C\times H}:=\{\prob{P}_\alpha|\alpha\in C\times H\}$ is the image of the model.
+\end{notation}
 
 
 \section{Representation theorems for decision problems }\label{sec:how_represent_conseqeunces}
 
-We assume decision models are probabilistic functions $C\to \Delta(\Omega)$ for some sample space $(\Omega,\sigalg{F})$ of ``consequences''. Probability distributions, and the principle of expected utility in particular, are common choices for evaluation under uncertainty. Representation theorems offer a more formal justification for this choice; they propose a collection of axioms regulating the sets of evaluations we want some decision evaluation model to admit, and then show that this model can be represented with (for example) a probability distribution along with a utility function. The desirability of some of the axioms in these theorems is not obvious. 
+We assume decision models are probabilistic functions $C\kto \Omega$ for some sample space $(\Omega,\sigalg{F})$ of ``consequences''. Probability distributions, and the principle of expected utility in particular, are common choices for evaluation under uncertainty. Representation theorems offer a more formal justification for this choice; they propose a collection of axioms regulating the sets of evaluations we want some decision evaluation model to admit, and then show that this model can be represented with (for example) a probability distribution along with a utility function. The desirability of some of the axioms in these theorems is not obvious. 
 
 Here we review the representation theorems of \citet{savage_foundations_1954} and \citet{jeffrey_logic_1990}. We establish that both imply that choices are compared using a probabilistic function $C\to \Delta(\Omega)$ for a suitable selection of $C$ and $(\Omega,\sigalg{F})$, along with a ``desirability'' function which differs in type between the two theorems.
 
