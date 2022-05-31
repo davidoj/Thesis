@@ -83,9 +83,11 @@ Given a decision problem $(C,\Omega,u)$ and a model $\prob{P}_\cdot:C\times H\kt
 \end{notation}
 
 
-\section{Representation theorems for decision problems }\label{sec:how_represent_conseqeunces}
+\section{Axiomatic theories of decision making}\label{sec:how_represent_conseqeunces}
 
-We assume decision models are probabilistic functions $C\kto \Omega$ for some sample space $(\Omega,\sigalg{F})$ of ``consequences''. Probability distributions, and the principle of expected utility in particular, are common choices for evaluation under uncertainty. Representation theorems offer a more formal justification for this choice; they propose a collection of axioms regulating the sets of evaluations we want some decision evaluation model to admit, and then show that this model can be represented with (for example) a probability distribution along with a utility function. The desirability of some of the axioms in these theorems is not obvious. 
+The question of how decision problems ought to be represented has received substantial attention. One of the main lessons from this literature relevant to our project is that there is substantial agreement regarding the \emph{type} of model that should be used to evaluate choices, and that type of model is a function that maps from the set of choices to probability distributions over the set of consequences, which is precisely the type of model we have adopted for this purpose.
+
+Beyond that, there are a number of different axiomatisations and theories of decision making, and the differences between them are subtle. In my view, the formal differences between the theories obscures the main disagreements between the proponents, which is not about not really about the type of the models that people should use. Instead, it's centered on the question: if someone needs to make a decision and they want to do it with a formal model, how should they determine the right kind of model for the problem given what they know? Much of the disagreement is seemingly esoteric and centered on contrived problems, but this question of how causal models should be constructed is really one of the fundamental questions of the entire field of causal inference. 
 
 Here we review the representation theorems of \citet{savage_foundations_1954} and \citet{jeffrey_logic_1990}. We establish that both imply that choices are compared using a probabilistic function $C\to \Delta(\Omega)$ for a suitable selection of $C$ and $(\Omega,\sigalg{F})$, along with a ``desirability'' function which differs in type between the two theorems.
 
