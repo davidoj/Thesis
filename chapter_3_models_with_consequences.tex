@@ -3,7 +3,7 @@
 
 \chapter{Models with choices and consequences}\label{ch:2p_statmodels}
 
-Probability sets, introduced in Chapter \ref{ch:tech_prereq}, will be used to model \emph{decision problems}, which are problems that involve choices and consequences. In such problems, three things are given: a set of options, one of which must be chosen, a set of consequences and a means of judging which consequences are more desirable than others. Such a problem requires an understanding of how each choice corresponds to consequences, as far as this is able to be understood. The fundamental type of problem studied in this thesis is how to map choices to consequences. 
+Probability sets, introduced in Chapter \ref{ch:tech_prereq}, will be used to model \emph{decision problems}, which are problems that involve choices and consequences. In such problems, three things are given: a set of options (one of which must be chosen), a set of consequences and a means of judging which consequences are more desirable than others. Such a problem requires an understanding of how each choice corresponds to consequences, as far as this is able to be understood. The fundamental type of problem studied in this thesis is how to map choices to consequences. 
 
 In practice, causal inference is concerned with a wider variety of problems than this. A great deal of empirical causal analysis is concerned with problems a step removed from this: the purpose is to advise other decision makers on a course of action rather than to recommend an action directly. Nevertheless, a great deal of causal analysis is ultimately motivated by problems involving a choice among options, even if the analysis only addresses such problems indirectly. Section \ref{sec:whats_the_point} briefly reviews the attitude of prominent theorists of causal inference towards decision problems. Subsequently, it presents the basic definition of a decision problem, and two different kinds of models that can be used to represent the relationship between choices and consequences.
 
@@ -13,7 +13,7 @@ We aren't trying to claim that this is the only possible way to formalise decisi
 
 Section \ref{sec:how_represent_conseqeunces} describes in particular detail the connections between \emph{statistical decision theory} \citep{wald_statistical_1950} and probability set models of decision problems. We are able to demonstrate a close connection between probability set models of decision problems and the classical statistical notion of \emph{risk} of a decision rule, even though causal considerations are often not central to classical statistics. Secondly, the kind of probability set model -- which we call a \emph{see-do model} -- shows up again in Chapter \ref{ch:evaluating_decisions} where we consider the question of when a probability set model supports a certain notion of ``the causal effect of a variable'', and again in Chapter \ref{ch:other_causal_frameworks} where we consider the kinds of probability set models induced by other causal reasoning frameworks.
 
-The formal definition of a variable in a probabilistic model is straightforward (Definition \ref{def:variable}). However, in practice the definitions of variables often includes informal content that enables the interpretation of a probabilistic model. In the field of causal models, one is likely to come across many different ``kinds'' of variables: for example, observed variables, unobserved variables, counterfactual variables and causal variables all play important roles in various causal inference frameworks. However, there is no formal distinction between these different kinds of variables -- Definition \ref{def:variable} applies to them all. Section \ref{sec:variable} is an attempt to clarify an understanding of the informal role of variables as ``pointing to the parts of the world that the model is about''. In comparison to the wide variety of variable types encountered in the causal literature, it offers a very limited theory of the informal semantics of variables. In short, observed variables correspond to a measurement procedure (in a sense that will be made precise), and unobserved variables do not.
+The formal definition of a variable in a probabilistic model is well known (Definition \ref{def:variable}). However, in practice the definitions of variables often includes informal content that enables the interpretation of a probabilistic model. In the field of causal models, one is likely to come across many different ``kinds'' of variables: for example, observed variables, unobserved variables, counterfactual variables and causal variables all play important roles in various causal inference frameworks. However, there is no formal distinction between these different kinds of variables -- Definition \ref{def:variable} applies to them all. Section \ref{sec:variable} is an attempt to clarify an understanding of the informal role of variables as ``pointing to the parts of the world that the model is about''. In comparison to the wide variety of variable types encountered in the causal literature, it offers a very limited theory of the informal semantics of variables. In short, observed variables correspond to a measurement procedure (in a sense that will be made precise), and unobserved variables do not.
 
 \section{What is the point of causal inference?}\label{sec:whats_the_point}
 
@@ -48,7 +48,7 @@ Given some means of relating between $C$ and $\Omega$, the order on $\Omega$ ind
     \item A Markov kernel $C\kto \Omega$
     \item A Markov kernel $C\times H\kto \Omega$ for some set of hypotheses $H$
 \end{itemize}
-That is, for each choice $c\in C$ we have either a probability distribution in $\Delta(\Omega)$ or a set of probability distributions indexed by $h\in H$. Sections \ref{sec:cons_to_sdp} and \ref{sec:cc_theorem} discuss each choice in more detail. Where it is needed, we also assume that a utility function $\Omega\to \mathbb{R}$ is available and that choices are evaluated using the principle of expected utility.
+That is, for each choice $c\in C$ we have either a probability distribution in $\Delta(\Omega)$ or a set of probability distributions indexed by $h\in H$. Sections \ref{sec:cons_to_sdp} and \ref{sec:cc_theorem} discuss each choice in more detail. Where it is needed, we also assume that a utility function $u:\Omega\to \mathbb{R}$ is available and that choices are evaluated using the principle of expected utility.
 
 Usually, someone confronted with a decision problem will not know for certain the consequences that arise from any given choice, and yet they may have some views about which consequences are more likely than others. Probability has a long and successful history of representing uncertain knowledge of this type. There are many works that aim to show that any method for representing uncertain knowledge that adheres to certain principles must be a probability distribution \citet{de_finetti_foresight_1992,horvitz_framework_1986}, along with criticism of these principles \citet{halpern_counter_1999}. A notable alternative to representing uncertainty with a single probability distribution represents uncertainty with a set of probability distributions, which is a type of \emph{vague probability} model \citep{walley_statistical_1991}. 
 
@@ -56,21 +56,23 @@ More relevant to the question of modelling decision problems are a number of wor
 
 \subsection{Formal definitions}\label{sec:probability_set_models}
 
-As mentioned above, we suppose that we are given a few basic ingredients: a set of choices $C$, a set of consequences $\Omega$ and a utility function $u:\Omega\to \mathbb{R}$. We call these ingredients a ``decision problem''.
+As mentioned above, we suppose that we are given a few basic ingredients: a set of choices $C$ equipped with an algebra $\sigalg{C}$, a set of consequences $\Omega$ with an algebra of events $\sigalg{F}$ and a utility function $u:\Omega\to \mathbb{R}$. We call these ingredients a ``decision problem''.
 
 \begin{definition}[Decision problem]
 A decision problem is a triple $(C,\Omega,u)$ consisting of a measurable set $(C,\sigalg{C})$ of choices, $(\Omega,\sigalg{F})$ consequences and a utility function $u:\Omega\to \mathbb{R}$.
 \end{definition}
 
-Our task is to find a \emph{model} that relates $C$ to $\Omega$. We assume two forms of model -- a \emph{sharp model} associates each choice with a unique probability distribution, and a \emph{vague model} associates each choice with a set of probability distributions.
+Our task is to find a \emph{model} that relates choice $C$ to consequences $\Omega$. We assume two forms of model -- a \emph{sharp model} associates each choice with a unique probability distribution, and a \emph{vague model} associates each choice with a set of probability distributions.
 
-\begin{definition}[Choices only model]
+\begin{definition}[Choices only model]\label{def:ch_only}
 Given a decision problem $(C,\Omega,u)$, a \emph{choices only model} is a function $C\kto \Omega$.
 \end{definition}
 
-\begin{definition}[Choices and hypotheses model]
+\begin{definition}[Choices and hypotheses model]\label{def:ch_and_hyp}
 Given a decision problem $(C,\Omega,u)$, a model with \emph{choices and hypotheses} is a function $C\times H\kto \Omega$ for some hypothesis set $H$.
 \end{definition}
+
+
 
 By convention, we use $\prob{P}_\cdot$ with the subscript $\cdot$ to denote a model, subscripts $\prob{P}_\alpha$ where $\alpha$ is an element of the domain to refer to the model evaluated at $\alpha$, and the subscript $\prob{P}_{C\times H}$ to refer to the image of the model.
 
@@ -83,15 +85,18 @@ Given a decision problem $(C,\Omega,u)$ and a model $\prob{P}_\cdot:C\times H\kt
 \end{notation}
 
 
-\section{Axiomatic theories of decision making}\label{sec:how_represent_conseqeunces}
+\section{Theories of decision making}\label{sec:how_represent_conseqeunces}
 
-The question of how decision problems ought to be represented has received substantial attention. One of the main lessons from this literature relevant to our project is that there is substantial agreement regarding the \emph{type} of model that should be used to evaluate choices, and that type of model is a function that maps from the set of choices to probability distributions over the set of consequences, which is precisely the type of model we have adopted for this purpose.
+The question of how decision problems ought to be represented has received substantial attention. We survey a number of key theories from this literature, and point out connections with our scheme:
+\begin{itemize}
+    \item Every theory surveyed proposes that choices are evaluated by way of a probabilistic map from choices to consequences, along with some measure of the desirability of consequences
+    \item Most theories have some analogue of hypotheses (Definition \ref{def:ch_and_hyp}, see also Chapter \ref{ch:evaluating_decisions})
+    \item Most theories have some notion of a ``prior'' over hypotheses, which induces a choice only model (Definition \ref{def:ch_only})
+\end{itemize}
 
-Beyond that, there are a number of different axiomatisations and theories of decision making, and the differences between them are subtle. In my view, the formal differences between the theories obscures the main disagreements between the proponents, which is not about not really about the type of the models that people should use. Instead, it's centered on the question: if someone needs to make a decision and they want to do it with a formal model, how should they determine the right kind of model for the problem given what they know? Much of the disagreement is seemingly esoteric and centered on contrived problems, but this question of how causal models should be constructed is really one of the fundamental questions of the entire field of causal inference. 
+Statistical Decision Theory (SDT), introduced by \citet{wald_statistical_1950}, further proves a \emph{complete class theorem}, which shows that, under some conditions, choices that are admissible (Definition \ref{def:admissible_decision}) are also optimal with respect to some prior over hypotheses. That is, any admissible decision under a choices and hypotheses model can be rationalised as a decision under a choices only model with some prior (though, importantly, this \emph{doesn't} establish that proposing a prior is always the appropriate way to go about making a decision). We show that SDT corresponds to a particular class of models we call conditionally independent see-do models (Definition \ref{def:ci_see_do_model}) combined with the principle of expected utility maximisation, and that the complete class theorem to a broader class of see-do models.
 
-Here we review the key representation theorems of \citet{savage_foundations_1954} and \citet{jeffrey_logic_1990}, along with the theory of \citet{lewis_causation_1986} that was presented as an alternative to Jeffrey's. All theories have a  We establish that both imply that choices are compared using a probabilistic function $C\to \Delta(\Omega)$ for a suitable selection of $C$ and $(\Omega,\sigalg{F})$, along with a ``desirability'' function which differs in type between the two theorems.
-
-Lewis' \emph{causal decision theory} is also briefly reviewed. While the particular considerations that motivated this theory are not examined, this theory introduces \emph{dependency hypotheses}, which play a key role in the rest of this work.
+The different theories of decision making are associated with differences of opinion on the question of how someone faced with a decision problem should go about constructing a model to help them make their decision. We don't attempt to resolve this debate, but, because the question of how to construct a causal model is an important one, we will explain it in Section \ref{sec:how_to_construct}. The questions raised are similar to questions considered in the following chapter, particularly in the examples \ref{pgph:two_kinds} and \ref{pgph:weaker_assumptions}.
 
 The following discussion will often make reference to \emph{complete preference relations}. A complete preference relation is a relation $\succ,\prec,\sim$ on a set $A$ such that for any $a,b,c$ in $A$ we have:
 \begin{itemize}
@@ -107,20 +112,26 @@ Define $a\preceq b$ to mean $a\prec b$ or $a \sim b$.
 
 \subsection{von Neumann-Morgenstern utility}
 
-\citet{von_neumann_theory_1944} proved that when the \emph{vNM axioms} hold (not defined here; see the original reference or \citet{steele_decision_2020}), an agent's preferences between ``lotteries'' (probability distributions in $\Delta(\Omega)$ for some $(\Omega,\sigalg{F})$) can be represented as the comparison of the expected value under each lottery of a utility function $u$ unique up to affine transformation. That is, for lotteries $\prob{P}_\alpha$ and $\prob{P}_{\alpha'}$, there exists some $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that $\mathbb{E}_{\prob{P}_\alpha}[u]> \mathbb{E}_{\prob{P}_{\alpha'}}[u]$ if and only if $\prob{P}_{\alpha} \succ \prob{P}_{\alpha'}$.
+\citet{von_neumann_theory_1944} (henceforth abbreviated to vNM) proved that when the \emph{vNM axioms} hold (not defined here; see the original reference or \citet{steele_decision_2020}), an agent's preferences between ``lotteries'' (probability distributions in $\Delta(\Omega)$ for some $(\Omega,\sigalg{F})$) can be represented as the comparison of the expected value under each lottery of a utility function $u$ unique up to affine transformation. That is, for lotteries $\prob{P}_\alpha$ and $\prob{P}_{\alpha'}$, there exists some $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that $\mathbb{E}_{\prob{P}_\alpha}[u]> \mathbb{E}_{\prob{P}_{\alpha'}}[u]$ if and only if $\prob{P}_{\alpha} \succ \prob{P}_{\alpha'}$.
 
-In vNM theory, the set of lotteries is is the set of all probability measures on $(\Omega,\sigalg{F})$. Thus von Neumann-Morgenstern theorem gives conditions under which preferences \emph{over distributions of consequences} can be represented using expected utility. It is silent on the question of whether each choice should be mapped to a unique probability distribution over consequences.
+In vNM theory, the set of lotteries is is the set of all probability measures on $(\Omega,\sigalg{F})$. Thus von Neumann-Morgenstern theorem gives conditions under which preferences \emph{over distributions of consequences} can be represented using expected utility. If a decision problem were given such that the set of available choices was in 1-to-1 correspondence with the set of probability distributions in $\Delta(\Omega)$, then the vNM theory provides conditions on the preference relation such that, if these conditions are satisfied, the preference relation can be represented by some utility function on the set of consequences. Typically, the set of choices is not in 1-to-1 correspondence with probability distributions in $\Delta(\Omega)$. Indeed, the starting point of this work is that the relation between choices and consequences is not always obvious, and this situation might be improved by a better understanding of models that relate the two.
 
 \subsection{Savage decision theory}
 
-Savage's decision theory establishes conditions under which, given \emph{acts} $C$, \emph{consequences} $\Omega$ and \emph{states} $(S,\sigalg{S})$ (which are ``possible mappings from acts to consequences''), the preference relation over acts can be represented with a probability distribution over states and a utility function $\Omega\to \mathbb{R}$. This is much closer to the subject of this work than the theorem of von Neumann and Morgernstern.
+Savage's decision theory distinguishes \emph{acts} $C$, \emph{consequences} $\Omega$ and \emph{states} $(S,\sigalg{S})$ \citep{savage_foundations_1954}. In our framework, acts are similar to choices, consequences to consequences and states are similar to hypotheses. Unlike vNM theory, the mapping from acts to consequences is not assumed to be given at the outset. Instead, each act is assumed to induce a known mapping from each state to an element of the set of consequences. His theorem conditions under which, given such a map from acts and states to consequences, a preference relation over acts can be represented by a ``prior'' over states and a utility function $u:\Omega\to \mathbb{R}$ in combination with the principle of expected utility. As Theorem \ref{th:sav_pmap} shows, the prior over states induces a probabilistic map from choices to consequences that, in combination with the utility, is sufficient to evaluate the desirability of the choices.
+
+We have said that acts are similar to choices and states are similar to hypotheses in our framework -- but there are differences. We've taken the set of choices to be the set of all the things that the decision maker might choose once they've finished considering their problem, \emph{and} the way they make this selection is to compare each choice on the basis of the consequences it is expected to bring about. In Savage's theory, like ours, the decision maker has a preference relation over the set of acts. Unlike our theory, however, the set of acts is precisely the set of all functions from states to consequences. That is, in contrast to our ``choices and hypotheses models'' (Definition \ref{def:ch_and_hyp}) the map from states and acts to consequences is deterministic where we take the map from choices and hypotheses to consequences to be stochastic, and the set of acts is assumed to contain every function from states to consequences.
+
+This could be considered a requirement of extendability: given a choices and hypotheses model $\prob{P}_\cdot:C\times H\kto \Omega$, we might consider the model a Savage decision model if the set of choices can be extended to the convex closure of the set of all deterministic functions $H\kto \Omega$ such that the Savage axioms (Appendix \ref{sec:savage_axioms}) hold. The reason why Savage's theory has such a rich set of choices is the need to go from a preference relation over choices to a preference relation over consequences. All a decision maker actually needs is the ordering on the choices that they're actually considering, and this might be compatible with many orderings of consequences. We don't know if there are cases of decision problems where this extendability requirement introduces difficulties. 
 
 \begin{definition}[Elements of a Savage decision problem]
-A \emph{Savage decision problem} features a measurable set of states $(S,\sigalg{S})$, a set of consequences $\Omega$ and a set of acts $C$ such that $|C|=\Omega^S$ and an evaluation function $T:S\times C\to F$ such that for any $f:S\to \Omega$ there exists $c\in C$ such that $T(\cdot,c)=f$.
+A \emph{Savage decision problem} features a measurable set of states $(S,\sigalg{S})$, a set of consequences $(\Omega,\sigalg{F})$ and a set of acts $C$ such that $|C|=\Omega^S$ and a measurable evaluation function $T:S\times C\to \Omega$ such that for any $f:S\to \Omega$ there exists $c\in C$ such that $T(\cdot,c)=f$.
 \end{definition}
 
-\begin{theorem}
-Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(\prec,\sim)$ on $C$ that satisfies the \emph{Savage axioms} \ref{sec:savage_axioms}, there exists a unique probability distribution $\mu\in\Delta(\sigalg{S})$ and a utility $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that
+Theorem \ref{th:savage_representation} is Savage's representation theorem. The Savage axioms aren't investigated in detail in this work, but for the reader's convenience they're given in Appendix \ref{sec:savage_axioms}.
+
+\begin{theorem}\label{th:savage_representation}
+Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(\prec,\sim)$ on $C$ that satisfies the \emph{Savage axioms}, there exists a unique probability distribution $\mu\in\Delta(\sigalg{S})$ and a utility $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that
 \begin{align}
     \alpha\preceq \alpha' &\iff \int_S u(T(s,\alpha))\mu(\mathrm{d}s) \leq \int_S u(T(s,\alpha'))\mu(\mathrm{d}s)&\forall \alpha,\alpha'\in C
 \end{align}
@@ -130,10 +141,10 @@ Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(
 \citet{savage_foundations_1954}
 \end{proof}
 
-If we equip consequences with a measures $(\Omega,\sigalg{F})$, Savage's setup implies the existence of a unique probabilistic function $C\to \Delta(\Omega)$ representing the ``probabilistic consequences'' of each choice.
+Savage's setup implies the existence of a unique probabilistic function $C\to \Delta(\Omega)$ representing the ``probabilistic consequences'' of each choice.
 
-\begin{theorem}
-Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(\prec,\sim)$ on $C$ that satisfies the \emph{Savage axioms}, and a $\sigma$-algebra $\sigalg{F}$ on $\Omega$ such that $T$ is measurable, there is a probabilistic function $\prob{P}_{\cdot}:C\to \Delta(\Omega)$ and a utility $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that
+\begin{theorem}\label{th:sav_pmap}
+Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(\prec,\sim)$ on $C$ that satisfies the Savage axioms, and a $\sigma$-algebra $\sigalg{F}$ on $\Omega$ such that $T$ is measurable, there is a probabilistic function $\prob{P}_{\cdot}:C\to \Delta(\Omega)$ and a utility $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that
 \begin{align}
     \alpha\preceq \alpha' &\iff \int_\Omega u(f)\prob{P}_\alpha(\mathrm{d}f) \leq \int_\Omega u(f)\prob{P}_{\alpha'}(\mathrm{d}f)&\forall \alpha,\alpha'\in C
 \end{align}
@@ -153,57 +164,31 @@ Then
 \end{align}
 \end{proof}
 
-\subsubsection{Savage axioms}\label{sec:savage_axioms}
-
-Careful analysis of Savage's theorem is outside the scope of this work, but given the relevant of Savage's representation theorem we will reproduce the axioms from \citet{savage_foundations_1954} with a small amount of commentary. Keep in mind that Savage's theorem establishes that the following are sufficient for representation with a probability set, not necessary, and furthermore the probability set representation of preferences satisfying these axioms is unique.
-
-Given acts $C$, states $(S,\sigalg{S})$ and consequences $F$ and a map $T:S\times C\to F$, let all greek letters $\alpha,\beta$ etc. be elements of $C$. Savage's axioms are:
-\begin{enumerate}[P1:]
-    \item There is a complete preference relation $\preceq$ on $C$
-    \begin{enumerate}[D1:]
-        \item $\alpha\preceq \beta$ given $B\in \sigalg{S}$ if and only if $\alpha'\preceq \beta'$ for every $\alpha'$ and $\beta'$ such that $T(\alpha,s)=T(\alpha',s)$ for $s\in B$ and $T(\alpha',r)=T(\beta',r)$ for $r\not\in B$, and $\beta'\preceq \alpha'$ either for every such pair or for none.
-    \end{enumerate}
-    \item For every $\alpha,\beta$ and $B\in \sigalg{S}$, $\alpha\preceq \beta$ given $B$ or $\beta\preceq \alpha$ given $B$
-    \begin{enumerate}[D2:]
-        \item for $q,q'\in F$, $q\preceq q'$ if and only if $\alpha\preceq \alpha'$ where $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for all $s\in S$
-        \item $B\in \sigalg{S}$ is null if and only if $\alpha\preceq \beta$ given B for every $\alpha,\beta\in C$
-    \end{enumerate}
-    \item If $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for every $s\in B$, $B\in \sigalg{S}$ non-null, then $\alpha\preceq \alpha'$ given $B$ if and only if $q\preceq q'$
-    \begin{enumerate}[D4:]
-        \item For $A,B\in \sigalg{S}$, $A\leqslant B$ if and only if $\alpha_A\preceq \alpha_B$ or $q\preceq q'$ for all $\alpha_A,\alpha_B\in C$, $q,q'\in F$ such that $T(\alpha_A,s) = q$ for $s\in A$, $T(\alpha_A,s')=q'$ for $s'\not\in A$, $T(\alpha_B,s)=q$ for $s\in B$, $T(\alpha_B,s')=q'$ for $s'\not\in B$. Read $\leqslant$ as ``is less probable than''
-    \end{enumerate}
-    \item For every $A,B\in\sigalg{S}$, $A\leqslant B$ or $B\leqslant A$
-    \item For some $\alpha,\beta$, $\alpha\prec \beta$
-    \item Suppose $\alpha\not\preceq \beta$. Then for every $\gamma$ there is a finite partition of $S$ such that if $\alpha'$ agrees with $\alpha$ and $\beta'$ agrees with $\beta$ except on some element $B$ of the partition, $\alpha'$ and $\beta'$ being equal to $\gamma$ on $B$, then $\alpha\not\preceq \beta'$ and $\alpha'\not\preceq \beta$
-    \begin{enumerate}[D5:]
-        \item $\alpha\preceq q$ for $q\in F$ given $B$ if and only if $\alpha\preceq \beta$ given $B$ where $T(\beta,s)=q$ for all $s\in S$
-    \end{enumerate}
-    \item If $\alpha\preceq T(\beta,s)$ given $B$ for every $s\in B$, then $\alpha\preceq \beta$ given $B$
-    \begin{enumerate}[P7':]
-        \item The proposition given by inverting every expression in D5 and P7
-    \end{enumerate}
-\end{enumerate}
-
-Our initial view of decision problems was that the consequences $\Omega$ are a set of things we know how to rank and choices $C$ are the things we want to rank. This is not exactly Savage's setup -- he assumes a preference relation ranking ``acts'' $C$ to begin with. Furthermore, Savage also introduces a set of states $S$ and assumes that the set of acts corresponds to the set of all function $S\to \Omega$. Many decision problems might be able to be extended with states and the set of acts enriched so as to satisfy these requirements, but it is not obvious that this is always possible.
-
-D1 formalises the idea of one act $\alpha$ being not preferred to another $\beta$ given the knowledge that the true state lies in the set $B$ (in short: ``given $B$'' or ``conditional on $B$''). P2 is sometimes called the ``sure thing principle'', as it implies the following: for any $\alpha, \beta$ if $\alpha$ is better than $\beta$ on some states and no worse on any other, then $\alpha\succ \beta$. In Savage's model, the ``likelihood'' that of any state cannot depend on the act chosen.
-
-D4 + P4 defines the ``probability preorder'' $\leqslant$ on $(S,\sigalg{S})$ and assumes it is complete.
-
-P5 is the requirement that the preference relation is non-trivial; not everything is equally desirable. This doesn't seem like it should be a practical requirement to me; we might hope that a model can distinguish between some of our options, but that doesn't mean we should assume it can. Savage claims that this requirement is ``innocuous'' because any exception must be trivial, but I'm not sure I agree.
-
-P6 is a requirement of continuity; for any $\alpha\preceq \beta$, we can divide $S$ finely enough to squeeze a ``small slice'' of any third outcome $\gamma$ into the gap between the two.
-
-P7 in combination with the other axioms forces preferences to be bounded.
-
 \subsection{Jeffrey's decision theory}
 
-Jeffrey's decision theory is an alternative to Savage's that starts from a different set of assumptions. One of the key differences is in what is assumed at the outset: where Savage assumes a set of states $S$, acts $C$ and consequences $\Omega$, Jeffrey's theory only considers a single space $\underline{\sigalg{F}}$, which is a complete atomless boolean algebra. Elements of $\underline{\sigalg{F}}$ are said to be propositions, although the structure of $\underline{\sigalg{F}}$ means we can't understand it as, for example, a set of propositions regarding the result of a particular measurement procedure (Section \ref{sec:variable}). The theory is set out in \citet{jeffrey_logic_1990}, and the key representation theorem proved in \citet{bolker_functions_1966}.
+Jeffrey's decision theory is an alternative to Savage's that starts from a different set of assumptions. One of the key differences is in what is assumed at the outset: where Savage assumes a set of states $S$, acts $C$ and consequences $\Omega$, Jeffrey's theory only considers a single space $\underline{\sigalg{F}}$, which is a complete atomless boolean algebra. Elements of $\underline{\sigalg{F}}$ are said to be propositions. We note that $\underline{\sigalg{F}}$ cannot be understood as the set of events with respect to a finite measurement procedure (Section \ref{sec:variable}). The collection of finite propositions regarting the results of some finite measurement procedure followed by flipping an infinite number of coins could perhaps be represented by a complete atomless boolean algebra. The theory is set out in \citet{jeffrey_logic_1990}, and the key representation theorem proved in \citet{bolker_functions_1966}.
 
-Recall that our fundamental problem is relating a set $C$ of things we can choose to a set $F$ of things we can compare. Jeffrey's theory uses a different strategy to accomplish this than Savages'; where identifies a set of acts $C$ with all functions $S\to F$ and proposes axioms that constrain a preference relation on $C$, Jeffrey assumes that choices are elements of the algebra $\underline{\sigalg{F}}$, along with propositions that do not correspond to choices. Jeffrey's axioms pertain to a preference relation on $\underline{\sigalg{F}}$. The ultimate result is, for our purposes, very similar.
+Recall that our fundamental problem is relating a set $C$ of things we can choose to a set $F$ of things we can compare. Jeffrey's theory uses a different strategy to accomplish this than Savages'; where Savage identifies a set of acts $C$ with all functions $S\to F$ and proposes axioms that constrain a preference relation on $C$, Jeffrey assumes that choices are elements of the algebra $\underline{\sigalg{F}}$, accompanied by other propositions that do not correspond precisely to choices. Jeffrey's axioms pertain to a preference relation on $\underline{\sigalg{F}}$, and preferences over choices are given by the restriction of the preference relation to $C$. In common with Savage's theory, the preference relation is assumed to be available over a much richer set than the set of choices actually under consideration.
+
+Complete atomless boolean algebras are somewhat different to standard measurable $\sigma$-algebras. The $\sigma$-algebra $(\mathbb{R},\sigalg{B}(\mathbb{R}))$ is a complete Boolean algebra when identifying $\land$ with $\cap$, $\lor$ with $\cup$, $0$ with $\emptyset$ and $1$ with $\mathbb{R}$, but it has atoms: any singleton $\{x\}$ has only the subsets $\emptyset$ and $\{x\}$. An example of a complete atomless boolean algebra can be constructed from the set of Lebesgue measurable sets on $[0,1]$ with any two sets that differ by a set of measure zero identified \citet{bolker_simultaneous_1967}.
+
+\begin{definition}[Complete atomless boolean algebra]\label{def:c_atom_ba}
+A complete atomless boolean algebra $\underline{\sigalg{F}}$ is a tuple $(A,\land,\lor,\not,0,1)$ such that, for all $a,b,c\in A$:
+\begin{itemize}
+    \item $(a\lor b)\lor c = a\lor (b\lor c)$ and $(a\land b)\land c = a\land (b\land c)$
+    \item $a\lor b = b\lor a$ and $a\land b = b\land a$
+    \item $a\lor (a\land b) = a$ and $a\land(a\lor b) = a$
+    \item $a\lor 0 = a$ and $a\land 1=a$
+    \item $a\lor(b\land c) = (a\lor b) \land (a\lor c)$ and $a\land(b\lor c) = (a\land b) \lor (a\land c)$
+    \item $a\lor \not a = 1$ and $a\land \not a = 0$
+\end{itemize}
+say $a\leq b$ exactly when $a\lor b = b$. A boolean algebra is atomless if for any $b$ there is some $a\neq 0$ such that $a\leq b$. A boolean algebra is complete if for every $B\subset A$, there is some $c$ such that $c$ is an upper bound of $B$ and for all upper bounds $c'$  of $B$, such that $c\leq c'$. 
+\end{definition}
+
+The Bolker axioms are also not analysed deeply in this work, but for the reader's convenience they can be found in Appendix \ref{sec:bolker_axioms}).
 
 \begin{theorem}\label{th:bolker_jeffrey}
-Suppose there is a complete atomless Boolean algebra $\underline{\sigalg{F}}$ with a preference relation $\preceq$. If $\preceq$ satisfies the \emph{Bolker axioms} (Section \ref{sec:bolker_axioms}) then there exists a desirability function $\text{des}:\underline{\sigalg{F}}\to\mathbb{R}$ and a probability distribution $\mu\in \Delta(\underline{\sigalg{F}})$ such that for $A,B\in \underline{\sigalg{F}}$ and finite partition $D_1,...,D_n\in \underline{\sigalg{F}}$:
+Suppose there is a complete atomless Boolean algebra $\underline{\sigalg{F}}$ with a preference relation $\preceq$. If $\preceq$ satisfies the \emph{Bolker axioms} then there exists a desirability function $\text{des}:\underline{\sigalg{F}}\to\mathbb{R}$ and a probability distribution $\mu\in \Delta(\underline{\sigalg{F}})$ such that for $A,B\in \underline{\sigalg{F}}$ and finite partition $D_1,...,D_n\in \underline{\sigalg{F}}$:
 \begin{align}
     (A \preceq B) \iff \sum_{i}^n \text{des}(D_i) \mu(D_i|A) \leq \sum_{i}^n \text{des}(D_i) \mu(D_i|B) \label{eq:ev_dec_theory}
 \end{align}
@@ -214,7 +199,7 @@ where $\mu(D_i|A):=\frac{\mu(A\cap D_i)}{\mu(A)}$ for $\mu(A)>0$, undefined othe
 \citet{bolker_functions_1966})
 \end{proof}
 
-As mentioned, in Jeffrey's theory the \emph{choices} $C$ are a subset of $\underline{\sigalg{F}}$. Thus we can deduce from a Jeffrey model a function $C\to \Delta(\underline{\sigalg{F}})$ that ``represents the consequences of choices'' in the sense of Theorem \ref{th:jeffrey_with_choices}.
+As mentioned, in Jeffrey's theory the \emph{choices} under consideration $C$ are assumed to be some subset of $\underline{\sigalg{F}}$. Thus we can deduce from a Jeffrey model a function $C\to \Delta(\underline{\sigalg{F}})$ that ``represents the consequences of choices'' in the sense of Theorem \ref{th:jeffrey_with_choices}.
 
 \begin{theorem}\label{th:jeffrey_with_choices}
 Suppose there is a complete atomless Boolean algebra $\underline{\sigalg{F}}$ with a preference relation $\preceq$ that satisfies the Bolker axioms, and a set of choices $C$ over which a preference relation is sought with $\mu(\alpha)>0$ for all $\alpha\in C$. Then there is a function $\prob{P}_\cdot:C\to \Delta(\underline{\sigalg{F}})$ such that for any $\alpha,\alpha'\in C$ and finite partition $D_1,...,D_n\in \underline{\sigalg{F}}$:
@@ -227,33 +212,6 @@ Where $\mu$ and $\mathrm{des}$ are as in Theorem \ref{th:bolker_jeffrey}
 \begin{proof}
 Define $\prob{P}_\cdot$ by $\alpha\mapsto \mu(\cdot|\alpha)$. Then Equation \ref{eq:ev_with_choices} follows from Equation \ref{eq:ev_dec_theory}.
 \end{proof}
-
-\subsubsection{Bolker axioms}\label{sec:bolker_axioms}
-
-$\underline{\sigalg{F}}$ a complete, atomless Boolean algebra with the impossible proposition. An example of such a set is constructed from the set of Lebesgue measurable sets on $[0,1]$ identifying any two sets that differ by a set of measure zero identified \citet{bolker_simultaneous_1967}. This is not a $\sigma$-algebra.
- 
-\begin{enumerate}[A1:]
-    \item $\preceq$ is a complete preference relation
-    \item $\underline{\sigalg{F}}$ is a complete, atomless Boolean algebra with the impossible proposition removed
-    \item For $A,B\in \underline{\sigalg{F}}$, if $A\cap B=\emptyset$, then
-    \begin{enumerate}[a)]
-        \item If $A\succ B$ then $A\succ A\cup B \succ B$
-        \item If $A\sim B$ then $A\sim A\cup B \sim B$
-    \end{enumerate}
-    \item Given $A\cap B=\emptyset$ and $A\sim B$, if $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$, then $A\cup G\sim B\cup G$ for every such $G$
-    \begin{enumerate}[D1:]
-        \item The supremum (infimum) of a subset $W\subset \underline{\sigalg{F}}$ is a set $G$ ($D$) such that for all $A\in W$, $G\subset A$ ($A\subset D$), and for any $E$ that also has this property, $G\subset E$ ($E\subset D$)
-    \end{enumerate}
-    \item Given $W:= \{W_i\}_{i\in M\subset \mathbb{N}}$ with $i<j\implies W_j\subset W_i$ and $W\subset \underline{\sigalg{F}}$ with supremum $G$ (infimum $D$), whenever $A\prec G \prec B$ ($A\prec D\prec B$) then there exists some $k\in M$ such that $i\geq k$ ($i\leq k$) implies $A\prec W_i \prec B$.
-\end{enumerate}
-
-Like Savage's theory, A1 requires the preference relation to be complete.
-
-A3 is the assumption that the desirability of disjunctions of events lies between the desirability of each event; it is sometimes called ``averaging''. It notably rules out the following: if $A\succ B$ we cannot have $A\cup B\sim A$. In the Jeffrey-Bolker theory, propositions all have positive probabilities.
-
-A4 allows a probability order to be defined on $\underline{\sigalg{F}}$. The conditions $A\cap B=\emptyset$, $A\sim B$, $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$ can be seen as a test for $A$ and $B$ being ``equally probable''. A4 requires that if $A$ and $B$ are rated as equally probable by one such test, then they are rated as equally probable by all such tests.
-
-A5 is an axiom of continuity.
 
 \subsection{Causal decision theory}
 
@@ -275,7 +233,7 @@ Dependency hypotheses are quite an important idea in causal reasoning. Together 
 
 Statistical decision theory (SDT), created by \citet{wald_statistical_1950}, predates all of the decision theories discussed above. Savage's theory appears to have developed in part to explain some features of SDT \citet{savage_theory_1951}, and Jeffrey's theory and subsequent causal decision theories were in turn influenced by Savage's decision theory. While the later decision theories were concerned with articulating why their theory fit the role of a theory for rational decision under uncertainty, Wald focused much more on the mathematical formalism and solutions to statistical problems. Statistical decision theory introduced many fundamental ideas that have since entered the ``water supply'' of machine learning theory, such as \emph{decision rules} and \emph{risk} as a measure of the quality of a decision rule.
 
-In contrast to the later decision theories, SDT has no explicit representation of the ``consequences'' of a decision. Rather, it is assumed that a loss function is given that maps decisions and hypotheses directly to a loss, which is a kind of desirability score similar to a utility (although it is minimised rather than maximised).
+In contrast to the later decision theories, SDT has no explicit representation of the ``consequences'' of a decision. Rather, it is assumed that a loss function is given that maps decisions and hypotheses directly to a loss, which is a kind of desirability score similar to a utility (although it is minimised rather than maximised). The following definitions are all standard to SDT.
 
 \begin{definition}[Statistical decision problem]
 A statistical decision problem (SDP) is a tuple $(X, H, D, l, \prob{P}_\cdot)$ where $(X,\sigalg{X})$ is a set of outcomes, $(H,\sigalg{H})$ is a set of hypotheses, $(D,\sigalg{D})$ is a set of decisions, $l:D\times H\to \mathbb{R}$ is a loss function and $\prob{P}_\cdot:H\kto X$ is a Markov kernel from hypotheses to to outcomes.
@@ -321,6 +279,8 @@ Given decision functions $C$, hypotheses $(H,\sigalg{H})$, risk $R:C\times H\to 
 
 \subsubsection{From consequences to statistical decision problems}\label{sec:cons_to_sdp}
 
+In this section, we relate our new work to the standard formulation of SDT presented above.
+
 Statistical decision theory ignores the notion of general consequences of choices; the only ``consequence'' in the theory is the loss incurred by a particular decision under a particular hypothesis. The kinds of probability set models studied here probabilistically map decisions to consequences, and the set of consequences is understood to have a utility function to allow for assessment of the desirability of different choices via the principle of expected utility. Not every probability set model induces a statistical decision problem in this manner. A family of models that does are what we call \emph{conditionally independent see-do models}. These models feature observations (the ``see'' part) along with decisions and consequences (the ``do'' part), and the observations come ``before'' the decisions (hence see-do). Examples of this type of model will be encountered again in Chapters \ref{ch:evaluating_decisions} and \ref{ch:other_causal_frameworks}. Furthermore, there is a hypothesis such that consequences are assumed to be independent of observations conditional on the decision and the hypothesis. This is why they are qualified as ``conditionally independent'' see-do models.
 \begin{definition}[See-do model]\label{def:see_do_model}
 A probability set model of a statistical decision problem, or a \emph{see-do model} for short, is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences and $\RV{D}:\Omega\to D$ are the decisions. $\prob{P}_{C\times H}$ must observe the following conditional independences:
@@ -328,7 +288,7 @@ A probability set model of a statistical decision problem, or a \emph{see-do mod
     \RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}\\
     \RV{D}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}
 \end{align}
-where $\RV{C}:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (see Definition \ref{def:eci_orig} for the definition of extended conditional independence).
+where $\RV{C}:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (refer to Definition \ref{def:eci_orig} for the definition of extended conditional independence $\CI_{\prob{P}_{C\times H}}^e$).
 \end{definition}
 \begin{definition}[Conditionally independent see-do model]\label{def:ci_see_do_model}
 A conditionally independent see-do model is a see do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where the following additional conditional independence holds:
@@ -415,11 +375,11 @@ The expected utility of $\alpha\in C$ is
 
 \subsubsection{Complete class theorem}\label{sec:cc_theorem}
 
-The \emph{complete class theorem} establishes that, under certain conditions, any \emph{admissible} decision rule (Definition \ref{def:admissible_decision}) for a see-do model $\prob{P}_{C\times H}$ with a utility $u$ must minimise the Bayes risk for a Bayesian model constructed from $\prob{P}_{C\times H}$ and a prior over hypotheses $\mu\in \Delta(H)$. This can be interpreted in a similar way to the decision theoretic representation discussed above: if you accept that the relevant assumptions apply to the decision problem at hand, than there is a Bayesian see-do model along with $u$ that captures the important features of this problem. The assumptions are that a see-do model $\prob{P}_{C\times H}$ with a utility $u$ that satisfies the relevant conditions is available, and that the principle used to evaluate decision rules should yield an admissible decision rule (though it may also be desired to satisfy other properties as well).
+The \emph{complete class theorem} is a key theorem of classical SDT that establishes, under certain conditions, any \emph{admissible} decision rule (Definition \ref{def:admissible_decision}) for a see-do model $\prob{P}_{C\times H}$ with a utility $u$ must minimise the Bayes risk for a Bayesian model constructed from $\prob{P}_{C\times H}$ and some prior over hypotheses $\mu\in \Delta(H)$. This can be interpreted in a similar way to the decision theoretic representation discussed above: if you accept that the relevant assumptions apply to the decision problem at hand, than there is a Bayesian see-do model along with $u$ that captures the important features of this problem. The assumptions are that a see-do model $\prob{P}_{C\times H}$ with a utility $u$ that satisfies the relevant conditions is available, and that the principle used to evaluate decision rules should yield an admissible decision rule (though it may also be desired to satisfy other properties as well).
 
-If there are auxiliary requirements for choosing the decision rule, the complete class theorem does not prove that it is easy to find a Bayesian model that will yield rules satisfying these requirements.
+If more is required of the decision rule than merely admissibility, then the complete class theorem does not prove that it is easy to find any Bayesian model that will yield rules satisfying these requirements. It also does not prove that a Bayesian approach is helpful for finding a ``correct'' decision rule according to some vague notion of ``correct''.
 
-See-do models (and statistical decision problems) have a lot of structure -- the loss, the assumption that consequences are conditionally independent of observations -- that is not actually critical to the complete class theorem. The complete class theorem is a theorem about risk function $R:C\times H\to \mathbb{R}$ that have certain properties. Theorem \ref{th:ind_risk} shows one way that a risk function can be derived from a see-do model along with a utility. However, it is also possible to derive risk functions from other classes of probability set models with utilities, and if the resulting risk function satisfies the appropriate conditions then the complete class theorem also applies to that class of model. For example, the complete class theorem also applies to see-do models without the assumption that consequences are conditionally independent of observations given the hypothesis and the decision, even though in this case the risk calculation is not the standard calculation for a statistical decision problem.
+We have shown in Theorem \ref{th:ind_risk} that conditionally independent see-do models induce statistical decision problems. However, the complete class theorem iteself (Theorem \ref{th:complete_class}) depends only on the risk function induced by a decision making model. In particular, the complete class theorem can also apply to general see-do models, without the assumption of conditional independence, which we show in Example \ref{ex:cc_sdt} and \ref{ex:cc_nonsdt}.
 
 \begin{definition}[Risk function]
 Given a set of choice $C$ and a set of hypotheses $H$, a risk function is a map $R:H\times C\to \mathbb{R}$.
@@ -431,7 +391,7 @@ If the second set $H$ were, instead of hypotheses about nature, a set of options
 Given a risk function $R:C\times H\to \mathbb{R}$, a choice r $\alpha\in C$ dominates a choice $\alpha'\in C$ if for all $h\in H$, $R(\alpha,h)\leq R(\alpha',h)$ and for at least on $h^*$, $R(\alpha,h)<R(\alpha,h^*)$. An \emph{admissible choice} is a choice $\alpha\in C$ such that there is no $\alpha'\in C$ dominating $\alpha$.
 \end{definition}
 
-\begin{definition}[Complete class]
+\begin{definition}[Complete class]\label{th:complete_class}
 A \emph{complete class} is any $B\subset C$ such that, for any $\alpha'\not in B$ there is some $\alpha\in B$ that dominates $\alpha'$. A \emph{minimal complete class} is a complete class $B$ such that no proper subset of $B$ is complete
 \end{definition}
 
@@ -526,6 +486,12 @@ The fact that $S$ is convex and closed follows from Lemmas \ref{lem:convex_close
 \begin{example}\label{ex:cc_nonsdt}
 As before, but suppose we have the see-do model is not conditionally independent. Because none of the lemmas \ref{lem:convex_closed}, \ref{lem:linear} and \ref{lem:all_kernels_is_convex_hull} made use of the conditional independence assumption, the risk set is still convex and closed downwards and so the set of Bayes optimal choices is also exactly the set of admissible choices.
 \end{example}
+
+\subsection{How should decision making models be constructed?}\label{sec:how_to_construct}
+
+The different answers that can be given to this question relate to the fact that there are two different kinds of problem involving data, choices and consequences. First, there is the problem faced by the decision maker: given the available data, which choice should they select in order to promote desirable consequences? Second, there is the problem faced by the forecaster: given the available data, what choice is the decision maker likely to arrive at, and what consequences are likely to occur as a result? All agree that the decision maker employs a probabilistic map from choices to consequences to help make the decision, and all agree that, if the forecaster expresses their forecast as a joint probability distribution, it is possible to derive a conditional distribution of consequences given choices, which is also a probabilistic map from choices to consequences (see Definition \ref{def:disint}). The disagreement is about exactly when the decision maker's consequence map should agree with the forecaster's conditional distribution.
+
+We don't offer a solution to this question. What we do in Chapters \ref{ch:evaluating_decisions} and \ref{ch:other_causal_frameworks} is to relate a certain notion of ``causal effect'' to a kind of symmetry of decision-making models. Causal effects are typically associated with the decision maker's perspective, while symmetry is a tool that forecasters may use to construct probabilistic models. 
 
 \section{Variables}\label{sec:variable}
 
@@ -662,3 +628,74 @@ A decision procedure is a collection $\{\proc{S}_\alpha\}_{\alpha\in C}$ of meas
 \end{definition}
 
 Like measurement procedures, a decision procedure $\{\proc{S}_\alpha\}_{\alpha\in A}$ isn't a well-defined mathematical object; it's not really a ``set'', because the contents are real-world actions.
+
+
+\section{Appendix: axiomatisation of decision theories}
+
+\subsection{Savage axioms}\label{sec:savage_axioms}
+
+Careful analysis of Savage's theorem is outside the scope of this work, but for the reader's convenience we will reproduce the axioms from \citet{savage_foundations_1954} with a small amount of commentary. Keep in mind that Savage's theorem establishes that the following are sufficient for representation with a probability set, not necessary, and furthermore the probability set representation of preferences satisfying these axioms is unique.
+
+Given acts $C$, states $(S,\sigalg{S})$ and consequences $F$ and a map $T:S\times C\to F$, let all greek letters $\alpha,\beta$ etc. be elements of $C$. Savage's axioms are:
+\begin{enumerate}[P1:]
+    \item There is a complete preference relation $\preceq$ on $C$
+    \begin{enumerate}[D1:]
+        \item $\alpha\preceq \beta$ given $B\in \sigalg{S}$ if and only if $\alpha'\preceq \beta'$ for every $\alpha'$ and $\beta'$ such that $T(\alpha,s)=T(\alpha',s)$ for $s\in B$ and $T(\alpha',r)=T(\beta',r)$ for $r\not\in B$, and $\beta'\preceq \alpha'$ either for every such pair or for none.
+    \end{enumerate}
+    \item For every $\alpha,\beta$ and $B\in \sigalg{S}$, $\alpha\preceq \beta$ given $B$ or $\beta\preceq \alpha$ given $B$
+    \begin{enumerate}[D2:]
+        \item for $q,q'\in F$, $q\preceq q'$ if and only if $\alpha\preceq \alpha'$ where $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for all $s\in S$
+        \item $B\in \sigalg{S}$ is null if and only if $\alpha\preceq \beta$ given B for every $\alpha,\beta\in C$
+    \end{enumerate}
+    \item If $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for every $s\in B$, $B\in \sigalg{S}$ non-null, then $\alpha\preceq \alpha'$ given $B$ if and only if $q\preceq q'$
+    \begin{enumerate}[D4:]
+        \item For $A,B\in \sigalg{S}$, $A\leqslant B$ if and only if $\alpha_A\preceq \alpha_B$ or $q\preceq q'$ for all $\alpha_A,\alpha_B\in C$, $q,q'\in F$ such that $T(\alpha_A,s) = q$ for $s\in A$, $T(\alpha_A,s')=q'$ for $s'\not\in A$, $T(\alpha_B,s)=q$ for $s\in B$, $T(\alpha_B,s')=q'$ for $s'\not\in B$. Read $\leqslant$ as ``is less probable than''
+    \end{enumerate}
+    \item For every $A,B\in\sigalg{S}$, $A\leqslant B$ or $B\leqslant A$
+    \item For some $\alpha,\beta$, $\alpha\prec \beta$
+    \item Suppose $\alpha\not\preceq \beta$. Then for every $\gamma$ there is a finite partition of $S$ such that if $\alpha'$ agrees with $\alpha$ and $\beta'$ agrees with $\beta$ except on some element $B$ of the partition, $\alpha'$ and $\beta'$ being equal to $\gamma$ on $B$, then $\alpha\not\preceq \beta'$ and $\alpha'\not\preceq \beta$
+    \begin{enumerate}[D5:]
+        \item $\alpha\preceq q$ for $q\in F$ given $B$ if and only if $\alpha\preceq \beta$ given $B$ where $T(\beta,s)=q$ for all $s\in S$
+    \end{enumerate}
+    \item If $\alpha\preceq T(\beta,s)$ given $B$ for every $s\in B$, then $\alpha\preceq \beta$ given $B$
+    \begin{enumerate}[P7':]
+        \item The proposition given by inverting every expression in D5 and P7
+    \end{enumerate}
+\end{enumerate}
+
+D1 formalises the idea of one act $\alpha$ being not preferred to another $\beta$ given the knowledge that the true state lies in the set $B$ (in short: ``given $B$'' or ``conditional on $B$''). P2 is sometimes called the ``sure thing principle'', as it implies the following: for any $\alpha, \beta$ if $\alpha$ is better than $\beta$ on some states and no worse on any other, then $\alpha\succ \beta$. In Savage's model, the ``likelihood'' that of any state cannot depend on the act chosen.
+
+D4 + P4 defines the ``probability preorder'' $\leqslant$ on $(S,\sigalg{S})$ and assumes it is complete.
+
+P5 is the requirement that the preference relation is non-trivial; not everything is equally desirable. This doesn't seem like it should be a practical requirement to me; we might hope that a model can distinguish between some of our options, but that doesn't mean we should assume it can. Savage claims that this requirement is ``innocuous'' because any exception must be trivial, but I'm not sure I agree.
+
+P6 is a requirement of continuity; for any $\alpha\preceq \beta$, we can divide $S$ finely enough to squeeze a ``small slice'' of any third outcome $\gamma$ into the gap between the two.
+
+P7 in combination with the other axioms forces preferences to be bounded.
+
+\subsection{Bolker axioms}\label{sec:bolker_axioms}
+
+$\underline{\sigalg{F}}$ a complete, atomless Boolean algebra with the impossible proposition removed.
+ 
+\begin{enumerate}[A1:]
+    \item $\preceq$ is a complete preference relation
+    \item $\underline{\sigalg{F}}$ is a complete, atomless Boolean algebra with the impossible proposition removed
+    \item For $A,B\in \underline{\sigalg{F}}$, if $A\cap B=\emptyset$, then
+    \begin{enumerate}[a)]
+        \item If $A\succ B$ then $A\succ A\cup B \succ B$
+        \item If $A\sim B$ then $A\sim A\cup B \sim B$
+    \end{enumerate}
+    \item Given $A\cap B=\emptyset$ and $A\sim B$, if $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$, then $A\cup G\sim B\cup G$ for every such $G$
+    \begin{enumerate}[D1:]
+        \item The supremum (infimum) of a subset $W\subset \underline{\sigalg{F}}$ is a set $G$ ($D$) such that for all $A\in W$, $G\subset A$ ($A\subset D$), and for any $E$ that also has this property, $G\subset E$ ($E\subset D$)
+    \end{enumerate}
+    \item Given $W:= \{W_i\}_{i\in M\subset \mathbb{N}}$ with $i<j\implies W_j\subset W_i$ and $W\subset \underline{\sigalg{F}}$ with supremum $G$ (infimum $D$), whenever $A\prec G \prec B$ ($A\prec D\prec B$) then there exists some $k\in M$ such that $i\geq k$ ($i\leq k$) implies $A\prec W_i \prec B$.
+\end{enumerate}
+
+Like Savage's theory, A1 requires the preference relation to be complete.
+
+A3 is the assumption that the desirability of disjunctions of events lies between the desirability of each event; it is sometimes called ``averaging''. It notably rules out the following: if $A\succ B$ we cannot have $A\cup B\sim A$. In the Jeffrey-Bolker theory, propositions all have positive probabilities.
+
+A4 allows a probability order to be defined on $\underline{\sigalg{F}}$. The conditions $A\cap B=\emptyset$, $A\sim B$, $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$ can be seen as a test for $A$ and $B$ being ``equally probable''. A4 requires that if $A$ and $B$ are rated as equally probable by one such test, then they are rated as equally probable by all such tests.
+
+A5 is an axiom of continuity.
