@@ -439,6 +439,24 @@ but $d'$ is an arbitrary sequence such that the $T$ elements match the $S$ eleme
 so $\kernel{K}$ is causally contractible by Theorem \ref{th:equal_of_condits}.
 \end{proof}
 
+\begin{lemma}
+Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is such that there is some $\RV{W}$ such that $\RV{Y}\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{C})$ and for all $\alpha$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel_2}
+\end{align}
+then
+\begin{align}
+    \prob{P}_{\alpha}^{\RV{Y}|\RV{HD}} &= \tikzfig{lookup_representation_kernel_h}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+As $\RV{H}$ is a function of $\RV{Y}$ and $\RV{D}$, we have
+\begin{align}
+    \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= 
+\end{align}
+\end{proof}
+
 Theorem \ref{th:ciid_rep_kernel} is the main result of this section. It shows that sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is causally contractible over some $\RV{W}$ if and only if there is some hypothesis $\RV{H}$ such that the $\RV{Y}_i$s are related to the $\RV{D}_i$s by conditionally independent and identical response functions (subject to a support assumption).
 
 Note that property (2) is equivalent to the conjunction of conditionally independent and identical response functions (Def \ref{def:cii_rf}) and weak data-independence (Def \ref{def:weak_di}).
