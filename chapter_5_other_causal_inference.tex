@@ -2,7 +2,95 @@
 
 \chapter{Other causal modelling frameworks}\label{ch:other_causal_frameworks}
 
-\todo[inline]{Ignore this}
+In this chapter, we examine the types of decision models that seem to be implied by causal Bayesian networks and potential outcomes models respectively. 
+
+\section{What is a Causal Bayesian Network?}
+
+The account of causal Bayesian networks presented here has a great deal in common with the probabilistic graphical model (PGM) framework introduced in \citet{lattimore_replacing_2019,lattimore_causal_2019}, though we arrived at our ideas independently. 
+
+\subsection{Definition of a Causal Bayesian Network}
+
+We follow the definition of a Causal Bayesian Network on \citet[page ~23-24]{pearl_causality:_2009}. There are a couple of technical differences: we require that interventional models are a measurable map from interventions to probability distributions, and we assume that there is a common sample space for every interventional distribution. There are also some non-technical differences: the notation is adapted for compatibility with the rest of the work in this thesis, and we separate the definition into two parts for clarity. We also require that interventional models are a measurable map from interventions to probability distributions
+
+\begin{definition}[Interventional model]
+An interventional model is a tuple $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ where $(\Omega,\sigalg{F})$ is a measurable space,  $\RV{V}:=(\RV{V}_i)_{i\in A}$ a sequence of variables with $\RV{V}_i:\Omega\to V_i$, $V_i$ denumerable, and the choice set
+\begin{align}
+    C:=\{\mathrm{do}_{\emptyset}\}\cup \{(\mathrm{do}_B,v_B)|B\subset A,v_B\in \mathrm{Range}(V_B)\}
+\end{align}
+That is, we take every subsequence $\RV{V}_B$ of $\RV{V}$ and add to $C$ every element of the range of $\RV{V}_B$, each labeled with the symbol $\mathrm{do}_B$. The Markov kernel $\prob{P}_\cdot:C\kto \Omega$ is such that for all $(\mathrm{do}_{B},v_B)\in C$:
+\begin{align}
+    \prob{P}_{(\mathrm{do}_{B},v_B)}^{\RV{V}_B} &= \delta_{v_B}
+\end{align}
+while $\prob{P}_{\mathrm{do}_{\emptyset}}$ can be arbitrary.
+\end{definition}
+
+An interventional model is a \emph{Causal Bayesian Network} with respect to a directed acyclic graph if it satisfies a number of compatibility requirements. The following definitions are standard, and reproduced here for convenience. The definitions here are terse, readers should refer to \citet[chap. ~1]{pearl_causality:_2009} for a more intuitive explanation.
+
+\begin{definition}[Directed graph]
+A directed graph $\graph{G}=(\graph{V},\graph{E})$ is a set of nodes $\graph{V}$ and edges, which are ordered pairs of nodes $\graph{E}\subset \graph{V}\times\graph{V}$. Nodes are written using the font $\node{V}$.
+\end{definition}
+
+The parents of a target node are all nodes with an edge ending at the target node.
+
+\begin{definition}[Parents]
+Given a directed graph $\graph{G}=(\graph{V},\graph{E})$ and $\node{V}_i\subset \graph{V}$, the parents of $\node{V}_i$ are $\PA(\node{V}_i):=\{\node{V}_j|(\node{V}_j,\node{V}_i)\in\graph{E}\}$.
+\end{definition}
+
+A path is a sequence of edges such that the $i$th edge and the $i+1$th edge share exactly one node.
+
+\begin{definition}[Path]
+Given a directed graph $\graph{G}=(\graph{V},\graph{E})$, a path is a sequence of edges $(E_i)_{i\in A}$ (where $A$ is either $[n]$ or $\mathbb{N}$) such that for any $i$, $E_i$ and $E_{i+1}$ share exactly one node.
+\end{definition}
+
+A directed path is a sequence of edges such that the end of the $i$th edge is the beginning of the $i+1$th edge.
+
+\begin{definition}[Directed path]
+Given a directed graph $\graph{G}=(\graph{V},\graph{E})$, a directed path is a sequence of edges $(E_i)_{i\in A}$ (where $A$ is either $[n]$ or $\mathbb{N}$) such that for any $i$, $E_i=(\node{V}_k,\node{V}_l)$ implies $E_{i+1}=(\node{V}_l,\node{V}_m)$ for some $\node{V}_m\in \graph{V}$.
+\end{definition}
+
+In an acyclic graph, directed paths never reach to the same node more than once.
+
+\begin{definition}[Directed acyclic graph]
+A directed graph $\graph{G}=(\graph{V},\graph{E})$ is acyclic if, for every path, each node appears at most once. Directed acyclic graph is abbreviated to ``DAG''.
+\end{definition}
+
+D-separation is a key property of directed acyclic graphs for defining causal Bayesian networks. It is defined with respect to undirected paths.
+
+\begin{definition}[Blocked path]
+Given a DAG $\graph{G}=(\graph{V},\graph{E})$, a path $p$ is blocked by $\node{V}_A\subset\graph{V}$ iff
+\begin{enumerate}
+    \item $(\node{V}_i,\node{V}_j)\in p$ and $(\node{V}_j,\node{V}_k)\in p$ while $\node{V}_j\in \node{V}_A$
+    \item $(\node{V}_j,\node{V}_i)\in p$ and $(\node{V}_j,\node{V}_k)\in p$ while $\node{V}_j\in \node{V}_A$
+    \item $(\node{V}_i,\node{V}_j)\in p$ and $(\node{V}_k,\node{V}_j)\in p$ while $\node{V}_j\cup \DE(\node{V}_j)\cap \node{V}_A=\emptyset$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[d-separation]
+Given a DAG $\graph{G}=(\graph{V},\graph{E})$, $\node{V}_A$ is $d$-separated from $\node{V}_B$ by $\node{V}_C$ (all subsets of \graph{V}) if $\node{V}_C$ blocks every path starting at $\node{V}_A$ and ending at $\node{V}_B$. This is written $\node{V}_A\perp_{\mathcal{G}} \node{V}_B | \mathbf{V}_C$.
+\end{definition}
+
+\begin{definition}[Compatibility]\label{def:compat}
+Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m:\RV{V}_i\mapsto \node{V}_i$, $\prob{P}_\cdot$ is compatible with $\mathcal{G}$ relative to $m$ if $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \mathbf{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\RV{C})$.
+\end{definition}
+
+The following definition is reproduced fron \citet{pearl_causality:_2009} with the differences mentioned: notation has been matched to ours, the interventional model is assumed to be measurable and the interventional distributions defined on a common sample space.
+
+\begin{definition}[Causal Bayesian network]
+Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ and a directed acyclic graph $\sigalg{G}$ with nodes labeled by $A$, $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ is a \emph{causal Bayesian network} with respect to $\sigalg{G}$ if
+\begin{enumerate}
+    \item $\prob{P}_\cdot$ is compatible with $\sigalg{G}$
+    \item $\prob{P}_{(\mathrm{do}_{B},v_B)}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}\overset{\prob{P}_{(\mathrm{do}_{B},v_B)}}{\cong}\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ for all $i\not\in B$
+\end{enumerate}
+\end{definition}
+
+We have a number of comments to make about this definition. First, the sequence of variables $(\RV{V}_i)_{i\in A}$ cannot be arbitrary. The sequence $(\RV{X},\RV{X})$ for some $\RV{X}:\Omega\to X$ is a perfectly legitimate variable, but if we say $\RV{V}_1=\RV{X}$ and $\RV{V}_2=\RV{X}$, there is no interventional model possible as the intervention $\prob{P}_{\mathrm{do}_{\{1,2\}},(0,1)}$ is asked to assign probability 1 to the impossible event $(\RV{X}\yields 0)\cap (\RV{X}\yields 1)$. Second, condition (2) is subtly under-specified - $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ is not necessariliy $\prob{P}_{(\mathrm{do}_{B},v_B)}$-almost surely unique. Therefore, one could either interpret it to be asking, given some intervention in $C$, for \emph{any version} of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ satisfying the equality, or for \emph{some particular version} of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ that satisfies the equality for every intervention in $C$.
+
+The first possibility is probably not intended. Suppose $\node{V}_i$ is a parent of $\node{V}_j$, and the associated variable $\RV{V}_i$ is continuously valued such that $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i}(\{v_i\})=0$ for all singletons $v_i\in V_i$. Then for each intervention $\mathrm{do}_{\{i\}}(v_i)$, we can choose a version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_j|\RV{V}_i}$ that takes an arbitrary value at the point $v_i$, which means that property (2) is satisfied trivially.
+
+\section{What is a Potential Outcomes model?}
+
+\section{}
+
 % \section{Weaker assumptions than causal contractibility}\label{sec:weaker_assumptions}
 
 % The results so far apply to purely observational models or to models where every ``input'' in the sequence is fixed at the point of choosing $\alpha$ (or a fixed random function is chosen at this point). Most of the interest in causal inference is how to use observational data -- which is plentiful -- to deduce consequences of choices. Suppose in the following that superscript ``$o$'' refers to observational variables (obtained by some measurement procedure not responsive to choices) and ``$v$'' refers to interventional variables (obtained by some measurement procedure responsive to choices). That is $\RV{Y}^o:=(\RV{Y}_i^o)_{i\in \mathbb{N}}$ is a sequence of observational variables, $\RV{Y}^v$ a sequence of interventional variables and $\RV{Y}^{o,v}:=(\RV{Y}^o_i,\RV{Y}^v_i)_{i\in\mathbb{N}}$ is a mixed sequence of both observational and interventional variables. $\RV{Y}_i^o$ and $\RV{Y}_i^v$ are assumed to take values in the same set $Y$.
@@ -104,11 +192,11 @@ then
 \end{example}
 
 
-\subsection{Individual-level causal contractibility}\label{sec:ilevel_ccontract}
+\section{Individual-level causal contractibility}\label{sec:ilevel_ccontract}
 
 Individual-level causal contractibility is our attempt to formulate a set of conditions sufficient for causal contractibility that may be easier to think about than the bare assumption. It is inspired by the fact that many treatments of causal identifiability refer to sequences of ``individuals'', ``patients'', ``units'' or the like, all of which are considered to be ``essentially identical'' from the point of view of the decision maker. However, these individuals are not directly referenced by the models under consideration. What we do here is consider models that \emph{do} reference individuals -- in particular, we suppose that each sub-procedure produces an input variable, an output variable and a \emph{unique identifier} (which can be thought of as something like someone's license number and state of issue). Under some conditions, assuming causal contractibility with respect to inputs, identifiers and outputs can imply causal contractibility with respect to inputs and outputs only. This clearly hasn't solved the entire problem of assessing a problem for causal contractibility, as a causal contractibility assumption is required to get off the ground.\todo{it might still be helpful, though? I don't really know what to say}
 
-\subsubsection{References to individual-level causal contractibility}
+\subsection{References to individual-level causal contractibility}
 
 The role of individuals has often been mentioned in literature on causal inference. For example, \citet{greenland_identifiability_1986} explain
 \begin{quote}
@@ -139,7 +227,7 @@ Note that Rubin's explanation of \emph{units} guarantees that they are unique: t
 
 Our proposition is: can the intuition that unique individuals are an important for the motivation for causal models, be captured by considering models that feature ``unique identifier'' variables referencing these unique individuals?
 
-\subsubsection{Unique identifiers}
+\subsection{Unique identifiers}
 
 A sequence of \emph{unique identifiers} is a vector of finite or infinite length such that no two coordinates are equal. We are interested in models that assign positive probability to any particular coordinate having any particular value. This is straightforward in the finite case. In the infinite case, note that a vector of $|\mathbb{N}|$ unique values with an arbitrary entry $k$ in the $j$th coordinate can be obtained by starting with $(i)_{i\in \mathbb{N}}$ and then transposing $j$ with $k$. More generally, we consider infinite length sequences of unique identifiers to be elements of the set of finite permutations $\mathbb{N}\to\mathbb{N}$.
 
@@ -170,13 +258,13 @@ This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the id
 
 
 
-\subsubsection{Individual-level causal contractibility and unobserved confounding}
+\subsection{Individual-level causal contractibility and unobserved confounding}
 
 Our first result is that some models with individual-level causal contractibility can be seen as models with unobserved confounding. A model $\prob{P}_C$ with individual-level causal contractibility features a causally contractible $\prob{P}_C^{\RV{Y}|\RV{ID}}$ for a sequence of outputs $\RV{Y}$, inputs $\RV{D}$ and individual identifiers $\RV{I}$. A model with unobserved confounding features causally contractible $\prob{P}_C^{\RV{Y}|\RV{UD}}$ where $\RV{Y}$ and $\RV{D}$ are as before and $\RV{U}$ is an ``unobserved confounder''. They key difference between $\RV{I}$ and $\RV{U}$ is that the individual identifier for each observation is unique, while unobserved variables (typically) have $|U|<N$ where $N$ is the number of observations.
 
 
 
-\subsubsection{Individual-level causal contractibility and ordinary causal contractibility}
+\subsection{Individual-level causal contractibility and ordinary causal contractibility}
 
 Our second key result is that individual-level causal contractibility along with the assumptions of exchangeability of individuals and sufficient control of inputs implies causal contractibility with respect to inputs and outputs.
 

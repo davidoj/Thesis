@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (4.5, 0.75) {$\prob{F}_{\mathrm{lu}}$};
+		\node [style=Llabel tikzit] (1) at (-2.75, 0.5) {$\RV{D}$};
+		\node [style=RLabel tikzit] (2) at (5.75, 0.75) {$\RV{Y}$};
+		\node [style=none] (3) at (4, 1) {};
+		\node [style=none] (4) at (4, 0.5) {};
+		\node [style=small kernel tikzit] (5) at (2, 1.75) {$\prob{P}_\alpha^{\RV{Y}^D|\RV{H}}$};
+		\node [style=Llabel tikzit] (6) at (-2.75, 1.75) {$\RV{W}$};
+		\node [style=RLabel tikzit] (7) at (5.75, -0.75) {$\RV{H}$};
+		\node [style=copymap tikzit] (8) at (0, 1.75) {};
+		\node [style=small kernel tikzit] (9) at (-1.5, 1.75) {$\prob{P}_\alpha^{\RV{H}|\RV{W}}$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (1) to (4.center);
+		\draw (0) to (2);
+		\draw [in=-180, out=0] (5) to (3.center);
+		\draw [in=180, out=-90, looseness=0.75] (8) to (7);
+		\draw (6) to (9);
+		\draw (9) to (8);
+		\draw (8) to (5);
+	\end{pgfonlayer}
+\end{tikzpicture}

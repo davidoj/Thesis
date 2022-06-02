@@ -317,7 +317,7 @@ Note that we are only interested in the variable $\RV{H}$ when the limit exists 
 Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$, we will say ``the'' directing random measure $\RV{H}:\Omega\to \mathcal{M}_1(Y^D)$ is the function
 \begin{align}
     \RV{H} := \bigtimes_{j\in D} A_j \mapsto \begin{cases}
-    \lim_{n\to \infty}\frac{1}{n} \sum_{i=1}^{\infty} \prod_{j\in D} \mathds{1}_A(\RV{Y}^D_{ij}) & \text{this limit exists}\\
+    \lim_{n\to \infty}\frac{1}{n} \sum_{i=1}^{\infty} \prod_{j\in D} \mathds{1}_{A_j}(\RV{Y}^D_{ij}) & \text{this limit exists}\\
     \llbracket \bigtimes_{j\in D} A_j = Y^D \rrbracket &\text{otherwise}
     \end{cases} 
 \end{align}
@@ -330,8 +330,12 @@ Weak data-independence is where outputs are independent of future inputs conditi
 A sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is weakly data-independent if $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}|(\RV{H},\RV{D}_{[1,i]},\RV{C})$.
 \end{definition}
 
-\begin{definition}[Strongly data-independent]\label{def:strong_di}
-A sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is strongly data-independent if it is weakly data-independent and $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}|(\RV{D}_{[1,i]},\RV{C})$.
+% \begin{definition}[Strongly data-independent]\label{def:strong_di}
+% A sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is strongly data-independent if it is weakly data-independent and $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}|(\RV{D}_{[1,i]},\RV{C})$.
+% \end{definition}
+
+\begin{definition}[Permutation within columns]
+Given a sequence of indices $(i,j)_{i\in \mathbb{N},j\in D}$ a finite permutation within the columns is a function $\eta:\mathbb{N}\times D\to \mathbb{N}\times D$ such that for each $j\in D$, $\eta_j:=\rho(\cdot,j)$ is a finite permutation $\mathbb{N}\to \mathbb{N}$.
 \end{definition}
 
 There is an assumption in the following theorem that the set of input sequences in which each value appears infinitely often has measure 1, which is needed in the main Theorem \ref{th:ciid_rep_kernel} to guarantee that the hypothesis $\RV{H}$ is a function of the observable variables.
@@ -348,9 +352,9 @@ Where $\prob{F}_{\text{lu}}$ is the Markov kernel associated with the lookup map
     \text{lu}:X^\mathbb{N}\times Y^{\mathbb{N}\times D}&\to Y\\
     ((x_i)_\mathbb{N},(y_{ij})_{i,j\in \mathbb{N}\times D})&\mapsto (y_{i d_i})_{i\in \mathbb{N}}
 \end{align}
-and for any finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
+and for any finite permutation within columns $\eta:\mathbb{N}\times D\to \mathbb{N}\times D$
 \begin{align}
-    \prob{P}_\alpha^{(\RV{Y}^D_{ij})_{\mathbb{N}\times D}|\RV{W}}&= \prob{P}_\alpha^{(\RV{Y}^D_{\rho(i)j})_{\mathbb{N}\times D}|\RV{W}}\label{eq:col_exch}
+    \prob{P}_\alpha^{(\RV{Y}^D_{ij})_{\mathbb{N}\times D}|\RV{W}}&= \prob{P}_\alpha^{(\RV{Y}^D_{\eta_j(i)j})_{\mathbb{N}\times D}|\RV{W}}\label{eq:col_exch}
 \end{align}
 \end{theorem}
 
@@ -404,11 +408,11 @@ Take some $d\in D^{\mathbb{N}}$. From Equation \ref{eq:rel_bet_y_yd} and causal 
     &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,(d_i)_{i\in\mathbb{N}})
 \end{align}
 
-Furthermore, from Equation \ref{eq:rel_bet_y_yd},
+Furthermore, for some finite permutation within columns $\eta:\mathbb{N}\times D\to \mathbb{N}\times D$, note that $\eta$ is a bijective function on $\mathbb{N}\times D$ that leaves all but a finite number of pairs unchanged. Thus, given some bijection $f:\mathbb{N}\to \mathbb{N}\times D$, $\rho:=\eta\circ f$ is a finite permutation on $\mathbb{N}$. From Equation \ref{eq:rel_bet_y_yd},
 \begin{align}
-    \prob{P}_\alpha^{(\RV{Y}^D_{\rho(i)j})_{\mathbb{N}\times D}|\RV{W}}(A|w) &= \prob{P}_\alpha^{\RV{Y}_\rho|\RV{WD}}(A|w,e)\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}_\rho}(A|w,e)\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,(e_{\rho(i) d_i})_{i\in \mathbb{N}})\\
+    \prob{P}_\alpha^{(\RV{Y}^D_{\eta_j(i)j})_{\mathbb{N}\times D}|\RV{W}}(A|w) &= \prob{P}_\alpha^{\RV{Y}_\rho|\RV{WD}}(A|w,e)\\
+    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}_{\rho^{-1}}}(A|w,e)&\text{by exchange commutativity}\\
+    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,(e_{\rho^{-1}(i) d_i})_{i\in \mathbb{N}})\\
     &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,e)\\
     &= \prob{P}_\alpha^{(\RV{Y}^D_{ij})_{\mathbb{N}\times D}|\RV{W}}(A|w)
 \end{align}
@@ -440,7 +444,7 @@ so $\kernel{K}$ is causally contractible by Theorem \ref{th:equal_of_condits}.
 \end{proof}
 
 \begin{lemma}
-Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is such that there is some $\RV{W}$ such that $\RV{Y}\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{C})$ and for all $\alpha$
+Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is such that $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is causally contractible over some $\RV{W}$, $\RV{Y}\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{D},\RV{C})$ and for all $\alpha$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel_2}
 \end{align}
@@ -451,9 +455,49 @@ then
 \end{lemma}
 
 \begin{proof}
-As $\RV{H}$ is a function of $\RV{Y}$ and $\RV{D}$, we have
+$\RV{Y}^D$ is a function of $\RV{Y}$ and $\RV{D}$ (see Definition \ref{def:tab_cd}) and $\RV{H}$ is a function of $\RV{Y}^D$. Say $f:Y\times D\to H$ is such that $\RV{H}=f(\RV{Y},\RV{D})$ (see Definition \ref{def:dir_rand_meas}). Then
 \begin{align}
-    \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= 
+    \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint}\label{eq:luprep_joint}
+\end{align}
+For $d\in D^{\mathbb{N}}$, take $[d=j]_i$ to be the $i$th coordinate of $d$ equal to $j\in D$ and $\#_{[d=j]_i}$ to be the position in $d$ of $[d=j]_i$. Concretely, $f$ is given by
+\begin{align}
+    f(y,d) &= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y_{\#_{[d=j]_i}})
+\end{align}
+almost surely. Note that for $y^D\in Y^{D\times\mathbb{N}}$ we have
+\begin{align}
+    f\circ \mathrm{lu}(y^D,d) &= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{\#_{[d=j]_i} j})
+\end{align}
+Let $\RV{G}:=f\circ \mathrm{lu}(\RV{Y}^D,d)$ for some $d\in D^{\mathbb{N}}$.
+
+Define $g:Y^{D\times\mathbb{N}}\to H$ by
+\begin{align}
+    g(y^D):= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{ij})
+\end{align}
+and note that $g(\RV{Y}^D)=\RV{H}$. For some $A\in \sigalg{Y}^D$ let $\RV{G}_A:=\RV{G}(A)$ and $\RV{H}_A:=\RV{H}(A)$.Consider 
+\begin{align}
+    \prob{P}_\alpha (\RV{G}_A\yields \RV{H}_A) &= \int_H \prob{P}_\alpha^{\RV{G}_A|\RV{H}} (\nu(A)| \nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)\\
+    &= \int_H \prob{P}_\alpha^{\RV{Y}^D|\RV{H}} (\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y_{\#_{[d=j]_i}})\yields \nu(A)| \nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)
+\end{align}
+but by causal contractibility of $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$, conditional on $\RV{H}$ the $\RV{Y}^D_{ij}$ are mutually independent and $\RV{Y}^D_{ij}$ is identically distributed to $\RV{Y}^D_{lm}$ if $j=m$. Thus, by the law of large numbers, 
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}^D|\RV{H}} (\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y_{\#_{[d=j]_i}})\yields \nu(A)| \nu)= 1
+\end{align}
+In particular, by Eq. \ref{eq:luprep_joint}
+\begin{align}
+    \prob{P}_\alpha^{\RV{YH}|\RV{WD}}&=\tikzfig{lookup_representation_kernel_joint}\\
+    &= \tikzfig{lookup_representation_kernel_joint_2}
+\end{align}
+noting that $\kernel{F}_g\otimes\mathrm{del}_W = \prob{P}_\alpha^{\RV{H}|\RV{Y}^D\RV{W}}$ (as $\RV{H}$ is by definition a function of $\RV{Y}^D$)
+\begin{align}
+    \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint_3}
+\end{align}
+and by the fact that $\RV{Y}\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{D},\RV{C})$ and $\RV{Y}^D$ is a function of $\RV{Y}$ and $\RV{D}$, we have $(\RV{Y}^D,\RV{Y})\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{C})$ by contraction. Then by decomposition, $\RV{Y}^D\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{C})$ also, and so
+\begin{align}
+    \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint_4}
+\end{align}
+and so by higher order conditionals,
+\begin{align}
+    \prob{P}_{\alpha}^{\RV{Y}|\RV{HD}} &= \tikzfig{lookup_representation_kernel_h}
 \end{align}
 \end{proof}
 
