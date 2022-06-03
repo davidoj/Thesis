@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex main"] 1653648889 "main.aux" "main.bbl" "main" 1653648900
+["bibtex main"] 1654236440 "main.aux" "main.bbl" "main" 1654236451
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1653648900 34913 551d502a493a71ace90219805fd3a612 "xelatex"
-  "references.bib" 1653369673 217282 5ffb90575a650c472f243666acab1688 ""
+  "main.aux" 1654236451 37595 b39b4857c6cd727528a5010a1c1bf00b "xelatex"
+  "references.bib" 1654150158 218747 2d7bc54b9495260f5be875557eb1b75e ""
   (generated)
-  "main.bbl"
   "main.blg"
-["xdvipdfmx"] 1653648900 "main.xdv" "main.pdf" "main" 1653648900
-  "main.xdv" 1653648900 1308024 fa0579b6a6b5ee215af983dae8e702a4 "xelatex"
+  "main.bbl"
+["xdvipdfmx"] 1654236451 "main.xdv" "main.pdf" "main" 1654236451
+  "main.xdv" 1654236451 1414028 3dc1e133a54f487bbdbd0ac80888d85e "xelatex"
   (generated)
   "main.pdf"
-["xelatex"] 1653648889 "main.tex" "main.xdv" "main" 1653648900
+["xelatex"] 1654236440 "main.tex" "main.xdv" "main" 1654236451
   "/etc/texmf/web2c/texmf.cnf" 1590547021 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -274,11 +274,11 @@
   "/usr/share/texmf/tex/latex/lm/t1lmtt.fd" 1256929440 2681 354015af3b61e7be30009f084986375a ""
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1599613219 4648586 d2b7c7b61735336533540bc8faab0630 ""
-  "chapter_1_introduction.tex" 1626304629 13449 d74fe23c627e00becac15cbba6b5bac6 ""
+  "chapter_1_introduction.tex" 1654215261 13534 e1c63074e772b5b5b768c4983226d0d3 ""
   "chapter_2_technical.tex" 1653539630 72280 745c08e9da45782149af054b5f35e118 ""
-  "chapter_3_models_with_consequences.tex" 1652146187 70938 e590ee444fb6e49f7707f838dc83147c ""
-  "chapter_4_response_functions.tex" 1653648864 112180 0282884bb28b77302223affe602e4cb8 ""
-  "chapter_5_other_causal_inference.tex" 1653648878 38370 741242203658ad6f6625865f2b37f575 ""
+  "chapter_3_models_with_consequences.tex" 1654226804 86684 1fb977973be4459edef53586c0f5ba7c ""
+  "chapter_4_response_functions.tex" 1654149464 116689 01659c17d817518d74d76d332af87e7b ""
+  "chapter_5_other_causal_inference.tex" 1654236416 55582 0012e5457148338ef2ba627a31148ec9 ""
   "diagrams.tikzstyles" 1649743179 2341 73783d7b804490fb2d99348ad69adc02 ""
   "figures/causally_contractible_comb.tikz" 1649313516 1149 daa253c106ddcb476abd072af532f020 ""
   "figures/ccom2_lhs.tikz" 1632877998 448 4f15b77e6de827c7c0a0fc91e7ce3ae0 ""
@@ -350,6 +350,10 @@
   "figures/lookup_rep_intermediate_kernel.tikz" 1653459685 950 8c2e4ffdf92c4322d62e755a1f5cc3b3 ""
   "figures/lookup_representation_kernel.tikz" 1653474215 697 53f3e32d1dd934f6d9653d0c56f6d67d ""
   "figures/lookup_representation_kernel_h.tikz" 1653484026 697 582b1daba66e2d9e712dea8c6d21f40f ""
+  "figures/lookup_representation_kernel_joint.tikz" 1654143694 955 b992a7a6d01a9322f114371ca4c7f9e7 ""
+  "figures/lookup_representation_kernel_joint_2.tikz" 1654148794 980 c8d327a37924bd9ade6aa83f7c0eeefa ""
+  "figures/lookup_representation_kernel_joint_3.tikz" 1654148990 1235 2ca937b6b9f37d0c8ab8d2b3f7e24a0b ""
+  "figures/lookup_representation_kernel_joint_4.tikz" 1654149356 991 1dddf89392e203ad8ab0b0bb17d7fdcf ""
   "figures/lookup_representation_kernel_k.tikz" 1653632496 581 1462c439dbe800929c254ec64507be51 ""
   "figures/mstruct1_lhs.tikz" 1632878682 282 584cb3cb74ad0b1108b8cd9fe489daf4 ""
   "figures/mstruct1_rhs.tikz" 1632879032 410 437654690909496e3b7e113f90ae603c ""
@@ -368,15 +372,15 @@
   "figures/semidirect_K_L_3.tikz" 1648702267 360 3686059f95e7105183fdcf74d46259e3 ""
   "figures/swap_example.tikz" 1647221173 553 1ecdd38dfab1613056725ab746518393 ""
   "figures/swap_example_2.tikz" 1647221501 547 d2ef0ab9aef12b616ab922520a5f9b98 ""
-  "main.aux" 1653648900 34913 551d502a493a71ace90219805fd3a612 "xelatex"
-  "main.bbl" 1653648889 24935 7d914c1b0b9164b2bf3174d500725d35 "bibtex main"
-  "main.out" 1653648900 4035 c29344dc99860cae5e446fd6cc8f231d "xelatex"
-  "main.tex" 1653369299 8045 b2727682d00f235f4f70d5d604835b9c ""
-  "main.toc" 1653648900 6508 e4596ffe5c669aaa79d847d64626885c "xelatex"
+  "main.aux" 1654236451 37595 b39b4857c6cd727528a5010a1c1bf00b "xelatex"
+  "main.bbl" 1654236440 25570 025572dc8223b9b7653c74a47d1c412f "bibtex main"
+  "main.out" 1654236451 5435 a7cef386006c341de004f2102d1b640b "xelatex"
+  "main.tex" 1654166037 8173 43cdbc3df0c6610f4a2bace4172facd5 ""
+  "main.toc" 1654236451 7469 aca4df40fc351bb64deaf5b06a8d1fae "xelatex"
   "tikzit.sty" 1652052985 1206 bd3a4ee1dccdce0fc641973c4461749d ""
   (generated)
+  "main.aux"
+  "main.log"
   "main.toc"
   "main.out"
-  "main.log"
-  "main.aux"
   "main.xdv"

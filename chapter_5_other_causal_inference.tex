@@ -10,19 +10,7 @@ The account of causal Bayesian networks presented here has a great deal in commo
 
 \subsection{Definition of a Causal Bayesian Network}
 
-We follow the definition of a Causal Bayesian Network on \citet[page ~23-24]{pearl_causality:_2009}. There are a couple of technical differences: we require that interventional models are a measurable map from interventions to probability distributions, and we assume that there is a common sample space for every interventional distribution. There are also some non-technical differences: the notation is adapted for compatibility with the rest of the work in this thesis, and we separate the definition into two parts for clarity. We also require that interventional models are a measurable map from interventions to probability distributions
-
-\begin{definition}[Interventional model]
-An interventional model is a tuple $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ where $(\Omega,\sigalg{F})$ is a measurable space,  $\RV{V}:=(\RV{V}_i)_{i\in A}$ a sequence of variables with $\RV{V}_i:\Omega\to V_i$, $V_i$ denumerable, and the choice set
-\begin{align}
-    C:=\{\mathrm{do}_{\emptyset}\}\cup \{(\mathrm{do}_B,v_B)|B\subset A,v_B\in \mathrm{Range}(V_B)\}
-\end{align}
-That is, we take every subsequence $\RV{V}_B$ of $\RV{V}$ and add to $C$ every element of the range of $\RV{V}_B$, each labeled with the symbol $\mathrm{do}_B$. The Markov kernel $\prob{P}_\cdot:C\kto \Omega$ is such that for all $(\mathrm{do}_{B},v_B)\in C$:
-\begin{align}
-    \prob{P}_{(\mathrm{do}_{B},v_B)}^{\RV{V}_B} &= \delta_{v_B}
-\end{align}
-while $\prob{P}_{\mathrm{do}_{\emptyset}}$ can be arbitrary.
-\end{definition}
+We follow the definition of a Causal Bayesian Network on \citet[page ~23-24]{pearl_causality:_2009}. There are a couple of technical differences: we require that interventional models are a measurable map from interventions to probability distributions, and we assume that there is a common sample space for every interventional distribution. There are also some non-technical differences: the notation is adapted for compatibility with the rest of the work in this thesis, and we separate the definition into two parts for clarity (Definitions \ref{def:interventional} and \ref{def:CBN}).
 
 An interventional model is a \emph{Causal Bayesian Network} with respect to a directed acyclic graph if it satisfies a number of compatibility requirements. The following definitions are standard, and reproduced here for convenience. The definitions here are terse, readers should refer to \citet[chap. ~1]{pearl_causality:_2009} for a more intuitive explanation.
 
@@ -69,23 +57,89 @@ Given a DAG $\graph{G}=(\graph{V},\graph{E})$, a path $p$ is blocked by $\node{V
 Given a DAG $\graph{G}=(\graph{V},\graph{E})$, $\node{V}_A$ is $d$-separated from $\node{V}_B$ by $\node{V}_C$ (all subsets of \graph{V}) if $\node{V}_C$ blocks every path starting at $\node{V}_A$ and ending at $\node{V}_B$. This is written $\node{V}_A\perp_{\mathcal{G}} \node{V}_B | \mathbf{V}_C$.
 \end{definition}
 
+\begin{definition}[Variable-node association]
+Given a graph $\graph{G}=(\graph{V},\graph{E})$ and a sequence of variables $(\RV{V}_i)_{i\in A}$, if $|A|=|\graph{V}|$ we can associate a variable with each node of the graph with an invertible map $m:\{\RV{V}_i|i\in A\}\to \graph{V}$. By convention, we give associated variables and nodes corresponding indices, and graphical operations are defined on variables through $m$, i.e. $\mathrm{Pa}(\RV{V}_i):=m(\mathrm{Pa}(m^{-1}(\RV{V}_i)))$.
+\end{definition}
+
 \begin{definition}[Compatibility]\label{def:compat}
-Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m:\RV{V}_i\mapsto \node{V}_i$, $\prob{P}_\cdot$ is compatible with $\mathcal{G}$ relative to $m$ if $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \mathbf{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\RV{C})$.
+Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m:\RV{V}_i\mapsto \node{V}_i$, $\prob{P}_\cdot$ is compatible with $\mathcal{G}$ relative to $m$ if for all $I,J,K\subset A$, $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \mathbf{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\RV{C})$.
 \end{definition}
 
 The following definition is reproduced fron \citet{pearl_causality:_2009} with the differences mentioned: notation has been matched to ours, the interventional model is assumed to be measurable and the interventional distributions defined on a common sample space.
 
-\begin{definition}[Causal Bayesian network]
-Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ and a directed acyclic graph $\sigalg{G}$ with nodes labeled by $A$, $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ is a \emph{causal Bayesian network} with respect to $\sigalg{G}$ if
+\begin{definition}[Interventional model]\label{def:interventional}
+An interventional model is a tuple $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ where $(\Omega,\sigalg{F})$ is a measurable space,  $\RV{V}:=(\RV{V}_i)_{i\in A}$ a sequence of variables with $\RV{V}_i:\Omega\to V_i$, $V_i$ denumerable, where $C$ the choice set
+\begin{align}
+    C:=\{\mathrm{do}_{\emptyset}\}\cup \{(\mathrm{do}_B,v_B)|B\subset A,v_B\in \mathrm{Range}(V_B)\}
+\end{align}
+That is, we take every subsequence $\RV{V}_B$ of $\RV{V}$ and add to $C$ every element of the range of $\RV{V}_B$, each labeled with the symbol $\mathrm{do}_B$.
+\end{definition}
+
+\begin{definition}[Causal Bayesian network]\label{def:CBN}
+Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ and a directed acyclic graph $\graph{G}$ with nodes $\graph{V}$, $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A},\graph{G})$  is a \emph{causal Bayesian network} with respect the node-variable association $m:\node{V}_i\mapsto \RV{V}_i$ if:
 \begin{enumerate}
-    \item $\prob{P}_\cdot$ is compatible with $\sigalg{G}$
+    \item $\prob{P}_\cdot$ is compatible with $\graph{G}$ with respect to $m$
+    \item $B\neq \emptyset \implies \prob{P}_{(\mathrm{do}_{B},v_B)}^{\RV{V}_B} = \delta_{v_B}$
     \item $\prob{P}_{(\mathrm{do}_{B},v_B)}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}\overset{\prob{P}_{(\mathrm{do}_{B},v_B)}}{\cong}\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ for all $i\not\in B$
 \end{enumerate}
 \end{definition}
 
-We have a number of comments to make about this definition. First, the sequence of variables $(\RV{V}_i)_{i\in A}$ cannot be arbitrary. The sequence $(\RV{X},\RV{X})$ for some $\RV{X}:\Omega\to X$ is a perfectly legitimate variable, but if we say $\RV{V}_1=\RV{X}$ and $\RV{V}_2=\RV{X}$, there is no interventional model possible as the intervention $\prob{P}_{\mathrm{do}_{\{1,2\}},(0,1)}$ is asked to assign probability 1 to the impossible event $(\RV{X}\yields 0)\cap (\RV{X}\yields 1)$. Second, condition (2) is subtly under-specified - $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ is not necessariliy $\prob{P}_{(\mathrm{do}_{B},v_B)}$-almost surely unique. Therefore, one could either interpret it to be asking, given some intervention in $C$, for \emph{any version} of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ satisfying the equality, or for \emph{some particular version} of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ that satisfies the equality for every intervention in $C$.
+We have a two comments to make about this definition. First, the sequence of variables $(\RV{V}_i)_{i\in A}$ cannot be arbitrary -- they must be ``causally compatible'' (see Section \ref{sec:cc_vars}. For example, the sequence $\RV{V}:=(\RV{X},\RV{X})$ for some $\RV{X}:\Omega\to X$ is a perfectly legitimate variable, but by condition (2) the intervention $\prob{P}_{\mathrm{do}_{\{1,2\}},(0,1)}$ is asked to assign probability 1 to the impossible event $(\RV{X}\yields 0)\cap (\RV{X}\yields 1)$. Second, condition (3) is subtly under-specified: $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ is not necessariliy $\prob{P}_{(\mathrm{do}_{B},v_B)}$-almost surely unique. We could therefore either require condition (3) to hold for some version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ for each intervention in $C$, or we could require it for a single version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ uniformly over all interventions in $C$.
 
-The first possibility is probably not intended. Suppose $\node{V}_i$ is a parent of $\node{V}_j$, and the associated variable $\RV{V}_i$ is continuously valued such that $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i}(\{v_i\})=0$ for all singletons $v_i\in V_i$. Then for each intervention $\mathrm{do}_{\{i\}}(v_i)$, we can choose a version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_j|\RV{V}_i}$ that takes an arbitrary value at the point $v_i$, which means that property (2) is satisfied trivially.
+For continuously valued variables, the ability to pick a version of the conditional probability for each intervention leads to undesirable results. Suppose $\node{V}_i$ is a parent of $\node{V}_j$, and the associated variable $\RV{V}_i$ is continuously valued and $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i}(\{v_i\})=0$ for all singletons $v_i\in V_i$. Then for every intervention $\mathrm{do}_{\{i\}}(v_i)$, we can choose a version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_j|\RV{V}_i}$ that takes an arbitrary value at the point $v_i$ (because this point has measure 0), so property (3) is satisfied trivially. Because of this, we will henceforth suppose that variables are discrete.
+
+\subsection{Unrolling a causal Bayesian network}
+
+Given a probability space $(\prob{P},\Omega,\sigalg{F})$ and an independent and identically distributed (IID) sequence $\RV{X}:=(\RV{X}_i)_{i\in [n]}$, it is common to ``roll up'' the joint distribution $\prob{P}^{\RV{X}}\in\Delta(X^n)$ to a single representative distribution $\prob{P}^{\RV{X}_0}\in \Delta(X)$ and say something like ``the $\RV{X}_i$ are IID according to $\prob{P}^{\RV{X}_0}$''. Because of the IID assumption, the full joint distribution $\prob{P}^{\RV{X}}\in\Delta(X^n)$ can be unambiguously reconstructed from a statement like this.
+
+A causal Bayesian network is similarly a rolled-up representation of a model of some sequence of variables. Unlike an IID sequence, it isn't completely unambiguous how to unroll it. We propose the following method: first, posit a sequence of variables $\RV{V}:= (\RV{V}_ij)_{i\in A,j\in [n]}$, and extend the set $C$ to be the set of sequences of interventions 
+\begin{align}
+\{(\mathrm{do}_{B_j j}(v_B))_{j\in [n]}|\forall j: B_j \subset A,v_{B_j}\in \mathrm{Range}(\RV{V}_{B_j})\}
+\end{align}
+i.e. $C$ now consists of all sequences of separate interventions to each subsequence of variables $\RV{V}_{Aj}:=(\RV{V}_{ij})_{i\in A}$, understood to refer to variables arising from a particular iteration of the decision procedure. 
+
+Given a graph $\graph{G}=(\graph{V},\graph{E})$, we now have a collection of variable-node association maps $m_j:\{\RV{V}_{ij}|i\in A\}\to \graph{V}$ such that $m_j(\RV{V}_{ij})=\node{V}_i$.
+
+We now need to specify how variables in an unrolled causal Bayesian network are distributed, given some sequence of interventions. By analogy with the original case of IID variables, we conclude that the $\RV{V}_{Aj}:=(\RV{V}_{ij})_{i\in A}$ are mutually independent given any particular sequence of interventions. Furthermore, Definition \ref{def:CBN} constrains the distribution of each variable given a particular sequence of interventions from $C$. For a sequence of interventions $\alpha\in C$, let $\pi_j(\alpha)$ be the $j$th intervention in the sequence. We might posit the following analogue of condition (3): 
+\begin{itemize}
+    \item [3'] $\pi_j(\alpha)=(\mathrm{do}_{B_j},v_{B_j})$ implies $\prob{P}_{\alpha}^{\RV{V}_{ij}|\mathrm{Pa}(\RV{V}_{ij})}\overset{\prob{P}_{\alpha}}{\cong}\prob{P}_{\mathrm{do}_{\emptyset}^n}^{\RV{V}_{i1}|\mathrm{Pa}(\RV{V}_{i1})}$ for all $i\not\in B$
+\end{itemize}
+Where $\mathrm{do}_{\emptyset}^n$ is a sequence of $n$ $\mathrm{do}_{\emptyset}$ interventions. This is a combination of an assumption that variables in the sequence are conditionally identically distributed given appropriate interventions and condition (3) from Definition \ref{def:CBN}. However, it's not quite satisfactory. Take $B:=\mathrm{Pa}(\RV{V}_{i1})$, and suppose $\prob{P}_{\mathrm{do}_{\emptyset}^n}^{\RV{V}_{B1}}(\{x\})=0$. Then (3') would be satisfied by a model for which
+\begin{align}
+    \prob{P}_{(\mathrm{do}_{B_1},x,\mathrm{do}_{B_2},x)}^{\RV{V}_{i1}|\RV{B}}(U|x) &= \delta_0(U)\\
+    \prob{P}_{(\mathrm{do}_{B_1},x,\mathrm{do}_{B_2},x)}^{\RV{V}_{i2}|\RV{B}}(U|x) &= \delta_1(U)
+\end{align}
+that is, if the empty intervention is unsupported over some element of the range of a variable, then (3') allows models that assign different consequences to repetitions of the same intervention on this variable, if those intervention forces the variable into the region that originally had no support.
+
+We propose instead the restricted assumption of identical conditionals: for any pair $\RV{V}_{ij}$ and $\RV{V}_{ik}$, unless $i$ is intervened on by $\pi_j(\alpha)$ and not intervened on by $\pi_{k}(\alpha)$, then $\prob{P}_\alpha^{\RV{V}_{ij}}$ of variables, unless an intervention forces the conditional distribution of a variable given its parents to be different, then the conditional probability of $\RV{V}_{ij}$ given its parents is equal to the conditional probability of $\RV{V}_{ik}$ given its parents. That leads to the following definition:
+
+\begin{definition}[Unrolled causal Bayesian network]\label{def:unr_CBN}
+Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in [n]})$ and a directed acyclic graph $\graph{G}$ with nodes $\graph{V}$, $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A},\graph{G})$  is an \emph{unrolled causal Bayesian network} with respect the node-variable association maps $m_j:\node{V}_{ij}\mapsto \RV{V}_i$ if:
+\begin{itemize}
+    \item [1*] $\prob{P}_\cdot^{\RV{V}_{Aj}}$ is compatible with $\graph{G}$ with respect to $m_j$ for all $j\in [n]$
+    \item [2*] $\pi_j(\alpha) = (\mathrm{do}_{B_j},v_{B_j})$ and $B_j\neq \emptyset$ implies $\prob{P}_{(\mathrm{do}_{B_j},v_{B_j})}^{\RV{V}_{Bj}} &= \delta_{v_{B_j}}$
+    \item [3*] If $\pi_j(\alpha) = (\mathrm{do}_{B_j},v_{B_j})$, $\pi_k(\alpha) = (\mathrm{do}_{B_k},v_{B_k})$ and $i\not \in B_j\cup B_k$ then $\prob{P}_{\alpha}^{\RV{V}_{ij}|\mathrm{Pa}(\RV{V}_{ij})}\overset{\prob{P}_{\alpha}}{\cong}\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_{ik}|\mathrm{Pa}(\RV{V}_{ik})}$
+    \item [4*] $\RV{V}_{Aj}\CI^e_{\prob{P}_{\cdot}} \RV{V}_{A [n]\setminus\{j\}} |\RV{C}$
+\end{itemize}
+\end{definition}
+
+Note that Definition \ref{def:unr_CBN} does not rule out the possibility that $\pi_j(\alpha)=\pi_j(\alpha')$ but $\prob{P}_\alpha^{\RV{V}_{Aj}}\neq \prob{P}_{\alpha'}^{\RV{V{}_{Aj}}}$ -- that is, the distribution may still depend globally on the sequence of interventions selected. This is a situation like in Chapter \ref{ch:evaluating_decisions}, where conditionally independent and identical response functions allow for the estimation of conditional probabilities from previous data, but additional assumptions are needed to establish that choices should be made according to these estiamtes alone.
+
+\subsection{Uncertainty in an unrolled causal Bayesian network}
+
+Condition 3* of Definiiton \ref{def:unr_CBN} establishes that, depending on the precise sequence of interventions chosen, certain conditionals are identical. In Chapter \ref{ch:evaluating_decisions}, we considered conditionals (or ``response functions'') that were identical \emph{conditional on some hypothesis} $\RV{H}$. Problems addressed with causal Bayesian networks are also usually problems where these conditional distributions are initially unknown (and, in some cases, they may remain unknown even after examining an arbitrarily large amount of data). We propose to use the same method to represent uncertainty over conditional distributions in a causal Bayesian network. In particular, an \emph{uncertain} unrolled causal Bayesian network is an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in [n]})$ with some variable $\RV{H}$ such that, conditional on any $h\in H$, the result is an unrolled causal Bayesian network.
+
+\begin{definition}[Uncertain unrolled causal Bayesian network]\label{def:unc_unr_cbn}
+Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in [n]})$ and a directed acyclic graph $\graph{G}$, $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A},\graph{G})$ is an \emph{uncertain unrolled causal Bayesian network} if there is some variable $\RV{H}:\Omega\to H$ such that for each $h\in H$, defining $\prob{P}_{\cdot,h}:= \alpha\mapsto \prob{P}_\alpha^{\mathrm{id}_{\Omega}|\RV{H}}(\cdot|h)$, $(\prob{P}_{\cdot,h},C,\Omega,(\RV{V}_i)_{i\in A},\graph{G})$ is an unrolled causal Bayesian network.
+\end{definition}
+
+Recalling the discussion in Section \ref{sec:probability_set_models}, Definition \ref{def:unc_unr_cbn} associates each intervention with a unique probability distribution. One could imagine therefore callling uncertain unrolled causal Bayesian networks ``Bayesian causal Bayesian networks'', although this is obviously a bit of a confusing name.
+
+An uncertain unrolled causal Bayesian network is \emph{almost} a conditionally independent and identical response function model. Due to [3*], such a model features conditionally independent and identical response functions wherever $\alpha$ consists of a sequence of interventions none of which target $i$. This leads us to the key result of this section: considering a subset of the interventions in $C$, an uncertain unrolled causal Bayesian network is causally contractible (with respect to some parameters) by application of Theorem \ref{th:ciid_rep_kernel}.
+
+\begin{theorem}[causal contractibility of CBNs]\label{th:causal_contractibility_cbn}
+
+\end{theorem}
 
 \section{What is a Potential Outcomes model?}
 
