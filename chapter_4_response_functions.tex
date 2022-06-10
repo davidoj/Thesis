@@ -291,7 +291,7 @@ Theorem \ref{th:table_rep_kernel} shows that a causally contractible conditional
 
 We reuse a number of concepts in the following work: models with sequences of inputs and outputs, ``tabulated'' representations of conditional probabilities and ``hypothesis'' or ``directing measures'' defined as the limit of relative frequencies.
 
-\begin{definition}[Sequential input-output model]
+\begin{definition}[Count-of-inputs variable]
 Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ on $(\Omega,\sigalg{F})$ with countable $D$, $\#_{\RV{D}_k=j}^i$ is the variable
 \begin{align}
     \#_{\RV{D}_k=j}^i := \llbracket \sum_{i=1}^{k-1} \llbracket \RV{D}_i = j \rrbracket = i-1\rrbracket\llbracket \RV{D}_k = j \rrbracket
@@ -767,7 +767,7 @@ Then the model exhibits a kind of ``backdoor adjustment''. Specifically, for $i>
 
 Equation \ref{eq:backdoor} is identical to the backdoor adjustment formula \citep[Chap. 1]{pearl_causality:_2009} for an intervention on $\RV{D}_1$ targeting $\RV{Y}_1$ where $\RV{X}_1$ is a common cause of both.
 
-\paragraph{Choices should be under the decision maker's control}
+\paragraph{Choices should be under the decision maker's control}\label{sec:dm_control}
 
 We have paid little attention to set of choices $C$. Causal contractibility is a helpful property of a model $\prob{P}_C$ that holds for all $\alpha\in C$, and many other independences we consider likewise held for all $\alpha$. Two points that might be a bit banal: first, it is $\alpha$ that is being chosen, not necessarily the sequence of inputs $\RV{D}$. There could be a meaningful distinction if, for example, $\prob{P}_\cdot^{\RV{Y}|\RV{D}}$ is causally contractible, but $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$ is nevertheless different to $\prob{P}_\beta^{\RV{Y}|\RV{D}}$ for some $\alpha\neq\beta$. Secondly (and this is the point of the following example) whether or not it is reasonable to use a model where the choice variable $\RV{C}$ isn't directly relevant to many questions depends on the problem at hand and how the model is being applied to this problem. 
 

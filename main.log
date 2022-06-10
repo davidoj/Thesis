@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  3 JUN 2022 16:07
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.9.9)  10 JUN 2022 15:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1480,62 +1480,63 @@ Overfull \hbox (13.18689pt too wide) in paragraph at lines 79--81
 \OT1/cmr/m/n/10 )$
  []
 
-! Misplaced alignment tab character &.
-l.82 ...ob{P}_{(\mathrm{do}_{B},v_B)}^{\RV{V}_B} &
-                                                  = \delta_{v_B}$
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
+[109] [110] [111] [112] [113] (./figures/cbn_example_cgm.tikz)
+(./figures/cbn_example_cgm.tikz) (./figures/cgm.tikz) (./figures/cgm.tikz)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[109] [110]
-! Misplaced alignment tab character &.
-l.120 ...athrm{do}_{B_j},v_{B_j})}^{\RV{V}_{Bj}} &
-                                                  = \delta_{v_{B_j}}$
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
+ [114]
+(./figures/cbn_unrolled_example.tikz) (./figures/cbn_unrolled_example.tikz)
 
-[111]
+LaTeX Warning: Reference `sec:counterfactual_statements' on page 115 undefined 
+on input line 222.
 
-LaTeX Warning: Reference `th:det_obs_to_cons' on page 112 undefined on input li
-ne 219.
-
-[112]
-Overfull \hbox (1.66454pt too wide) in paragraph at lines 261--262
+[115] (./figures/lookup_representation_single.tikz)
+(./figures/lookup_representation_single.tikz) [116]
+(./figures/potential_outcomes_ccontract1.tikz)
+(./figures/potential_outcomes_ccontract2.tikz)
+(./figures/potential_outcomes_ccontract3.tikz)
+(./figures/potential_outcomes_ccontract1.tikz)
+(./figures/potential_outcomes_ccontract2.tikz)
+(./figures/potential_outcomes_ccontract3.tikz) [117] [118]
+Overfull \hbox (1.66454pt too wide) in paragraph at lines 412--413
 \T1/lmr/m/n/10 change-abil-ity'' for a de-ci-sion prob-lem re-gard-ing tak-ing 
 as-pirin to treat a headache
  []
 
 Missing character: There is no – in font ec-lmr10!
-[113] [114]
-Overfull \hbox (6.15839pt too wide) in paragraph at lines 315--315
-[]\T1/lmr/bx/n/12 Individual-level causal con-tractibil-ity and un-ob-served
+[119] [120]
+Overfull \hbox (6.69186pt too wide) in paragraph at lines 469--469
+[]\T1/lmr/bx/n/12 Identification with individual-level re-sponse func-tions 
  []
 
-[115] (./figures/index_independence_1.tikz)
-(./figures/index_independence_2.tikz) (./figures/index_independence_1.tikz)
-(./figures/index_independence_2.tikz)
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [116]
-Overfull \hbox (0.57549pt too wide) in paragraph at lines 353--354
+LaTeX Warning: Reference `lem:ind' on page 121 undefined on input line 475.
+
+[121]
+Overfull \hbox (22.03877pt too wide) in paragraph at lines 482--483
+\T1/lmr/m/it/10 causally con-tractible over $\OT1/cmss/m/n/10 W$\T1/lmr/m/it/10
+ , if $\OT1/cmss/m/n/10 Y [][] \OT1/cmr/m/n/10 (\OT1/cmss/m/n/10 I\OML/cmm/m/it
+/10 ; \OT1/cmss/m/n/10 C\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 j\OT1/cmr/m/n/10 (\OT
+1/cmss/m/n/10 W\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 D\OT1/cmr/m/n/10 )$ \T1/lmr/
+m/it/10 and for any $\OML/cmm/m/it/10 j \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 I$\
+T1/lmr/m/it/10 , $[][] \U/msb/m/n/10 P[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 j\OT1
+/cmr/m/n/10 ) \OML/cmm/m/it/10 >
+ []
+
+(./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
+(./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
+Overfull \hbox (4.46439pt too wide) in paragraph at lines 493--494
 []\T1/lmr/m/n/10 In par-tic-u-lar, for any $\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10
  2 \U/msb/m/n/10 N$\T1/lmr/m/n/10 , $\OML/cmm/m/it/10 j \OMS/cmsy/m/n/10 2 \OML
 /cmm/m/it/10 I$\T1/lmr/m/n/10 , this holds for some $\OML/cmm/m/it/10 ^^W$ \T1/
 lmr/m/n/10 such that $\OML/cmm/m/it/10 ^^W\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^E
-[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 j\OT1/cmr/m/n/10 ) =
+[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 j\OT1/cmr/m/n/10 )) =
  []
 
 (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
 (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
 (./figures/index_independence_5.tikz) (./figures/index_independence_5.tikz)
-[117] (./figures/kernel_fac_with_idents.tikz)
+[122] (./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
 (./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
@@ -1548,22 +1549,41 @@ lmr/m/n/10 such that $\OML/cmm/m/it/10 ^^W\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^E
 (./figures/kernel_Q_fac_with_idents_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
-(./figures/kernel_Q_fac_with_idents_subbed.tikz) [118]
+(./figures/kernel_Q_fac_with_idents_subbed.tikz) [123]
 (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
 (./figures/kernel_P_indep.tikz) (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
-(./figures/kernel_P_indep.tikz) [119] [120] [121]
-Overfull \hbox (84.4473pt too wide) detected at line 523
+(./figures/kernel_P_indep.tikz) [124]
+Overfull \hbox (3.29549pt too wide) in paragraph at lines 588--589
+[][]\T1/lmr/bx/n/10 Theorem 5.3.8. []\T1/lmr/m/it/10 Given a se-quen-tial input
+-output model $\OT1/cmr/m/n/10 (\U/msb/m/n/10 P[]\OML/cmm/m/it/10 ; \OT1/cmr/m/
+n/10 (\OT1/cmss/m/n/10 D\OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 I\OT1/cmr/m/n/10 )\
+OML/cmm/m/it/10 ; \OT1/cmss/m/n/10 Y\OT1/cmr/m/n/10 )$\T1/lmr/m/it/10 , on $\OT
+1/cmr/m/n/10 (\OML/cmm/m/it/10 
+; \OMS/cmsy/m/n/10 F\OT1/cmr/m/n/10 )$
+ []
+
+[125]
+
+LaTeX Warning: Reference `ex:bad_randomised_experiment' on page 126 undefined o
+n input line 628.
+
+[126]
+
+LaTeX Warning: Reference `lem:ind' on page 127 undefined on input line 641.
+
+[127]
+Overfull \hbox (84.4473pt too wide) detected at line 680
 []
  []
 
-[122]
-Overfull \hbox (62.47636pt too wide) detected at line 547
+
+Overfull \hbox (62.47636pt too wide) detected at line 704
 []
  []
 
-) (./main.bbl
+[128]) (./main.bbl
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
 7.
  (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
@@ -1573,7 +1593,11 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [123]
+
+Underfull \vbox (badness 1466) has occurred while \output is active []
+
+ [129]
+[130]
 Underfull \hbox (badness 6284) in paragraph at lines 126--136
 []\T1/lmr/m/n/10 A. P. Dawid.  Causal In-fer-ence with-out Coun-ter-fac-tu-als.
   \T1/lmr/m/it/10 Jour-
@@ -1603,7 +1627,6 @@ Underfull \hbox (badness 5893) in paragraph at lines 126--136
 lor & Fran-cis _eprint:
  []
 
-[124]
 Missing character: There is no ’ in font ec-lmr10!
 
 Underfull \hbox (badness 1490) in paragraph at lines 160--169
@@ -1647,7 +1670,7 @@ Underfull \hbox (badness 1264) in paragraph at lines 171--181
 /lmtt/m/n/10 https : / / doi . org /
  []
 
-[125]
+[131] [132]
 Underfull \hbox (badness 4193) in paragraph at lines 287--295
 \T1/lmr/m/n/10 CBO9781139025751$.  URL []$\T1/lmtt/m/n/10 https : / / www . cam
 bridge . org / core / books /
@@ -1661,7 +1684,7 @@ al-[]sciences /
 
 Missing character: There is no ł in font ec-lmr10!
 Missing character: There is no ń in font ec-lmr10!
-[126]
+
 Underfull \hbox (badness 10000) in paragraph at lines 331--340
 \T1/lmtt/m/n/10 www . cambridge . org / core / journals / political-[]analysis 
 / article / abs /
@@ -1680,7 +1703,7 @@ Underfull \hbox (badness 2334) in paragraph at lines 353--361
 487320936787$[]\T1/lmr/m/n/10 .  Pub-
  []
 
-[127]
+[133]
 Missing character: There is no – in font ec-lmr10!
 
 Underfull \hbox (badness 1009) in paragraph at lines 428--436
@@ -1688,7 +1711,7 @@ Underfull \hbox (badness 1009) in paragraph at lines 428--436
 563, 1468-3318.  doi:
  []
 
-[128]
+[134]
 Underfull \hbox (badness 3503) in paragraph at lines 509--516
 []\T1/lmr/m/n/10 Brian Skyrms.  Causal De-ci-sion The-ory.  \T1/lmr/m/it/10 The
  Jour-nal of Phi-los-o-
@@ -1706,6 +1729,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 509--516
  ? openform & fp = jphil &
  []
 
+[135]
 Missing character: There is no ’ in font ec-lmr10!
 
 Underfull \hbox (badness 3000) in paragraph at lines 547--554
@@ -1713,14 +1737,14 @@ Underfull \hbox (badness 3000) in paragraph at lines 547--554
  Ex-ten-
  []
 
-[129]) [130] [131]
+) [136] [137]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 224.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 224.
  (./main.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 224.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 224.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A7CEF386006C341DE004F2102D1B640B;5435.
+(rerunfilecheck)             Checksum: 561BAAD4B4B754034489B5653F40BB96;5317.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1731,12 +1755,12 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 224.
  ) 
 Here is how much of TeX's memory you used:
- 30995 strings out of 479819
- 596480 string characters out of 5895847
- 940149 words of memory out of 5000000
- 46884 multiletter control sequences out of 15000+600000
+ 31128 strings out of 479819
+ 599332 string characters out of 5895847
+ 941490 words of memory out of 5000000
+ 46982 multiletter control sequences out of 15000+600000
  638721 words of font info for 175 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  68i,20n,83p,2518b,1063s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (131 pages, 1414028 bytes).
+Output written on main.xdv (137 pages, 1514360 bytes).

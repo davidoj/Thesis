@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=plain circle] (0) at (-0.25, 4.25) {$\node{V}_1$};
+		\node [style=plain circle] (1) at (-2.5, 1.75) {$\node{V}_2$};
+		\node [style=plain circle] (2) at (2, 1.75) {$\node{V}_3$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=right arrow] (0) to (2);
+		\draw [style=right arrow] (0) to (1);
+		\draw [style=right arrow] (1) to (2);
+	\end{pgfonlayer}
+\end{tikzpicture}

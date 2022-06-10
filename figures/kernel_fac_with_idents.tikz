@@ -1,8 +1,8 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=small kernel tikzit] (0) at (-1.75, 0.75) {$\prob{P}_\alpha^{\RV{D}|\RV{I}}$};
-		\node [style=small kernel tikzit] (1) at (0.75, 1.5) {$\prob{P}_C^{\RV{Y}|\RV{ID}}$};
-		\node [style=RLabel tikzit] (2) at (3.5, 1.5) {$\RV{Y}$};
+		\node [style=small kernel tikzit] (1) at (0.75, 1.5) {$\prob{P}_C^{\RV{YJ}|\RV{ID}}$};
+		\node [style=RLabel tikzit] (2) at (3.5, 1.5) {$(\RV{Y},\RV{J})$};
 		\node [style=Llabel tikzit] (4) at (-4, 1.75) {$\RV{I}$};
 		\node [style=copymap tikzit] (5) at (-3, 1.75) {};
 		\node [style=none] (6) at (0, 1.75) {};

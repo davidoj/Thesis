@@ -1,7 +1,7 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (1, -0.5) {$\prob{P}_C^{\RV{Y}|\RV{ID}}$};
-		\node [style=RLabel tikzit] (1) at (3.75, -0.5) {$\RV{Y}$};
+		\node [style=small kernel tikzit] (0) at (1, -0.5) {$\prob{P}_C^{\RV{YJ}|\RV{ID}}$};
+		\node [style=RLabel tikzit] (1) at (3.75, -0.5) {$(\RV{Y},\RV{J})$};
 		\node [style=Llabel tikzit] (2) at (-5.25, -0.25) {$\RV{I}$};
 		\node [style=none] (3) at (0.25, -0.25) {};
 		\node [style=none] (4) at (0.25, -0.75) {};

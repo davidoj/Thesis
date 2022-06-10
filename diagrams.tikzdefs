@@ -53,6 +53,7 @@
 \newcommand{\combbreak}{\ensuremath{\wr}}
 \newcommand{\bigcombdot}{\ensuremath{\underline{\bigcprod}}}
 \newcommand{\proc}[1]{\ensuremath{\mathscr{#1}}}
+\newcommand{\node}[1]{\ensuremath{\overset{\sim}{\RV{#1}}}}
 
 \newcommand\swap[1]{%
 \begin{tikzpicture}[scale=#1]
