@@ -217,6 +217,79 @@ where
     \end{cases}
 \end{align}
 
+\subsection{Hidden confounders}
+
+One of the particularly interesting questions in causal inference is how to infer consequences of actions from observational data. A particular question of interest for problems of this type is the question of what kinds of inductive assumptions are applicable to this problem.
+
+A common assumption in the causal Bayesian network tradition applicable to this kind of problem is the assumption of \emph{hidden confounders}. Suppose we have an uncertain unrolled causal Bayesian network $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in [3],j\in [n]},\RV{H},\graph{G})$ where the graph $\RV{G}$ is as follows:
+\begin{align}
+    \tikzfigure{cbn_example_cgm}
+\end{align}
+and we consider the subset $C'\subset C$ of interventions that are either empty or target $\RV{V}_2$ only. We note that Theorem \ref{th:causal_contractibility_cbn} implies that $\prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{1[n]}\RV{V}_{2[n]}}$ is causally contractible, but not $\prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{2[n]}}$. We can specify somewhat informally that $\RV{V}_{1[n]}$ is not observed -- that is, it is not associated with a measurement procedure. 
+
+The assumption of a hidden confounder often implies that, for any choice, the consequences of ``interventions'' have been anticipated by \emph{some} fraction of the observations. Specifically, the causal contractibility of $\prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{1[n]}\RV{V}_{2[n]}}$ implies that $\prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{2[n]}}$ is unchanged by swaps that leave $\RV{V}_{1[n]}$ unchanged.
+
+\begin{theorem}\label{th:condit_exchange}
+Given $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in [3],j\in [n]},\RV{H},\graph{G})$ with $\prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{1[n]}\RV{V}_{2[n]}}$ causally contractible over $\RV{H}$, $V_i$ discrete for all $i\in [3]$ and $\prob{P}_C^{\RV{V}_{[2]i}|\RV{H}}(v_1,v_2|h)>0$ for all $v_1,v_2,h$, let $\RV{Q}:\Omega\to [n]^n$ be a permutation of $[n]$ such that $\RV{V}_{1[n]}=\RV{V}_{1\RV{Q}([n])}$. Then
+\begin{align}
+    \prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{2[n]}} &= \prob{P}_C^{\RV{V}_{3\RV{Q}([n])}|\RV{H}\RV{V}_{2\RV{Q}([n])}}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+By causal contractibility of $\prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{1[n]}\RV{V}_{2[n]}}$ over $\RV{H}$
+\begin{align}
+    \prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{1[n]}\RV{V}_{2[n]}} &= \prob{P}_C^{\RV{V}_{3\RV{Q}([n])}|\RV{H}\RV{V}_{1\RV{Q}([n])}\RV{V}_{2\RV{Q}([n])}}\\
+    &= \prob{P}_C^{\RV{V}_{3\RV{Q}([n])}|\RV{H}\RV{V}_{1[n]}\RV{V}_{2\RV{Q}([n])}}
+\end{align}
+Thus
+\begin{align}
+    &\prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{2[n]}}\\
+     &= \tikzfig{contractibility_over_hidden}\\
+     &= \tikzfig{contractibility_over_hidden_2}\\
+     &= \tikzfig{contractibility_over_hidden_3}\\
+     &= \prob{P}_C^{\RV{V}_{3\RV{Q}([n])}|\RV{H}\RV{V}_{2\RV{Q}([n])}}
+\end{align}
+\end{proof}
+
+Theorem \ref{th:condit_exchange} says that causal contractibility of $\prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{1[n]}\RV{V}_{2[n]}}$ implies the ``exchange commutativity'' of $\prob{P}_C^{\RV{V}_{3[n]}|\RV{H}\RV{V}_{2[n]}}$ with respect to the unknown permutation $\RV{Q}$ of the indices of $[n]$ -- in fact, for all such unknown permutations that preserve $\RV{V}_{1[n]}$. That is, $\RV{V}_{1[n]}$ determines some subset of indices that are, in some sense, interchangeable. If this subset includes indices that correspond to passive observations and indices that correspond to consequences of actions (indices associated with $\mathrm{do}_\emptyset$ and $\mathrm{do}_A$ for nonempty $A$ respectively), then we can see this as the assumption that the consequences of actions were preempted by some known set of the passive observations.
+
+One could consider making \emph{only} a ``preemption'' assumption, without the additional assumptions associated with causal Bayesian networks (that is, no assumptions about the nature of interventions). Formally, we define preemption:
+\begin{definition}[Preemption]\label{def:preemption}
+Given a sequential input-output model $(\prob{P}_C, (\RV{D},\RV{X}), \RV{Y})$ with $D,X$ denumerable, for each $\alpha$, $\prob{P}_\alpha^{\RV{Y}_1|\RV{WD}_1}$ is preempted by $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ if $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ is causally contractible over $\RV{W}$ and for each $d,x\in W\times D\times X$, $\alpha\in C$, $i>1$, $\prob{P}_\alpha^{\RV{D}_i\RV{X}_i|\RV{W}}(d,x|w)>0$
+\end{definition}
+
+The idea is, if $\prob{P}_\alpha^{\RV{Y}_1|\RV{WD}_1}$ is preempted, then there is an infinite (but random) subset of indices that can be swapped with the index $1$ as in Theorem \ref{th:condit_exchange}. Definition \ref{def:preemption} adds to the conditions of Theorem \ref{th:condit_exchange} a condition of full support. As before, we can consider preemption along with an informal assumption that $\RV{X}$ is unobserved.
+
+If $\prob{P}_\alpha^{\RV{Y}_1|\RV{WD}_1}$ is preempted and $\prob{P}_\alpha^{\RV{Y}_i|\RV{W}\RV{X}_i\RV{D}_i}$ is deterministic in the appropriate sense, then $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ will also be causally contractible. 
+
+\begin{theorem}\label{th:det_obs_to_cons}
+Suppose, given a sequential input-output model $(\prob{P}_C, (\RV{D},\RV{X}), \RV{Y})$ with $D,X$ denumerable, $\prob{P}_\alpha^{\RV{Y}_1|\RV{WD}_1}$ is preempted by $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ and for all $w\in W$, $i>1$ there is some $f:D\to Y$ such that
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_i|\RV{W}\RV{D}_i}(A|w,d) &\overset{\prob{P}_\alpha^{\RV{WD}_i}}{\cong} \delta_{f(d)}(A)
+\end{align}
+then $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is causally contractible.
+\end{theorem}
+
+\begin{proof}
+Fix $w\in W$. By determinism of $\prob{P}_\alpha^{\RV{Y}_2|\RV{W}\RV{D}_2}$, $\RV{Y}_2\CI^e_{\prob{P}_C} \RV{X}_2|(\RV{W},\RV{D}_2,\RV{C})$. By causal contractibility of $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$, we also have
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_1|\RV{W}\RV{X}_1\RV{D}_1} &\overset{\prob{P}_\alpha^{\RV{WX}_2\RV{D}_2}}{\cong} \prob{P}_\alpha^{\RV{Y}_2|\RV{W}\RV{X}_2\RV{D}_2}
+\end{align}
+Note that the assumption $\prob{P}_\alpha^{\RV{D}_2\RV{X}_2|\RV{W}}(d,x|w)>0$ for all $d,x,w$ implies $\prob{P}_\alpha^{\RV{WX}_2\RV{D}_2}\gg \prob{P}_\alpha^{\RV{WX}_1\RV{D}_1}$, so
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_1|\RV{W}\RV{D}_1}\otimes \mathrm{del}_X &\overset{\prob{P}_\alpha^{\RV{WX}_2\RV{D}_2}}{\cong} \prob{P}_\alpha^{\RV{Y}_2|\RV{W}\RV{D}_2}\otimes \mathrm{del}_X\\
+    \implies \prob{P}_\alpha^{\RV{Y}_1|\RV{W}\RV{D}_1}\otimes \mathrm{del}_X &\overset{\prob{P}_\alpha^{\RV{WX}_1\RV{D}_1}}{\cong} \prob{P}_\alpha^{\RV{Y}_2|\RV{W}\RV{D}_2}\otimes \mathrm{del}_X\\
+    \implies \prob{P}_\alpha^{\RV{Y}_1|\RV{W}\RV{D}_1} &\overset{\prob{P}_\alpha^{\RV{W}\RV{D}_1}}{\cong}\prob{P}_\alpha^{\RV{Y}_2|\RV{W}\RV{D}_2}\\
+    \implies \prob{P}_\alpha^{\RV{Y}_1|\RV{W}\RV{D}_1}(A|w,d) &\overset{\prob{P}_\alpha^{\RV{W}\RV{D}_1}}{\cong} \delta_{f(d)}(A)
+\end{align}
+By determinism, we also have $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\{i\}^C},\RV{D}_{\{i\}^C})|(\RV{W},\RV{D}_i,\RV{C})$ and so $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is causally contractible.
+\end{proof}
+
+
+As an aside, if we were considering some data-dependent variation of a causal Bayesian network, the fact that $\RV{V}_{1[n]}$ is unobserved would have formal implications for our model. For example, if $\RV{V}_{2i}$ is unobserved for all $i$, then it seems that we should assume that under every choice, $\RV{V}_{2i}$ is independent of $\RV{V}_{1[1,i)}$ given $\RV{V}_{\{2,3\}[1,i)}$ -- that is, there is no choice that induces the controlled variable $\RV{V}_{2i}$ to be dependent on the history of unobserved variables $\RV{V}_{1[1,i)}$.
+
+
 \section{What is a Potential Outcomes model?}
 
 Potential outcomes is another popular framework for modelling causal problems. There are two key differences between the potential outcomes approach and the causal Bayesian network approach: potential outcomes models are ``unrolled by default'' and they feature no notion of ``intervention''. A third difference relates to the possibility of expressing ``counterfactual'' statements, although this difference seems to be contingent on the particular manner we use to unroll a causal Bayesian network - see Section \ref{sec:counterfactual_statements}, and recall from Section \ref{sec:unrolling} that we had to make some choices in our construction of unrolled causal Bayesian networks, Definition \ref{def:unr_CBN}.

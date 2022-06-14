@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (4, 0.25) {$\prob{P}_C^{\RV{V}_{3\RV{Q}([n])}|\RV{H}\RV{V}_{1[n]}\RV{V}_{2\RV{Q}([n])}}$};
+		\node [style=small kernel tikzit] (1) at (-2.5, 0.25) {$\prob{P}_C^{\RV{V}_{1[n]}|\RV{H}\RV{V}_{2[n]}}$};
+		\node [style=none] (2) at (1.75, 0.75) {};
+		\node [style=none] (3) at (1.75, 0.25) {};
+		\node [style=none] (4) at (1.75, -0.25) {};
+		\node [style=RLabel tikzit] (5) at (8, 0.25) {$\RV{V}_{3\RV{Q}([n])}$};
+		\node [style=Llabel tikzit] (6) at (-6, 1) {$\RV{H}$};
+		\node [style=Llabel tikzit] (7) at (-6, -0.75) {$\RV{V}_{2\RV{Q}([n])}$};
+		\node [style=none] (8) at (-3, 0.5) {};
+		\node [style=none] (9) at (-3, 0) {};
+		\node [style=copymap tikzit] (10) at (-5.25, 1) {};
+		\node [style=copymap tikzit] (11) at (-5.25, -0.75) {};
+		\node [style=none] (12) at (-2.25, 1.5) {};
+		\node [style=none] (13) at (-2, -1) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (6) to (10);
+		\draw [in=-180, out=-15] (10) to (8.center);
+		\draw (7) to (11);
+		\draw [in=180, out=15] (11) to (9.center);
+		\draw (1) to (3.center);
+		\draw (0) to (5);
+		\draw [in=-180, out=15] (10) to (12.center);
+		\draw [in=180, out=0] (12.center) to (2.center);
+		\draw [in=0, out=-180] (4.center) to (13.center);
+		\draw [in=-15, out=180] (13.center) to (11);
+	\end{pgfonlayer}
+\end{tikzpicture}
