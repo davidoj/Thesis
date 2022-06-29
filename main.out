@@ -57,9 +57,10 @@
 \BOOKMARK [2][-]{subsection.5.1.2}{Unrolling\040a\040causal\040Bayesian\040network}{section.5.1}% 57
 \BOOKMARK [2][-]{subsection.5.1.3}{Uncertainty\040in\040an\040unrolled\040causal\040Bayesian\040network}{section.5.1}% 58
 \BOOKMARK [2][-]{subsection.5.1.4}{Probabilistic\040Graphical\040Models}{section.5.1}% 59
-\BOOKMARK [1][-]{section.5.2}{What\040is\040a\040Potential\040Outcomes\040model?}{chapter.5}% 60
-\BOOKMARK [1][-]{section.5.3}{Individual-level\040response\040functions}{chapter.5}% 61
-\BOOKMARK [2][-]{subsection.5.3.1}{References\040to\040individual-level\040causal\040contractibility}{section.5.3}% 62
-\BOOKMARK [2][-]{subsection.5.3.2}{Unique\040identifiers}{section.5.3}% 63
-\BOOKMARK [2][-]{subsection.5.3.3}{Identification}{section.5.3}% 64
-\BOOKMARK [1][-]{section.5.4}{Conclusion}{chapter.5}% 65
+\BOOKMARK [2][-]{subsection.5.1.5}{Hidden\040confounders}{section.5.1}% 60
+\BOOKMARK [1][-]{section.5.2}{What\040is\040a\040Potential\040Outcomes\040model?}{chapter.5}% 61
+\BOOKMARK [1][-]{section.5.3}{Individual-level\040response\040functions}{chapter.5}% 62
+\BOOKMARK [2][-]{subsection.5.3.1}{References\040to\040individual-level\040causal\040contractibility}{section.5.3}% 63
+\BOOKMARK [2][-]{subsection.5.3.2}{Unique\040identifiers}{section.5.3}% 64
+\BOOKMARK [2][-]{subsection.5.3.3}{Identification}{section.5.3}% 65
+\BOOKMARK [1][-]{section.5.4}{Conclusion}{chapter.5}% 66

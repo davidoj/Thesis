@@ -1,9 +1,14 @@
-\begin{thebibliography}{69}
+\begin{thebibliography}{75}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[noa(1995)]{noauthor_holy_1995}
+\emph{Holy {Bible} : {Contemporary} {English} {Version}}.
+\newblock New York : American Bible Society, [1995] ©1995, 1995.
+\newblock URL \url{https://search.library.wisc.edu/catalog/999953290302121}.
 
 \bibitem[Aldous(1981)]{aldous_representations_1981}
 David~J. Aldous.
@@ -96,6 +101,23 @@ Stephan Bongers, Jonas Peters, Bernhard Schölkopf, and Joris~M. Mooij.
 Erhan \c{C}inlar.
 \newblock \emph{Probability and Stochastics}.
 \newblock Springer, 2011.
+
+\bibitem[Chickering(2002)]{chickering_learning_2002}
+David~Maxwell Chickering.
+\newblock Learning {Equivalence} {Classes} of {Bayesian}-{Network}
+  {Structures}.
+\newblock \emph{Journal of Machine Learning Research}, 2\penalty0
+  (Feb):\penalty0 445--498, 2002.
+\newblock ISSN ISSN 1533-7928.
+\newblock URL \url{http://www.jmlr.org/papers/v2/chickering02a.html}.
+
+\bibitem[Chickering(2003)]{chickering_optimal_2003}
+David~Maxwell Chickering.
+\newblock Optimal {Structure} {Identification} with {Greedy} {Search}.
+\newblock \emph{J. Mach. Learn. Res.}, 3:\penalty0 507--554, March 2003.
+\newblock ISSN 1532-4435.
+\newblock \doi{10.1162/153244303321897717}.
+\newblock URL \url{https://doi.org/10.1162/153244303321897717}.
 
 \bibitem[Chiribella et~al.(2008)Chiribella, D'Ariano, and
   Perinotti]{chiribella_quantum_2008}
@@ -403,6 +425,13 @@ Karl Menger.
 \newblock \doi{10.1007/978-3-7091-6045-9_31}.
 \newblock URL \url{https://doi.org/10.1007/978-3-7091-6045-9_31}.
 
+\bibitem[Ng et~al.(2019)Ng, Zhu, Chen, and Fang]{ng_graph_2019}
+Ignavier Ng, Shengyu Zhu, Zhitang Chen, and Zhuangyan Fang.
+\newblock A {Graph} {Autoencoder} {Approach} to {Causal} {Structure}
+  {Learning}, November 2019.
+\newblock URL \url{http://arxiv.org/abs/1911.07420}.
+\newblock Number: arXiv:1911.07420 arXiv:1911.07420 [cs, stat].
+
 \bibitem[Oreskes and Conway(2011)]{oreskes_merchants_2011}
 Naomi Oreskes and Erik~M. Conway.
 \newblock \emph{Merchants of {Doubt}: {How} a {Handful} of {Scientists}
@@ -423,6 +452,18 @@ Judea Pearl and Dana Mackenzie.
   {Effect}}.
 \newblock Basic Books, New York, 1 edition edition, May 2018.
 \newblock ISBN 978-0-465-09760-9.
+
+\bibitem[Peters et~al.(2016)Peters, Bühlmann, and
+  Meinshausen]{peters_causal_2016}
+Jonas Peters, Peter Bühlmann, and Nicolai Meinshausen.
+\newblock Causal inference by using invariant prediction: identification and
+  confidence intervals.
+\newblock \emph{Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology)}, 78\penalty0 (5):\penalty0 947--1012, 2016.
+\newblock ISSN 1467-9868.
+\newblock \doi{10.1111/rssb.12167}.
+\newblock URL
+  \url{https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167}.
 
 \bibitem[Proctor(2012)]{proctor_history_2012}
 Robert~N. Proctor.
@@ -589,5 +630,14 @@ James Woodward.
 {World Health Organisation}.
 \newblock Tobacco {Fact} sheet no 339, 2018.
 \newblock URL \url{https://www.webcitation.org/6gUXrCDKA}.
+
+\bibitem[Zheng et~al.(2018)Zheng, Aragam, Ravikumar, and Xing]{zheng_dags_2018}
+Xun Zheng, Bryon Aragam, Pradeep~K Ravikumar, and Eric~P Xing.
+\newblock {DAGs} with {NO} {TEARS}: {Continuous} {Optimization} for {Structure}
+  {Learning}.
+\newblock In \emph{Advances in {Neural} {Information} {Processing} {Systems}},
+  volume~31. Curran Associates, Inc., 2018.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper/2018/hash/e347c51419ffb23ca3fd5050202f9c3d-Abstract.html}.
 
 \end{thebibliography}

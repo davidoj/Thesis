@@ -4,6 +4,49 @@
 
 \chapter{Introduction}\label{ch:introduction}
 
+\todo[inline]{I'm thinking of classification problems as types of prediction problems, though it's not really what ``prediction'' means. The key feature is that there is a ground truth that is not known at the time the prediction or class is offered, but will become fully known at some later point.}
+
+Data driven prediction problems and data driven decision making problems have a lot in common. The outcomes some people are interested in predicting are often outcomes other people want to influence. A forecaster might want to predict the winner of the next election, while a party strategist is interested in maximising their party's chance of victory. A product manager may be simultaneously interested in accurately inferring the sentiment expressed in reviews of their product, and in making product changes that increase the frequency that this sentiment is positive. Furthermore, data relevant to prediction is often relevant to decision making and vise-versa. Political parties often reason that electorates in which their predicted chance of victory is very low are not worth investing campaign resources in, and if a forecaster learns of evidence that one party had adopted a particularly effective election strategy they might want to revisit their prediction of the eventual election winner. The overlap is not perfect: comprehensive electorate level polls are probably more useful to the forecaster while small-scale controlled experiments are probably more useful to the strategist.
+
+A key difference between prediction and influence problems is the ``multiplicity of futures'' that each problem asks us to consider. A forecaster wants to identify -- loosely speaking -- the single most likely outcome, while a strategist must consider multiple options and identify the likely outcomes associated with each of these. As a consequence of this difference, the forecaster receives more complete feedback about the quality of their forecast than the strategist. Unlike the forecaster, all but one of the options that the strategist considers are never realised, and the world never offers feedback on these alternative options.
+
+This difference suggests that it might be easier to assess the reliability of a predictive algorithm than the reliability of a decision-making algorithm, and this is be borne out in practice. Validating a predictive algorithm using data split into training and holdout sets is a ubiquitous in machine learning. For many data generating processes, appropriately conducted validation is widely considered to be a reliable indicator of an algorithm's performance for sufficiently similar data generating processes. In contrast, the most well-known condition that is widely accepted to yield reliable decision making algorithms is that the data used to draw inferences comes from a well-conducted controlled experiment. Data that satisfies this is much rarer than data that standard machine learning validation approaches can be applied to. There are approaches to causal inference that don't depend on experimental data, but they depend on other assumptions which are similarly applicable to a limited fraction of datasets. Alternatives to controlled experiments often come with the additional headache of being difficult to assess for a given dataset.
+
+Some of the most far-reaching recent development in algorithmic decision making have involved only the elementary theory of randomised experiments. Operational advances that enable controlled experiments to be conducted at large scales have driven substantial changes in the operations of many online businesses \citep{kohavi_surprising_2017}, and Abhijit Banerjee and Esther Duflo were recently awarded a Nobel prize in part for their pioneering role in the use of large numbers of randomised controlled trials (RCTs) to assess the effectiveness of different kinds of development interventions \citep{zhang_abdul_2014}. Some fields of science have also been significantly affected by ``negative progress'' in the science of assessing experimental results. For example, in psychology, strong evidence has emerged that experimental findings from this field provide weaker evidence to a reader of the findings about the consequences of the reader's actions than many had believed \citet{open_science_collaboration_estimating_2015,stroebe_what_2019}. In a similar time frame, standards for what constitutes a ``well-conducted'' experiment have risen across many fields \citep{nosek_preregistration_2018,liberati_prisma_2009}.
+
+An individual who wants to use data to make better decisions can consider running a controlled experiment of their own. This may not be possible, and even if it is, there may be large amounts of apparently relevant data available that seems wasteful to ignore on the basis of its non-experimental provenance. This individual might therefore be motivated to make some additional assumptions which allow them to draw conclusions about how to act from non-experimental data.
+
+Some examples of assumptions this person could consider are:
+\begin{itemize}
+    \item There is an input variable independent of the \emph{potential outcomes} conditional on some covariates
+    \item There is a variable closely correlated with the \emph{potential outcomes} for each observation
+    \item The set of observed and unobserved variables have a known \emph{causal structure}
+    \item The set of observed variables is \emph{causally sufficient} and the \emph{causal structure} is \emph{faithful} to the conditional independence structure of the observed variables
+    \item 
+    \item Regression discontinuity (assumption: within timesteps, confounders almost constant)
+    \item DID (assumption: initial level accounts for confounders)
+    \item Causal sufficiency + faithfulness
+    \item Detailed causal structure w/identifiable substructure
+\end{itemize}
+
+A common feature of all of these: they're kinda confusing
+
+
+
+ - Predictive machine learning has advanced tremendously w/combination of experimentation + theory
+ - Causal inference has stuck close to established theory
+ - Deriving assumptions is an exact science, making assumptions is not
+ - Assumptions are so important in causal inference, and coming at it from a slightly different (decision theoretic) direction can a) expand the space of available assumptions and b) situating common assumptions in a different context
+
+
+ Further reasons for alternative foundations
+ - CGM theory has been undeniably productive -- mediation, confounding, ``m-structures'', causal discovery
+ - Some outstanding questions:
+ - Not always obvious how to map pre-formal knowledge to interventions
+ - Not all variables are ``causally compatible''
+
+
+
 \section{Theories of causal inference}
 
 Beginning in the 1930s, a number of associations between cigarette smoking and lung cancer were established: on a population level, lung cancer rates rose rapidly alongside the prevalence of cigarette smoking. Lung cancer patients were far more likely to have a smoking history than demographically similar individuals without cancer and smokers were around 40 times as likely as demographically similar non-smokers to go on to develop lung cancer. In laborotory experiments, cells which were introduced to tobacco smoke developed \emph{ciliastasis}, and mice exposed to cigarette smoke tars developed tumors\citep{proctor_history_2012}. Nevertheless, until the late 1950s, substantial controversy persisted over the question of whether the available data was sufficient to establish that smoking cigarettes \emph{caused} lung cancer. Cigarette manufacturers famously argued against any possible connection \citep{oreskes_merchants_2011} and Roland Fisher in particular argued that the available data was not enough to establish that smoking actually caused lung cancer \citep{fisher_cancer_1958}. Today, it is widely accepted that cigarettes do cause lung cancer, along with other serious conditions such as vascular disease and chronic respiratory disease \citep{world_health_organisation_tobacco_nodate,wiblin_why_2016}.
