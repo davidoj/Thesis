@@ -314,7 +314,7 @@ Given a measurable set $(\Omega,\sigalg{F})$, the measurable set of distribution
 Note that we are only interested in the variable $\RV{H}$ when the limit exists almost surely, the part of the definition for where the limit does not exists is for completeness only.
 
 \begin{definition}[Directing random measure]\label{def:dir_rand_meas}
-Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$, we will say ``the'' directing random measure $\RV{H}:\Omega\to \mathcal{M}_1(Y^D)$ is the function
+Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$, we will say the directing random measure $\RV{H}:\Omega\to \mathcal{M}_1(Y^D)$ is the function
 \begin{align}
     \RV{H} := \bigtimes_{j\in D} A_j \mapsto \begin{cases}
     \lim_{n\to \infty}\frac{1}{n} \sum_{i=1}^{\infty} \prod_{j\in D} \mathds{1}_{A_j}(\RV{Y}^D_{ij}) & \text{this limit exists}\\
@@ -594,13 +594,13 @@ so $(\prob{P}_C,\RV{D},\RV{Y})$ is also local over $\RV{H}$.
 
 Theorem \ref{th:ciid_rep_kernel} says that a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ features conditionally independent and identical response functions $\prob{P}_C^{\RV{Y}_i|\RV{HD}_i}$ and is weakly data independent if and only if there is some $\RV{W}$ such that $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is causally contractible over $\RV{W}$, and $\RV{Y}\CI^E_{\prob{P}_C} \RV{W}|(\RV{H},\RV{C})$ (see Definition \ref{def:dir_rand_meas} for the definition of $\RV{H}$).
 
-A simple special case to consider is when $\RV{W}$ is single valued -- that is, when $\prob{P}_C^{\RV{Y}||RV{D}}$. As Theorem \ref{th:data_ind_CC} shows, this corresponds to the models where the inputs $\RV{D}$ are strongly data-independent and everywhere independent of the hypothesis $\RV{H}$. We can also consider the case where $(\prob{P}_C, \RV{D},\RV{Y})$ is only exchange commutative over $*$. This corresponds to models where the inputs $\RV{D}$ are data-independent and the hypothesis $\RV{H}$ depends on a symmetric function of the inputs $\RV{D}$ (under some side conditions).
+A simple special case to consider is when $\RV{W}$ is single valued -- that is, when $\prob{P}_C^{\RV{Y}|\RV{D}}$ is causally contractible. As Theorem \ref{th:data_ind_CC} shows, this corresponds to the models where the inputs $\RV{D}$ are strongly data-independent and everywhere independent of the hypothesis $\RV{H}$. We can also consider the case where $(\prob{P}_C, \RV{D},\RV{Y})$ is only exchange commutative over $*$. This corresponds to models where the inputs $\RV{D}$ are data-independent and the hypothesis $\RV{H}$ depends on a symmetric function of the inputs $\RV{D}$ (under some side conditions).
 
 \begin{theorem}[Data-independent causal contractibility]\label{th:data_ind_CC}
 Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with sample space $(\Omega,\sigalg{F})$ is given with $D$ countable and, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}}(E)=1$ for all $\alpha$. Then the following are equivalent:
 \begin{enumerate}
     \item $\prob{P}_\cdot^{\RV{Y}|\RV{D}}$ is causally contractible
-    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\RV{C})|(\RV{H},\RV{D}_i)$, for all $i,j$ $$\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$$, $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$ and for all $i$ $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}) | (\RV{D}_{[1,i)},\RV{C})$
+    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\RV{C})|(\RV{H},\RV{D}_i)$, for all $i,j$ $$\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$$, $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$ and for all $i$ $\RV{D}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}) | (\RV{D}_{[1,i)},\RV{C})$
     \item There is some $\kernel{L}:H\times X\kto Y$ such that for all $\alpha$, $$\prob{P}_\alpha^{\RV{YH}|\RV{D}}= \tikzfig{do_model_representation_with_h}$$
 \end{enumerate}
 \end{theorem}
@@ -670,6 +670,8 @@ Thus $\prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{D}}$ is $\sigalg{E}_{\RV{D}}\vee\sigma(\
     \prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{D}\RV{J}} &= \prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{J}}\otimes \text{erase}_{DX^{\mathbb{N}}}
 \end{align}
 That is, for all $\alpha$ $\RV{Y}_{[n]}\CI_{\prob{P}} \RV{D}_{(n,\infty)}|(\RV{D}_{[n]},\RV{J})$, implying $(\prob{P}_C,\RV{D},\RV{Y})$ is local over $\RV{J}$ and, because $\RV{J}$ is symmetric in $\RV{D}$, exchange commutative also.
+
+\todo[inline]{independence?}
 \end{proof}
 
 \begin{corollary}\label{th:ciid_rep_kernel_nolocal}
@@ -680,7 +682,7 @@ If $(\prob{P}_C,\RV{D},\RV{Y})$ is exchange commutative over $*$, and for each $
 \end{corollary}
 
 \begin{proof}
-By Theorem \ref{lem:exch_prod_ciid}, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is causally contractible over $\RV{W}$, so the result follows immediately from Theorem \ref{th:ciid_rep_kernel}.
+By Theorem \ref{lem:exch_prod_ciid}, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is causally contractible over some $\RV{W}$, so the result follows immediately from Theorem \ref{th:ciid_rep_kernel}.
 \end{proof}
 
 \subsection{Examples and discussion}\label{sec:examples}
