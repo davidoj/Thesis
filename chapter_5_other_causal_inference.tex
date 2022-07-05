@@ -335,7 +335,7 @@ by the assumption that this probability is dominated by the Lebesgue measure. On
 \end{proof}
 
 We will now specify the medical example in more detail
-\begin{example}
+\begin{example}\label{ex:doctor_detailed}
 Let $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$ be associated with patient outcomes, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$ with treatment plans (including, for example, what assessments are made, what other treatments are used and so forth), some of which the decision maker can consider, $\RV{X}:=(\RV{X}_i)_{-i\in \{0\}\cup\mathbb{N}}$ to be the recommendation of a particular treatment and $\RV{Z}_i:= (\RV{Z}_i)_{-i\in \mathbb{N}}$ to be other doctor's identifiers in the dataset.
 
 Assume $\RV{D}_i$ screens off $\RV{Z}_i$ from $\RV{X}_i$ and $\RV{Y}_i$ -- that is, the latent treatment plan is sufficiently detailed to screen off the relevance of the doctor's identity (this is a causal assumption), and the stochastic response to treatment plans is identical for each patient with positive support in the past data for each plan the decision maker is considering. That is, assume $(\prob{P}_C,\RV{D},(\RV{X},\RV{Y}))$ is preempted. By the assumption that $\RV{D}_i$ screens off $\RV{Z}_i$, we can also conclude that $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$ is preempted.
@@ -345,40 +345,46 @@ Suppose that each doctor makes choices $\RV{G}^d_z$ by some deterministic functi
 If the decision maker is then told by an oracle that for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$, she may then conclude that $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical responses for all $-i\in\{0\}\cup\mathbb{N}$.
 \end{example}
 
-This story makes a lot of causal assumptions. 
+This story makes a number of assumptions with a causal character. First, the assumption of preemption, which we've acknowledged isn't perfectly worked out, is taken here quite literally -- we are not just supposing that the problem can be posed ``as if'' the consequences of our choices had been previously realised, but we are actually taking the $\RV{D}_i$s to literally stand for unobserved choices that actual doctors make. Secondly, the assumption that the unobserved $\RV{D}_i$s screen off the doctor's identities is reminiscent of the idea from the causal graphical models tradition that variables have complete sets of causal parents, some of which may be unobserved, but all of which together screen that variable off from other nondescendant variables. Note that this assumption isn't required by Theorem \ref{th:det_obs_to_cons}, but it supports the particular story being told here.
 
-Theorem \ref{th:preempt_diverse} is a more plausibly useful theorem than \ref{th:det_obs_to_cons}. It shows that, if we believe that $\prob{P}_\alpha^{\RV{Y}_0}$ is preempted by $\prob{P}_\alpha^{\RV{Y}_{-\mathbb{N}}}$, and after conditioning on some $\RV{V}$ the set of distributions of preempting actions is suitably diverse, then we can conclude conditional independence in the consequences of the decision maker's actions from conditional independence in the given observations.
+Finally, the idea that the long run frequencies of each doctor's choices are generic conditioned on the other doctor's choices and the long run input-output relationship seems closely related to the idea of ``independent causal mechanisms''. This comes up in two forms in the literature. First, it is used to justify the assumption of \emph{causal faithfulness}: here, it is shown that \emph{if} one makes an assumption that conditional probabilities in a causal model are generic with respect to one another in a manner similar to Equation \ref{eq:lebesgue_dom}, then causal faithfulness holds with probability 1 \citep{meek_strong_1995}. However, it's been noted that conditional probabilities routinely do line up in ``non-generic'' ways in an anti-causal direction.
 
-\begin{theorem}\label{th:preempt_diverse}
-Suppose, given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and for each $i$, $(\RV{X}_i,\RV{V}_i,\RV{Z}_i) = f\circ \RV{Y}_i$ for some $f$ with both $D$ and $X$ denumerable, $\prob{P}_\alpha^{\RV{Y}_0}$ is preempted by $\prob{P}_\alpha^{\RV{Y}_{-\mathbb{N}}}$ with respect to $\RV{D}$ and and some $\RV{W}$. Let $\RV{H}$ be the directing random measure of the input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ (Definition \ref{def:dir_rand_meas}). If for each $h\in H$ and each $x\in X$, $i<0$ there is some set of real-valued weights $\{a_i|i\in V\}$ such that
-\begin{align}
-    \prob{P}_\alpha^{\RV{Z}_i|\RV{H}\RV{D}_i\RV{X}_i}(\cdot|h,d,\cdot) &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{Z}_i|\RV{H}\RV{V}_i\RV{X}_i}(\cdot|h,j,\cdot)
-\end{align}
-and if for all $i$, $\RV{Z}_i\CI^e_{\prob{P}_C} \RV{V}_i|(\RV{X}_i,\RV{H},\RV{C})$ then $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is causally contractible over $\RV{H}$.
-\end{theorem}
+Interestingly, Theorem \ref{th:det_obs_to_cons} itself doesn't depend on a notion of causal direction, and merely shows that a conclusion of independent and identical response functions follows from an assumption of preemption and an assumption of ``generic mechanism association''. Example \ref{ex:doctor_detailed} shows one way that this generic association could be argued for. 
 
-\begin{proof}
-By assumption
-\begin{align}
-    \prob{P}_\alpha^{\RV{Z}_0|\RV{HD}_0\RV{X}_0}(A|h,d,x) &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{HD}_{-1}\RV{X}_{-1}}(A|h,d,x)
-\end{align}
-and also by assumption, for all $A,h,d,x$:
-\begin{align}
-    \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{D}_i\RV{X}_{-1}}(A|h,d,x) &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{V}_{-1}\RV{X}_{-1}}(A|h,j,x)\\
-        &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{X}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)&\text{by }\RV{Z}_{-1}\CI^e_{\prob{P}_C} \RV{V}_{-1}|(\RV{X}_{-1},\RV{H},\RV{C})\\
-    &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)\sum_{j\in V} a_j\\
-    &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)&\text{ by taking }A=Z
-\end{align}
-thus
-\begin{align}
-    \prob{P}_\alpha^{\RV{Z}_0|\RV{HD}_0\RV{X}_0}(A|h,d,x) &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{D}_{-1}\RV{X}_{-1}}(A|h,d,x)\\
-    &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)\\
-    &= \prob{P}_\alpha^{\RV{Z}_0|\RV{H}\RV{X}_0}(A|h,x)\label{eq:indep_of_d}
-\end{align}
-Furthermore, by assumption $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{Z}_{\{0\}^C},\RV{D}_{\{0\}^C}|(\RV{H},\RV{D}_0,\RV{X}_0,\RV{C})$ and $\RV{Z}_0\CI^e_{\prob{P}_C} \RV{D}_{0}|(\RV{H},\RV{D}_0,\RV{C})$ by Equation \ref{eq:indep_of_d}, thus $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is causally contractible over $\RV{H}$.
-\end{proof}
+Note that in that example, there is no reason not to expect that each doctor doesn't select a mixture of treatment plans that is \emph{close} to having support at a special singleton -- in fact, it is assumed that doctors try to take into account the response of patient outcomes to treatment plans and the actions of other doctors, and that they simply fail to do this perfectly. We also cheat by having an oracle tell the decision maker that the key conditional independence holds. In particular, we ask the decision maker to conclude something precise about $\RV{H}$ (namely, the key conditional independence) while also assuming that none of the other doctors are able to do this. 
 
-Note that this is a result similar to \citet{peters_causal_2016}, where our variable $\RV{V}$ is understood to be analogous to the environment $e$ in that work.
+% Theorem \ref{th:preempt_diverse} is a more plausibly useful theorem than \ref{th:det_obs_to_cons}. It shows that, if we believe that $\prob{P}_\alpha^{\RV{Y}_0}$ is preempted by $\prob{P}_\alpha^{\RV{Y}_{-\mathbb{N}}}$, and after conditioning on some $\RV{V}$ the set of distributions of preempting actions is suitably diverse, then we can conclude conditional independence in the consequences of the decision maker's actions from conditional independence in the given observations.
+
+% \begin{theorem}\label{th:preempt_diverse}
+% Suppose, given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and for each $i$, $(\RV{X}_i,\RV{V}_i,\RV{Z}_i) = f\circ \RV{Y}_i$ for some $f$ with both $D$ and $X$ denumerable, $\prob{P}_\alpha^{\RV{Y}_0}$ is preempted by $\prob{P}_\alpha^{\RV{Y}_{-\mathbb{N}}}$ with respect to $\RV{D}$ and and some $\RV{W}$. Let $\RV{H}$ be the directing random measure of the input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ (Definition \ref{def:dir_rand_meas}). If for each $h\in H$ and each $x\in X$, $i<0$ there is some set of real-valued weights $\{a_i|i\in V\}$ such that
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{Z}_i|\RV{H}\RV{D}_i\RV{X}_i}(\cdot|h,d,\cdot) &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{Z}_i|\RV{H}\RV{V}_i\RV{X}_i}(\cdot|h,j,\cdot)
+% \end{align}
+% and if for all $i$, $\RV{Z}_i\CI^e_{\prob{P}_C} \RV{V}_i|(\RV{X}_i,\RV{H},\RV{C})$ then $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is causally contractible over $\RV{H}$.
+% \end{theorem}
+
+% \begin{proof}
+% By assumption
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{Z}_0|\RV{HD}_0\RV{X}_0}(A|h,d,x) &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{HD}_{-1}\RV{X}_{-1}}(A|h,d,x)
+% \end{align}
+% and also by assumption, for all $A,h,d,x$:
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{D}_i\RV{X}_{-1}}(A|h,d,x) &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{V}_{-1}\RV{X}_{-1}}(A|h,j,x)\\
+%         &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{X}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)&\text{by }\RV{Z}_{-1}\CI^e_{\prob{P}_C} \RV{V}_{-1}|(\RV{X}_{-1},\RV{H},\RV{C})\\
+%     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)\sum_{j\in V} a_j\\
+%     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)&\text{ by taking }A=Z
+% \end{align}
+% thus
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{Z}_0|\RV{HD}_0\RV{X}_0}(A|h,d,x) &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{D}_{-1}\RV{X}_{-1}}(A|h,d,x)\\
+%     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)\\
+%     &= \prob{P}_\alpha^{\RV{Z}_0|\RV{H}\RV{X}_0}(A|h,x)\label{eq:indep_of_d}
+% \end{align}
+% Furthermore, by assumption $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{Z}_{\{0\}^C},\RV{D}_{\{0\}^C}|(\RV{H},\RV{D}_0,\RV{X}_0,\RV{C})$ and $\RV{Z}_0\CI^e_{\prob{P}_C} \RV{D}_{0}|(\RV{H},\RV{D}_0,\RV{C})$ by Equation \ref{eq:indep_of_d}, thus $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is causally contractible over $\RV{H}$.
+% \end{proof}
+
+% Note that this is a result similar to \citet{peters_causal_2016}, where our variable $\RV{V}$ is understood to be analogous to the environment $e$ in that work.
 
 There is a substantial literature that aims to draw causal conclusions from observational data by first applying a graph learning algorithm to a sequence of observational data, and then using the graph obtained as a DAG for a causal Bayesian network. Earlier examples treat the graph learning problem as a discrete optimization problem and include the PC algorithm and the Causal Inference Algorithm \citet[Ch. 5\& 6]{spirtes_causation_1993} and Greedy Equivalent Search \citet{chickering_optimal_2003,chickering_learning_2002}. More recent examples pose graph learning as a continuous optimization problem \citet{zheng_dags_2018,ng_graph_2019}. Underpinning all of these approaches are a number of key assumptions, which include the assumption of \emph{faithfulness} -- that missing edges in the learned graph correspond to missing edges in the appropriate causal DAG -- and often also the assumption of \emph{causal sufficiency}, which is the assumption that there are ``no relevant unobserved variables''. Together, these assumptions imply that certain conditional independences in the observational data sequence imply the same conditional independences in the data produced under intervention. One open question we raise is: can this implication also be understood as a special case of the interventional data being preempted by the observational data?
 
