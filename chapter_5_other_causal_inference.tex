@@ -267,7 +267,7 @@ Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ and variables $\RV
     \prob{P}_\alpha^{\RV{D}_0|\RV{Y}_{-\mathbb{N}}} &= a\prob{P}_{\alpha'}^{\RV{D}_0|\RV{Y}_{-\mathbb{N}}}+b\prob{P}_{\alpha''}^{\RV{D}_0|\RV{Y}_{-\mathbb{N}}}\\
     \implies \prob{P}_\alpha &= a\prob{P}_{\alpha'}+b\prob{P}_{\alpha''}
 \end{align}
-and, defining $\RV{H}$ to be the directing random measure of $(\RV{P}_C,\RV{D},\RV{Y})$, $\prob{P}_\alpha^{\RV{D}_i|\RV{H}}(\alpha)>0$ for all $\alpha\in C$, $i<0$.
+as well as $\prob{P}_\alpha^{\RV{D}_{-\mathbb{N}}}$ is exchangeable and, defining $\RV{G}$ to be the directing random measure of $(\RV{P}_C,*,\RV{D})$, $\prob{P}_\alpha^{\RV{D}_i|\RV{G}}(\alpha|g)>0$ for all $\alpha\in C$, almost all $g\in G$, $i<0$.
 \end{definition}
 
 The assumption of preemption as given in Definition \ref{def:preemption} can, under some side conditions, yield nontrivial conclusions. Theorem \ref{th:det_obs_to_cons} comes with a lot of complicated conditions, so it it worth explaining with an example first.
@@ -276,13 +276,14 @@ Suppose we have a collection of doctors $\RV{Z}_i$ who each see a series of pati
 
 One way that this story could fail is if the doctors all knew exactly the long-run probabilistic outcomes of different treatment plans and coordinated with one another, they could (in principle) each pick different mixtures of treatment plans just so that the variation in outcomes is masked -- that is, for example, doctor 1 picks a medium effectiveness plan 100\% of the time, while doctor 2 picks a highly effective plan 50\% of the time and a low effectiveness plan 50\% of the time leading to the same distribution over outcomes. The conditions in Theorem \ref{th:det_obs_to_cons} requiring domination by the uniform measure on $[0,1]$ are assumptions that this kind of thing does not happen, either because the doctors don't coordinate or because even if they did coordinate they would not know the long-run averages of outcomes associated with each plan precisely enough to completely mask the variation.
 
-This proposition might seem obvious here, but precise dependences can arise if we are thinking about the conditional probabilities associated with arbitrary collections of variables. 
+\begin{notation}[Matrix notation]
+Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $D,Y$ discrete, the directing random measure $\RV{H}$ takes values in the set of Markov kernels $D\kto Y$, which can be identified with a subset of matrices in $\mathbb{R}^{|D|\times |Y|}$. We can therefore refer to elements of $H$ as matrices $(h_d^y)_{d\in D,y\in Y}$ with $\sum_{y\in Y} h_d^y = 1$ for all $d$, and $h_d^y\overset{\prob{P}_\alpha}{\cong}\prob{P}_\alpha^{\RV{Y}|\RV{H}\RV{D}}(y|h,d)$. We can also define $\RV{H}_d^y$ as the $d,y$-th projection of $\RV{H}$.
+\end{notation}
 
 \begin{theorem}\label{th:det_obs_to_cons}
-Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{-i\in \mathbb{N}}$, with $D,X,Y,Z$ discrete. Suppose further that $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$ is preempted and $\prob{P}_\alpha^{\RV{Z}\RV{D}_{-\mathbb{N}}}$ exchangeable . Let $\RV{E}$ be the directing random measure of $(\RV{P}_C,\RV{Z},\RV{D})$, $\RV{F}$ the directing random measure of $(\RV{P}_C,(\RV{D},\RV{Z}),\RV{X})$, $\RV{G}$ be the directing random measure of $(\prob{P}_C,(\RV{D},\RV{Z},\RV{X}),\RV{Y})$ and $\RV{H}$ the directing random measure of $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$. Suppose $\RV{D}_i\not\CI^e_{\prob{P}_C}\RV{Z}_i|(\RV{E},\RV{C})$ or $\RV{X}_i\not\CI^e_{\prob{P}_C}|\RV{Z}_i|(\RV{F},\RV{D}_i,\RV{C})$ and finally suppose for each $f\in F$ $g\in G$, $\alpha\in C$
+Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{-i\in \mathbb{N}}$, with $D,X,Y,Z$ discrete. Suppose further that $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$ is preempted. Let $\RV{G}$ be the directing random measure of $(\RV{P}_C,\RV{Z},\RV{D})$ and $\RV{H}$ the directing random measure of $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$. Finally suppose for each $h\in H$ and $d\in D$ and $z,z'\in Z$,
 \begin{align}
-    \prob{P}_\alpha^{\RV{F}|\RV{E}}(\cdot|e) \ll U_{[0,1]}\\
-    \prob{P}_\alpha^{\RV{G}|\RV{EF}}(\cdot|e,f) \ll U_{[0,1]}
+    \prob{P}_\alpha^{\RV{G}^d_{z}|\RV{H}\RV{G}^d_{z'}}(\cdot|h,g^d_{z'}) \ll U_{[0,1]}\label{eq:lebesgue_dom}
 \end{align}
 where $U_{[0,1]}$ is the uniform probability measure on $([0,1],\mathcal{B}([0,1]))$ -- that is, the Lebesgue measure on $[0,1]$ restricted to the Borel sets.
 
@@ -290,27 +291,61 @@ Then $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical r
 \end{theorem}
 
 \begin{proof}
-Because $D,X,Y,Z$ are all discrete, we can identify the directing random measures $\RV{F}$, $\RV{G}$ and $\RV{H}$ with random vectors. In particular, identify the set $F$ with the set of $|Z||D|$-dimensional vectors $(f^d_z)_{d\in D,z\in Z}$, $G$ with the set of $|D||X||Y|$-dimensional vectors $(g^{xy}_d)_{x\in X,y\in Y,d\in D}$ and $H$ with the set of $|Y||D||Z||X|$-dimensional vectors $(h^y_{d,z,x})_{y\in Y,d\in D,z\in Z,x\in X}$.
-
-The assumption $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$ implies, for all $h,y,\alpha,z,z',x$ there's some $e, f, g$ such that
+First, define matrices $k$ and $l$ by
 \begin{align}
-    &\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{Z}_i\RV{X}_i}(y|h,z,x) \overset{\prob{P}_\alpha}{\cong} \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{Z}_i\RV{X}_i}(y|h,z',x)\\
-    \implies &\sum_{d\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{G}\RV{D}_i\RV{Z}_i\RV{X}_i}(y|g,d,z,x)\frac{\prob{P}_\alpha^{\RV{X}_i|\RV{F}\RV{D}_i\RV{Z}_i}(x|f,d,z)\prob{P}_\alpha^{\RV{D}_i|\RV{E}\RV{Z}_i}(d|e,z)}{\sum_{d'\in D}\prob{P}_\alpha^{\RV{X}_i|\RV{F}\RV{D}_i\RV{Z}_i}(x|f,d',z)\prob{P}_\alpha^{\RV{D}_i|\RV{E}\RV{Z}_i}(d'|e,z)}\\
-    &\overset{\prob{P}_\alpha}{\cong} \sum_{d\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{G}\RV{D}_i\RV{Z}_i\RV{X}_i}(y|g,d,z',x)\frac{\prob{P}_\alpha^{\RV{X}_i|\RV{F}\RV{D}_i\RV{Z}_i}(x|f,d,z')\prob{P}_\alpha^{\RV{D}_i|\RV{E}\RV{Z}_i}(d|e,z')}{\sum_{d'\in D}\prob{P}_\alpha^{\RV{X}_i|\RV{F}\RV{D}_i\RV{Z}_i}(x|f,d',z')\prob{P}_\alpha^{\RV{D}_i|\RV{E}\RV{Z}_i}(d'|e,z')}\label{eq:from_ciir_indep_lemma}
+    \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i\RV{Z}_i\RV{X}_i}(y|h,d,z,x)&\overset{\prob{P}_\alpha}{\cong}: k^y_{dzx}\\
+    \prob{P}_\alpha^{\RV{X}_i|\RV{H}\RV{D}_i\RV{Z}_i}(x|h,d,z)&{\prob{P}_\alpha}{\cong}: l^x_{dz}
 \end{align}
+noting that both $k$ and $l$ are almost surely deterministic functions of $h$ by \todo[inline]{independence lemma}.
 
-Where Equation \ref{eq:from_ciir_indep_lemma} uses \todo[inline]{independence lemma} to replace $\RV{H}$ with the more specific directing measures. We can substantially simplify this by noting that 
+The assumption $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$ implies, for $\prob{P}_\alpha$-almost all $k,l,\alpha,z,z',x,y$
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}_i|\RV{G}\RV{D}_i\RV{Z}_i\RV{X}_i}(y|g,d,z,x)&= g^y_{dzx}\\
-    \prob{P}_\alpha^{\RV{X}_i|\RV{F}\RV{D}_i\RV{Z}_i}(x|f,d,z)&=f^x_{dz}\\
-    \prob{P}_\alpha^{\RV{D}_i|\RV{E}\RV{Z}_i}(d|e,z)&=e^d_z
+    \sum_{d\in D} k^y_{dzx}\frac{l^x_{dz}g^d_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z}&= \sum_{d\in D} k^y_{dz'x}\frac{l^x_{dz'}g^d_{z'}}{\sum_{d'\in D}l^x_{d'z'}g^{d'}_{z'}}\label{eq:polynomial}
 \end{align}
-then, rewriting Equation \ref{eq:from_ciir_indep_lemma}
-\begin{align}
-    \sum_{d\in D} g^y_{dzx}\frac{f^x_{dz}e^d_z}{\sum_{d'\in D}f^x_{d'z}e^{d'}_z}&\overset{\prob{P}_\alpha}{\cong} \sum_{d\in D} g^y_{dzx}\frac{f^x_{dz'}e^d_{z'}}{\sum_{d'\in D}f^x_{d'z'}e^{d'}_{z'}}
-\end{align}
+Fixing $k$, $l$ and $g^d_z$, Eq. \ref{eq:polynomial} defines a polynomial constraints on $g^d_{z'}$. We will show that, unless $k^y_{dzx}=k^y_{d'zx}$ for all $d,d'$ and $z$ then this constraint is nontrivial for some $z'$. For arbitrary $d$, without loss of generality, assume $k^y_{dz'x} > k^y_{d^<z'x}$ for some $d^<$. 
 
+Then either $l^x_{dz'}=l^x_{d^<z'}$, $l^x_{dz'}< l^x_{d^<z'}$ or $l^x_{dz'}=l^x_{d^>z'}$. Consider the first case, and take $g'$ such that $g{\prime d}_{z'}=g^{d}_{z'}-\epsilon$ and $g{\prime d^<}_{z'}=g^{d^<}_{z'}+\epsilon$ and equal to $g$ otherwise. There is almost surely some $\epsilon$ such that $g'$ is a Markov kernel, as $g^{d}_{z'}>0$ almost surely. Then
+\begin{align}
+    \frac{l^x_{dz}g^d_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z} &> \frac{l^x_{dz}g^{\prime d}_z}{\sum_{d'\in D}l^x_{d'z}g^{\prime d'}_z}\\
+    \frac{l^x_{d^<z}g^{d^<}_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z} &< \frac{l^x_{d^<z}g^{\prime d^<}_z}{\sum_{d'\in D}l^x_{d'z}g^{\prime d'}_z}
+\end{align}
+because by assumption the denominator remains the same. But then
+\begin{align}
+    \sum_{d\in D} k^y_{dzx}\frac{l^x_{dz}g^d_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z}&> \sum_{d\in D} k^y_{dz'x}\frac{l^x_{dz'}g^{\prime d}_{z'}}{\sum_{d'\in D}l^x_{d'z'}g^{\primed'}_{z'}}\label{eq:inequality}
+\end{align}
+because on the left side a larger term in the sum receives more weight, a smaller term receives less weight and all other terms are weighted equally.
+
+Consider $l^x_{dz'}> l^x_{d^<z'}$. Then we still have
+\begin{align}
+    \frac{l^x_{dz}g^d_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z} &> \frac{l^x_{dz}g^{\prime d}_z}{\sum_{d'\in D}l^x_{d'z}g^{\prime d'}_z}\\
+    \frac{l^x_{d^<z}g^{d^<}_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z} &< \frac{l^x_{d^<z}g^{\prime d^<}_z}{\sum_{d'\in D}l^x_{d'z}g^{\prime d'}_z}
+\end{align}
+For the first inequality, both the numerator and the denominator shrink. For the second, note that
+\begin{align}
+    \frac{l^x_{d^<z}g^{d^<}_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z} &= \frac{l^x_{d^<z}(g^{d^<}_z+\epsilon)}{(1+\frac{\epsilon}{g^{d'}_z})\sum_{d'\in D}l^x_{d'z}g^{d'}_z}\\
+    < \frac{l^x_{d^<z}(g^{d^<}_z+\epsilon)}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z}
+\end{align}
+and so the conclusion in Eq. \ref{eq:inequality} follows for the same reasons. Finally considering $l^x_{dz'}< l^x_{d^<z'}$, analogous reasoning implies Eq. \ref{eq:inequality} once again.
+
+Thus, unless $k^y_{dzx}=k^y_{d'zx}$ for all $d,d'$ and $z$, Eq. \ref{eq:polynomial} implies a nontrivial constraint on  $g^d_{z'}$ for some $z'$. Thus, for some $z'$, $x$, $d,d'$, $y$ the set of solutions $A:=\{g^d_{z'}|\text{Eq. \ref{eq:polynomial} is satisfied}\land k^y_{dzx}\neq k^y_{d'zx}\}$ has Lebesgue measure 0 in the set $[0,1]^{D}$ \citep{okamoto_distinctness_1973}, and so finally
+\begin{align}
+    \prob{P}_\alpha^{\RV{G}^d_{z'}|\RV{H}\RV{G}^d_{z'}}(A|h,g^d_{z}) = 0
+\end{align}
+by the assumption that this probability is dominated by the Lebesgue measure. On the other hand, by assumption the set $B:=\{g^d_{z'}|\text{Eq. \ref{eq:polynomial} is satisfied}\}$ has measure 1. Thus we conclude that $k^y_{dzx}=k^y_{d'zx}$ with probability 1. That is, $\RV{Y}_i\CI_{\prob{P}_C}^e \RV{D}_i|(\RV{H},\RV{Z}_i,\RV{X}_i,\RV{C})$. Thus, by contraction with $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$, we have $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Z}_i,\RV{D}_i)|(\RV{H},\RV{X}_i,\RV{C})$, which implies $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical response functions.
 \end{proof}
+
+We will now specify the medical example in more detail
+\begin{example}
+Let $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$ be associated with patient outcomes, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$ with treatment plans (including, for example, what assessments are made, what other treatments are used and so forth), some of which the decision maker can consider, $\RV{X}:=(\RV{X}_i)_{-i\in \{0\}\cup\mathbb{N}}$ to be the recommendation of a particular treatment and $\RV{Z}_i:= (\RV{Z}_i)_{-i\in \mathbb{N}}$ to be other doctor's identifiers in the dataset.
+
+Assume $\RV{D}_i$ screens off $\RV{Z}_i$ from $\RV{X}_i$ and $\RV{Y}_i$ -- that is, the latent treatment plan is sufficiently detailed to screen off the relevance of the doctor's identity (this is a causal assumption), and the stochastic response to treatment plans is identical for each patient with positive support in the past data for each plan the decision maker is considering. That is, assume $(\prob{P}_C,\RV{D},(\RV{X},\RV{Y}))$ is preempted. By the assumption that $\RV{D}_i$ screens off $\RV{Z}_i$, we can also conclude that $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$ is preempted.
+
+Suppose that each doctor makes choices $\RV{G}^d_z$ by some deterministic function of their beliefs of what every other doctor does $\RV{G}^e_{z'}$ and of the effect of treatment plans $\RV{H}$, but they estimate both $\RV{G}^e_{z'}$ and $\RV{H}$ with continuously distributed noise. Then their beliefs, and hence (by supposition) their choices end up dominated by the uniform measure on $[0,1]$.
+
+If the decision maker is then told by an oracle that for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$, she may then conclude that $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical responses for all $-i\in\{0\}\cup\mathbb{N}$.
+\end{example}
+
+This story makes a lot of causal assumptions. 
 
 Theorem \ref{th:preempt_diverse} is a more plausibly useful theorem than \ref{th:det_obs_to_cons}. It shows that, if we believe that $\prob{P}_\alpha^{\RV{Y}_0}$ is preempted by $\prob{P}_\alpha^{\RV{Y}_{-\mathbb{N}}}$, and after conditioning on some $\RV{V}$ the set of distributions of preempting actions is suitably diverse, then we can conclude conditional independence in the consequences of the decision maker's actions from conditional independence in the given observations.
 
