@@ -49,11 +49,11 @@ A probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=
 \end{align}
 \end{definition}
 
-Definition \ref{def:cii_rf} implies $\RV{Y}_i\CI_{\prob{P}_C}^e (\RV{D}_{\neq i},\RV{Y}_{\neq i},\RV{C})|(\RV{D}_i,\RV{H})$. We can consider a number of different kinds of models where this holds. A simple family of models can be obtained by ``attaching'' a prior $\mu$ over $\RV{H}$ to Equation \ref{eq:do_model_rep}. This yields the Markov kernel $\kernel{K}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$
+Definition \ref{def:cii_rf} implies $\RV{Y}_i\CI_{\prob{P}_C}^e (\RV{D}_{\neq i},\RV{Y}_{\neq i},\RV{C})|(\RV{D}_i,\RV{H})$. We can consider a number of different kinds of models where this holds. A simple family of models can be obtained by ``attaching'' a prior $\mu$ over $\RV{H}$ to Equation \eqref{eq:do_model_rep}. This yields the Markov kernel $\kernel{K}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$
 \begin{align}
     \kernel{K} := \tikzfig{do_model_representation_mu}\label{eq:data_independent_kernel}
 \end{align}
-$\kernel{K}=\prob{P}_C^{\RV{Y}|\RV{D}}$ if $\RV{H}\CI^e_{\prob{P}_C} (\RV{D},\RV{C})$ and $\RV{D}_i \CI^e_{\prob{P}_C} \RV{Y}_{[i-1]}|(\RV{D}_{[i-1]},\RV{C})$. We say that such models have an \emph{input-independent hypothesis} and \emph{data-independent inputs}, and they are considered in more detail in Section \ref{sec:data_independent_actions}. This is a limited family of models, but it can be a helpful starting point to understand more general ones. Theorem \ref{th:data_ind_CC} establishes that given a data-independent model $\prob{P}_C$, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is \emph{causally contractible} if and only if it can be represented in the form given by Equation \ref{eq:data_independent_kernel}. 
+$\kernel{K}=\prob{P}_C^{\RV{Y}|\RV{D}}$ if $\RV{H}\CI^e_{\prob{P}_C} (\RV{D},\RV{C})$ and $\RV{D}_i \CI^e_{\prob{P}_C} \RV{Y}_{[i-1]}|(\RV{D}_{[i-1]},\RV{C})$. We say that such models have an \emph{input-independent hypothesis} and \emph{data-independent inputs}, and they are considered in more detail in Section \ref{sec:data_independent_actions}. This is a limited family of models, but it can be a helpful starting point to understand more general ones. Theorem \ref{th:data_ind_CC} establishes that given a data-independent model $\prob{P}_C$, $\prob{P}_C^{\RV{Y}|\RV{D}}$ is \emph{causally contractible} if and only if it can be represented in the form given by Equation \eqref{eq:data_independent_kernel}. 
 
 Dropping the assumption $\RV{H}\CI^e_{\prob{P}_C} (\RV{D},\RV{C})$ yields models that simply have data-independent inputs. In this case, we can write for any $\alpha\in C$
 \begin{align}
@@ -132,7 +132,7 @@ then there is a unique Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N
 \end{lemma}
 
 \begin{proof}
-Take any $x\in X^{\mathbb{N}}$ and let $x_{|m}\in X^n$ be the first $n$ elements of $x$. By Equation \ref{eq:marginalise_comb}, for any $A_i\in \sigalg{Y}$, $i\in [m]$
+Take any $x\in X^{\mathbb{N}}$ and let $x_{|m}\in X^n$ be the first $n$ elements of $x$. By Equation \eqref{eq:marginalise_comb}, for any $A_i\in \sigalg{Y}$, $i\in [m]$
 \begin{align}
     \kernel{K}_n(\bigtimes_{i\in [m]}A_i\times Y^{n-m}|x_{|n}) &= \kernel{K}_m(\bigtimes_{i\in [m]}A_i|x_{|m})
 \end{align}
@@ -151,7 +151,7 @@ Furthermore, for each $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$, $n\in \mathbb{N}$ 
 \prob{Q}_d(\bigtimes_{i\in[n]} A_i \times Y^{\mathbb{N}})&\geq \prob{Q}_d(\bigtimes_{i\in [p]} A_i\times Y^{\mathbb{N}})\\
 &\geq \prob{Q}_d(\bigtimes_{i\in \mathbb{N}} A_i)
 \end{align}
-so by the Monotone convergence theorem, the sequence $\prob{Q}_d(\bigtimes_{i\in[n]} A_i)$ converges as $n\to \infty$ to $\prob{Q}_d(\bigtimes_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigtimes_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \ref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
+so by the Monotone convergence theorem, the sequence $\prob{Q}_d(\bigtimes_{i\in[n]} A_i)$ converges as $n\to \infty$ to $\prob{Q}_d(\bigtimes_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigtimes_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \eqref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
 
 Thus $d\mapsto Q_d$ is the desired $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$.
 \end{proof}
@@ -348,7 +348,7 @@ and so
     \text{swap}_{A\leftrightarrow B} (\mathrm{ev}_x^{-1}(C_A)) &= C_A\label{eq:swap_select_relation}
 \end{align}
 
-Substituting Equation \ref{eq:swap_select_relation} into \ref{eq:q_mu_rel}
+Substituting Equation \eqref{eq:swap_select_relation} into \eqref{eq:q_mu_rel}
 \begin{align}
     \prob{Q}(C_A|x) &= \mu \text{swap}_{A\leftrightarrow B} (C_A)\\
     &= \kernel{K} \text{swap}_{A\leftrightarrow B} (C_A|e)\\
@@ -379,7 +379,7 @@ Suppose
 \end{align}
 where $\mu$ is column exchangeable, and consider any two $x,x'\in X^{\mathbb{N}}$ such that some subsequences are equal $x_S=x'_T$ with $S,T\subset \mathbb{N}$ and $|S|=|T|=[n]$.
 
-For any $\{A_i\in\sigalg{Y}|i\in S\}$, let $A_S = \text{swap}_{[n]\leftrightarrow S} \times_{i\in [n]} A_i\times Y^{\mathbb{N}}$, $A_T = \text{swap}_{S\leftrightarrow T} (A_S)$, $B=(x_i i)_{i\in S}$ and $C=(x_i i)_{i\in T}=(x_{\text{swap}_{S\leftrightarrow T}}(i) i)_{i\in S}$. By Equations \ref{eq:q_mu_rel} and \ref{eq:swap_select_relation}
+For any $\{A_i\in\sigalg{Y}|i\in S\}$, let $A_S = \text{swap}_{[n]\leftrightarrow S} \times_{i\in [n]} A_i\times Y^{\mathbb{N}}$, $A_T = \text{swap}_{S\leftrightarrow T} (A_S)$, $B=(x_i i)_{i\in S}$ and $C=(x_i i)_{i\in T}=(x_{\text{swap}_{S\leftrightarrow T}}(i) i)_{i\in S}$. By Equations \eqref{eq:q_mu_rel} and \eqref{eq:swap_select_relation}
 \begin{align}
     \kernel{K}(A_S|x) &= \mu \text{swap}_{S\leftrightarrow B} (A_S)\\
     &= \mu \text{swap}_{T\leftrightarrow C} (A_T)&\text{ by column exchangeability of }\mu\\
@@ -437,12 +437,12 @@ Define $\kernel{M}:H\kto Y^X$ by $\kernel{M}(A|h)=h(A)$ for all $A\in\sigalg{Y}^
     \mu(\bigtimes_{i\in \mathbb{N}} A_i\times B) &= \int_B \prod_{i\in \mathbb{N}} \kernel{M}(A_i|h) \mu\kernel{F}_{\RV{H}}(\mathrm{d}h)&\forall A_i\in\sigalg{Y}^X
 \end{align}
 
-By Equations \ref{eq:lookup_representation} and \ref{eq:ev_alternate_rep}
+By Equations \eqref{eq:lookup_representation} and \eqref{eq:ev_alternate_rep}
 \begin{align}
     \kernel{K} &= \tikzfig{do_model_representation_kernel_pre}\\
     &:= \tikzfig{do_model_representation_kernel}\label{eq:lup_rep_combined}
 \end{align}
-Where we can connect the copied outputs of $\mu\kernel{F}_{\RV{H}}$ to the inputs of each $\kernel{M}$ ``inside the plate'' as the plates in Equations \ref{eq:ev_alternate_rep} and \ref{eq:df_rep_mu} are equal in number and each connected wire represents a single copy of $Y^D$.
+Where we can connect the copied outputs of $\mu\kernel{F}_{\RV{H}}$ to the inputs of each $\kernel{M}$ ``inside the plate'' as the plates in Equations \eqref{eq:ev_alternate_rep} and \eqref{eq:df_rep_mu} are equal in number and each connected wire represents a single copy of $Y^D$.
 \end{proof}
 
 \begin{theorem}\label{th:ciid_rep_kernel}
@@ -497,7 +497,7 @@ Swap maps are deterministic, so by Theorem \ref{th:fong_det_kerns}
     &= \tikzfig{commutative_exchange_with_swap_symmed}\label{eq:sym}\\
     &= \tikzfig{commutative_exchange_with_swap_cconted}\label{eq:ccont}
 \end{align}
-where Equation \ref{eq:sym} follows from symmetry of $\kernel{L}$ and \ref{eq:ccont} follows from causal contractibility of $\kernel{M}(\cdot|z,\cdot)$
+where Equation \eqref{eq:sym} follows from symmetry of $\kernel{L}$ and \eqref{eq:ccont} follows from causal contractibility of $\kernel{M}(\cdot|z,\cdot)$
 
 Only if:
 Construct the probability space $(\prob{Q},X^{\mathbb{N}}\times Y^{\mathbb{N}},\sigalg{X}^{\mathbb{N}}\otimes\sigalg{Y}^{\mathbb{N}})$ with $\prob{P}=\mu\odot\kernel{K}$.
@@ -594,7 +594,7 @@ By construction, $\RV{D}_{\RV{R}^{-1}(i,j)}=j$ almost surely; that is, $\RV{D}_{
     &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}_{\RV{R}^{-1}}|\RV{D}_{\RV{R}^{-1}}}(A|e)\label{eq:yd_is_indep}\\
     &=: \prob{P}_C^{\RV{Y}^D}\label{eq:yd_dist}
 \end{align}
-for any $d\in D^{\mathbb{N}}$. Equation \ref{eq:yd_is_indep} implies $\RV{Y}^D\CI (\RV{D},\RV{C})$, hence the possibility of defining $\prob{P}_C^{\RV{Y}^D}$.
+for any $d\in D^{\mathbb{N}}$. Equation \eqref{eq:yd_is_indep} implies $\RV{Y}^D\CI (\RV{D},\RV{C})$, hence the possibility of defining $\prob{P}_C^{\RV{Y}^D}$.
 
 Now,
 \begin{align}
@@ -609,18 +609,18 @@ By Lemma \ref{lem:infinitely_extended_kernels}, it must therefore be the case th
 \begin{align}
     \prob{P}^{\RV{Y}|\RV{D}} = \prob{P}^{\RV{Y}_{\rho}|\RV{D}_{\rho}}
 \end{align}
-Then from Equation \ref{eq:need_ccont}
+Then from Equation \eqref{eq:need_ccont}
 \begin{align}
     \prob{P}^{\RV{Y}_{\RV{R}^{-1}}|\RV{D}_{\RV{R}^{-1}}}_\alpha(A|d) &\overset{\prob{P}_C}{\cong} \int_R \prob{P}_\alpha^{\RV{Y}_\rho|\RV{D}_{\rho}}(A|d)\prob{P}_\alpha^{\RV{R}^{-1}}(\mathrm{d}\rho)\\
     &\overset{\prob{P}_C}{\cong} \int_R \prob{P}_C^{\RV{Y}|\RV{D}}(A|d)\prob{P}_\alpha^{\RV{R}^{-1}}(\mathrm{d}\rho)\\
     &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}|\RV{D}}(A|d)\label{eq:rotated_conditional}
 \end{align}
- for all $i,j\in \mathbb{N}$. Then by Equation \ref{eq:yd_dist} and Equation \ref{eq:rotated_conditional}
+ for all $i,j\in \mathbb{N}$. Then by Equation \eqref{eq:yd_dist} and Equation \eqref{eq:rotated_conditional}
 \begin{align}
     \prob{P}_C^{\RV{Y}^D}(A) &= \prob{P}_C^{\RV{Y}|\RV{D}}(A|e)\label{eq:rel_bet_y_yd}
 \end{align}
 
-From Equation \ref{eq:rel_bet_y_yd} and causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{D}}(A|e)$, take some $d\in D^{\mathbb{N}}$ and
+From Equation \eqref{eq:rel_bet_y_yd} and causal contractibility of $\prob{P}_C^{\RV{Y}|\RV{D}}(A|e)$, take some $d\in D^{\mathbb{N}}$ and
 \begin{align}
     (\prob{P}_C^{\RV{Y}^D}\otimes \mathrm{id}_D)\kernel{F}_{ev}(A|d) &= \prob{P}_C^{(\RV{Y}^D_{d_i i})_{\mathbb{N}}}\\
     &=\prob{P}_C^{(\RV{Y}_{d_i i})_{\mathbb{N}}|\RV{D}}(A|e)\\
@@ -706,7 +706,7 @@ Joining combs uses an ``insert'' operation (Definition \ref{def:insert_discrete}
     &= \tikzfig{comb_insert_gettingsimpler}\\
     &= \tikzfig{comb_insert_simple}\label{eq:comb_insert_simple}
 \end{align}
-While Equation \ref{eq:comb_insert_complicated} is a well-formed string diagram in the category of Markov kernels, Equation \ref{eq:comb_insert_simple} is not. In the case that all the underlying sets are discrete, Equation \ref{eq:comb_insert_simple} can be defined using an extended string diagram notation appropriate for the category of real-valued matrices \citep{jacobs_causal_2019}, though we do not introduce this extension here.
+While Equation \eqref{eq:comb_insert_complicated} is a well-formed string diagram in the category of Markov kernels, Equation \eqref{eq:comb_insert_simple} is not. In the case that all the underlying sets are discrete, Equation \eqref{eq:comb_insert_simple} can be defined using an extended string diagram notation appropriate for the category of real-valued matrices \citep{jacobs_causal_2019}, though we do not introduce this extension here.
 
 Two different notations are used to describe combs. There is an ``extended'' notation which explicitly references the ``gaps'' and the ``conditionals'' that form a comb. For example, the comb $\prob{P}_C^{\RV{Y_{[2]}}\combbreak\RV{D}_{[2]}})$ above could be written $\prob{P}_C^{\RV{Y}_{2}|\RV{D}_2\combgap \RV{Y}_1|\RV{D}_1}$. Alternatively, given two sequences $(\RV{Y}_i)_{i\in [n]}$ and $(\RV{D}_i)_{i\in [n]}$ and a comb that consists of a sequence of conditionals of corresponding indices interspersed by gaps $\prob{P}_C^{...\combgap \RV{Y}_{2}|\RV{D}_2\combgap \RV{Y}_1|\RV{D}_1}$, we compress this to $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$.
 
@@ -818,7 +818,7 @@ Then the model exhibits a kind of ``backdoor adjustment'' \citet[Chap. 1]{pearl_
 \end{example}
 
 
-Equation \ref{eq:backdoor} is identical to the backdoor adjustment formula for an intervention on $\RV{D}_1$ targeting $\RV{Y}_1$ where $\RV{X}_1$ is a common cause of both.
+Equation \eqref{eq:backdoor} is identical to the backdoor adjustment formula for an intervention on $\RV{D}_1$ targeting $\RV{Y}_1$ where $\RV{X}_1$ is a common cause of both.
 
 \subsubsection{Example: body mass index}
 
@@ -910,7 +910,7 @@ and let $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i})|(\RV{D}_i,\RV{H})$
 
 It remains to be shown that $\prob{P}_\alpha^{\RV{DY}}=\prob{P}_\alpha^{\prime \RV{DY}}$.
 
-By Equation \ref{eq:identical_response_assumption} and $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i})|(\RV{D}_i,\RV{H})$, it follows (for identical reasons as Equation \ref{eq:comb_representation_w_CI}) that
+By Equation \eqref{eq:identical_response_assumption} and $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i})|(\RV{D}_i,\RV{H})$, it follows (for identical reasons as Equation \eqref{eq:comb_representation_w_CI}) that
 \begin{align}
     \prob{P}_C^{\RV{Y}\combbreak \RV{D}} &= \tikzfig{do_model_representation}\\
     &= \tikzfig{do_model_representation_mu}\\

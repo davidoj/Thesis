@@ -165,7 +165,7 @@ By assumption, if $\pi_j(\alpha) =: (\mathrm{do}_{B_j},v_{B_j})$ and $\pi_j(\alp
     \implies \prob{P}_\alpha^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})} &= \prob{P}_{\alpha'}^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})}
 \end{align}
 
-Next, causal contractibility of $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ over $\RV{H}$. By Eq. \ref{eq:mutual_conditional_independence}
+Next, causal contractibility of $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ over $\RV{H}$. By Eq. \eqref{eq:mutual_conditional_independence}
 \begin{align}
     \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} (\RV{V}_{i [1,j)},\mathrm{Pa}(\RV{V}_{i [1,j)}) )|(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\RV{C})
 \end{align}
@@ -274,7 +274,7 @@ The assumption of preemption as given in Definition \ref{def:preemption} can, un
 
 Suppose we have a collection of doctors $\RV{Z}_i$ who each see a series of patients and offer a treatment $\RV{X}_i$ and report their results $\RV{Y}_i$. Each doctor may decide whether or not to prescribe based on any number of unobserved factors, and may offer additional unrecorded treatments, vary in their bedside manner and so forth, and there may be stochastic variation in any of these. The decision maker is also a doctor, and is reviewing the data contained in the sequences $(\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in [n]}$. The decision maker supposes that whatever overall treatment plan they adopt (which could also depend on features not listed in this set of variables), the same thing has probably been done at least sometimes by some of these prior doctors -- that is, their treatment protocol is preempted. They also assume that the doctor's identity has no bearing on outcomes over and above the treatment protocol, they assume that doctors don't all select the same mixture of treatment protocols. It then stands to reason that the doctors who choose different treatment plans will see slightly different results \emph{if the different treatment plans actually lead to different results}. Conversely, if there is \emph{no} variation in results after conditioning on whether patients were treated this suggests that whether or not treatment occurred is the \emph{only} important feature of any treatment plan.
 
-One way that this story could fail is if the doctors all knew exactly the long-run probabilistic outcomes of different treatment plans and coordinated with one another, they could (in principle) each pick different mixtures of treatment plans just so that the variation in outcomes is masked -- that is, for example, doctor 1 picks a medium effectiveness plan 100\% of the time, while doctor 2 picks a highly effective plan 50\% of the time and a low effectiveness plan 50\% of the time leading to the same distribution over outcomes. The conditions in Theorem \ref{th:det_obs_to_cons} requiring domination by the uniform measure on $[0,1]$ are assumptions that this kind of thing does not happen, either because the doctors don't coordinate or because even if they did coordinate they would not know the long-run averages of outcomes associated with each plan precisely enough to completely mask the variation.
+One way that this story could fail is if the doctors all knew exactly the long-run probabilistic outcomes of different treatment plans and coordinated with one another, they could (in principle) each pick different mixtures of treatment plans just so that the variation in outcomes is masked -- that is, for example, doctor 1 picks a medium effectiveness plan 100\% of the time, while doctor 2 picks a highly effective plan 50\% of the time and a low effectiveness plan 50\% of the time leading to the same distribution over outcomes. The conditions in Theorem \ref{th:det_obs_to_cons} requiring domination by the uniform measure on $[0,1]$ are assumptions that this kind of thing does not happen, either because the doctors don't coordinate or because, even if they did coordinate, they would not know the long-run averages of outcomes associated with each plan precisely enough to completely mask the variation.
 
 \begin{notation}[Matrix notation]
 Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $D,Y$ discrete, the directing random measure $\RV{H}$ takes values in the set of Markov kernels $D\kto Y$, which can be identified with a subset of matrices in $\mathbb{R}^{|D|\times |Y|}$. We can therefore refer to elements of $H$ as matrices $(h_d^y)_{d\in D,y\in Y}$ with $\sum_{y\in Y} h_d^y = 1$ for all $d$, and $h_d^y\overset{\prob{P}_\alpha}{\cong}\prob{P}_\alpha^{\RV{Y}|\RV{H}\RV{D}}(y|h,d)$. We can also define $\RV{H}_d^y$ as the $d,y$-th projection of $\RV{H}$.
@@ -302,7 +302,7 @@ The assumption $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$ im
 \begin{align}
     \sum_{d\in D} k^y_{dzx}\frac{l^x_{dz}g^d_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z}&= \sum_{d\in D} k^y_{dz'x}\frac{l^x_{dz'}g^d_{z'}}{\sum_{d'\in D}l^x_{d'z'}g^{d'}_{z'}}\label{eq:polynomial}
 \end{align}
-Fixing $k$, $l$ and $g^d_z$, Eq. \ref{eq:polynomial} defines a polynomial constraints on $g^d_{z'}$. We will show that, unless $k^y_{dzx}=k^y_{d'zx}$ for all $d,d'$ and $z$ then this constraint is nontrivial for some $z'$. For arbitrary $d$, without loss of generality, assume $k^y_{dz'x} > k^y_{d^<z'x}$ for some $d^<$. 
+Fixing $k$, $l$ and $g^d_z$, Eq. \eqref{eq:polynomial} defines a polynomial constraints on $g^d_{z'}$. We will show that, unless $k^y_{dzx}=k^y_{d'zx}$ for all $d,d'$ and $z$ then this constraint is nontrivial for some $z'$. For arbitrary $d$, without loss of generality, assume $k^y_{dz'x} > k^y_{d^<z'x}$ for some $d^<$. 
 
 Then either $l^x_{dz'}=l^x_{d^<z'}$, $l^x_{dz'}< l^x_{d^<z'}$ or $l^x_{dz'}=l^x_{d^>z'}$. Consider the first case, and take $g'$ such that $g{\prime d}_{z'}=g^{d}_{z'}-\epsilon$ and $g{\prime d^<}_{z'}=g^{d^<}_{z'}+\epsilon$ and equal to $g$ otherwise. There is almost surely some $\epsilon$ such that $g'$ is a Markov kernel, as $g^{d}_{z'}>0$ almost surely. Then
 \begin{align}
@@ -311,7 +311,7 @@ Then either $l^x_{dz'}=l^x_{d^<z'}$, $l^x_{dz'}< l^x_{d^<z'}$ or $l^x_{dz'}=l^x_
 \end{align}
 because by assumption the denominator remains the same. But then
 \begin{align}
-    \sum_{d\in D} k^y_{dzx}\frac{l^x_{dz}g^d_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z}&> \sum_{d\in D} k^y_{dz'x}\frac{l^x_{dz'}g^{\prime d}_{z'}}{\sum_{d'\in D}l^x_{d'z'}g^{\primed'}_{z'}}\label{eq:inequality}
+    \sum_{d\in D} k^y_{dzx}\frac{l^x_{dz}g^d_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z}&> \sum_{d\in D} k^y_{dz'x}\frac{l^x_{dz'}g^{\prime d}_{z'}}{\sum_{d'\in D}l^x_{d'z'}g^{\prime d'}_{z'}}\label{eq:inequality}
 \end{align}
 because on the left side a larger term in the sum receives more weight, a smaller term receives less weight and all other terms are weighted equally.
 
@@ -325,13 +325,13 @@ For the first inequality, both the numerator and the denominator shrink. For the
     \frac{l^x_{d^<z}g^{d^<}_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z} &= \frac{l^x_{d^<z}(g^{d^<}_z+\epsilon)}{(1+\frac{\epsilon}{g^{d'}_z})\sum_{d'\in D}l^x_{d'z}g^{d'}_z}\\
     < \frac{l^x_{d^<z}(g^{d^<}_z+\epsilon)}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z}
 \end{align}
-and so the conclusion in Eq. \ref{eq:inequality} follows for the same reasons. Finally considering $l^x_{dz'}< l^x_{d^<z'}$, analogous reasoning implies Eq. \ref{eq:inequality} once again.
+and so the conclusion in Eq. \eqref{eq:inequality} follows for the same reasons. Finally considering $l^x_{dz'}< l^x_{d^<z'}$, analogous reasoning implies Eq. \eqref{eq:inequality} once again.
 
-Thus, unless $k^y_{dzx}=k^y_{d'zx}$ for all $d,d'$ and $z$, Eq. \ref{eq:polynomial} implies a nontrivial constraint on  $g^d_{z'}$ for some $z'$. Thus, for some $z'$, $x$, $d,d'$, $y$ the set of solutions $A:=\{g^d_{z'}|\text{Eq. \ref{eq:polynomial} is satisfied}\land k^y_{dzx}\neq k^y_{d'zx}\}$ has Lebesgue measure 0 in the set $[0,1]^{D}$ \citep{okamoto_distinctness_1973}, and so finally
+Thus, unless $k^y_{dzx}=k^y_{d'zx}$ for all $d,d'$ and $z$, Eq. \eqref{eq:polynomial} implies a nontrivial constraint on  $g^d_{z'}$ for some $z'$. Thus, for some $z'$, $x$, $d,d'$, $y$ the set of solutions $A:=\{g^d_{z'}|\text{Eq. \eqref{eq:polynomial} is satisfied}\land k^y_{dzx}\neq k^y_{d'zx}\}$ has Lebesgue measure 0 in the set $[0,1]^{D}$ \citep{okamoto_distinctness_1973}, and so finally
 \begin{align}
     \prob{P}_\alpha^{\RV{G}^d_{z'}|\RV{H}\RV{G}^d_{z'}}(A|h,g^d_{z}) = 0
 \end{align}
-by the assumption that this probability is dominated by the Lebesgue measure. On the other hand, by assumption the set $B:=\{g^d_{z'}|\text{Eq. \ref{eq:polynomial} is satisfied}\}$ has measure 1. Thus we conclude that $k^y_{dzx}=k^y_{d'zx}$ with probability 1. That is, $\RV{Y}_i\CI_{\prob{P}_C}^e \RV{D}_i|(\RV{H},\RV{Z}_i,\RV{X}_i,\RV{C})$. Thus, by contraction with $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$, we have $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Z}_i,\RV{D}_i)|(\RV{H},\RV{X}_i,\RV{C})$, which implies $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical response functions.
+by the assumption that this probability is dominated by the Lebesgue measure. On the other hand, by assumption the set $B:=\{g^d_{z'}|\text{Eq. \eqref{eq:polynomial} is satisfied}\}$ has measure 1. Thus we conclude that $k^y_{dzx}=k^y_{d'zx}$ with probability 1. That is, $\RV{Y}_i\CI_{\prob{P}_C}^e \RV{D}_i|(\RV{H},\RV{Z}_i,\RV{X}_i,\RV{C})$. Thus, by contraction with $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$, we have $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Z}_i,\RV{D}_i)|(\RV{H},\RV{X}_i,\RV{C})$, which implies $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical response functions.
 \end{proof}
 
 We will now specify the medical example in more detail
@@ -347,7 +347,7 @@ If the decision maker is then told by an oracle that for all $i$, $\RV{Y}_i\CI^e
 
 This story makes a number of assumptions with a causal character. First, the assumption of preemption, which we've acknowledged isn't perfectly worked out, is taken here quite literally -- we are not just supposing that the problem can be posed ``as if'' the consequences of our choices had been previously realised, but we are actually taking the $\RV{D}_i$s to literally stand for unobserved choices that actual doctors make. Secondly, the assumption that the unobserved $\RV{D}_i$s screen off the doctor's identities is reminiscent of the idea from the causal graphical models tradition that variables have complete sets of causal parents, some of which may be unobserved, but all of which together screen that variable off from other nondescendant variables. Note that this assumption isn't required by Theorem \ref{th:det_obs_to_cons}, but it supports the particular story being told here.
 
-Finally, the idea that the long run frequencies of each doctor's choices are generic conditioned on the other doctor's choices and the long run input-output relationship seems closely related to the idea of ``independent causal mechanisms''. This comes up in two forms in the literature. First, it is used to justify the assumption of \emph{causal faithfulness}: here, it is shown that \emph{if} one makes an assumption that conditional probabilities in a causal model are generic with respect to one another in a manner similar to Equation \ref{eq:lebesgue_dom}, then causal faithfulness holds with probability 1 \citep{meek_strong_1995}. However, it's been noted that conditional probabilities routinely do line up in ``non-generic'' ways in an anti-causal direction.
+Finally, the idea that the long run frequencies of each doctor's choices are generic conditioned on the other doctor's choices and the long run input-output relationship seems closely related to the idea of ``independent causal mechanisms''. This comes up in two forms in the literature. First, it is used to justify the assumption of \emph{causal faithfulness}: here, it is shown that \emph{if} one makes an assumption that conditional probabilities in a causal model are generic with respect to one another in a manner similar to Equation \eqref{eq:lebesgue_dom}, then causal faithfulness holds with probability 1 \citep{meek_strong_1995}. However, it's been noted that conditional probabilities routinely do line up in ``non-generic'' ways in an anti-causal direction.
 
 Interestingly, Theorem \ref{th:det_obs_to_cons} itself doesn't depend on a notion of causal direction, and merely shows that a conclusion of independent and identical response functions follows from an assumption of preemption and an assumption of ``generic mechanism association''. Example \ref{ex:doctor_detailed} shows one way that this generic association could be argued for. 
 
@@ -381,7 +381,7 @@ Note that in that example, there is no reason not to expect that each doctor doe
 %     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)\\
 %     &= \prob{P}_\alpha^{\RV{Z}_0|\RV{H}\RV{X}_0}(A|h,x)\label{eq:indep_of_d}
 % \end{align}
-% Furthermore, by assumption $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{Z}_{\{0\}^C},\RV{D}_{\{0\}^C}|(\RV{H},\RV{D}_0,\RV{X}_0,\RV{C})$ and $\RV{Z}_0\CI^e_{\prob{P}_C} \RV{D}_{0}|(\RV{H},\RV{D}_0,\RV{C})$ by Equation \ref{eq:indep_of_d}, thus $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is causally contractible over $\RV{H}$.
+% Furthermore, by assumption $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{Z}_{\{0\}^C},\RV{D}_{\{0\}^C}|(\RV{H},\RV{D}_0,\RV{X}_0,\RV{C})$ and $\RV{Z}_0\CI^e_{\prob{P}_C} \RV{D}_{0}|(\RV{H},\RV{D}_0,\RV{C})$ by Equation \eqref{eq:indep_of_d}, thus $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is causally contractible over $\RV{H}$.
 % \end{proof}
 
 % Note that this is a result similar to \citet{peters_causal_2016}, where our variable $\RV{V}$ is understood to be analogous to the environment $e$ in that work.
@@ -485,7 +485,7 @@ Causal contractibility of $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ over some $\RV{W}$
 %     &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_l} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\label{eq:all_the_same}\\
 %     &= \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}
 % \end{align}
-% where Eq. \ref{eq:all_the_same} follows from the fact that for every $k,l\in q\times\{o\}\cup\{(i,v)\}$, $w_k=w_l$.
+% where Eq. \eqref{eq:all_the_same} follows from the fact that for every $k,l\in q\times\{o\}\cup\{(i,v)\}$, $w_k=w_l$.
 
 % Thus for $A\in \sigalg{Y}^{\mathbb{N}}$
 % \begin{align}
@@ -493,7 +493,7 @@ Causal contractibility of $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ over some $\RV{W}$
 %     &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \text{swap}_{\RV{Q}^{-1}} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}}](A)\\
 %     &= \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\label{eq:by_cc1}
 % \end{align}
-% Where Eq. \ref{eq:by_cc1} follows from causal contractibility of $\prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}$.
+% Where Eq. \eqref{eq:by_cc1} follows from causal contractibility of $\prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}$.
 % \end{proof}
 
 % It also follows from Ecclesiastes' assumption and finite $W$ that if some $\RV{X}_i^o$, $\RV{Z}_i^o$ are \emph{deterministically} related given $\RV{W}$, then $\prob{P}_C^{\RV{Z}|\RV{X}}$ is causally contractible.
@@ -671,7 +671,7 @@ In particular, for any $i\in \mathbb{N}$, $j\in I$, this holds for some $\nu$ su
     &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_4}\label{eq:follows_from_equality}
 \end{align}
 
-where Equation \ref{eq:follows_from_determinism} follows from Theorem \ref{th:fong_det_kerns} and Equation \ref{eq:follows_from_equality} follows from the fact that Equation \ref{eq:follows_from_determinism} holds for arbitrary $j\in I$.
+where Equation \eqref{eq:follows_from_determinism} follows from Theorem \ref{th:fong_det_kerns} and Equation \eqref{eq:follows_from_equality} follows from the fact that Equation \eqref{eq:follows_from_determinism} holds for arbitrary $j\in I$.
 
 Thus by Lemma \ref{lem:infinitely_extended_kernels}
 \begin{align}
@@ -849,7 +849,7 @@ that is, if $h$ maps $j$ to 1, $\RV{D}$ is 1 while if $h$ maps $j$ to $0$, $\RV{
 Then, for $i>1$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i}(y|h,d) &= \sum_{j\in \mathbb{N}} \delta_1(p(j,h))\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h) + \delta_0(p(j,h))\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h)\\
-    &= \sum_{j\in \mathbb{N}} \delta_1(d)\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h) + \delta_0(d)\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h)&\text{by Eq \ref{eq:all_eq_d}}\\
+    &= \sum_{j\in \mathbb{N}} \delta_1(d)\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h) + \delta_0(d)\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{H}}(j|d,h)&\text{by Eq \eqref{eq:all_eq_d}}\\
     &= \delta_1(y)\\
     \implies \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i}(y|d) &= \delta_1(y)
 \end{align}

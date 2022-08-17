@@ -139,7 +139,7 @@ For Markov kernels $\kernel{L}:E\to \delta(\mathcal{F})$, $\kernel{M}:E\to \delt
     \end{tikzpicture}\\
     &= (\kernel{L}\utimes\kernel{M})\utimes\kernel{N}
 \end{align}
-This follows directly from Equation \ref{eq:ccom1}.
+This follows directly from Equation \eqref{eq:ccom1}.
 \end{proof}
 
 \begin{definition}[Sequence notation]\label{def:vec_notation}
@@ -273,7 +273,7 @@ The second and third conditions are nontrivial: suppose $\RV{X}$ takes values in
 \end{tikzpicture}\label{eq:cannot_marginalise}
 \end{align}
 
-For \emph{this} diagram, properties \ref{eq:labels_express_marginal_upper} and \ref{eq:labels_express_marginal_lower} do not hold, even though \ref{eq:labels_express_joint} does.
+For \emph{this} diagram, properties \eqref{eq:labels_express_marginal_upper} and \eqref{eq:labels_express_marginal_lower} do not hold, even though \eqref{eq:labels_express_joint} does.
 
 \end{definition}
 
@@ -379,7 +379,7 @@ Given a probability space $(\prob{P},\Omega,\mathcal{F})$, and random variables 
 \draw[-{Rays [n=8]}] ($(m.east) + (0,-0.15)$) -- (T);
 \end{tikzpicture}\label{eq:ordinary_disint}
 \end{align}
-$\kernel{M}$ is a version of $\prob{P}^{\RV{Y}|\RV{X}}$, ``the probability of $\RV{Y}$ given $\RV{X}$''. Let $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ be the set of all kernels that satisfy \ref{eq:ordinary_disint} and $\prob{P}^{\RV{Y}|\RV{X}}$ an arbitrary member of $\prob{P}^{\RV{Y}|\RV{X}}$.
+$\kernel{M}$ is a version of $\prob{P}^{\RV{Y}|\RV{X}}$, ``the probability of $\RV{Y}$ given $\RV{X}$''. Let $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ be the set of all kernels that satisfy \eqref{eq:ordinary_disint} and $\prob{P}^{\RV{Y}|\RV{X}}$ an arbitrary member of $\prob{P}^{\RV{Y}|\RV{X}}$.
 
 Given a Markov kernel space $(\kernel{K},D,\Omega)$ and random variables $\RV{X}:\Omega\times D\to X$, $\RV{Y}:\Omega\times D\to Y$, $\kernel{M}:D\times E\to \Delta(\mathcal{F})$ is a \emph{$\RV{Y}$ given $\RV{DX}$ disintegration} of $\kernel{K}^{\RV{YX}|\RV{D}}$ iff
 
@@ -407,7 +407,7 @@ Given a Markov kernel space $(\kernel{K},D,\Omega)$ and random variables $\RV{X}
 \end{tikzpicture}\label{eq:def_k_disint}
 \end{align}
 
-Write $\kernel{K}^{\{\RV{Y}|\RV{XD}\}}$ for the set of kernels satisfying \ref{eq:def_k_disint} and $\kernel{K}^{\RV{Y}|\RV{XD}}$ for an arbitrary member of $\kernel{K}^{\{\RV{Y}|\RV{XD}\}}$.
+Write $\kernel{K}^{\{\RV{Y}|\RV{XD}\}}$ for the set of kernels satisfying \eqref{eq:def_k_disint} and $\kernel{K}^{\RV{Y}|\RV{XD}}$ for an arbitrary member of $\kernel{K}^{\{\RV{Y}|\RV{XD}\}}$.
 \end{definition}
 
 \begin{definition}[Wire labels -- input]\label{def:wl_disint}
@@ -461,7 +461,7 @@ So, if $\kernel{M}\in \prob{P}^{\{\RV{X}|\RV{Y}\}}$, then it is straightforward 
 \end{tikzpicture} \in \prob{P}^{\{\RV{X}\RV{Y}|\RV{Y}\}} \label{eq:const_from_m}
 \end{align}
 
-and hence the output labels are valid. Diagram \ref{eq:const_from_m} is constructed by taking the product of the copy map with $\kernel{M}\otimes\textbf{Id}$. Thus it is valid to label $\kernel{M}$ with
+and hence the output labels are valid. Diagram \eqref{eq:const_from_m} is constructed by taking the product of the copy map with $\kernel{M}\otimes\textbf{Id}$. Thus it is valid to label $\kernel{M}$ with
 
 \begin{align}
 \begin{tikzpicture}
@@ -748,11 +748,11 @@ That is, $Q$ is the measure $\lambda{A}$ for all points $(x,d)$ except where $x=
     &= \{(d,x):d=x\And d\in C\}
 \end{align}
 
-Thus $Q^{\{0\}}$ is not measurable and consequently $Q$ fails to be a Markov kernel. The problem comes from the fact that $Q$ is defined by an uncountable collection of disintegrations $Q(d)$, each of which is individually measurable. In this case, the problem can be easily solved by defining $Q'$ without the non-measurable component in \ref{eq:non_measurable_disint}. What we would like are general conditions under which we know that we can choose an appropriate set of disintegrations $Q(d)$ in order for the resulting $Q$ to be a Markov kernel.
+Thus $Q^{\{0\}}$ is not measurable and consequently $Q$ fails to be a Markov kernel. The problem comes from the fact that $Q$ is defined by an uncountable collection of disintegrations $Q(d)$, each of which is individually measurable. In this case, the problem can be easily solved by defining $Q'$ without the non-measurable component in \eqref{eq:non_measurable_disint}. What we would like are general conditions under which we know that we can choose an appropriate set of disintegrations $Q(d)$ in order for the resulting $Q$ to be a Markov kernel.
 
 This problem can be easily dealt with if we only require $\kernel{K}$ to be unique up to a set of measure 0 with respect to some ``background probability'' $\prob{P}^*\in\Delta(\sigalg{D}\otimes\sigalg{E})$, because we can simply take $\kernel{K}$ to be an arbitrary disintegration of $\prob{P}^*$ and then use Theorem \ref{th:iterated_disint} to find further disintegrations (see Lemma \ref{lem:agree_disint}. However, many common examples of causal models do admit a background probability. For example, with Causal Bayesian Networks, $do(\RV{X}=x)$ interventions are typically associated with a point probability measure $\delta_x$ on the intervened variable. If, for example, $X$ takes values in $[0,1]$ then there is no probability measure that assigns nonzero probability to every real number we can choose for a do-intervention $do(\RV{X}=x)$.
 
-For a more specific example with Causal Bayesian Networks, suppose we have $\RV{X}$ and $\RV{Y}$ in $[0,1]$, the graph $\mathcal{G}:=\RV{X}\rightarrow \RV{Y}$ and, as above, the observational distribution is $\prob{P}(\RV{X}\in A,\RV{Y}\in B)=\lambda(A)\lambda(B)$. Then, because elements of $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ are unique up to a set of $\kernel{P}$-measure 0, Equation \ref{eq:non_measurable_disint} is a version of $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ for each $d\in D$. Identify each $d\in D$ with an intervention $do(\RV{X}=x)$. According to the definition of \citet{pearl_causality:_2009} pg 24, the interventional distribution $\prob{P}(d)(\RV{X},\RV{Y})$ must have the following properties for evey $x\in X$:
+For a more specific example with Causal Bayesian Networks, suppose we have $\RV{X}$ and $\RV{Y}$ in $[0,1]$, the graph $\mathcal{G}:=\RV{X}\rightarrow \RV{Y}$ and, as above, the observational distribution is $\prob{P}(\RV{X}\in A,\RV{Y}\in B)=\lambda(A)\lambda(B)$. Then, because elements of $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ are unique up to a set of $\kernel{P}$-measure 0, Equation \eqref{eq:non_measurable_disint} is a version of $\prob{P}^{\{\RV{Y}|\RV{X}\}}$ for each $d\in D$. Identify each $d\in D$ with an intervention $do(\RV{X}=x)$. According to the definition of \citet{pearl_causality:_2009} pg 24, the interventional distribution $\prob{P}(d)(\RV{X},\RV{Y})$ must have the following properties for evey $x\in X$:
 
 \begin{itemize}
     \item $\prob{P}^{\RV{XY}}_{do(\RV{X}=x)}$ is Markov relative to $\mathcal{G}$ (this condition is trivial with the given $\mathcal{G}$)
@@ -781,7 +781,7 @@ The second at least guarantees that $do(\RV{X}=x)\mapsto \prob{P}_{do{\RV{X}=x}}
     \prob{P}_{\do(\RV{X}=x),x'}^{\RV{XY}|\RV{X}}(A\times B) = \mathds{1}_R(x)\delta_{x'}(A)\delta_1(B) + (1-\mathds{1}_R(x))\delta_x(A) \lambda(B) \label{eq:cbn_cont2}
 \end{align}
 
-While Equation \ref{eq:cbn_cont2} behaves ``as it is supposed to'' for mixtures of $do$ operations $\pi\in \Delta([0,1])$ absolutely continuous with respect to the Lebesgue measure $\lambda\gg \pi$, it also sets $\RV{Y}$ to 1 for any point interventions in the Cantor set, or any mixtures of $do$ operations absolutely continuous with respect to the Cantor set. This is possible because, in general, we don't have a rule for choosing a version of $\prob{P}^{\{\RV{XY}|\RV{X}\}}$ that assigns ``sensible'' values to all $\prob{P}$-measure 0 sets.
+While Equation \eqref{eq:cbn_cont2} behaves ``as it is supposed to'' for mixtures of $do$ operations $\pi\in \Delta([0,1])$ absolutely continuous with respect to the Lebesgue measure $\lambda\gg \pi$, it also sets $\RV{Y}$ to 1 for any point interventions in the Cantor set, or any mixtures of $do$ operations absolutely continuous with respect to the Cantor set. This is possible because, in general, we don't have a rule for choosing a version of $\prob{P}^{\{\RV{XY}|\RV{X}\}}$ that assigns ``sensible'' values to all $\prob{P}$-measure 0 sets.
 
 It is straightforward to show that wherever $D$ is countable, arbitrary disintegrations of $(\kernel{K},(D,\sigalg{D}),(E,\sigalg{E}))$ exist. \textbf{This is an assumption we will typically make.}
 
@@ -835,7 +835,7 @@ For $H_\in \sigalg{X}$
     \int_B R^A_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y) &= \lim_{n\to\infty} \int_B R^{A,n}_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y)\\
 \end{align}
 
-By Equation \ref{eq:agrement_on_jsub}, $\int_{H_j} R^A_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y) = \kernel{K}_{d}^{\RV{XY}}(H_j\times A)$ for all $H_j\in \cup{n\in \mathbb{N}}\sigalg{J}_n$. However, $\cup{n\in \mathbb{N}}\sigalg{J}_n$ is a p-system for $\sigalg{X}$ and so $\int_{B} R^A_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y) = \kernel{K}_{d}^{\RV{XY}}(B\times A)$ for all $B\in \sigalg{X}$.
+By Equation \eqref{eq:agrement_on_jsub}, $\int_{H_j} R^A_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y) = \kernel{K}_{d}^{\RV{XY}}(H_j\times A)$ for all $H_j\in \cup{n\in \mathbb{N}}\sigalg{J}_n$. However, $\cup{n\in \mathbb{N}}\sigalg{J}_n$ is a p-system for $\sigalg{X}$ and so $\int_{B} R^A_d(x) d\kernel{K}_d^{\RV{XY}}(\{x\}\otimes Y) = \kernel{K}_{d}^{\RV{XY}}(B\times A)$ for all $B\in \sigalg{X}$.
 
 Suppose $D=[0,1]$. This will later be generalised to a general standard measurable space using the isomorphism between $[0,1]$ and any uncountable standard measurable space.
 
@@ -1225,7 +1225,7 @@ Given a kernel space $(\kernel{K},D,\Omega)$, some relative probability space $(
 
 \begin{lemma}[Diagrammatic consequences of labels]
 
-In general, diagram labels are ``well behaved'' with regard to the application of any of the special Markov kernels: identities \ref{eq:identity}, swaps \ref{eq:swap}, discards \ref{eq:discard} and copies \ref{eq:copy} as well as with respect to the coherence theorem of the CD category. They are not ``well behaved'' with respect to composition.
+In general, diagram labels are ``well behaved'' with regard to the application of any of the special Markov kernels: identities \eqref{eq:identity}, swaps \eqref{eq:swap}, discards \eqref{eq:discard} and copies \eqref{eq:copy} as well as with respect to the coherence theorem of the CD category. They are not ``well behaved'' with respect to composition.
 
 Fix some Markov kernel space $(\kernel{K},D,\Omega)$ and random variables $\RV{X}$, $\RV{Y}$, $\RV{Z}$ taking values in $X,Y,Z$ respectively. $\mathrm{Sat:}$ indicates that a labeled diagram satisfies definitions \ref{def:wl_jprob} and \ref{def:wl_disint} with respect to $(\mathscr{K},D,\Omega)$ and $\RV{X}$, $\RV{Y}$, $\RV{Z}$.  The following always holds:
 
@@ -1311,7 +1311,7 @@ and the following implications hold:
     \item $\int_{X\times Y} \delta_{\mathrm{swap(x,y)}}(A\times B)d\kernel{K}_w(x,y) = \prob{P}_{\RV{Y}\RV{X}|\RV{Z}}(w;A\times B)$
     \item $\kernel{K}\splitter{0.1} (w;A\times B) = \int_{X} \delta_{x,x}(A\times B) d\kernel{K}_w(x) = \prob{P}_{\RV{X}\RV{X}|\RV{Z}} (w;A\times B)$
 \end{itemize}
-\ref{eq:splitter_preserves_name}: Suppose $\kernel{K}$ is a version of $\prob{P}_{\RV{Y}|\RV{Z}}$. Then
+\eqref{eq:splitter_preserves_name}: Suppose $\kernel{K}$ is a version of $\prob{P}_{\RV{Y}|\RV{Z}}$. Then
 \begin{align}
 \prob{P}_{\RV{Z}\RV{Y}} &= \begin{tikzpicture}
 \path (0,0) node[dist] (m) {$\prob{P}_{\RV{Z}}$}

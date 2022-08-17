@@ -1,0 +1,70 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: references.bib
+Repeated entry---line 1031 of file references.bib
+ : @article{kerns_definettis_2006
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1974 of file references.bib
+ : @book{savage_foundations_1954
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1981 of file references.bib
+ : @phdthesis{shpitser_complete_2008
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2481 of file references.bib
+ : @article{fong_causal_2013
+ :                          ,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author, editor, or key in noauthor_holy_1995
+Warning--empty author and editor in noauthor_holy_1995
+Warning--empty institution in barenboim_foundations_2020
+Warning--empty booktitle in horvitz_framework_1986
+Warning--empty journal in lattimore_learning_2017
+Warning--empty journal in saarela_role_2020
+Warning--empty publisher in scholkopf_causality_2022
+You've used 96 entries,
+            2773 wiz_defined-function locations,
+            1326 strings with 27150 characters,
+and the built_in function-call counts, 42489 in all, are:
+= -- 4152
+> -- 1855
+< -- 90
++ -- 654
+- -- 556
+* -- 3288
+:= -- 6689
+add.period$ -- 499
+call.type$ -- 96
+change.case$ -- 454
+chr.to.int$ -- 94
+cite$ -- 200
+duplicate$ -- 2039
+empty$ -- 3609
+format.name$ -- 695
+if$ -- 8998
+int.to.chr$ -- 3
+int.to.str$ -- 1
+missing$ -- 109
+newline$ -- 682
+num.names$ -- 392
+pop$ -- 787
+preamble$ -- 1
+purify$ -- 372
+quote$ -- 0
+skip$ -- 1426
+stack$ -- 0
+substring$ -- 1479
+swap$ -- 248
+text.length$ -- 14
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 951
+warning$ -- 7
+while$ -- 400
+width$ -- 0
+write$ -- 1649
+(There were 4 error messages)

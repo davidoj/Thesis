@@ -459,7 +459,7 @@ and the naturality of \emph{del}, which means that
 
 \subsection{Manipulating String Diagrams}\label{sssec:string_diagram_manipulation}
 
-Planar deformations along with the applications of Equations \ref{eq:ccom_1} through to Equation \ref{eq:nat} are almost the only rules we have for transforming one string diagram into an equivalent one. One further rule is given by Theorem \ref{th:fong_det_kerns}.
+Planar deformations along with the applications of Equations \eqref{eq:ccom_1} through to Equation \eqref{eq:nat} are almost the only rules we have for transforming one string diagram into an equivalent one. One further rule is given by Theorem \ref{th:fong_det_kerns}.
 
 \begin{theorem}[Copy map commutes for deterministic kernels \citep{fong_causal_2013}]\label{th:fong_det_kerns}
 For $\kernel{K}:X\kto Y$
@@ -516,8 +516,8 @@ Given $\kernel{K}:X\kto Y$ and $\kernel{L}:Y\kto Z$:
 
 \begin{align}
 	(\kernel{K}\cprod \kernel{L})(\mathrm{id}_{Y}\otimes \mathrm{del}_Z) &= \tikzfig{semidirect_K_L}\\
-	 &= \tikzfig{semidirect_K_L_2} &\text{by Eq. \ref{eq:nat}}\\
-	 &= \tikzfig{semidirect_K_L_3} &\text{by Eq. \ref{eq:ccom2_del}}
+	 &= \tikzfig{semidirect_K_L_2} &\text{by Eq. \eqref{eq:nat}}\\
+	 &= \tikzfig{semidirect_K_L_3} &\text{by Eq. \eqref{eq:ccom2_del}}
 \end{align}
 
 Thus the action of the $\text{del}$ map is to marginalise over the deleted wire. With integrals, we can write
@@ -779,7 +779,7 @@ then
     &= \int_{C} \prob{P}_C^{\RV{XY}|\RV{X}}(A\times B|z)\prob{P}_\alpha^{\RV{Z}}(\mathrm{dz})\\
     &= \prob{P}_\alpha^{\RV{XYZ}\RV{Z}}(A\times B\times C)
 \end{align}
-a contradiction. An analogous argument follows if we replace ``$>$'' with ``$<$'' in Eq. \ref{eq:assume_ieq}.
+a contradiction. An analogous argument follows if we replace ``$>$'' with ``$<$'' in Eq. \eqref{eq:assume_ieq}.
 \end{proof}
 
 
@@ -912,7 +912,7 @@ Then pick some $w,h,x\in\mathbb{R}$ such that $\frac{w}{h^2}\neq x$ and $(\RV{W}
 \end{align}
 so $\prob{P}_\square^{\RV{B}|\RV{WHC}}$ is invalid. Thus there is some valid $\mu^{\RV{WHC}}$ such that the probability set $\prob{P}_{\square}^{\RV{BWHC}} = \mu^{\RV{WHC}}\odot \prob{P}_\square^{\RV{Y}|\RV{X}}$ is empty.
 
-Validity rules out conditional probabilities like \ref{eq:bmi_example}. We conjecture that in many cases this condition is implicitly taken into account -- it is obviously silly to posit a model in which body mass index can be controlled independently of height and weight. We note, however, that presuming the authors intended their model to be interpreted according to the usual semantics of causal Bayesian networks, the invalid conditional probability \ref{eq:bmi_example} would be used to evaluate the causal effect of body mass index in the causal diagram found in \citet{shahar_association_2009}.
+Validity rules out conditional probabilities like \eqref{eq:bmi_example}. We conjecture that in many cases this condition is implicitly taken into account -- it is obviously silly to posit a model in which body mass index can be controlled independently of height and weight. We note, however, that presuming the authors intended their model to be interpreted according to the usual semantics of causal Bayesian networks, the invalid conditional probability \eqref{eq:bmi_example} would be used to evaluate the causal effect of body mass index in the causal diagram found in \citet{shahar_association_2009}.
 \end{example}
 
 
@@ -980,13 +980,13 @@ Take a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\
 \end{corollary}
 
 \begin{proof}
-Take $\prob{P}_C^{\RV{YZ}|\RV{X}}$ to be the Borel measurable map $m$ from Theorem \ref{th:bogachev}, and note that $\Pi_Y\circ (\RV{Y},\RV{Z})=\RV{Y}$. Then equation \ref{eq:conditional1} implies for all $A\in \sigalg{Y},B\in\sigalg{Y\times Z}$ there is some $n$ such that
+Take $\prob{P}_C^{\RV{YZ}|\RV{X}}$ to be the Borel measurable map $m$ from Theorem \ref{th:bogachev}, and note that $\Pi_Y\circ (\RV{Y},\RV{Z})=\RV{Y}$. Then equation \eqref{eq:conditional1} implies for all $A\in \sigalg{Y},B\in\sigalg{Y\times Z}$ there is some $n$ such that
 
 \begin{align}
     \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_C^{\RV{YZ}|\RV{X}}\kernel{F}_{\Pi_Y}(dy|x)\\
     &=\int_A n(B|x,y) \prob{P}_C^{\RV{Y}|\RV{X}}(dy|x)\label{eq:rec_push}
 \end{align}
-where Equation \ref{eq:rec_push} follows from Lemma \ref{th:recurs_pushf}.
+where Equation \eqref{eq:rec_push} follows from Lemma \ref{th:recurs_pushf}.
 
 Then, for any $\prob{P}_\alpha\in\prob{P}_C$
 \begin{align}
@@ -995,7 +995,7 @@ Then, for any $\prob{P}_\alpha\in\prob{P}_C$
 which implies $n$ is a version of $\prob{P}_C^{\RV{YZ}|(\RV{Y}|\RV{X})}$. By Lemma \ref{th:recurs_pushf}, $n\kernel{F}_{\Pi_Y}$ is a version of $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
 \end{proof}
 
-We might be motivated to ask whether the higher order conditionals in Theorem \ref{th:ho_cond_psets} can be chosen to be valid. Despite Lemma \ref{lem:proper_implies_valid} showing that the existence of proper conditional probabilities implies the existence of valid ones, we cannot make use of this in the above theorem because Equation \ref{eq:proper} makes $n$ proper with respect to the ``wrong'' sample space $(Y\times Z, \sigalg{Y}\otimes\sigalg{Z})$ while what we would need is a proper conditional probability with respect to $(\Omega,\sigalg{F})$.
+We might be motivated to ask whether the higher order conditionals in Theorem \ref{th:ho_cond_psets} can be chosen to be valid. Despite Lemma \ref{lem:proper_implies_valid} showing that the existence of proper conditional probabilities implies the existence of valid ones, we cannot make use of this in the above theorem because Equation \eqref{eq:proper} makes $n$ proper with respect to the ``wrong'' sample space $(Y\times Z, \sigalg{Y}\otimes\sigalg{Z})$ while what we would need is a proper conditional probability with respect to $(\Omega,\sigalg{F})$.
 
 We can choose higher order conditionals to be valid in the case of discrete sets, and whether we can choose them to be valid in more general measurable spaces is an open question.
 

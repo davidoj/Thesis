@@ -278,7 +278,7 @@ Also
     \draw (copy1) to [out=90,in=180] ($(Yx.west) + (0,0.15)$);
     \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
  \end{tikzpicture} \\
- &\overset{\ref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
+ &\overset{\eqref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
     \path (0,0) node[dist] (g) {$\gamma$}
     + (0,-0.45) node (D) {$\RV{D}$}
     + (0.7,-0.15) node[copymap] (copy1) {}
@@ -292,7 +292,7 @@ Also
     \draw (g2) to [out=0,in=180] ($(Yx.west) + (0,0.15)$);
     \draw ($(Yx.east) + (0,0.15)$) -- (X) (copy2) to [out=-90,in=180] (Y);
  \end{tikzpicture}\\
- &= \overset{\ref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
+ &= \overset{\eqref{eq:decompose_condi_x}}{=} \begin{tikzpicture}
     \path (0,0) node (g) {}
     + (0,-0.45) node (D) {$\RV{D}$}
     + (0.7,-0.45) node[copymap] (copy1) {}
@@ -309,7 +309,7 @@ Also
     \draw[-{Rays[n=8]}] (copy1) to [out=90,in=180] (stop0);
  \end{tikzpicture}\label{eq:is_conditional}
 \end{align}
-Equation \ref{eq:is_conditional} establishes that $(\gamma\otimes\textbf{Id}_X\otimes\stopper{0.3}_D)\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$ is a version of $\kernel{C}_\gamma^{\RV{Y}|\RV{X}\RV{D}}$, and thus $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
+Equation \eqref{eq:is_conditional} establishes that $(\gamma\otimes\textbf{Id}_X\otimes\stopper{0.3}_D)\kernel{C}^{\RV{Y}|\RV{X}\RV{H}}$ is a version of $\kernel{C}_\gamma^{\RV{Y}|\RV{X}\RV{D}}$, and thus $\RV{Y}\CI_{\kernel{C}_\gamma} \RV{D}|\RV{X}$.
 
 This can also be derived from the semi-graphoid rules:
 

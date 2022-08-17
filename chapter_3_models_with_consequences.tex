@@ -208,7 +208,7 @@ Where $\mu$ and $\mathrm{des}$ are as in Theorem \ref{th:bolker_jeffrey}
 \end{theorem}
 
 \begin{proof}
-Define $\prob{P}_\cdot$ by $\alpha\mapsto \mu(\cdot|\alpha)$. Then Equation \ref{eq:ev_with_choices} follows from Equation \ref{eq:ev_dec_theory}.
+Define $\prob{P}_\cdot$ by $\alpha\mapsto \mu(\cdot|\alpha)$. Then Equation \eqref{eq:ev_with_choices} follows from Equation \eqref{eq:ev_dec_theory}.
 \end{proof}
 
 \subsection{Causal decision theory}
@@ -223,7 +223,7 @@ Given a set $C$ of choices, sample space $(\Omega,\sigalg{F})$, variables $\RV{H
 For some probabilistic function $\prob{P}_\cdot:C\to \Delta(\Omega)$.
 \end{definition}
 
-The reasons why Lewis wanted to introduce dependency hypothesis and modify Jeffrey's rule to Equation \ref{eq:lewis_cdt} are controversial and do not come up in this work. However, causal decision theory is still relevant to this work in two ways: firstly, once again is a probabilistic function $\prob{P}_\cdot:C\to \Delta(\Omega)$. Secondly, causal decision theory introduces the notion of the dependency hypothesis $\RV{H}$. The dependency hypothesis is similar to the state in Savage's theory, however Lewis does not require a deterministic map from dependency hypotheses to consequences, nor does he require a choice to correspond to every possible function from dependency hypotheses to states.
+The reasons why Lewis wanted to introduce dependency hypothesis and modify Jeffrey's rule to Equation \eqref{eq:lewis_cdt} are controversial and do not come up in this work. However, causal decision theory is still relevant to this work in two ways: firstly, once again is a probabilistic function $\prob{P}_\cdot:C\to \Delta(\Omega)$. Secondly, causal decision theory introduces the notion of the dependency hypothesis $\RV{H}$. The dependency hypothesis is similar to the state in Savage's theory, however Lewis does not require a deterministic map from dependency hypotheses to consequences, nor does he require a choice to correspond to every possible function from dependency hypotheses to states.
 
 Dependency hypotheses are quite an important idea in causal reasoning. Together Lewis' decision rule connect the theory of probability sets with \emph{statistical decision theory}, as Section \ref{sec:sdt} will show. Chapter \ref{ch:evaluating_decisions} goes into considerable detail concerning the question of when probability sets support certain types of dependency hypothesis. While they are typically not explicitly represented in common frameworks for causal inference, Chapter \ref{ch:other_causal_frameworks} discusses how dependency hypotheses are often implicit in these approaches, and shows how they can be made explicit.
 
@@ -320,7 +320,7 @@ The expected utility given $\alpha$ and $h$ is
      &= -\int_D\int_X l(d,h)\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
     &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}},h)
 \end{align}
-where Equation \ref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}$.
+where Equation \eqref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}$.
 \end{proof}
 
 Theorem \ref{th:ind_risk} does \emph{not} hold for general see-do models. General see-do models allow for the utility to depend on $\RV{X}$ even after conditioning on $\RV{D}$ and $\RV{H}$, while the form of the loss function in SDT forces no direct dependence on observations. The generic ``see-do risk'' (Definition \ref{def:see_do_risk}) provides a notion of risk for the more general case, while Theorem \ref{th:ind_risk} shows it reduces to SDP risk in the case of conditionally independent see-do models with a utility that depends only on the consequences $\RV{Y}$.
