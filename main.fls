@@ -972,6 +972,18 @@ INPUT ./figures/lookup_representation_kernel.tikz
 INPUT ./figures/lookup_representation_kernel.tikz
 INPUT ./figures/lookup_representation_kernel.tikz
 INPUT ./figures/lookup_representation_kernel.tikz
+INPUT ./figures/de_finetti_conditional.tikz
+INPUT ./figures/de_finetti_conditional.tikz
+INPUT ./figures/de_finetti_conditional.tikz
+INPUT ./figures/de_finetti_conditional.tikz
+INPUT ./figures/de_finetti_conditional.tikz
+INPUT ./figures/de_finetti_conditional.tikz
+INPUT ./figures/de_finetti_conditional_erase.tikz
+INPUT ./figures/de_finetti_conditional_erase.tikz
+INPUT ./figures/de_finetti_conditional_erase.tikz
+INPUT ./figures/de_finetti_conditional_erase.tikz
+INPUT ./figures/de_finetti_conditional_erase.tikz
+INPUT ./figures/de_finetti_conditional_erase.tikz
 INPUT ./figures/lookup_representation_kernel.tikz
 INPUT ./figures/lookup_representation_kernel.tikz
 INPUT ./figures/lookup_representation_kernel.tikz
@@ -1479,6 +1491,7 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr10.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr12.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr17.pfb
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr5.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr6.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr7.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr8.pfb

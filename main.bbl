@@ -1,4 +1,4 @@
-\begin{thebibliography}{96}
+\begin{thebibliography}{100}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -65,6 +65,15 @@ Elias Bareinboim, Juan~D. Correa, Duligur Ibeling, and Thomas Icard.
 Richard S. Sutton {and} Andrew~G. Barto.
 \newblock Reinforcement {Learning}: {An} {Introduction}, 1998.
 \newblock URL \url{http://jmvidal.cse.sc.edu/lib/sutton98a.html}.
+
+\bibitem[Berk(2010)]{berk_what_2010}
+Richard Berk.
+\newblock What {You} {Can} and {Can}’t {Properly} {Do} with {Regression}.
+\newblock \emph{Journal of Quantitative Criminology}, 26\penalty0 (4):\penalty0
+  481--487, December 2010.
+\newblock ISSN 1573-7799.
+\newblock \doi{10.1007/s10940-010-9116-4}.
+\newblock URL \url{https://doi.org/10.1007/s10940-010-9116-4}.
 
 \bibitem[Blackwell(1979)]{blackwell_theory_1979}
 David~A. Blackwell.
@@ -362,6 +371,15 @@ Miguel~A Hernán.
 \newblock URL \url{https://doi.org/10.1177/0962280211398037}.
 \newblock Publisher: SAGE Publications Ltd STM.
 
+\bibitem[Hernán and Robins(2006)]{hernan_estimating_2006}
+Miguel~A Hernán and James~M Robins.
+\newblock Estimating causal effects from epidemiological data.
+\newblock \emph{Journal of Epidemiology and Community Health}, 60\penalty0
+  (7):\penalty0 578--586, July 2006.
+\newblock ISSN 0143-005X.
+\newblock \doi{10.1136/jech.2004.029496}.
+\newblock URL \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2652882/}.
+
 \bibitem[Hernán and Robins(2020)]{hernan_whatif_2020}
 Miguel~A. Hernán and James~M Robins.
 \newblock \emph{Causal {Inference}: {What} {If}}.
@@ -547,6 +565,16 @@ Karl Menger.
 \newblock ISBN 978-3-7091-6045-9.
 \newblock \doi{10.1007/978-3-7091-6045-9_31}.
 \newblock URL \url{https://doi.org/10.1007/978-3-7091-6045-9_31}.
+
+\bibitem[Muller(2015)]{muller_causal_2015}
+Seán~M. Muller.
+\newblock Causal {Interaction} and {External} {Validity}: {Obstacles} to the
+  {Policy} {Relevance} of {Randomized} {Evaluations}.
+\newblock \emph{The World Bank Economic Review}, 29\penalty0
+  (suppl\_1):\penalty0 S217--S225, January 2015.
+\newblock ISSN 0258-6770.
+\newblock \doi{10.1093/wber/lhv027}.
+\newblock URL \url{https://doi.org/10.1093/wber/lhv027}.
 
 \bibitem[Ng et~al.(2019)Ng, Zhu, Chen, and Fang]{ng_graph_2019}
 Ignavier Ng, Shengyu Zhu, Zhitang Chen, and Zhuangyan Fang.
@@ -751,6 +779,12 @@ Wolfgang Stroebe.
 \newblock URL \url{https://doi.org/10.1080/01973533.2019.1577736}.
 \newblock Publisher: Routledge \_eprint:
   https://doi.org/10.1080/01973533.2019.1577736.
+
+\bibitem[Sävje(2021)]{savje_randomization_2021}
+Fredrik Sävje.
+\newblock Randomization does not imply unconfoundedness, July 2021.
+\newblock URL \url{http://arxiv.org/abs/2107.14197}.
+\newblock arXiv:2107.14197 [stat].
 
 \bibitem[Von~Neumann and Morgenstern(1944)]{von_neumann_theory_1944}
 J.~Von~Neumann and O.~Morgenstern.
