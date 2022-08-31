@@ -384,43 +384,6 @@ Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$, we will say 
 \end{align}
 \end{definition}
 
-% The following lemma establishes that, if a sequence of input and output pairs features independent and identical responses conditional on some arbitrary variable, then we can without loss of generality consider the conditioning variable to be the directing random measure defined over the same sequence of input-output pairs.
-
-% \begin{lemma}[Sufficiency of directing random measure]
-% If a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ has independent and identical response functions conditional on some variable $\RV{G}$, letting $\RV{H}$ be the directing random measure with respect to inputs $\RV{D}$ and outputs $\RV{Y}$, then for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{G}|(\RV{X}_i,\RV{H},\RV{C})$ and for all $\alpha, i, j$, $\prob{P}_\alpha^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_\alpha^{\RV{Y}_j|\RV{X}_j\RV{H}}$.
-% \end{lemma}
-
-% \begin{proof}
-% Fix arbitrary $k\in\mathbb{N}$ and consider the alternative random measure
-% \begin{align}
-%     \RV{H}' := \bigtimes_{j\in D} A_j \mapsto \begin{cases}
-%     \lim_{n\to \infty}\frac{1}{n} \sum_{i\in\mathbb{N}\setminus\{k\}} \prod_{j\in D} \mathds{1}_{A_j}(\RV{Y}^D_{ij}) & \text{this limit exists}\\
-%     \llbracket \bigtimes_{j\in D} A_j = Y^D \rrbracket &\text{otherwise}
-%     \end{cases} 
-% \end{align}
-
-% Note that, for arbitrary $\bigtimes_{j\in D} A_j$, in the case that the limit above exists
-% \begin{align}
-%     \RV{H}'(\bigtimes_{j\in D} A_j)-\RV{H}(\bigtimes_{j\in D} A_j) &= \lim_{n\to \infty}\frac{1}{n} \prod_{j\in D} \mathds{1}_{A_j}(\RV{Y}^D_{kj})\\
-%     &= 0
-% \end{align}
-% That is, $\RV{H}'=\RV{H}$.
-
-% Now, $\RV{H}'$ is a function of $(\RV{D}_i,\RV{Y}_i)_{i\neq k}$, so by the assumption of independent response functions and weak data-independence, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{H}'|(\RV{X}_i,\RV{G},\RV{C})$.
-
-% Furthermore, suppose there is some $d\in D$, $g,g'\in G$, $A\in\sigalg{Y}$ such that
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{Y}_k|\RV{D}_k\RV{G}}(A|d,g) \neq \prob{P}_\alpha^{\RV{Y}_k|\RV{D}_k\RV{G}}(A|d,g')
-% \end{align}
-% then 
-% \begin{align}
-%     \RV{H}'_{dA} &:= \RV{H}'(Y^{d-1}\times A\times Y^{|D|-d})\\
-%      &= \lim_{n\to \infty}\frac{1}{n} \sum_{i\in\mathbb{N}\setminus\{k\}} \mathds{1}_{A}(\RV{Y}^D_{id})
-% \end{align}
-% in particular, by the law of large numbers
-
-% \end{proof}
-
 We say a model observes data-independence when future inputs are independent of outputs conditional on past inputs and the directing measure $\RV{H}$.
 
 \begin{definition}[Data-independent]\label{def:weak_di}
@@ -440,7 +403,7 @@ Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given wi
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel}\\
     &\iff\\
-    \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(\bigtimes_{i\in \mathbb{N}}A_i|w,(d_i)_{i\in \mathbb{N}}) &= \prob{P}_\alpha^{(\RV{Y}^D_{i d_i})_{i\in\mathbb{N}}|\RV{W}}(\bigtimes_{i\in \mathbb{N}}A_i|w)&\forall A_i\in \sigalg{Y}^{\mathbb{N}}, w\in W, d_i\in D
+    \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(\bigtimes_{i\in \mathbb{N}}A_i|w,(d_i)_{i\in \mathbb{N}}) &= \prob{P}_\alpha^{(\RV{Y}^D_{i d_i})_{i\in\mathbb{N}}|\RV{W}}(\bigtimes_{i\in \mathbb{N}}A_i|w)&\forall A_i\in \sigalg{Y}^{D}, w\in W, d_i\in D
 \end{align}
 Where $\prob{F}_{\text{lu}}$ is the Markov kernel associated with the lookup map
 \begin{align}
@@ -599,6 +562,40 @@ Let $\text{con}_{q}:Y^{\mathbb{N}\times D}\kto Y^{\mathbb{N}\times D}$ be the Ma
 \end{align}
 
 Finally, take $\RV{H}^A$ the directing random measure of $\RV{Y}^{D,A}$. We conclude from the equality Eq. \eqref{eq:equal_of_tabs} and from the fact that there is a one-to-one map from directing random measures to exchangeable distributions that $\RV{H}^A\overset{\prob{P}_\alpha}{\cong} \RV{H}$.
+\end{proof}
+
+The following lemma establishes that, if a sequence of input and output pairs features independent and identical responses conditional on some arbitrary variable, then we can without loss of generality consider the conditioning variable to be the directing random conditional defined over the same sequence of input-output pairs.
+
+\begin{lemma}\label{lem:ci_drc}
+If a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ has independent and identical response functions conditional on some variable $\RV{G}$, letting $\RV{H}$ be the directing random measure with respect to inputs $\RV{D}$ and outputs $\RV{Y}$, then for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{G}|(\RV{X}_i,\RV{H},\RV{C})$ and for all $\alpha, i, j$, $\prob{P}_\alpha^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_\alpha^{\RV{Y}_j|\RV{X}_j\RV{H}}$.
+\end{lemma}
+
+\begin{proof}
+We'll show for all $A_j\in \sgiagl{Y}^D$, $h\in H$, $g\in G$:
+\begin{align}
+    \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}\RV{G}}(A_j|j,h,g) &= \RV{H}(\bigtimes_{j\in D} A_j)\\
+    &= \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}(A_j|j,h)
+\end{align}
+
+Note first that $\prob{P}_\alpha^{\RV{Y}|\RV{GD}}$ is IO contractible. Thus by Theorem \ref{th:table_rep_kernel},
+
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}|\RV{GD}}(\bigtimes_{i\in \mathbb{N}}A_i|g,(d_i)_{i\in \mathbb{N}}) &= \prob{P}_\alpha^{(\RV{Y}^D_{i d_i})_{i\in\mathbb{N}}|\RV{G}}(\bigtimes_{i\in \mathbb{N}}A_i|g)&\forall A_i\in \sigalg{Y}^{D}, g\in G, d_i\in D
+\end{align}
+
+but by the assumption of conditional independence and identity given $\RV{G}$, the sequences $(\RV{Y}^D_{ij})_{i\in\mathbb{N}}$ are IID given $\RV{G}$ for each $j\in D$. In particular, for all $i$
+
+\begin{align}
+    \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}}(A_j|j,g) &= \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}^D_{1 j}|\RV{G}}(A_j|g)\\
+    &= \prob{P}_\alpha^{\RV{Y}^D_{1 j}|\RV{G}}(\bigtimes_{j\in D} A_j|g)
+\end{align}
+
+Hence, by applying the law of large numbers after conditioning on each $g\in G$,
+\begin{align}
+    \RV{H}(\bigtimes_{j\in D} A_j) &\overset{\prob{P}_\alpha}{\cong} \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}}(A_j|j,g)\\
+    &\overset{\prob{P}_\alpha}{\cong} \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}\RV{G}}(A_j|j,h,g)\\
+    &\overset{\prob{P}_\alpha}{\cong} \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}(A_j|j,h)
+\end{align}
 \end{proof}
 
 The following is a technical lemma that will be used in Theorem \ref{th:ciid_rep_kernel}.
@@ -812,32 +809,62 @@ hence $\prob{P}_C^{\RV{Y}|\RV{D}}$ is exchange commutative. Furthermore, take $A
 \end{align}
 \end{proof}
 
-\begin{lemma}[Exchangeable to dominated]\label{lem:exch_to_dom}
-\todo[inline]{...}
+\begin{lemma}[Exchangeably dominated conditionals]\label{lem:dom_cond}
+Given $(\prob{P}_C,\Omega,\sigalg{F})$ and variables $\RV{D},\RV{Y}$, if for each $\alpha$ there is some $\prob{Q}_\alpha$ such that $\prob{Q}_\alpha^{\RV{DY}}$ is exchangeable with directing random measure $\RV{G}$ and for any $i$, $\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^C}}\overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^C}}$ then $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible (where $\RV{H}$ is the directing random conditional for $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$).
 \end{lemma}
+
+\begin{proof}
+By \citet[Prop. 1.4]{kallenberg_basic_2005}, there is a $\RV{G}$ such that $(\RV{D}_i,\RV{Y}_i)\CI^e_{\prob{Q}_C} (\RV{D}_{\{i\}^C}\RV{Y}_{\{i\}^C})|(\RV{G},\RV{C})$ and for all $i,j$
+\begin{align}
+    \prob{Q}_\alpha^{\RV{Y}_i\RV{D}_i|\RV{G}} &= \prob{Q}_\alpha^{\RV{Y}_j\RV{D}_j|\RV{G}}\label{eq:joint_given_g}
+\end{align}
+
+There is some function $f:D^{\mathbb{N}}\times Y^{\mathbb{N}}$ such that $\RV{G}=f(\RV{D},\RV{Y})$, i.e.
+
+\begin{align}
+    \prob{Q}_\alpha^{\RV{Y_iG}|\RV{D}\RV{Y}_{\{i\}^C}} &= \tikzfig{qyg_eq_pyg}\\
+                                     &\overset{P}{\cong} \prob{P}_\alpha^{\RV{Y_iG}|\RV{D}\RV{Y}_{\{i\}^C}}\\
+    \implies \prob{Q}_\alpha^{\RV{Y_i}|\RV{G}\RV{D}\RV{Y}_{\{i\}^C}}&\overset{P}{\cong} \prob{P}_\alpha^{\RV{Y}_i|\RV{G}\RV{D}\RV{Y}_{\{i\}^C}}\label{eq:cond_on_g}
+\end{align}
+
+It follows from weak union that
+\begin{align}
+    \RV{Y}_i\CI^e_{\prob{Q}_C} (\RV{D}_{\{i\}^C}\RV{Y}_{\{i\}^C}) | (\RV{D}_i,\RV{G},\RV{C})\\
+    \iff \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}\RV{Y}_{\{i\}^C}\RV{D}_{\{i\}^C}}(A|d_i,g,d,y) &\overset{P}{\cong} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}}(A|d_i,g) & \forall A,d_i,g,d,y,\alpha\label{eq:swap_q_for_p}\\
+    \implies \RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^C}\RV{Y}_{\{i\}^C}) | (\RV{D}_i,\RV{G},\RV{C})
+\end{align}
+where Eq. \eqref{eq:swap_q_for_p} follows from Eq. \eqref{eq:cond_on_g}.
+
+Finally, from Eq. \eqref{eq:joint_given_g} and Eq. \eqref{eq:swap_q_for_p}
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}} &\overset{\prob{P}}{\cong} \prob{P}_\alpha^{\RV{Y}_j\RV{D}_j|\RV{G}}
+\end{align}
+Thus $(\prob{P}_C,\RV{D},\RV{Y})$ features independent and identical responses conditioned on $\RV{G}$, and by Lemma \ref{lem:ci_drc} it also has independent and identical responses conditioned on $\RV{H}$. Finally, by Theorem \ref{th:ciid_rep_kernel} $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible.
+\end{proof}
 
 Given $\prob{P}_C^{\RV{Y}|\RV{D}}$ exchange commutative, we can show that  $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible over where $\RV{W}$ is some symmetric function of $\RV{D}$. This $\RV{W}$ therefore satisfies $\RV{Y}\CI^e_{\prob{P}_C} \RV{W} | (\RV{H},\RV{D},\RV{C})$, and so exchange commutativity of $\prob{P}_C^{\RV{Y}|\RV{D}}$ is enough to establish $(\prob{P}_C,\RV{D},\RV{Y})$ has conditionally independent and identical response conditionals. 
 
 \begin{theorem}\label{lem:exch_prod_ciid}
-If $\prob{P}_C^{\RV{Y}|\RV{D}}$ is exchange commutative, and for each $\alpha$ $\prob{P}_\alpha^{\RV{D}}$ is absolutely continuous with respect to some exchangeable distribution in $\Delta(D^{\mathbb{N}})$ then there is some $\RV{W}$ symmetric over $\RV{D}$ such that $(\prob{P}_C,\RV{D},\RV{Y})$ is IO contractible over $\RV{W}$ and $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{W}|(\RV{D}_i,\RV{H},\RV{C})$.
+If $\prob{P}_C^{\RV{Y}|\RV{D}}$ is exchange commutative, and for each $\alpha$ $\prob{P}_\alpha^{\RV{D}}$ is absolutely continuous with respect to some exchangeable distribution $\prob{Q}_\alpha^{\RV{D}}$ in $\Delta(D^{\mathbb{N}})$ then $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible, where $\RV{H}$ is the directing random conditional for $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$.
 \end{theorem}
 
 \begin{proof}
-Take all sets in $\sigalg{D}^{\mathbb{N}}$ invariant under any finite permutation, and call this the \emph{exchangeable $\sigma$-algebra} $\sigalg{E}$ \citep[pg. 29]{kallenberg_basic_2005}. Let $\sigalg{E}_{\RV{D}}:=\RV{D}^{-1}(\sigalg{E})$.
+For each $\alpha$, extend $\prob{Q}_\alpha^{\RV{D}}$ to a distribution on $(\RV{D},\RV{Y})$ by defining a version of the conditional $\prob{P}_\alpha^{\RV{Y}|\RV{D}}\in \prob{Q}_\alpha^{\RV{Y}|\RV{D}}$. Because $\prob{Q}_\alpha^{\RV{D}}$ dominates $\prob{P}_\alpha^{\RV{D}}$, we have in fact $\prob{Q}_\alpha^{\RV{Y}|\RV{D}}\overset{\prob{P}}{\cong}\prob{P}_\alpha^{\RV{Y}|\RV{D}}$
 
-Consider $\prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{D}}$ for some $n\in \mathbb{N}$. By assumption of exchange commutativity, for any permutation $\rho_{>n}$ that only affects indices after the $n$th, $\prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{D}}=_\alpha^{\RV{Y}_{[n]}|\RV{D}_{\rho_{>n}}}$. That is, $\prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{D}}$ is $\sigalg{E}_{\RV{D}_(n,\infty)}\vee\sigma(\RV{D}_{[n]}$-measurable.
-
-Let $\sigalg{T}_{\RV{D}}$ be the tail $\sigma$-algebra generated by $\RV{D}$ defined as the intersection $\sigalg{T}_{\RV{D}}:=\cap_{i=1}^{\infty} \sigma(\RV{D}_{[i,\infty)})$. Note that $\sigalg{T}_{\RV{D}_{(n,\infty)}}=\sigalg{T}_{\RV{D}}$. By \citet[Corollary 1.6]{kallenberg_basic_2005} and the assumption that assumption that $\prob{P}_\alpha^{\RV{D}}$ is dominated by an exchangeable distribution, $\sigalg{E}_{\RV{D}_(n,\infty)}=\sigalg{T}_{\RV{D}_{(n,\infty)}}$ almost surely for any $n$. But $\sigalg{T}_{\RV{D}_{(n,\infty)}}=\sigalg{T}_{\RV{D}}$, so $\sigalg{E}_{\RV{D}_(n,\infty)}=\sigalg{T}_{\RV{D}}$ almost surely for any $n$, and thus $\sigalg{E}_{\RV{D}_(n,\infty)}=\sigalg{E}_{\RV{D}}$ almost surely.
-
-Thus $\prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{D}}$ is $\sigalg{E}_{\RV{D}}\vee\sigma(\RV{D}_{[n]})$-measurable. By \citet[Corollary 1.6]{kallenberg_basic_2005} again, there is a random $\RV{J}$ taking values in the set of distributions on $D$ such that $\sigma(\RV{J})=\sigalg{E}_{\RV{D}}$ almost surely. Thus
+We will show $\prob{Q}_\alpha^{\RV{DY}}$ is unchanged by finite permutations of $(\RV{D}_i,\RV{Y}_i)$ pairs. For some finite permutation $\rho:\mathbb{N}\to\mathbb{N}$:
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{D}\RV{J}} &= \prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{D}_{[n]}\RV{J}}\otimes \text{erase}_{DX^{\mathbb{N}}}
+    \prob{Q}_\alpha^{\RV{D}_\rho\RV{Y}_\rho} &= \prob{Q}_\alpha^{\RV{D}_\rho\RV{Y}_\rho} (\text{swap}_{\rho,D^{\mathbb{N}}}\otimes \text{swap}_{\rho,Y^{\mathbb{N}}})\\
+    &= \prob{Q}_\alpha^{\RV{D}}\odot \prob{Q}_\alpha^{\RV{Y}|\RV{D}}(\text{swap}_{\rho,D^{\mathbb{N}}}\otimes \text{swap}_{\rho,Y^{\mathbb{N}}})\\
+    &= \tikzfig{exch_dom_swap1}\\
+    &= \tikzfig{exch_dom_swap2}\\
+    &= \tikzfig{exch_dom_swap3}\label{eq:exch_comep}\\
+    &= \tikzfig{exch_dom_swap4}\label{eq:det_comep}\\
+    &= \tikzfig{exch_dom_swap5}\label{eq:exchep}\\
+    &= \prob{Q}_\alpha^{\RV{D}\RV{Y}}
 \end{align}
-That is, for all $\alpha$ $\RV{Y}_{[n]}\CI_{\prob{P}} \RV{D}_{(n,\infty)}|(\RV{D}_{[n]},\RV{J})$, implying $(\prob{P}_C,\RV{D},\RV{Y})$ is local over $\RV{J}$ and, because $\RV{J}$ is symmetric in $\RV{D}$, exchange commutative also.
+Where line \eqref{eq:exch_comep} follows from exchange commutativity, \eqref{eq:det_comep} follows from Theorem \ref{th:fong_det_kerns} and the fact that the swap map is deterministic and line \eqref{eq:exchep} comes from the exchangeability of $\prob{Q}_\alpha^{\RV{D}}$.
 
-It remains to be shown that $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{J}|(\RV{D}_i,\RV{H},\RV{C})$. Recall $\prob{P}_\alpha^{\RV{D}}$ is dominated by an exchangeable distribution, call it $\nu$. Because $\prob{P}_C^{\RV{Y}|\RV{D}}$ is exchange commutative, $\nu\prob{P}_C^{\RV{Y}|\RV{D}}$ is also exchangeable, and thus $\prob{P}_\alpha^{\RV{D}}\prob{P}_C^{\RV{Y}|\RV{D}}$ is dominated by an exchangeable distribution.
-
-\todo[inline]{Apply prev lemma}
+Because $\prob{P}_\alpha^{\RV{D}}$ is dominated by $\prob{Q}_\alpha^{\RV{D}}$ by assumption, we have $\prob{P}_\alpha^{\RV{Y}|\RV{D}} \overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}|\RV{D}}$, which implies $\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^C}}\overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^C}}$ and the result follows from Lemma \ref{lem:dom_cond}.
 \end{proof}
 
 \begin{corollary}\label{th:ciid_rep_kernel_nolocal}
@@ -852,7 +879,7 @@ By Theorem \ref{lem:exch_prod_ciid}, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO con
 \end{proof}
 
 \begin{theorem}\label{th:infinite_condition_swaps}
-Given $(\prob{P}_C,\RV{D},\RV{Y})$ with conditionally independent and identical response functions $\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}$, for any infinite set $A,B\subset \mathbb{N}$ with $\sum_{i\in A} \llbrakcet \RV{D}_i = d\rrbracket = \infty$ for all $d\in D$, and any $i,j\in \mathbb{N}$, $i\not\in A$, $j\not\in B$, $$\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_A,\RV{D}_A}=\prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j|RV{Y}_B\RV{D}_B}$$. If in addition each $\prob{P}_\alpha^{\RV{YD}}$ is dominated by some $\prob{Q}_\alpha$ such that $\prob{Q}_\alpha^{\RV{Y}\RV{D}}$ is exchangeable, then the reverse implication also holds.
+Given $(\prob{P}_C,\RV{D},\RV{Y})$ with conditionally independent and identical response functions $\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}$, for any infinite set $A,B\subset \mathbb{N}$ with $\sum_{i\in A} \llbracket \RV{D}_i = d\rrbracket = \infty$ for all $d\in D$, and any $i,j\in \mathbb{N}$, $i\not\in A$, $j\not\in B$, $$\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_A,\RV{D}_A}=\prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j|RV{Y}_B\RV{D}_B}$$. If in addition each $\prob{P}_\alpha^{\RV{YD}}$ is dominated by some $\prob{Q}_\alpha$ such that $\prob{Q}_\alpha^{\RV{Y}\RV{D}}$ is exchangeable, then the reverse implication also holds.
 \end{theorem}
 
 \begin{proof}
@@ -866,11 +893,10 @@ If: By Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is I
 Only if:
 By construction
 \begin{align}
-    \prob{Q}_\alpha^{\RV{D}_i\RV{Y}_A\RV{D}_A}\odot \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_A,\RV{D}_A}
+    \prob{Q}_\alpha^{\RV{Y}_i\RV{D}_i\RV{Y}_{\{i^C\}}\RV{D}_{\{i^C\}}}:=\prob{Q}_\alpha^{\RV{D}_i\RV{Y}_{\{i^C\}}\RV{D}_{\{i^C\}}}\odot \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_{\{i^C\}},\RV{D}_{\{i^C\}}}
 \end{align}
-is exchangeable.
+is exchangeable, and by domination $\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_{\{i^C\}},\RV{D}_{\{i^C\}}}\overset{\prob{P}}{\cong}\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_{\{i^C\}},\RV{D}_{\{i^C\}}}$. The result follows from Lemma \ref{lem:dom_cond}.
 
-\todo[inline]{apply prev lem}
 
 \end{proof}
 

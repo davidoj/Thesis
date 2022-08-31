@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1661781605 "main.aux" "main.bbl" "main" 1661781678
+["bibtex main"] 1661781605 "main.aux" "main.bbl" "main" 1661781716
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1661781677 47057 d78709e9c1cde9e0f36136e8206e6721 "lualatex"
+  "main.aux" 1661781715 47057 d78709e9c1cde9e0f36136e8206e6721 "lualatex"
   "references.bib" 1661774306 249359 c4936940e249cc06dea7f20562bb88ad ""
   (generated)
-  "main.bbl"
   "main.blg"
-["lualatex"] 1661781664 "main.tex" "main.pdf" "main" 1661781678
+  "main.bbl"
+["lualatex"] 1661781702 "main.tex" "main.pdf" "main" 1661781716
   "/Users/davidjohnston/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1627009929 123160 fbe1a84f1f7fa0f7b674538f719d266f ""
   "/Users/davidjohnston/Library/texlive/2021/texmf-var/luatex-cache/generic/names/luaotfload-names.luc" 1627009929 1575827 360718b03b1f1227f3b1afff93259046 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1246382020 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -361,7 +361,7 @@
   "chapter_1_introduction.tex" 1661321667 32837 71b85717722dadf2f47531d0dd5143d7 ""
   "chapter_2_technical.tex" 1660796664 72300 713bdd708a30f15b15d7cd27e27f51fd ""
   "chapter_3_models_with_consequences.tex" 1660361393 86692 099805be84e0ca60f24a2c1b0e8531f3 ""
-  "chapter_4_response_functions.tex" 1661781662 141000 b57653261dedabacdd4297b81ecc20cf ""
+  "chapter_4_response_functions.tex" 1661781701 141000 a131bab473795452fc225fa7930add84 ""
   "chapter_5_other_causal_inference.tex" 1661775700 112803 d640d84f342c1c72f33ecb8694ca4ae4 ""
   "chapter_6_discussion.tex" 1660652548 5057 5f3e352840451eea8cb4417f9f273356 ""
   "diagrams.tikzstyles" 1649979175 2341 73783d7b804490fb2d99348ad69adc02 ""
@@ -469,15 +469,15 @@
   "figures/semidirect_K_L_3.tikz" 1648946633 360 3686059f95e7105183fdcf74d46259e3 ""
   "figures/swap_example.tikz" 1649979175 553 1ecdd38dfab1613056725ab746518393 ""
   "figures/swap_example_2.tikz" 1649979175 547 d2ef0ab9aef12b616ab922520a5f9b98 ""
-  "main.aux" 1661781677 47057 d78709e9c1cde9e0f36136e8206e6721 "lualatex"
+  "main.aux" 1661781715 47057 d78709e9c1cde9e0f36136e8206e6721 "lualatex"
   "main.bbl" 1661781605 37617 99dfefc6055ac36400e3acd4a48bdaa1 "bibtex main"
-  "main.out" 1661781677 14186 a089b3272b03121e7109237f10248c8a "lualatex"
+  "main.out" 1661781715 14186 a089b3272b03121e7109237f10248c8a "lualatex"
   "main.tex" 1661322133 8315 4adff96392a5787a0d9701a27994f637 ""
-  "main.toc" 1661781677 8348 5e0e0379b486a244958b908e9c4a04d1 "lualatex"
+  "main.toc" 1661781715 8348 5e0e0379b486a244958b908e9c4a04d1 "lualatex"
   "tikzit.sty" 1651808330 1206 bd3a4ee1dccdce0fc641973c4461749d ""
   (generated)
-  "main.toc"
   "main.out"
-  "main.log"
   "main.aux"
   "main.pdf"
+  "main.log"
+  "main.toc"

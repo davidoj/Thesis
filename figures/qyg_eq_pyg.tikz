@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (-2.5, 0.25) {$\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}}^C}$};
+		\node [style=small kernel tikzit] (1) at (1, 1.5) {$\kernel{F}_f$};
+		\node [style=copymap tikzit] (2) at (-0.25, 0.25) {};
+		\node [style=copymap tikzit] (3) at (-4.75, 0.25) {};
+		\node [style=Llabel tikzit] (4) at (-5.5, 0.25) {$\RV{D},\RV{Y}_{\{i\}^C}$};
+		\node [style=RLabel tikzit] (5) at (2.75, 1.5) {$\RV{G}$};
+		\node [style=RLabel tikzit] (6) at (2.75, 0.25) {$\RV{Y}$};
+		\node [style=none] (7) at (0.5, 1.75) {};
+		\node [style=none] (8) at (0.5, 1.25) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (4) to (3);
+		\draw (3) to (0);
+		\draw (0) to (2);
+		\draw [in=-180, out=60, looseness=0.75] (2) to (8.center);
+		\draw [in=-180, out=75, looseness=0.75] (3) to (7.center);
+		\draw (1) to (5);
+		\draw (2) to (6);
+	\end{pgfonlayer}
+\end{tikzpicture}

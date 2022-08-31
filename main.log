@@ -1413,17 +1413,7 @@ Underfull \vbox (badness 1454) has occurred while \output is active []
 (./figures/do_model_representation_deleted.tikz)
 (./figures/do_model_representation_deleted1.tikz) [92] [93]
 (./figures/do_model_representation_conditional.tikz)
-(./figures/do_model_representation_conditional.tikz)
-! Undefined control sequence.
-l.855 ... \mathbb{N}$ with $\sum_{i\in A} \llbrakcet
-                                                   \RV{D}_i = d\rrbracket = ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[94] [95]
+(./figures/do_model_representation_conditional.tikz) [94] [95]
 Overfull \hbox (80.81445pt too wide) detected at line 903
 []
  []
@@ -1804,7 +1794,7 @@ ts/symbols/msbm5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsf
 onts/symbols/msbm7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/st
 maryrd/stmary10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/wasy-
 type1/wasy10.pfb>
-Output written on main.pdf (159 pages, 1327988 bytes).
+Output written on main.pdf (159 pages, 1328001 bytes).
 
 PDF statistics: 2694 PDF objects out of 2984 (max. 8388607)
  2399 compressed objects within 24 object streams
