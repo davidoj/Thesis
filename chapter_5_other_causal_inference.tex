@@ -261,8 +261,8 @@ It's not obvious how to formalise this general idea of preemption. One possibili
 
 To formalise this, we say there is a variable $\RV{D}$ that is like an ``action'' at the $i=0$ index in the sense that a choice $\alpha$ that leads to a distribution of actions $\RV{D}_0$ identical to some mixture of other choices $\alpha'$ and $\alpha''$ induces consequences equal to the same mixture of $\alpha'$ and $\alpha''$. We require that the model is IO contractible over the sequence of actions $(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$, and that each action has positive probability in the ``historical'' indices $i<0$. The reason that this assumption is weaker than IO contractibility is that $\RV{D}_i$ for $i<0$ is unobserved -- that is, rules for choosing the action $\RV{D}_0$ cannot depend on $\RV{D}_i$ for $i<0$.
 
-\begin{definition}[Preemption]\label{def:preemption}
-Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ and variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $D$ discrete, we say $(\prob{P}_C,\RV{D},\RV{Y})$ is preempted if for directing random measure $\RV{H}$, $\prob{P}_\alpha^{\RV{Y}_i|\RV{HD}_i}$ are independent and identical responses for all $i$, 
+\begin{definition}[Precedent]\label{def:preemption}
+Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ and variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $D$ discrete, we say $(\prob{P}_C,\RV{D},\RV{Y})$ is precedented if for directing random measure $\RV{H}$, $\prob{P}_\alpha^{\RV{Y}_i|\RV{HD}_i}$ are independent and identical responses for all $i$, 
 \begin{align}
     \prob{P}_\alpha^{\RV{D}_0|\RV{Y}_{-\mathbb{N}}} &= a\prob{P}_{\alpha'}^{\RV{D}_0|\RV{Y}_{-\mathbb{N}}}+b\prob{P}_{\alpha''}^{\RV{D}_0|\RV{Y}_{-\mathbb{N}}}\\
     \implies \prob{P}_\alpha &= a\prob{P}_{\alpha'}+b\prob{P}_{\alpha''}
@@ -281,7 +281,7 @@ Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $D,Y$ di
 \end{notation}
 
 \begin{theorem}\label{th:det_obs_to_cons}
-Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{-i\in \mathbb{N}}$, with $D,X,Y,Z$ discrete. Suppose further that $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$ is preempted. Let $\RV{G}$ be the directing random measure of $(\RV{P}_C,\RV{Z},\RV{D})$ and $\RV{H}$ the directing random measure of $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$. Finally suppose for each $h\in H$ and $d\in D$ and $z,z'\in Z$,
+Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{-i\in \mathbb{N}}$, with $D,X,Y,Z$ discrete. Suppose further that $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$ is preempted. Let $\RV{G}$ be the directing random conditional of $(\RV{P}_C,\RV{Z},\RV{D})$ and $\RV{H}$ the directing random measure of $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$. Finally suppose for each $h\in H$ and $d\in D$ and $z,z'\in Z$,
 \begin{align}
     \prob{P}_\alpha^{\RV{G}^d_{z}|\RV{H}\RV{G}^d_{z'}}(\cdot|h,g^d_{z'}) \ll U_{[0,1]}\label{eq:lebesgue_dom}
 \end{align}
@@ -392,7 +392,7 @@ There is a substantial literature that aims to draw causal conclusions from obse
 
 The fact that we are offering the assumption that covariates are unobservable as an informal assumption is due to the fact that we are limiting our attention to data-independent models (recall Definition \ref{def:weak_di}). In these models, actions never depend on the available data, and choosing some action based on observations must happen outside the model. If we were considering some data-dependent variation of a causal Bayesian network, the fact that $\RV{V}_{1[n]}$ is unobserved would have formal implications for our model. For example, if $\RV{V}_{1i}$ is unobserved for all $i$ while $\RV{V}_{2i}$ is directly controlled for all $i$, then we should require that, under every choice $\alpha$, $\RV{V}_{2i}$ is independent of $\RV{V}_{1[1,i)}$ given $\RV{V}_{\{2,3\}[1,i)}$ -- that is, there is no choice that induces the controlled variable $\RV{V}_{2i}$ to be dependent on the history of unobserved variables $\RV{V}_{1[1,i)}$, given the history of the observed variables.
 
-\section{What is a Potential Outcomes model?}
+\section{What is a Potential Outcomes model?}\label{sec:potential_outcomes}
 
 Potential outcomes is another popular framework for modelling causal problems. There are two key differences between the potential outcomes approach and the causal Bayesian network approach: potential outcomes models are ``unrolled by default'' and they feature no notion of ``intervention''. A third difference relates to the possibility of expressing ``counterfactual'' statements, although this difference seems to be contingent on the particular manner we use to unroll a causal Bayesian network - see Section \ref{sec:counterfactual_statements}, and recall from Section \ref{sec:unrolling} that we had to make some choices in our construction of unrolled causal Bayesian networks, Definition \ref{def:unr_CBN}.
 
