@@ -1,0 +1,724 @@
+
+%!TEX root = ../main.tex
+
+\chapter{Models with choices and consequences}\label{ch:2p_statmodels}
+
+Probability sets, introduced in Chapter \ref{ch:tech_prereq}, will be used to model \emph{decision problems}, which are problems that involve choices and consequences. In such problems, three things are given: a set of options (one of which must be chosen), a set of consequences and a means of judging which consequences are more desirable than others. Such a problem requires an understanding of how each choice corresponds to consequences, as far as this is able to be understood. The fundamental type of problem studied in this thesis is how to map choices to consequences. 
+
+In practice, causal inference is concerned with a wider variety of problems than this. A great deal of empirical causal analysis is concerned with problems a step removed from this: the purpose is to advise other decision makers on a course of action rather than to recommend an action directly. Nevertheless, a great deal of causal analysis is ultimately motivated by problems involving a choice among options, even if the analysis only addresses such problems indirectly. Section \ref{sec:whats_the_point} briefly reviews the attitude of prominent theorists of causal inference towards decision problems. Subsequently, it presents the basic definition of a decision problem, and two different kinds of models that can be used to represent the relationship between choices and consequences.
+
+In our approach, a decision maker facing a decision problem must select one choice from a set of candidates. We assume that they use a \emph{model} to help them make this selection, which associates with each choice a probability distribution over a set of possible consequences, and a \emph{utility} that enables them to compare the desirability of different consequences. The reasons we consider this setup are several: firstly, the idea that we make decisions by comparing the consequences of different choices is intuitively appealing, and probability is a well-understood and widely used theory for representing uncertain prospects. Furthermore, many theories of decision making that aim for more rigorous foundations for formal decision making arrive at models that map choices to distributions over consequences, sometimes along with some additional structure. Chapter \ref{ch:other_causal_frameworks} shows how many causal inference frameworks also induce functions from some underlying set to probability distributions, even though they are not at face value theories of decision making, and the underlying sets are not necessarily identified with possible choices. 
+
+We aren't trying to claim that this is the only possible way to formalise decision making. This chapter examines some key decision theories that justify their modelling choices by suggesting axioms for rational theories of decision under uncertainty. However, despite the various attempts at axiomatisation, the nature of theories of ``rational choice'' is contested -- there is no clear standard among the the theories surveyed here, or developed elsewhere. This work is not trying to resolve this dispute, yet modelling choices must still be made. Section \ref{sec:how_represent_conseqeunces} provides an overview of four major decision theories along with their axiomatisations (where applicable). These are \emph{Savage decision theory}, \emph{Jeffrey decision theory} (or evidential decision theory), Lewis' \emph{causal decision theory} and \emph{statistical decision theory}.
+
+Section \ref{sec:how_represent_conseqeunces} describes in particular detail the connections between \emph{statistical decision theory} \citep{wald_statistical_1950} and probability set models of decision problems. We are able to demonstrate a close connection between probability set models of decision problems and the classical statistical notion of \emph{risk} of a decision rule, even though causal considerations are often not central to classical statistics. Secondly, the kind of probability set model -- which we call a \emph{see-do model} -- shows up again in Chapter \ref{ch:evaluating_decisions} where we consider the question of when a probability set model supports a certain notion of ``the causal effect of a variable'', and again in Chapter \ref{ch:other_causal_frameworks} where we consider the kinds of probability set models induced by other causal reasoning frameworks.
+
+The formal definition of a variable in a probabilistic model is well known (Definition \ref{def:variable}). However, in practice the definitions of variables often includes informal content that enables the interpretation of a probabilistic model. In the field of causal models, one is likely to come across many different ``kinds'' of variables: for example, observed variables, unobserved variables, counterfactual variables and causal variables all play important roles in various causal inference frameworks. However, there is no formal distinction between these different kinds of variables -- Definition \ref{def:variable} applies to them all. Section \ref{sec:variable} is an attempt to clarify an understanding of the informal role of variables as ``pointing to the parts of the world that the model is about''. In comparison to the wide variety of variable types encountered in the causal literature, it offers a very limited theory of the informal semantics of variables. In short, observed variables correspond to a measurement procedure (in a sense that will be made precise), and unobserved variables do not.
+
+\section{What is the point of causal inference?}\label{sec:whats_the_point}
+
+\citet{pearl_book_2018} argue that causal reasoning frameworks should be understood by the kinds of questions that they may be able to answer. They classify causal questions into three types, which they claim form a hierarchy or a ``ladder''. That is: questions of type $m$ are also questions of type $n$ for $m<n$. The question types are \citep{barenboim_foundations_2020}:
+\begin{enumerate}
+    \item \emph{Associational}: ``questions about relationships and predictions''; formally defined as queries that can be answered by a single probability distribution
+    \item \emph{Interventional}: ``questions about the consequences of interventions''; formally defined as queries that can be answered by a causal Bayesian network (CBN)
+    \item \emph{Counterfactual}: ``questions concerning imagining alternate worlds''; formally defined as queries that can be answered by a structural causal model (SCM)
+\end{enumerate}
+
+Models that address decision problems are concerned primarily with consequences of choices, which seems to place them at the second level of this ladder. Given that this thesis is concerned with foundational questions in causal inference and that counterfactual questions are, according to this ladder, a more general kind of causal question, one might ask why this thesis only focuses on questions at level 2. 
+
+There are a few reasons for focusing on level 2 questions as the primary motivation for a theory of causal inference. First, decision problems are a particularly important subset of causal inference problems. Within the causal inference literature, ``interventional'' questions and interpretations are much more prominent than strictly counterfactual questions. For example, \citet{rubin_causal_2005} points out that causal inference often informs a decision maker by providing ``scientific knowledge'', but does not make recommendations by itself. \citep{imbens_causal_2015} introduces causal inference as the study of ``outcomes of manipulations'' and \citep{spirtes_causation_1993} highlights the universal relevance of understanding how to control certain outcomes, while further arguing that clarifying commonsense ideas of causation is also an important aim of causal inference. \citet{hernan_whatif_2020} present causal knowledge as critical for assessing the consequences of actions. Second, sometimes we want to justify a technical choice by appealing to features of the problem the theory is supposed to solve, and this is much easier for me to do with decision problems -- for which I have strong intuitions -- than strictly counterfactual questions, where my intuitions are generally much less clear. Third, as discussed in Chapter \ref{ch:introduction} and will be further discussed in Chapter \ref{ch:other_causal_frameworks}, a key feature of causal models is the fact that they come with a set of ``possibilities under consideration''. These possibilities might be interventions or counterfactual proposals, and they may be explicit or implicit. If the set of possibilities is difficult to ascertain, then the causal model becomes difficult to understand. In decision problems specifically, the set of possible choices is a natural candidate for this set of ``possibilities under consideration'' -- as we understand them, given a decision maker facing a decision problem, there is a set of possible choices that the decision maker may ultimately select. This same set is the set of things that the decision maker wants to evaluate with regard to their likely consequences, which is to say it is the set of possibilities under consideration. If we do not suppose that the causal problem is ultimately embedded in a decision problem, it is not at all obvious to us where else the ``set of possibilities'' could come from.
+
+Speculatively, counterfactual queries may also be able to be interpreted as decision problems with fanciful options. Consider an informal decision problem and a counterfactual query addressing similar material:
+\begin{itemize}
+    \item Decision problem: I want my headache to go away. If I take Aspirin, will it do so?
+    \item Counterfactual query: I wish I didn't have headache. If I had taken the Aspirin, would I still have it?
+\end{itemize}
+If I haven't taken aspirin, then there's nothing I can actually choose to do to make it so that I had. However, if I imagine that I did have some option available that accomplished this, then the structure of the two questions seems rather similar. Both ask: if I take the option, what will the consequence be? Of course, it's hard to say what makes a correct answer to the second question, but this is a feature of counterfactual questions in general.
+
+\subsection{Modelling decision problems}\label{sec:modelling_decision_problems}
+
+People who need to make a decisions might (and often do) make them with no mathematical reasoning at all. However, this work is concerned with making decisions assisted by mathematical reasoning. In order to reason mathematically about a decision to be made, we assume that somehow, we have access to two sets:
+\begin{enumerate}
+    \item There is a set of choices $C$ that need to be compared
+    \item There is a set of consequences $\Omega$ along with a utility function $u:\Omega\to \mathbb{R}$, which measures the goodness of each $\omega\in \Omega$
+\end{enumerate}
+
+Given some means of relating between $C$ and $\Omega$, the order on $\Omega$ induced by $u$ will induce some order on $C$. There are a great number of different ways that of relating elements of $C$ to elements of $\Omega$. For example, a binary relation between the two sets will, given a total order on $\Omega$, induce a preorder on $C$. However, in this work the assumption is made that the relevant kinds of relations are either
+\begin{itemize}
+    \item A Markov kernel $C\kto \Omega$
+    \item A Markov kernel $C\times H\kto \Omega$ for some set of hypotheses $H$
+\end{itemize}
+That is, for each choice $c\in C$ we have either a probability distribution in $\Delta(\Omega)$ or a set of probability distributions indexed by $h\in H$. Sections \ref{sec:cons_to_sdp} and \ref{sec:cc_theorem} discuss each choice in more detail. Where it is needed, we also assume that a utility function $u:\Omega\to \mathbb{R}$ is available and that choices are evaluated using the principle of expected utility.
+
+Usually, someone confronted with a decision problem will not know for certain the consequences that arise from any given choice, and yet they may have some views about which consequences are more likely than others. Probability has a long and successful history of representing uncertain knowledge of this type. There are many works that aim to show that any method for representing uncertain knowledge that adheres to certain principles must be a probability distribution \citet{de_finetti_foresight_1992,horvitz_framework_1986}, along with criticism of these principles \citet{halpern_counter_1999}. A notable alternative to representing uncertainty with a single probability distribution represents uncertainty with a set of probability distributions, which is a type of \emph{vague probability} model \citep{walley_statistical_1991}. 
+
+More relevant to the question of modelling decision problems are a number of works that establish conditions under which ``desirability'' or ``preference'' relations over sets of choices or propositions must be represented by a probability distribution along with a utility function. These works are surveyed in Section \ref{sec:how_represent_conseqeunces}. Ultimately, however, the question of whether probability is the right choice to represent uncertain knowledge in decision models is not a key focus of this work. It is a conventional choice, and one that is accepted here.
+
+\subsection{Formal definitions}\label{sec:probability_set_models}
+
+As mentioned above, we suppose that we are given a few basic ingredients: a set of choices $C$ equipped with an algebra $\sigalg{C}$, a set of consequences $\Omega$ with an algebra of events $\sigalg{F}$ and a utility function $u:\Omega\to \mathbb{R}$. We call these ingredients a ``decision problem''.
+
+\begin{definition}[Decision problem]
+A decision problem is a triple $(C,\Omega,u)$ consisting of a measurable set $(C,\sigalg{C})$ of choices, $(\Omega,\sigalg{F})$ consequences and a utility function $u:\Omega\to \mathbb{R}$.
+\end{definition}
+
+Our task is to find a \emph{model} that relates choice $C$ to consequences $\Omega$. We assume two forms of model -- a \emph{choices only model} associates each choice with a unique probability distribution, and a \emph{choices and hypotheses model} associates each choice with a set of probability distributions. A model consisting of a single probability distribution is also sometimes called a ``Bayesian'' model, so we could call choices only models ``Bayesian'' and choices and hypotheses models ``non-Bayesian''.
+
+\begin{definition}[Choices only model]\label{def:ch_only}
+Given a decision problem $(C,\Omega,u)$, a \emph{choices only model} is a function $C\kto \Omega$.
+\end{definition}
+
+\begin{definition}[Choices and hypotheses model]\label{def:ch_and_hyp}
+Given a decision problem $(C,\Omega,u)$, a model with \emph{choices and hypotheses} is a function $C\times H\kto \Omega$ for some hypothesis set $H$.
+\end{definition}
+
+
+
+By convention, we use $\prob{P}_\cdot$ with the subscript $\cdot$ to denote a model, subscripts $\prob{P}_\alpha$ where $\alpha$ is an element of the domain to refer to the model evaluated at $\alpha$, and the subscript $\prob{P}_{C\times H}$ to refer to the image of the model.
+
+\begin{notation}[Model]
+Given a decision problem $(C,\Omega,u)$ and a model $\prob{P}_\cdot:C\times H\kto \Omega$, $\prob{P}_\alpha:=\prob{P}_\cdot(\alpha)$.
+\end{notation}
+
+\begin{notation}[Image of a model]\label{def:induced_pset_1}
+Given a decision problem $(C,\Omega,u)$ and a model $\prob{P}_\cdot:C\times H\kto \Omega$, the $\prob{P}_{C\times H}:=\{\prob{P}_\alpha|\alpha\in C\times H\}$ is the image of the model.
+\end{notation}
+
+
+\section{Theories of decision making}\label{sec:how_represent_conseqeunces}
+
+The question of how decision problems ought to be represented has received substantial attention. We survey a number of key theories from this literature, and point out connections with our scheme:
+\begin{itemize}
+    \item Every theory surveyed proposes that choices are evaluated by way of a probabilistic map from choices to consequences, along with some measure of the desirability of consequences
+    \item Most theories have some analogue of hypotheses (Definition \ref{def:ch_and_hyp}, see also Chapter \ref{ch:evaluating_decisions})
+    \item Most theories have some notion of a ``prior'' over hypotheses, which induces a choice only model (Definition \ref{def:ch_only})
+\end{itemize}
+
+Statistical Decision Theory (SDT), introduced by \citet{wald_statistical_1950}, further proves a \emph{complete class theorem}, which shows that, under some conditions, choices that are admissible (Definition \ref{def:admissible_decision}) are also optimal with respect to some prior over hypotheses. That is, any admissible decision under a choices and hypotheses model can be rationalised as a decision under a choices only model with some prior (though, importantly, this \emph{doesn't} establish that proposing a prior is always the appropriate way to go about making a decision). We show that SDT corresponds to a particular class of models we call conditionally independent see-do models (Definition \ref{def:ci_see_do_model}) combined with the principle of expected utility maximisation, and that the complete class theorem to a broader class of see-do models.
+
+The following discussion will often make reference to \emph{complete preference relations}. A complete preference relation is a relation $\succ,\prec,\sim$ on a set $A$ such that for any $a,b,c$ in $A$ we have:
+\begin{itemize}
+    \item Exactly one of $a\succ b$, $a\prec b$, $a\sim b$ holds
+    \item $(a\succ b)\iff(b\prec a)$
+    \item $a\succ b$ and $b\succ c$ implies $a\succ c$
+\end{itemize}
+In short, it is a total order without antisymmetry ($a$ and $b$ can be equally preferred even if they are not in fact equal).
+
+This definition is meant to correspond to the common sense idea of having preferences over some set of things, where $\succ$ can be read as ``strictly better than'', $\prec$ read as ``strictly worse than'' and $\sim$ read as ``as good as''. Given any two things from the set, I can say which one I prefer, or if I prefer neither (and all of these are mutually exclusive). If I prefer $a$ to $a'$ then I think $a'$ is worse than $a$. Furthermore, if I prefer $a$ to $a'$ and $a'$ to $a''$ then I prefer $a$ to $a''$.
+
+Define $a\preceq b$ to mean $a\prec b$ or $a \sim b$.
+
+\subsection{von Neumann-Morgenstern utility}
+
+\citet{von_neumann_theory_1944} (henceforth abbreviated to vNM) proved that when the \emph{vNM axioms} hold (not defined here; see the original reference or \citet{steele_decision_2020}), an agent's preferences between ``lotteries'' (probability distributions in $\Delta(\Omega)$ for some $(\Omega,\sigalg{F})$) can be represented as the comparison of the expected value under each lottery of a utility function $u$ unique up to affine transformation. That is, for lotteries $\prob{P}_\alpha$ and $\prob{P}_{\alpha'}$, there exists some $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that $\mathbb{E}_{\prob{P}_\alpha}[u]> \mathbb{E}_{\prob{P}_{\alpha'}}[u]$ if and only if $\prob{P}_{\alpha} \succ \prob{P}_{\alpha'}$.
+
+In vNM theory, the set of lotteries is is the set of all probability measures on $(\Omega,\sigalg{F})$. Thus von Neumann-Morgenstern theorem gives conditions under which preferences \emph{over distributions of consequences} can be represented using expected utility. If a decision problem were given such that the set of available choices was in 1-to-1 correspondence with the set of probability distributions in $\Delta(\Omega)$, then the vNM theory provides conditions on the preference relation such that, if these conditions are satisfied, the preference relation can be represented by some utility function on the set of consequences. Typically, the set of choices is not in 1-to-1 correspondence with probability distributions in $\Delta(\Omega)$. Indeed, the starting point of this work is that the relation between choices and consequences is not always obvious, and this situation might be improved by a better understanding of models that relate the two.
+
+\subsection{Savage decision theory}
+
+Savage's decision theory distinguishes \emph{acts} $C$, \emph{consequences} $\Omega$ and \emph{states} $(S,\sigalg{S})$ \citep{savage_foundations_1954}. In our framework, acts are similar to choices, consequences to consequences and states are similar to hypotheses. Unlike vNM theory, the mapping from acts to consequences is not assumed to be given at the outset. Instead, each act is assumed to induce a known mapping from each state to an element of the set of consequences. His theorem conditions under which, given such a map from acts and states to consequences, a preference relation over acts can be represented by a ``prior'' over states and a utility function $u:\Omega\to \mathbb{R}$ in combination with the principle of expected utility. As Theorem \ref{th:sav_pmap} shows, the prior over states induces a probabilistic map from choices to consequences that, in combination with the utility, is sufficient to evaluate the desirability of the choices.
+
+We have said that acts are similar to choices and states are similar to hypotheses in our framework -- but there are differences. We've taken the set of choices to be the set of all the things that the decision maker might choose once they've finished considering their problem, \emph{and} the way they make this selection is to compare each choice on the basis of the consequences it is expected to bring about. In Savage's theory, like ours, the decision maker has a preference relation over the set of acts. Unlike our theory, however, the set of acts is precisely the set of all functions from states to consequences. That is, in contrast to our ``choices and hypotheses models'' (Definition \ref{def:ch_and_hyp}) the map from states and acts to consequences is deterministic where we take the map from choices and hypotheses to consequences to be stochastic, and the set of acts is assumed to contain every function from states to consequences.
+
+This could be considered a requirement of extendability: given a choices and hypotheses model $\prob{P}_\cdot:C\times H\kto \Omega$, we might consider the model a Savage decision model if the set of choices can be extended to the convex closure of the set of all deterministic functions $H\kto \Omega$ such that the Savage axioms (Appendix \ref{sec:savage_axioms}) hold. The reason why Savage's theory has such a rich set of choices is the need to go from a preference relation over choices to a preference relation over consequences. All a decision maker actually needs is the ordering on the choices that they're actually considering, and this might be compatible with many orderings of consequences. We don't know if there are cases of decision problems where this extendability requirement introduces difficulties. 
+
+\begin{definition}[Elements of a Savage decision problem]
+A \emph{Savage decision problem} features a measurable set of states $(S,\sigalg{S})$, a set of consequences $(\Omega,\sigalg{F})$ and a set of acts $C$ such that $|C|=\Omega^S$ and a measurable evaluation function $T:S\times C\to \Omega$ such that for any $f:S\to \Omega$ there exists $c\in C$ such that $T(\cdot,c)=f$.
+\end{definition}
+
+Theorem \ref{th:savage_representation} is Savage's representation theorem. The Savage axioms aren't investigated in detail in this work, but for the reader's convenience they're given in Appendix \ref{sec:savage_axioms}.
+
+\begin{theorem}\label{th:savage_representation}
+Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(\prec,\sim)$ on $C$ that satisfies the \emph{Savage axioms}, there exists a unique probability distribution $\mu\in\Delta(\sigalg{S})$ and a utility $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that
+\begin{align}
+    \alpha\preceq \alpha' &\iff \int_S u(T(s,\alpha))\mu(\mathrm{d}s) \leq \int_S u(T(s,\alpha'))\mu(\mathrm{d}s)&\forall \alpha,\alpha'\in C
+\end{align}
+\end{theorem}
+
+\begin{proof}
+\citet{savage_foundations_1954}
+\end{proof}
+
+Savage's setup implies the existence of a unique probabilistic function $C\to \Delta(\Omega)$ representing the ``probabilistic consequences'' of each choice.
+
+\begin{theorem}\label{th:sav_pmap}
+Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(\prec,\sim)$ on $C$ that satisfies the Savage axioms, and a $\sigma$-algebra $\sigalg{F}$ on $\Omega$ such that $T$ is measurable, there is a probabilistic function $\prob{P}_{\cdot}:C\to \Delta(\Omega)$ and a utility $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that
+\begin{align}
+    \alpha\preceq \alpha' &\iff \int_\Omega u(f)\prob{P}_\alpha(\mathrm{d}f) \leq \int_\Omega u(f)\prob{P}_{\alpha'}(\mathrm{d}f)&\forall \alpha,\alpha'\in C
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Define $\prob{P}_\cdot:C\to \Delta(\Omega)$ by
+\begin{align}
+    \prob{P}_\alpha(A) &:= \mu (T_\alpha^{-1}(A))&\forall A\in \sigalg{F}
+\end{align}
+where $\RV{T}_\alpha:S\to F$ is the function $s\mapsto T(s,\alpha)$. $\prob{P}_\alpha$ is the pushforward of $T_\alpha$ under $\mu$.
+
+Then 
+\begin{align}
+    \int_\Omega u(f)\prob{P}_\alpha(\mathrm{d}f) &= \int_S u \circ T_\alpha (s)\mu(\mathrm{d}s)\\
+    &= \int_S u(T(s,\alpha))\mu(\mathrm{d}s)
+\end{align}
+\end{proof}
+
+\subsection{Jeffrey's decision theory}
+
+Jeffrey's decision theory is an alternative to Savage's that starts from a different set of assumptions. One of the key differences is in what is assumed at the outset: where Savage assumes a set of states $S$, acts $C$ and consequences $\Omega$, Jeffrey's theory only considers a single space $\underline{\sigalg{F}}$, which is a complete atomless boolean algebra. Elements of $\underline{\sigalg{F}}$ are said to be propositions. We note that $\underline{\sigalg{F}}$ cannot be understood as the set of events with respect to a finite measurement procedure (Section \ref{sec:variable}). The collection of finite propositions regarting the results of some finite measurement procedure followed by flipping an infinite number of coins could perhaps be represented by a complete atomless boolean algebra. The theory is set out in \citet{jeffrey_logic_1990}, and the key representation theorem proved in \citet{bolker_functions_1966}.
+
+Recall that our fundamental problem is relating a set $C$ of things we can choose to a set $F$ of things we can compare. Jeffrey's theory uses a different strategy to accomplish this than Savages'; where Savage identifies a set of acts $C$ with all functions $S\to F$ and proposes axioms that constrain a preference relation on $C$, Jeffrey assumes that choices are elements of the algebra $\underline{\sigalg{F}}$, accompanied by other propositions that do not correspond precisely to choices. Jeffrey's axioms pertain to a preference relation on $\underline{\sigalg{F}}$, and preferences over choices are given by the restriction of the preference relation to $C$. In common with Savage's theory, the preference relation is assumed to be available over a much richer set than the set of choices actually under consideration.
+
+Complete atomless boolean algebras are somewhat different to standard measurable $\sigma$-algebras. The $\sigma$-algebra $(\mathbb{R},\sigalg{B}(\mathbb{R}))$ is a complete Boolean algebra when identifying $\land$ with $\cap$, $\lor$ with $\cup$, $0$ with $\emptyset$ and $1$ with $\mathbb{R}$, but it has atoms: any singleton $\{x\}$ has only the subsets $\emptyset$ and $\{x\}$. An example of a complete atomless boolean algebra can be constructed from the set of Lebesgue measurable sets on $[0,1]$ with any two sets that differ by a set of measure zero identified \citet{bolker_simultaneous_1967}.
+
+\begin{definition}[Complete atomless boolean algebra]\label{def:c_atom_ba}
+A complete atomless boolean algebra $\underline{\sigalg{F}}$ is a tuple $(A,\land,\lor,\not,0,1)$ such that, for all $a,b,c\in A$:
+\begin{itemize}
+    \item $(a\lor b)\lor c = a\lor (b\lor c)$ and $(a\land b)\land c = a\land (b\land c)$
+    \item $a\lor b = b\lor a$ and $a\land b = b\land a$
+    \item $a\lor (a\land b) = a$ and $a\land(a\lor b) = a$
+    \item $a\lor 0 = a$ and $a\land 1=a$
+    \item $a\lor(b\land c) = (a\lor b) \land (a\lor c)$ and $a\land(b\lor c) = (a\land b) \lor (a\land c)$
+    \item $a\lor \not a = 1$ and $a\land \not a = 0$
+\end{itemize}
+say $a\leq b$ exactly when $a\lor b = b$. A boolean algebra is atomless if for any $b$ there is some $a\neq 0$ such that $a\leq b$. A boolean algebra is complete if for every $B\subset A$, there is some $c$ such that $c$ is an upper bound of $B$ and for all upper bounds $c'$  of $B$, such that $c\leq c'$. 
+\end{definition}
+
+The Bolker axioms are also not analysed deeply in this work, but for the reader's convenience they can be found in Appendix \ref{sec:bolker_axioms}).
+
+\begin{theorem}\label{th:bolker_jeffrey}
+Suppose there is a complete atomless Boolean algebra $\underline{\sigalg{F}}$ with a preference relation $\preceq$. If $\preceq$ satisfies the \emph{Bolker axioms} then there exists a desirability function $\text{des}:\underline{\sigalg{F}}\to\mathbb{R}$ and a probability distribution $\mu\in \Delta(\underline{\sigalg{F}})$ such that for $A,B\in \underline{\sigalg{F}}$ and finite partition $D_1,...,D_n\in \underline{\sigalg{F}}$:
+\begin{align}
+    (A \preceq B) \iff \sum_{i}^n \text{des}(D_i) \mu(D_i|A) \leq \sum_{i}^n \text{des}(D_i) \mu(D_i|B) \label{eq:ev_dec_theory}
+\end{align}
+where $\mu(D_i|A):=\frac{\mu(A\cap D_i)}{\mu(A)}$ for $\mu(A)>0$, undefined otherwise.
+\end{theorem}
+
+\begin{proof}
+\citet{bolker_functions_1966})
+\end{proof}
+
+As mentioned, in Jeffrey's theory the \emph{choices} under consideration $C$ are assumed to be some subset of $\underline{\sigalg{F}}$. Thus we can deduce from a Jeffrey model a function $C\to \Delta(\underline{\sigalg{F}})$ that ``represents the consequences of choices'' in the sense of Theorem \ref{th:jeffrey_with_choices}.
+
+\begin{theorem}\label{th:jeffrey_with_choices}
+Suppose there is a complete atomless Boolean algebra $\underline{\sigalg{F}}$ with a preference relation $\preceq$ that satisfies the Bolker axioms, and a set of choices $C$ over which a preference relation is sought with $\mu(\alpha)>0$ for all $\alpha\in C$. Then there is a function $\prob{P}_\cdot:C\to \Delta(\underline{\sigalg{F}})$ such that for any $\alpha,\alpha'\in C$ and finite partition $D_1,...,D_n\in \underline{\sigalg{F}}$:
+\begin{align}
+    \alpha \preceq \alpha'\iff \sum_{i}^n \text{des}(D_i) \prob{P}_\alpha(D_i) \leq \sum_{i}^n \text{des}(D_i) \prob{P}_{\alpha'}(D_i)\label{eq:ev_with_choices}
+\end{align}
+Where $\mu$ and $\mathrm{des}$ are as in Theorem \ref{th:bolker_jeffrey}
+\end{theorem}
+
+\begin{proof}
+Define $\prob{P}_\cdot$ by $\alpha\mapsto \mu(\cdot|\alpha)$. Then Equation \eqref{eq:ev_with_choices} follows from Equation \eqref{eq:ev_dec_theory}.
+\end{proof}
+
+\subsection{Causal decision theory}
+
+Causal decision theory was developed after both Jeffrey's and Savage's theory. A number of authors \citet{lewis_causal_1981,skyrms_causal_1982} felt that Jeffrey's theory erred by treating the consequences of a choice as an ``ordinary conditional probability''. \citet{lewis_causal_1981} suggested that causal decision theory can be used to evaluate choices when we are given a set $\Omega$ of consequences over which preferences are known, a set $C$ of choices and a set $H$ of dependency hypotheses (the letters have been changed to match usage in this work; in the original the consequences were called $S$, the choices $A$ and the dependency hypotheses $H$). Choices are then evaluated according to the causal decision rule. We have taken the liberty to state Lewis' rule in the language of the present work.
+
+\begin{definition}[Causal decision rule]
+Given a set $C$ of choices, sample space $(\Omega,\sigalg{F})$, variables $\RV{H}:\Omega\to H$ (the \emph{dependency hypothesis}) and $\RV{S}:\Omega\to S$ (the \emph{consequence}) and a utility $u:\Omega\to \mathbb{R}$, the \emph{causal utility} of a choice $\alpha\in C$ is given by
+\begin{align}
+    U(\alpha) := \int_S \int_H u(s) \prob{P}_\alpha^{\RV{S}|\RV{H}}(\mathrm{d}s|h) \prob{P}_C^{\RV{H}}(\mathrm{d}h)\label{eq:lewis_cdt}
+\end{align}
+For some probabilistic function $\prob{P}_\cdot:C\to \Delta(\Omega)$.
+\end{definition}
+
+The reasons why Lewis wanted to introduce dependency hypothesis and modify Jeffrey's rule to Equation \eqref{eq:lewis_cdt} are controversial and do not come up in this work. However, causal decision theory is still relevant to this work in two ways: firstly, once again is a probabilistic function $\prob{P}_\cdot:C\to \Delta(\Omega)$. Secondly, causal decision theory introduces the notion of the dependency hypothesis $\RV{H}$. The dependency hypothesis is similar to the state in Savage's theory, however Lewis does not require a deterministic map from dependency hypotheses to consequences, nor does he require a choice to correspond to every possible function from dependency hypotheses to states.
+
+Dependency hypotheses are quite an important idea in causal reasoning. Together Lewis' decision rule connect the theory of probability sets with \emph{statistical decision theory}, as Section \ref{sec:sdt} will show. Chapter \ref{ch:evaluating_decisions} goes into considerable detail concerning the question of when probability sets support certain types of dependency hypothesis. While they are typically not explicitly represented in common frameworks for causal inference, Chapter \ref{ch:other_causal_frameworks} discusses how dependency hypotheses are often implicit in these approaches, and shows how they can be made explicit.
+
+\subsection{Statistical decision theory}\label{sec:sdt}
+
+Statistical decision theory (SDT), created by \citet{wald_statistical_1950}, predates all of the decision theories discussed above. Savage's theory appears to have developed in part to explain some features of SDT \citet{savage_theory_1951}, and Jeffrey's theory and subsequent causal decision theories were in turn influenced by Savage's decision theory. While the later decision theories were concerned with articulating why their theory fit the role of a theory for rational decision under uncertainty, Wald focused much more on the mathematical formalism and solutions to statistical problems. Statistical decision theory introduced many fundamental ideas that have since entered the ``water supply'' of machine learning theory, such as \emph{decision rules} and \emph{risk} as a measure of the quality of a decision rule.
+
+In contrast to the later decision theories, SDT has no explicit representation of the ``consequences'' of a decision. Rather, it is assumed that a loss function is given that maps decisions and hypotheses directly to a loss, which is a kind of desirability score similar to a utility (although it is minimised rather than maximised). The following definitions are all standard to SDT.
+
+\begin{definition}[Statistical decision problem]
+A statistical decision problem (SDP) is a tuple $(X, H, D, l, \prob{P}_\cdot)$ where $(X,\sigalg{X})$ is a set of outcomes, $(H,\sigalg{H})$ is a set of hypotheses, $(D,\sigalg{D})$ is a set of decisions, $l:D\times H\to \mathbb{R}$ is a loss function and $\prob{P}_\cdot:H\kto X$ is a Markov kernel from hypotheses to to outcomes.
+\end{definition}
+
+Statistical decision theory is concerned with the selection of \emph{decision rules}, rather than the selection of decisions directly. A decision rule maps observations to decisions, and may be deterministic or stochastic.
+
+\begin{definition}[Decision rule]
+Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$, a decision rule is a Markov kernel $\kernel{D}_\alpha:\Omega\kto D$.
+\end{definition}
+
+Because decision rules in SDT play the role of what we call \emph{choices}, we denote the set of all available decision rules by $C$. A further feature of SDT that is unlike the later decision theories is that SDT does not offer a single rule for assessing the desirability of any choice in $C$. Instead, it offers a definition of the risk, which assesses the desirability of a choice \emph{relative to a particular hypothesis}. The risk function completely characterises the problem of choosing a decision function. Two different rules are for turning this ``intermediate assessment'' into a final assessment of the available choices - Bayes optimality and minimax optimality. Bayes optimality reuquires a prior over hypotheses, while minimax optimality does not.
+
+\begin{definition}[SDP Risk]\label{def:risk}
+Given a statistical decision problem $(X, H, D, l, \prob{P}_\cdot)$ and decision functions $C$, the \emph{risk} functional $R:C\times H\to \mathbb{R}$ is defined by
+\begin{align}
+    R(\kernel{D}_\alpha,h):= \int_X \int_D l(d,h) \kernel{D}_\alpha(\mathrm{d}d|f)\kernel{P}_h(\mathrm{d}f)
+\end{align}
+\end{definition}
+
+It is possible to find risk functions in problems that aren't SDPs. The definitions of Bayes and Minimax optimality still apply to risk functions obtained on other manners. Thus Bayes optimality and minimax optimality are defined in terms of risk functions in general, not SDP risk functions.
+
+\begin{definition}[Bayes risk]
+Given decision functions $C$, hypotheses $(H,\sigalg{H})$, risk $R:C\times H\to \mathbb{R}$ and prior $\mu\in \Delta(H)$, the $\mu$-\emph{Bayes risk} is
+\begin{align}
+    R_\mu(\kernel{D}_\alpha) &:= \int_{H} R(\kernel{D}_\alpha,h)\mu(\mathrm{d}h)
+\end{align}
+\end{definition}
+
+\begin{definition}[Bayes optimal]
+Given decision functions $C$, hypotheses $(H,\sigalg{H})$, risk $R:C\times H\to \mathbb{R}$ and prior $\mu\in \Delta(H)$, $\alpha\in C$ is $\mu$-Bayes optimal if
+\begin{align}
+    R_\mu(\kernel{D}_\alpha) &= \inf_{\alpha'\in C} R_{\mu}(\kernel{D}_{\alpha'})
+\end{align}
+\end{definition}
+
+\begin{definition}[Minimax optimal]
+Given decision functions $C$, hypotheses $(H,\sigalg{H})$, risk $R:C\times H\to \mathbb{R}$, a \emph{minimax decision function} is any decision function $\kernel{D}_\alpha$ satisfying
+\begin{align}
+    \sup_{h\in H}  R(\kernel{D}_\alpha,h) &= \inf_{\alpha' in C} \sup_{h\in H} R(\kernel{D}_{\alpha'},h)
+\end{align}
+\end{definition}
+
+\subsubsection{From consequences to statistical decision problems}\label{sec:cons_to_sdp}
+
+In this section, we relate our new work to the standard formulation of SDT presented above.
+
+Statistical decision theory ignores the notion of general consequences of choices; the only ``consequence'' in the theory is the loss incurred by a particular decision under a particular hypothesis. The kinds of probability set models studied here probabilistically map decisions to consequences, and the set of consequences is understood to have a utility function to allow for assessment of the desirability of different choices via the principle of expected utility. Not every probability set model induces a statistical decision problem in this manner. A family of models that does are what we call \emph{conditionally independent see-do models}. These models feature observations (the ``see'' part) along with decisions and consequences (the ``do'' part), and the observations come ``before'' the decisions (hence see-do). Examples of this type of model will be encountered again in Chapters \ref{ch:evaluating_decisions} and \ref{ch:other_causal_frameworks}. Furthermore, there is a hypothesis such that consequences are assumed to be independent of observations conditional on the decision and the hypothesis. This is why they are qualified as ``conditionally independent'' see-do models.
+\begin{definition}[See-do model]\label{def:see_do_model}
+A probability set model of a statistical decision problem, or a \emph{see-do model} for short, is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences and $\RV{D}:\Omega\to D$ are the decisions. $\prob{P}_{C\times H}$ must observe the following conditional independences:
+\begin{align}
+    \RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}\\
+    \RV{D}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}
+\end{align}
+where $\RV{C}:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (refer to Definition \ref{def:eci_orig} for the definition of extended conditional independence $\CI_{\prob{P}_{C\times H}}^e$).
+\end{definition}
+\begin{definition}[Conditionally independent see-do model]\label{def:ci_see_do_model}
+A conditionally independent see-do model is a see do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where the following additional conditional independence holds:
+\begin{align}
+    \RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})
+\end{align}
+\end{definition}
+We assume that a utility function is available depending on the consequence $\RV{Y}$ only, and identify the loss with the negative expected utility, conditional on a particular decision and hypothesis.
+\begin{definition}[Induced loss]
+Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ and a utility $u:Y\to \mathbb{R}$, the induced loss $l:D\times H\to \mathbb{R}$ is defined as
+\begin{align}
+    l(d,h)&:= -\int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)
+\end{align}
+\end{definition}
+where the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}$'s existence is guaranteed by $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$.
+
+A see-do model induces a set of decision functions: for each $\alpha\in C$, there is an associated probability distribution $\prob{P}_\alpha^{\RV{D}|\RV{X}}$. Using the above definition of loss, the expected loss of a decision function in a conditionally independent see-do model induces a risk function identical to the SDP risk.
+\begin{theorem}[Induced SDP risk]\label{th:ind_risk}
+Given a conditionally independent see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice $\alpha\in C$ and hypothesis $h\in H$ is equal to the negative SDP risk of the associated decision rule $\prob{P}_\alpha^{\RV{D}|\RV{X}}$ and hypothesis $h$.
+\begin{align}
+    \prob{P}_{\alpha,h}^{\RV{Y}}u &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}},h)
+\end{align}
+\end{theorem}
+
+\begin{proof}
+The expected utility given $\alpha$ and $h$ is
+\begin{align}
+    \int_Y u(y)\prob{P}_{\alpha,h}^{\RV{Y}}(\mathrm{d}y) &= \int_Y  \int_D \int_{X} u(y)\prob{P}_{\alpha,h}^{\RV{Y}|\RV{DX}}(\mathrm{d}y|d,x)\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha,h}^{\RV{X}}(\mathrm{d}x) \\
+    &= \int_X  \int_D \int_{Y} u(y) \prob{P}_{\alpha,h}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha,h}^{\RV{X}}(\mathrm{d}x)\label{eq:because_of_ci}\\
+    &= \int_{X} \int_D \int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
+     &= -\int_D\int_X l(d,h)\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
+    &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}},h)
+\end{align}
+where Equation \eqref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}$.
+\end{proof}
+
+Theorem \ref{th:ind_risk} does \emph{not} hold for general see-do models. General see-do models allow for the utility to depend on $\RV{X}$ even after conditioning on $\RV{D}$ and $\RV{H}$, while the form of the loss function in SDT forces no direct dependence on observations. The generic ``see-do risk'' (Definition \ref{def:see_do_risk}) provides a notion of risk for the more general case, while Theorem \ref{th:ind_risk} shows it reduces to SDP risk in the case of conditionally independent see-do models with a utility that depends only on the consequences $\RV{Y}$.
+\begin{definition}[See-do risk]\label{def:see_do_risk}
+Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:X\times Y\to \mathbb{R}$, the \emph{see-do risk} $R:C\times H\to \mathbb{R}$ is given by
+\begin{align}
+    R(\alpha,h) &:= -\prob{P}_{\alpha,h}^{\RV{XY}}u&\forall \alpha\in C,h\in H
+\end{align}
+\end{definition}
+
+Section \ref{sec:modelling_decision_problems} noted that two types of probability set model are considered: probability sets $\prob{P}_C$ indexed by choices alone, and probability sets $\prob{P}_{C\times H}$ jointly indexed by choices and hypotheses. See-do models are an instance of the second kind, jointly indexed by choices and hypotheses. Bayesian see-do models are of the former type, indexed by choices alone. A see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ and a prior over hypotheses $\mu\in \Delta(H)$ can by combined to form a Bayesian see-do model, and under the right conditions the risk of the Bayesian model reduces to the Bayes risk of the original see-do model.
+
+\begin{definition}[Bayesian see-do model]
+A Bayesian see-do model is a tuple $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences, $\RV{D}:\Omega\to D$ are the decisions and $\RV{H}:\Omega\to H$ is the hypothesis. $\prob{P}_C$ must observe the following conditional independences:
+\begin{align}
+    \RV{X}&\CI^e_{\prob{P}_{C}} \RV{C}|\RV{H}\\
+    \RV{D}&\CI^e_{\prob{P}_{C}} \RV{H}|\RV{C}\\
+    \RV{H}&\CI^e_{\prob{P}_C} \RV{C}
+\end{align}
+\end{definition}
+
+\begin{definition}[Induced Bayesian see-do model]
+Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D},\RV{H})$ on $(\Omega,\sigalg{F})$ and a prior $\mu\in \Delta(H)$, the induced Bayesian see-do model $\prob{P}_C$ on $(\Omega\times H,\sigalg{F}\otimes \sigalg{H})$ is
+\begin{align}
+    \prob{P}_C(A) &= \int_{\RV{H}^{-1}(A)} \prob{P}_{C\times \{h\}}(\Pi_{\Omega}^{-1}(A))\mu(\mathrm{d}h)&\forall A\in \sigalg{F}\otimes\sigalg{H}
+\end{align}
+Where $\Pi_\Omega:\Omega\times H\to \Omega$ is the projection onto $\Omega$.
+\end{definition}
+
+\begin{theorem}[Induced SDP Bayes risk]
+Given a conditionally independent see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ along with a utility $u:Y\to \mathbb{R}$ and a prior $\mu\in \Delta(H)$, the expected utility for each choice $\alpha\in C$ under the induced Bayesian see-do model is equal to the negative $\mu$-Bayes risk of that decision rule.
+\end{theorem}
+
+\begin{proof}
+First, note that $h\mapsto \prob{P}_{C\times \{h\}}^{\RV{Y}|\RV{XD}}$ is a version of $\prob{P}_C^{\RV{Y}|\RV{XD}}$ and hence $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X},\RV{C})|(\RV{H},\RV{D})$, a property it inherits from the underlying see-do model.
+
+Also, note that $\prob{P}_C^{\RV{H}}=\mu$, by construction.
+
+The expected utility of $\alpha\in C$ is 
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}} u &= \int_Y u(y) \prob{P}_{\alpha}^{\RV{Y}}(\mathrm{d}y) \\
+    &= \int_Y  \int_D \int_{X} \int_H u(y)\prob{P}_{\alpha}^{\RV{Y}|\RV{DXH}}(\mathrm{d}y|d,x,h)\prob{P}_{\alpha}^{\RV{D}|\RV{XH}}(\mathrm{d}d|x,h)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h) \\
+    &= \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{\alpha}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h)\\
+    &=  \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{C}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
+     &= -\int_D\int_X\int_H l(d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
+    &= -\int_H R(\prob{P}_{\alpha}^{\RV{D}|\RV{X}},h)\mu(\mathrm{d}h)\\
+    &= -R_{\mu}(\prob{P}_{\alpha}^{\RV{D}|\RV{X}})
+\end{align}
+\end{proof}
+
+\subsubsection{Complete class theorem}\label{sec:cc_theorem}
+
+The \emph{complete class theorem} is a key theorem of classical SDT that establishes, under certain conditions, any \emph{admissible} decision rule (Definition \ref{def:admissible_decision}) for a see-do model $\prob{P}_{C\times H}$ with a utility $u$ must minimise the Bayes risk for a Bayesian model constructed from $\prob{P}_{C\times H}$ and some prior over hypotheses $\mu\in \Delta(H)$. This can be interpreted in a similar way to the decision theoretic representation discussed above: if you accept that the relevant assumptions apply to the decision problem at hand, than there is a Bayesian see-do model along with $u$ that captures the important features of this problem. The assumptions are that a see-do model $\prob{P}_{C\times H}$ with a utility $u$ that satisfies the relevant conditions is available, and that the principle used to evaluate decision rules should yield an admissible decision rule (though it may also be desired to satisfy other properties as well).
+
+If more is required of the decision rule than merely admissibility, then the complete class theorem does not prove that it is easy to find any Bayesian model that will yield rules satisfying these requirements. It also does not prove that a Bayesian approach is helpful for finding a ``correct'' decision rule according to some vague notion of ``correct''.
+
+We have shown in Theorem \ref{th:ind_risk} that conditionally independent see-do models induce statistical decision problems. However, the complete class theorem iteself (Theorem \ref{th:complete_class}) depends only on the risk function induced by a decision making model. In particular, the complete class theorem can also apply to general see-do models, without the assumption of conditional independence, which we show in Example \ref{ex:cc_sdt} and \ref{ex:cc_nonsdt}.
+
+\begin{definition}[Risk function]
+Given a set of choice $C$ and a set of hypotheses $H$, a risk function is a map $R:H\times C\to \mathbb{R}$.
+\end{definition}
+
+If the second set $H$ were, instead of hypotheses about nature, a set of options available to a second player playing a game, then a ``risk function'' defines a two-player zero-sum game \citet{toutenburg_ferguson_1967}.
+
+\begin{definition}[Admissible choice]\label{def:admissible_decision}
+Given a risk function $R:C\times H\to \mathbb{R}$, a choice r $\alpha\in C$ dominates a choice $\alpha'\in C$ if for all $h\in H$, $R(\alpha,h)\leq R(\alpha',h)$ and for at least on $h^*$, $R(\alpha,h)<R(\alpha,h^*)$. An \emph{admissible choice} is a choice $\alpha\in C$ such that there is no $\alpha'\in C$ dominating $\alpha$.
+\end{definition}
+
+\begin{definition}[Complete class]\label{th:complete_class}
+A \emph{complete class} is any $B\subset C$ such that, for any $\alpha'\not in B$ there is some $\alpha\in B$ that dominates $\alpha'$. A \emph{minimal complete class} is a complete class $B$ such that no proper subset of $B$ is complete
+\end{definition}
+
+\begin{theorem}
+If a minimal complete class $B\subset C$ exists then $B$ is the set consisting of all the admissible decision rules.
+\end{theorem}
+
+\begin{proof}
+See \citet[Theorem 2.1]{toutenburg_ferguson_1967}
+\end{proof}
+
+\begin{definition}[Risk set]
+Given a finite set of hypotheses $H$, a set of choices $C$ and a risk function $R:C\times H\to \mathbb{R}$, the risk set is the subset of $\mathbb{R}^{|H|}$ given by
+\begin{align}
+    S := \{(R(\alpha,h))_{h\in H}|\alpha\in C\}
+\end{align}
+\end{definition}
+
+\begin{theorem}[Complete class theorem]
+Given a risk function $R:C\times H\to \mathbb{R}$, if the risk set S is convex, bounded from below and closed downwards, and H is finite, then the set of Bayes optimal choices is a minimal complete class.
+\end{theorem}
+
+\begin{proof}
+See \citet[~Theorem 2.10.2]{toutenburg_ferguson_1967}
+\end{proof}
+
+Two examples of the application of the complete class theorem will be presented (Examples \ref{ex:cc_sdt} and \ref{ex:cc_nonsdt}). In order to explain them, we need a few lemmas.
+
+\begin{lemma}\label{lem:convex_closed}
+Given $H$ and $C$ both finite and a risk function $R:C\times H\to \mathbb{R}$ and an associated probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$, $\Omega$ finite, if the function
+\begin{align}
+    \prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}\mapsto R(\alpha,h)
+\end{align}
+is linear and 
+\begin{align}
+    Q:= ((\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}})_{h\in H})_{\alpha\in C}
+\end{align}
+is convex closed, then the risk set $S$ is convex closed.
+\end{lemma}
+
+\begin{proof}
+By linearity of 
+\begin{align}
+    \prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}\mapsto R(\alpha,h)
+\end{align}
+we also have linearity of 
+\begin{align}
+    (\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}})_{h\in H}\mapsto (R(\alpha,h))_{h\in H}
+\end{align}
+Furthermore, $Q$ is bounded when viewed as an element of $\mathbb{R}^{\Omega\times H\times C}$, and so $S$ is the linear image of a compact convex set, and is therefore also compact convex.
+\end{proof}
+
+\begin{lemma}\label{lem:linear}
+For a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D},\RV{H})$ with utility $u:X\times Y\to \mathbb{R}$, the map
+\begin{align}
+    \prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}\mapsto R(\alpha,h)
+\end{align}
+is linear.
+\end{lemma}
+
+\begin{proof}
+By definition,
+\begin{align}
+    R(\alpha,h) &= - \prob{P}_{\alpha,h}^{\RV{XY}} u\\
+    &= -\prob{P}_{C\times\{h\}}^{\RV{X}} \odot \prob{P}_{\alpha\times h}^{\RV{D}|\RV{X}} \odot \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{DX}} u
+\end{align}
+Which is a composition of kernel products involving $\prob{P}_{\alpha\times H}^{\RV{D}|\RV{X}}$, and kernel products are linear, hence this function is linear.
+\end{proof}
+
+The preceding theorem does \emph{not} hold for a utility defined on $\Omega$ rather than on $X\times Y$. In this case we have instead
+\begin{align}
+    -\prob{P}_{C\times\{h\}}^{\RV{X}} \odot \prob{P}_{\alpha\times h}^{\RV{D}|\RV{X}} \odot \prob{P}_{\alpha,h}^{\Omega|\RV{DX}} u
+\end{align}
+where $\alpha$ appears twice on the right hand side, rendering the map nonlinear.
+
+\begin{lemma}\label{lem:all_kernels_is_convex_hull}
+For finite $X$ and $D$, the set of all Markov kernels $X\kto D$ is convex closed.
+\end{lemma}
+
+\begin{proof}
+From \citet{blackwell_theory_1979}, the set of all Markov kernels $X\kto D$ is the convex hull of the set of all deterministic Markov kernels $X\kto D$. There are a finite number of deterministic Markov kernels, and so the convex hull of this set is closed.
+\end{proof}
+
+\begin{example}\label{ex:cc_sdt}
+Suppose we have a conditionally independent see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ along with a bounded utility $u:Y\to \mathbb{R}$ where $H,D,X$ and $Y$ are all finite, and $\{\prob{P}_\alpha^{\RV{D}|\RV{X}}|\alpha\in C\}$ is the set of all Markov kernels $X\kto D$. Then the risk set is convex and closed downwards, and so the set of Bayes optimal choices is exactly the set of admissible choices.
+
+The boundedness of the risk set $S$ follows from the boundedness of the utility $u$; if $u$ is bounded above by $k$, then $S$ is bounded below in every dimension by $-k$.
+
+The fact that $S$ is convex and closed follows from Lemmas \ref{lem:convex_closed}, \ref{lem:linear} and \ref{lem:all_kernels_is_convex_hull}.
+\end{example}
+
+\begin{example}\label{ex:cc_nonsdt}
+As before, but suppose we have the see-do model is not conditionally independent. Because none of the lemmas \ref{lem:convex_closed}, \ref{lem:linear} and \ref{lem:all_kernels_is_convex_hull} made use of the conditional independence assumption, the risk set is still convex and closed downwards and so the set of Bayes optimal choices is also exactly the set of admissible choices.
+\end{example}
+
+% \subsection{How should decision making models be constructed?}\label{sec:how_to_construct}
+
+% The decision theories proposed by Jeffrey and Lewis differ in the kind of space in which they're defined and in the decision rule proposed. However, the reasons given by Lewis (and others) for proposing ``causal'' decision theory relate to their views about how decision models should be constructed.
+
+% Consider a decision maker (DM) faced with a machine with two buttons, one red and one green, that costs \$51 to operate. The DM has observed a large number of people operate the machine previously, half have pushed the red button and half have pushed the green button. No matter which button was pressed, 60\% of the time the operator received \$100 from the machine, and 30\% of the time they received nothing. The DM is contemplating whether to insert \$51 and push the red button or the green button. Consider a second person, a forecaster, who has observed all of the machine operators so far, and wants to predict what the DM will decide to do.
+
+% The decision maker constructs a see-do model (Definition \ref{def:see_do_model}) with observations being the previous operators, and hypothesizes that each button is associated with a payout probability in $[0,1]$ that might vary operator to operator. The consequences are payouts (0 or \$100) less the \$10 cost of operation if he chooses to play. The forecaster constructs a joint probability distribution over the entire sequence of operators and payouts, and, reasoning that every operator-machine pair is essentially the same, hypothesizes that each button is associated with a fixed payout probability $[0,1]$ for each button, and a probability of pressing the red button in $[0,1]$. Having seen a large number of people already, the forecaster concludes each button has a payout probability of 70\%, and each operator has a probability of pressing the red button of 50\%.
+
+% The question is: does the decision maker adopt a model that agrees with the forecaster, such that he concludes that no matter which button he presses, the payout probability will be 70\% (in agreement with the forecaster), or does the decision maker adopt some model that induces a different map from choices to consequences?
+
+% In this case, the decision maker may well want to adopt a different model. To the forecaster, the operator-machine pairs are indistinguishable in that the forecaster is no more knowledgeable about the internal state of the machine at any point, and also no more knowledgeable about the internal state of the operator's head at each point. Thus it makes little difference to them whether each button implements a random method to pay out 60\% of the time no matter what, or if each button has a deterministic payout at each episode and 20\% of operators know exactly what it is while the other 80\% choose one button at random.
+
+% To the decision maker, however, some additional information is available. In particular, the decision maker knows they do not have any information that might tell them how the correct button differs in this instance to the correct button in any other instance. The decision maker does \emph{not} know if all of the other operators also lacked such information. It is relevant to the decision maker whether the button pays out according to some fixed probabilistic procedure each time, or if the payout is deterministically associated with a particular button each episode, and sometimes the operators know which button is correct, but sometimes they do not. In the first case, the decision make could assign a 60\% chance to each button paying out, while in the second case they might choose a different value (perhaps 50\%).
+
+% So far, everyone agrees that the distribution over consequences the decision maker associated with each button need not agree with the forecaster's conditional distribution. The disagreement is in extreme cases. Suppose everything is as above, except the payout is seen to have been received 100\% of the time. The decision maker might reason that, while \emph{some} of the other operators might have access to additional information, it is unlikely that \emph{all} of them differ in this respect, and so the DM might then conclude that they should regard the probability of both buttons paying out as close to 100\%.
+
+% Suppose additionally that it is proven to the decision maker that the payout associated with each button is known with certainty to an oracle, and furthermore that the oracle knows that in each instance one button pays out \$100 and the other pays out nothing. In this case, it is typically argued that the decision maker should 
+
+%  Furthermore, this oracle has a good reason for why 100\% of the previous operators received a payout: the oracle 
+
+%   that problem is to press one of two buttons,. They have some data, some choices they want to compare, and some possible consequences over which they have a utility defined. Consider a second person whose job is to forecast the choice of the decision maker, and the consequences that arise after their choice. Suppose also that the forecaster and the decision maker are given the same data ? Second, there is the problem faced by the forecaster: given the available data, what choice is the decision maker likely to arrive at, and what consequences are likely to occur as a result? All agree that the decision maker employs a probabilistic map from choices to consequences to help make the decision, and all agree that, if the forecaster expresses their forecast as a joint probability distribution, it is possible to derive a conditional distribution of consequences given choices, which is also a probabilistic map from choices to consequences (see Definition \ref{def:disint}). The disagreement is about exactly when the decision maker's consequence map should agree with the forecaster's conditional distribution.
+
+% We don't offer a solution to this question. What we do in Chapters \ref{ch:evaluating_decisions} and \ref{ch:other_causal_frameworks} is to relate a certain notion of ``causal effect'' to a kind of symmetry of decision-making models. Causal effects are typically associated with the decision maker's perspective, while symmetry is a tool that forecasters may use to construct probabilistic models. 
+
+\section{Variables}\label{sec:variable}
+
+In probability theory, it is standard to assume the existence of a probability space $(\mu,\Omega,\sigalg{F})$ and to define \emph{random variables} as measurable functions from $(\Omega,\sigalg{F})$ to $(\mathbb{R},\mathcal{B}(\mathbb{R}))$. However, variables aren't \emph{just} functions -- they're also typically understood to correspond to some measured aspect of the real world. For example, \citet{pearl_causality:_2009} offers the following two, purportedly equivalent, definitions of variables:
+\begin{quote}
+By a \emph{variable} we will mean an attribute, measurement or inquiry that may take on one of several possible outcomes, or values, from a specified domain. If we have beliefs (i.e., probabilities) attached to the possible values that a variable may attain, we will call that variable a random variable.
+\end{quote}
+
+\begin{quote}
+This is a minor generalization of the textbook definition, according to which a random variable is a mapping from the sample space (e.g., the set of elementary events) to the real line. In our definition, the mapping is from the sample space to any set of objects called ``values,'' which may or may not be ordered.
+\end{quote}
+
+However, these are actually two different things. The first is a \emph{measurement}, which is something we can do in the real world that produces as a result an element of a mathematical set. The second is a \emph{function}, a purely mathematical object with a domain and a codomain and a mapping from the former into the latter. Measurement procedures play the extremely important role of ``pointing to the parts of the world'' that the model addresses.
+
+The general scheme considered in this work is to assume that there is a collection of  ``complete measurement procedure'' $\proc{S}_\alpha$, one for each choice $\alpha\in C$. $\proc{S}_\alpha$ is considered to be the procedure that measures all quantities of interest, and any subprocedure corresponding to a particular quantity of interest reconstructed from the result of $\proc{S}$ by applying a function to its result. The function $\RV{X}$ that, when applied to the result of $\proc{S}$, yields the result of a measurement subprocedure $\proc{X}$ is the \emph{variable} associated with the measurement procedure $\proc{X}$. In this way, a variable $\RV{X}$ -- which is by itself just a mathematical function -- is associated with a measurement procedure in the real world.
+
+\subsection{Variables and measurement procedures}
+
+Consider Newton's second law in the form $\RV{F}=\RV{MA}$. This model relates ``variables'' $\RV{F}$, $\RV{M}$ and $\RV{A}$. As \citet{feynman_feynman_1979} noted, in order to understand this law, some pre-existing understanding of force, mass and acceleration is required. In order to offer a numerical value for the net force on a given object is, even the most knowledgeable physicist will have to go and do a measurement, which involves interacting with the object in some manner that cannot be completely mathematically specified, and which will return a numerical value that will be taken to be the net force.
+
+In order to make sense of the equation $\RV{F}=\RV{MA}$, it must be understood relative to some measurement procedure $\proc{S}$ that simultaneously measures the force on an object, its mass and its acceleration, which can be recovered by the functions $\RV{F}$, $\RV{M}$ and $\RV{A}$ respectively. The equation then says that, whatever result $s$ this procedure yields, $\RV{F}(s)=\RV{M}(s)\RV{A}(s)$ will hold.
+
+A measurement procedure $\proc{S}$ is akin to \citet{menger_random_2003}'s notion of variables as ``consistent classes of quantities'' that consist of pairing between real-world objects and quantities of some type. $\proc{S}$ itself is not a well-defined mathematical thing. At the same time, the set of values it may yield \emph{is} a well-defined mathematical set. No actual procedure can be guaranteed to return elements of a mathematical set known in advance -- anything can fail -- but we assume that we can study procedures reliable enough that we don't lose much by ignoring this possibility.
+
+Note that, because $\proc{S}$ is not a purely mathematical thing, we cannot perform mathematical reasoning with $\proc{S}$ directly. It is much more practical to relegate $\proc{S}$ to the background, and reason in terms of the functions $\RV{F}$, $\RV{M}$ and $\RV{A}$. However, even if we don't talk about it much, $\proc{S}$ remains an important element of the law.
+
+\subsection{Measurement procedures}\label{sec:mprocs}
+
+\begin{definition}[Measurement procedure]
+A \emph{measurement procedure} $\proc{B}$ is a procedure that involves interacting with the real world somehow and delivering an element of a mathematical set $X$ as a result. A procedure $\proc{B}$ is said to takes values in a set $B$.
+\end{definition}
+
+We adopt the convention that the procedure name $\proc{B}$ and the set of values $B$ share the same letter.
+
+\begin{definition}[Values yielded by procedures]
+$\proc{B}\yields x$ is the proposition that the the procedure $\proc{B}$ will yield the value $x\in X$. $\proc{B}\yields A$ for $A\subset X$ is the proposition $\lor_{x\in A} \proc{B}\yields x$.
+\end{definition}
+
+\begin{definition}[Equivalence of procedures]\label{def:equality}
+Two procedures $\proc{B}$ and $\proc{C}$ are equal if they both take values in $X$ and $\proc{B}\yields x\iff \proc{C}\yields x$ for all $x\in X$.
+\end{definition}
+
+If two involve different measurement actions in the real world but necessarily yield the same result, we say they are equivalent.
+
+It is worth noting that this notion of equivalence identifies procedures with different real-world actions. For example, ``measure the force'' and ``measure everything, then discard everything but the force'' are often different -- in particular, it might be possible to measure the force only before one has measured everything else. Thus the result yielded by the first procedure could be available before the result of the second. However, if the first is carried out in the course of carrying out the second, they both yield the same result in the end and so we treat them as equivalent. 
+
+Measurement procedures are like functions without well-defined domains. Just like we can compose functions with other functions to create new functions, we can compose measurement procedures with functions to produce new measurement procedures.
+
+\begin{definition}[Composition of functions with procedures]
+Given a procedure $\proc{B}$ that takes values in some set $B$, and a function $f:B\to C$, define the ``composition'' $f\circ \proc{B}$ to be any procedure $\proc{C}$ that yields $f(x)$ whenever $\proc{B}$ yields $x$. We can construct such a procedure by describing the steps: first, do $\proc{B}$ and secondly, apply $f$ to the value yielded by $\proc{B}$.
+\end{definition}
+
+For example, $\proc{MA}$ is the composition of $h:(x,y)\mapsto xy$ with the procedure $(\proc{M},\proc{A})$ that yields the mass and acceleration of the same object. Measurement procedure composition is associative:
+
+\begin{align}
+    (g\circ f)\circ\proc{B}\text{ yields } x &\iff B\text{ yields } (g\circ f)^{-1}(x) \\
+    &\iff B\text{ yields } f^{-1}(g^{-1}(x))\\
+    &\iff f\circ B \text{ yields } g^{-1}(x)\\
+    &\iff g\circ(f\circ B)\text{ yields } x
+\end{align}
+
+
+One might wonder whether there is also some kind of ``tensor product'' operation that takes a standalone $\proc{M}$ and a standalone $\proc{A}$ and returns a procedure $(\proc{M},\proc{A})$. Unlike function composition, this would be an operation that acts on two procedures rather than a procedure and a function. Thus this ``append'' combines real-world operations somehow, which might introduce additional requirements (we can't just measure mass and acceleration; we need to measure the mass and acceleration of the same object at the same time), and may be under-specified. For example, measuring a subatomic particle's position and momentum can be done separately, but if we wish to combine the two procedures then we can get different results depending on the order in which we combine them.
+
+Our approach here is to suppose that there is some complete measurement procedure $\proc{S}$ to be modeled, which takes values in the observable sample space $(\Psi,\sigalg{E})$ and for all measurement procedures of interest there is some $f$ such that the procedure is equivalent to $f\circ \proc{S}$ for some $f$. In this manner, we assume that any problems that arise from a need to combine real world actions have already been solved in the course of defining $\proc{S}$.
+
+Given that measurement processes are in practice finite precision and with finite range, $\Psi$ will generally be a finite set. We can therefore equip $\Psi$ with the collection of measurable sets given by the power set $\sigalg{E}:=\mathscr{P}(\Psi)$, and $(\Psi,\sigalg{E})$ is a standard measurable space. $\sigalg{E}$ stands for a complete collection of logical propositions we can generate that depend on the results yielded by the measurement procedure $\proc{S}$.
+
+One could also consider measurement procedures to produce results in $(\mathbb{R},\mathcal{B}(\mathbb{R}))$ (i.e. the reals with the Borel sigma-algebra) or a set isomorphic to it. This choice is often made in practice, and following standard practice we also often consider variables to take values in sets isomorphic to $(\mathbb{R},\mathcal{B}(\mathbb{R}))$. However, for measurement in particular this seems to be a choice of convenience rather than necessity -- for any measurement with finite precision and range, it is possible to specify a finite set of possible results.
+
+\subsection{Observable variables}
+
+Our \emph{complete} procedure $\proc{S}$ represents a large collection of subprocedures of interest, each of which can be obtained by composition of some function with $\proc{S}$. We call the pair consisting of a subprocedure of interest $\proc{X}$ along with the variable $\RV{X}$ used to obtain it from $\proc{S}$ an \emph{observable variable}.
+
+\begin{definition}[Observable variable]
+Given a measurement procedure $\proc{S}$ taking values in $(\Psi,\sigalg{E})$, an observable variable is a pair $(\RV{X}\circ \proc{S},\RV{X})$ where $\RV{X}:(\Psi,\sigalg{E})\to (X,\sigalg{X})$ is a measurable function and $\proc{X}:=\RV{X}\circ \proc{S}$ is the measurement procedure induced by $\RV{X}$ and $\proc{S}$.
+\end{definition}
+
+For the model $\RV{F}=\RV{MA}$, for example, suppose we have a complete measurement procedure $\proc{S}$ that yields a triple (force, mass, acceleration) taking values in the sets $X$, $Y$, $Z$ respectively. Then we can define the ``force'' variable $(\proc{F},\RV{F})$ where $\proc{F}:=\RV{F}\circ \proc{S}$ and $\RV{F}:X\times Y\times Z\to X$ is the projection function onto $X$.
+
+A measurement procedure yields a particular value when it is completed. We will call a proposition of the form ``$\proc{X}$ yields $x$'' an \emph{observation}. Note that $\proc{X}$ need not be a complete procedure here. Given the complete procedure $\proc{S}$, a variable $\RV{X}:\Psi\to X$ and the corresponding procedure $\proc{X}=\RV{X}\circ\proc{S}$, the proposition ``$\proc{X}$ yields $x$'' is equivalent to the proposition ``$\proc{S}$ yields a value in $\RV{X}^{-1}(x)$''. Because of this, we define the \emph{event} $\RV{X}\yields x$ to be the set $\RV{X}^{-1}(x)$.
+
+\begin{definition}[Event]
+Given the complete procedure $\proc{S}$ taking values in $\Psi$ and an observable variable $(\RV{X}\circ \proc{S},\RV{X})$ for $\RV{X}:\Psi\to X$, the \emph{event} $\RV{X}\yields x$ is the set $\RV{X}^{-1}(x)$ for any $x\in X$.
+\end{definition}
+
+If we are given an observation ``$\proc{X}$ yields $x$'', then the corresponding event $\RV{X}\yields x$ is \emph{compatible with this observation}.
+
+It is common to use the symbol $=$ instead of $\bowtie$ to stand for ``yields'', but we want to avoid this because $\RV{Y}=y$ already has a meaning, namely that $\RV{Y}$ is a constant function everywhere equal to $y$.
+
+An \emph{impossible event} is the empty set. If $\RV{X}\yields x=\emptyset$ this means that we have identified no possible outcomes of the measurement process $\proc{S}$ compatible with the observation ``$\proc{X}$ yields $x$''. 
+
+\subsection{Model variables}
+
+Observable variables are special in the sense that they are tied to a particular measurement procedure $\proc{S}$. However, the measurement procedure $\proc{S}$ does not enter into our mathematical reasoning; it guides our construction of a mathematical model, but once this is done mathematical reasoning proceeds entirely with mathematical objects like sets and functions, with no further reference to the measurement procedure.
+
+A \emph{model variable} is simply a measurable function with domain $(\Psi,\sigalg{E})$.
+
+Model variables do not have to be derived from observable variables. We may instead choose a sample space for our model $(\Omega,\sigalg{F})$ that does not correspond to the possible values that $\proc{S}$ might yield. In that case, we require a surjective model variable $\RV{S}:\Omega\to \Psi$ called the complete observable variable, and every observable variable $(\RV{X}'\circ \proc{S},\RV{X}')$ is associated with the model variable $\RV{X}:=\RV{X}'\circ \RV{S}$.
+
+An \emph{unobserved variable} is a variable whose set of possible values is not constrained by the results of the measurement procedure.
+
+\begin{definition}[Unobserved variable]\label{def:unobserved_variable}
+Given a sample space $(\Omega,\sigalg{F})$ and a complete observable variable $\RV{S}:\Omega\to\Psi$, a model variable $\RV{Y}:\Omega\to Y$ is \emph{unobserved} if $\RV{Y}(\RV{S}\yields s)=Y$ for all $s\in \Psi$.
+\end{definition}
+
+\subsection{Variable sequences and partial order}
+
+Given $\RV{Y}:\Omega\to X$, we can define a sequence of variables: $(\RV{X},\RV{Y}):=\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$. $(\RV{X},\RV{Y})$ has the property that $(\RV{X},\RV{Y})\yields (x,y)= \RV{X}\yields x\cap \RV{Y}\yields y$, which supports the interpretation of $(\RV{X},\RV{Y})$ as the values yielded by $\RV{X}$ and $\RV{Y}$ together.
+
+Define the partial order on variables $\varlessthan$ where $\RV{X}\varlessthan \RV{Y}$ can be read ``$\RV{X}$ is completely determined by $\RV{Y}$''.
+
+\begin{definition}[Variables determined by another variable]\label{def:variable_po}
+Given a sample space $(\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, $\RV{X}\varlessthan \RV{Y}$ if there is some $f:Y\to X$ such that $\RV{X}=f\circ \RV{Y}$.
+\end{definition}
+
+Clearly, $\RV{X}\varlessthan(\RV{X},\RV{Y})$ for any $\RV{X}$ and $\RV{Y}$.
+
+\subsection{Decision procedures}\label{sec:actions}
+
+The kind of problem we want to solve requires us to compare the consequences of different choices from a set of possibilities $C$. We take the \emph{consequences of} $\alpha\in C$ to refer to the values obtained by some measurement procedure $\proc{S}_\alpha$ associated with the choice $\alpha$.
+
+As we have said, what exactly a ``measurement procedure'' is is a bit vague -- it's ``what we actually do to get the numbers we associate with variables''. It seems we could describe the above in terms of a single measurement procedure $\proc{S}$, which involves:
+
+\begin{enumerate}
+    \item Choose $\alpha$
+    \item Proceed according to $\proc{S}_\alpha$
+\end{enumerate}
+
+However, $\proc{S}$ is problematic to model. The model is often part of the process of choosing $\alpha$, and so a model of $\proc{S}$ that involves the step ``choose $\alpha$'' will be self-referential. Because of this, we don't try to model $\proc{S}$, and whether this changes anything is an open question.
+
+\begin{definition}[Decision procedure]
+A decision procedure is a collection $\{\proc{S}_\alpha\}_{\alpha\in C}$ of measurement procedures.
+\end{definition}
+
+Like measurement procedures, a decision procedure $\{\proc{S}_\alpha\}_{\alpha\in A}$ isn't a well-defined mathematical object; it's not really a ``set'', because the contents are real-world actions.
+
+\section{Conclusion}
+
+We define ``decision making models'' as maps from a set of choices $C$ to distributions over a set of consequences $\Omega$. We suppose that decision making models are accompanied by a utility function that rates the desirability of each consequence, though we do not often explicitly consider the utility function. This general scheme is common to many theories of decision making.
+
+We distinguish decision making models with choices only from decision making models with choices and consequences. The former are ``Bayesian'' models, with the consequences of each choice given by a unique probability distribution, while the latter are ``non-Bayesian''. Bayesian models with an expected utility induce a complete order on the choices -- each choice is either better, worse or just the same as another choice. On the other hand, non-Bayesian models induce a partial order, with admissible choices being better than inadmissible choices, but pairs of admissible choices are not known to be indifferent. The complete class theorem shows that any rule for selecting from the admissible choices can be rationalised as a rule for selecting Bayes-optimal choices with respect to \emph{some} prior, and we show that this theorem applies to see-do models equipped with a utility function if the set of hypotheses is finite and the induced risk function is convex and downward closed.
+
+We introduce variables and measurement procedures as our understanding of how models correspond to ``real world decision problems''. Measurement procedures are typically in the background, and we don't explicitly discuss them. However, when we talk about ``observed variables'', we mean that there is a measurement procedure in the background, and an observed variable is a partial result of this procedure.
+
+\section{Appendix: axiomatisation of decision theories}
+
+\subsection{Savage axioms}\label{sec:savage_axioms}
+
+Careful analysis of Savage's theorem is outside the scope of this work, but for the reader's convenience we will reproduce the axioms from \citet{savage_foundations_1954} with a small amount of commentary. Keep in mind that Savage's theorem establishes that the following are sufficient for representation with a probability set, not necessary, and furthermore the probability set representation of preferences satisfying these axioms is unique.
+
+Given acts $C$, states $(S,\sigalg{S})$ and consequences $F$ and a map $T:S\times C\to F$, let all greek letters $\alpha,\beta$ etc. be elements of $C$. Savage's axioms are:
+\begin{enumerate}[P1:]
+    \item There is a complete preference relation $\preceq$ on $C$
+    \begin{enumerate}[D1:]
+        \item $\alpha\preceq \beta$ given $B\in \sigalg{S}$ if and only if $\alpha'\preceq \beta'$ for every $\alpha'$ and $\beta'$ such that $T(\alpha,s)=T(\alpha',s)$ for $s\in B$ and $T(\alpha',r)=T(\beta',r)$ for $r\not\in B$, and $\beta'\preceq \alpha'$ either for every such pair or for none.
+    \end{enumerate}
+    \item For every $\alpha,\beta$ and $B\in \sigalg{S}$, $\alpha\preceq \beta$ given $B$ or $\beta\preceq \alpha$ given $B$
+    \begin{enumerate}[D2:]
+        \item for $q,q'\in F$, $q\preceq q'$ if and only if $\alpha\preceq \alpha'$ where $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for all $s\in S$
+        \item $B\in \sigalg{S}$ is null if and only if $\alpha\preceq \beta$ given B for every $\alpha,\beta\in C$
+    \end{enumerate}
+    \item If $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for every $s\in B$, $B\in \sigalg{S}$ non-null, then $\alpha\preceq \alpha'$ given $B$ if and only if $q\preceq q'$
+    \begin{enumerate}[D4:]
+        \item For $A,B\in \sigalg{S}$, $A\leqslant B$ if and only if $\alpha_A\preceq \alpha_B$ or $q\preceq q'$ for all $\alpha_A,\alpha_B\in C$, $q,q'\in F$ such that $T(\alpha_A,s) = q$ for $s\in A$, $T(\alpha_A,s')=q'$ for $s'\not\in A$, $T(\alpha_B,s)=q$ for $s\in B$, $T(\alpha_B,s')=q'$ for $s'\not\in B$. Read $\leqslant$ as ``is less probable than''
+    \end{enumerate}
+    \item For every $A,B\in\sigalg{S}$, $A\leqslant B$ or $B\leqslant A$
+    \item For some $\alpha,\beta$, $\alpha\prec \beta$
+    \item Suppose $\alpha\not\preceq \beta$. Then for every $\gamma$ there is a finite partition of $S$ such that if $\alpha'$ agrees with $\alpha$ and $\beta'$ agrees with $\beta$ except on some element $B$ of the partition, $\alpha'$ and $\beta'$ being equal to $\gamma$ on $B$, then $\alpha\not\preceq \beta'$ and $\alpha'\not\preceq \beta$
+    \begin{enumerate}[D5:]
+        \item $\alpha\preceq q$ for $q\in F$ given $B$ if and only if $\alpha\preceq \beta$ given $B$ where $T(\beta,s)=q$ for all $s\in S$
+    \end{enumerate}
+    \item If $\alpha\preceq T(\beta,s)$ given $B$ for every $s\in B$, then $\alpha\preceq \beta$ given $B$
+    \begin{enumerate}[P7':]
+        \item The proposition given by inverting every expression in D5 and P7
+    \end{enumerate}
+\end{enumerate}
+
+D1 formalises the idea of one act $\alpha$ being not preferred to another $\beta$ given the knowledge that the true state lies in the set $B$ (in short: ``given $B$'' or ``conditional on $B$''). P2 is sometimes called the ``sure thing principle'', as it implies the following: for any $\alpha, \beta$ if $\alpha$ is better than $\beta$ on some states and no worse on any other, then $\alpha\succ \beta$. In Savage's model, the ``likelihood'' that of any state cannot depend on the act chosen.
+
+D4 + P4 defines the ``probability preorder'' $\leqslant$ on $(S,\sigalg{S})$ and assumes it is complete.
+
+P5 is the requirement that the preference relation is non-trivial; not everything is equally desirable. This doesn't seem like it should be a practical requirement to me; we might hope that a model can distinguish between some of our options, but that doesn't mean we should assume it can. Savage claims that this requirement is ``innocuous'' because any exception must be trivial, but I'm not sure I agree.
+
+P6 is a requirement of continuity; for any $\alpha\preceq \beta$, we can divide $S$ finely enough to squeeze a ``small slice'' of any third outcome $\gamma$ into the gap between the two.
+
+P7 in combination with the other axioms forces preferences to be bounded.
+
+\subsection{Bolker axioms}\label{sec:bolker_axioms}
+
+$\underline{\sigalg{F}}$ a complete, atomless Boolean algebra with the impossible proposition removed.
+ 
+\begin{enumerate}[A1:]
+    \item $\preceq$ is a complete preference relation
+    \item $\underline{\sigalg{F}}$ is a complete, atomless Boolean algebra with the impossible proposition removed
+    \item For $A,B\in \underline{\sigalg{F}}$, if $A\cap B=\emptyset$, then
+    \begin{enumerate}[a)]
+        \item If $A\succ B$ then $A\succ A\cup B \succ B$
+        \item If $A\sim B$ then $A\sim A\cup B \sim B$
+    \end{enumerate}
+    \item Given $A\cap B=\emptyset$ and $A\sim B$, if $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$, then $A\cup G\sim B\cup G$ for every such $G$
+    \begin{enumerate}[D1:]
+        \item The supremum (infimum) of a subset $W\subset \underline{\sigalg{F}}$ is a set $G$ ($D$) such that for all $A\in W$, $G\subset A$ ($A\subset D$), and for any $E$ that also has this property, $G\subset E$ ($E\subset D$)
+    \end{enumerate}
+    \item Given $W:= \{W_i\}_{i\in M\subset \mathbb{N}}$ with $i<j\implies W_j\subset W_i$ and $W\subset \underline{\sigalg{F}}$ with supremum $G$ (infimum $D$), whenever $A\prec G \prec B$ ($A\prec D\prec B$) then there exists some $k\in M$ such that $i\geq k$ ($i\leq k$) implies $A\prec W_i \prec B$.
+\end{enumerate}
+
+Like Savage's theory, A1 requires the preference relation to be complete.
+
+A3 is the assumption that the desirability of disjunctions of events lies between the desirability of each event; it is sometimes called ``averaging''. It notably rules out the following: if $A\succ B$ we cannot have $A\cup B\sim A$. In the Jeffrey-Bolker theory, propositions all have positive probabilities.
+
+A4 allows a probability order to be defined on $\underline{\sigalg{F}}$. The conditions $A\cap B=\emptyset$, $A\sim B$, $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$ can be seen as a test for $A$ and $B$ being ``equally probable''. A4 requires that if $A$ and $B$ are rated as equally probable by one such test, then they are rated as equally probable by all such tests.
+
+A5 is an axiom of continuity.

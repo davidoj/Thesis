@@ -1,230 +1,122 @@
-\documentclass{book}
-
-% If your paper is accepted, change the options for the package
-% aistats2020 as follows:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Masters/Doctoral Thesis 
+% LaTeX Template
+% Version 2.5 (27/8/17)
 %
-% \usepackage[accepted]{aistats2020}
+% This template was downloaded from:
+% http://www.LaTeXTemplates.com
 %
-% This option will print headings for the title of your paper and
-% headings for the authors names, plus a copyright note at the end of
-% the first column of the first page.
+% Version 2.x major modifications by:
+% Vel (vel@latextemplates.com)
+%
+% This template is based on a template by:
+% Steve Gunn (http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/)
+% Sunil Patel (http://www.sunilpatel.co.uk/thesis-template/)
+%
+% Template license:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% If you set papersize explicitly, activate the following three lines:
-%\special{papersize = 8.5in, 11in}
-%\setlength{\pdfpageheight}{11in}
-%\setlength{\pdfpagewidth}{8.5in}
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
 
-% If you use natbib package, activate the following three lines:
-\usepackage[round]{natbib}
-\renewcommand{\bibname}{References}
-\renewcommand{\bibsection}{\subsubsection*{\bibname}}
+\documentclass[
+11pt, % The default document font size, options: 10pt, 11pt, 12pt
+oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+australian, % ngerman for German
+singlespacing, %singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, % Uncomment to add the main table of contents to the table of contents
+parskip, % Uncomment to add space between paragraphs
+%nohyperref, % Uncomment to not load the hyperref package
+headsepline, % Uncomment to get a line under the header
+%chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+%consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+]{MastersDoctoralThesis} % The class file specifying the document structure
 
-% If you use BibTeX in apalike style, activate the following line:
-%\bibliographystyle{apalike}
+\input{Bibliography_settings} %Bibliography commands
 
-\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
-\usepackage{hyperref}       % hyperlinks
-\usepackage{url}            % simple URL typesetting
-\usepackage{booktabs}       % professional-quality tables
-\usepackage{amsfonts}       % blackboard math symbols
-\usepackage{nicefrac}       % compact symbols for 1/2, etc.
-\usepackage{microtype}      % microtypography
+\input{Custom_Settings}
 
-% My packages
-\usepackage{tikzit}
-\input{diagrams.tikzstyles}
-\usepackage[mathscr]{euscript}
-\usepackage{graphicx}
-\usepackage {tikz}
-\usetikzlibrary {positioning}
-\usetikzlibrary{shapes.misc}
-\usetikzlibrary{shapes.geometric}
-\usetikzlibrary{calc}
-\usetikzlibrary{arrows.meta}
-\usetikzlibrary{intersections}
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{dsfont}
-\usepackage{stmaryrd }
-\usepackage{csquotes}
-\usepackage{wasysym}
-\usepackage[]{todonotes}
-\usepackage[shortlabels]{enumitem}
-\usepackage{bm}
-\usepackage{isomath}
-\usepackage{mathtools}
-\usepackage{algpseudocode}
-\usepackage{algorithm}
-\usepackage{multirow}
+%----------------------------------------------------------------------------------------
+%	THESIS INFORMATION
+%----------------------------------------------------------------------------------------
 
-\usepackage{mathtools}
-\mathtoolsset{showonlyrefs}
+\thesistitle{Decision theoretic foundations for statistical causal modelling} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\supervisor{Robert Williamson and Cheng Soon Ong} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
+\degree{Doctor of Philosophy} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\author{David Johnston} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
+\subject{Artificial Intelligence} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\keywords{causal inference, decision theory} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\university{\href{http://anu.edu.au}{The Australian National University}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+\department{\href{https://cecs.anu.edu.au/}{College of Engineering and Computer Science}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+% \group{\href{http://rsaa.anu.edu.au}{Research School of Astronomy \& Astrophysics}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+\faculty{\href{http://science.anu.edu.au}{ANU College of Science}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
 
-\makeatletter
-\newcommand{\newreptheorem}[2]
-  {\newtheorem*{rep@#1}{\rep@title}\newenvironment{rep#1}[1]
-  {\def\rep@title{#2 \ref*{##1}}\begin{rep@#1}}{\end{rep@#1}}}
-\makeatother
-
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newreptheorem{theorem}{Theorem}
-\newreptheorem{lemma}{Lemma}
-
-\newtheorem{innercustomthm}{Theorem}
-\newenvironment{customthm}[1]
-  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
-  {\endinnercustomthm}
-
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{notation}[theorem]{Nxample}
-
-
-\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
-
-\newcommand{\CI}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp$}}}}
-\newcommand{\CII}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp\mkern-10mu\perp$}}}}
-\newcommand{\RV}[1]{\ensuremath{\mathsf{#1}}}
-\newcommand{\node}[1]{\ensuremath{\overset{\sim}{\RV{#1}}}}
-\newcommand{\graph}[1]{\ensuremath{\overset{\sim}{\mathcal{#1}}}}
-\newcommand{\URV}[1]{\ensuremath{\underline{\RV{#1}}}}
-\newcommand{\PA}[2]{\ensuremath{\text{Pa}_{#1}(#2)}}
-\newcommand{\ND}[2]{\ensuremath{\text{ND}_{#1}(#2)}}
-\newcommand{\CH}[2]{\ensuremath{\text{Ch}_{#1}(#2)}}
-\newcommand{\DE}[2]{\ensuremath{\text{De}_{#1}(#2)}}
-\newcommand{\ID}[1]{\ensuremath{\text{Id}_{#1}}}
-\newcommand{\utimes}{\ensuremath{\underline{\otimes}}}
-\newcommand{\prob}[1]{\ensuremath{\mathbb{#1}}}
-\newcommand{\disint}[1]{\ensuremath{\overline{\prob{#1}}}}
-\newcommand{\kernel}[1]{\ensuremath{\mathbb{#1}}}
-\newcommand{\model}[1]{\ensuremath{\mathbb{#1}}}
-\newcommand{\diagram}[1]{\ensuremath{\mathscr{#1}}}
-\newcommand{\sigalg}[1]{\ensuremath{\mathcal{#1}}}
-\newcommand{\vecRV}[1]{\ensuremath{\mathsfbfit{#1}}}
-\newcommand{\vecVal}[1]{\ensuremath{\mathbf{#1}}}
-\newcommand{\prodSet}[1]{\ensuremath{\mathbf{#1}}}
-\newcommand{\indx}[1]{\ensuremath{\mathcal{#1}}}
-\newcommand{\nod}[1]{\ensuremath{\mathsfit{#1}}}
-\newcommand{\kto}{\ensuremath{\rightarrowtriangle}}
-\newcommand{\proc}[1]{\ensuremath{\mathscr{#1}}}
-\newcommand{\yields}{\ensuremath{\bowtie}}
-\newcommand{\submodel}{\ensuremath{\sqsubset}}
-\newcommand{\seedo}[5]{\ensuremath{\model{#1}^{\RV{#3}|\RV{#2}\square\RV{#5}|\RV{#4}}}}
-\newcommand{\rseedo}[6]{\ensuremath{\model{#1}^{\RV{#3}|\RV{#2}\framebox{#6}\RV{#5}|\RV{#4}}}}
-\newcommand{\set}{\ensuremath{\bowtie}}
-\newcommand{\cprod}{\ensuremath{\odot}}
-\newcommand{\bigcprod}{\ensuremath{\bigodot}}
-\newcommand{\combprod}{\ensuremath{\underline{\cprod}}}
-\newcommand{\combbreak}{\ensuremath{\wr}}
-\newcommand{\combgap}{\ensuremath{\shortleftarrow}}
-\newcommand{\bigcombprod}{\ensuremath{\underline{\bigcprod}}}
-\newcommand{\varlessthan}{\ensuremath{\preccurlyeq}}
-\algnewcommand\algorithmicassert{\texttt{assert}}
-\algnewcommand\Assert[1]{\State \algorithmicassert(#1)}%
-
-
-
-\providecommand\longrightarrowRHD{\relbar\joinrel\relbar\joinrel\mathrel\RHD}
-\providecommand\longleftarrowRHD{\mathrel\LHD\joinrel\relbar\joinrel\relbar}
-
-\makeatletter
-\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
-\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
-\makeatother
-
-\tikzset{
-    triangle/.style = {regular polygon, regular polygon sides=3 },
-    node rotated/.style = {rotate=90},
-    border rotated/.style = {shape border rotate=90},
-    dist/.style = {triangle,draw,border rotated, inner sep=0pt},
-    smalldist/.style = {triangle,draw,border rotated},
-    kernel/.style={rectangle,draw,inner sep = 2pt},
-    expectation/.style = {triangle,draw,inner sep=0pt,shape border rotate=270},
-    copymap/.style = {circle,fill,inner sep=1pt}}
-
-\newcommand\DCI{
-    \begin{tikzpicture}[scale=0.35]
-    \draw[->] (1,0) -- (0,0);
-    \draw (0.6,0) -- (0.6,0.75);
-    \draw (0.4,0) -- (0.4,0.75);
-    \end{tikzpicture}
+\AtBeginDocument{
+\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
 }
-
-\newcommand\splitter[1]{%
-\begin{tikzpicture}[scale=#1]
-\draw (0,-1) -- (0,0);
-\draw (0,0) to [bend right] (1,1);
-\draw (0,0) to [bend left] (-1,1);
-\end{tikzpicture}
-}
-
-\newcommand\stopper[1]{%
-\begin{tikzpicture}[scale=#1]
-\draw[-{Rays [n=8]}] (0,-1) -- (0,0);
-\end{tikzpicture}
-}
-
-\newcommand\swap[1]{%
-\begin{tikzpicture}[scale=#1]
-\draw (0,0) to [out=90, in=270] (0.5,1);
-\draw (0.5,0) to [out=90,in=270] (0,1);
-\end{tikzpicture}
-}
-
-\newcommand\source[1]{%
-\begin{tikzpicture}[scale=#1]
-\path (0,0) node[prob,fill=gray] (P) {};
-\draw (P) -- ($(P.east) + (1,0)$);
-\end{tikzpicture}
-}
-
-\DeclareMathOperator*{\argmax}{arg\,max}
-\DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\arginf}{arg\,inf}
-\DeclareMathOperator*{\argsup}{arg\,sup}
-
-\newcommand{\cheng}[1]{ {\color{purple}[{\bf Cheng:~{#1}}]} }
-
-% Decision Theoretic Foundations for Causal Modelling
-
-\title{Causal Statistical Decision Theory|What are interventions?}
-\date{\today}
-
-\author{ David Johnston }
 
 \begin{document}
 
-\maketitle
+\input{Front_Matter}
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
 
 
-% \begin{abstract}
-% We develop \emph{causal statistical decison theory} (CSDT) a novel theory of causal inference which we derive by introducing the idea that ``decisions have consequences'' to statistical decision theory. CSDT features \emph{causal theories} as the central object of study. We show that causal Bayesian networks have a natural representation as a causal theory and that potential outcomes models may arguably be represented as causal theories as well. In both cases the resulting theories feature unreasonably rich sets of decisions, which we suggest is because both approaches aim to produce reusable causal models. Using causal theories, we investigate reusability -- when can knowledge gained using one causal theory be applied to another -- and show that this is possible when the theories are related by a \emph{coarsening}.
-% \end{abstract}
-\tableofcontents
+\include{Chapters/chapter_1_introduction}
+\include{Chapters/chapter_2_technical}
+\include{Chapters/chapter_3_models_with_consequences}
+\include{Chapters/chapter_4_response_functions}
+\include{Chapters/chapter_5_other_causal_inference}
+\include{Chapters/chapter_6_discussion}
 
 
-\input{chapter_1_introduction}
-\input{chapter_2_technical}
-\input{chapter_3_models_with_consequences}
-\input{chapter_4_response_functions}
-% \input{chapter_5_cc_sdt}
-% \input{chapter_5_interventions_counterfactuals}
-\input{chapter_5_other_causal_inference}
-\input{chapter_6_discussion}
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+%Use the executable file provide here to clean-up Mendeley generated bib files
+%https://ramblingacademic.com/2016/06/19/fixing-bibtex-files-mendeley/ 
+% or the python script at https://tex.stackexchange.com/questions/286261/incompatible-month-formats-between-biblatex-and-mendeley
 
-\bibliographystyle{plainnat}
-\bibliography{references}
+\printbibliography[heading=bibintoc]
 
-\appendix
-\newpage
-\section*{Appendix:}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%----------------------------------------------------------------------------------------
 
-% \input{appendix_AIstats}
+\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
 
-\end{document}
+% Include the appendices of the thesis as separate files from the Appendices folder
+% Uncomment the lines as you write the Appendices
+
+% \include{Appendices/AppendixA}
+%\include{Appendices/AppendixB}
+%\include{Appendices/AppendixC}
+
+\clearpage
+
+%\listoffixmes
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+
+\end{document}  

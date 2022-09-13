@@ -1,0 +1,236 @@
+%!TEX root = main.tex
+
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+\vspace*{.02\textheight}
+%{\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
+% \bigskip  
+%\textsc{\Large Doctoral Thesis}\\[0.5cm] % Thesis type
+
+%\HRule \\[0.4cm] % Horizontal line
+
+%{\huge \bfseries \ttitle\par}\vspace{0.6cm} % Thesis title automatic
+
+{\bfseries
+\LARGE{Decision theoretic foundations for statistical causal modelling}\\
+\bigskip
+\large{}
+}
+
+\vspace{1cm} % Thesis title
+
+%\HRule \\[1.2cm] % Horizontal line
+ 
+\begin{minipage}[t]{0.3\textwidth}
+\begin{center}
+ \large
+%\emph{Author:}\\
+ \authorname % Author name - remove the \href bracket to remove the link
+\end{center}
+\end{minipage}
+
+%\begin{minipage}[t]{0.4\textwidth}
+%\begin{flushright} \large
+%\emph{Supervisor:} \\
+%\href{http://www.jamessmith.com}{\supname} % Supervisor name - remove the \href bracket to remove the link  
+%\end{flushright}
+%\end{minipage}\\[3cm]
+ 
+% \vspace{1cm}
+% \includegraphics[width=0.6\textwidth]{gfx/front_cover} \\ \bigskip  
+% \vspace{1cm}
+
+\large \textit{A thesis submitted for the degree of \degreename}\\[0.7cm] % University requirement text
+%\textit{in the}\\[0.4cm]
+% \groupname\\
+\deptname\\ % Research group name and department name
+%\univname % University name
+
+%{\small Draft (\today)}\\[2cm] % Date
+%\includegraphics{Logo} % University/department logo - uncomment to place it
+
+\includegraphics[width=5cm]{gfx/ANU_LOGO_cmyk_56mm}
+
+{\normalsize September, 2022}\\[2cm] % Date
+
+\end{center}
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	DECLARATION PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{declaration}
+%\addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
+\begingroup
+\large
+\noindent This dissertation is an account of research undertaken between January 2018 and September 2022 at the College of Engineering and Computer Sciences, The Australian National University, Canberra, Australia. 
+
+%Except where acknowledged in the customary manner, all material presented in this dissertation including figures and photographs are original and have not been submitted in whole or part for a degree in any university.
+
+The work presented in this thesis is that of the candidate alone, except where indicated by due literature reference and acknowledgements in the text. It has not been submitted in whole or in part for any other degree at this or any other university.
+
+The development of ideas and research was undertaken with guidance from my primary supervisors Robert Williamson and Cheng Soon Ong, and the thesis was written by myself. The overall direction of the research was developed in collaboration with my supervisors, who also provided a lot of detailed feedback on my work along the way. The original results presented here were primarily my work.
+
+\bigskip
+\vspace{1cm}
+\begin{flushright}
+\authorname\\
+\today
+\end{flushright}
+\endgroup
+\end{declaration}
+\vspace{3cm}
+% \begingroup
+% \footnotesize\emph{{Cover: Figure 1 from \fullcite{Lineweaver2012AnnRev}}}
+% \endgroup
+\cleardoublepage
+
+% \begin{declaration}
+% \addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
+% \noindent I, \authorname, declare that this thesis titled, \enquote{\ttitle} and the work presented in it are my own. I confirm that:
+
+% \begin{itemize} 
+% \item This work was done wholly or mainly while in candidature for a research degree at this University.
+% \item Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
+% \item Where I have consulted the published work of others, this is always clearly attributed.
+% \item Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
+% \item I have acknowledged all main sources of help.
+% \item Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
+% \end{itemize}
+ 
+% \noindent Signed:\\
+% \rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
+ 
+% \noindent Date:\\
+% \rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
+% \end{declaration}
+
+% \cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	QUOTATION PAGE
+%----------------------------------------------------------------------------------------
+
+% \vspace*{0.2\textheight}
+
+% \noindent\enquote{\itshape Thanks to my solid academic training, today I can write hundreds of words on virtually any topic without possessing a shred of information, which is how I got a good job in journalism.}
+
+% \hfill Dave Barry
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\begin{acknowledgements}
+\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
+\vspace{0.4cm}
+\begingroup
+\normalsize
+\todo[inline]{Acknowldegements}
+\endgroup
+\end{acknowledgements}
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+\begingroup
+\normalsize
+\todo[inline]{Update abstract}
+\bigskip
+
+\textbf{Keywords:} \keywordnames
+
+\endgroup
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+% \renewcommand{\listfigurename}{Figures}
+% \renewcommand{\listtablename}{Tables}
+
+\begin{spacing}{0.94} 
+\tableofcontents % Prints the main table of contents
+\end{spacing}
+
+% \listoffigures % Prints the list of figures
+% \listoftables % Prints the list of tables
+% \listoflistings % Prints the list of python codes
+
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%----------------------------------------------------------------------------------------
+
+\todo[inline]{List of notation}
+
+% \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
+% \textbf{ANU}&\textbf{A}ustralian \textbf{N}ational \textbf{U}niversity\\
+
+% \end{abbreviations}
+
+%----------------------------------------------------------------------------------------
+%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% \begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
+
+% % The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
+
+% Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
+% %Constant Name & $Symbol$ & $Constant Value$ with units\\
+
+% \end{constants}
+
+%----------------------------------------------------------------------------------------
+%	SYMBOLS
+%----------------------------------------------------------------------------------------
+
+\begin{symbols}{lll} % Include a list of Symbols (a three column table)
+
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ Name & notation & meaning \\
+ \hline
+ Iverson bracket & $\llbracket \cdot \rrbracket$ & Function equal to 1 if $\cdot$ is true, false otherwise \\ 
+ Identity function & $\mathrm{id}_X$ & Identity function $X\to X$\\
+ Identity kernel & $\mathrm{Id}_{X}$ & Kernel associated with the identity function $X\to X$\\
+ \hline
+\end{tabular}
+
+
+\addlinespace % Gap to separate the Roman symbols from the Greek
+
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ Name & notation & meaning \\
+ \hline
+ Iverson bracket & $\llbracket \cdot \rrbracket$ & Function equal to 1 if $\cdot$ is true, false otherwise \\ 
+ Identity function & $\mathrm{id}_X$ & Identity function $X\to X$\\
+ Identity kernel & $\mathrm{Id}_{X}$ & Kernel associated with the identity function $X\to X$\\
+ \hline
+\end{tabular}
+
+\end{symbols}
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+% \dedicatory{For/Dedicated to/To my\ldots} 
+
+

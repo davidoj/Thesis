@@ -1,70 +1,25 @@
-This is BibTeX, Version 0.99d (TeX Live 2021)
-Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
-The top-level auxiliary file: main.aux
-The style file: plainnat.bst
-Database file #1: references.bib
-Repeated entry---line 1471 of file references.bib
- : @article{kerns_definettis_2006
- :                               ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 2414 of file references.bib
- : @book{savage_foundations_1954
- :                              ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 2421 of file references.bib
- : @phdthesis{shpitser_complete_2008
- :                                  ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 2921 of file references.bib
- : @article{fong_causal_2013
- :                          ,
-I'm skipping whatever remains of this entry
-Warning--to sort, need author, editor, or key in noauthor_holy_1995
-Warning--empty author and editor in noauthor_holy_1995
-Warning--empty institution in barenboim_foundations_2020
-Warning--empty booktitle in horvitz_framework_1986
-Warning--empty journal in lattimore_learning_2017
-Warning--empty journal in saarela_role_2020
-Warning--empty publisher in scholkopf_causality_2022
-You've used 121 entries,
-            2773 wiz_defined-function locations,
-            1502 strings with 32675 characters,
-and the built_in function-call counts, 54398 in all, are:
-= -- 5330
-> -- 2404
-< -- 116
-+ -- 843
-- -- 720
-* -- 4211
-:= -- 8512
-add.period$ -- 628
-call.type$ -- 121
-change.case$ -- 583
-chr.to.int$ -- 119
-cite$ -- 250
-duplicate$ -- 2589
-empty$ -- 4593
-format.name$ -- 904
-if$ -- 11548
-int.to.chr$ -- 3
-int.to.str$ -- 1
-missing$ -- 131
-newline$ -- 856
-num.names$ -- 496
-pop$ -- 1014
-preamble$ -- 1
-purify$ -- 476
-quote$ -- 0
-skip$ -- 1841
-stack$ -- 0
-substring$ -- 1938
-swap$ -- 342
-text.length$ -- 20
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 1221
-warning$ -- 7
-while$ -- 510
-width$ -- 0
-write$ -- 2070
-(There were 4 error messages)
+[0] Config.pm:311> INFO - This is Biber 2.16
+[0] Config.pm:314> INFO - Logfile is 'main.blg'
+[52] biber-darwin:340> INFO - === Mon Sep 12, 2022, 16:24:36
+[66] Biber.pm:415> INFO - Reading 'main.bcf'
+[197] Biber.pm:952> INFO - Found 120 citekeys in bib section 0
+[208] Biber.pm:4340> INFO - Processing section 0
+[217] Biber.pm:4531> INFO - Looking for bibtex format file 'library.bib' for section 0
+[237] bibtex.pm:1689> INFO - LaTeX decoding ...
+[543] bibtex.pm:1494> INFO - Found BibTeX data source 'library.bib'
+[552] Utils.pm:395> WARN - Duplicate entry key: 'kerns_definettis_2006' in file 'library.bib', skipping ...
+[558] Utils.pm:395> WARN - Duplicate entry key: 'savage_foundations_1954' in file 'library.bib', skipping ...
+[558] Utils.pm:395> WARN - Duplicate entry key: 'shpitser_complete_2008' in file 'library.bib', skipping ...
+[559] Utils.pm:395> WARN - Duplicate entry key: 'shrier_intention--treat_2017' in file 'library.bib', skipping ...
+[560] Utils.pm:395> WARN - Duplicate entry key: 'clerc_pointless_2017' in file 'library.bib', skipping ...
+[561] Utils.pm:395> WARN - Duplicate entry key: 'maathuis_estimating_2009' in file 'library.bib', skipping ...
+[561] Utils.pm:395> WARN - Duplicate entry key: 'fong_causal_2013' in file 'library.bib', skipping ...
+[563] Utils.pm:395> WARN - Duplicate entry key: 'meek_strong_1995' in file 'library.bib', skipping ...
+[844] Utils.pm:395> WARN - legacy year field '{[1937] 1992}' in entry 'de_finetti_foresight_1992' is not an integer - this will probably not sort properly.
+[1105] UCollate.pm:68> INFO - Overriding locale 'en-AU' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1105] UCollate.pm:68> INFO - Overriding locale 'en-AU' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1105] Biber.pm:4168> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-AU'
+[1106] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-AU'
+[1218] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[1307] bbl.pm:757> INFO - Output to main.bbl
+[1307] Biber.pm:128> INFO - WARNINGS: 9
