@@ -1,0 +1,27 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=small kernel tikzit] (0) at (0, 1.5) {$\prob{F}_{\mathrm{lu}}$};
+		\node [style=Llabel tikzit] (1) at (-5.5, 0.75) {$\RV{D}$};
+		\node [style=RLabel tikzit] (2) at (3, 1.5) {$\RV{Y}$};
+		\node [style=none] (3) at (-0.5, 1.75) {};
+		\node [style=none] (4) at (-0.5, 1.25) {};
+		\node [style=small kernel tikzit] (5) at (-4, 2) {$\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$};
+		\node [style=Llabel tikzit] (6) at (-5.5, 2) {$\RV{W}$};
+		\node [style=RLabel tikzit] (7) at (3, 0.25) {$\RV{H}$};
+		\node [style=small kernel tikzit] (9) at (2.25, 0.25) {$\kernel{F}_{g}$};
+		\node [style=none] (10) at (1.75, 0.5) {};
+		\node [style=none] (11) at (1.75, 0) {};
+		\node [style=small dist tikzit] (12) at (-3.25, -0.25) {$\delta_{d'}$};
+		\node [style=copymap tikzit] (13) at (-2, 1.75) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0) to (2);
+		\draw (6) to (5);
+		\draw (9) to (7);
+		\draw [in=180, out=0] (1) to (4.center);
+		\draw [in=180, out=0] (12) to (11.center);
+		\draw [in=165, out=0] (5) to (13);
+		\draw [in=-180, out=0] (13) to (3.center);
+		\draw [in=-180, out=-90] (13) to (10.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

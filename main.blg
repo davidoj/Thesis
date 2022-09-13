@@ -3,19 +3,19 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-Repeated entry---line 1150 of file references.bib
+Repeated entry---line 1471 of file references.bib
  : @article{kerns_definettis_2006
  :                               ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 2093 of file references.bib
+Repeated entry---line 2414 of file references.bib
  : @book{savage_foundations_1954
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 2100 of file references.bib
+Repeated entry---line 2421 of file references.bib
  : @phdthesis{shpitser_complete_2008
  :                                  ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 2600 of file references.bib
+Repeated entry---line 2921 of file references.bib
  : @article{fong_causal_2013
  :                          ,
 I'm skipping whatever remains of this entry
@@ -26,45 +26,45 @@ Warning--empty booktitle in horvitz_framework_1986
 Warning--empty journal in lattimore_learning_2017
 Warning--empty journal in saarela_role_2020
 Warning--empty publisher in scholkopf_causality_2022
-You've used 100 entries,
+You've used 121 entries,
             2773 wiz_defined-function locations,
-            1360 strings with 28040 characters,
-and the built_in function-call counts, 44182 in all, are:
-= -- 4329
-> -- 1906
-< -- 94
-+ -- 673
-- -- 571
-* -- 3423
-:= -- 6951
-add.period$ -- 521
-call.type$ -- 100
-change.case$ -- 471
-chr.to.int$ -- 98
-cite$ -- 208
-duplicate$ -- 2114
-empty$ -- 3763
-format.name$ -- 716
-if$ -- 9355
+            1502 strings with 32675 characters,
+and the built_in function-call counts, 54398 in all, are:
+= -- 5330
+> -- 2404
+< -- 116
++ -- 843
+- -- 720
+* -- 4211
+:= -- 8512
+add.period$ -- 628
+call.type$ -- 121
+change.case$ -- 583
+chr.to.int$ -- 119
+cite$ -- 250
+duplicate$ -- 2589
+empty$ -- 4593
+format.name$ -- 904
+if$ -- 11548
 int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 112
-newline$ -- 712
-num.names$ -- 408
-pop$ -- 812
+missing$ -- 131
+newline$ -- 856
+num.names$ -- 496
+pop$ -- 1014
 preamble$ -- 1
-purify$ -- 385
+purify$ -- 476
 quote$ -- 0
-skip$ -- 1477
+skip$ -- 1841
 stack$ -- 0
-substring$ -- 1568
-swap$ -- 256
-text.length$ -- 14
+substring$ -- 1938
+swap$ -- 342
+text.length$ -- 20
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 995
+type$ -- 1221
 warning$ -- 7
-while$ -- 418
+while$ -- 510
 width$ -- 0
-write$ -- 1720
+write$ -- 2070
 (There were 4 error messages)

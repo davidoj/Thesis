@@ -517,7 +517,7 @@ Fix $w\in W$ and consider $\prob{P}_{\alpha,w}^{\RV{Y}^D}:= \prob{P}_{\alpha}^{\
 \begin{align}
     \prob{P}_{\alpha,w}^{\RV{Y}^D|\RV{H}} &= \tikzfig{de_finetti_conditional}
 \end{align}
-Hence
+Because the right hand side does not depend on $w$, we can say
 \begin{align}
     \prob{P}_{\alpha}^{\RV{Y}^D|\RV{HW}} &= \tikzfig{de_finetti_conditional_erase}
 \end{align}
@@ -571,7 +571,7 @@ If a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ has independent 
 \end{lemma}
 
 \begin{proof}
-We'll show for all $A_j\in \sgiagl{Y}^D$, $h\in H$, $g\in G$:
+We'll show for all $A_j\in \sigalg{Y}^D$, $h\in H$, $g\in G$:
 \begin{align}
     \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}\RV{G}}(A_j|j,h,g) &= \RV{H}(\bigtimes_{j\in D} A_j)\\
     &= \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}(A_j|j,h)
@@ -601,7 +601,7 @@ Hence, by applying the law of large numbers after conditioning on each $g\in G$,
 The following is a technical lemma that will be used in Theorem \ref{th:ciid_rep_kernel}.
 
 \begin{lemma}\label{lem:hw_interchange}
-Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable and, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}}(E)=1$ for all $\alpha$, for some $\RV{W}$, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible, $\RV{Y}\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{D},\RV{C})$ and for all $\alpha$
+Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable and, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}}(E)=1$ for all $\alpha$, for some $\RV{W}$, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible and for all $\alpha$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel_2}
 \end{align}
@@ -612,43 +612,68 @@ then
 \end{lemma}
 
 \begin{proof}
-$\RV{Y}^D$ is a function of $\RV{Y}$ and $\RV{D}$ (see Definition \ref{def:tab_cd}) and $\RV{H}$ is a function of $\RV{Y}^D$. Say $f:Y\times D\to H$ is such that $\RV{H}=f(\RV{Y},\RV{D})$ (see Definition \ref{def:dir_rand_meas}). Then (using $\RV{Y}\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{D},\RV{C})$)
+$\RV{Y}^D$ is a function of $\RV{Y}$ and $\RV{D}$ (see Definition \ref{def:tab_cd}) and $\RV{H}$ is a function of $\RV{Y}^D$. Say $f:Y\times D\to H$ is such that $\RV{H}=f(\RV{Y},\RV{D})$ (see Definition \ref{def:dir_rand_meas}). Because $\RV{H}=f(\RV{Y},\RV{D})$, we have $\RV{H}\CI^e_{\prob{P}_C} (\RV{W},\RV{C})|(\RV{Y},\RV{D})$. Thus
 \begin{align}
     \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint}\label{eq:luprep_joint}
 \end{align}
-For $d\in D^{\mathbb{N}}$, take $[d=j]_i$ to be the $i$th coordinate of $d$ equal to $j\in D$ and $\#_{[d=j]_i}$ to be the position in $d$ of $[d=j]_i$. Concretely, $f$ is given by
+For a sequence $d\in D^{\mathbb{N}}$ where each $j\in D$ occurs infinitely often, take $[d=j]_i$ to be the $i$th coordinate of $d$ equal to $j\in D$ and $\#_{[d=j]_i}$ to be the position in $d$ of $[d=j]_i$. Concretely, $f$ is given by
 \begin{align}
-    f(y,d) &= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y_{\#_{[d=j]_i}})
+    f(y,d) &= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y_{\#_{[d=j]_i}})\\
+    &=: f_d(y)
 \end{align}
 where the limit exists. Note that for $y^D\in Y^{D\times\mathbb{N}}$ we have
 \begin{align}
-    f\circ \mathrm{lu}(y^D,d) &= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{\#_{[d=j]_i} j})
+    f_d\circ \mathrm{lu}(y^D,d) &= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{\#_{[d=j]_i} j})
 \end{align}
-Let $\RV{G}:=f\circ \mathrm{lu}(\RV{Y}^D,d)$ for some $d\in D^{\mathbb{N}}$.
+Let $g:=(y^D,d)\mapsto f_d\circ \mathrm{lu}(y^D,d)$ for some $d\in D^{\mathbb{N}}$ where each $j\in D$ occurs infinitely often.
 
-Define $g:Y^{D\times\mathbb{N}}\to H$ by
+We aim to show that $g(\RV{Y}^D,d)\overset{\prob{P}_\alpha}{\cong} g(\RV{Y}^D,d')$ for all $d,d'\in D^{\mathbb{N}}$ such that each $j\in D$ occurs infinitely often.
+
+Consider, for arbitrary $A\in \sigalg{Y}^D$
 \begin{align}
-    g(y^D):= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{ij})
+    \prob{P}_\alpha (g(\RV{Y}^D,d)(A)\yields g(\RV{Y}^D,d')(A)) &= \int_H \prob{P}_\alpha^{\mathrm{Id}_{\Omega}|\RV{H}}(g(\RV{Y}^D,d)(A)\yields g(\RV{Y}^D,d')(A)|\nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)
 \end{align}
-and note that $g(\RV{Y}^D)=\RV{H}$. For some $A\in \sigalg{Y}^D$ let $\RV{G}_A:=\RV{G}(A)$ and $\RV{H}_A:=\RV{H}(A)$.Consider 
+
+Note that
 \begin{align}
-    \prob{P}_\alpha (\RV{G}_A\yields \RV{H}_A) &= \int_H \prob{P}_\alpha^{\RV{G}_A|\RV{H}} (\nu(A)| \nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)\\
-    &= \int_H \prob{P}_\alpha^{\RV{Y}^D|\RV{H}} (\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y_{\#_{[d=j]_i}})\yields \nu(A)| \nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)
+     \prob{P}_\alpha^{\mathrm{Id}_{\Omega}|\RV{H}}(g(\RV{Y}^D,d)(A)\yields \nu(A)|\nu) &= \prob{P}_\alpha^{\RV{Y}^D|\RV{H}}(\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{\#_{[d=j]_i},j})\yields \nu(A)| \nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)
+\end{align}
+by independent permutability of the rows of $\RV{Y}^D$ (Theorem \ref{th:table_rep_kernel}), for each row we can send $\#_{[d=j]_i}$ to $i$ and obtain
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}^D|\RV{H}}(\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{\#_{[d=j]_i},j})\yields \nu(A)| \nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu) &= \prob{P}_\alpha^{\RV{Y}^D|\RV{H}} (\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{i,j})\yields \nu(A)| \nu)\\
+    &= \prob{P}_\alpha^{\RV{Y}^D_{iD}|\RV{H}} (\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \mathds{1}_{A}(y^D_{i,D})\yields \nu(A)| \nu)
 \end{align}
 but by Lemma \ref{lem:ciid_yd}, the sequence $(\RV{Y}^D_{iD})_{i\in \mathbb{N}}$ are mutually independent conditional on $\RV{H}$ and for all $\alpha$, $\prob{P}_\alpha^{\RV{Y}_{iD}|\RV{H}}(A|\nu)\overset{\prob{P}_C}{\cong}\nu(A)$. Thus, by the law of large numbers
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}^D|\RV{H}} (\left[\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y_{\#_{[d=j]_i}})\right]\yields \nu(A)| \nu)= 1
+    \prob{P}_\alpha^{\RV{Y}^D|\RV{H}} (\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \mathds{1}_{\prod_{j\in D} A_j}(y^D_{i,D})\yields \nu(A)| \nu)&= 1\\
+    \implies \int_H \prob{P}_\alpha^{\mathrm{Id}_{\Omega}|\RV{H}}(g(\RV{Y}^D,d)(A)\yields g(\RV{Y}^D,d')(A)|\nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu) &= \int_H \prob{P}_\alpha^{\mathrm{Id}_{\Omega}|\RV{H}}(g(\RV{Y}^D,d)(A)\yields \nu(A) \cap  g(\RV{Y}^D,d')(A)\yields \nu(A)|\nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)\\
+    &= 1\\
+    \implies g(\RV{Y}^D,d)&\overset{\prob{P}_\alpha}{\cong} g(\RV{Y}^D,d) & \text{as this holds for all }A
 \end{align}
-In particular, by Eq. \eqref{eq:luprep_joint}
+And, as a consequence, defining
 \begin{align}
-    \prob{P}_\alpha^{\RV{YH}|\RV{WD}}&=\tikzfig{lookup_representation_kernel_joint}\\
-    &= \tikzfig{lookup_representation_kernel_joint_2}
+    i:(y^d,d,d')\mapsto (\mathrm{lu}(\RV{Y}^D,d),g(\RV{Y}^D,d'))
 \end{align}
-noting that $\kernel{F}_g\otimes\mathrm{del}_W = \prob{P}_\alpha^{\RV{H}|\RV{Y}^D\RV{W}}$ (as $\RV{H}$ is by definition a function of $\RV{Y}^D$)
+we have
+\begin{align}
+    i(y^d,d,d) &\overset{\prob{P}_\alpha}{\cong} i(y^d,d,d)
+\end{align}
+which in turn implies
+\begin{align}
+    &\phantom{=} \tikzfig{lookup_representation_kernel_joint}\\
+    &= \tikzfig{lookup_representation_kernel_joint_half}
+    &=: \tikzfig{lookup_representation_kernel_joint_2}
+\end{align}
+noting that $\kernel{F}_h\otimes\mathrm{del}_W = \prob{P}_\alpha^{\RV{H}|\RV{Y}^D\RV{W}}$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}^D\RV{H}|\RV{W}} &= \tikzfig{p_yd_h_on_w} \\
+    &= \tikzfig{yd_h_on_w_invert}
+\end{align}
+and so
 \begin{align}
     \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint_3}
 \end{align}
-and by the fact that $\RV{Y}\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{D},\RV{C})$ and $\RV{Y}^D$ is a function of $\RV{Y}$ and $\RV{D}$, we have $(\RV{Y}^D,\RV{Y})\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{C})$ by contraction. Then by decomposition, $\RV{Y}^D\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{C})$ also, and so
+From Theorem \ref{th:table_rep_kernel} we also have $\RV{Y}^D\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\RV{C})$ , so
 \begin{align}
     \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint_4}
 \end{align}
@@ -665,7 +690,7 @@ Note that property (2) is equivalent to the conjunction of conditionally indepen
 \begin{theorem}[Representation of IO contractible models]\label{th:ciid_rep_kernel}
 Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with sample space $(\Omega,\sigalg{F})$ is given with $D$ countable and, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}}(E)=1$ for all $\alpha$. Then the following are equivalent:
 \begin{enumerate}
-    \item There is some $\RV{W}$ such that $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible and $\RV{Y}\CI^e_{\prob{P}_C} \RV{W} | (\RV{H},\RV{D},\RV{C})$
+    \item There is some $\RV{W}$ such that $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible
     \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\RV{C})|(\RV{H},\RV{D}_i)$ and for all $i,j$ $$\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$$
     \item There is some $\kernel{L}:H\times X\kto Y$ such that for all $\alpha$, $$\prob{P}_\alpha^{\RV{Y}|\RV{HD}}= \tikzfig{do_model_representation_conditional}$$
 \end{enumerate}
@@ -842,7 +867,7 @@ Finally, from Eq. \eqref{eq:joint_given_g} and Eq. \eqref{eq:swap_q_for_p}
 Thus $(\prob{P}_C,\RV{D},\RV{Y})$ features independent and identical responses conditioned on $\RV{G}$, and by Lemma \ref{lem:ci_drc} it also has independent and identical responses conditioned on $\RV{H}$. Finally, by Theorem \ref{th:ciid_rep_kernel} $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible.
 \end{proof}
 
-Given $\prob{P}_C^{\RV{Y}|\RV{D}}$ exchange commutative, we can show that  $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible over where $\RV{W}$ is some symmetric function of $\RV{D}$. This $\RV{W}$ therefore satisfies $\RV{Y}\CI^e_{\prob{P}_C} \RV{W} | (\RV{H},\RV{D},\RV{C})$, and so exchange commutativity of $\prob{P}_C^{\RV{Y}|\RV{D}}$ is enough to establish $(\prob{P}_C,\RV{D},\RV{Y})$ has conditionally independent and identical response conditionals. 
+While $\prob{P}_C^{\RV{Y}|\RV{D}}$ exchange commutative is not necessarily IO contractible, exchange commutativity of this conditional implies IO contractibility over the directing random conditional $\RV{H}$, and thus is sufficient for conditionally indpeendent and identical responses.
 
 \begin{theorem}\label{lem:exch_prod_ciid}
 If $\prob{P}_C^{\RV{Y}|\RV{D}}$ is exchange commutative, and for each $\alpha$ $\prob{P}_\alpha^{\RV{D}}$ is absolutely continuous with respect to some exchangeable distribution $\prob{Q}_\alpha^{\RV{D}}$ in $\Delta(D^{\mathbb{N}})$ then $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible, where $\RV{H}$ is the directing random conditional for $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$.
@@ -896,8 +921,6 @@ By construction
     \prob{Q}_\alpha^{\RV{Y}_i\RV{D}_i\RV{Y}_{\{i^C\}}\RV{D}_{\{i^C\}}}:=\prob{Q}_\alpha^{\RV{D}_i\RV{Y}_{\{i^C\}}\RV{D}_{\{i^C\}}}\odot \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_{\{i^C\}},\RV{D}_{\{i^C\}}}
 \end{align}
 is exchangeable, and by domination $\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_{\{i^C\}},\RV{D}_{\{i^C\}}}\overset{\prob{P}}{\cong}\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_{\{i^C\}},\RV{D}_{\{i^C\}}}$. The result follows from Lemma \ref{lem:dom_cond}.
-
-
 \end{proof}
 
 \section[Discussion]{Discussion}\label{sec:symmetries_discussion}
@@ -908,7 +931,7 @@ The previous section established a number of symmetries of input-output models t
 
 These general results both establish a symmetry of the conditional distribution of outputs after conditioning on some ``long run limit'' (either $\RV{H}$ or an infinite sequence of input-output pairs). This makes the results less tidy than the classic result for conditionally independent and identically distributed sequences, which required only that the distribution of the sequence be symmetric to permutation, and no conditioning on long-run limits.
 
-We can consider simpler versions of exchange commutativity or IO contractibility that omit the conditioning on the long-run limit. This is where we choose $\RV{W}=*$ in Definitions \ref{def:caus_exch} and \ref{def:ccontract} respectively. Theorem \ref{th:ciid_rep_kernel} and Corollary \ref{th:ciid_rep_kernel_nolocal} respectively establish that these simpler symmetries are sufficient for conditionally independent and identical responses. We present a few examples to show that these simpler symmetries are not necessary for this property, however. The basic idea in these examples is that, even with conditionally independent and identical responses, inputs could be chosen strategically and different inputs could be chosen according to different strategies.
+We can consider simpler versions of exchange commutativity or IO contractibility that omit the conditioning on the long-run limit. This is where we have exchange commutativity (or IO contractibility) over the trivial variable $\RV{W}=*$ in Definitions \ref{def:caus_exch} and \ref{def:ccontract} respectively. Theorem \ref{th:ciid_rep_kernel} and Corollary \ref{th:ciid_rep_kernel_nolocal} respectively establish that these simpler symmetries are sufficient for conditionally independent and identical responses. We present a few examples to show that these simpler symmetries are not necessary for this property, however. The basic idea in these examples is that, even with conditionally independent and identical responses, inputs could be chosen strategically and different inputs could be chosen according to different strategies.
 
 \paragraph{Example 1: purely passive observation}\label{pgph:passive_strategic}
 
