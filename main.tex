@@ -23,7 +23,7 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[
-11pt, % The default document font size, options: 10pt, 11pt, 12pt
+10pt, % The default document font size, options: 10pt, 11pt, 12pt
 oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
 australian, % ngerman for German
 singlespacing, %singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
@@ -46,17 +46,17 @@ headsepline, % Uncomment to get a line under the header
 %	THESIS INFORMATION
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Decision theoretic foundations for statistical causal modelling} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
-\supervisor{Robert Williamson and Cheng Soon Ong} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\thesistitle{The Origin and Evolution of Life on a Pale Blue} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\supervisor{Charles H.\textsc{Lineweaver}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
 \degree{Doctor of Philosophy} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
-\author{David Johnston} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\author{Aditya Chopra} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
 \addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
-\subject{Artificial Intelligence} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
-\keywords{causal inference, decision theory} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\subject{Planetary Science} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\keywords{habitability, planetary science, astrobiology} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
 \university{\href{http://anu.edu.au}{The Australian National University}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
-\department{\href{https://cecs.anu.edu.au/}{College of Engineering and Computer Science}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
-% \group{\href{http://rsaa.anu.edu.au}{Research School of Astronomy \& Astrophysics}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+\department{\href{http://rses.anu.edu.au}{Research School of Earth Sciences}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+\group{\href{http://rsaa.anu.edu.au}{Research School of Astronomy \& Astrophysics}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
 \faculty{\href{http://science.anu.edu.au}{ANU College of Science}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
 
 \AtBeginDocument{
@@ -80,13 +80,8 @@ headsepline, % Uncomment to get a line under the header
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
-
-\include{Chapters/chapter_1_introduction}
-\include{Chapters/chapter_2_technical}
-\include{Chapters/chapter_3_models_with_consequences}
-\include{Chapters/chapter_4_response_functions}
-\include{Chapters/chapter_5_other_causal_inference}
-\include{Chapters/chapter_6_discussion}
+\include{Chapters/Chapter01}
+\include{Chapters/Chapter02}
 
 
 %----------------------------------------------------------------------------------------
@@ -108,7 +103,7 @@ headsepline, % Uncomment to get a line under the header
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
-% \include{Appendices/AppendixA}
+\include{Appendices/AppendixA}
 %\include{Appendices/AppendixB}
 %\include{Appendices/AppendixC}
 
