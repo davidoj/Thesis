@@ -68,7 +68,7 @@ If $A$ is a separable, completely metrizable topological space, then $(A,\mathca
 
 \subsubsection{Probability measures and Markov kernels}
 
-\begin{definition}[Probability measure]
+\begin{definition}[Probability measure]\label{def:prob_meas}
 Given a measurable space $(E,\sigalg{E})$, a map $\mu:\sigalg{E}\to [0,1]$ is a \emph{probability measure} if
 \begin{itemize}
 	\item $\mu(E)=1$, $\mu(\emptyset)=0$
@@ -76,11 +76,11 @@ Given a measurable space $(E,\sigalg{E})$, a map $\mu:\sigalg{E}\to [0,1]$ is a 
 \end{itemize}
 \end{definition}
 
-\begin{notation}[Set of all probability measures]
+\begin{notation}[Set of all probability measures]\label{no:prob_meas_set}
 The set of all probability measures on $(E,\sigalg{E})$ is written $\Delta(E)$.
 \end{notation}
 
-\begin{definition}[Markov kernel]
+\begin{definition}[Markov kernel]\label{def:markov_kern}
 Given measurable spaces $(E,\sigalg{E})$ and $(F,\sigalg{F})$, a \emph{Markov kernel} or \emph{stochastic function} is a map $\kernel{M}:E\times\sigalg{F}\to [0,1]$ such that
 \begin{itemize}
 	\item The map $\kernel{M}(A|\cdot):x\mapsto \kernel{M}(A|x)$ is $\sigalg{E}$-measurable for all $A\in \sigalg{F}$
@@ -98,11 +98,11 @@ A \emph{deterministic} Markov kernel $\kernel{A}:E\to \Delta(\mathcal{F})$ is a 
 
 \paragraph{Common probability measures and Markov kernels}
 
-\begin{definition}[Dirac measure]
+\begin{definition}[Dirac measure]\label{def:dirac_meas}
 The \emph{Dirac measure} $\delta_x\in \Delta(X)$ is a probability measure such that $\delta_x(A)=\llbracket x\in A \rrbracket$
 \end{definition}
 
-\begin{definition}[Markov kernel associated with a function]
+\begin{definition}[Markov kernel associated with a function]\label{def:mkern_func}
 Given measurable $f:(X,\sigalg{X})\to (Y,\sigalg{Y})$, $\kernel{F}_f:X\kto Y$ is the Markov kernel given by $x\mapsto \delta_{f(x)}$
 \end{definition}
 
@@ -129,7 +129,7 @@ Given measurable $f:X\to Y$ and $g:Y\to Z$, $\kernel{F}_f\kernel{F}_g = \kernel{
 Given a measurable space $(\Omega,\sigalg{F})$ and a measurable space of values $(X,\sigalg{X})$, an \emph{$X$-valued variable} is a measurable function $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$.
 \end{definition}
 
-\begin{definition}[Sequence of variables]
+\begin{definition}[Sequence of variables]\label{def:seqvar}
 Given a measurable space $(\Omega,\sigalg{F})$ and two variables $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$, $\RV{Y}:(\Omega,\sigalg{F})\to (Y,\sigalg{Y})$, $(\RV{X},\RV{Y}):\Omega\to X\times Y$ is the variable $\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$.
 \end{definition}
 
@@ -146,9 +146,9 @@ Given a probability space $(\mu,\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega
 \end{align}
 \end{definition}
 
-\begin{notation}[Single-valued variable]\label{no:single_valued}
+\begin{definition}[Trivial variable]\label{no:single_valued}
 We let $*$ stand for any single-valued variable $*:\Omega\to \{*\}$.
-\end{notation}
+\end{definition}
 
 \subsubsection{Markov kernel product notation}\label{ssec:product_notation}
 
@@ -162,7 +162,7 @@ Given $\mu\in \Delta(\mathcal{X})$ and $\kernel{M}:X\kto Y$, the \emph{measure-k
 for all $A\in \sigalg{Y}$.
 \end{definition}
 
-\begin{definition}[Kernel-kernel product]
+\begin{definition}[Kernel-kernel product]\label{def:kproduct}
 Given $\kernel{M}:X\kto Y$ and $\kernel{N}:Y\kto Z$, the \emph{kernel-kernel product} $\kernel{M}\kernel{N}:X\kto Z$ is given by
 \begin{align}
 \kernel{MN} (A|x) := \int_Y \kernel{N}(A|x) \kernel{M}(\mathrm{d}y|x)
@@ -312,7 +312,7 @@ Given kernels $\kernel{K}:W\kto Y$ and $\kernel{L}:X\kto Z$, the tensor product 
 Given $\prob{K}:X\kto Y$ and $\prob{L}:Y\times X\kto Z$, the semidirect product is graphically represented by connecting $\kernel{K}$ and $\kernel{L}$ and keeping an extra copy
 
 \begin{align}
-    \prob{K}\cprod\prob{L}:&= \text{copy}_X(\prob{K}\otimes \text{id}_X)(\text{copy}_Y\otimes\text{id}_X )(\text{id}_Y \otimes \prob{L})\\
+    \prob{K}\cprod\prob{L}:&= \text{Copy}_X(\prob{K}\otimes \text{id}_X)(\text{Copy}_Y\otimes\text{id}_X )(\text{id}_Y \otimes \prob{L})\\
                             &= \tikzfig{copy_product}
 \end{align}
 
@@ -368,8 +368,8 @@ We read diagrams from left to right (this is somewhat different to \citet{fritz_
 
 \subsection{Special maps}
 
-\begin{definition}[Identity map]
-The identity map $\text{id}_X:X\kto X$ defined by $(\text{id}_X)(A|x)= \delta_x(A)$ for all $x\in X$, $A\in\sigalg{X}$, is represented by a bare line.
+\begin{definition}[Identity map]\label{def:ident_k}
+The identity map $\text{Id}_X:X\kto X$ defined by $(\text{id}_X)(A|x)= \delta_x(A)$ for all $x\in X$, $A\in\sigalg{X}$, is represented by a bare line.
 \begin{align}
     \mathrm{id}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
     \path (0,0) node (A) {$X$} ++ (0.5,0) node (B) {$X$};
@@ -378,20 +378,20 @@ The identity map $\text{id}_X:X\kto X$ defined by $(\text{id}_X)(A|x)= \delta_x(
 \end{align}
 \end{definition}
 
-\begin{definition}[Erase map]
-Given some 1-element set $\{*\}$, the erase map $\text{del}_X:X\kto \{*\}$ is defined by $(\text{del}_X)(*|x) = 1$ for all $x\in X$. It ``discards the input''. It looks like a lit fuse:
+\begin{definition}[Erase map]\label{def:erase}
+Given some 1-element set $\{*\}$, the erase map $\text{Del}_X:X\kto \{*\}$ is defined by $(\text{Del}_X)(*|x) = 1$ for all $x\in X$. It ``discards the input''. It looks like a lit fuse:
 \begin{align}
-    \text{del}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+    \text{Del}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
     \path (0,0) ++ (1,0) node (B) {$X$};
     \draw[-{Rays[n=8]}] (A) -- (B);
 \end{tikzpicture}
 \end{align}
 \end{definition}
 
-\begin{definition}[Swap map]
-The swap map $\text{swap}_{X,Y}:X\times Y\kto Y\times X$ is defined by $(\text{swap}_{X,Y})(A\times B|x,y)=\delta_x(B)\delta_y(A)$ for $(x,y)\in X\times Y$, $A\in \sigalg{X}$ and $B\in \sigalg{Y}$. It swaps two inputs and is represented by crossing wires:
+\begin{definition}[Swap map]\label{def:swap}
+The swap map $\text{Swap}_{X,Y}:X\times Y\kto Y\times X$ is defined by $(\text{Swap}_{X,Y})(A\times B|x,y)=\delta_x(B)\delta_y(A)$ for $(x,y)\in X\times Y$, $A\in \sigalg{X}$ and $B\in \sigalg{Y}$. It swaps two inputs and is represented by crossing wires:
 \begin{align}
-    \text{swap}_{X,Y} &:=  \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+    \text{Swap}_{X,Y} &:=  \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
         \path (0,0) node (A) {} 
         + (0,-0.5) node (B) {}
         ++ (1,0) node (C) {}
@@ -401,10 +401,10 @@ The swap map $\text{swap}_{X,Y}:X\times Y\kto Y\times X$ is defined by $(\text{s
 \end{align}
 \end{definition}
 
-\begin{definition}[Copy map]
-The copy map $\text{copy}_X:X\kto X\times X$ is defined by $(\text{copy}_X)(A\times B|x)=\delta_x(A)\delta_x(B)$ for all $x\in X$, $A,B\in \sigalg{X}$. It makes two identical copies of the input, and is drawn as a fork:
+\begin{definition}[Copy map]\label{def:copy}
+The copy map $\text{Copy}_X:X\kto X\times X$ is defined by $(\text{Copy}_X)(A\times B|x)=\delta_x(A)\delta_x(B)$ for all $x\in X$, $A,B\in \sigalg{X}$. It makes two identical copies of the input, and is drawn as a fork:
 \begin{align}
-    \text{copy}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+    \text{Copy}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
     \path (0,0) node (A) {$X$} 
     ++ (0.5,0) node[copymap] (copy0) {}
     ++ (0.5,0.15) node (B) {$X$}
@@ -415,10 +415,10 @@ The copy map $\text{copy}_X:X\kto X\times X$ is defined by $(\text{copy}_X)(A\ti
 \end{definition}
 
 \begin{definition}[$n$-fold copy map]
-The $n$-fold copy map $\text{copy}^n_X:X\kto X^n$ is given by the recursive definition
+The $n$-fold copy map $\text{Copy}^n_X:X\kto X^n$ is given by the recursive definition
 \begin{align}
-    \text{copy}^1_X &= \text{copy}_X\\
-    \text{copy}^n_X &= \tikzfig{n_fold_copy} &n>1
+    \text{Copy}^1_X &= \text{Copy}_X\\
+    \text{Copy}^n_X &= \tikzfig{n_fold_copy} &n>1
 \end{align}
 \end{definition}
 
@@ -430,7 +430,7 @@ Thus, given $\kernel{K}_i:X\kto Y$ for $i\in A$,
 
 \begin{align}
     \bigotimes_{i\in A} \kernel{K}_i &:= \tikzfig{plate_without_copymap}
-    \text{copy}^{|A|}_X(\bigotimes_{i\in A} \kernel{K}_i) &:= \tikzfig{plate_with_copymap}
+    \text{Copy}^{|A|}_X(\bigotimes_{i\in A} \kernel{K}_i) &:= \tikzfig{plate_with_copymap}
 \end{align}
 
 \subsection{Commutative comonoid axioms}
@@ -451,7 +451,7 @@ as well as compatibility with the monoidal structure
     \tikzfig{mstruct1_lhs} &= \tikzfig{mstruct1_rhs}\\
     \tikzfig{mstruct2_lhs} &= \tikzfig{mstruct2_rhs}
 \end{align}
-and the naturality of \emph{del}, which means that
+and the naturality of \emph{Del}, which means that
 \begin{align}
     \tikzfig{naturality_lhs} &= \tikzfig{naturality_rhs}\label{eq:nat}
 \end{align}
@@ -486,8 +486,8 @@ That is, an identity map ``passes its input directly to the next kernel''.
 For arbitrary $\kernel{K}: X\times Y\times Y\kto Z$:
 
 \begin{align}
- \tikzfig{identity_tensor_copy} &= (\text{id}_X\otimes \text{copy}_Y)\kernel{K}\\
- [(\text{id}_X\otimes \text{copy}_Y)\kernel{K}](A|x,y) &= \int_Y\int_Y \kernel{K}(A|x,y',y'') \delta_y(\mathrm{d}y')\delta_y(\mathrm{d}y'')\\
+ \tikzfig{identity_tensor_copy} &= (\text{id}_X\otimes \text{Copy}_Y)\kernel{K}\\
+ [(\text{id}_X\otimes \text{Copy}_Y)\kernel{K}](A|x,y) &= \int_Y\int_Y \kernel{K}(A|x,y',y'') \delta_y(\mathrm{d}y')\delta_y(\mathrm{d}y'')\\
                                            &= \kernel{K}(A|x,y,y)
 \end{align}
 
@@ -496,8 +496,8 @@ That is, the copy map ``passes along two copies of its input'' to the next kerne
 For arbitrary $\kernel{K}:X\times Y\kto Z$
 
 \begin{align}
-    \tikzfig{swap_example} &= \text{swap}_{YX} \kernel{K}\\
-    (\text{swap}_{YX}\kernel{K})(A|y,x) &= \int_{X\times Y} \kernel{K}(A|x',y')\delta_y(\mathrm{d}y')\delta_x(\mathrm{d}x')\\
+    \tikzfig{swap_example} &= \text{Swap}_{YX} \kernel{K}\\
+    (\text{Swap}_{YX}\kernel{K})(A|y,x) &= \int_{X\times Y} \kernel{K}(A|x',y')\delta_y(\mathrm{d}y')\delta_x(\mathrm{d}x')\\
                                         &= \kernel{K}(A|x,y)
 \end{align}
 
@@ -506,8 +506,8 @@ The swap map before a kernel switches the input arguments.
 For arbitrary $\kernel{K}:X\kto Y\times Z$
 
 \begin{align}
-    \tikzfig{swap_example_2} &= \kernel{K}\text{swap}_{YZ}\\
-    (\kernel{K}\text{swap}_{YZ})(A\times B|x) &= \int_{Y\times Z} \delta_{y}(B)\delta_{z}(A)\kernel{K}(\mathrm{d}y\times\mathrm{d}z|x)\\
+    \tikzfig{swap_example_2} &= \kernel{K}\text{Swap}_{YZ}\\
+    (\kernel{K}\text{Swap}_{YZ})(A\times B|x) &= \int_{Y\times Z} \delta_{y}(B)\delta_{z}(A)\kernel{K}(\mathrm{d}y\times\mathrm{d}z|x)\\
     &= \int_{B\times A} \kernel{K}(\mathrm{d}y\times\mathrm{d}z|x)\\
     &= \kernel{K}(B\times A|x)
 \end{align}
@@ -515,25 +515,24 @@ For arbitrary $\kernel{K}:X\kto Y\times Z$
 Given $\kernel{K}:X\kto Y$ and $\kernel{L}:Y\kto Z$:
 
 \begin{align}
-	(\kernel{K}\cprod \kernel{L})(\mathrm{id}_{Y}\otimes \mathrm{del}_Z) &= \tikzfig{semidirect_K_L}\\
+	(\kernel{K}\cprod \kernel{L})(\mathrm{id}_{Y}\otimes \mathrm{Del}_Z) &= \tikzfig{semidirect_K_L}\\
 	 &= \tikzfig{semidirect_K_L_2} &\text{by Eq. \eqref{eq:nat}}\\
 	 &= \tikzfig{semidirect_K_L_3} &\text{by Eq. \eqref{eq:ccom2_del}}
 \end{align}
 
-Thus the action of the $\text{del}$ map is to marginalise over the deleted wire. With integrals, we can write
+Thus the action of the $\text{Del}$ map is to marginalise over the deleted wire. With integrals, we can write
 
 \begin{align}
-	(\kernel{K}\cprod \kernel{L})(\mathrm{id}_{Y}\otimes \mathrm{del}_Z)(A\times\{*\}|x) &= \int_{Y}\int_{\{*\}}\delta_y(A)\delta_{*}(\{*\})\kernel{L}(\mathrm{d}z|y)\kernel{K}(\mathrm{d}y|x)\\
+	(\kernel{K}\cprod \kernel{L})(\mathrm{id}_{Y}\otimes \mathrm{Del}_Z)(A\times\{*\}|x) &= \int_{Y}\int_{\{*\}}\delta_y(A)\delta_{*}(\{*\})\kernel{L}(\mathrm{d}z|y)\kernel{K}(\mathrm{d}y|x)\\
 	&= \int_A \kernel{K}(\mathrm{d}y|x)\\
 	&= \kernel{K}(A|x)
 \end{align}
 
 \section{Probability Sets}\label{sec:probability_sets}
 
-
 A probability set is a set of probability measures. This section establishes a number of useful properties of conditional probability with respect to probability sets. Unlike conditional probability with respect to a probability space, conditional probabilities don't always exist for probability sets. Where they do, however, they are almost surely unique and we can marginalise and disintegrate them to obtain other conditional probabilities with respect to the same probability set.
 
-\begin{definition}[Probability set]
+\begin{definition}[Probability set]\label{def:prob_set}
 A probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ is a collection of probability measures on $(\Omega,\sigalg{F})$. In other words it is a subset of $\mathscr{P}(\Delta(\Omega))$, where $\mathscr{P}$ indicates the power set.
 \end{definition}
 
@@ -634,7 +633,7 @@ Just like we defined uniform conditional probability as a version of ``condition
 We will first define regular conditional independence. We define it in terms of a having a conditional that ``ignores one of its inputs'', which, provided conditional probabilities exists, is equivalent to other common definitions (Theorem \ref{th:cho_ci_equiv}).
 
 \begin{definition}[Conditional independence]\label{def:ci}
-For a \emph{probability model} $\model{P}_{\alpha}$ and variables $\RV{A},\RV{B},\RV{Z}$, we say $\RV{B}$ is conditionally independent of $\RV{A}$ given $\RV{C}$, written $\RV{B}\CI_{\model{P}_{\alpha}}\RV{A}|\RV{C}$, if
+For a \emph{probability model} $\model{P}_{\alpha}$ and variables $\RV{A},\RV{B},\RV{Z}$, we say $\RV{B}$ is conditionally independent of $\RV{A}$ given $\text{id}_C$, written $\RV{B}\CI_{\model{P}_{\alpha}}\RV{A}|\text{id}_C$, if
 \begin{align}
     \prob{P}^{\RV{Y}|\RV{WX}} &\overset{\prob{P}}{\cong} \tikzfig{cond_indep_erase}\\
     \iff
@@ -657,15 +656,15 @@ Given standard measurable $(\Omega,\sigalg{F})$, a probability model $\prob{P}$ 
 See \citet{cho_disintegration_2019}.
 \end{proof}
 
-Extended conditional independence as introduced by \citet{constantinou_extended_2017} is defined in terms of ``nonstochastic variables'' on the choice set C. A nonstochastic variable is essentially a variable defined on $C$ rather than on the sample space $\Omega$
+Extended conditional independence as introduced by \citet{constantinou_extended_2017} is defined in terms of ``nonstochastic variables'' on the option set C. A nonstochastic variable is essentially a variable defined on $C$ rather than on the sample space $\Omega$
 
-\begin{definition}[Nonstochastic variable]
+\begin{definition}[Nonstochastic variable]\label{def:nonstoc_var}
 Given a sample space $(\Omega,\sigalg{F})$, a choice set $(C,\sigalg{C})$, a codomain $(X,\sigalg{X})$ and a probability set $\prob{P}_C$, a nonstochastic variable is a measurable function $\phi:C\to X$.
 \end{definition}
 
 In particular, we want to consider \emph{complementary} nonstochastic variable - that is, pairs of nonstochastic variables $\phi$ and $\xi$ such that the sequence $(\phi,\xi)$ is invertible. For example, if $\phi:=\mathrm{idf}_C$, then 
 
-\begin{definition}[Complementary nonstochastic variables]
+\begin{definition}[Complementary nonstochastic variables]\label{def:comp_var}
 A pair of nonstochastic variables $\phi$ and $\xi$ are complementary if $(\phi,\xi)$ is invertible.
 \end{definition}
 
@@ -724,7 +723,7 @@ The following forms of these properties are often used here:
 \begin{example}[Choice variable]\label{ex:choice_var}
 Suppose we have a decision procedure $\proc{S}_C:=\{\proc{S}_\alpha|\alpha\in C\}$ that consists of a measurement procedure for each element of a denumerable set of choices $C$. Each measurement procedure $\proc{S}_\alpha$ is modeled by a probability distribution $\prob{P}_\alpha$ on a shared sample space $(\Omega,\sigalg{F})$ such that we have an observable ``choice'' variable $(\RV{D},\RV{D}\circ\proc{S}_\alpha)$ where $\RV{D}\circ\proc{S}_\alpha$ always yields $\alpha$.
 
-Furthermore, Define $\RV{Y}:\Omega\to \Omega$ as the identity function. Then, by supposition, for each $\alpha\in A$, $\prob{P}_\alpha^{\RV{Y}\RV{C}}$ exists and for $A\in \sigalg{Y}$, $B\in \sigalg{C}$:
+Furthermore, Define $\RV{Y}:\Omega\to \Omega$ as the identity function. Then, by supposition, for each $\alpha\in A$, $\prob{P}_\alpha^{\RV{Y}\text{id}_C}$ exists and for $A\in \sigalg{Y}$, $B\in \sigalg{C}$:
 
 \begin{align}
     \prob{P}_\alpha^{\RV{YC}}(A\times B) &= \prob{P}_\alpha(A)\delta_\alpha(B)
@@ -742,7 +741,7 @@ Thus $\prob{P}_C^{\RV{Y}|\RV{D}}$ exists and
     \prob{P}_C^{\RV{Y}|\RV{D}}(A|\alpha) &= \prob{P}_\alpha^{\RV{Y}} (A)&\forall A\in \sigalg{Y},\alpha\in C 
 \end{align}
 
-Because only deterministic marginals $\prob{P}_\alpha^{\RV{D}}$ are available, for every $\alpha\in C$ we have $\RV{Y}\CI_{\prob{P}_\alpha} \RV{D}$. This reflects the fact that \emph{after we have selected a choice $\alpha$} the value of $\RV{C}$ provides no further information about the distribution of $\RV{Y}$, because $\RV{D}$ is deterministic given any $\alpha$. It does not reflect the fact that ``choosing different values of $\RV{C}$ has no effect on $\RV{Y}$''.
+Because only deterministic marginals $\prob{P}_\alpha^{\RV{D}}$ are available, for every $\alpha\in C$ we have $\RV{Y}\CI_{\prob{P}_\alpha} \RV{D}$. This reflects the fact that \emph{after we have selected a choice $\alpha$} the value of $\text{id}_C$ provides no further information about the distribution of $\RV{Y}$, because $\RV{D}$ is deterministic given any $\alpha$. It does not reflect the fact that ``choosing different values of $\text{id}_C$ has no effect on $\RV{Y}$''.
 \end{example}
 
 \begin{theorem}[Uniform conditional independence representation]\label{th:uci_rep}
@@ -901,7 +900,7 @@ Hence $\prob{V}^{\RV{X}}\odot \prob{T}^{\RV{Y}|\RV{X}}$ is invalid.
 \begin{example}\label{ex:invalidity}
 Body mass index is defined as a person's weight divided by the square of their height. Suppose we have a measurement process $\proc{S}=(\proc{W},\proc{H})$ and $\proc{B}=\frac{\proc{W}}{\proc{H}^2}$ - i.e. we figure out someone's body mass index first by measuring both their height and weight, and then passing the result through a function that divides the second by the square of the first. Thus, given the random variables $\RV{W},\RV{H}$ modelling $\proc{W},\proc{H}$, $\proc{B}$ is the function given by $\RV{B}=\frac{\RV{W}}{\RV{H}^2}$.
 
-With this background, suppose we postulate a decision model in which body mass index can be directly controlled by a variable $\RV{C}$, while height and weight are not. Specifically, we have a probability set $\prob{P}_\square$ with
+With this background, suppose we postulate a decision model in which body mass index can be directly controlled by a variable $\text{id}_C$, while height and weight are not. Specifically, we have a probability set $\prob{P}_\square$ with
 \begin{align}
     \prob{P}_\square^{\RV{B}|\RV{WHC}} &= \tikzfig{invalid_BMI_model} \label{eq:bmi_example}
 \end{align}

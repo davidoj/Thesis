@@ -1,6 +1,6 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (-4.5, 1.5) {$\text{copy}_X^{n-1}$};
+		\node [style=small kernel tikzit] (0) at (-4.5, 1.5) {$\text{Copy}_X^{n-1}$};
 		\node [style=none] (1) at (-3.75, 1.75) {};
 		\node [style=none] (2) at (-3.75, 1) {};
 		\node [style=RLabel tikzit] (3) at (0.25, 1.75) {};

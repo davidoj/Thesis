@@ -1,3 +1,5 @@
+%!TEX root = main.tex
+
 
 % ********************************************************************
 % Useful commands
@@ -15,67 +17,190 @@
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\file}[1]{\texttt{\bfseries#1}}
 \newcommand{\option}[1]{\texttt{\itshape#1}}
+
+
 %----------------------------------------------------------------------------------------
 
 %----------------------------------------------------------------------------------------
 %	Optional Packages
 %----------------------------------------------------------------------------------------
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+
+
+% My packages
+\usepackage{tikzit}
+\input{diagrams.tikzstyles}
+\usepackage[mathscr]{euscript}
 \usepackage{graphicx}
-\usepackage[figuresright]{rotating}
-
-\usepackage[utf8]{inputenc} % Required for inputting international characters
-\usepackage[T1]{fontenc} % Output font encoding for international characters
-\usepackage{mathpazo} % Use the Palatino font by default
-%\usepackage{tgpagella} %The TEX Gyre Pagella family of fonts is based on the URW Palladio family, but heavily extended (https://www.tug.org/FontCatalogue/texgyrepagella/)
-
-\usepackage{fontawesome} % Use for loading symbol for URLs
-\usepackage{textcomp} % use for degree symbol (\textdegree)
-
-%\usepackage[document]{ragged2e}
-
-\usepackage[section]{minted} %works well in Overleaf but offline may need Python package to be installed and shell escape setting applied
-\usemintedstyle{friendly}
-\usemintedstyle{borland}
-
-\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
-\usepackage[font={itshape,raggedright},begintext=``,endtext="]{quoting}
-\usepackage{microtype}
-\usepackage[framemethod=TikZ]{mdframed}
+\usepackage {tikz}
+\usetikzlibrary {positioning}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{intersections}
+\usepackage{amsthm}
+\usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{stmaryrd }
+\usepackage{csquotes}
+\usepackage{wasysym}
+\usepackage[]{todonotes}
+\usepackage[shortlabels]{enumitem}
+\usepackage{bm}
+\usepackage{isomath}
+\usepackage{mathtools}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
 \usepackage{multirow}
-\usepackage{tabulary}
-\usepackage{glossaries}
-\usepackage{textcomp}
 
-%New colors defined below
-\definecolor{LightGray}{gray}{0.9}
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-\definecolor{mintedbackground}{rgb}{0.95,0.95,0.95}
-
-%\usepackage{subcaption} %for sub figures
-
-\usepackage{fixme} %FixMe package
-\fxsetup{status=draft,author=} % <====== add this line
-\fxsetup{theme=color}
-\fxsetface{margin}{\scriptsize}
-%\definecolor{fxnote}{rgb}{0.0000,0.0000,0.0000}
-%\definecolor{fxwarning}{rgb}{0.0000,0.0000,0.0000}
-%\definecolor{fxerror}{rgb}{0.0000,0.0000,0.0000}
-%\definecolor{fxfatal}{rgb}{0.0000,0.0000,0.0000}
-
-\pdfcompresslevel=9 %best compression
-\pdfadjustspacing=1 %for small font expansion
-
-%\usepackage{chngcntr}
-%\counterwithin{figure}{section}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
 
 
-%\usepackage[titles]{tocloft}
-%\setlength{\cftbeforechapskip}{5pt} \ sets spacing in Table of Contents
-% or see http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/squeeze.html
+
+%----------------------------------------------------------------------------------------
+%	MATHS SETTINGS
+%----------------------------------------------------------------------------------------
+
+
+\makeatletter
+\newcommand{\newreptheorem}[2]
+  {\newtheorem*{rep@#1}{\rep@title}\newenvironment{rep#1}[1]
+  {\def\rep@title{#2 \ref*{##1}}\begin{rep@#1}}{\end{rep@#1}}}
+\makeatother
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newreptheorem{theorem}{Theorem}
+\newreptheorem{lemma}{Lemma}
+
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{customthm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}[theorem]{Nxample}
+
+
+\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
+
+\newcommand{\CI}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp$}}}}
+\newcommand{\CII}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp\mkern-10mu\perp$}}}}
+\newcommand{\RV}[1]{\ensuremath{\mathsf{#1}}}
+\newcommand{\node}[1]{\ensuremath{\overset{\sim}{\RV{#1}}}}
+\newcommand{\graph}[1]{\ensuremath{\overset{\sim}{\mathcal{#1}}}}
+\newcommand{\URV}[1]{\ensuremath{\underline{\RV{#1}}}}
+\newcommand{\PA}[2]{\ensuremath{\text{Pa}_{#1}(#2)}}
+\newcommand{\ND}[2]{\ensuremath{\text{ND}_{#1}(#2)}}
+\newcommand{\CH}[2]{\ensuremath{\text{Ch}_{#1}(#2)}}
+\newcommand{\DE}[2]{\ensuremath{\text{De}_{#1}(#2)}}
+\newcommand{\ID}[1]{\ensuremath{\text{Id}_{#1}}}
+\newcommand{\utimes}{\ensuremath{\underline{\otimes}}}
+\newcommand{\prob}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand{\disint}[1]{\ensuremath{\overline{\prob{#1}}}}
+\newcommand{\kernel}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand{\model}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand{\diagram}[1]{\ensuremath{\mathscr{#1}}}
+\newcommand{\sigalg}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\vecRV}[1]{\ensuremath{\mathsfbfit{#1}}}
+\newcommand{\vecVal}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\prodSet}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\indx}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\nod}[1]{\ensuremath{\mathsfit{#1}}}
+\newcommand{\kto}{\ensuremath{\rightarrowtriangle}}
+\newcommand{\proc}[1]{\ensuremath{\mathscr{#1}}}
+\newcommand{\yields}{\ensuremath{\bowtie}}
+\newcommand{\submodel}{\ensuremath{\sqsubset}}
+\newcommand{\seedo}[5]{\ensuremath{\model{#1}^{\RV{#3}|\RV{#2}\square\RV{#5}|\RV{#4}}}}
+\newcommand{\rseedo}[6]{\ensuremath{\model{#1}^{\RV{#3}|\RV{#2}\framebox{#6}\RV{#5}|\RV{#4}}}}
+\newcommand{\set}{\ensuremath{\bowtie}}
+\newcommand{\cprod}{\ensuremath{\odot}}
+\newcommand{\bigcprod}{\ensuremath{\bigodot}}
+\newcommand{\combprod}{\ensuremath{\underline{\cprod}}}
+\newcommand{\combbreak}{\ensuremath{\wr}}
+\newcommand{\combgap}{\ensuremath{\shortleftarrow}}
+\newcommand{\bigcombprod}{\ensuremath{\underline{\bigcprod}}}
+\newcommand{\varlessthan}{\ensuremath{\preccurlyeq}}
+\algnewcommand\algorithmicassert{\texttt{assert}}
+\algnewcommand\Assert[1]{\State \algorithmicassert(#1)}%
+
+
+
+\providecommand\longrightarrowRHD{\relbar\joinrel\relbar\joinrel\mathrel\RHD}
+\providecommand\longleftarrowRHD{\mathrel\LHD\joinrel\relbar\joinrel\relbar}
+
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\tikzset{
+    triangle/.style = {regular polygon, regular polygon sides=3 },
+    node rotated/.style = {rotate=90},
+    border rotated/.style = {shape border rotate=90},
+    dist/.style = {triangle,draw,border rotated, inner sep=0pt},
+    smalldist/.style = {triangle,draw,border rotated},
+    kernel/.style={rectangle,draw,inner sep = 2pt},
+    expectation/.style = {triangle,draw,inner sep=0pt,shape border rotate=270},
+    copymap/.style = {circle,fill,inner sep=1pt}}
+
+\newcommand\DCI{
+    \begin{tikzpicture}[scale=0.35]
+    \draw[->] (1,0) -- (0,0);
+    \draw (0.6,0) -- (0.6,0.75);
+    \draw (0.4,0) -- (0.4,0.75);
+    \end{tikzpicture}
+}
+
+\newcommand\splitter[1]{%
+\begin{tikzpicture}[scale=#1]
+\draw (0,-1) -- (0,0);
+\draw (0,0) to [bend right] (1,1);
+\draw (0,0) to [bend left] (-1,1);
+\end{tikzpicture}
+}
+
+\newcommand\stopper[1]{%
+\begin{tikzpicture}[scale=#1]
+\draw[-{Rays [n=8]}] (0,-1) -- (0,0);
+\end{tikzpicture}
+}
+
+\newcommand\swap[1]{%
+\begin{tikzpicture}[scale=#1]
+\draw (0,0) to [out=90, in=270] (0.5,1);
+\draw (0.5,0) to [out=90,in=270] (0,1);
+\end{tikzpicture}
+}
+
+\newcommand\source[1]{%
+\begin{tikzpicture}[scale=#1]
+\path (0,0) node[prob,fill=gray] (P) {};
+\draw (P) -- ($(P.east) + (1,0)$);
+\end{tikzpicture}
+}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\arginf}{arg\,inf}
+\DeclareMathOperator*{\argsup}{arg\,sup}
+
+\newcommand{\cheng}[1]{ {\color{purple}[{\bf Cheng:~{#1}}]} }
+
 
 %----------------------------------------------------------------------------------------
 %	BOX SETTINGS

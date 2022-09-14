@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (TeX Live 2021)  (format=lualatex 2021.7.16)  12 SEP 2022 16:24
+This is LuaHBTeX, Version 1.13.0 (TeX Live 2021)  (format=lualatex 2021.7.16)  14 SEP 2022 13:08
  restricted system commands enabled.
 **main.tex
 (./main.tex
@@ -1814,7 +1814,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 (./Front_Matter.tex
 1: section
-<gfx/ANU_LOGO_cmyk_56mm.pdf, id=168, 211.06152pt x 107.066pt>
+<gfx/ANU_LOGO_cmyk_56mm.pdf, id=160, 211.06152pt x 107.066pt>
 File: gfx/ANU_LOGO_cmyk_56mm.pdf Graphic file (type pdf)
 <use gfx/ANU_LOGO_cmyk_56mm.pdf>
 Package luatex.def Info: gfx/ANU_LOGO_cmyk_56mm.pdf  used on input line 62.
@@ -1858,27 +1858,19 @@ ine 140.
 1: section
 [4
 
-] (./main.lof)
-\tf@lof=\write7
-
-\openout7 = main.lof
+]
+Overfull \hbox (721.29152pt too wide) in alignment at lines 203--248
+ [][][] 
+ []
 
 1: section
 [5
 
-] (./main.lot)
-\tf@lot=\write8
+] [6]
+Overfull \vbox (14.14865pt too high) has occurred while \output is active []
 
-\openout8 = main.lot
 
-1: section
-[6
-
-])
-1: section
-[7
-
-]
+[7])
 1: section
 
 \openout2 = Chapters/chapter_1_introduction.aux
@@ -1889,7 +1881,7 @@ Chapter 1.
 
 
 
-] [2] (./figures/simple_dag.tikz) (./figures/simple_dag.tikz) [3] [4]
+] [2] [3] (./figures/simple_dag.tikz) (./figures/simple_dag.tikz) [4]
 [5] [6] [7] [8] [9] (./figures/simple_dag_jumper.tikz)
 (./figures/simple_dag_jumper.tikz) (./figures/simple_dag_jumper_bd.tikz)
 (./figures/simple_dag_jumper_bd.tikz) (./figures/not_simple_dag_jumper.tikz)
@@ -1898,12 +1890,12 @@ Chapter 1.
 Package biblatex Warning: Package option 'sortcites' enabled.
 (biblatex)                Verify postnote placement on input line 183.
 
-[11] [12] [13]) [14]
+[11] [12] [13]) [14] [15]
 \openout2 = Chapters/chapter_2_technical.aux
  (./Chapters/chapter_2_technical.tex
 Chapter 2.
 1: section
-[15
+[16
 
 
 
@@ -1916,50 +1908,53 @@ File: ueus.fd 2013/01/14 v3.01 Euler Script
 )
 (/usr/local/texlive/2021/texmf-dist/tex/latex/microtype/mt-eus.cfg
 File: mt-eus.cfg 2006/07/28 v1.2 microtype config. file: AMS Euler Script (RS)
-) [16]
-[17] (./figures/disint_def.tikz) (./figures/disint_def.tikz) [18]
+) [17]
+[18] (./figures/disint_def.tikz) (./figures/disint_def.tikz) [19]
 (./figures/odot_assoc_1.tikz) (./figures/odot_assoc_2.tikz)
-(./figures/odot_assoc_1.tikz) (./figures/odot_assoc_2.tikz) [19] [20]
-(./figures/copy_product.tikz) (./figures/copy_product.tikz) [21]
-(./figures/n_fold_copy.tikz) (./figures/n_fold_copy.tikz) [22]
+(./figures/odot_assoc_1.tikz) (./figures/odot_assoc_2.tikz) [20] [21]
+(./figures/copy_product.tikz) (./figures/copy_product.tikz) [22]
+(./figures/n_fold_copy.tikz) (./figures/n_fold_copy.tikz)
 (./figures/plate_without_copymap.tikz) (./figures/plate_with_copymap.tikz)
 (./figures/plate_without_copymap.tikz) (./figures/plate_with_copymap.tikz)
-(./figures/ccom_lhs.tikz) (./figures/ccom_rhs.tikz) (./figures/ccom_lhs.tikz)
-(./figures/ccom_rhs.tikz) (./figures/ccom2_lhs.tikz) (./figures/ccom2_mhs.tikz) (./figures/ccom2_rhs.tikz) (./figures/ccom2_lhs.tikz)
-(./figures/ccom2_mhs.tikz) (./figures/ccom2_rhs.tikz) (./figures/ccom3_lhs.tikz
-) (./figures/ccom3_rhs.tikz) (./figures/ccom3_lhs.tikz)
-(./figures/ccom3_rhs.tikz) (./figures/mstruct1_lhs.tikz)
+[23] (./figures/ccom_lhs.tikz) (./figures/ccom_rhs.tikz)
+(./figures/ccom_lhs.tikz) (./figures/ccom_rhs.tikz) (./figures/ccom2_lhs.tikz)
+(./figures/ccom2_mhs.tikz) (./figures/ccom2_rhs.tikz) (./figures/ccom2_lhs.tikz
+) (./figures/ccom2_mhs.tikz) (./figures/ccom2_rhs.tikz)
+(./figures/ccom3_lhs.tikz) (./figures/ccom3_rhs.tikz) (./figures/ccom3_lhs.tikz
+) (./figures/ccom3_rhs.tikz) (./figures/mstruct1_lhs.tikz)
 (./figures/mstruct1_rhs.tikz) (./figures/mstruct2_lhs.tikz)
 (./figures/mstruct2_rhs.tikz) (./figures/mstruct1_lhs.tikz)
 (./figures/mstruct1_rhs.tikz) (./figures/mstruct2_lhs.tikz)
 (./figures/mstruct2_rhs.tikz) (./figures/naturality_lhs.tikz)
 (./figures/naturality_rhs.tikz) (./figures/naturality_lhs.tikz)
 (./figures/naturality_rhs.tikz) (./figures/deterministic_copymap_commute.tikz)
-(./figures/deterministic_copymap_commute.tikz) [23]
+(./figures/deterministic_copymap_commute.tikz) [24]
 (./figures/identity_tensor_L.tikz) (./figures/identity_tensor_L.tikz)
 (./figures/identity_tensor_copy.tikz) (./figures/identity_tensor_copy.tikz)
 (./figures/swap_example.tikz) (./figures/swap_example.tikz)
-(./figures/swap_example_2.tikz) (./figures/swap_example_2.tikz) [24]
+(./figures/swap_example_2.tikz) (./figures/swap_example_2.tikz) [25]
 (./figures/semidirect_K_L.tikz) (./figures/semidirect_K_L_2.tikz)
 (./figures/semidirect_K_L_3.tikz) (./figures/semidirect_K_L.tikz)
-(./figures/semidirect_K_L_2.tikz) (./figures/semidirect_K_L_3.tikz) [25]
+(./figures/semidirect_K_L_2.tikz) (./figures/semidirect_K_L_3.tikz) [26]
 (./figures/disintegration_existence.tikz)
-(./figures/disintegration_existence.tikz) [26] [27]
-(./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz)
-(./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz) [28]
-(./figures/eci_def.tikz) (./figures/eci_def.tikz) (./figures/eci_def.tikz)
-(./figures/eci_def.tikz) [29] (./figures/eci_rep.tikz) (./figures/eci_rep.tikz) (./figures/eci_rep_1.tikz) (./figures/eci_rep_2.tikz) (./figures/eci_rep.tikz) (./figures/eci_rep_1.tikz) (./figures/eci_rep_2.tikz) (./figures/eci_rep.tikz) [30] (./figures/eci_rep.tikz) (./figures/eci_rep.tikz) [31] [32
+(./figures/disintegration_existence.tikz) [27] (./figures/cond_indep_erase.tikz
+) (./figures/cond_indep_erase.tikz) [28] (./figures/cond_indep_erase.tikz)
+(./figures/cond_indep_erase.tikz) (./figures/eci_def.tikz)
+(./figures/eci_def.tikz) [29] (./figures/eci_def.tikz) (./figures/eci_def.tikz) [30] (./figures/eci_rep.tikz) (./figures/eci_rep.tikz)
+(./figures/eci_rep_1.tikz) (./figures/eci_rep_2.tikz) (./figures/eci_rep.tikz)
+(./figures/eci_rep_1.tikz) (./figures/eci_rep_2.tikz) (./figures/eci_rep.tikz)
+[31] (./figures/eci_rep.tikz) (./figures/eci_rep.tikz) [32] [33
 Missing character: There is no ’ (U+2019) in font ec-lmr10!
-] [33]
-(./figures/invalid_BMI_model.tikz) (./figures/invalid_BMI_model.tikz) [34]
+] [34]
+(./figures/invalid_BMI_model.tikz) (./figures/invalid_BMI_model.tikz) [35]
 (./figures/conditional_pushforward.tikz)
-(./figures/conditional_pushforward.tikz) [35] [36]
+(./figures/conditional_pushforward.tikz) [36] [37]
 (./figures/higher_order_disint.tikz) (./figures/higher_order_disint_0.tikz)
 (./figures/higher_order_disint_1.tikz) (./figures/higher_order_disint_2.tikz)
 (./figures/higher_order_disint.tikz) (./figures/higher_order_disint_0.tikz)
 (./figures/higher_order_disint_1.tikz) (./figures/higher_order_disint_2.tikz)
-[37] (./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz)
-Overfull \hbox (4.7322pt too wide) in paragraph at lines 1065--1066
+[38] (./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz)
+Overfull \hbox (4.7322pt too wide) in paragraph at lines 1064--1065
 []\T1/lmr/m/n/10.95 For all $\OML/cmm/m/it/10.95 x; y$ \T1/lmr/m/n/10.95 such th
 at $\U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 (\OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/
 10.95 y\OMS/cmsy/m/n/10.95 gj\OML/cmm/m/it/10.95 x\OT1/cmr/m/n/10.95 )$ \T1/lmr
@@ -1970,36 +1965,36 @@ at $\U/msb/m/n/10.95 P[]\OT1/cmr/m/n/10.95 (\OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/
 A\OMS/cmsy/m/n/10.95 j\OML/cmm/m/it/10.95 x; y\OT1/cmr/m/n/10.95 ) =
  []
 
-) [38]
+) [39]
 \openout2 = Chapters/chapter_3_models_with_consequences.aux
  (./Chapters/chapter_3_models_with_consequences.tex
 Chapter 3.
 1: section
-[39
+[40
 
 
 
 
-] [40] [41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52] [53]
-[54] [55] [56] [57] [58] [59]) [60]
+] [41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52] [53] [54]
+[55] [56] [57] [58] [59] [60]) [61]
 \openout2 = Chapters/chapter_4_response_functions.aux
 
 (./Chapters/chapter_4_response_functions.tex
 Chapter 4.
 1: section
-[61
+[62
 
 
 
 
-] [62] [63]
+] [63] [64]
 
-LaTeX Warning: Reference `sec:examples' on page 64 undefined on input line 43.
+LaTeX Warning: Reference `sec:examples' on page 65 undefined on input line 43.
 
-[64] [65] [66] (./figures/commutativity_of_exchange.tikz)
+[65] [66] [67] (./figures/commutativity_of_exchange.tikz)
 (./figures/commutativity_of_exchange.tikz) (./figures/cons_locality_1.tikz)
 (./figures/cons_locality_2.tikz) (./figures/cons_locality_1.tikz)
-(./figures/cons_locality_2.tikz) [67] (./figures/local_lhs.tikz)
+(./figures/cons_locality_2.tikz) [68] (./figures/local_lhs.tikz)
 (./figures/local_rhs.tikz) (./figures/local_lhs.tikz) (./figures/local_rhs.tikz
 )
 Overfull \hbox (1.4752pt too wide) in paragraph at lines 142--143
@@ -2009,10 +2004,10 @@ ut model $\OT1/cmr/m/n/10.95 (\U/msb/m/n/10.95 P[]\OML/cmm/m/it/10.95 ; \OT1/cm
 ss/m/n/10.95 D\OML/cmm/m/it/10.95 ; \OT1/cmss/m/n/10.95 Y\OT1/cmr/m/n/10.95 )$
  []
 
-[68] [69] (./figures/exch_com_lhs.tikz) (./figures/exch_com_rhs.tikz)
+[69] [70] (./figures/exch_com_lhs.tikz) (./figures/exch_com_rhs.tikz)
 (./figures/exch_com_lhs.tikz) (./figures/exch_com_rhs.tikz)
 (./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz)
-(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz) [70] [71] [72]
+(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz) [71] [72] [73]
 LaTeX Font Info:    Trying to load font information for U+dsrom on input line 3
 72.
 
@@ -2025,7 +2020,7 @@ Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/8'
 (microtype)             (new value: 8.0pt) on input line 372.
 Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/6'
 (microtype)             (new value: 6.0pt) on input line 372.
- [73]
+ [74]
 Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/20.74'
 (microtype)             (new value: 20.74pt) on input line 384.
 Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/14.4'
@@ -2042,13 +2037,13 @@ Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/5'
 (microtype)             (new value: 5.0pt) on input line 384.
 
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [74] [75]
+(./figures/lookup_representation_kernel.tikz) [75] [76]
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [76]
+(./figures/lookup_representation_kernel.tikz) [77]
 (./figures/de_finetti_conditional.tikz) (./figures/de_finetti_conditional.tikz) (./figures/de_finetti_conditional_erase.tikz)
-(./figures/de_finetti_conditional_erase.tikz) [77] [78]
+(./figures/de_finetti_conditional_erase.tikz) [78] [79]
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [79]
+(./figures/lookup_representation_kernel.tikz) [80]
 (./figures/lookup_representation_kernel_h.tikz)
 (./figures/lookup_representation_kernel_h.tikz)
 (./figures/lookup_representation_kernel_joint.tikz)
@@ -2057,7 +2052,7 @@ Overfull \hbox (24.17052pt too wide) detected at line 645
 []
  []
 
-[80]
+[81]
 Overfull \hbox (244.63258pt too wide) detected at line 652
 []
  []
@@ -2069,14 +2064,14 @@ Overfull \hbox (244.63258pt too wide) detected at line 652
 (./figures/lookup_representation_kernel_joint_half.tikz)
 (./figures/lookup_representation_kernel_joint_2.tikz) (./figures/p_yd_on_w.tikz
 ) (./figures/yd_h_on_w_invert.tikz) (./figures/p_yd_on_w.tikz)
-(./figures/yd_h_on_w_invert.tikz) [81]
+(./figures/yd_h_on_w_invert.tikz) [82]
 (./figures/lookup_representation_kernel_joint_3.tikz)
 (./figures/lookup_representation_kernel_joint_3.tikz)
 (./figures/lookup_representation_kernel_joint_4.tikz)
 (./figures/lookup_representation_kernel_joint_4.tikz)
 (./figures/lookup_representation_kernel_h.tikz)
 (./figures/lookup_representation_kernel_h.tikz)
-(./figures/do_model_representation_conditional.tikz) [82]
+(./figures/do_model_representation_conditional.tikz) [83]
 (./figures/lookup_rep_intermediate_kernel.tikz)
 (./figures/lookup_rep_intermediate_kernel.tikz)
 (./figures/de_finetti_representation_conditional.tikz)
@@ -2084,7 +2079,7 @@ Overfull \hbox (244.63258pt too wide) detected at line 652
 (./figures/de_finetti_representation_conditional_w.tikz)
 (./figures/de_finetti_representation_conditional_w.tikz)
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [83]
+(./figures/lookup_representation_kernel.tikz) [84]
 (./figures/lookup_representation_kernel_h.tikz)
 (./figures/lookup_representation_kernel_h.tikz)
 (./figures/do_model_representation_conditional.tikz)
@@ -2098,12 +2093,12 @@ Overfull \hbox (244.63258pt too wide) detected at line 652
 (./figures/do_model_representation_conditional_deleted.tikz)
 (./figures/do_model_representation_conditional_deleted1.tikz)
 (./figures/do_model_representation_conditional_deleted.tikz)
-(./figures/do_model_representation_conditional_deleted1.tikz) [84]
+(./figures/do_model_representation_conditional_deleted1.tikz) [85]
 Overfull \hbox (17.83942pt too wide) in paragraph at lines 775--775
 []\T1/lmr/bx/n/12 Con-di-tion-ally in-de-pend-ent and identical re-sponses with data-independent
  []
 
-(./figures/do_model_representation_with_h.tikz) [85]
+(./figures/do_model_representation_with_h.tikz) [86]
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation_with_h.tikz)
@@ -2113,7 +2108,7 @@ Overfull \hbox (17.83942pt too wide) in paragraph at lines 775--775
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation.tikz)
-(./figures/do_model_representation.tikz) [86]
+(./figures/do_model_representation.tikz) [87]
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation_permuted.tikz)
@@ -2122,40 +2117,40 @@ Overfull \hbox (17.83942pt too wide) in paragraph at lines 775--775
 (./figures/do_model_representation_deleted1.tikz)
 (./figures/do_model_representation_deleted.tikz)
 (./figures/do_model_representation_deleted1.tikz)
-Overfull \hbox (7.35706pt too wide) in paragraph at lines 842--843
+Overfull \hbox (16.60951pt too wide) in paragraph at lines 842--843
 []\T1/lmr/m/n/10.95 By [][][][][]Kal-len-berg (2005b[][], Prop. 1.4), there is 
 a $\OT1/cmss/m/n/10.95 G$ \T1/lmr/m/n/10.95 such that $\OT1/cmr/m/n/10.95 (\OT1
 /cmss/m/n/10.95 D[]\OML/cmm/m/it/10.95 ; \OT1/cmss/m/n/10.95 Y[]\OT1/cmr/m/n/10
-.95 ) [][] (\OT1/cmss/m/n/10.95 D[]Y[]\OT1/cmr/m/n/10.95 )\OMS/cmsy/m/n/10.95 j\OT1/cmr/m/n/10.95 (\OT1/cmss/m/n/10.95 G\OML/cmm/m/it/10.95 ; \OT1/cmss/m/n/10.95 C\OT1/cmr/m/n/10.95 )$
+.95 ) [][] (\OT1/cmss/m/n/10.95 D[]Y[]\OT1/cmr/m/n/10.95 )\OMS/cmsy/m/n/10.95 j\OT1/cmr/m/n/10.95 (\OT1/cmss/m/n/10.95 G\OML/cmm/m/it/10.95 ; [][]\OT1/cmr/m/n/10.95 )$
  []
 
-(./figures/qyg_eq_pyg.tikz) (./figures/qyg_eq_pyg.tikz) [87]
+(./figures/qyg_eq_pyg.tikz) (./figures/qyg_eq_pyg.tikz) [88]
 (./figures/exch_dom_swap1.tikz) (./figures/exch_dom_swap2.tikz)
 (./figures/exch_dom_swap3.tikz) (./figures/exch_dom_swap4.tikz)
 (./figures/exch_dom_swap5.tikz) (./figures/exch_dom_swap1.tikz)
 (./figures/exch_dom_swap2.tikz) (./figures/exch_dom_swap3.tikz)
-(./figures/exch_dom_swap4.tikz) (./figures/exch_dom_swap5.tikz) [88]
+(./figures/exch_dom_swap4.tikz) (./figures/exch_dom_swap5.tikz) [89]
 (./figures/do_model_representation_conditional.tikz)
-(./figures/do_model_representation_conditional.tikz) [89] [90]
+(./figures/do_model_representation_conditional.tikz) [90] [91]
 Overfull \hbox (26.71092pt too wide) detected at line 952
 []
  []
 
-[91] [92] (./figures/response_conditional_comb.tikz)
-(./figures/response_conditional_comb.tikz) [93]
+[92] [93] (./figures/response_conditional_comb.tikz)
+(./figures/response_conditional_comb.tikz) [94]
 (./figures/causally_contractible_comb.tikz)
 (./figures/causally_contractible_comb.tikz)
 (./figures/comb_insert_complicated.tikz)
 (./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz) (./figures/comb_insert_complicated.tikz)
-(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz) [94] (./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [95]
-[96] (./figures/local_lhs.tikz) (./figures/local_rhs.tikz)
-(./figures/local_lhs.tikz) (./figures/local_rhs.tikz) [97] [98]
+(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz) [95] (./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [96]
+[97] (./figures/local_lhs.tikz) (./figures/local_rhs.tikz)
+(./figures/local_lhs.tikz) (./figures/local_rhs.tikz) [98] [99]
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [99]
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz) [100]
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [101]
 (./figures/lookup_representation_kernel_k.tikz)
 (./figures/lookup_representation_kernel_k.tikz)
 (./figures/do_model_representation_kernel_k.tikz)
@@ -2163,7 +2158,7 @@ Overfull \hbox (26.71092pt too wide) detected at line 952
 (./figures/lookup_rep_intermediate_kernel.tikz)
 (./figures/lookup_rep_intermediate_kernel.tikz)
 (./figures/de_finetti_representation_kernel.tikz)
-(./figures/de_finetti_representation_kernel.tikz) [101]
+(./figures/de_finetti_representation_kernel.tikz) [102]
 (./figures/do_model_representation_kernel_pre.tikz)
 (./figures/do_model_representation_kernel_k.tikz)
 (./figures/do_model_representation_kernel_pre.tikz)
@@ -2171,21 +2166,21 @@ Overfull \hbox (26.71092pt too wide) detected at line 952
 (./figures/do_model_representation_kernel.tikz)
 (./figures/do_model_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [102]
+(./figures/lookup_representation_kernel.tikz) [103]
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation_mu_k.tikz)
-(./figures/do_model_representation_mu_k.tikz) [103]
+(./figures/do_model_representation_mu_k.tikz) [104]
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation_mu.tikz)
 (./figures/do_model_representation.tikz)
-(./figures/do_model_representation_mu.tikz) [104]) [105]
+(./figures/do_model_representation_mu.tikz) [105]) [106]
 \openout2 = Chapters/chapter_5_other_causal_inference.aux
 
 (./Chapters/chapter_5_other_causal_inference.tex
 Chapter 5.
 1: section
-[106
+[107
 
 
 
@@ -2204,20 +2199,20 @@ t-work)\T1/lmr/bx/n/10.95 . []\T1/lmr/m/n/10.95 Given an in-ter-ven-tional model
 ; \OT1/cmr/m/n/10.95 (\OT1/cmss/m/n/10.95 V[]\OT1/cmr/m/n/10.95 )[])$
  []
 
-[107]
+[108]
 
-LaTeX Warning: Reference `sec:cc_vars' on page 108 undefined on input line 85.
+LaTeX Warning: Reference `sec:cc_vars' on page 109 undefined on input line 85.
 
-[108] [109] [110] [111] (./figures/cbn_example_cgm.tikz)
+[109] [110] [111] [112] (./figures/cbn_example_cgm.tikz)
 (./figures/cbn_example_cgm.tikz) (./figures/cgm.tikz) (./figures/cgm.tikz)
 (./figures/cbn_unrolled_example.tikz) (./figures/cbn_unrolled_example.tikz)
-[112] (./figures/cbn_example_cgm.tikz) (./figures/cbn_example_cgm.tikz)
+[113] (./figures/cbn_example_cgm.tikz) (./figures/cbn_example_cgm.tikz)
 (./figures/contractible_over_hidden.tikz)
 (./figures/contractible_over_hidden_2.tikz)
 (./figures/contractible_over_hidden_3.tikz)
 (./figures/contractible_over_hidden.tikz)
 (./figures/contractible_over_hidden_2.tikz)
-(./figures/contractible_over_hidden_3.tikz) [113] [114] [115] [116]
+(./figures/contractible_over_hidden_3.tikz) [114] [115] [116] [117]
 Overfull \hbox (9.10692pt too wide) in paragraph at lines 339--340
 [][]\T1/lmr/bx/n/10.95 Ex-ample 5.1.19. []\T1/lmr/m/n/10.95 Let $\OT1/cmss/m/n/
 10.95 Y \OT1/cmr/m/n/10.95 := (\OT1/cmss/m/n/10.95 Y[]\OT1/cmr/m/n/10.95 )[]$ \
@@ -2225,27 +2220,27 @@ T1/lmr/m/n/10.95 be as-so-ci-ated with pa-tient out-comes, $\OT1/cmss/m/n/10.95
  D \OT1/cmr/m/n/10.95 := (\OT1/cmss/m/n/10.95 D[]\OT1/cmr/m/n/10.95 )[]$
  []
 
-[117] [118]
+[118] [119]
 
-LaTeX Warning: Reference `sec:counterfactual_statements' on page 119 undefined 
+LaTeX Warning: Reference `sec:counterfactual_statements' on page 120 undefined 
 on input line 397.
 
 (./figures/lookup_representation_single.tikz)
-(./figures/lookup_representation_single.tikz) [119]
+(./figures/lookup_representation_single.tikz) [120]
 (./figures/potential_outcomes_ccontract1.tikz)
 (./figures/potential_outcomes_ccontract2.tikz)
 (./figures/potential_outcomes_ccontract3.tikz)
 (./figures/potential_outcomes_ccontract1.tikz)
 (./figures/potential_outcomes_ccontract2.tikz)
-(./figures/potential_outcomes_ccontract3.tikz) [120] [121] [122
+(./figures/potential_outcomes_ccontract3.tikz) [121] [122] [123
 Missing character: There is no – (U+2013) in font ec-lmr10!
-] [123]
+] [124]
 (./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
 (./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
-[124] (./figures/index_independence_3.tikz)
+[125] (./figures/index_independence_3.tikz)
 (./figures/index_independence_4.tikz) (./figures/index_independence_3.tikz)
 (./figures/index_independence_4.tikz) (./figures/index_independence_5.tikz)
-(./figures/index_independence_5.tikz) [125]
+(./figures/index_independence_5.tikz) [126]
 (./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
 (./figures/kernel_fac_with_idents.tikz)
@@ -2264,37 +2259,37 @@ Missing character: There is no – (U+2013) in font ec-lmr10!
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
 (./figures/kernel_P_indep.tikz) (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
-(./figures/kernel_P_indep.tikz) [126] [127]
+(./figures/kernel_P_indep.tikz) [127] [128]
 
-LaTeX Warning: Reference `ex:bad_randomised_experiment' on page 128 undefined o
+LaTeX Warning: Reference `ex:bad_randomised_experiment' on page 129 undefined o
 n input line 798.
 
-[128] [129]
+[129] [130]
 Overfull \hbox (29.2596pt too wide) detected at line 850
 []
  []
 
-[130]
+[131]
 Overfull \hbox (2.6753pt too wide) detected at line 874
 []
  []
 
-[131]
+[132]
 Overfull \hbox (12.75401pt too wide) in paragraph at lines 930--931
 []\T1/lmr/m/n/10.95 In par-tic-u-lar, sup-pose an ex-per-i-ment is modeled by a se-quen-tial input-output model $\OT1/cmr/m/n/10.95 (\U/msb/m/n/10.95 P[]\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 (\OT1/cmss/m/n/10.95 D\OML/cmm/m/it/10.95 ; \OT1/cmss/m/n/10.95 U\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ; \OT1/cmss/m/n/10.95 Y\OT1/cmr/m/n/10.95 )$
  []
 
-[132] [133]) [134]
+[133] [134]) [135]
 \openout2 = Chapters/chapter_6_discussion.aux
  (./Chapters/chapter_6_discussion.tex
 Chapter 6.
 1: section
-[135
+[136
 
 
 
 
-]) [136]
+]) [137]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -2375,7 +2370,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 1: section
-[137
+[138
 
 
 
@@ -2432,7 +2427,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[138
+[139
 Missing character: There is no ’ (U+2019) in font ec-lmr10!
 ]
 ! Undefined control sequence.
@@ -2507,18 +2502,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-<argument> \faExternalLink 
-                
-l.99 \printbibliography[heading=bibintoc]
-                                       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[139
+[140
 Missing character: There is no — (U+2014) in font ec-lmr10!
 ]
 ! Undefined control sequence.
@@ -2565,7 +2549,29 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[140]
+! Undefined control sequence.
+<argument> \faExternalLink 
+                
+l.99 \printbibliography[heading=bibintoc]
+                                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \faExternalLink 
+                
+l.99 \printbibliography[heading=bibintoc]
+                                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[141]
 ! Undefined control sequence.
 <argument> \faExternalLink 
                 
@@ -2615,18 +2621,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-<argument> \faExternalLink 
-                
-l.99 \printbibliography[heading=bibintoc]
-                                       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[141
+[142
 Missing character: There is no ń (U+0144) in font ec-lmr10!
 Missing character: There is no ’ (U+2019) in font ec-lmr10!
 ]
@@ -2641,7 +2636,63 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[142
+! Undefined control sequence.
+<argument> \faExternalLink 
+                
+l.99 \printbibliography[heading=bibintoc]
+                                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \faExternalLink 
+                
+l.99 \printbibliography[heading=bibintoc]
+                                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[143]
+! Undefined control sequence.
+<argument> \faExternalLink 
+                
+l.99 \printbibliography[heading=bibintoc]
+                                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \faExternalLink 
+                
+l.99 \printbibliography[heading=bibintoc]
+                                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \faExternalLink 
+                
+l.99 \printbibliography[heading=bibintoc]
+                                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[144
 Missing character: There is no – (U+2013) in font ec-lmr10!
 ]
 ! Undefined control sequence.
@@ -2677,29 +2728,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-<argument> \faExternalLink 
-                
-l.99 \printbibliography[heading=bibintoc]
-                                       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-<argument> \faExternalLink 
-                
-l.99 \printbibliography[heading=bibintoc]
-                                       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[143]
 Overfull \hbox (40.23785pt too wide) in paragraph at lines 99--99
 \T1/lmr/m/it/10.95 cial Psy-cho-logy\T1/lmr/m/n/10.95 , 41(2). Pub-lisher: Rout-
 ledge _eprint: ht-tps://doi.org/10.1080/01973533.2019.1577736,
@@ -2760,31 +2789,32 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-<argument> \faExternalLink 
-                
-l.99 \printbibliography[heading=bibintoc]
-                                       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> \faExternalLink 
-                
-l.99 \printbibliography[heading=bibintoc]
-                                       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[144
+[145
 Missing character: There is no ’ (U+2019) in font ec-lmr10!
-] (./main.aux (./Chapters/chapter_1_introduction.aux)
+]
+! Undefined control sequence.
+<argument> \faExternalLink 
+                
+l.99 \printbibliography[heading=bibintoc]
+                                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \faExternalLink 
+                
+l.99 \printbibliography[heading=bibintoc]
+                                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[146] (./main.aux (./Chapters/chapter_1_introduction.aux)
 (./Chapters/chapter_2_technical.aux)
 (./Chapters/chapter_3_models_with_consequences.aux)
 (./Chapters/chapter_4_response_functions.aux)
@@ -2797,24 +2827,24 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: D1877620F2C29AD5D81054672E36A82E;5349.
+(rerunfilecheck)             Checksum: 915B9E589744D3873F1AC06C89E0F610;5193.
 Package logreq Info: Writing requests to 'main.run.xml'.
 
 \openout1 = main.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 54381 strings out of 478531
- 195411,2373549 words of node,token memory allocated
- 5232 words of node memory still in use:
+ 54401 strings out of 478531
+ 195408,2373549 words of node,token memory allocated
+ 5304 words of node memory still in use:
    81 hlist, 8 vlist, 10 rule, 4 disc, 4 local_par, 5 dir, 85 glue, 5 kern, 6 pe
-nalty, 2 margin_kern, 35 glyph, 667 attribute, 80 glue_spec, 359 attribute_list,
- 7 write, 4 save_pos, 174 pdf_literal, 34 pdf_action, 20 pdf_colorstack nodes
-   avail lists: 1:27,2:11081,3:3678,4:381,5:2104,6:483,7:11322,8:128,9:2707,10:2
-8,11:945,12:2
- 67347 multiletter control sequences out of 65536+600000
+nalty, 2 margin_kern, 35 glyph, 679 attribute, 80 glue_spec, 365 attribute_list,
+ 7 write, 4 save_pos, 174 pdf_literal, 40 pdf_action, 20 pdf_colorstack nodes
+   avail lists: 1:20,2:11093,3:3678,4:401,5:2107,6:479,7:11324,8:133,9:2716,10:2
+6,11:956,12:1
+ 67381 multiletter control sequences out of 65536+600000
  199 fonts using 13794839 bytes
- 107i,21n,100p,3197b,1727s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 107i,21n,100p,3197b,1725s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
 live/2021/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</usr/local/texlive/2021/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-
@@ -2850,10 +2880,10 @@ s/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsf
 onts/symbols/msbm7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/st
 maryrd/stmary10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/wasy-
 type1/wasy10.pfb>
-Output written on main.pdf (152 pages, 1584365 bytes).
+Output written on main.pdf (154 pages, 1599445 bytes).
 
-PDF statistics: 2639 PDF objects out of 2984 (max. 8388607)
- 2338 compressed objects within 24 object streams
- 689 named destinations out of 1000 (max. 131072)
- 448 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 2687 PDF objects out of 2984 (max. 8388607)
+ 2384 compressed objects within 24 object streams
+ 693 named destinations out of 1000 (max. 131072)
+ 432 words of extra memory for PDF output out of 10000 (max. 100000000)
 

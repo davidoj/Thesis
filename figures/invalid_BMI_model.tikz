@@ -5,7 +5,7 @@
 		\node [style=Llabel tikzit] (3) at (-2.5, -0.75) {$\RV{W}$};
 		\node [style=none] (4) at (-1, 0.75) {};
 		\node [style=none] (5) at (-1, -0.75) {};
-		\node [style=Llabel tikzit] (6) at (-2.5, 0) {$\RV{C}$};
+		\node [style=Llabel tikzit] (6) at (-2.5, 0) {$\text{id}_C$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=delmap] (2) to (4.center);

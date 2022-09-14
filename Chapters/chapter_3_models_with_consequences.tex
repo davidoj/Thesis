@@ -283,10 +283,10 @@ Statistical decision theory ignores the notion of general consequences of choice
 \begin{definition}[See-do model]\label{def:see_do_model}
 A probability set model of a statistical decision problem, or a \emph{see-do model} for short, is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences and $\RV{D}:\Omega\to D$ are the decisions. $\prob{P}_{C\times H}$ must observe the following conditional independences:
 \begin{align}
-    \RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}\\
-    \RV{D}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}
+    \RV{X}&\CI^e_{\prob{P}_{C\times H}} \text{id}_C|\RV{H}\\
+    \RV{D}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\text{id}_C
 \end{align}
-where $\RV{C}:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (refer to Definition \ref{def:eci_orig} for the definition of extended conditional independence $\CI_{\prob{P}_{C\times H}}^e$).
+where $\text{id}_C:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (refer to Definition \ref{def:eci_orig} for the definition of extended conditional independence $\CI_{\prob{P}_{C\times H}}^e$).
 \end{definition}
 \begin{definition}[Conditionally independent see-do model]\label{def:ci_see_do_model}
 A conditionally independent see-do model is a see do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where the following additional conditional independence holds:
@@ -320,7 +320,7 @@ The expected utility given $\alpha$ and $h$ is
      &= -\int_D\int_X l(d,h)\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
     &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}},h)
 \end{align}
-where Equation \eqref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}$.
+where Equation \eqref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}\CI^e_{\prob{P}_{C\times H}} \RV{H}|\text{id}_C$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}\CI^e_{\prob{P}_{C\times H}} \text{id}_C|\RV{H}$.
 \end{proof}
 
 Theorem \ref{th:ind_risk} does \emph{not} hold for general see-do models. General see-do models allow for the utility to depend on $\RV{X}$ even after conditioning on $\RV{D}$ and $\RV{H}$, while the form of the loss function in SDT forces no direct dependence on observations. The generic ``see-do risk'' (Definition \ref{def:see_do_risk}) provides a notion of risk for the more general case, while Theorem \ref{th:ind_risk} shows it reduces to SDP risk in the case of conditionally independent see-do models with a utility that depends only on the consequences $\RV{Y}$.
@@ -336,9 +336,9 @@ Section \ref{sec:modelling_decision_problems} noted that two types of probabilit
 \begin{definition}[Bayesian see-do model]
 A Bayesian see-do model is a tuple $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences, $\RV{D}:\Omega\to D$ are the decisions and $\RV{H}:\Omega\to H$ is the hypothesis. $\prob{P}_C$ must observe the following conditional independences:
 \begin{align}
-    \RV{X}&\CI^e_{\prob{P}_{C}} \RV{C}|\RV{H}\\
-    \RV{D}&\CI^e_{\prob{P}_{C}} \RV{H}|\RV{C}\\
-    \RV{H}&\CI^e_{\prob{P}_C} \RV{C}
+    \RV{X}&\CI^e_{\prob{P}_{C}} \text{id}_C|\RV{H}\\
+    \RV{D}&\CI^e_{\prob{P}_{C}} \RV{H}|\text{id}_C\\
+    \RV{H}&\CI^e_{\prob{P}_C} \text{id}_C
 \end{align}
 \end{definition}
 
@@ -355,7 +355,7 @@ Given a conditionally independent see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV
 \end{theorem}
 
 \begin{proof}
-First, note that $h\mapsto \prob{P}_{C\times \{h\}}^{\RV{Y}|\RV{XD}}$ is a version of $\prob{P}_C^{\RV{Y}|\RV{XD}}$ and hence $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X},\RV{C})|(\RV{H},\RV{D})$, a property it inherits from the underlying see-do model.
+First, note that $h\mapsto \prob{P}_{C\times \{h\}}^{\RV{Y}|\RV{XD}}$ is a version of $\prob{P}_C^{\RV{Y}|\RV{XD}}$ and hence $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X},\text{id}_C)|(\RV{H},\RV{D})$, a property it inherits from the underlying see-do model.
 
 Also, note that $\prob{P}_C^{\RV{H}}=\mu$, by construction.
 
@@ -639,11 +639,17 @@ As we have said, what exactly a ``measurement procedure'' is is a bit vague -- i
 
 However, $\proc{S}$ is problematic to model. The model is often part of the process of choosing $\alpha$, and so a model of $\proc{S}$ that involves the step ``choose $\alpha$'' will be self-referential. Because of this, we don't try to model $\proc{S}$, and whether this changes anything is an open question.
 
-\begin{definition}[Decision procedure]
-A decision procedure is a collection $\{\proc{S}_\alpha\}_{\alpha\in C}$ of measurement procedures.
+\begin{definition}[Decision procedure]\label{def:dec_proc}
+A decision procedure is a collection $\{\proc{S}_\alpha\}_{\alpha\in C}$ of measurement procedures. We call $C$ the \emph{option set}.
 \end{definition}
 
-Like measurement procedures, a decision procedure $\{\proc{S}_\alpha\}_{\alpha\in A}$ isn't a well-defined mathematical object; it's not really a ``set'', because the contents are real-world actions.
+Like measurement procedures, a decision procedure $\{\proc{S}_\alpha\}_{\alpha\in A}$ isn't a well-defined mathematical object; it's not really a ``set'', because the contents are real-world actions. We assume that each measurement procedure $\proc{S}_\alpha$ yields a value in the same sample space $\Omega$. As a result, each variable $\RV{X}:\Omega\to X$ associates via $\proc{S}_\alpha$ with a subprocedure $\proc{X}_\alpha$. Note that this setup does not guarantee that $\proc{X}_\alpha$ is the same ``kind of measurement'' as $\proc{X}_{\alpha'}$ and so a variable $\RV{X}$ doesn't \emph{necessarily} correspond to a unique kind of measurement. However, it's often a good idea to make sure each variable does correspond to a unique kind of measurement under each available option.
+
+A decision procedure is modelled by a decision model, which assigns a probability measure to each available option, all defined on a common sample space.
+
+\begin{definition}[Decision model]\label{def:dec_model}
+A decision model is a triple $(\prob{P}_C, (\Omega,\sigalg{F}), C)$ where $\prob{P}_C$ is the probability set $\{\prob{P}_\alpha|\alpha\in C\}$, $(\Omega,\sigalg{F})$ is the sample space and $C$ is the option set.
+\end{definition}
 
 \section{Conclusion}
 

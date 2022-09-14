@@ -6,7 +6,7 @@
 		\node [style=none] (3) at (3, 0.25) {};
 		\node [style=none] (4) at (3, -0.25) {};
 		\node [style=Llabel tikzit] (5) at (-1.5, -0.75) {$\RV{D}$};
-		\node [style=small kernel tikzit] (6) at (1.25, -0.75) {$\kernel{Q}^{\RV{C}|\RV{D}}$};
+		\node [style=small kernel tikzit] (6) at (1.25, -0.75) {$\kernel{Q}^{\text{id}_C|\RV{D}}$};
 		\node [style=none] (9) at (0.25, -0.75) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}

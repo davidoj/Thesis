@@ -993,6 +993,80 @@
       \verb https://ojs.aaai.org/index.php/AAAI/article/view/6567
       \endverb
     \endentry
+    \entry{daniusis_inferring_2012}{misc}{}
+      \name{author}{7}{}{%
+        {{hash=a78074a986622e79c4902b5733032fd2}{%
+           family={Daniusis},
+           familyi={D\bibinitperiod},
+           given={Povilas},
+           giveni={P\bibinitperiod}}}%
+        {{hash=2ffe1708b0e014a39d80d26907053160}{%
+           family={Janzing},
+           familyi={J\bibinitperiod},
+           given={Dominik},
+           giveni={D\bibinitperiod}}}%
+        {{hash=ce7c98ecd490ed138dd0d65d7207083a}{%
+           family={Mooij},
+           familyi={M\bibinitperiod},
+           given={Joris},
+           giveni={J\bibinitperiod}}}%
+        {{hash=61c4904f1136c6ac16a6a948ad0c96f7}{%
+           family={Zscheischler},
+           familyi={Z\bibinitperiod},
+           given={Jakob},
+           giveni={J\bibinitperiod}}}%
+        {{hash=118f819e02e5caa91a6405c627026e55}{%
+           family={Steudel},
+           familyi={S\bibinitperiod},
+           given={Bastian},
+           giveni={B\bibinitperiod}}}%
+        {{hash=62735e1af0391d63c09ff9fbcd3d4d54}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Kun},
+           giveni={K\bibinitperiod}}}%
+        {{hash=4c01ba063fdb8bb71da28de58702a81f}{%
+           family={Schoelkopf},
+           familyi={S\bibinitperiod},
+           given={Bernhard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{1f274d6ee7d474bdba5e3c3edb4c9337}
+      \strng{fullhash}{19a64dfb453196318ad7c949c3be462e}
+      \strng{bibnamehash}{19a64dfb453196318ad7c949c3be462e}
+      \strng{authorbibnamehash}{19a64dfb453196318ad7c949c3be462e}
+      \strng{authornamehash}{1f274d6ee7d474bdba5e3c3edb4c9337}
+      \strng{authorfullhash}{19a64dfb453196318ad7c949c3be462e}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We consider two variables that are related to each other by an invertible function. While it has previously been shown that the dependence structure of the noise can provide hints to determine which of the two variables is the cause, we presently show that even in the deterministic (noise-free) case, there are asymmetries that can be exploited for causal inference. Our method is based on the idea that if the function and the probability density of the cause are chosen independently, then the distribution of the effect will, in a certain sense, depend on the function. We provide a theoretical analysis of this method, showing that it also works in the low noise regime, and link it to information geometry. We report strong empirical results on various real-world data sets from different domains.}
+      \field{annotation}{Comment: Appears in Proceedings of the Twenty-Sixth Conference on Uncertainty in Artificial Intelligence (UAI2010)}
+      \field{month}{3}
+      \field{note}{arXiv:1203.3475 [cs, stat]}
+      \field{title}{Inferring deterministic causal relations}
+      \field{urlday}{12}
+      \field{urlmonth}{9}
+      \field{urlyear}{2022}
+      \field{year}{2012}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1203.3475
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1203.3475
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1203.3475
+      \endverb
+      \keyw{Computer Science - Machine Learning,Statistics - Machine Learning}
+    \endentry
     \entry{dawid_causal_2000}{article}{}
       \name{author}{1}{}{%
         {{hash=4016275a6a7dc086e196dd10c2f7520d}{%
@@ -2378,45 +2452,6 @@
       \verb https://www.jair.org/index.php/jair/article/view/10151
       \endverb
     \endentry
-    \entry{hendry_foundations_1997}{book}{}
-      \name{author}{2}{}{%
-        {{hash=6816e7c37c57bf4a47d33394a8562e5e}{%
-           family={Hendry},
-           familyi={H\bibinitperiod},
-           given={David\bibnamedelima F.},
-           giveni={D\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
-        {{hash=019801a13b36a4ee5384789b729c7a36}{%
-           family={Morgan},
-           familyi={M\bibinitperiod},
-           given={Mary\bibnamedelima S.},
-           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \list{publisher}{1}{%
-        {Cambridge University Press}%
-      }
-      \strng{namehash}{e59d0608e61b14584c864c3741d999f8}
-      \strng{fullhash}{e59d0608e61b14584c864c3741d999f8}
-      \strng{bibnamehash}{e59d0608e61b14584c864c3741d999f8}
-      \strng{authorbibnamehash}{e59d0608e61b14584c864c3741d999f8}
-      \strng{authornamehash}{e59d0608e61b14584c864c3741d999f8}
-      \strng{authorfullhash}{e59d0608e61b14584c864c3741d999f8}
-      \field{sortinit}{H}
-      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{In this compelling book, David Hendry and Mary Morgan bring together the classic papers of the pioneer econometricians, some of which have never been published before. Together, these papers form the foundations of econometric thought. They are essential reading for anyone seeking to understand the aims, method and methodology of econometrics and the development of this statistical approach in economics. However, because they are technically straightforward, the book is also accessible to students and non-specialists. An editorial commentary places the readings in their historical context and indicates the continuing relevance of these early, yet highly sophisticated, works for current econometric analysis. While this book provides a companion volume to Mary Morgan's acclaimed The History of Econometric Ideas, the editors' commentary both adds to that earlier volume and also provides a stand-alone and synthetic account of the development of econometrics.}
-      \field{isbn}{978-0-521-58870-6}
-      \field{month}{2}
-      \field{note}{Google-Books-ID: yRYrW3SS1OwC}
-      \field{title}{The {Foundations} of {Econometric} {Analysis}}
-      \field{year}{1997}
-      \keyw{Business \& Economics / Econometrics,Business \& Economics / Economics / General}
-    \endentry
     \entry{hernan_does_2008}{article}{}
       \name{author}{2}{}{%
         {{hash=28f606b292b08307b10c2ad8ca417fc7}{%
@@ -2746,6 +2781,93 @@
       \endverb
       \verb{url}
       \verb https://openreview.net/forum?id=rJNeX0gdbr
+      \endverb
+    \endentry
+    \entry{hoyer_nonlinear_2009}{incollection}{}
+      \name{author}{5}{}{%
+        {{hash=198d6e58844515dee7766cd2b34954e4}{%
+           family={Hoyer},
+           familyi={H\bibinitperiod},
+           given={Patrik\bibnamedelima O.},
+           giveni={P\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=2ffe1708b0e014a39d80d26907053160}{%
+           family={Janzing},
+           familyi={J\bibinitperiod},
+           given={Dominik},
+           giveni={D\bibinitperiod}}}%
+        {{hash=32c50b3bb2e43125b3098626ef50e556}{%
+           family={Mooij},
+           familyi={M\bibinitperiod},
+           given={Joris\bibnamedelima M},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=b50a0fee091540dedaefacc234101037}{%
+           family={Peters},
+           familyi={P\bibinitperiod},
+           given={Jonas},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ca31cc11ec9370460148c3a9c48fce45}{%
+           family={Schölkopf},
+           familyi={S\bibinitperiod},
+           given={Bernhard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \name{editor}{4}{}{%
+        {{hash=0ffc3f404f0baef79d60dfb5034ff37a}{%
+           family={Koller},
+           familyi={K\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=45a34b645c5e7fbd7020b9c3bd59f707}{%
+           family={Schuurmans},
+           familyi={S\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=419350ebbeb4eba5351469f378dee007}{%
+           family={Bengio},
+           familyi={B\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=bbfb0f3936c83b7b099561e6f0e32ef3}{%
+           family={Bottou},
+           familyi={B\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Curran Associates, Inc.}%
+      }
+      \strng{namehash}{816a28f1b020babd1ca9d29f3c9ff8db}
+      \strng{fullhash}{a8c2b5fe00a6ee34ac1cebec6108afcb}
+      \strng{bibnamehash}{a8c2b5fe00a6ee34ac1cebec6108afcb}
+      \strng{authorbibnamehash}{a8c2b5fe00a6ee34ac1cebec6108afcb}
+      \strng{authornamehash}{816a28f1b020babd1ca9d29f3c9ff8db}
+      \strng{authorfullhash}{a8c2b5fe00a6ee34ac1cebec6108afcb}
+      \strng{editorbibnamehash}{323857ead2c361f7863b9f1095ed3291}
+      \strng{editornamehash}{610db0f87d1e5addd5f26b753039a8b9}
+      \strng{editorfullhash}{323857ead2c361f7863b9f1095ed3291}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in {Neural} {Information} {Processing} {Systems} 21}
+      \field{title}{Nonlinear causal discovery with additive noise models}
+      \field{urlday}{6}
+      \field{urlmonth}{2}
+      \field{urlyear}{2019}
+      \field{year}{2009}
+      \field{urldateera}{ce}
+      \field{pages}{689\bibrangedash 696}
+      \range{pages}{8}
+      \verb{file}
+      \verb NIPS Full Text PDF:/Users/davidjohnston/Zotero/storage/QK3WLZAQ/Hoyer et al. - 2009 - Nonlinear causal discovery with additive noise mod.pdf:application/pdf;NIPS Snapshot:/Users/davidjohnston/Zotero/storage/KKAHZ7YW/3548-nonlinear-causal-discovery-with-additive-noise-models.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf
+      \endverb
+      \verb{url}
+      \verb http://papers.nips.cc/paper/3548-nonlinear-causal-discovery-with-additive-noise-models.pdf
       \endverb
     \endentry
     \entry{imbens_identification_1994}{article}{}
@@ -3730,6 +3852,61 @@
       \verb{url}
       \verb https://doi.org/10.1007/978-3-7091-6045-9_31
       \endverb
+    \endentry
+    \entry{mooij_j.m._distinguishing_2016}{article}{}
+      \name{author}{6}{}{%
+        {{hash=079a72167e4b6c166413ca4f846e101b}{%
+           family={{Mooij, J.M.}},
+           familyi={M\bibinitperiod}}}%
+        {{hash=d47a63c0f4f54429ea682550e7fd5d66}{%
+           family={{Peters, J.}},
+           familyi={P\bibinitperiod}}}%
+        {{hash=ee79cb02b3b433c6f8a92e9f9133b051}{%
+           family={{Janzing, D.}},
+           familyi={J\bibinitperiod}}}%
+        {{hash=1451ea3f39ecd40a4562f392ca946d99}{%
+           family={{Zscheischler, J.}},
+           familyi={Z\bibinitperiod}}}%
+        {{hash=e1c22bbf22c760f70e6d5ae22c4eb803}{%
+           family={{Schölkopf, B.}},
+           familyi={S\bibinitperiod}}}%
+        {{hash=4069a9955c912cbb0da1d4e238983da0}{%
+           family={{Amsterdam Machine Learning lab (IVI, FNWI)}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{c379a31f95fd421f639b34ce3417e377}
+      \strng{fullhash}{5182dfa89a35603b3f52aed95f4bb320}
+      \strng{bibnamehash}{5182dfa89a35603b3f52aed95f4bb320}
+      \strng{authorbibnamehash}{5182dfa89a35603b3f52aed95f4bb320}
+      \strng{authornamehash}{c379a31f95fd421f639b34ce3417e377}
+      \strng{authorfullhash}{5182dfa89a35603b3f52aed95f4bb320}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The discovery of causal relationships from purely observational data is a fundamental problem in science. The most elementary form of such a causal discovery problem is to decide whether X causes Y or, alternatively, Y causes X, given joint observations of two variables X,Y. An example is to decide whether altitude causes temperature, or vice versa, given only joint measurements of both variables. Even under the simplifying assumptions of no confounding, no feedback loops, and no selection bias, such bivariate causal discovery problems are challenging. Nevertheless, several approaches for addressing those problems have been proposed in recent years. We review two families of such methods: methods based on Additive Noise Models (ANMs) and Information Geometric Causal Inference (IGCI). We present the benchmark CauseEffectPairs that consists of data for 100 different cause-effect pairs selected from 37 data sets from various domains (e.g., meteorology, biology, medicine, engineering, economy, etc.) and motivate our decisions regarding the “ground truth” causal directions of all pairs. We evaluate the performance of several bivariate causal discovery methods on these real-world benchmark data and in addition on artificially simulated data. Our empirical results on real-world data indicate that certain methods are indeed able to distinguish cause from effect using only purely observational data, although more benchmark data would be needed to obtain statistically significant conclusions. One of the best performing methods overall is the method based on Additive Noise Models that has originally been proposed by Hoyer et al. (2009), which obtains an accuracy of 63 ± 10 \% and an AUC of 0.74 ± 0.05 on the real-world benchmark. As the main theoretical contribution of this work we prove the consistency of that method.}
+      \field{issn}{1532-4435}
+      \field{journaltitle}{Journal of Machine Learning Research}
+      \field{shorttitle}{Distinguishing {Cause} from {Effect} {Using} {Observational} {Data}}
+      \field{title}{Distinguishing {Cause} from {Effect} {Using} {Observational} {Data}: {Methods} and {Benchmarks}}
+      \field{urlday}{7}
+      \field{urlmonth}{2}
+      \field{urlyear}{2019}
+      \field{volume}{17}
+      \field{year}{2016}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://dare.uva.nl/personal/pure/en/publications/distinguishing-cause-from-effect-using-observational-data-methods-and-benchmarks(f4e35a2b-cd22-41a4-93e5-7f0b1cf8090a).html
+      \endverb
+      \verb{url}
+      \verb http://dare.uva.nl/personal/pure/en/publications/distinguishing-cause-from-effect-using-observational-data-methods-and-benchmarks(f4e35a2b-cd22-41a4-93e5-7f0b1cf8090a).html
+      \endverb
+      \keyw{A - open article in open journal}
     \endentry
     \entry{muller_causal_2015}{article}{}
       \name{author}{1}{}{%
@@ -4858,6 +5035,67 @@
       \verb Full Text:/home/davidj/snap/zotero-snap/common/Zotero/storage/HFBQFBRJ/Shahar - 2009 - The association of body mass index with health out.pdf:application/pdf
       \endverb
       \keyw{Bias,Humans,Causality,Body Mass Index,Confounding Factors,Epidemiologic,Epidemiologic Methods,Mortality,Observation}
+    \endentry
+    \entry{shimizu_linear_2006}{article}{}
+      \name{author}{5}{}{%
+        {{hash=d5235ea47ea56947d9cbb725fbbf5e5c}{%
+           family={Shimizu},
+           familyi={S\bibinitperiod},
+           given={Shohei},
+           giveni={S\bibinitperiod}}}%
+        {{hash=198d6e58844515dee7766cd2b34954e4}{%
+           family={Hoyer},
+           familyi={H\bibinitperiod},
+           given={Patrik\bibnamedelima O.},
+           giveni={P\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=0e2e38f9af4cf28c39b1681cc0c626f0}{%
+           family={Hyv\&\#228},
+           familyi={H\bibinitperiod},
+           given={Aapo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=fce383ae8c8410a7e97a6cbc249f3af8}{%
+           family={rinen},
+           familyi={r\bibinitperiod}}}%
+        {{hash=1c0a201c7c42214ae59d2393844a167f}{%
+           family={Kerminen},
+           familyi={K\bibinitperiod},
+           given={Antti},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{cd744ea322f537b9a9fe03cda57d4917}
+      \strng{fullhash}{7e07a7faca90a4b7853d0cef4f1e4f2b}
+      \strng{bibnamehash}{7e07a7faca90a4b7853d0cef4f1e4f2b}
+      \strng{authorbibnamehash}{7e07a7faca90a4b7853d0cef4f1e4f2b}
+      \strng{authornamehash}{cd744ea322f537b9a9fe03cda57d4917}
+      \strng{authorfullhash}{7e07a7faca90a4b7853d0cef4f1e4f2b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In recent years, several methods have been proposed for the discovery of causal structure from non-experimental data. Such methods make various assumptions on the data generating process to facilitate its identification from purely observational data. Continuing this line of research, we show how to discover the complete causal structure of continuous-valued data, under the assumptions that (a) the data generating process is linear, (b) there are no unobserved confounders, and (c) disturbance variables have non-Gaussian distributions of non-zero variances. The solution relies on the use of the statistical method known as independent component analysis, and does not require any pre-specified time-ordering of the variables. We provide a complete Matlab package for performing this LiNGAM analysis (short for Linear Non-Gaussian Acyclic Model), and demonstrate the effectiveness of the method using artificially generated data and real-world data.}
+      \field{issn}{1533-7928}
+      \field{journaltitle}{Journal of Machine Learning Research}
+      \field{number}{72}
+      \field{title}{A {Linear} {Non}-{Gaussian} {Acyclic} {Model} for {Causal} {Discovery}}
+      \field{urlday}{12}
+      \field{urlmonth}{9}
+      \field{urlyear}{2022}
+      \field{volume}{7}
+      \field{year}{2006}
+      \field{urldateera}{ce}
+      \field{pages}{2003\bibrangedash 2030}
+      \range{pages}{28}
+      \verb{file}
+      \verb Full Text PDF:/Users/davidjohnston/Zotero/storage/L95GKNVB/Shimizu et al. - 2006 - A Linear Non-Gaussian Acyclic Model for Causal Dis.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://jmlr.org/papers/v7/shimizu06a.html
+      \endverb
+      \verb{url}
+      \verb http://jmlr.org/papers/v7/shimizu06a.html
+      \endverb
     \endentry
     \entry{shpitser_complete_2008}{article}{}
       \name{author}{2}{}{%

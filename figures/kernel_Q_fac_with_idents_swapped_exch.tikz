@@ -6,9 +6,9 @@
 		\node [style=none] (3) at (1.75, 0) {};
 		\node [style=none] (4) at (1.75, -0.5) {};
 		\node [style=Llabel tikzit] (5) at (-4.75, -1) {$\RV{D}$};
-		\node [style=small kernel tikzit] (6) at (-2, -1) {$\kernel{Q}^{\RV{C}|\RV{D}}$};
+		\node [style=small kernel tikzit] (6) at (-2, -1) {$\kernel{Q}^{\text{id}_C|\RV{D}}$};
 		\node [style=none] (7) at (-2.75, -1) {};
-		\node [style=small kernel tikzit] (8) at (0.25, -1) {$\kernel{Q}^{\RV{D}|\RV{C}}$};
+		\node [style=small kernel tikzit] (8) at (0.25, -1) {$\kernel{Q}^{\RV{D}|\text{id}_C}$};
 		\node [style=small kernel tikzit] (9) at (-3.75, 0.5) {$\kernel{F}_{\rho}$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}

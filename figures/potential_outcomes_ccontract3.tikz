@@ -7,9 +7,9 @@
 		\node [style=none] (4) at (3, 0) {};
 		\node [style=Llabel tikzit] (5) at (-4, 1.25) {$\RV{X}$};
 		\node [style=small kernel tikzit] (6) at (0.25, 1.25) {$\prob{P}_\alpha^{\RV{Y}^D|\RV{X}}$};
-		\node [style=small kernel tikzit] (7) at (6.5, 0.25) {$\text{swap}_{\rho^{-1}}$};
-		\node [style=small kernel tikzit] (8) at (-2.5, 1.25) {$\text{swap}_{\rho}$};
-		\node [style=small kernel tikzit] (9) at (0.25, 0) {$\text{swap}_{\rho}$};
+		\node [style=small kernel tikzit] (7) at (6.5, 0.25) {$\text{Swap}_{\rho^{-1}}$};
+		\node [style=small kernel tikzit] (8) at (-2.5, 1.25) {$\text{Swap}_{\rho}$};
+		\node [style=small kernel tikzit] (9) at (0.25, 0) {$\text{Swap}_{\rho}$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (0) to (7);

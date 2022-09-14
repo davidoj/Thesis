@@ -1,3 +1,6 @@
+%!TEX root = main.tex
+
+
 \frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
 
 \pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
@@ -19,9 +22,9 @@
 %{\huge \bfseries \ttitle\par}\vspace{0.6cm} % Thesis title automatic
 
 {\bfseries
-\LARGE{The Origin and Evolution of Life on a Pale Blue Dot}\\
+\LARGE{Decision theoretic foundations for statistical causal modelling}\\
 \bigskip
-\large{Astrophysical, Geochemical and Biological Constraints on Habitability}
+\large{}
 }
 
 \vspace{1cm} % Thesis title
@@ -43,13 +46,13 @@
 %\end{flushright}
 %\end{minipage}\\[3cm]
  
-\vspace{1cm}
-\includegraphics[width=0.6\textwidth]{gfx/front_cover} \\ \bigskip  
-\vspace{1cm}
+% \vspace{1cm}
+% \includegraphics[width=0.6\textwidth]{gfx/front_cover} \\ \bigskip  
+% \vspace{1cm}
 
 \large \textit{A thesis submitted for the degree of \degreename}\\[0.7cm] % University requirement text
 %\textit{in the}\\[0.4cm]
-\groupname\\
+% \groupname\\
 \deptname\\ % Research group name and department name
 %\univname % University name
 
@@ -58,7 +61,7 @@
 
 \includegraphics[width=5cm]{gfx/ANU_LOGO_cmyk_56mm}
 
-{\normalsize November, 2015}\\[2cm] % Date
+{\normalsize September, 2022}\\[2cm] % Date
 
 \end{center}
 \end{titlepage}
@@ -71,19 +74,13 @@
 %\addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
 \begingroup
 \large
-\noindent This dissertation is an account of research undertaken between April 2009 and November 2015 at the Research School of Earth Sciences, The Australian National University, Canberra, Australia. 
+\noindent This dissertation is an account of research undertaken between January 2018 and September 2022 at the College of Engineering and Computer Sciences, The Australian National University, Canberra, Australia. 
 
 %Except where acknowledged in the customary manner, all material presented in this dissertation including figures and photographs are original and have not been submitted in whole or part for a degree in any university.
 
 The work presented in this thesis is that of the candidate alone, except where indicated by due literature reference and acknowledgements in the text. It has not been submitted in whole or in part for any other degree at this or any other university.
 
-This thesis is based on six papers published in refereed scientific journals or books. The development of ideas and research was undertaken with guidance from my supervisor Charles H. Lineweaver and published papers presented in the thesis were written collaboratively with him. Below I describe my contributions to the research in each chapter and associated papers.
-
-\begin{itemize}
-\item Chapter~\ref{ch:HabitableWorlds} is the paper \citet{Lineweaver2012AnnRev}. Section~\ref{sec:HZones} is my major research contribution to the paper. Research on the distribution of biomass on Earth, the constraints for habitable zones within the Earth, and the energy requirements and sources for the earliest bacteria is my work.
-\item Chapter~\ref{ch:biologicalhab} is the paper \citet{Chopra2016} where my research forms a major contribution to all sections of the paper.
-\end{itemize}
-
+The development of ideas and research was undertaken with guidance from my primary supervisors Robert Williamson and Cheng Soon Ong, and the thesis was written by myself. The overall direction of the research was developed in collaboration with my supervisors, who also provided a lot of detailed feedback on my work along the way. The original results presented here were primarily my work.
 
 \bigskip
 \vspace{1cm}
@@ -94,9 +91,9 @@ This thesis is based on six papers published in refereed scientific journals or 
 \endgroup
 \end{declaration}
 \vspace{3cm}
-\begingroup
-\footnotesize\emph{{Cover: Figure 1 from \fullcite{Lineweaver2012AnnRev}}}
-\endgroup
+% \begingroup
+% \footnotesize\emph{{Cover: Figure 1 from \fullcite{Lineweaver2012AnnRev}}}
+% \endgroup
 \cleardoublepage
 
 % \begin{declaration}
@@ -140,11 +137,7 @@ This thesis is based on six papers published in refereed scientific journals or 
 \vspace{0.4cm}
 \begingroup
 \normalsize
-Like Sagan's apple pie, this thesis was not put together from scratch, because that would have required me to first create the universe. So to all baryons, wise ancestors and enlightened cousins, eukaryotic or otherwise, thank you.
-
-I am grateful to my supervisor, research school, friends and family.
-
-Thank you Google et al. May the electrons keep following and the entropy keep increasing\dots
+\todo[inline]{Acknowldegements}
 \endgroup
 \end{acknowledgements}
 
@@ -156,11 +149,7 @@ Thank you Google et al. May the electrons keep following and the entropy keep in
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
 \begingroup
 \normalsize
-Some of the most fundamental questions in astrobiology are: How does life begin and evolve\,? Does life exist elsewhere in the universe\,? What is the future of life on Earth and beyond\,? This thesis approaches these questions by investigating the chemical and energy requirements for life and the conditions that enabled the emergence and proliferation of life on Earth. Understanding how common the necessary physical processes, chemical ingredients and environmental conditions may be on other planets helps us assess the likelihood of finding life beyond our planet and gives us clues about the best targets and detection methods for future search efforts.
-
-Our evaluation of astrophysical and geochemical constraints on the habitability of Earth-like planets tells us that temperature and the presence of water are the main factors that define the limits for life. Our analysis of recent exoplanet detections suggests that the fraction of stars with planets is $\sim$\,100\%, and that the fraction with wet rocky planets is likely to be comparably large. We find that the most fundamental free energy redox and photon gradients associated with the earliest life forms on Earth, and the energy-transducing metabolisms they induce, are plausible on other wet rocky planets.
-
-Even if the emergence of life is a common feature of planetary systems throughout the universe, we propose a new Gaian bottleneck hypothesis where we postulate that in addition to water, energy and abiogenesis, the early extinction of planetary life is also a cosmic imperative. We discuss why the vast majority of initially wet rocky planetary environments evolve away from habitable conditions within about a billion years because of the strength, rapidity and universality of abiotic positive feedbacks in the atmospheres of terrestrial planets in traditional circumstellar habitable zones. We argue that the maintenance of planetary habitability is a property more associated with an unusually rapid evolution of biological regulation of surface volatiles, than with the luminosity and distance to the host star. Our model suggests that a planet needs to be inhabited in order to remain habitable and predicts that lifeless habitable planets will be rare. The Gaian bottleneck to the long-term persistence of life may be a better explanation for the non-prevalence of extraterrestrial life than the conventional emergence bottleneck paradigm.
+\todo[inline]{Update abstract}
 \bigskip
 
 \textbf{Keywords:} \keywordnames
@@ -172,41 +161,40 @@ Even if the emergence of life is a common feature of planetary systems throughou
 %	LIST OF CONTENTS/FIGURES/TABLES PAGES
 %----------------------------------------------------------------------------------------
 
-\renewcommand{\listfigurename}{Figures}
-\renewcommand{\listtablename}{Tables}
+% \renewcommand{\listfigurename}{Figures}
+% \renewcommand{\listtablename}{Tables}
 
 \begin{spacing}{0.94} 
 \tableofcontents % Prints the main table of contents
 \end{spacing}
 
-\listoffigures % Prints the list of figures
-\listoftables % Prints the list of tables
+% \listoffigures % Prints the list of figures
+% \listoftables % Prints the list of tables
 % \listoflistings % Prints the list of python codes
 
 %----------------------------------------------------------------------------------------
 %	ABBREVIATIONS
 %----------------------------------------------------------------------------------------
 
-\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
-\textbf{ANU}&\textbf{A}ustralian \textbf{N}ational \textbf{U}niversity\\
-\textbf{BOM}&\textbf{B}ureau of \textbf{M}eteorology\\
-\textbf{CSIRO}&\textbf{C}ommonwealth \textbf{S}cientific and \textbf{I}ndustrial \textbf{R}esearch \textbf{O}rganisation\\
-\textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere\\
-\textbf{WSF} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
-\end{abbreviations}
+\todo[inline]{List of notation}
+
+% \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
+% \textbf{ANU}&\textbf{A}ustralian \textbf{N}ational \textbf{U}niversity\\
+
+% \end{abbreviations}
 
 %----------------------------------------------------------------------------------------
 %	PHYSICAL CONSTANTS/OTHER DEFINITIONS
 %----------------------------------------------------------------------------------------
 
-\begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
+% \begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
 
-% The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
+% % The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
 
-Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
-%Constant Name & $Symbol$ & $Constant Value$ with units\\
+% Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
+% %Constant Name & $Symbol$ & $Constant Value$ with units\\
 
-\end{constants}
+% \end{constants}
 
 %----------------------------------------------------------------------------------------
 %	SYMBOLS
@@ -214,13 +202,48 @@ Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
 
 \begin{symbols}{lll} % Include a list of Symbols (a three column table)
 
-$a$ & distance & \si{\meter} \\
-$P$ & power & \si{\watt} (\si{\joule\per\second}) \\
-%Symbol & Name & Unit \\
-
-\addlinespace % Gap to separate the Roman symbols from the Greek
-
-$\omega$ & angular frequency & \si{\radian} \\
+\begin{tabular}{ |c|c|c|c|} 
+ \hline
+ Name & Notation & Meaning & Reference \\
+ \hline
+ \multicolumn{4}{l}{\textbf{Probability theory}}\\
+ \hline
+ Iverson bracket & $\llbracket \cdot \rrbracket$ & Function equal to 1 if $\cdot$ is true, false otherwise & \\
+ Variable & $\RV{X}$ & Measurable function $(\Omega,\sigalg{F})\to(X,\sigalg{X})$ & Definition \ref{def:variable} \\
+ Trivial variable & $*$ & Single-valued variable, maps $(\Omega,\sigalg{F})\to (\{*\},\{\emptyset,\{*\}\})$ & Definition \ref{no:single_valued} \\
+ Variable sequence & $(\RV{X},\RV{Y})$ & The variable given by $\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$ & Definition \ref{def:seqvar}\\
+ Probability measure & $\prob{P}\in \Delta(\Omega)$ & Countably additive measure on $(\Omega,\sigalg{F})$ with $\prob{P}(\Omega)=1$ & Definition \ref{def:prob_meas}\\
+ Set of probability measures & $\Delta(\Omega)$ & Set of probability measures on $(\Omega,\sigalg{F})$ & Notation \ref{no:prob_meas_set}\\
+ Markov kernel & $\kernel{K}:X\kto Y$ & Measurable map from $(X,\sigalg{X})$ to probability measures on $(Y,\sigalg{Y})$ & Definition \ref{def:markov_kern}\\
+ Dirac measure & $\delta_x$ & Probability measure where $\delta_x(A)=1$ if $x\in A$, $0$ otherwise & Definition \ref{def:dirac_meas}\\
+ Markov kernel associated with a function & $\kernel{F}_{f}$ & Markov kernel associated with $f:X\to Y$ that maps $x\mapsto \delta_{f(x)}$ & Definition \ref{def:mkern_func}\\
+ Marginal distribution & $\prob{P}^{\RV{X}}$ & $\prob{P}\kernel{F}_{\RV{X}}$ & Definition \ref{def:pushforward}\\
+ Conditional distribution & $\prob{P}^{\RV{Y}|\RV{X}}$ & Arbitrary Markov kernel $X\kto Y$ such that $\prob{P}^{\RV{XY}}(A\times B) = \int_A \prob{P}^{\RV{Y}|\RV{X}}(B|x)\prob{P}^{\RV{X}}(\mathrm{d}x)$ & Definition \ref{def:disint} \\
+ Conditional independence & $\RV{X}\CI_{\prob{P}}\RV{Y}|\RV{Z}$ & $\prob{P}^{\RV{X}|\RV{YZ}}(A|y,z)$ does not depend on $z$ & Definition \ref{def:ci}\\
+ Uniform conditional probability & $\prob{P}_A^{\RV{Y}|\RV{X}}$ & Arbitrary Markov kernel $X\kto Y$ that is a conditional distribution for every $\alpha\in A$ & Defintion \ref{def:cprob_pset}\\
+ Kernel product & $\kernel{K}\kernel{L}$ & The Markov kernel given by $(A|x)\mapsto \int_Y \kernel{L}(A|y)\kernel{K}(\mathrm{d}y|x)$ & Definition \ref{def:kproduct}\\
+ Semidirect product & $\kernel{K}\odot \kernel{L}$ The Markov kernel given by $(A\times B|x)\mapsto \int_A \kernel{L}(B)|y)\kernel{K}(\mathrm{d}y|x)$ & Definition \ref{def:copyproduct}\\
+\hline
+\multicolumn{4}{l}{\textbf{String diagrams}}\\
+\hline
+ Identity map & $\mathrm{Id}_X$ & Markov kernel associated with the identity function $X\to X$ & Definition \ref{def:ident_k}\\
+ Erase map & $\mathrm{Del}_X$, $\stopper{0.5}$ & Markov kernel associated with the trivial variable $*_X:X\to \{*\}$ & Definition \ref{def:erase}\\
+ Swap map & $\mathrm{Swap}_{XY}$, $\swap{0.5}$ & Markov kernel associated with the function that swaps its inputs $(x,y)\mapsto (y,x)$ & Definition \ref{def:swap}\\
+ Swap according to permuation & $\mathrm{Swap}_\rho$ & Markov kernel that swaps inputs in a manner specified by permuation $\rho$ &\\
+ Copy map & $\mathrm{Copy}_{X}$, $\splitter{0.5}$ & Markov kernel associated with the function that makes two copies of its inputs & Definition \ref{def:copy}\\
+\hline
+\multicolumn{4}{l}{\textbf{Probability sets and decision models}}\\
+\hline
+Probability set & $\prob{P}_A$ & A collection of probability measures $\{\prob{P}_\alpha|\alpha\in A\}$ on a common sample space & Definition \ref{def:prob_set}\\
+Decision model & $(\prob{P}_C,(\Omega,\sigalg{F}),C)$ & An option set $C$, a sample space $(\Omega,\sigalg{F})$ and a probability measure $\prob{P}_\alpha$ for each option & Definition \ref{def:dec_model}\\
+Option set & $C$ & Interpreted as the set of options available to a decision maker & Definition \ref{def:dec_model}\\
+Nonstochastic variable & $\phi$ & Function defined on the option set $C\to A$ & Definition \ref{def:nonstoc_var}\\
+Complementary variables & $(\phi,\xi)$ & Sequence of nonstochastic variables that induces an invertible function & Definition \ref{def:comp_var}\\
+Extended conditional independence & $\RV{X}\CI^e_{\prob{P}_C}(\RV{Y},\phi)|(\RV{Z},\xi)$ & Generalisation of conditional independence to decision models & Definition \ref{def:eci_orig}\\
+Choice variable & $\text{id}_C$ & Identity function on option set $C$; corresponds to the choice made by decision maker & \\
+Tabular conditional & $\RV{Y}^X$ & Variable with the property that $\RV{Y}=\sum_{x\in X} \llbracket \RV{X}=x\rrbracket \RV{Y}^x$; not necessarily interpretable as potential outcomes & Definition \ref{def:tab_cd}\\
+\hline
+\end{tabular}
 
 \end{symbols}
 
@@ -228,6 +251,6 @@ $\omega$ & angular frequency & \si{\radian} \\
 %	DEDICATION
 %----------------------------------------------------------------------------------------
 
-\dedicatory{For/Dedicated to/To my\ldots} 
+% \dedicatory{For/Dedicated to/To my\ldots} 
 
 

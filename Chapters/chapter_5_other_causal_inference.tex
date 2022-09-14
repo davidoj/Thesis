@@ -60,7 +60,7 @@ Given a graph $\graph{G}=(\graph{V},\graph{E})$ and a sequence of variables $(\R
 \end{definition}
 
 \begin{definition}[Compatibility]\label{def:compat}
-Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m:\RV{V}_i\mapsto \node{V}_i$, $\prob{P}_\cdot$ is compatible with $\mathcal{G}$ relative to $m$ if for all $I,J,K\subset A$, $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \mathbf{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\RV{C})$.
+Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m:\RV{V}_i\mapsto \node{V}_i$, $\prob{P}_\cdot$ is compatible with $\mathcal{G}$ relative to $m$ if for all $I,J,K\subset A$, $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \mathbf{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\text{id}_C)$.
 \end{definition}
 
 The following definition is reproduced fron \citet{pearl_causality:_2009} with the differences mentioned: notation has been matched to ours, the interventional model is assumed to be measurable and the interventional distributions defined on a common sample space.
@@ -122,7 +122,7 @@ Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\
     \item [2*] $\pi_j(\alpha) = (\mathrm{do}_{B_j},v_{B_j})$ and $B_j\neq \emptyset$ implies $\prob{P}_{(\mathrm{do}_{B_j},v_{B_j})}^{\RV{V}_{Bj}} = \delta_{v_{B_j}}$
     \item [3*] If $\pi_j(\alpha) = (\mathrm{do}_{B_j},v_{B_j})$, $\pi_k(\alpha) = (\mathrm{do}_{B_k},v_{B_k})$ and $i\not \in B_j\cup B_k$ then $\prob{P}_{\alpha}^{\RV{V}_{ij}|\mathrm{Pa}(\RV{V}_{ij})}\overset{\prob{P}_{\alpha}}{\cong}\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_{ik}|\mathrm{Pa}(\RV{V}_{ik})}$
     \item [4*] $\pi_j(\alpha)=\pi_j(\alpha')$ implies $\prob{P}_\alpha^{\RV{V}_{Aj}}= \prob{P}_{\alpha'}^{\RV{V_{Aj}}}$
-    \item [5*] $\RV{V}_{Aj}\CI^e_{\prob{P}_{C}} \RV{V}_{A [n]\setminus\{j\}} |\RV{C}$
+    \item [5*] $\RV{V}_{Aj}\CI^e_{\prob{P}_{C}} \RV{V}_{A [n]\setminus\{j\}} |\text{id}_C$
 \end{itemize}
 \end{definition}
 
@@ -139,18 +139,18 @@ Recalling the discussion in Section \ref{sec:probability_set_models}, Definition
 An uncertain unrolled causal Bayesian network is \emph{almost} a conditionally independent and identical response function model. Due to 3*, such a model features conditionally independent and identical response functions wherever $\alpha$ consists of a sequence of interventions none of which target $i$. This leads us to the key result of this section: considering a subset of the interventions in $C$, an uncertain unrolled causal Bayesian network is IO contractible (with respect to some parameters) by application of Theorem \ref{th:ciid_rep_kernel}.
 
 \begin{theorem}[IO contractibility of CBNs]\label{th:causal_contractibility_cbn}
-Given an uncertain unrolled causal Bayesian network $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in [n]},\RV{H},\graph{G})$, take $C'\subset C$ to be sequences of interventions that, for some $j\in [n]$, do not target a particular $\RV{V}_{ij}$ for any $i\in A$. Then $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\RV{C}|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$ and $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ is IO contractible over $\RV{H}$. 
+Given an uncertain unrolled causal Bayesian network $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in [n]},\RV{H},\graph{G})$, take $C'\subset C$ to be sequences of interventions that, for some $j\in [n]$, do not target a particular $\RV{V}_{ij}$ for any $i\in A$. Then $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\text{id}_C|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$ and $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ is IO contractible over $\RV{H}$. 
 \end{theorem}
 
 \begin{proof}
-First we will prove $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\RV{C}|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$. This is equivalent to the claim that $\prob{P}_\alpha^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ is the same as $\prob{P}_{\alpha'}^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ for any $\alpha,\alpha'$. By assumption 5* of Definition \ref{def:unr_CBN}, for each $h\in H$
+First we will prove $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\text{id}_C|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$. This is equivalent to the claim that $\prob{P}_\alpha^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ is the same as $\prob{P}_{\alpha'}^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ for any $\alpha,\alpha'$. By assumption 5* of Definition \ref{def:unr_CBN}, for each $h\in H$
 \begin{align}
-    \RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha,h}} \RV{V}_{A [n]\setminus\{j\}} |\RV{C}
+    \RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha,h}} \RV{V}_{A [n]\setminus\{j\}} |\text{id}_C
 \end{align}
 which implies
 \begin{align}
-    &\RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\RV{C},\RV{H})\\
-    &\implies \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\RV{C})\label{eq:mutual_conditional_independence}
+    &\RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\text{id}_C,\RV{H})\\
+    &\implies \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\text{id}_C)\label{eq:mutual_conditional_independence}
 \end{align}
 thus it is sufficient to show that, for any $\alpha,\alpha'\in C'$ and $j\in[n]$
 \begin{align}
@@ -167,7 +167,7 @@ By assumption, if $\pi_j(\alpha) =: (\mathrm{do}_{B_j},v_{B_j})$ and $\pi_j(\alp
 
 Next, IO contractibility of $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ over $\RV{H}$. By Eq. \eqref{eq:mutual_conditional_independence}
 \begin{align}
-    \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} (\RV{V}_{i [1,j)},\mathrm{Pa}(\RV{V}_{i [1,j)}) )|(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\RV{C})
+    \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} (\RV{V}_{i [1,j)},\mathrm{Pa}(\RV{V}_{i [1,j)}) )|(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\text{id}_C)
 \end{align}
 furthermore, by 3* and the assumption that no intervention $\alpha\in C'$ targets $\RV{V}_{ij}$ for any $j$, for any $\alpha\in C'$
 \begin{align}
@@ -182,7 +182,7 @@ thus $\prob{P}_C$ has independent and identical response functions conditional o
 
 Illustrating the fact that some choices must be made in order to work out what kind of rolled-up model corresponds to a given causal Bayesian network, Rohde and Lattimore consider an unrolling where the empty intervention is always made in conjunction with a particular intervention on a particular node in the DAG. Where we explicitly write down a model of an entire sequence of observations, Probabilistic Graphical Models can be assumed to represent a sequence of an arbitrary number of empty interventions in conjunction with an arbitrary number of particular interventions on particular nodes in the DAG. Such compact representations are of course very useful when the extra details are redundant. The difference underscores the approach taken to causal modelling in this thesis -- we proceed cautiously, aiming to explicitly represent all relevant assumptions that go into building a particular type of causal model, and approach that can lead to relatively verbose model definitions and representations.
 
-Precisely, a probabilistic graphical model is a map $\prob{P}_\cdot$ from the set of single-node interventions $C$ to probability distributions $\prob{P}_\alpha$ defined on $(\Omega,\sigalg{F})$. A probabilistic graphical model is typically associated with a causal Bayesian network $(\prob{Q}_\cdot,C,\Omega',(\RV{V}_i)_{i\in A},\graph{G})$ where, for each $\RV{V}_i:\Omega\to V_i$ in the original causal Bayesian network, two variables $\RV{V}_i$ and $\RV{V}_i^*$ are defined on $(\Omega,\sigalg{F})$. The probabilistic graphical model also adds a ``parameter'' $\RV{W}_i$ for each variable pair $(\RV{V}_i,\RV{V}_i^*)$ such that, taking $C'$ to be interventions not targeting $\RV{V}_i^*$, for any $\alpha\in C'$, $\prob{P}_\alpha^{\RV{V}_i|\RV{W}_i\mathrm{Pa}(\RV{V}_i)}=\prob{P}_\alpha^{\RV{V}_i^*|\RV{W}_i\mathrm{Pa}(\RV{V}^*_i)}$ and $\RV{V}_i\CI^e_{\prob{P}_{C'}} (\RV{V}^*_A,\RV{C})|(\RV{W}_i)$ (where parents are assessed relative to the graph $\graph{G}$). This should look familiar - it is specifying, in a very similar manner to Theorem \ref{th:causal_contractibility_cbn}, that a Probabilistic Graphical Model constructed from a causal Bayesian network $(\prob{Q}_\cdot,C,\Omega',(\RV{V}_i)_{i\in A},\graph{G})$ features independent and identical response functions for each node given its parents conditional on the parameter $\RV{W}_i$.
+Precisely, a probabilistic graphical model is a map $\prob{P}_\cdot$ from the set of single-node interventions $C$ to probability distributions $\prob{P}_\alpha$ defined on $(\Omega,\sigalg{F})$. A probabilistic graphical model is typically associated with a causal Bayesian network $(\prob{Q}_\cdot,C,\Omega',(\RV{V}_i)_{i\in A},\graph{G})$ where, for each $\RV{V}_i:\Omega\to V_i$ in the original causal Bayesian network, two variables $\RV{V}_i$ and $\RV{V}_i^*$ are defined on $(\Omega,\sigalg{F})$. The probabilistic graphical model also adds a ``parameter'' $\RV{W}_i$ for each variable pair $(\RV{V}_i,\RV{V}_i^*)$ such that, taking $C'$ to be interventions not targeting $\RV{V}_i^*$, for any $\alpha\in C'$, $\prob{P}_\alpha^{\RV{V}_i|\RV{W}_i\mathrm{Pa}(\RV{V}_i)}=\prob{P}_\alpha^{\RV{V}_i^*|\RV{W}_i\mathrm{Pa}(\RV{V}^*_i)}$ and $\RV{V}_i\CI^e_{\prob{P}_{C'}} (\RV{V}^*_A,\text{id}_C)|(\RV{W}_i)$ (where parents are assessed relative to the graph $\graph{G}$). This should look familiar - it is specifying, in a very similar manner to Theorem \ref{th:causal_contractibility_cbn}, that a Probabilistic Graphical Model constructed from a causal Bayesian network $(\prob{Q}_\cdot,C,\Omega',(\RV{V}_i)_{i\in A},\graph{G})$ features independent and identical response functions for each node given its parents conditional on the parameter $\RV{W}_i$.
 
 A depiction of probabilistic graphical models and uncertain unrolled causal Bayesian networks using string diagrams gives some intuition regarding the structure of these different types of models, as well as some of the ``off-page'' assumptions of ordinary causal Bayesian networks.
 
@@ -281,7 +281,7 @@ Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $D,Y$ di
 \end{notation}
 
 \begin{theorem}\label{th:det_obs_to_cons}
-Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{-i\in \mathbb{N}}$, with $D,X,Y,Z$ discrete. Suppose further that $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$ is preempted. Let $\RV{G}$ be the directing random conditional of $(\RV{P}_C,\RV{Z},\RV{D})$ and $\RV{H}$ the directing random conditional of $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$. Finally suppose for each $h\in H$ and $d\in D$ and $z,z'\in Z$,
+Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{-i\in \mathbb{N}}$, with $D,X,Y,Z$ discrete. Suppose further that $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$ is preempted. Let $\RV{G}$ be the directing random conditional of $(\RV{P}_C,\RV{Z},\RV{D})$ and $\RV{H}$ the directing random conditional of $(\prob{P}_C,(\RV{D},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\text{id}_C)$. Finally suppose for each $h\in H$ and $d\in D$ and $z,z'\in Z$,
 \begin{align}
     \prob{P}_\alpha^{\RV{G}^d_{z}|\RV{H}\RV{G}^d_{z'}}(\cdot|h,g^d_{z'}) \ll U_{[0,1]}\label{eq:lebesgue_dom}
 \end{align}
@@ -298,7 +298,7 @@ First, define matrices $k$ and $l$ by
 \end{align}
 noting that both $k$ and $l$ are almost surely deterministic functions of $h$.
 
-The assumption $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$ implies, for $\prob{P}_\alpha$-almost all $k,l,\alpha,z,z',x,y$
+The assumption $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\text{id}_C)$ implies, for $\prob{P}_\alpha$-almost all $k,l,\alpha,z,z',x,y$
 \begin{align}
     \sum_{d\in D} k^y_{dzx}\frac{l^x_{dz}g^d_z}{\sum_{d'\in D}l^x_{d'z}g^{d'}_z}&= \sum_{d\in D} k^y_{dz'x}\frac{l^x_{dz'}g^d_{z'}}{\sum_{d'\in D}l^x_{d'z'}g^{d'}_{z'}}\label{eq:polynomial}
 \end{align}
@@ -331,7 +331,7 @@ Thus, unless $k^y_{dzx}=k^y_{d'zx}$ for all $d,d'$ and $z$, Eq. \eqref{eq:polyno
 \begin{align}
     \prob{P}_\alpha^{\RV{G}^d_{z}|\RV{H}\RV{G}^d_{z'}}(A|h,g^d_{z}) = 0
 \end{align}
-by the assumption that this probability is dominated by the Lebesgue measure. On the other hand, by assumption, the set $B:=\{g^d_{z'}|\text{Eq. \eqref{eq:polynomial} is satisfied}\}$ has measure 1. Thus we conclude that $k^y_{dzx}=k^y_{d'zx}$ with probability 1. That is, $\RV{Y}_i\CI_{\prob{P}_C}^e \RV{D}_i|(\RV{H},\RV{Z}_i,\RV{X}_i,\RV{C})$. By contraction with $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$, we have $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Z}_i,\RV{D}_i)|(\RV{H},\RV{X}_i,\RV{C})$. Because we already know $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i\RV{Z}_i}$ are identical for all $i$, this implies $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical response functions.
+by the assumption that this probability is dominated by the Lebesgue measure. On the other hand, by assumption, the set $B:=\{g^d_{z'}|\text{Eq. \eqref{eq:polynomial} is satisfied}\}$ has measure 1. Thus we conclude that $k^y_{dzx}=k^y_{d'zx}$ with probability 1. That is, $\RV{Y}_i\CI_{\prob{P}_C}^e \RV{D}_i|(\RV{H},\RV{Z}_i,\RV{X}_i,\text{id}_C)$. By contraction with $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\text{id}_C)$, we have $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Z}_i,\RV{D}_i)|(\RV{H},\RV{X}_i,\text{id}_C)$. Because we already know $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i\RV{Z}_i}$ are identical for all $i$, this implies $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical response functions.
 \end{proof}
 
 We will now specify the medical example in more detail
@@ -342,7 +342,7 @@ Assume $\RV{D}_i$ screens off $\RV{Z}_i$ from $\RV{X}_i$ and $\RV{Y}_i$ -- that 
 
 Suppose that each doctor makes choices $\RV{G}^d_z$ by some deterministic function of their beliefs of what every other doctor does $\RV{G}^e_{z'}$ and of the effect of treatment plans $\RV{H}$, but they estimate both $\RV{G}^e_{z'}$ and $\RV{H}$ with continuously distributed noise. Then their beliefs, and hence (by supposition) their choices end up dominated by the uniform measure on $[0,1]$.
 
-If the decision maker is then told by an oracle that for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\RV{C})$, she may then conclude that $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical responses for all $-i\in\{0\}\cup\mathbb{N}$.
+If the decision maker is then told by an oracle that for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\text{id}_C)$, she may then conclude that $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical responses for all $-i\in\{0\}\cup\mathbb{N}$.
 \end{example}
 
 This story makes a number of assumptions with a causal character. First, the assumption of preemption, which we've acknowledged isn't perfectly worked out, is taken here quite literally -- we are not just supposing that the problem can be posed ``as if'' the consequences of our choices had been previously realised, but we are actually taking the $\RV{D}_i$s to literally stand for unobserved choices that actual doctors make. Secondly, the assumption that the unobserved $\RV{D}_i$s screen off the doctor's identities is reminiscent of the idea from the causal graphical models tradition that variables have complete sets of causal parents, some of which may be unobserved, but all of which together screen that variable off from other nondescendant variables. Note that this assumption isn't required by Theorem \ref{th:det_obs_to_cons}, but it supports the particular story being told here.
@@ -360,7 +360,7 @@ Note that in that example, there is no reason not to expect that each doctor doe
 % \begin{align}
 %     \prob{P}_\alpha^{\RV{Z}_i|\RV{H}\RV{D}_i\RV{X}_i}(\cdot|h,d,\cdot) &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{Z}_i|\RV{H}\RV{V}_i\RV{X}_i}(\cdot|h,j,\cdot)
 % \end{align}
-% and if for all $i$, $\RV{Z}_i\CI^e_{\prob{P}_C} \RV{V}_i|(\RV{X}_i,\RV{H},\RV{C})$ then $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is IO contractible over $\RV{H}$.
+% and if for all $i$, $\RV{Z}_i\CI^e_{\prob{P}_C} \RV{V}_i|(\RV{X}_i,\RV{H},\text{id}_C)$ then $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is IO contractible over $\RV{H}$.
 % \end{theorem}
 
 % \begin{proof}
@@ -371,7 +371,7 @@ Note that in that example, there is no reason not to expect that each doctor doe
 % and also by assumption, for all $A,h,d,x$:
 % \begin{align}
 %     \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{D}_i\RV{X}_{-1}}(A|h,d,x) &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{V}_{-1}\RV{X}_{-1}}(A|h,j,x)\\
-%         &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{X}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)&\text{by }\RV{Z}_{-1}\CI^e_{\prob{P}_C} \RV{V}_{-1}|(\RV{X}_{-1},\RV{H},\RV{C})\\
+%         &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{X}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)&\text{by }\RV{Z}_{-1}\CI^e_{\prob{P}_C} \RV{V}_{-1}|(\RV{X}_{-1},\RV{H},\text{id}_C)\\
 %     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)\sum_{j\in V} a_j\\
 %     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)&\text{ by taking }A=Z
 % \end{align}
@@ -381,7 +381,7 @@ Note that in that example, there is no reason not to expect that each doctor doe
 %     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)\\
 %     &= \prob{P}_\alpha^{\RV{Z}_0|\RV{H}\RV{X}_0}(A|h,x)\label{eq:indep_of_d}
 % \end{align}
-% Furthermore, by assumption $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{Z}_{\{0\}^C},\RV{D}_{\{0\}^C}|(\RV{H},\RV{D}_0,\RV{X}_0,\RV{C})$ and $\RV{Z}_0\CI^e_{\prob{P}_C} \RV{D}_{0}|(\RV{H},\RV{D}_0,\RV{C})$ by Equation \eqref{eq:indep_of_d}, thus $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is IO contractible over $\RV{H}$.
+% Furthermore, by assumption $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{Z}_{\{0\}^C},\RV{D}_{\{0\}^C}|(\RV{H},\RV{D}_0,\RV{X}_0,\text{id}_C)$ and $\RV{Z}_0\CI^e_{\prob{P}_C} \RV{D}_{0}|(\RV{H},\RV{D}_0,\text{id}_C)$ by Equation \eqref{eq:indep_of_d}, thus $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is IO contractible over $\RV{H}$.
 % \end{proof}
 
 % Note that this is a result similar to \citet{peters_causal_2016}, where our variable $\RV{V}$ is understood to be analogous to the environment $e$ in that work.
@@ -421,11 +421,11 @@ $(\prob{P}_C,\Omega,\sigalg{F})$ is a potential outcomes model with respect to $
 \end{definition}
 
 \begin{theorem}
-A potential outcomes model $(\prob{P}_C,\Omega,\sigalg{F})$ with respect to $\RV{D}_i:\Omega\to D$, $\RV{Y}_i:\Omega\to Y$ and $\RV{Y}^D_i:\Omega\to Y^D$, $\RV{Y}^D_i$ has $\RV{Y}\CI_{\prob{P}_C}^e\RV{C}|(\RV{D},\RV{Y}^D)$ and $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$ is IO contractible (with respect to $*$).
+A potential outcomes model $(\prob{P}_C,\Omega,\sigalg{F})$ with respect to $\RV{D}_i:\Omega\to D$, $\RV{Y}_i:\Omega\to Y$ and $\RV{Y}^D_i:\Omega\to Y^D$, $\RV{Y}^D_i$ has $\RV{Y}\CI_{\prob{P}_C}^e\text{id}_C|(\RV{D},\RV{Y}^D)$ and $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$ is IO contractible (with respect to $*$).
 \end{theorem}
 
 \begin{proof}
-IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$ follows from the fact that $\RV{Y}_i$ is deterministic given $\RV{Y}^D_i$ and $\RV{D}_i$, and thus $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^C},\RV{Y}_{\{i\}^C},\RV{C})|(\RV{Y}^D_{i},\RV{D}_i)$. Furthermore, for all $i,j$
+IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$ follows from the fact that $\RV{Y}_i$ is deterministic given $\RV{Y}^D_i$ and $\RV{D}_i$, and thus $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^C},\RV{Y}_{\{i\}^C},\text{id}_C)|(\RV{Y}^D_{i},\RV{D}_i)$. Furthermore, for all $i,j$
 \begin{align}
     \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i} &= \prob{P}_C^{\RV{Y}_j|\RV{Y}^D_j\RV{D}_j}
 \end{align}
@@ -433,23 +433,23 @@ hence the $\prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}$ are independent and identic
 
 From Definition \ref{def:potential_outcomes}, $\prob{P}_\alpha^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}$ is the same for all $\alpha\in C$, and by the argument above,
 \begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i\RV{Y}^D_{\{i\}^C}\RV{D}_{\{i\}^C}} &= \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}\otimes \mathrm{del}_{Y^{|D\times A\setminus\{i\}|}\times D^{|A|}}
+    \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i\RV{Y}^D_{\{i\}^C}\RV{D}_{\{i\}^C}} &= \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}\otimes \mathrm{Del}_{Y^{|D\times A\setminus\{i\}|}\times D^{|A|}}
 \end{align}
 hence
 \begin{align}
     \prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}} &= \bigotimes_{i\in A} \prob{P}_C^{\RV{Y}_1|\RV{Y}^D_1\RV{D}_1}
 \end{align}
-hence $\RV{Y}\CI_{\prob{P}_C}^e\RV{C}|(\RV{D},\RV{Y}^D)$.
+hence $\RV{Y}\CI_{\prob{P}_C}^e\text{id}_C|(\RV{D},\RV{Y}^D)$.
 \end{proof}
 
 A key theorem of potential outcomes is that, if $\RV{D}$ is ``strongly ignorable'' with respect to $\RV{Y}^D$, then the average treatment effect is identified. ``Strong ignorability'' here means that the probability $\prob{P}_\alpha^{\RV{D}_i}(d)>0$ for each $d$ and for each choice $\alpha$ the inputs $\RV{D}$ are independent of the potential outcomes $\RV{Y}^D$ given the covariates and the choice. We reproduce this theorem in terms of IO contractibility. Note that Theorem \ref{th:potential_outcomes_identifiability} applies to potential outcomes models with sets of choices, rathter than simply to single probability distributions.
 
 \begin{theorem}[Potential outcomes identifiability]\label{th:potential_outcomes_identifiability}
-If $(\prob{P}_C,\Omega,\sigalg{F})$ is a potential outcomes model with respect to $\RV{Y}^D:=(\RV{Y}^D_i)_{i\in \mathbb{N}}$, $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$ and $(\RV{D}_i)_{i\in \mathbb{N}}$, each value of $D$ occurs infinitely often with probability 1, there is some $\RV{X}:= (\RV{X}_i)_{i\in \mathbb{N}}$ such that $\prob{P}_\alpha^{\RV{Y}^D\RV{X}}$ is exchangeable for all $\alpha$ and $\RV{D} \CI^e_{\prob{P}_C} \RV{Y}^D | (\RV{X},\RV{Y},\RV{C})$ and for each $\alpha$ $\prob{P}_\alpha^{\RV{D}}$ is absolutely continuous with respect to some exchangeable distribution in $\Delta(D^{\mathbb{N}})$, then there is some $\RV{W}$ such that for all $\alpha$ $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ is IO contractible over $\RV{W}$.
+If $(\prob{P}_C,\Omega,\sigalg{F})$ is a potential outcomes model with respect to $\RV{Y}^D:=(\RV{Y}^D_i)_{i\in \mathbb{N}}$, $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$ and $(\RV{D}_i)_{i\in \mathbb{N}}$, each value of $D$ occurs infinitely often with probability 1, there is some $\RV{X}:= (\RV{X}_i)_{i\in \mathbb{N}}$ such that $\prob{P}_\alpha^{\RV{Y}^D\RV{X}}$ is exchangeable for all $\alpha$ and $\RV{D} \CI^e_{\prob{P}_C} \RV{Y}^D | (\RV{X},\RV{Y},\text{id}_C)$ and for each $\alpha$ $\prob{P}_\alpha^{\RV{D}}$ is absolutely continuous with respect to some exchangeable distribution in $\Delta(D^{\mathbb{N}})$, then there is some $\RV{W}$ such that for all $\alpha$ $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ is IO contractible over $\RV{W}$.
 \end{theorem}
 
 \begin{proof}
-By exchangeability of $\prob{P}_\alpha^{\RV{Y}^D\RV{X}}$, $\prob{P}_\alpha^{\RV{Y}^D|\RV{X}}$ commutes with exchange. Because $\RV{Y}$ is deterministic given $\RV{D}$ and $\RV{Y}^D$, $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X},\RV{C})|(\RV{Y}^D,\RV{D})$ Thus, for some finite permutation $\rho$, by IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$
+By exchangeability of $\prob{P}_\alpha^{\RV{Y}^D\RV{X}}$, $\prob{P}_\alpha^{\RV{Y}^D|\RV{X}}$ commutes with exchange. Because $\RV{Y}$ is deterministic given $\RV{D}$ and $\RV{Y}^D$, $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X},\text{id}_C)|(\RV{Y}^D,\RV{D})$ Thus, for some finite permutation $\rho$, by IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{XD}} &= \tikzfig{potential_outcomes_ccontract1}\\
     &= \tikzfig{potential_outcomes_ccontract2}\\
@@ -475,13 +475,13 @@ IO contractibility of $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ over some $\RV{W}$ fol
 % \begin{align}
 %     q:((w^o_j)_{\mathbb{N}},w^v_i)&\mapsto \{j|w^o_j=w^v_i\}
 % \end{align}
-% and take $\RV{Q}:=q\circ(\RV{W}^o,\RV{W}^v_i)$ for arbitrary $i\in \mathbb{N}$. For an index set $U\in\mathbb{N}$ take $\text{swap}_{\cdot}:Y^{\mathbb{N}}\times Y^{\mathbb{N}}\to Y^{\mathbb{N}}\times Y^{\mathbb{N}}$ to be an arbitrary finite swap that acts as the identity on all indices $(j,x)\not\in \RV{Q}\times \{o\}\cup\{(i,v)\}$. Then $\prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}} = \prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}$.
+% and take $\RV{Q}:=q\circ(\RV{W}^o,\RV{W}^v_i)$ for arbitrary $i\in \mathbb{N}$. For an index set $U\in\mathbb{N}$ take $\text{Swap}_{\cdot}:Y^{\mathbb{N}}\times Y^{\mathbb{N}}\to Y^{\mathbb{N}}\times Y^{\mathbb{N}}$ to be an arbitrary finite swap that acts as the identity on all indices $(j,x)\not\in \RV{Q}\times \{o\}\cup\{(i,v)\}$. Then $\prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}\text{Swap}_{\RV{Q}} = \prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}$.
 % \end{theorem}
 
 % \begin{proof}
-% Note that for $B_j\in \sigalg{W}$, where $\rho_q:\mathbb{N}\times\{i,v\}\to \mathbb{N}\times\{i,v\}$ is the permutation function associated with $\text{swap}_{q}$
+% Note that for $B_j\in \sigalg{W}$, where $\rho_q:\mathbb{N}\times\{i,v\}\to \mathbb{N}\times\{i,v\}$ is the permutation function associated with $\text{Swap}_{q}$
 % \begin{align}
-%     \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}} (\bigtimes_{j\in\mathbb{N}} B_j) &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{\rho_q(w_l)} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\\
+%     \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}\text{Swap}_{\RV{Q}} (\bigtimes_{j\in\mathbb{N}} B_j) &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{\rho_q(w_l)} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\\
 %     &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_l} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\label{eq:all_the_same}\\
 %     &= \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}
 % \end{align}
@@ -489,8 +489,8 @@ IO contractibility of $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ over some $\RV{W}$ fol
 
 % Thus for $A\in \sigalg{Y}^{\mathbb{N}}$
 % \begin{align}
-%     \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\text{swap}_{\RV{Q}}(A) &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{Q}\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}}](A)\\
-%     &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \text{swap}_{\RV{Q}^{-1}} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}\text{swap}_{\RV{Q}}](A)\\
+%     \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\text{Swap}_{\RV{Q}}(A) &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{Q}\RV{W}^o\RV{W}^v_i}\text{Swap}_{\RV{Q}}](A)\\
+%     &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \text{Swap}_{\RV{Q}^{-1}} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}\text{Swap}_{\RV{Q}}](A)\\
 %     &= \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\label{eq:by_cc1}
 % \end{align}
 % Where Eq. \eqref{eq:by_cc1} follows from IO contractibility of $\prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}$.
@@ -524,7 +524,7 @@ IO contractibility of $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ over some $\RV{W}$ fol
 % \begin{align}
 %     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h)
 % \end{align}
-% i.e. $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{W}_0,\RV{C})|(\RV{X}_0,\RV{H})$. But then there is some $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}$ such that
+% i.e. $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{W}_0,\text{id}_C)|(\RV{X}_0,\RV{H})$. But then there is some $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}$ such that
 % \begin{align}
 %     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}\otimes \text{erase}_W\\
 %     \implies \prob{P}_\alpha^{\RV{Z}^v_i|\RV{X}^v_i\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}
@@ -632,7 +632,7 @@ For \emph{any} sample space $(\Omega,\sigalg{F})$ we can define a trivial $\siga
 \begin{example}\label{eq:il_exchc}
 Given a sequential input-output model $(\prob{P}_C, (\RV{D},\RV{I}),\RV{Y})$ where $\RV{I}$ is the identifier variable $\omega\mapsto (\mathbb{N})$, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ commutes with exchange.
 
-This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the identity, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ and $\text{swap}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ will have no common support; the first will be supported on $\RV{I}\yields (\mathbb{N})$ only, and the second only on $\RV{I}\yields \rho(\mathbb{N})$.
+This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the identity, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ and $\text{Swap}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ will have no common support; the first will be supported on $\RV{I}\yields (\mathbb{N})$ only, and the second only on $\RV{I}\yields \rho(\mathbb{N})$.
 \end{example}
 
 We are particularly interested in models where exchange commutativity is not trivial, so we focus on the case where each identifier $\RV{I}_i$ has some non-zero probability of taking any value in $\mathbb{N}$. 
@@ -649,14 +649,14 @@ This assumption is somewhat difficult to understand. If we imagine that the iden
 
 Because every individual has a unique identifier and so, in general, the outcome of individual $i$'s experiment need not constrain the outcome of individual $j$ even if they receive the same inputs, it seems that it may very often be possible to construct a model with individual level response functions. Finding a simple set of conditions sufficient to enable such a construction is an open question.
 
-Before proving Theorem \ref{th:cc_ind_treat}, we prove a number of lemmas and a preliminary theorem. Lemma \ref{lem:ind_to_cc} and Theorem \ref{th:ind} do \emph{not} require that $\RV{I}$ be a sequence of unique identifiers, they hold just as well if it is a sequence of non-unique labels; that is, if $\RV{I}_i\yields \RV{I}_j$ had positive measure for some $i\neq j$. The reason why we are interested mainly in the case where $\RV{I}$ is a sequence of unique identifiers is that the assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I}|\RV{C}$ is substantially more limiting in the case that $\RV{I}$ is a non-unique sequence of labels. In particular, it implies that the conditional probability of $(\RV{Y}_1,\RV{Y}_2)$ given $(\RV{I}_1=1,\RV{I}_2=1)$ is exactly the same as the conditional probability of $(\RV{Y}_1,\RV{Y}_2)$ given $(\RV{I}_i=1,\RV{I}_2=2)$; observations associated with equal labels are no more relevant that observations associated with different labels.
+Before proving Theorem \ref{th:cc_ind_treat}, we prove a number of lemmas and a preliminary theorem. Lemma \ref{lem:ind_to_cc} and Theorem \ref{th:ind} do \emph{not} require that $\RV{I}$ be a sequence of unique identifiers, they hold just as well if it is a sequence of non-unique labels; that is, if $\RV{I}_i\yields \RV{I}_j$ had positive measure for some $i\neq j$. The reason why we are interested mainly in the case where $\RV{I}$ is a sequence of unique identifiers is that the assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I}|\text{id}_C$ is substantially more limiting in the case that $\RV{I}$ is a non-unique sequence of labels. In particular, it implies that the conditional probability of $(\RV{Y}_1,\RV{Y}_2)$ given $(\RV{I}_1=1,\RV{I}_2=1)$ is exactly the same as the conditional probability of $(\RV{Y}_1,\RV{Y}_2)$ given $(\RV{I}_i=1,\RV{I}_2=2)$; observations associated with equal labels are no more relevant that observations associated with different labels.
 
 In the following, it is helpful to assume that each sub-experiment has a ``unique identifier'' $\RV{I}_i$, with the sequence of all sub-experiment labels given by $\RV{I}$. With this, if $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is assumed IO contractible, then it's possible to talk about the individual response functions $\prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{H}\RV{D}_i}$. These plays a role very similar to the $i$th vector of potential outcomes $\RV{Y}^D_i$. Because $\RV{I}_i$ is unique (i.e. never equal to $\RV{I}_j$ for $j\neq i$), only one observation of any individual is ever given, just like only one element of a vector of potential outcomes is ever observed.
 
 Theorem \ref{th:cc_ind_treat} can also be extended to the case where $\RV{D}$ is a function of the choice $\alpha$ and a ``random signal'' $\RV{R}$, as in Theorem \ref{cor:extend_to_randomised}.
 
 \begin{lemma}\label{lem:ind_to_cc}
-Given sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob{P}_\alpha^{\RV{Y}|\RV{WDI}}$ IO contractible over $\RV{W}$, if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\RV{C})|(\RV{W},\RV{D})$ and for any $j\in I$, $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0$, then there is some $\RV{W}'$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{W}'\RV{D}}$ is also IO contractible over $\RV{W}$.
+Given sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob{P}_\alpha^{\RV{Y}|\RV{WDI}}$ IO contractible over $\RV{W}$, if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\text{id}_C)|(\RV{W},\RV{D})$ and for any $j\in I$, $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0$, then there is some $\RV{W}'$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{W}'\RV{D}}$ is also IO contractible over $\RV{W}$.
 \end{lemma}
 
 \begin{proof}
@@ -690,9 +690,9 @@ Given a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $
 \end{align}
 and
 \begin{align}
-    &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}\\
-    &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}\\
-    &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}\\
+    &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C\\
+    &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C\\
+    &\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}\\
     &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
 \end{align}
 then $\prob{P}_C^{\RV{Y}|\RV{JD}}$ is IO contractible over $\RV{J}$.
@@ -705,12 +705,12 @@ For any $\alpha\in C$
     &= \tikzfig{kernel_fac_with_idents_indepped}
 \end{align}
 
-Define $\kernel{Q}$ by $\alpha\mapsto \prob{P}_\alpha$ and $\kernel{Q}^{\cdot|\cdot\RV{C}}$ by $\alpha\mapsto \prob{P}_\alpha^{*}$ and $\kernel{Q}^{\RV{C}}$ is an arbitrary distribution in $\Delta(C)$ with full support. Note that the support of $\kernel{Q}^{\RV{IDYJ}}$ is the union of the support of $\prob{P}^{\RV{IDYJ}}_\alpha$ for all $\alpha$. Then
+Define $\kernel{Q}$ by $\alpha\mapsto \prob{P}_\alpha$ and $\kernel{Q}^{\cdot|\cdot\text{id}_C}$ by $\alpha\mapsto \prob{P}_\alpha^{*}$ and $\kernel{Q}^{\text{id}_C}$ is an arbitrary distribution in $\Delta(C)$ with full support. Note that the support of $\kernel{Q}^{\RV{IDYJ}}$ is the union of the support of $\prob{P}^{\RV{IDYJ}}_\alpha$ for all $\alpha$. Then
 \begin{align}
     \kernel{Q}^{\RV{YJ}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_fac_with_idents_kernelised}
 \end{align}
 
-By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$, it is also the case that
+By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$, it is also the case that
 \begin{align}
     \kernel{Q}^{\RV{Y}|\RV{ID}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents}\\
     &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_indepped}\\
@@ -718,12 +718,12 @@ By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$, it is also the case tha
 \end{align}
 But
 \begin{align}
-    \kernel{Q}^{\RV{Y}|\RV{ID}}=\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{Y}|\RV{ID}}\kernel{Q}^{\RV{C}}(\alpha)\\
+    \kernel{Q}^{\RV{Y}|\RV{ID}}=\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{Y}|\RV{ID}}\kernel{Q}^{\text{id}_C}(\alpha)\\
     &= \prob{P}_C^{\RV{Y}|\RV{ID}}\\
     \implies \tikzfig{kernel_Q_fac_with_idents_subbed} &= \prob{P}_C^{\RV{Y}|\RV{ID}}
 \end{align}
 
-Furthermore, by assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}$, so there is some $\kernel{K}:C\kto Y\times W$ such that
+Furthermore, by assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C$, so there is some $\kernel{K}:C\kto Y\times W$ such that
 \begin{align}
     \kernel{Q}^{\RV{YJ}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_indepped}\\
     \implies \prob{P}_C^{\RV{YJ}|\RV{ID}} &= \tikzfig{kernel_Q_fac_with_idents_swapped}\\
@@ -735,11 +735,11 @@ Then by Lemma \ref{lem:ind_to_cc}, $\prob{P}_C^{\RV{Y}|\RV{JD}}$ is IO contracti
 Lemma \ref{lem:exch_to_ind} is used to apply Theorem \ref{th:ind} to models where $\RV{I}$ is a sequence of unique identifiers. Only in this case, exchangeability of the unique identifiers implies the identifiers are independent of the outcomes $\RV{Y}$.
 
 \begin{lemma}\label{lem:exch_to_ind}
-Given any probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \RV{C}|(\RV{D},\RV{I})$ and $\RV{I}:\Omega\to I$ is an infinite sequence of unique identifiers, if for each finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
+Given any probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \text{id}_C|(\RV{D},\RV{I})$ and $\RV{I}:\Omega\to I$ is an infinite sequence of unique identifiers, if for each finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{swap}_{\rho(I)}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{Swap}_{\rho(I)}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}
 \end{align}
-then $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\RV{C}$.
+then $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\text{id}_C$.
 \end{lemma}
 
 \begin{proof}
@@ -758,22 +758,22 @@ Theorem \ref{th:cc_ind_treat} presents a set of sufficient conditions for $\prob
 \begin{enumerate}
     \item There exist variables $\RV{I}$ representing ``unique identifiers'' which satisfy the assumption that $\prob{P}_C^{\RV{Y}_i|\RV{J}\RV{D}_i\RV{I}_i}$ are a sequence of independent and identical response functions for some $\RV{J}$
     \item The identifiers $\RV{I}$ can be swapped without altering the model of the consequences $\RV{Y}$
-    \item The inputs $\RV{D}$ and the choice $\RV{C}$ are substitutable with respect to $\RV{Y}$ and $\RV{I}$: $\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ and $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$
+    \item The inputs $\RV{D}$ and the choice $\text{id}_C$ are substitutable with respect to $\RV{Y}$ and $\RV{I}$: $\RV{YI}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}$ and $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$
 \end{enumerate}
 
 \begin{theorem}\label{th:cc_ind_treat}
 Given a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$, on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ and $D$ countable, $\RV{I}$ an infinite sequence of unique identifiers, if there is some $\RV{J}$ such that
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{swap}_{\rho(I)}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}&\forall \text{ finite permutations }\rho\\
-    &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}\\
-    &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}\\
+    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{Swap}_{\rho(I)}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}&\forall \text{ finite permutations }\rho\\
+    &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C\\
+    &\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}\\
     &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
 \end{align}
 and for each $\alpha$ $\prob{P}_\alpha^{\RV{Y}|\RV{JID}}$ is IO contractible over $\RV{J}$, then we have conditionally independent and identical responses $\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}$ for all $i$, where $\RV{H}$ is the directing random conditional with respect to $(\RV{D},\RV{Y})$.
 \end{theorem}
 
 \begin{proof}
-Apply lemma \ref{lem:exch_to_ind} to get $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \RV{C}$, then apply Theorem \ref{th:ind} for $\prob{P}_C^{\RV{Y}|\RV{J}\RV{D}}$ IO contractible. The result follows from Theorem \ref{th:ciid_rep_kernel}.
+Apply lemma \ref{lem:exch_to_ind} to get $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C$, then apply Theorem \ref{th:ind} for $\prob{P}_C^{\RV{Y}|\RV{J}\RV{D}}$ IO contractible. The result follows from Theorem \ref{th:ciid_rep_kernel}.
 \end{proof}
 
 Theorem \ref{th:cc_ind_treat} can be extended to the case where decisions $\RV{D}$ are a one-to-one deterministic function of the choice, or a random mixtures of one-to-one deterministic functions of the choice. This extension is applicable a randomised controlled trial, where the treatments are deterministically controlled and randomly assigned.
@@ -806,9 +806,9 @@ A sequential experiment is modeled by a probability set $\prob{P}_C$ with binary
 
 Each treatment $\RV{D}_i$ is given to a patient, and each patient provides a unique identifier $\RV{I}_i$ which for simplicity we assume is a number in $\mathbb{N}$ (instead of, say, a driver's license number and state of issue), and that (implausibly) there is a positive probability for $\RV{I}_i$ to take any value in $\mathbb{N}$ for any choice $\alpha$.
 
-The treatments are decided as follows: the analyst consults the model $\prob{P}_C$, and, according to $\prob{P}_C$ and some previously agreed upon decision rule, comes up with a (possibly stochastic) sequence  of treatment distributions $\alpha:=(\mu_i)_{i\in N}$ with each $\mu_i$ in $\Delta(\{0,1\})$. If $\mu_i$ is deterministic -- that is, it puts probability 1 on some treatment $d_i$, the experiment administrator will assign patient $i$ the treatment $d_i$. Otherwise, if $\mu_i$ is nondeterministic, the administrator will consult a random number generator that yields treatment assignments according to $\mu_i$, and treatment will then be assigned deterministically according to the result. Letting $C'\subset C$ be the deterministic elements of $C$, this scheme is assumed by the analyst to support the assumptions $\RV{YIJ}\CI^e_{\prob{P}_{C'}} \RV{D}|\RV{C}$ and $\RV{YIJ}\CI^e_{\prob{P}_{C'}} \RV{C}|\RV{D}$ for any $\RV{J}$, and the randomisation procedure is deemed sufficient to ensure that for any mixed $\alpha\in C$ where $\alpha = \sum_{\beta\in C'} \mu(\beta) \beta$, $\prob{P}_\alpha = \sum_{\beta\in C'} \prob{P}_\beta$.
+The treatments are decided as follows: the analyst consults the model $\prob{P}_C$, and, according to $\prob{P}_C$ and some previously agreed upon decision rule, comes up with a (possibly stochastic) sequence  of treatment distributions $\alpha:=(\mu_i)_{i\in N}$ with each $\mu_i$ in $\Delta(\{0,1\})$. If $\mu_i$ is deterministic -- that is, it puts probability 1 on some treatment $d_i$, the experiment administrator will assign patient $i$ the treatment $d_i$. Otherwise, if $\mu_i$ is nondeterministic, the administrator will consult a random number generator that yields treatment assignments according to $\mu_i$, and treatment will then be assigned deterministically according to the result. Letting $C'\subset C$ be the deterministic elements of $C$, this scheme is assumed by the analyst to support the assumptions $\RV{YIJ}\CI^e_{\prob{P}_{C'}} \RV{D}|\text{id}_C$ and $\RV{YIJ}\CI^e_{\prob{P}_{C'}} \text{id}_C|\RV{D}$ for any $\RV{J}$, and the randomisation procedure is deemed sufficient to ensure that for any mixed $\alpha\in C$ where $\alpha = \sum_{\beta\in C'} \mu(\beta) \beta$, $\prob{P}_\alpha = \sum_{\beta\in C'} \prob{P}_\beta$.
 
-Furthermore, assume $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is IO contractible. Then by Theorem \ref{th:ciid_rep_kernel_k}, there is some $\RV{J}$ such that, conditional on $\RV{J}$, $\prob{P}_C^{\RV{Y}_i|\RV{J}\RV{D}_i\RV{I}_i}$ are conditionally independent and identical response functions. The analyst constructing the model has no particular knowledge about any identifier, and so for any choice the associated model is assumed invariant to permutations of identifiers - that is $\RV{Y}\CI^e_{\prob{P}_C} \RV{I}|\RV{C}$ (see Lemma \ref{th:ind}). The assumption that this holds given any choice can be tricky -- not only must the identifiers appear symmetric to the analyst constructing the model, but nothing breaking this symmetry may be learned from the choice $\alpha$ (see the Example \ref{sec:dm_control}). One reason supporting this assumption is that the decision maker selects $\alpha$ according to a rule known in advance, so they do not ``learn'' anything upon picking a particular $\alpha$.
+Furthermore, assume $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is IO contractible. Then by Theorem \ref{th:ciid_rep_kernel_k}, there is some $\RV{J}$ such that, conditional on $\RV{J}$, $\prob{P}_C^{\RV{Y}_i|\RV{J}\RV{D}_i\RV{I}_i}$ are conditionally independent and identical response functions. The analyst constructing the model has no particular knowledge about any identifier, and so for any choice the associated model is assumed invariant to permutations of identifiers - that is $\RV{Y}\CI^e_{\prob{P}_C} \RV{I}|\text{id}_C$ (see Lemma \ref{th:ind}). The assumption that this holds given any choice can be tricky -- not only must the identifiers appear symmetric to the analyst constructing the model, but nothing breaking this symmetry may be learned from the choice $\alpha$ (see the Example \ref{sec:dm_control}). One reason supporting this assumption is that the decision maker selects $\alpha$ according to a rule known in advance, so they do not ``learn'' anything upon picking a particular $\alpha$.
 
 Then, for the deterministic subset $C'\subset C$, application of Theorem \ref{th:cc_ind_treat} yields $\prob{P}_{C'}^{\RV{Y}|\RV{HD}}$ is IO contractible over $\RV{H}$, and by application of Corollary \ref{cor:extend_to_randomised}, so is $\prob{P}_{C}^{\RV{Y}|\RV{D}}$.
 \end{example}
@@ -817,12 +817,12 @@ Permutability of identifiers can fail when the rule for selecting $\alpha$ is no
 
 The following example involves the choice $\alpha$ depending on some covariate $\RV{U}$. It is not straightforward to express the idea that ``$\alpha$ depends on $\RV{U}$'' in a probability set model $\prob{P}_C$, and they are intended to apply to situations where the choice doesn't depend on anything not already expressed in the model (as in Example \ref{ex:randomised_experiment}). However, the fact that probability sets don't work well in situations where the choice depends on something not expressed in the model doesn't mean that you can't use a probability set to model such a situation, it just means that you shouldn't do it. This is what the following example shows.
 
-The condition $\RV{YIJ}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ without also having $\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\RV{C}$ does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. Informally, if $\RV{D}$ gives some ``extra information'' over and above $\RV{C}$, then any symmetry that holds before we observe $\RV{D}$ might not hold after $\RV{D}$ has been observed. We have argued in Section \ref{sec:dm_control} somewhat informally that the choice $\RV{C}$ should be completely under the decision maker's control -- for Theorem \ref{th:cc_ind_treat}, this perfect control has to extend to the sequence of inputs $\RV{D}$. Constructing the following example requires the hypotheses that any given identifier $i\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. Thus the space of hypotheses is a sequence of binary values $H=\{0,1\}^{\mathbb{N}}$. Equipped with the product topology, $H$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(H,\mathcal{B}(H))$ is a standard measurable space and, because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
+The condition $\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}$ without also having $\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$ does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. Informally, if $\RV{D}$ gives some ``extra information'' over and above $\text{id}_C$, then any symmetry that holds before we observe $\RV{D}$ might not hold after $\RV{D}$ has been observed. We have argued in Section \ref{sec:dm_control} somewhat informally that the choice $\text{id}_C$ should be completely under the decision maker's control -- for Theorem \ref{th:cc_ind_treat}, this perfect control has to extend to the sequence of inputs $\RV{D}$. Constructing the following example requires the hypotheses that any given identifier $i\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. Thus the space of hypotheses is a sequence of binary values $H=\{0,1\}^{\mathbb{N}}$. Equipped with the product topology, $H$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(H,\mathcal{B}(H))$ is a standard measurable space and, because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
 
 \begin{example}
-Take $Y=C=D=\{0,1\}$ and take $(H,\sigalg{H})$ to be $\{0,1\}^{\mathbb{N}}$ equipped with the product topology. For any $i\neq 1$, $\RV{Y}_i\RV{I}_i\RV{D}_i\CI^e_{\prob{P}_C} \RV{C}$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$ and $\RV{I}_i\CI^e_{\prob{P}_C} \RV{C}$.
+Take $Y=C=D=\{0,1\}$ and take $(H,\sigalg{H})$ to be $\{0,1\}^{\mathbb{N}}$ equipped with the product topology. For any $i\neq 1$, $\RV{Y}_i\RV{I}_i\RV{D}_i\CI^e_{\prob{P}_C} \text{id}_C$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$ and $\RV{I}_i\CI^e_{\prob{P}_C} \text{id}_C$.
 
-$\RV{YI}\CI^e_{\prob{P}_C} \RV{C}|\RV{D}$ follows from the fact that $\RV{C}$ can be (almost surely) written as a function of $\RV{D}$.
+$\RV{YI}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}$ follows from the fact that $\text{id}_C$ can be (almost surely) written as a function of $\RV{D}$.
 
 For all $i,\in \mathbb{N}$, $y,d\in \{0,1\}$, $h\in H$ set
 \begin{align}
@@ -830,7 +830,7 @@ For all $i,\in \mathbb{N}$, $y,d\in \{0,1\}$, $h\in H$ set
 \end{align}
 where $p(j,h)$ projects the $j$-th component of $h$. That is, if $h$ maps $j$ to 1, $\RV{Y}$ goes with $\RV{D}$ while if $h$ maps $j$ to $0$, $\RV{Y}$ goes opposite $\RV{D}$. Suppose also 
 \begin{align}
-    \RV{Y}_i\CI_{\prob{P}_C}^e (\RV{X}_{<i},\RV{Y}_{<i},\RV{I}_{<i},\RV{C})|(\RV{X}_i,\RV{Y}_i,\RV{H})
+    \RV{Y}_i\CI_{\prob{P}_C}^e (\RV{X}_{<i},\RV{Y}_{<i},\RV{I}_{<i},\text{id}_C)|(\RV{X}_i,\RV{Y}_i,\RV{H})
 \end{align}
 Then $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is IO contractible. Set $\prob{P}_{C}^{\RV{H}}$ to be the uniform measure on $(H,\sigalg{H})$ and for $i>1$
 \begin{align}
@@ -889,7 +889,7 @@ However, given any finite permutation $\rho:\mathbb{N}\to\mathbb{N}$
 
 The ``backdoor adjustment'' formula is a fundamental tool for many kinds of causal inference. This is a short example to show the conditions under which it's applicable, stated in terms of IO contractibility. Suppose a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{X}),\RV{Y})$ where $(\prob{P}_\cdot^{\RV{Y}|\RV{WDX}}$ is IO contractible, and:
 \begin{itemize}
-    \item $i>n\implies \RV{X}_{i}\CI^e_{\prob{P}_C}\RV{D}_{i}|(\RV{H},\RV{C})$
+    \item $i>n\implies \RV{X}_{i}\CI^e_{\prob{P}_C}\RV{D}_{i}|(\RV{H},\text{id}_C)$
     \item $\prob{P}_\alpha^{\RV{X}_{i}|\RV{H}}\cong \prob{P}_\alpha^{\RV{X}_{1}|\RV{H}}$ for all $\alpha$
  \end{itemize}
 Then the model exhibits a kind of ``backdoor adjustment''. Specifically, for $i>n$
@@ -921,7 +921,7 @@ First, consider the ``I choose'' condition. Here, DM's choice $\alpha\in \{0,1\}
 
 but this example suggests another reason one might want to avoid deterministic treatment assignments. If the choices $\alpha$ are a deterministic sequence of assignments for each index $i$, this means that there is an enormous set of possible choices, and many degrees of freedom if the choices ``aren't actually chosen'' in the sense of the example above. In contrast, if the set of choices is a single parameter in $[0,1]$ which is then used to assign all treatments according to a random procedure depending only on this parameter, there are many fewer degrees of freedom to exploit if the choice ``isn't actually chosen''.
 
-A particular concern arises when the choice variable $\RV{C}$ is not associated with the output of a decision procedure involving the model $\prob{P}_C$. In this situation, the value of $\RV{C}$ can affect the model in potentially unexpected ways. ``Potentially unexpected'' is a vague notion, and we can't say whether $\RV{C}$ being completely under the decision maker's control avoids ``unexpected'' dependence on $\RV{C}$, but it seems to be less problematic.
+A particular concern arises when the choice variable $\text{id}_C$ is not associated with the output of a decision procedure involving the model $\prob{P}_C$. In this situation, the value of $\text{id}_C$ can affect the model in potentially unexpected ways. ``Potentially unexpected'' is a vague notion, and we can't say whether $\text{id}_C$ being completely under the decision maker's control avoids ``unexpected'' dependence on $\text{id}_C$, but it seems to be less problematic.
 
 We set this up in terms of an ``analyst'' and an ``administrator'' who have responsibility for different parts of the procedure. They don't strictly need to be different people, but it helps make the issue clearer. The analyst's job is to construct a model $\prob{P}_C$, evaluate different options $\alpha\in C$ and offer advice regarding the choice. The administrator's job is to choose some $\alpha\in C$ satisfying the analyst's requirements and to carry out any procedure arising from this.
 
@@ -935,7 +935,7 @@ In particular, suppose an experiment is modeled by a sequential input-output mod
  $\RV{U}_i=1$ & 1 & 1   
 \end{tabular}
 \end{center}
-and the triples $(\RV{D}_i,\RV{U}_i,\RV{Y}_i)$ are mutually independent given $\RV{C}$. This makes $\prob{P}_C^{\RV{Y}|\RV{UD}}$ IO contractible over $*$. Suppose also 
+and the triples $(\RV{D}_i,\RV{U}_i,\RV{Y}_i)$ are mutually independent given $\text{id}_C$. This makes $\prob{P}_C^{\RV{Y}|\RV{UD}}$ IO contractible over $*$. Suppose also 
 \begin{align}
     \prob{P}_\alpha^{\RV{D}_i}(1) &= \alpha_i
 \end{align}
@@ -949,7 +949,7 @@ one might be tempted to reason that, if $\prob{Q}$ is the analyst's state of kno
 \end{align}
 Thus $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also IO contractible.
 
-However, the analyst's recommendation \emph{does not} fix the value of $\RV{C}$. Suppose analyst actually recommends any $\alpha$ such that $\lim_{n\to\infty} \sum_i^n \frac{\alpha_i}{n} = 0.5$ (acknowledging that, in this contrived example, there's no obvious reason to do so). Suppose that the administrator operates by the following rule: \emph{first} they observe the value of $\RV{U}_i$, then they choose $\alpha_i$ equal to whatever they saw with an $\epsilon$ sized step towards $0.5$. That is, if they see $\RV{U}_i\yields 1$, they choose $\alpha_i=1-\epsilon$, where $\epsilon < 0.5$.
+However, the analyst's recommendation \emph{does not} fix the value of $\text{id}_C$. Suppose analyst actually recommends any $\alpha$ such that $\lim_{n\to\infty} \sum_i^n \frac{\alpha_i}{n} = 0.5$ (acknowledging that, in this contrived example, there's no obvious reason to do so). Suppose that the administrator operates by the following rule: \emph{first} they observe the value of $\RV{U}_i$, then they choose $\alpha_i$ equal to whatever they saw with an $\epsilon$ sized step towards $0.5$. That is, if they see $\RV{U}_i\yields 1$, they choose $\alpha_i=1-\epsilon$, where $\epsilon < 0.5$.
 
 Then the analyst should instead adopt the model
 \begin{align}
