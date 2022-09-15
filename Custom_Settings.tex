@@ -24,7 +24,42 @@
 %----------------------------------------------------------------------------------------
 %	Optional Packages
 %----------------------------------------------------------------------------------------
-\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{graphicx}
+\usepackage[figuresright]{rotating}
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathpazo} % Use the Palatino font by default
+%\usepackage{tgpagella} %The TEX Gyre Pagella family of fonts is based on the URW Palladio family, but heavily extended (https://www.tug.org/FontCatalogue/texgyrepagella/)
+
+\usepackage{fontawesome} % Use for loading symbol for URLs
+\usepackage{textcomp} % use for degree symbol (\textdegree)
+
+%\usepackage[document]{ragged2e}
+
+\usepackage[section]{minted} %works well in Overleaf but offline may need Python package to be installed and shell escape setting applied
+\usemintedstyle{friendly}
+\usemintedstyle{borland}
+
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\usepackage[font={itshape,raggedright},begintext=``,endtext="]{quoting}
+\usepackage{microtype}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{tabulary}
+\usepackage{glossaries}
+\usepackage{textcomp}
+
+%New colors defined below
+\definecolor{LightGray}{gray}{0.9}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{mintedbackground}{rgb}{0.95,0.95,0.95}
+
+
 \usepackage{hyperref}       % hyperlinks
 \usepackage{url}            % simple URL typesetting
 \usepackage{booktabs}       % professional-quality tables
@@ -33,11 +68,13 @@
 \usepackage{microtype}      % microtypography
 
 
+\pdfcompresslevel=9 %best compression
+\pdfadjustspacing=1 %for small font expansion
+
 % My packages
 \usepackage{tikzit}
 \input{diagrams.tikzstyles}
 \usepackage[mathscr]{euscript}
-\usepackage{graphicx}
 \usepackage {tikz}
 \usetikzlibrary {positioning}
 \usetikzlibrary{shapes.misc}

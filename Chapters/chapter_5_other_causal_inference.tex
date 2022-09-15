@@ -63,10 +63,10 @@ Given a graph $\graph{G}=(\graph{V},\graph{E})$ and a sequence of variables $(\R
 Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m:\RV{V}_i\mapsto \node{V}_i$, $\prob{P}_\cdot$ is compatible with $\mathcal{G}$ relative to $m$ if for all $I,J,K\subset A$, $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \mathbf{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\text{id}_C)$.
 \end{definition}
 
-The following definition is reproduced fron \citet{pearl_causality:_2009} with the differences mentioned: notation has been matched to ours, the interventional model is assumed to be measurable and the interventional distributions defined on a common sample space.
+The following definition is reproduced fron \citet{pearl_causality:_2009} with the differences mentioned: notation has been matched to ours, the interventional model is assumed to be measurable and the interventional distributions are assumed to be defined on a common sample space.
 
 \begin{definition}[Interventional model]\label{def:interventional}
-An interventional model is a tuple $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ where $(\Omega,\sigalg{F})$ is a measurable space,  $\RV{V}:=(\RV{V}_i)_{i\in A}$ a sequence of variables with $\RV{V}_i:\Omega\to V_i$, $V_i$ denumerable, where $C$ the choice set
+An interventional model is a tuple $(\prob{P}_C,\Omega,(\RV{V}_i)_{i\in A})$ where $(\Omega,\sigalg{F})$ is a measurable space,  $\RV{V}:=(\RV{V}_i)_{i\in A}$ a sequence of variables with $\RV{V}_i:\Omega\to V_i$, $V_i$ denumerable, where $C$ the choice set
 \begin{align}
     C:=\{\mathrm{do}_{\emptyset}\}\cup \{(\mathrm{do}_B,v_B)|B\subset A,v_B\in \mathrm{Range}(V_B)\}
 \end{align}
@@ -74,7 +74,7 @@ That is, we take every subsequence $\RV{V}_B$ of $\RV{V}$ and add to $C$ every e
 \end{definition}
 
 \begin{definition}[Causal Bayesian network]\label{def:CBN}
-Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ and a directed acyclic graph $\graph{G}$ with nodes $\graph{V}$, $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A},\graph{G})$  is a \emph{causal Bayesian network} with respect the node-variable association $m:\node{V}_i\mapsto \RV{V}_i$ if:
+Given an interventional model $(\prob{P}_C,\Omega,(\RV{V}_i)_{i\in A})$ and a directed acyclic graph $\graph{G}$ with nodes $\graph{V}$, $(\prob{P}_C,\Omega,(\RV{V}_i)_{i\in A},\graph{G})$  is a \emph{causal Bayesian network} with respect the node-variable association $m:\node{V}_i\mapsto \RV{V}_i$ if:
 \begin{enumerate}
     \item $\prob{P}_\cdot$ is compatible with $\graph{G}$ with respect to $m$
     \item $B\neq \emptyset \implies \prob{P}_{(\mathrm{do}_{B},v_B)}^{\RV{V}_B} = \delta_{v_B}$
@@ -82,9 +82,9 @@ Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_i)_{i\in A})$ an
 \end{enumerate}
 \end{definition}
 
-We have a two comments to make about this definition. First, the sequence of variables $(\RV{V}_i)_{i\in A}$ cannot be arbitrary -- they must be ``causally compatible'' (see Section \ref{sec:cc_vars}. For example, the sequence $\RV{V}:=(\RV{X},\RV{X})$ for some $\RV{X}:\Omega\to X$ is a perfectly legitimate variable, but by condition (2) the intervention $\prob{P}_{\mathrm{do}_{\{1,2\}},(0,1)}$ is asked to assign probability 1 to the impossible event $(\RV{X}\yields 0)\cap (\RV{X}\yields 1)$. Second, condition (3) is subtly under-specified: $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ is not necessariliy $\prob{P}_{(\mathrm{do}_{B},v_B)}$-almost surely unique. We could therefore either require condition (3) to hold for some version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ for each intervention in $C$, or we could require it for a single version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i|\mathrm{Pa}(\RV{V}_i)}$ uniformly over all interventions in $C$.
+One might go about constructing a causal Bayesian network by starting with a joint probability distribution and then ``adding in'' the interventions. When constructing a causal Bayesian network this way, one has to make sure the chosen sequence of variables $(\RV{V}_i)_{i\in A}$ is ``interventionally compatible''. In particular, we require $v_{\mathrm{Pa}(i)}\mapsto \delta_{v_i}$ be a $\RV{V}_i|\mathrm{Pa}(\RV{V}_i)$-valid conditional for all $i$ (Definition \ref{def:valid_conditional_prob}, or else the probability set for an intervention on $\RV{V}_i$ will be empty.
 
-For continuously valued variables, the ability to pick a version of the conditional probability for each intervention leads to undesirable results. Suppose $\node{V}_i$ is a parent of $\node{V}_j$, and the associated variable $\RV{V}_i$ is continuously valued and $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i}(\{v_i\})=0$ for all singletons $v_i\in V_i$. Then for every intervention $\mathrm{do}_{\{i\}}(v_i)$, we can choose a version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_j|\RV{V}_i}$ that takes an arbitrary value at the point $v_i$ (because this point has measure 0), so property (3) is satisfied trivially. Because of this, we will henceforth suppose that variables are discrete.
+For continuously valued variables, the ability to pick a version of the conditional probability for each intervention is problematic. Suppose $\node{V}_i$ is a parent of $\node{V}_j$, and the associated variable $\RV{V}_i$ is continuously valued and $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i}(\{v_i\})=0$ for all singletons $v_i\in V_i$. Then for every intervention $\mathrm{do}_{\{i\}}(v_i)$, we can choose a version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_j|\RV{V}_i}$ that takes an arbitrary value at the point $v_i$ (because this point has measure 0), so property (3) is satisfied trivially.
 
 \subsection{Unrolling a causal Bayesian network}\label{sec:unrolling}
 

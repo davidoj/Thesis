@@ -98,8 +98,8 @@
 
 
 % Addchap provides unnumbered chapters with an entry in the table of contents as well as an updated header
-\ProvideDocumentCommand{\addchap}{ s o m }{%
-	\chapter*{#3}%
+\ProvideDocumentCommand{\addchap}{ s o m o }{%
+	\chapter*{#3}\label{#4}%
 	\markboth{}{}%
 	\IfBooleanTF{#1}{%
 	}{%
@@ -531,9 +531,9 @@ KOMA-script documentation for details.}]{fancyhdr}
 \providecaptionname{english,british,american}{\symbolsname}{List of Symbols}
 \providecaptionname{ngerman,german,austrian,naustrian}{\symbolsname}{Symbolverzeichnis}
 
-\NewDocumentEnvironment{symbols}{ m }{%
+\NewDocumentEnvironment{symbols}{ m o }{%
 	\ifbool{nolistspace}{\begingroup\singlespacing}{}
-	\ifbool{listtoc}{\addchap{\symbolsname}}{\addchap*{\symbolsname}}
+	\ifbool{listtoc}{\addchap{\symbolsname}}{\addchap*{\symbolsname}{#2}}
 	\begin{longtable}{#1}
 	}{%
 	\end{longtable}

@@ -9,27 +9,13 @@ Less likely to be familiar to readers is the string diagram notation we use to r
 
 We also extend the theory of probability to a theory of probability sets, which we introduce in Section \ref{sec:probability_sets}. This section goes over some ground already trodden by Section \ref{sec:standard_prob}; this structure was chosen so that people familiar with the Section \ref{sec:standard_prob} can skip to Section \ref{sec:probability_sets} for relevant generalisations to probability sets. Two key ideas introduced here are \emph{uniform conditional probability}, similar but not identical to conditional probability, and \emph{extended conditional independence} as introduced by \citet{constantinou_extended_2017}, similar but not identical to regular conditional independence.
 
-We finally introduce the assumption of \emph{validity}, which ensures that probability sets constructed by ``assembling'' collections of uniform conditionals are non-empty.
+Sections \ref{sec:validity} and \ref{sec:interp_of_dms} are not critical for understanding the work in the rest of this thesis. 
+
+We introduce the assumption of \emph{validity} in Section \ref{sec:validity}, a condition that ensures probability sets constructed by ``assembling'' collections of uniform conditionals are non-empty. This is relevant to sanity checking models with interventions (see Definition \ref{def:CBN} and the remarks following it).
+
+We use many standard definitions in our setup -- for example, \emph{variables} (Definition \ref{def:variable}) are a standard definition in probability theory. On the other hand, we also make use of non-standard notions, like probability sets and decision models (Definition \ref{def:dec_model}). In Section \ref{sec:interp_of_dms} we attempt an account of how the formal elements of our theory could be interpreted. The two objects we focus our attention on are \emph{variables} and \emph{options}.
 
 This is a reference chapter -- a reader who is already quite familiar with probability theory may skip to Chapter \ref{ch:2p_statmodels}. Where necessary, references back to theorems and definitions in this chapter are given. In Chapter \ref{ch:evaluating_decisions}, we will introduce one additional probabilistic primitive: \emph{combs}, as we feel that additional context is helpful for understanding them.
-
-\section{Conventions}
-
-One of the unusual conventions in this thesis is the notation of uniform conditional probability. Given a set of probability distributions $\prob{P}_C:=\{\prob{P}_\alpha|\alpha\in C\}$ on a common sample space $(\Omega,\sigalg{F})$ with variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\prob{P}^{\RV{Y}|\RV{X}}_C$ represents a Markov kernel $X\kto Y$ that satisfies the definition of the distribution of $\RV{Y}$ given $\RV{X}$ (Definition \ref{def:disint}) for every $\alpha\in C$, while $\prob{P}_\alpha^{\RV{Y}|\RV{X}}$ is a conditional distribution only for $\alpha$. There are two unusual feature: firstly, it is more common to write a conditional distribution $\prob{P}(\RV{Y}|\RV{X})$ and secondly, the subscript indicating the ``domain of validity'' of the conditional probability is unusual.
-
-Because this thesis uses sets of probability measures rather than single probability measures, in general a conditional distribution may be valid only for some subset of the probability measures, and always including a subscript indicating which subset or element for which a conditional distribution is valid avoids any ambiguity about this. Avoiding notation of the form $\prob{P}(\RV{Y}|\RV{X})$ is an aesthetic preference; writing a conditional distribution like this suggests $\prob{P}(\RV{Y}|\RV{X})$ is the result of function composition between $\prob{P}$ and some function denoted ``$\RV{Y}|\RV{X}$''. However, conditional probabilities are not given by composition of functions like this.
-
-\begin{center}
-\begin{tabular}{ |c|c|c| } 
- \hline
- Name & notation & meaning \\
- \hline
- Iverson bracket & $\llbracket \cdot \rrbracket$ & Function equal to 1 if $\cdot$ is true, false otherwise \\ 
- Identity function & $\mathrm{idf}_X$ & Identity function $X\to X$\\
- Identity kernel & $\mathrm{id}_{X}$ & Kernel associated with the identity function $X\to X$\\
- \hline
-\end{tabular}
-\end{center}
 
 \section{Probability Theory}
 
@@ -125,12 +111,22 @@ Given measurable $f:X\to Y$ and $g:Y\to Z$, $\kernel{F}_f\kernel{F}_g = \kernel{
 
 \subsubsection{Variables, conditionals and marginals}
 
-\begin{definition}[Variable]\label{def:variable}
-Given a measurable space $(\Omega,\sigalg{F})$ and a measurable space of values $(X,\sigalg{X})$, an \emph{$X$-valued variable} is a measurable function $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$.
+We offer the standard definition of a random variable.
+
+\begin{definition}[Random variable]\label{def:variable}
+Given a measurable space $(\Omega,\sigalg{F})$ and a measurable space of values $(X,\sigalg{X})$, an \emph{$X$-valued random variable} is a measurable function $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$.
 \end{definition}
 
+A sequence of random variables is also a random variable.
+
 \begin{definition}[Sequence of variables]\label{def:seqvar}
-Given a measurable space $(\Omega,\sigalg{F})$ and two variables $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$, $\RV{Y}:(\Omega,\sigalg{F})\to (Y,\sigalg{Y})$, $(\RV{X},\RV{Y}):\Omega\to X\times Y$ is the variable $\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$.
+Given a measurable space $(\Omega,\sigalg{F})$ and two random variables $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$, $\RV{Y}:(\Omega,\sigalg{F})\to (Y,\sigalg{Y})$, $(\RV{X},\RV{Y}):\Omega\to X\times Y$ is the random variable $\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$.
+\end{definition}
+
+We define a partial order on random variables such that $\RV{Y}$ is higher than $\RV{X}$ if $\RV{X}$ is given by application of a function to $\RV{Y}$. For example, $\RV{Y}\varlessthan (\RV{W},\RV{Y})$ as $\RV{Y}$ can be obtained by composing a projection with $(\RV{W},\RV{Y})$.
+
+\begin{definition}[Random variables determined by another random variable]\label{def:variable_po}
+Given a sample space $(\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, $\RV{X}\varlessthan \RV{Y}$ if there is some $f:Y\to X$ such that $\RV{X}=f\circ \RV{Y}$.
 \end{definition}
 
 \begin{definition}[Marginal distribution]\label{def:pushforward}
@@ -255,8 +251,6 @@ We often want to talk about almost sure equality of two different versions $\ker
 \begin{definition}[Almost sure equality with respect to a pair of variables]
 Given $(\prob{P},\Omega,\sigalg{F})$ and $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, two Markov kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are $\RV{X}$-almost surely equal with respect to $\prob{P}$, written $\kernel{K}\overset{\prob{P}}{\cong}\kernel{L}$, if they are almost surely equal with respect to the marginal $\prob{P}^{\RV{X}}$.
 \end{definition}
-
-
 
 \section{String Diagrams}\label{ssec:mken_diagrams}
 
@@ -528,12 +522,18 @@ Thus the action of the $\text{Del}$ map is to marginalise over the deleted wire.
 	&= \kernel{K}(A|x)
 \end{align}
 
-\section{Probability Sets}\label{sec:probability_sets}
+\section{Probability Sets and Decision Models}\label{sec:probability_sets}
 
 A probability set is a set of probability measures. This section establishes a number of useful properties of conditional probability with respect to probability sets. Unlike conditional probability with respect to a probability space, conditional probabilities don't always exist for probability sets. Where they do, however, they are almost surely unique and we can marginalise and disintegrate them to obtain other conditional probabilities with respect to the same probability set.
 
 \begin{definition}[Probability set]\label{def:prob_set}
 A probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ is a collection of probability measures on $(\Omega,\sigalg{F})$. In other words it is a subset of $\mathscr{P}(\Delta(\Omega))$, where $\mathscr{P}$ indicates the power set.
+\end{definition}
+
+We define a \emph{decision model} as a triple of a probability set along with an indexing \emph{option set} and the common sample space. We could also consider a decision model to be a function $C\kto \Omega$, where we do not distinguish options options $\alpha,\alpha'\in C$ that induce the same probability distributions (i.e. $\prob{P}_\alpha=\prob{P}_{\alpha'}$).
+
+\begin{definition}[Decision model]\label{def:dec_model}
+A decision model is a triple $(\prob{P}_C, (\Omega,\sigalg{F}), C)$ where $\prob{P}_C$ is the probability set $\{\prob{P}_\alpha|\alpha\in C\}$, $(\Omega,\sigalg{F})$ is the shared sample space of $\prob{P}_C$ and $C$ is the option set.
 \end{definition}
 
 Given a probability set $\prob{P}_C$, we define marginal and conditional probabilities as probability measures and Markov kernels that satisfy Definitions \ref{def:pushforward} and \ref{def:disint} respectively for \emph{all} base measures in $\prob{P}_C$. There are generally multiple Markov kernels that satisfy the properties of a conditional probability with respect to a probability set, and this definition ensures that marginal and conditional probabilities are ``almost surely'' unique (Definition \ref{def:asequal}) with respect to probability sets.
@@ -626,6 +626,85 @@ By definition, for any $\prob{P}_\alpha\in \prob{P}_C$
 \end{align}
 \end{proof}
 
+\subsection{Existence of conditional distributions}
+
+It is known that conditional distributions do not exist in general for probability measures defined on arbitrary measurable sets. However, the requirement that the sets are \emph{standard measurable} is sufficient for the existence of conditional distributions. We also further show that, given a borel measurable map to standard measurable probability distributions, what we call ``higher order conditionals'' also exist.
+
+\begin{lemma}[Conditional pushforward]\label{th:recurs_pushf}
+Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with conditional $\prob{P}_C^{\RV{X}|\RV{Y}}$ such that $\RV{Z}=f\circ \RV{Y}$ for some $f:Y\to Z$. Then there exists a conditional probability $\prob{P}_C^{\RV{Z}|\RV{X}}=\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$.
+\end{lemma}
+
+\begin{proof}
+Note that $(\RV{X},\RV{Z})=(\text{id}_X\otimes f)\circ (\RV{X},\RV{Y})$. Thus, by Lemma \ref{lem:pushf_kprod}, for any $\prob{P}_\alpha\in \prob{P}_C$
+
+\begin{align}
+    \prob{P}_\alpha^{\RV{XZ}} = \prob{P}_\alpha^{\RV{XY}}\kernel{F}_{\text{id}_X\otimes f}
+\end{align}
+
+Note also that for all $A\in\sigalg{X}$, $B\in \sigalg{Z}$, $x\in X$, $y\in Y$:
+
+\begin{align}
+\prob{F}_{\text{id}_X\otimes f}(A\times B|x,y)&=\delta_x(A)\delta_{f(y)}(B)\\
+&= \prob{F}_{\text{id}_X} (A|x)\otimes \prob{F}_f(B|y)\\
+\implies \prob{F}_{\text{id}_X\otimes f} &= \prob{F}_{\text{id}_X} \otimes \prob{F}_f
+\end{align}
+
+Thus
+
+\begin{align}
+    \prob{P}_\alpha^{\RV{XZ}} &= (\prob{P}_\alpha^{\RV{X}}\odot \prob{P}_C^{\RV{Y}|\RV{X}})\kernel{F}_{\text{id}_X}\otimes \kernel{F}_f\\
+    &= \tikzfig{conditional_pushforward}
+\end{align}
+
+Which implies $\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$ is a version of $\prob{P}_{\alpha}^{\RV{Z}|\RV{X}}$. Because this holds for all $\alpha$, it is therefore also a version of $\prob{P}_C^{\RV{Z}|\RV{X}}$.
+\end{proof}
+
+The following theorem is a standard result in many probability texts. In this work, the measurable spaces considered will all be standard measurable and so Theorem \ref{th:reg_cond} always applies. We will simply assume that conditional probabilities exist, and avoid referencing this theorem every time.
+
+\begin{theorem}[Existence of regular conditionals]\label{th:reg_cond}
+Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$ with $Y$ standard measurable and a probability model $\prob{P}_{\alpha}$ on $(\Omega,\sigalg{F})$. Then there exists a conditional $\prob{P}_\alpha^{\RV{Y}|\RV{X}}$.
+\end{theorem}
+
+\begin{proof}
+\citet[Theorem 2.18]{cinlar_probability_2011}
+\end{proof}
+
+The following theorem was proved by \citet{bogachev_kantorovich_2020}.
+
+\begin{theorem}\label{th:bogachev}
+Given a Borel measurable map $m:X\kto Y\times Z$ let $\Pi_Y:Y\times Z\to Y$ be the projection onto $Y$. Then there exists a Borel measurable map $n:X\times Y\kto Y\times Z$ such that 
+\begin{align}
+    n(\Pi_y^{-1}(y)|x,y) &= 1\label{eq:proper}\\
+    m(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) m\kernel{F}_{\Pi_Y}(dy|x)&\forall A\in \sigalg{Y},B\in\sigalg{Y\times Z}\label{eq:conditional1}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+ \citet[Theorem 3.5]{bogachev_kantorovich_2020}
+\end{proof}
+
+The following corollary implies that, given a uniform conditional, higher order conditionals can generically be found for probability sets.
+
+\begin{corollary}[Existence of higher order conditionals with respect to probability sets]\label{th:ho_cond_psets}
+Take a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with uniform conditional distribution $\prob{P}_C^{\RV{YZ}|\RV{X}}$, and $Y$ and $Z$ standard measurable. Then there exists a higher order uniform conditional $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
+\end{corollary}
+
+\begin{proof}
+Take $\prob{P}_C^{\RV{YZ}|\RV{X}}$ to be the Borel measurable map $m$ from Theorem \ref{th:bogachev}, and note that $\Pi_Y\circ (\RV{Y},\RV{Z})=\RV{Y}$. Then equation \eqref{eq:conditional1} implies for all $A\in \sigalg{Y},B\in\sigalg{Y\times Z}$ there is some $n$ such that
+
+\begin{align}
+    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_C^{\RV{YZ}|\RV{X}}\kernel{F}_{\Pi_Y}(dy|x)\\
+    &=\int_A n(B|x,y) \prob{P}_C^{\RV{Y}|\RV{X}}(dy|x)\label{eq:rec_push}
+\end{align}
+where Equation \eqref{eq:rec_push} follows from Lemma \ref{th:recurs_pushf}.
+
+Then, for any $\prob{P}_\alpha\in\prob{P}_C$
+\begin{align}
+    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_{\alpha}^{\RV{Y}|\RV{X}}(dy|x)
+\end{align}
+which implies $n$ is a version of $\prob{P}_C^{\RV{YZ}|(\RV{Y}|\RV{X})}$. By Lemma \ref{th:recurs_pushf}, $n\kernel{F}_{\Pi_Y}$ is a version of $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
+\end{proof}
+
 \subsection{Extended conditional independence}\label{sec:eci}
 
 Just like we defined uniform conditional probability as a version of ``conditional probability'' appropriate for probability sets, we need some version of ``conditional independence'' for probability sets. One such has already been given in some detail: it is the idea of \emph{extended conditional independence} defined in \citet{constantinou_extended_2017}.
@@ -672,7 +751,6 @@ A pair of nonstochastic variables $\phi$ and $\xi$ are complementary if $(\phi,\
 The letters $\phi$ and $\xi$ are used to represent complementary nonstochastic variables.
 \end{notation}
 
-
 Unlike \citet{constantinou_extended_2017}, we limit ourselves to a definition of extended conditional independence where regular uniform conditional probabilities exist. Our definition is otherwise identical.
 
 \begin{definition}[Extended conditional independence]\label{def:eci_orig}
@@ -687,7 +765,7 @@ Given a probability set $\prob{P}_C$, variables $\RV{X}$, $\RV{Y}$ and $\RV{Z}$ 
 Very often, we consider a particular kind of extended conditional independence that does not explicitly make use of nonstochastic variables. We call this \emph{uniform conditional independence}.
 
 \begin{definition}[Uniform conditional independence]\label{def:eci}
-Given a probability set $\prob{P}_C$ and variables $\RV{X}$, $\RV{Y}$ and $\RV{Z}$, the uniform conditional independence $\RV{Y}\CI^e_{\prob{P}_C} \RV{X} C|\RV{Z}$ holds if $\prob{P}_C^{\RV{Y}|\RV{XZ}}$ and $\prob{P}_C^{\RV{Y}|\RV{X}}$ exist and
+Given a probability set $\prob{P}_C$ and variables $\RV{X}$, $\RV{Y}$ and $\RV{Z}$, the uniform conditional independence $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X}, \mathrm{id}_C)|\RV{Z}$ holds if $\prob{P}_C^{\RV{Y}|\RV{XZ}}$ and $\prob{P}_C^{\RV{Y}|\RV{X}}$ exist and
 \begin{align}
     \prob{P}_C^{\RV{Y}|\RV{XZ}} &\overset{\prob{P}_C}{\cong} \tikzfig{eci_def}\\
     &\iff\\
@@ -712,37 +790,13 @@ For countable sets $C$ (which, recall, is an assumption we generally accept), as
 The following forms of these properties are often used here:
 
 \begin{enumerate}
-    \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e \RV{Y} C|\RV{Z}$ iff $\RV{Y}\CI_{\prob{P}} \RV{X} C|\RV{Z}$
-    \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y},\RV{Z})C|\RV{W}$ implies $\RV{X}\CI_{\prob{P}}\RV{Y}C|\RV{W}$ and $\RV{X}\CI_{\prob{P}}\RV{Z}C|\RV{W}$
-    \item Weak union: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z})C|\RV{W}$ implies $\RV{X}\CI_{\prob{P}_C}^e\RV{Y}C|(\RV{Z},\RV{W})$
-    \item Contraction: $\RV{X}\CI_{\prob{P}_C}^e\RV{Z}C|\RV{W}$ and $\RV{X}\CI_{\prob{P}_C}^e\RV{Y}C|(\RV{Z},\RV{W})$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z})C|\RV{W}$
+    \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y} \mathrm{id}_C)|\RV{Z}$ iff $\RV{Y}\CI_{\prob{P}} (\RV{X} \mathrm{id}_C)|\RV{Z}$
+    \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y},\RV{Z}, \mathrm{id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}}\RV{Y}C|\RV{W}$ and $\RV{X}\CI_{\prob{P}}(\RV{Z},\mathrm{id}_C)|\RV{W}$
+    \item Weak union: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{id}_C)|(\RV{Z},\RV{W})$
+    \item Contraction: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Z},\mathrm{id}_C)|\RV{W}$ and $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{id}_C)|(\RV{Z},\RV{W})$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{id}_C)|\RV{W}$
 \end{enumerate}
 
-\subsection{Examples}
-
-\begin{example}[Choice variable]\label{ex:choice_var}
-Suppose we have a decision procedure $\proc{S}_C:=\{\proc{S}_\alpha|\alpha\in C\}$ that consists of a measurement procedure for each element of a denumerable set of choices $C$. Each measurement procedure $\proc{S}_\alpha$ is modeled by a probability distribution $\prob{P}_\alpha$ on a shared sample space $(\Omega,\sigalg{F})$ such that we have an observable ``choice'' variable $(\RV{D},\RV{D}\circ\proc{S}_\alpha)$ where $\RV{D}\circ\proc{S}_\alpha$ always yields $\alpha$.
-
-Furthermore, Define $\RV{Y}:\Omega\to \Omega$ as the identity function. Then, by supposition, for each $\alpha\in A$, $\prob{P}_\alpha^{\RV{Y}\text{id}_C}$ exists and for $A\in \sigalg{Y}$, $B\in \sigalg{C}$:
-
-\begin{align}
-    \prob{P}_\alpha^{\RV{YC}}(A\times B) &= \prob{P}_\alpha(A)\delta_\alpha(B)
-\end{align}
-
-This implies, for all $\alpha\in C$
-
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{D}} &= \prob{P}_\alpha^{\RV{Y}}
-\end{align}
-
-Thus $\prob{P}_C^{\RV{Y}|\RV{D}}$ exists and
-
-\begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{D}}(A|\alpha) &= \prob{P}_\alpha^{\RV{Y}} (A)&\forall A\in \sigalg{Y},\alpha\in C 
-\end{align}
-
-Because only deterministic marginals $\prob{P}_\alpha^{\RV{D}}$ are available, for every $\alpha\in C$ we have $\RV{Y}\CI_{\prob{P}_\alpha} \RV{D}$. This reflects the fact that \emph{after we have selected a choice $\alpha$} the value of $\text{id}_C$ provides no further information about the distribution of $\RV{Y}$, because $\RV{D}$ is deterministic given any $\alpha$. It does not reflect the fact that ``choosing different values of $\text{id}_C$ has no effect on $\RV{Y}$''.
-\end{example}
+Conditional independence is sometimes given in terms of a factorisation of the joint conditional distribution (or joint conditional expectations). Theorem \ref{th:uci_rep} shows that the definition given here is equivalent to the definition given in terms of factorisation.
 
 \begin{theorem}[Uniform conditional independence representation]\label{th:uci_rep}
 Given a probability set $\prob{P}_C$ with a uniform conditional probability $\prob{P}^{\RV{XY}|\RV{Z}}_C$,
@@ -751,7 +805,7 @@ Given a probability set $\prob{P}_C$ with a uniform conditional probability $\pr
     &\iff\\
     \prob{P}^{\RV{XY}|\RV{Z}}_C(A\times B|z) &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{X}|\RV{Z}}(A|z)\prob{P}_C^{\RV{Y}|\RV{Z}}(B|z)&\forall A\in \sigalg{X},B\in \sigalg{Y},z\in Z
 \end{align}
-if and only if $\RV{Y}\CI_{\prob{P}_C}^e \RV{X}C|\RV{Z}$
+if and only if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{X},\mathrm{id}_C)|\RV{Z}$
 \end{theorem}
 
 \begin{proof}
@@ -782,29 +836,25 @@ a contradiction. An analogous argument follows if we replace ``$>$'' with ``$<$'
 \end{proof}
 
 
-\subsection{Maximal probability sets and valid conditionals}
+\section{Maximal probability sets and valid conditionals}\label{sec:validity}
 
-So far, we have been implicitly supposing that we first set up a probability set and from that set we may sometimes derive uniform conditional probabilities, extended conditional independences and so forth. However, sometimes we want to work backwards: start with a collection of uniform conditional probabilities, and work with the probability set implicitly defined by this collection. For example, when we have a Causal Bayesian Network, the collection of operations of the form ``$\mathrm{do}(\RV{X}=x)$'' specify a probability set by a collection of uniform conditional probabilities on variables other than $\RV{X}$, along with marginal probabilities of $\RV{X}$. Specifically:
+So far, we have been implicitly supposing that we first set up a non-empty probability set and from that set we may sometimes derive conditional probabilities, extended conditional independences and so forth. However, sometimes we want to work backwards: start with a collection of conditional probabilities, and work with the probability set implicitly defined by this collection. This is similar to the case in which we specify how some system works by specifying, based on a priori knowledge, a set of equations that govern it. A sanity check on proposing such a set of equations is to check whether they admit any solutions, and (possibly) to check how large the set of solutions they admit is.
+
+Similarly, proposing a collection of condiitonal probabilities may similarly be compatible with a large set of base probability distributions, a unique probability distribution or no probability distributions at all. \emph{Validity} is a sufficient (but not necessary) condition to ensure that certain collections of conditional probabilities yield a non-empty set of compatible distributions.
+
+A particular example of specifying conditional probabilities a priori is given by Causal Bayesian Networks (see \ref{def:CBN} for more details on this kind of model). The collection of operations of the form ``$\mathrm{do}(\RV{X}=x)$'' force the conditional distribution of $\RV{X}$ given its parents to a particular value. Specifically:
 \begin{align}
-	\prob{P}_{\RV{X}=x}^{\RV{Y}|\mathrm{Pa}(\RV{Y})} &= \begin{cases}
+	\prob{P}_{\mathrm{do}_\RV{X},x}^{\RV{Y}|\mathrm{Pa}(\RV{Y})} &= \begin{cases}
 	\prob{P}_{\mathrm{obs}}^{\RV{Y}|\mathrm{Pa}(\RV{Y})}&\RV{Y}\text{ is a causal variable and not equal to }\RV{X}\\
 	\delta_x & \RV{Y}=\RV{X}
 	\end{cases}
 \end{align}
 
-The qualification ``$\RV{Y}$ is a causal variable'' is usually not an explicit condition for causal Bayesian networks, but it is an important one. For example, $2\RV{X}$ is not equal to $\RV{X}$, but we cannot define a causal Bayesian network where both $\RV{X}$ and $2\RV{X}$ are causal variables, see Example \ref{ex:invalidity}.
+Given a causal Bayesian network with the graph $\RV{Y}\rightarrow \RV{X}$ and some observational probability distribution $\prob{P}_{\mathrm{obs}}^{\RV{XY}}\in\Delta(X\times Y)$, we conclude that $\prob{P}_{\mathrm{do}_\RV{X},x}^{\RV{X}|\RV{Y}}=\text{del}_Y \delta_x$. Suppose, however, we had $\RV{X}=\RV{Y}$ -- i.e. $\RV{X}$ and $\RV{Y}$ are actually two different labels for the same variable. Then there would be no distribution $\prob{Q}$ in $\Delta(X\times Y)$ with $\prob{Q}^{\RV{X}|\RV{Y}}=\text{del}_Y \delta_x$.
 
-When working backwards like this, we can run into a couple of problems: we may end up with a probability set where some probabilities are non-unique, or we might inadvertently define an empty probability set. \emph{Validity} is a condition that can ensure that we at least avoid the second problem.
+The key result of this section is: probability sets defined by collections of recursive valid conditionals and distributions are nonempty. While we suspect this condition is often satisfied by causal models in practice, we offer one example in the literature where it apparently is not. The problem of whether a probability set is valid is analogous to the problem of whether a probability distribution satisfying a collection of constraints exists discussed in \citet{vorobev_consistent_1962}. As that work shows, there are many questions of this nature that can be asked and that are not addressed by the criterion of validity.
 
-Thus, if we start with a probability set, we know how to check if certain uniform conditional probabilities exist or not. However, there is a particular line of reasoning that comes up most often in the graphical models tradition of causal inference where we start with collections of conditional probabilities and assemble them into probability models as needed. A simple example of this is the causal Bayesian network given by the graph $\RV{X}\longrightarrowRHD \RV{Y}$ and some observational probability distribution $\prob{P}^{\RV{XY}}\in\Delta(X\times Y)$. Using the standard notion of ``hard interventions on $\RV{X}$'', this model induces a probability set which we could informally describe as the set $\prob{P}_\square:=\{\prob{P}_a^{\RV{XY}}|a\in X\cup\{o\}\}$ where $o$ is a special element corresponding to the observational setting. The graph $\RV{X}\longrightarrowRHD \RV{Y}$ implies the existence of the uniform conditional probability $\prob{P}_\square^{\RV{Y}|\RV{X}}$ under the nominated set of interventions, while the usual rules of hard interventions imply that $\prob{P}_a^{\RV{X}} = \delta_a$ for $a\in X$.
-
-Reasoning ``backwards'' like this -- from uniform conditionals and marginals back to probability sets -- must be done with care. The probability set associated with a collection of conditionals and marginals may be empty or nonunique. Uniqueness may not always be required, but an empty probability set is clearly not a useful model.
-
-Consider, for example, $\Omega=\{0,1\}$ with $\RV{X}=(\RV{Z},\RV{Z})$ for $\RV{Z}:=\text{id}_{\Omega}$ and any measure $\kappa\in \Delta(\{0,1\}^2)$ such that $\kappa(\{1\}\times \{0\})>0$. Note that $\RV{X}^{-1}(\{1\}\times \{0\})=\RV{Z}^{-1}(\{1\})\cap \RV{Z}^{-1}(\{0\})=\emptyset$. Thus for any probability measure $\mu\in \Delta(\{0,1\})$, $\mu^{\RV{X}}(\{1\}\times \{0\}) = \mu(\emptyset)=0 $ and so $\kappa$ cannot be the marginal distribution of $\RV{X}$ for any base measure at all.
-
-We introduce the notion of \emph{valid distributions} and \emph{valid conditionals}. The key result here is: probability sets defined by collections of recursive valid conditionals and distributions are nonempty. While we suspect this condition is often satisfied by causal models in practice, we offer one example in the literature where it apparently is not. The problem of whether a probability set is valid is analogous to the problem of whether a probability distribution satisfying a collection of constraints exists discussed in \citet{vorobev_consistent_1962}. As that work shows, there are many questions of this nature that can be asked and that are not addressed by the criterion of validity.
-
-There is also a connection between the notion of validity and the notion of \emph{unique solvability} in \citet{bongers_theoretical_2016}. We ask ``when can a set of conditional probabilities together with equations be jointly satisfied by a probability model?'' while Bongers et. al. ask when a set of equations can be jointly satisfied by a probability model.
+In functional causal models, we have the notions of \emph{global compatibility} from \citet{forre_causal_2020} and \emph{unique solvability} in \citet{bongers_theoretical_2016}. These are more general than validity; they are not just sufficient but also necessary for the existence of a solution. In addition, we note that the intervention operation discussed in \citet{forre_causal_2020} preserves global compatibility, unlike the acyclic notion of intervention discussed above.
 
 \begin{definition}[Valid distribution]\label{def:valid_dist}
 Given $(\Omega,\sigalg{F})$ and a variable $\RV{X}:\Omega\to X$, an $\RV{X}$-valid probability distribution is any probability measure $\prob{K}\in \Delta(X)$ such that $\RV{X}^{-1}(A)=\emptyset\implies \prob{K}(A) = 0$ for all $A\in\sigalg{X}$.
@@ -914,89 +964,7 @@ so $\prob{P}_\square^{\RV{B}|\RV{WHC}}$ is invalid. Thus there is some valid $\m
 Validity rules out conditional probabilities like \eqref{eq:bmi_example}. We conjecture that in many cases this condition is implicitly taken into account -- it is obviously silly to posit a model in which body mass index can be controlled independently of height and weight. We note, however, that presuming the authors intended their model to be interpreted according to the usual semantics of causal Bayesian networks, the invalid conditional probability \eqref{eq:bmi_example} would be used to evaluate the causal effect of body mass index in the causal diagram found in \citet{shahar_association_2009}.
 \end{example}
 
-
-
-\subsection{Existence of conditional probabilities}
-
-
-\begin{lemma}[Conditional pushforward]\label{th:recurs_pushf}
-Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with conditional $\prob{P}_C^{\RV{X}|\RV{Y}}$ such that $\RV{Z}=f\circ \RV{Y}$ for some $f:Y\to Z$. Then there exists a conditional probability $\prob{P}_C^{\RV{Z}|\RV{X}}=\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$.
-\end{lemma}
-
-\begin{proof}
-Note that $(\RV{X},\RV{Z})=(\text{id}_X\otimes f)\circ (\RV{X},\RV{Y})$. Thus, by Lemma \ref{lem:pushf_kprod}, for any $\prob{P}_\alpha\in \prob{P}_C$
-
-\begin{align}
-    \prob{P}_\alpha^{\RV{XZ}} = \prob{P}_\alpha^{\RV{XY}}\kernel{F}_{\text{id}_X\otimes f}
-\end{align}
-
-Note also that for all $A\in\sigalg{X}$, $B\in \sigalg{Z}$, $x\in X$, $y\in Y$:
-
-\begin{align}
-\prob{F}_{\text{id}_X\otimes f}(A\times B|x,y)&=\delta_x(A)\delta_{f(y)}(B)\\
-&= \prob{F}_{\text{id}_X} (A|x)\otimes \prob{F}_f(B|y)\\
-\implies \prob{F}_{\text{id}_X\otimes f} &= \prob{F}_{\text{id}_X} \otimes \prob{F}_f
-\end{align}
-
-Thus
-
-\begin{align}
-    \prob{P}_\alpha^{\RV{XZ}} &= (\prob{P}_\alpha^{\RV{X}}\odot \prob{P}_C^{\RV{Y}|\RV{X}})\kernel{F}_{\text{id}_X}\otimes \kernel{F}_f\\
-    &= \tikzfig{conditional_pushforward}
-\end{align}
-
-Which implies $\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$ is a version of $\prob{P}_{\alpha}^{\RV{Z}|\RV{X}}$. Because this holds for all $\alpha$, it is therefore also a version of $\prob{P}_C^{\RV{Z}|\RV{X}}$.
-\end{proof}
-
-The following theorem is a standard result in many probability texts. In this work, the measurable spaces considered will all be standard measurable and so Theorem \ref{th:reg_cond} always applies. We will simply assume that conditional probabilities exist, and avoid referencing this theorem every time.
-
-\begin{theorem}[Existence of regular conditionals]\label{th:reg_cond}
-Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$ with $Y$ standard measurable and a probability model $\prob{P}_{\alpha}$ on $(\Omega,\sigalg{F})$. Then there exists a conditional $\prob{P}_\alpha^{\RV{Y}|\RV{X}}$.
-\end{theorem}
-
-\begin{proof}
-\citet[Theorem 2.18]{cinlar_probability_2011}
-\end{proof}
-
-The following theorem was proved by \citet{bogachev_kantorovich_2020}.
-
-\begin{theorem}\label{th:bogachev}
-Given a Borel measurable map $m:X\kto Y\times Z$ let $\Pi_Y:Y\times Z\to Y$ be the projection onto $Y$. Then there exists a Borel measurable map $n:X\times Y\kto Y\times Z$ such that 
-\begin{align}
-    n(\Pi_y^{-1}(y)|x,y) &= 1\label{eq:proper}\\
-    m(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) m\kernel{F}_{\Pi_Y}(dy|x)&\forall A\in \sigalg{Y},B\in\sigalg{Y\times Z}\label{eq:conditional1}
-\end{align}
-\end{theorem}
-
-\begin{proof}
- \citet[Theorem 3.5]{bogachev_kantorovich_2020}
-\end{proof}
-
-The following corollary implies that, given a uniform conditional, higher order conditionals can generically be found for probability sets.
-
-\begin{corollary}[Existence of higher order conditionals with respect to probability sets]\label{th:ho_cond_psets}
-Take a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with uniform conditional distribution $\prob{P}_C^{\RV{YZ}|\RV{X}}$, and $Y$ and $Z$ standard measurable. Then there exists a higher order uniform conditional $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
-\end{corollary}
-
-\begin{proof}
-Take $\prob{P}_C^{\RV{YZ}|\RV{X}}$ to be the Borel measurable map $m$ from Theorem \ref{th:bogachev}, and note that $\Pi_Y\circ (\RV{Y},\RV{Z})=\RV{Y}$. Then equation \eqref{eq:conditional1} implies for all $A\in \sigalg{Y},B\in\sigalg{Y\times Z}$ there is some $n$ such that
-
-\begin{align}
-    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_C^{\RV{YZ}|\RV{X}}\kernel{F}_{\Pi_Y}(dy|x)\\
-    &=\int_A n(B|x,y) \prob{P}_C^{\RV{Y}|\RV{X}}(dy|x)\label{eq:rec_push}
-\end{align}
-where Equation \eqref{eq:rec_push} follows from Lemma \ref{th:recurs_pushf}.
-
-Then, for any $\prob{P}_\alpha\in\prob{P}_C$
-\begin{align}
-    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_{\alpha}^{\RV{Y}|\RV{X}}(dy|x)
-\end{align}
-which implies $n$ is a version of $\prob{P}_C^{\RV{YZ}|(\RV{Y}|\RV{X})}$. By Lemma \ref{th:recurs_pushf}, $n\kernel{F}_{\Pi_Y}$ is a version of $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
-\end{proof}
-
-We might be motivated to ask whether the higher order conditionals in Theorem \ref{th:ho_cond_psets} can be chosen to be valid. Despite Lemma \ref{lem:proper_implies_valid} showing that the existence of proper conditional probabilities implies the existence of valid ones, we cannot make use of this in the above theorem because Equation \eqref{eq:proper} makes $n$ proper with respect to the ``wrong'' sample space $(Y\times Z, \sigalg{Y}\otimes\sigalg{Z})$ while what we would need is a proper conditional probability with respect to $(\Omega,\sigalg{F})$.
-
-We can choose higher order conditionals to be valid in the case of discrete sets, and whether we can choose them to be valid in more general measurable spaces is an open question.
+One question that arises is whether we can generally choose valid versions of the higher order conditionals whose existence is established in Theorem \ref{th:ho_cond_psets}. This would potentially have applications to causal Bayesian network style reasoning -- where we might want to start with some conditional probability, disintegrate it into higher order conditionals, keep one and replace the other under some intervention operation. In general, this is still an open question -- Theorem \ref{th:ho_cond_psets} does not imply the resulting higher order conditional is valid -- but we can show that if we limit our attention to discrete sets then higher order conditionals can be chosen to be valid.
 
 \begin{lemma}\label{lem:proper_implies_valid}
 Given a probability space $(\mu,\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, if there is a regular proper conditional probability $\mu^{|\RV{X}}:X\kto \Omega$ then there is a valid conditional distribution $\mu^{\RV{Y}|\RV{X}}$.
@@ -1065,3 +1033,134 @@ For all $x,y$ such that $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}(\{y\}|x)$ is positive
 
 Furthermore, where $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$, we either have $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A= \emptyset$ or can choose some $\omega\in (\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A$ and let $\kernel{Q}(\RV{Z}(\omega)|x,y) = 1$. This is an arbitrary choice, and may differ from the original $\prob{P}_C^{\RV{Z}|\RV{XY}}$. However, because $Y$ is discrete the union of all points $y$ where $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$ is a measure zero set, and so $\kernel{Q}$ differs from $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}$ on a measure zero set.
 \end{proof}
+
+\section{Interpretation of probabilistic decision models}\label{sec:interp_of_dms}
+
+In this thesis, we will use the notions of probability distributions, random variables and sample spaces that are standard to probability theory. Beyond these, decision models also feature \emph{option sets}, which are not standard elements of the theory of probability and necessitate the theory of probability sets worked out above. With regard to how decision models are interpreted, we will consider them to be an aid to a decision maker who wants to predict the consequences of difference choices they might make and have little else to say about them in this thesis. However, in this section we will explore in more detail the question of interpretating variables and options. On the question of interpreting options, our approach differs in some respects from the interventional and potential outcomes approaches.
+
+In statistics, variables aren't \emph{just} measurable functions defined on the sample space (Definition \ref{def:variable}). Typically, they're also understood to correspond to some measured aspect of the real world. For example, \citet{pearl_causality:_2009} offers the following two, purportedly equivalent, definitions of variables:
+\begin{quote}
+By a \emph{variable} we will mean an attribute, measurement or inquiry that may take on one of several possible outcomes, or values, from a specified domain. If we have beliefs (i.e., probabilities) attached to the possible values that a variable may attain, we will call that variable a random variable.
+\end{quote}
+
+\begin{quote}
+This is a minor generalization of the textbook definition, according to which a random variable is a mapping from the sample space (e.g., the set of elementary events) to the real line. In our definition, the mapping is from the sample space to any set of objects called ``values,'' which may or may not be ordered.
+\end{quote}
+
+However, these are actually two different things. The first is a \emph{measurement}, which is something we can do in the real world that produces as a result an element of a mathematical set. The second is a \emph{function}, a purely mathematical object with a domain and a codomain and a mapping from the former into the latter. Measurement procedures play the extremely important role of ``pointing to the parts of the world'' that the model addresses.
+
+The general scheme considered in this work is to assume that there is a  ``conditional measurement procedure'', where the decision maker, on choosing an option $\alpha\in C$, executes a measurement $\proc{S}_\alpha$. $\proc{S}_\alpha$ is considered to be a measurement procedure that measures all quantities of interest, and particular quantities of interest can be obtained by composing $\proc{S}_\alpha$ with an appropriate function. The function $\RV{X}$ that, when applied to the result of $\proc{S}$ is the variable associated with this particular quantity of interest.
+
+\subsection{Random variables and measurement procedures}
+
+Consider Newton's second law in the form $\RV{F}=\RV{MA}$. This model relates ``variables'' $\RV{F}$, $\RV{M}$ and $\RV{A}$. As \citet{feynman_feynman_1979} noted, in order to understand this law, some pre-existing understanding of force, mass and acceleration is required. In order to offer a numerical value for the net force on a given object is, even the most knowledgeable physicist will have to go and do a measurement, which involves interacting with the object in some manner that cannot be completely mathematically specified, and which will return a numerical value that will be taken to be the net force.
+
+Thus, in order to fully make sense of the equation $\RV{F}=\RV{MA}$, it must be understood relative to some measurement procedure $\proc{S}$ that simultaneously measures the force on an object, its mass and its acceleration. If the procedure yields a triple $(\text{``force''},\text{``mass''},\text{``acceleration''})$, then the required quantities can be recovered by composing functions with the procedure's result. For example, ``force'' can be recovered by applying the function $\R{F}:(a,b,c)\mapsto a$, and one can similarly define $\RV{M}$ and $\RV{A}$. The equation then says that, whatever result $s$ this procedure yields, $\RV{F}(s)=\RV{M}(s)\RV{A}(s)$ will hold.
+
+One could also consider imposing some coherence requirements on $\proc{S}$. For example, perhaps we require that $\RV{F}\circ\proc{S}$ gives the same result as some procedure $\proc{F}$ that measures only the net force on the given object, or that different people can execute $\proc{S}$ and obtain the same result. However, details like this are beyond the scope of this work. The one requirement we do place on $\proc{S}$ is that it is sure to return values in some set $F\times M\times A$ that is known in advance. No actual procedure can be guaranteed to return elements of a mathematical set known in advance -- anything can fail -- but for our purposes we assume that we can study procedures reliable enough that we don't lose much by ignoring this possibility.
+
+A measurement procedure $\proc{S}$ is akin to \citet{menger_random_2003}'s notion of variables as ``consistent classes of quantities'' that consist of pairing between real-world objects and quantities of some type. $\proc{S}$ itself is not a well-defined mathematical thing, but the set of values it may yield \emph{is} a well-defined mathematical set. This is what facilitates the idea of ``composing a function with $\proc{S}$''. Because $\proc{S}$ is not a purely mathematical thing, we avoid attempting to reason mathematically about $\proc{S}$ beyond the requirement that we can compose functions with it. As a result, $\proc{S}$ is required to interpret the mathematical models, but mainly stays in the background while the actual details of the reasoning concern the functions $\RV{F}$, $\RV{M}$ and $\RV{A}$ (or whatever variables the problem actually gives us).
+
+\subsection{Defining measurement procedures}\label{sec:mprocs}
+
+Motivated by the example above, we define a measurement procedure as something an individual can ``do'' which leaves them, in the end, with an element of a mathematical set.
+
+\begin{definition}[Measurement procedure]
+A \emph{measurement procedure} $\proc{B}$ is a procedure that involves interacting with the real world somehow and delivering an element of a mathematical set $X$ as a result. A procedure $\proc{B}$ is said to takes values in a set $B$.
+\end{definition}
+
+We adopt the convention that the procedure name $\proc{B}$ and the set of values $B$ share the same letter.
+
+\begin{definition}[Values yielded by procedures]
+$\proc{B}\yields x$ is the proposition that the the procedure $\proc{B}$ will yield the value $x\in X$. $\proc{B}\yields A$ for $A\subset X$ is the proposition $\lor_{x\in A} \proc{B}\yields x$.
+\end{definition}
+
+\begin{definition}[Equivalence of procedures]\label{def:equality}
+Two procedures $\proc{B}$ and $\proc{C}$ are equal if they both take values in $X$ and $\proc{B}\yields x\iff \proc{C}\yields x$ for all $x\in X$.
+\end{definition}
+
+If two involve different measurement actions in the real world but necessarily yield the same result, we say they are equivalent.
+
+It is worth noting that this notion of equivalence identifies procedures with different real-world actions. For example, ``measure the force'' and ``measure everything, then discard everything but the force'' are often different -- in particular, it might be possible to measure the force only without measuring anything else. However, if we suppose that both yield the same result in the end we can treat them as equivalent. 
+
+Measurement procedures are like functions without well-defined domains. Just like we can compose functions with other functions to create new functions, we can compose measurement procedures with functions to produce new measurement procedures.
+
+\begin{definition}[Composition of functions with procedures]
+Given a procedure $\proc{B}$ that takes values in some set $B$, and a function $f:B\to C$, define the ``composition'' $f\circ \proc{B}$ to be any procedure $\proc{C}$ that yields $f(x)$ whenever $\proc{B}$ yields $x$. We can construct such a procedure by describing the steps: first, do $\proc{B}$ and secondly, apply $f$ to the value yielded by $\proc{B}$.
+\end{definition}
+
+For example, $\proc{MA}$ is the composition of $h:(x,y)\mapsto xy$ with the procedure $(\proc{M},\proc{A})$ that yields the mass and acceleration of the same object. Measurement procedure composition is associative:
+
+\begin{align}
+    (g\circ f)\circ\proc{B}\text{ yields } x &\iff B\text{ yields } (g\circ f)^{-1}(x) \\
+    &\iff B\text{ yields } f^{-1}(g^{-1}(x))\\
+    &\iff f\circ B \text{ yields } g^{-1}(x)\\
+    &\iff g\circ(f\circ B)\text{ yields } x
+\end{align}
+
+One might wonder whether there is also some kind of ``tensor product'' operation that takes a standalone $\proc{M}$ and a standalone $\proc{A}$ and returns a procedure $(\proc{M},\proc{A})$. Unlike function composition, this would be an operation that acts on two procedures rather than a procedure and a function. Thus this ``append'' combines real-world operations somehow, and in the spirit of not analysing procedures too deeply we avoid defining any such notion.
+
+Our approach here is to suppose that there is only one measurement procedure $\proc{S}$ that yields all the information required to determine the values of all observed variables. Observed variables are, precisely, functions defined on the observable sample space $(\Psi,\sigalg{E})$. Thus we never need to combine real world actions -- we assume that they are all taken care of by $\proc{S}$.
+
+Given that measurement processes are in practice finite precision and with finite range, $\Psi$ will generally be a finite set. We could in this case equip $\Psi$ with the collection of measurable sets given by the power set $\sigalg{E}:=\mathscr{P}(\Psi)$, and $(\Psi,\sigalg{E})$ is a standard measurable space. More generally, we assume that there is a set $\sigalg{E}$ of observable events such that $(\Psi,\sigalg{E})$ is standard measurable, though beyond the suggestion that $\Psi$ is likely to be finite in practice, we don't know if there are reasonable measurement procedures that do not conform to this requirement.
+
+\subsection{Observable variables}
+
+The measurement procedure $\proc{S}$ represents a large collection of quantities of interest, each of which can be obtained by composition of some function with $\proc{S}$. Given some measurable function $\RV{X}:(\Psi,\sigalg{E})\to(X,\sigalg{X})$, we call the pair $(\RV{X},\proc{S})$ an \emph{observable variable}. Typically, however, we omit the mention of $\proc{S}$ for brevity. Unlike the definition of a variable (Definition \ref{def:variable}), an \emph{observable variable} is the function along with the procedure required to determine which ``bit of the world'' the function is referring to.
+
+\begin{definition}[Observable variable]
+Given a measurement procedure $\proc{S}$ taking values in $(\Psi,\sigalg{E})$, an observable variable is a pair $(\RV{X},\proc{S})$ where $\RV{X}:(\Psi,\sigalg{E})\to (X,\sigalg{X})$ is a measurable function.
+\end{definition}
+
+For the model $\RV{F}=\RV{MA}$, for example, suppose we have a measurement procedure $\proc{S}$ that yields a triple $(\text{``force''},\text{``mass''},\text{``acceleration''})$ taking values in the sets $X$, $Y$, $Z$ respectively. Then we can define the ``force'' variable $(\proc{S},\RV{F})$ where $\proc{F}:=\RV{F}\circ \proc{S}$ and $\RV{F}:X\times Y\times Z\to X$ is the projection function onto $X$.
+
+A measurement procedure yields a particular value when it is completed. We will call a proposition of the form ``$\RV{X}\circ \proc{S}$ yields $x$'' an \emph{observation}. The proposition ``$\RV{X}$ yields $x$'' is equivalent to the proposition ``$\proc{S}$ yields a value in $\RV{X}^{-1}(x)$''. Because of this, we define the \emph{event} $\RV{X}\yields x$ to be the set $\RV{X}^{-1}(x)$.
+
+\begin{definition}[Event]
+Given the complete procedure $\proc{S}$ taking values in $\Psi$ and an observable variable $(\RV{X}\circ \proc{S},\RV{X})$ for $\RV{X}:\Psi\to X$, the \emph{event} $\RV{X}\yields x$ is the set $\RV{X}^{-1}(x)$ for any $x\in X$.
+\end{definition}
+
+If we are given an observation ``$\RV{X}\circ \proc{S}$ yields $x$'', then the corresponding event $\RV{X}\yields x$ is the set of measurement results compatible with this observation.
+
+It is common to use the symbol $=$ instead of $\bowtie$ to stand for ``yields'', but we want to avoid this because $\RV{Y}=y$ already has a meaning, namely that $\RV{Y}$ is a constant function everywhere equal to $y$.
+
+An \emph{impossible event} is the empty set. If $\RV{X}\yields x=\emptyset$ this means that we have identified no possible outcomes of the measurement process $\proc{S}$ compatible with the observation ``$\RV{X}\circ \proc{S}$ yields $x$''. 
+
+\subsection{Unobservable variables}
+
+Statistical models often include unobservable variables. Formally, we can define a sample space $(\Omega,\sigalg{F})$ and a function $\RV{S}:\Omega\to \Psi$ which tells us, for any observed result of $\proc{S}$, which values of the larger sample space $\Omega$ are consistent.
+
+A general variable is then a measurable function on $\Omega$, and an unobservable variable is a general variable $\RV{X}$ such that $\RV{X}\not\varlessthan \RV{S}$ (Definition \ref{def:variable_po}). However, unobservable variables come with a warning -- we assume there is some measurement procedure $\proc{S}$ that tells us how to interpret all of the observable variables, but we do not assume any such object that facilitates an interpretation of unobservable variables.
+
+Observable variables are special in the sense that they are tied to a particular measurement procedure $\proc{S}$. However, the measurement procedure $\proc{S}$ does not enter into our mathematical reasoning; it guides our construction of a mathematical model, but once this is done mathematical reasoning proceeds entirely with mathematical objects like sets and functions, with no further reference to the measurement procedure.
+
+\begin{definition}[Unobservable variable]\label{def:unobserved_variable}
+Given a sample space $(\Omega,\sigalg{F})$, a measurement procedure $\proc{S}$ yielding values in $\Psi$ and $\RV{S}:\Omega\to\Psi$ that determines the outcomes compatible with measurement results, a random variable $\RV{Y}:\Omega\to Y$ is \emph{unobservable} if $\RV{Y}\not\varlessthan \RV{S}$.
+\end{definition}
+
+\subsection{Decision procedures}\label{sec:actions}
+
+The kind of problem we want to solve requires us to compare the consequences of different choices from a set of options $C$. We take the \emph{consequences of} $\alpha\in C$ to refer to the values obtained by some measurement procedure $\proc{S}_\alpha$ associated with the choice $\alpha$, and assume that we have in hand a \emph{conditional measurement procedure} $\proc{S}_C$ which is the procedure given by ``do $\proc{S}_\alpha$ if you choose $\alpha$''.
+
+We could instead contemplate an unconditional measurement procedure $\proc{T}$ of the form:
+\begin{enumerate}
+    \item Choose $\mathrm{id}_C$
+    \item Proceed according to $\proc{S}_\alpha$
+\end{enumerate}
+One of the reasons we might want to do this is that we already have something that looks like a procedure for part 1: first, construct a model of the consequences of each option, and then pick the best option according to the model. However, this only requires a model of the consequences of each action -- i.e. a model of part 2 -- not a model of part 1. Furthermore, modelling part 1 is difficult. Suppose we construct a model $\prob{Q}$ of parts 1 and 2, and as a result we decide on option $\alpha$. Then, seemingly, we can construct a better model $\prob{Q}'$ which assigns certainty to the outcome $\mathrm{id}_C\yields\alpha$. But \emph{then} the consequences of any $\alpha'\neq \alpha$ seem to be moot, as we are at this point certain that $\alpha$ will be chosen.
+
+There may well be reasonable solutions to the problem of modelling the full procedure $\proc{T}$ that also yields a useful model of the consequences of every available option, but we only need to model part 2 in order to execute the procedure for picking an option. Exploring and resolving any difficulties related to modelling the part 1 are beyond the scope of this thesis.
+
+We can therefore consider a decision procedure to be a collection of subprocedures $\proc{S}_\alpha$ for each option $\alpha$, and these correspond to probability measures $\prob{P}_\alpha$ for each option $\alpha$ (see Definition \ref{def:dec_model}). Our analysis isn't maximally general here -- we could imagine some decision problems where different options in general lead to different sample spaces. Exploring this variation is also beyond the scope of this thesis.
+
+\begin{definition}[Decision procedure]\label{def:dec_proc}
+A decision procedure is a collection $\proc{S}_C:=\{\proc{S}_\alpha\}_{\alpha\in C}$ of measurement procedures. As in Definition \ref{def:dec_model}, we call $C$ the \emph{option set}.
+\end{definition}
+
+\subsection{Interpretation of potential outcomes and interventions}
+
+Given an option set $C$, we could consider a vector of potential outcomes $\RV{Y}^C$  where $\RV{Y}^\alpha$ is interpreted as ``the value that $\RV{Y}$ would take had I chosen $\alpha$''. Because $\RV{Y}^\alpha$ is defined whether or not I choose $\alpha$, it's clear that the vector $\RV{Y}^C$ must be an unobservable variable. Thus it comes with the warning we mentioned -- we don't necessarily assume that there is any obvious way to interpret this variable.
+
+On the other hand, the assumed decision procedure $\proc{S}_C$ does provide a means of interpreting the decision model $(\prob{P}_C,\Omega,C)$. In practice, someone might analyse a decision problem with a decision procedure that is too vague, or that fails some consistency condition (questions which we don't analyse in any detail here). However, we do, at least, point to decision procedures as the kind of thing that facilitates the interpretation of a decision model.
+
+Whether our interpretation applies to interventional models depends on what kinds of interventions the model contemplates and on just how vague decision procedures are allowed to be before we disqualify them. On the one hand, an interventional model that allows only interventions on a choice variable $\mathrm{id}_C$ will induce a collection of probability distributions for each value of the option set $C$, and so would be suitable for modelling a decision procedure with this option set. It is not clear that there is a meaningful distinction in this kind of model between $\mathrm{id}_C$ taking a particular value and intervening on $\mathrm{id}_C$ ``to set it to a particular value''. On the other hand, whether an interventional model that features hard interventions on arbitrary variables can be interpreted as a model of a decision procedure depends on whether we accept that a statement like ``have Nature set an individual's body mass index to $11$'' is enough to define a measurement procedure $\proc{S}_\alpha$ \citep{pearl_does_2018}. Such a statement seems too vague to qualify to us, but we don't analyse this question in detail and the subsequent work doesn't depend on a strong commitment either way.
