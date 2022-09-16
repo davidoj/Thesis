@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (TeX Live 2021)  (format=lualatex 2021.7.16)  15 SEP 2022 10:37
+This is LuaHBTeX, Version 1.13.0 (TeX Live 2021)  (format=lualatex 2021.7.16)  16 SEP 2022 16:08
  system commands enabled.
 **main.tex
 (./main.tex
@@ -2043,7 +2043,12 @@ runsystem(rm main.aex)...executed
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 
-(./main.aux (./Chapters/chapter_5_other_causal_inference.aux))
+(./main.aux (./Chapters/chapter_1_introduction.aux)
+(./Chapters/chapter_2_technical.aux)
+(./Chapters/chapter_3_models_with_consequences.aux)
+(./Chapters/chapter_4_response_functions.aux)
+(./Chapters/chapter_5_other_causal_inference.aux)
+(./Chapters/chapter_6_discussion.aux))
 \openout1 = main.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
@@ -2304,7 +2309,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 (./Front_Matter.tex
 1: section
-<gfx/ANU_LOGO_cmyk_56mm.pdf, id=68, 211.06152pt x 107.066pt>
+<gfx/ANU_LOGO_cmyk_56mm.pdf, id=160, 211.06152pt x 107.066pt>
 File: gfx/ANU_LOGO_cmyk_56mm.pdf Graphic file (type pdf)
 <use gfx/ANU_LOGO_cmyk_56mm.pdf>
 Package luatex.def Info: gfx/ANU_LOGO_cmyk_56mm.pdf  used on input line 62.
@@ -2369,19 +2374,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 214--214
  []
 
 
-LaTeX Warning: Reference `def:variable' on page v undefined on input line 214.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 215--215
 []|\TU/lmr/m/n/10.95 Single-valued vari-
  []
-
-
-LaTeX Warning: Reference `no:single_valued' on page v undefined on input line 2
-15.
-
-
-LaTeX Warning: Reference `def:seqvar' on page v undefined on input line 216.
 
 LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 
 217.
@@ -2399,39 +2394,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 217--217
  []
 
 
-LaTeX Warning: Reference `def:prob_meas' on page v undefined on input line 217.
-
-
-
-LaTeX Warning: Reference `no:prob_meas_set' on page v undefined on input line 2
-18.
-
-
 Underfull \hbox (badness 1005) in paragraph at lines 219--219
 \OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 X\OT1/ppl/m/n/10.95 , \OMS/zplm/m/n/1
 0.95 X\OT1/zplm/m/n/10.95 )$ \TU/lmr/m/n/10.95 to prob-ab-il-ity
  []
 
 
-LaTeX Warning: Reference `def:markov_kern' on page v undefined on input line 21
-9.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 220--220
 []|\TU/lmr/m/n/10.95 Prob-ab-il-ity meas-ure
  []
-
-
-LaTeX Warning: Reference `def:dirac_meas' on page v undefined on input line 220
-.
-
-
-LaTeX Warning: Reference `def:mkern_func' on page v undefined on input line 221
-.
-
-
-LaTeX Warning: Reference `def:pushforward' on page v undefined on input line 22
-2.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 223--223
@@ -2451,19 +2422,9 @@ Underfull \hbox (badness 1502) in paragraph at lines 223--223
  []
 
 
-LaTeX Warning: Reference `def:disint' on page v undefined on input line 223.
-
-
-LaTeX Warning: Reference `def:ci' on page v undefined on input line 224.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 225--225
 []|\TU/lmr/m/n/10.95 Uni-form con-di-tional
  []
-
-
-LaTeX Warning: Reference `def:cprob_pset' on page v undefined on input line 225
-.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 226--226
@@ -2477,25 +2438,9 @@ m/m/n/10.95 j\OML/zplm/m/it/10.95 x\OT1/zplm/m/n/10.95 ) \OMS/zplm/m/n/10.95 7!
  []
 
 
-LaTeX Warning: Reference `def:kproduct' on page v undefined on input line 226.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 227--227
 []|\TU/lmr/m/n/10.95 The Markov ker-nel
  []
-
-
-LaTeX Warning: Reference `def:copyproduct' on page v undefined on input line 22
-7.
-
-
-LaTeX Warning: Reference `def:ident_k' on page v undefined on input line 232.
-
-
-LaTeX Warning: Reference `def:erase' on page v undefined on input line 233.
-
-
-LaTeX Warning: Reference `def:swap' on page v undefined on input line 234.
 
 
 Overfull \hbox (41.99992pt too wide) in alignment at lines 210--235
@@ -2518,9 +2463,6 @@ Underfull \hbox (badness 5175) in paragraph at lines 235--235
  []
 
 
-LaTeX Warning: Reference `def:copy' on page v undefined on input line 236.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 241--241
 \TU/lmr/m/n/10.95 ab-il-ity meas-ures
  []
@@ -2533,9 +2475,6 @@ Underfull \hbox (badness 2469) in paragraph at lines 241--241
  []
 
 
-LaTeX Warning: Reference `def:prob_set' on page v undefined on input line 241.
-
-
 Underfull \hbox (badness 1715) in paragraph at lines 242--242
 []|\TU/lmr/m/n/10.95 An op-tion set $\OML/zplm/m/it/10.95 C$\TU/lmr/m/n/10.95 , a
  []
@@ -2545,18 +2484,6 @@ Underfull \hbox (badness 2564) in paragraph at lines 242--242
 \TU/lmr/m/n/10.95 sample space $\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 
 \OT1/ppl/m/n/10.95 , \OMS/zplm/m/n/10.95 F\OT1/zplm/m/n/10.95 )$
  []
-
-
-LaTeX Warning: Reference `def:dec_model' on page v undefined on input line 242.
-
-
-
-LaTeX Warning: Reference `def:dec_model' on page v undefined on input line 243.
-
-
-
-LaTeX Warning: Reference `def:nonstoc_var' on page v undefined on input line 24
-4.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 245--245
@@ -2574,15 +2501,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 245--245
  []
 
 
-LaTeX Warning: Reference `def:comp_var' on page v undefined on input line 245.
-
-
 Underfull \hbox (badness 3942) in paragraph at lines 246--246
 []|\TU/lmr/m/n/10.95 Ex-ten-ded con-di-tional
  []
-
-
-LaTeX Warning: Reference `def:eci_orig' on page v undefined on input line 246.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 248--248
@@ -2605,9 +2526,6 @@ Underfull \hbox (badness 1917) in paragraph at lines 248--248
  []
 
 
-LaTeX Warning: Reference `def:tab_cd' on page v undefined on input line 248.
-
-
 Overfull \hbox (41.99992pt too wide) in alignment at lines 235--250
  [][][][] 
  []
@@ -2618,104 +2536,394 @@ Overfull \hbox (41.99992pt too wide) in alignment at lines 235--250
 ] [6]) [7]
 1: section
 
-\openout2 = Chapters/chapter_5_other_causal_inference.aux
-(./Chapters/chapter_5_other_causal_inference.tex
+\openout2 = Chapters/chapter_1_introduction.aux
+(./Chapters/chapter_1_introduction.tex
 Chapter 1.
 1: section
 [1
 
 
 
-] [2]
+] [2] [3] (./figures/simple_dag.tikz) (./figures/simple_dag.tikz) [4]
+[5] [6]
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 104.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 104.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 104.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 104.
+ [7] [8] [9] (./figures/simple_dag_jumper.tikz)
+(./figures/simple_dag_jumper.tikz) (./figures/simple_dag_jumper_bd.tikz)
+(./figures/simple_dag_jumper_bd.tikz) (./figures/not_simple_dag_jumper.tikz)
+(./figures/not_simple_dag_jumper.tikz) [10]
 
-LaTeX Warning: Reference `def:valid_conditional_prob' on page 3 undefined on in
-put line 85.
+Package biblatex Warning: Package option 'sortcites' enabled.
+(biblatex)                Verify postnote placement on input line 183.
 
-[3]
-
-LaTeX Warning: Reference `ch:evaluating_decisions' on page 4 undefined on input
- line 114.
-
-
-LaTeX Warning: Reference `ch:evaluating_decisions' on page 4 undefined on input
- line 131.
-
-[4]
-
-LaTeX Warning: Reference `sec:probability_set_models' on page 5 undefined on in
-put line 137.
+[11] [12] [13] [14]) [15]
+\openout2 = Chapters/chapter_2_technical.aux
+ (./Chapters/chapter_2_technical.tex
+Chapter 2.
+1: section
+[16
 
 
-LaTeX Warning: Reference `th:ciid_rep_kernel' on page 5 undefined on input line
- 139.
 
-[5]
 
-LaTeX Warning: Reference `th:ciid_rep_kernel' on page 6 undefined on input line
- 176.
+]
+LaTeX Font Info:    Trying to load font information for U+eus on input line 40.
 
-[6] (./figures/cbn_example_cgm.tikz) (./figures/cbn_example_cgm.tikz)
-(./figures/cgm.tikz) (./figures/cgm.tikz) (./figures/cbn_unrolled_example.tikz) (./figures/cbn_unrolled_example.tikz) [7] (./figures/cbn_example_cgm.tikz)
-(./figures/cbn_example_cgm.tikz) (./figures/contractible_over_hidden.tikz)
+ (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/ueus.fd
+File: ueus.fd 2013/01/14 v3.01 Euler Script
+)
+(/usr/local/texlive/2021/texmf-dist/tex/latex/microtype/mt-eus.cfg
+File: mt-eus.cfg 2006/07/28 v1.2 microtype config. file: AMS Euler Script (RS)
+) [17]
+(./figures/disint_def.tikz) (./figures/disint_def.tikz) [18] [19]
+(./figures/odot_assoc_1.tikz) (./figures/odot_assoc_2.tikz)
+(./figures/odot_assoc_1.tikz) (./figures/odot_assoc_2.tikz) [20] [21]
+(./figures/copy_product.tikz) (./figures/copy_product.tikz) [22]
+(./figures/n_fold_copy.tikz) (./figures/n_fold_copy.tikz)
+(./figures/plate_without_copymap.tikz) (./figures/plate_with_copymap.tikz)
+(./figures/plate_without_copymap.tikz) (./figures/plate_with_copymap.tikz)
+[23] (./figures/ccom_lhs.tikz) (./figures/ccom_rhs.tikz)
+(./figures/ccom_lhs.tikz) (./figures/ccom_rhs.tikz) (./figures/ccom2_lhs.tikz)
+(./figures/ccom2_mhs.tikz) (./figures/ccom2_rhs.tikz) (./figures/ccom2_lhs.tikz
+) (./figures/ccom2_mhs.tikz) (./figures/ccom2_rhs.tikz)
+(./figures/ccom3_lhs.tikz) (./figures/ccom3_rhs.tikz) (./figures/ccom3_lhs.tikz
+) (./figures/ccom3_rhs.tikz) (./figures/mstruct1_lhs.tikz)
+(./figures/mstruct1_rhs.tikz) (./figures/mstruct2_lhs.tikz)
+(./figures/mstruct2_rhs.tikz) (./figures/mstruct1_lhs.tikz)
+(./figures/mstruct1_rhs.tikz) (./figures/mstruct2_lhs.tikz)
+(./figures/mstruct2_rhs.tikz) (./figures/naturality_lhs.tikz)
+(./figures/naturality_rhs.tikz) (./figures/naturality_lhs.tikz)
+(./figures/naturality_rhs.tikz) (./figures/deterministic_copymap_commute.tikz)
+(./figures/deterministic_copymap_commute.tikz) [24]
+(./figures/identity_tensor_L.tikz) (./figures/identity_tensor_L.tikz)
+(./figures/identity_tensor_copy.tikz) (./figures/identity_tensor_copy.tikz)
+(./figures/swap_example.tikz) (./figures/swap_example.tikz)
+(./figures/swap_example_2.tikz) (./figures/swap_example_2.tikz)
+(./figures/semidirect_K_L.tikz) (./figures/semidirect_K_L_2.tikz)
+(./figures/semidirect_K_L_3.tikz) (./figures/semidirect_K_L.tikz)
+(./figures/semidirect_K_L_2.tikz) (./figures/semidirect_K_L_3.tikz) [25]
+[26] (./figures/disintegration_existence.tikz)
+(./figures/disintegration_existence.tikz) [27] [28]
+(./figures/conditional_pushforward.tikz)
+(./figures/conditional_pushforward.tikz) [29] (./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz) [30] (./figures/cond_indep_erase.tikz)
+(./figures/cond_indep_erase.tikz) (./figures/eci_def.tikz)
+(./figures/eci_def.tikz) [31] (./figures/eci_def.tikz) (./figures/eci_def.tikz)
+Overfull \hbox (7.32077pt too wide) in paragraph at lines 796--797
+[]\TU/lmr/m/n/10.95 Con-trac-tion: $\OT1/cmss/m/n/10.95 X [][] \OT1/zplm/m/n/10
+.95 (\OT1/cmss/m/n/10.95 Z\OT1/ppl/m/n/10.95 , [][]\OT1/zplm/m/n/10.95 )\OMS/zp
+lm/m/n/10.95 j\OT1/cmss/m/n/10.95 W$ \TU/lmr/m/n/10.95 and $\OT1/cmss/m/n/10.95
+ X [][] \OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10.95 Y\OT1/ppl/m/n/10.95 , [][]\OT1
+/zplm/m/n/10.95 )\OMS/zplm/m/n/10.95 j\OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10.95 
+Z\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 W\OT1/zplm/m/n/10.95 )$ \TU/lmr/m/n/1
+0.95 im-plies $\OT1/cmss/m/n/10.95 X [][] \OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10
+.95 Y\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 Z\OT1/ppl/m/n/10.95 , [][]\OT1/zp
+lm/m/n/10.95 )\OMS/zplm/m/n/10.95 j\OT1/cmss/m/n/10.95 W$ 
+ []
+
+(./figures/eci_rep.tikz) (./figures/eci_rep.tikz) [32]
+(./figures/eci_rep_1.tikz) (./figures/eci_rep_2.tikz) (./figures/eci_rep.tikz)
+(./figures/eci_rep_1.tikz) (./figures/eci_rep_2.tikz) (./figures/eci_rep.tikz)
+(./figures/eci_rep.tikz) (./figures/eci_rep.tikz) [33] [34] [35]
+(./figures/invalid_BMI_model.tikz) (./figures/invalid_BMI_model.tikz) [36]
+(./figures/higher_order_disint.tikz) (./figures/higher_order_disint_0.tikz)
+(./figures/higher_order_disint_1.tikz) (./figures/higher_order_disint_2.tikz)
+(./figures/higher_order_disint.tikz) (./figures/higher_order_disint_0.tikz)
+(./figures/higher_order_disint_1.tikz) (./figures/higher_order_disint_2.tikz)
+[37] (./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz)
+Overfull \hbox (14.35733pt too wide) detected at line 1030
+[]
+ []
+
+[38]
+Overfull \hbox (20.96162pt too wide) in paragraph at lines 1032--1033
+[]\TU/lmr/m/n/10.95 For all $\OML/zplm/m/it/10.95 x\OT1/ppl/m/n/10.95 , \OML/zp
+lm/m/it/10.95 y$ \TU/lmr/m/n/10.95 such that $\U/fplmbb/m/n/10.95 P[]\OT1/zplm/
+m/n/10.95 (\OMS/zplm/m/n/10.95 f\OML/zplm/m/it/10.95 y\OMS/zplm/m/n/10.95 gj\OM
+L/zplm/m/it/10.95 x\OT1/zplm/m/n/10.95 )$ \TU/lmr/m/n/10.95 is pos-it-ive, we ha
+ve $\U/fplmbb/m/n/10.95 P[]\OT1/zplm/m/n/10.95 (\OMS/zplm/m/n/10.95 f\OML/zplm/
+m/it/10.95 y\OMS/zplm/m/n/10.95 g  \OML/zplm/m/it/10.95 A\OMS/zplm/m/n/10.95 j\OML/zplm/m/it/10.95 x\OT1/zplm/m/n/10.95 ) = \OT1/ppl/m/n/10.95 0  \OT1/zplm/m/n/10.95 =[]\OMS/zplm/m/n/10.95 )  \U/fplmbb/m/n/10.95 P[]\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 A\OMS/zplm/m/n/10.95 j\OML/zplm/m/it/10.95 x\OT1/ppl/m/n/10.95 , \OML/zplm/m/it/10.95 y\OT1/zplm/m/n/10.95 ) =
+ []
+
+[39] [40] [41] [42]) [43] [44]
+\openout2 = Chapters/chapter_3_models_with_consequences.aux
+
+(./Chapters/chapter_3_models_with_consequences.tex
+Chapter 3.
+1: section
+[45
+
+
+
+
+] [46] [47] [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59]
+[60] [61]) [62]
+\openout2 = Chapters/chapter_4_response_functions.aux
+ (./Chapters/chapter_4_response_functions.tex
+Chapter 4.
+1: section
+[63
+
+
+
+
+] [64] [65]
+
+LaTeX Warning: Reference `sec:examples' on page 66 undefined on input line 43.
+
+[66] [67] [68] (./figures/commutativity_of_exchange.tikz)
+(./figures/commutativity_of_exchange.tikz) (./figures/cons_locality_1.tikz)
+(./figures/cons_locality_2.tikz) (./figures/cons_locality_1.tikz)
+(./figures/cons_locality_2.tikz) [69] (./figures/local_lhs.tikz)
+(./figures/local_rhs.tikz)
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 21.61124pt on input line 135.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 15.0049pt on input line 135.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 135.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 21.61124pt on input line 135.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 15.0049pt on input line 135.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 135.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 18.00587pt on input line 135.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 135.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 18.00587pt on input line 135.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 135.
+ (./figures/local_lhs.tikz) (./figures/local_rhs.tikz)
+Overfull \hbox (2.48404pt too wide) in paragraph at lines 142--143
+[][]\TU/lmr/bx/n/10.95 Defin-i-tion 4.3.3 \TU/lmr/m/n/10.95 (Ex-change com-mut-a
+tiv-ity)\TU/lmr/bx/n/10.95 . []\TU/lmr/m/n/10.95 Given a se-quen-tial input-outp
+ut model $\OT1/zplm/m/n/10.95 (\U/fplmbb/m/n/10.95 P[]\OT1/ppl/m/n/10.95 , \OT1
+/cmss/m/n/10.95 D\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 Y\OT1/zplm/m/n/10.95 
+)$
+ []
+
+[70] [71] (./figures/exch_com_lhs.tikz) (./figures/exch_com_rhs.tikz)
+(./figures/exch_com_lhs.tikz) (./figures/exch_com_rhs.tikz)
+(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz)
+(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz) [72] [73] [74]
+[75]
+LaTeX Font Info:    Trying to load font information for U+dsrom on input line 3
+72.
+ (/usr/local/texlive/2021/texmf-dist/tex/latex/doublestroke/Udsrom.fd
+File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
+)
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/10.95'
+(microtype)             (new value: 10.95pt) on input line 372.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/8'
+(microtype)             (new value: 8.0pt) on input line 372.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/6'
+(microtype)             (new value: 6.0pt) on input line 372.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/20.74'
+(microtype)             (new value: 20.74pt) on input line 384.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/14.4'
+(microtype)             (new value: 14.4pt) on input line 384.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/12'
+(microtype)             (new value: 12.0pt) on input line 384.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/17.28'
+(microtype)             (new value: 17.28pt) on input line 384.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/10'
+(microtype)             (new value: 10.0pt) on input line 384.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/9'
+(microtype)             (new value: 9.0pt) on input line 384.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/7'
+(microtype)             (new value: 7.0pt) on input line 384.
+Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/5'
+(microtype)             (new value: 5.0pt) on input line 384.
+
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [76] [77]
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [78]
+(./figures/de_finetti_conditional.tikz) (./figures/de_finetti_conditional.tikz) [79] (./figures/de_finetti_conditional_erase.tikz)
+(./figures/de_finetti_conditional_erase.tikz) [80] [81]
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel_h.tikz)
+(./figures/lookup_representation_kernel_h.tikz)
+(./figures/lookup_representation_kernel_joint.tikz)
+(./figures/lookup_representation_kernel_joint.tikz) [82]
+Overfull \hbox (9.68742pt too wide) detected at line 645
+[]
+ []
+
+
+Overfull \hbox (265.72609pt too wide) detected at line 652
+[]
+ []
+
+(./figures/lookup_representation_kernel_joint.tikz)
+(./figures/lookup_representation_kernel_joint_half.tikz)
+(./figures/lookup_representation_kernel_joint_2.tikz)
+(./figures/lookup_representation_kernel_joint.tikz)
+(./figures/lookup_representation_kernel_joint_half.tikz)
+(./figures/lookup_representation_kernel_joint_2.tikz) [83]
+(./figures/p_yd_on_w.tikz) (./figures/yd_h_on_w_invert.tikz)
+(./figures/p_yd_on_w.tikz) (./figures/yd_h_on_w_invert.tikz)
+(./figures/lookup_representation_kernel_joint_3.tikz)
+(./figures/lookup_representation_kernel_joint_3.tikz)
+(./figures/lookup_representation_kernel_joint_4.tikz)
+(./figures/lookup_representation_kernel_joint_4.tikz)
+(./figures/lookup_representation_kernel_h.tikz)
+(./figures/lookup_representation_kernel_h.tikz) [84]
+(./figures/do_model_representation_conditional.tikz)
+(./figures/lookup_rep_intermediate_kernel.tikz)
+(./figures/lookup_rep_intermediate_kernel.tikz)
+(./figures/de_finetti_representation_conditional.tikz)
+(./figures/de_finetti_representation_conditional.tikz) [85]
+(./figures/de_finetti_representation_conditional_w.tikz)
+(./figures/de_finetti_representation_conditional_w.tikz)
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel_h.tikz)
+(./figures/lookup_representation_kernel_h.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional_permuted.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional_permuted.tikz) [86]
+(./figures/do_model_representation_conditional_deleted.tikz)
+(./figures/do_model_representation_conditional_deleted1.tikz)
+(./figures/do_model_representation_conditional_deleted.tikz)
+(./figures/do_model_representation_conditional_deleted1.tikz)
+Overfull \hbox (16.47969pt too wide) in paragraph at lines 775--775
+[]\TU/lmr/bx/n/12 Con-di-tion-ally in-de-pend-ent and identical re-sponses with data-independent
+ []
+
+[87] (./figures/do_model_representation_with_h.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_with_h.tikz)
+(./figures/do_model_representation_with_h.tikz)
+(./figures/do_model_representation_with_h.tikz)
+(./figures/do_model_representation_with_h.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation.tikz) [88]
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation_permuted.tikz)
+(./figures/do_model_representation_permuted.tikz)
+(./figures/do_model_representation_deleted.tikz)
+(./figures/do_model_representation_deleted1.tikz)
+(./figures/do_model_representation_deleted.tikz)
+(./figures/do_model_representation_deleted1.tikz)
+Overfull \hbox (13.96933pt too wide) in paragraph at lines 842--843
+[]\TU/lmr/m/n/10.95 By [][][][][]Kal-len-berg (2005b[][], Prop. 1.4), there is 
+a $\OT1/cmss/m/n/10.95 G$ \TU/lmr/m/n/10.95 such that $\OT1/zplm/m/n/10.95 (\OT
+1/cmss/m/n/10.95 D[]\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 Y[]\OT1/zplm/m/n/1
+0.95 ) [][] (\OT1/cmss/m/n/10.95 D[]Y[]\OT1/zplm/m/n/10.95 )\OMS/zplm/m/n/10.95
+ j\OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10.95 G\OT1/ppl/m/n/10.95 , [][]\OT1/zplm/
+m/n/10.95 )$
+ []
+
+[89] (./figures/qyg_eq_pyg.tikz) (./figures/qyg_eq_pyg.tikz)
+(./figures/exch_dom_swap1.tikz) (./figures/exch_dom_swap2.tikz)
+(./figures/exch_dom_swap3.tikz) (./figures/exch_dom_swap4.tikz)
+(./figures/exch_dom_swap5.tikz) (./figures/exch_dom_swap1.tikz)
+(./figures/exch_dom_swap2.tikz) (./figures/exch_dom_swap3.tikz)
+(./figures/exch_dom_swap4.tikz) (./figures/exch_dom_swap5.tikz) [90]
+(./figures/do_model_representation_conditional.tikz)
+(./figures/do_model_representation_conditional.tikz) [91] [92]
+Overfull \hbox (27.291pt too wide) detected at line 952
+[]
+ []
+
+[93] [94] (./figures/response_conditional_comb.tikz)
+(./figures/response_conditional_comb.tikz) [95]
+(./figures/causally_contractible_comb.tikz)
+(./figures/causally_contractible_comb.tikz)
+(./figures/comb_insert_complicated.tikz)
+(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz) (./figures/comb_insert_complicated.tikz)
+(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz) [96] (./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [97]
+[98] (./figures/local_lhs.tikz) (./figures/local_rhs.tikz)
+(./figures/local_lhs.tikz) (./figures/local_rhs.tikz) [99] [100]
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [101]
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [102]
+(./figures/lookup_representation_kernel_k.tikz)
+(./figures/lookup_representation_kernel_k.tikz)
+(./figures/do_model_representation_kernel_k.tikz)
+(./figures/do_model_representation_kernel_k.tikz)
+(./figures/lookup_rep_intermediate_kernel.tikz)
+(./figures/lookup_rep_intermediate_kernel.tikz)
+(./figures/de_finetti_representation_kernel.tikz)
+(./figures/de_finetti_representation_kernel.tikz) [103]
+(./figures/do_model_representation_kernel_pre.tikz)
+(./figures/do_model_representation_kernel_k.tikz)
+(./figures/do_model_representation_kernel_pre.tikz)
+(./figures/do_model_representation_kernel_k.tikz)
+(./figures/do_model_representation_kernel.tikz)
+(./figures/do_model_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz)
+(./figures/lookup_representation_kernel.tikz) [104]
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation_mu_k.tikz)
+(./figures/do_model_representation_mu_k.tikz) [105]
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation_mu.tikz)
+(./figures/do_model_representation.tikz)
+(./figures/do_model_representation_mu.tikz) [106]) [107]
+\openout2 = Chapters/chapter_5_other_causal_inference.aux
+
+(./Chapters/chapter_5_other_causal_inference.tex
+Chapter 5.
+1: section
+[108
+
+
+
+
+] [109] [110] [111] [112] [113] (./figures/cbn_example_cgm.tikz)
+(./figures/cbn_example_cgm.tikz) (./figures/cgm.tikz) (./figures/cgm.tikz)
+(./figures/cbn_unrolled_example.tikz) (./figures/cbn_unrolled_example.tikz)
+[114] (./figures/cbn_example_cgm.tikz) (./figures/cbn_example_cgm.tikz)
+(./figures/contractible_over_hidden.tikz)
 (./figures/contractible_over_hidden_2.tikz)
 (./figures/contractible_over_hidden_3.tikz)
 (./figures/contractible_over_hidden.tikz)
 (./figures/contractible_over_hidden_2.tikz)
-(./figures/contractible_over_hidden_3.tikz) [8] [9] [10] [11] [12]
+(./figures/contractible_over_hidden_3.tikz) [115] [116] [117] [118] [119]
+[120]
 
-LaTeX Warning: Reference `def:weak_di' on page 13 undefined on input line 393.
-
-[13]
-
-LaTeX Warning: Reference `sec:counterfactual_statements' on page 14 undefined o
-n input line 397.
-
-
-LaTeX Warning: Reference `def:tab_cd' on page 14 undefined on input line 401.
-
-
-LaTeX Warning: Reference `def:tab_cd' on page 14 undefined on input line 401.
+LaTeX Warning: Reference `sec:counterfactual_statements' on page 121 undefined 
+on input line 397.
 
 (./figures/lookup_representation_single.tikz)
-(./figures/lookup_representation_single.tikz) [14]
+(./figures/lookup_representation_single.tikz) [121]
 (./figures/potential_outcomes_ccontract1.tikz)
 (./figures/potential_outcomes_ccontract2.tikz)
 (./figures/potential_outcomes_ccontract3.tikz)
 (./figures/potential_outcomes_ccontract1.tikz)
 (./figures/potential_outcomes_ccontract2.tikz)
-(./figures/potential_outcomes_ccontract3.tikz) [15]
-
-LaTeX Warning: Reference `lem:exch_prod_ciid' on page 16 undefined on input lin
-e 458.
-
-[16] [17]
-
-LaTeX Warning: Reference `def:dir_rand_cond' on page 18 undefined on input line
- 646.
-
-[18]
-
-LaTeX Warning: Reference `th:ciid_rep_kernel' on page 19 undefined on input lin
-e 663.
-
+(./figures/potential_outcomes_ccontract3.tikz) [122] [123] [124] [125]
 (./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
 (./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
-[19] (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz
-) (./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
-
-LaTeX Warning: Reference `th:fong_det_kerns' on page 20 undefined on input line
- 676.
-
-
-LaTeX Warning: Reference `lem:infinitely_extended_kernels' on page 20 undefined
- on input line 678.
-
-(./figures/index_independence_5.tikz) (./figures/index_independence_5.tikz)
-
-LaTeX Warning: Reference `th:ciid_rep_kernel' on page 20 undefined on input lin
-e 682.
-
-[20] (./figures/kernel_fac_with_idents.tikz)
+[126] (./figures/index_independence_3.tikz)
+(./figures/index_independence_4.tikz) (./figures/index_independence_3.tikz)
+(./figures/index_independence_4.tikz) (./figures/index_independence_5.tikz)
+(./figures/index_independence_5.tikz) [127]
+(./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
 (./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
@@ -2733,58 +2941,43 @@ e 682.
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
 (./figures/kernel_P_indep.tikz) (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
-(./figures/kernel_P_indep.tikz) [21] [22]
+(./figures/kernel_P_indep.tikz) [128] [129]
 
-LaTeX Warning: Reference `th:ciid_rep_kernel' on page 23 undefined on input lin
-e 776.
+LaTeX Warning: Reference `ex:bad_randomised_experiment' on page 130 undefined o
+n input line 798.
 
-
-LaTeX Warning: Reference `ex:bad_randomised_experiment' on page 23 undefined on
- input line 798.
-
-[23]
-
-LaTeX Warning: Reference `th:ciid_rep_kernel_k' on page 24 undefined on input l
-ine 811.
-
-[24]
+[130] [131]
 Overfull \hbox (33.45747pt too wide) detected at line 850
 []
  []
 
-[25]
+[132]
 Overfull \hbox (8.6045pt too wide) detected at line 874
 []
  []
 
-
-LaTeX Warning: Reference `th:equal_of_condits' on page 26 undefined on input li
-ne 875.
-
-[26]
+[133]
 Overfull \hbox (14.41602pt too wide) in paragraph at lines 930--931
 []\TU/lmr/m/n/10.95 In par-tic-u-lar, sup-pose an ex-per-i-ment is modeled by a se-quen-tial input-output model $\OT1/zplm/m/n/10.95 (\U/fplmbb/m/n/10.95 P[]\OT1/ppl/m/n/10.95 , \OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10.95 D\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 U\OT1/zplm/m/n/10.95 )\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 Y\OT1/zplm/m/n/10.95 )$
  []
 
-[27]
-LaTeX Font Info:    Trying to load font information for U+dsrom on input line 9
-57.
- (/usr/local/texlive/2021/texmf-dist/tex/latex/doublestroke/Udsrom.fd
-File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
-)
-Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/10.95'
-(microtype)             (new value: 10.95pt) on input line 957.
-Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/8'
-(microtype)             (new value: 8.0pt) on input line 957.
-Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/6'
-(microtype)             (new value: 6.0pt) on input line 957.
+[134] [135]) [136]
+\openout2 = Chapters/chapter_6_discussion.aux
+ (./Chapters/chapter_6_discussion.tex
+Chapter 6.
 
-[28]
+Overfull \hbox (17.35544pt too wide) in paragraph at lines 14--15
+[]\TU/lmr/m/n/10.95 The iden-ti-fied sym-met-ries of-fer de-cision makers an al-
+tern-at-ive means of as-sess-ing unconfoundedness-
+ []
 
-LaTeX Warning: Reference `th:data_ind_CC' on page 29 undefined on input line 97
-7.
+1: section
+[137
 
-) [29]
+
+
+
+] [138]) [139]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
@@ -2794,69 +2987,101 @@ Package microtype Info: Loading generic protrusion settings for font family
 File: mt-FontAwesome.cfg 2021/02/22 v1.0 microtype config. file: Font Awesome (
 RS)
 )
+1: section
+[140
+
+
+
+]
+Overfull \hbox (41.55258pt too wide) in paragraph at lines 101--101
+\TU/lmr/m/it/10.95 Math-em-at-ical Struc-tures in Com-puter Sci-ence\TU/lmr/m/n
+/10.95 , 29(7), pp. 938–971. \TU/lmr/m/sc/10.95 doi\TU/lmr/m/n/10.95 : [][]$\
+TU/lmtt/m/n/10.95 10 . 1017 / S0960129518000488$[][]
+ []
+
+[141]
+Overfull \hbox (23.64513pt too wide) in paragraph at lines 101--101
+[][]\TU/lmr/m/n/10.95 Fong, B. (2013). ‘  Causal The-or-ies: A Cat-egor-ical 
+Per-spect-ive on Bayesian Net-works’. \TU/lmr/m/it/10.95 arXiv:1301.6201
+ []
+
+[142] [143]
 Overfull \hbox (16.25049pt too wide) in paragraph at lines 101--101
 [][]\TU/lmr/m/n/10.95 Lat-timore, F. and Ro-hde, D. (2019b). ‘  Re-pla-cing th
 e do-calculus with Bayes rule’. \TU/lmr/m/it/10.95 arXiv:1906.07125
  []
 
-1: section
-[30
+[144] [145] [146]
+Overfull \hbox (40.12738pt too wide) in paragraph at lines 101--101
+\TU/lmr/m/it/10.95 cial Psy-cho-logy\TU/lmr/m/n/10.95 , 41(2). Pub-lisher: Rout-
+ledge _eprint: ht-tps://doi.org/10.1080/01973533.2019.1577736,
+ []
 
-
-
-] [31] (./main.aux (./Chapters/chapter_5_other_causal_inference.aux))
+[147] [148] (./main.aux (./Chapters/chapter_1_introduction.aux)
+(./Chapters/chapter_2_technical.aux)
+(./Chapters/chapter_3_models_with_consequences.aux)
+(./Chapters/chapter_4_response_functions.aux)
+(./Chapters/chapter_5_other_causal_inference.aux)
+(./Chapters/chapter_6_discussion.aux))
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5CC0BFB1CA64D673B68909BE7F850DD1;1477.
+(rerunfilecheck)             Checksum: 1151EF341AC952B1A758582F717E5013;5699.
 Package logreq Info: Writing requests to 'main.run.xml'.
 
 \openout1 = main.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 61463 strings out of 478531
- 195417,2373549 words of node,token memory allocated
- 1545 words of node memory still in use:
-   23 hlist, 2 vlist, 10 rule, 5 dir, 2 glue, 4 kern, 1 glyph, 89 attribute, 127
- glue_spec, 70 attribute_list, 3 write, 16 pdf_literal, 4 pdf_action, 16 pdf_col
-orstack nodes
-   avail lists: 1:10,2:11126,3:3661,4:319,5:2136,6:280,7:10649,8:107,9:2708,10:2
-5,11:734
- 77885 multiletter control sequences out of 65536+600000
- 188 fonts using 14385111 bytes
- 112i,20n,108p,1510b,1747s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 67640 strings out of 478531
+ 195411,2848258 words of node,token memory allocated
+ 5563 words of node memory still in use:
+   81 hlist, 8 vlist, 10 rule, 4 disc, 4 local_par, 5 dir, 85 glue, 5 kern, 6 pe
+nalty, 2 margin_kern, 35 glyph, 683 attribute, 127 glue_spec, 367 attribute_list
+, 7 write, 4 save_pos, 174 pdf_literal, 42 pdf_action, 20 pdf_colorstack nodes
+   avail lists: 1:12,2:11100,3:3678,4:391,5:2146,6:581,7:12141,8:129,9:2716,10:2
+6,11:983,12:1
+ 79621 multiletter control sequences out of 65536+600000
+ 448 fonts using 30328687 bytes
+ 112i,21n,108p,3197b,1747s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2021/texmf-dist/fonts/opentype/public/fontawesome/FontAwesom
 e.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmmono10-regu
 lar.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmromancaps
-10-regular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmro
-man8-regular.otf>{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc
-}</usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmromanslant10-reg
-ular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman10-
-italic.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman1
-0-bold.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman1
-0-regular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmrom
-an12-italic.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmr
-oman12-regular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/
-lmroman12-bold.otf></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mss10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-s8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/doublestroke/dsrom10
-.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fplmbb.pfb>
-</usr/local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/
-local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local
-/texlive/2021/texmf-dist/fonts/type1/public/stmaryrd/stmary10.pfb></usr/local/te
-xlive/2021/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/20
-21/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2021/texmf
--dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (39 pages, 594720 bytes).
+10-regular.otf>{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}<
+/usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman6-regular.otf
+></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman8-italic.ot
+f></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman9-italic.o
+tf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman9-regular
+.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman7-regul
+ar.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman8-reg
+ular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmromansla
+nt10-regular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lm
+roman10-italic.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/
+lmroman10-bold.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/
+lmroman10-regular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/
+lm/lmroman12-italic.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/publi
+c/lm/lmroman12-regular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/pu
+blic/lm/lmroman12-bold.otf></usr/local/texlive/2021/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmss10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmss8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/doublestroke
+/dsrom10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/eul
+er/eusm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fp
+lmbb.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fplmr.p
+fb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></
+usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
+></usr/local/texlive/2021/texmf-dist/fonts/type1/public/stmaryrd/stmary10.pfb></
+usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/loca
+l/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texliv
+e/2021/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (156 pages, 1326588 bytes).
 
-PDF statistics: 679 PDF objects out of 1000 (max. 8388607)
- 540 compressed objects within 6 object streams
- 137 named destinations out of 1000 (max. 131072)
- 248 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 2754 PDF objects out of 2984 (max. 8388607)
+ 2419 compressed objects within 25 object streams
+ 690 named destinations out of 1000 (max. 131072)
+ 432 words of extra memory for PDF output out of 10000 (max. 100000000)
 
