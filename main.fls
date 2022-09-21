@@ -747,8 +747,6 @@ INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/algorithms/algorithm.sty
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/algorithms/algorithm.sty
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/algorithms/algorithm.sty
-INPUT ./main.aex
-INPUT ./main.aex
 INPUT ./main.aux
 INPUT ./main.aux
 INPUT ./Chapters/chapter_1_introduction.aux
@@ -966,6 +964,7 @@ INPUT ./gfx/ANU_LOGO_cmyk_56mm.pdf
 INPUT /usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /Users/davidjohnston/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/lmroman17-regular.luc
 INPUT /Users/davidjohnston/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/lmromanslant10-regular.luc
+INPUT /Users/davidjohnston/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-italic.luc
 INPUT ./main.toc
 INPUT ./main.toc
 OUTPUT main.toc
@@ -1022,7 +1021,6 @@ INPUT /Users/davidjohnston/Library/texlive/2021/texmf-var/luatex-cache/generic/f
 OUTPUT Chapters/chapter_1_introduction.aux
 INPUT ./Chapters/chapter_1_introduction.tex
 INPUT ./Chapters/chapter_1_introduction.tex
-INPUT /Users/davidjohnston/Library/texlive/2021/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-italic.luc
 INPUT ./figures/simple_dag.tikz
 INPUT ./figures/simple_dag.tikz
 INPUT ./figures/simple_dag.tikz

@@ -526,14 +526,16 @@ Thus the action of the $\text{Del}$ map is to marginalise over the deleted wire.
 
 A probability set is a set of probability measures. This section establishes a number of useful properties of conditional probability with respect to probability sets. Unlike conditional probability with respect to a probability space, conditional probabilities don't always exist for probability sets. Where they do, however, they are almost surely unique and we can marginalise and disintegrate them to obtain other conditional probabilities with respect to the same probability set.
 
-\begin{definition}[Probability set]\label{def:prob_set}
-A probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ is a collection of probability measures on $(\Omega,\sigalg{F})$. In other words it is a subset of $\mathscr{P}(\Delta(\Omega))$, where $\mathscr{P}$ indicates the power set.
-\end{definition}
-
-We define a \emph{decision model} as a triple of a probability set along with an indexing \emph{option set} and the common sample space. We could also consider a decision model to be a function $C\kto \Omega$, where we do not distinguish options options $\alpha,\alpha'\in C$ that induce the same probability distributions (i.e. $\prob{P}_\alpha=\prob{P}_{\alpha'}$).
+First, we define a \emph{decision model} as a triple of a probability set along with an indexing \emph{option set} and the common sample space. We could also consider a decision model to be a function $C\kto \Omega$, where we do not distinguish options options $\alpha,\alpha'\in C$ that induce the same probability distributions (i.e. $\prob{P}_\alpha=\prob{P}_{\alpha'}$).
 
 \begin{definition}[Decision model]\label{def:dec_model}
-A decision model is a triple $(\prob{P}_C, (\Omega,\sigalg{F}), C)$ where $\prob{P}_C$ is the probability set $\{\prob{P}_\alpha|\alpha\in C\}$, $(\Omega,\sigalg{F})$ is the shared sample space of $\prob{P}_C$ and $C$ is the option set.
+A decision model is a triple $(\prob{P}_\cdot, (\Omega,\sigalg{F}), (C,\sigalg{C}))$ where $\prob{P}_\cdot:C\kto \Omega$ is a Markov kernel, $(\Omega,\sigalg{F})$ is the shared sample space and $C$ is the option set.
+\end{definition}
+
+Decision models induce sets of probability distributions: for some $A\subset C$, $\prob{P}_A:=\{\prob{P}_\alpha|\alpha\in A\}$ is the set of probability distributions induced by $A$.
+
+\begin{definition}[Probability set]\label{def:prob_set}
+A probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ is a collection of probability measures on $(\Omega,\sigalg{F})$. In other words it is a subset of $\mathscr{P}(\Delta(\Omega))$, where $\mathscr{P}$ indicates the power set.
 \end{definition}
 
 Given a probability set $\prob{P}_C$, we define marginal and conditional probabilities as probability measures and Markov kernels that satisfy Definitions \ref{def:pushforward} and \ref{def:disint} respectively for \emph{all} base measures in $\prob{P}_C$. There are generally multiple Markov kernels that satisfy the properties of a conditional probability with respect to a probability set, and this definition ensures that marginal and conditional probabilities are ``almost surely'' unique (Definition \ref{def:asequal}) with respect to probability sets.
@@ -1161,6 +1163,6 @@ A decision procedure is a collection $\proc{S}_C:=\{\proc{S}_\alpha\}_{\alpha\in
 
 Given an option set $C$, we could consider a vector of potential outcomes $\RV{Y}^C$  where $\RV{Y}^\alpha$ is interpreted as ``the value that $\RV{Y}$ would take had I chosen $\alpha$''. Because $\RV{Y}^\alpha$ is defined whether or not I choose $\alpha$, it's clear that the vector $\RV{Y}^C$ must be an unobservable variable. Thus it comes with the warning we mentioned -- we don't necessarily assume that there is any obvious way to interpret this variable.
 
-On the other hand, the assumed decision procedure $\proc{S}_C$ does provide a means of interpreting the decision model $(\prob{P}_C,\Omega,C)$. In practice, someone might analyse a decision problem with a decision procedure that is too vague, or that fails some consistency condition (questions which we don't analyse in any detail here). However, we do, at least, point to decision procedures as the kind of thing that facilitates the interpretation of a decision model.
+On the other hand, the assumed decision procedure $\proc{S}_C$ does provide a means of interpreting the decision model $(\prob{P}_\cdot,\Omega,C)$. In practice, someone might analyse a decision problem with a decision procedure that is too vague, or that fails some consistency condition (questions which we don't analyse in any detail here). However, we do, at least, point to decision procedures as the kind of thing that facilitates the interpretation of a decision model.
 
 Whether our interpretation applies to interventional models depends on what kinds of interventions the model contemplates and on just how vague decision procedures are allowed to be before we disqualify them. On the one hand, an interventional model that allows only interventions on a choice variable $\mathrm{id}_C$ will induce a collection of probability distributions for each value of the option set $C$, and so would be suitable for modelling a decision procedure with this option set. It is not clear that there is a meaningful distinction in this kind of model between $\mathrm{id}_C$ taking a particular value and intervening on $\mathrm{id}_C$ ``to set it to a particular value''. On the other hand, whether an interventional model that features hard interventions on arbitrary variables can be interpreted as a model of a decision procedure depends on whether we accept that a statement like ``have Nature set an individual's body mass index to $11$'' is enough to define a measurement procedure $\proc{S}_\alpha$ \citep{pearl_does_2018}. Such a statement seems too vague to qualify to us, but we don't analyse this question in detail and the subsequent work doesn't depend on a strong commitment either way.
