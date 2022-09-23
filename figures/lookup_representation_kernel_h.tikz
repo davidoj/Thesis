@@ -5,7 +5,7 @@
 		\node [style=RLabel tikzit] (2) at (5.25, -0.75) {$\RV{Y}$};
 		\node [style=none] (3) at (1.75, -0.5) {};
 		\node [style=none] (4) at (1.75, -1) {};
-		\node [style=small kernel tikzit] (5) at (-1, 0.25) {$\prob{P}_\alpha^{\RV{Y}^D|\RV{H}}$};
+		\node [style=small kernel tikzit] (5) at (-1, 0.25) {$\prob{P}_C^{\RV{Y}^D|\RV{H}}$};
 		\node [style=Llabel tikzit] (6) at (-2.5, 0.25) {$\RV{H}$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}

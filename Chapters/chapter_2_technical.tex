@@ -27,7 +27,7 @@ This is a reference chapter -- a reader who is already quite familiar with proba
 Given a set $A$, a $\sigma$-algebra $\mathcal{A}$ is a collection of subsets of $A$ where
 \begin{itemize}
 	\item $A\in \mathcal{A}$ and $\emptyset\in \mathcal{A}$
-	\item $B\in \mathcal{A}\implies B^C\in\mathcal{A}$
+	\item $B\in \mathcal{A}\implies B^{\complement}\in\mathcal{A}$
 	\item $\mathcal{A}$ is closed under countable unions: For any countable collection $\{B_i|i\in Z\subset \mathbb{N}\}$ of elements of $\mathcal{A}$, $\cup_{i\in Z}B_i\in \mathcal{A}$ 
 \end{itemize}
 \end{definition}
@@ -950,20 +950,20 @@ Hence $\prob{V}^{\RV{X}}\odot \prob{T}^{\RV{Y}|\RV{X}}$ is invalid.
 
 
 \begin{example}\label{ex:invalidity}
-Body mass index is defined as a person's weight divided by the square of their height. Suppose we have a measurement process $\proc{S}=(\proc{W},\proc{H})$ and $\proc{B}=\frac{\proc{W}}{\proc{H}^2}$ - i.e. we figure out someone's body mass index first by measuring both their height and weight, and then passing the result through a function that divides the second by the square of the first. Thus, given the random variables $\RV{W},\RV{H}$ modelling $\proc{W},\proc{H}$, $\proc{B}$ is the function given by $\RV{B}=\frac{\RV{W}}{\RV{H}^2}$.
+Body mass index is defined as a person's weight divided by the square of their height. Thus, given the random variables $\RV{W},\RV{H}$ modelling $\proc{W},\proc{H}$, $\proc{B}$ is the random variable given by $\RV{B}=\frac{\RV{W}}{\RV{H}^2}$.
 
-With this background, suppose we postulate a decision model in which body mass index can be directly controlled by a variable $\text{id}_C$, while height and weight are not. Specifically, we have a probability set $\prob{P}_\square$ with
+With this background, suppose we postulate a decision model in which body mass index can be directly controlled by a variable $\RV{D}$, while height and weight are not. Specifically, we suppose some a probability set $\prob{P}_\square$ with
 \begin{align}
-    \prob{P}_\square^{\RV{B}|\RV{WHC}} &= \tikzfig{invalid_BMI_model} \label{eq:bmi_example}
+    \prob{P}_\square^{\RV{B}|\RV{WHD}} &= \tikzfig{invalid_BMI_model} \label{eq:bmi_example}
 \end{align}
-Then pick some $w,h,x\in\mathbb{R}$ such that $\frac{w}{h^2}\neq x$ and $(\RV{W},\RV{H})\yields (w,h)\neq \emptyset$ (which is to say, our measurement procedure could potentially yield $(w,h)$ for a person's height and weight). We have $\prob{P}_\square^{\RV{B}|\RV{WHC}}(\{x\}|w,h,x)=1$, but 
+Then pick some $w,h,x\in\mathbb{R}$ such that $\frac{w}{h^2}\neq x$ and $(\RV{W},\RV{H})\yields (w,h)\neq \emptyset$ (which is to say, our measurement procedure could potentially yield $(w,h)$ for a person's height and weight). We have $\prob{P}_\square^{\RV{B}|\RV{WHD}}(\{x\}|w,h,x)=1$, but 
 \begin{align}
     (\RV{B},\RV{W},\RV{H})\yields \{(x,w,h)\} &= \{\omega|(\RV{W},\RV{H})(\omega) = (w,h),\RV{B}(\omega) = \frac{w}{h^2}\}\\
     &=\emptyset
 \end{align}
-so $\prob{P}_\square^{\RV{B}|\RV{WHC}}$ is invalid. Thus there is some valid $\mu^{\RV{WHC}}$ such that the probability set $\prob{P}_{\square}^{\RV{BWHC}} = \mu^{\RV{WHC}}\odot \prob{P}_\square^{\RV{Y}|\RV{X}}$ is empty.
+so $\prob{P}_\square^{\RV{B}|\RV{WHD}}$ is invalid. It follows that there is some valid $\mu^{\RV{WHC}}$ such that the probability set $\prob{P}_\mu$ such that $\prob{P}_{\mu}^{\RV{BWHC}} = \mu^{\RV{WHC}}\odot \prob{P}_\square^{\RV{Y}|\RV{X}}$ is empty.
 
-Validity rules out conditional probabilities like \eqref{eq:bmi_example}. We conjecture that in many cases this condition is implicitly taken into account -- it is obviously silly to posit a model in which body mass index can be controlled independently of height and weight. We note, however, that presuming the authors intended their model to be interpreted according to the usual semantics of causal Bayesian networks, the invalid conditional probability \eqref{eq:bmi_example} would be used to evaluate the causal effect of body mass index in the causal diagram found in \citet{shahar_association_2009}.
+Validity rules out conditional probabilities like \eqref{eq:bmi_example}. We conjecture that in many cases this condition is implicitly taken into account. We note, however, that presuming the authors intended their model to be interpreted according to the usual semantics of causal Bayesian networks with hard interventions, the invalid conditional probability \eqref{eq:bmi_example} appears in the structural model of the causal effect of body mass index found in \citet{shahar_association_2009}.
 \end{example}
 
 One question that arises is whether we can generally choose valid versions of the higher order conditionals whose existence is established in Theorem \ref{th:ho_cond_psets}. This would potentially have applications to causal Bayesian network style reasoning -- where we might want to start with some conditional probability, disintegrate it into higher order conditionals, keep one and replace the other under some intervention operation. In general, this is still an open question -- Theorem \ref{th:ho_cond_psets} does not imply the resulting higher order conditional is valid -- but we can show that if we limit our attention to discrete sets then higher order conditionals can be chosen to be valid.

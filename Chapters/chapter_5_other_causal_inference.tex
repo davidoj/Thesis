@@ -1,80 +1,102 @@
 %!TEX root = ../main.tex
 
-\chapter{Other causal modelling frameworks}\label{ch:other_causal_frameworks}
+\chapter{Causal modelling with decision models}\label{ch:other_causal_frameworks}
 
-In this chapter, we examine the types of decision models that can be constructed from causal Bayesian networks and potential outcomes models. Neither of these popular approaches to causal inference yields a fully specified decision making model. Causal Bayesian networks are usually specified in a ``rolled up'' form, and certain judgements must be made about how this should be unrolled to a sequential model. Potential outcomes models, on the other hand, do not feature a native notion of ``choices'', and a judgement must be made about what the relevant collection of choices in a potential outcomes model is.
+In previous chapters we've proposed a general type for decision models and examined a particular assumption -- the assumption of CIIR sequences -- that allows one to predict future consequences of actions based on previously observed data. We noted that this assumption is often unreasonable. In this chapter, we consider the problem of constructing more broadly applicable decision models that license some kind of causal inference. 
 
-\section{What is a Causal Bayesian Network?}
+Our approach is first to examine what kinds of decision models are induced by causal Bayesian networks and potential outcomes models, two widely used frameworks for causal modelling. We then work backwards to propose two assumptions applicable to decision models based on regularities imposed by these frameworks. These assumptions are \emph{precedent} and \emph{individual level CIIR sequences} respectively.
+
+When we try to work out what kind of decision models are expressed by causal Bayesian networks and potential outcomes, there are small gaps that need to be filled in with additional assumptions. Causal Bayesian networks are ``rolled up'' and an assumption must be made about how exactly to ``unroll'' it to a sequential model. While this assumption is under normal circumstances fairly trivial, it is nontrivial if one wants to consider consequences of counterfactual speculation instead of or alongside consequences of ordinary choices. Potential outcomes models, on the other hand, do not offer a notion of ``options'', and a judgement must be made about how a potential outcomes model induces a collection of options and their associated consequences. These gaps are minor, but they do reflect the different commitments of the different approaches. These differences are summarised in the table below:
+
+\begin{center}
+\begin{tabular}{ |c|p{4cm}|p{4cm}| } 
+ \hline
+  & Must & Optionally  \\
+ \hline
+ Potential outcomes & Represent potential outcomes of every ``output'' variable & Represent consequences of choosing different options \\ 
+ Causal Bayesian networks & Represent consequences of choosing different options for ``generic variables'', options are interventions & Specify exactly which variables are affected by the choice \\
+ Decision models & Represent consequences of choosing different options & Options are interventions, represent potential outcomes of output variables\\
+ \hline
+\end{tabular}
+\end{center}
+
+The assumption of \emph{precedent} is motivated by the general idea that in some cases a decision maker might guess that every option they have available has already been tried by someone, somewhere, though they do not know exactly when. On its own, it doesn't allow a decision maker to conclude very much (although it does allow them to surmise that, given enough data, the consequences of their choice must have occurred at least once). However, in conjunction with the assumption of \emph{generic relationships between conditionals}, it allows a decision maker to conclude from a conditional independence that a certain sequence of variable pairs features conditionally independent and identical responses. This result is similar in spirit to the principle underlying causal inference by invariant prediction \citep{peters_causal_2016}, which identifies causal parents on the basis of groups of variables that render a target variable conditionally independent of an ``environment'' variable. However, we offer substantially different assumptions -- instead of an assumption of generic relationships between conditionals, invariant prediction places restrictions on the kinds of ``interventions'' that can happen in each environment. The assumption of generic relationships between conditionals is itself similar to assumptions that have been used to justify inferences of causal direction \citep{meek_strong_1995,lemeire_replacing_2013}. Our result suggests that the assumption of precedent might facilitate understanding of the relationship between this notion of causal direction and invariance based causal inference without appealing to any notion of intervention.
+
+\section{Causal Bayesian networks}
+
+Causal Bayesian networks are a family of structural interventional models. In the form presented here, they provide a ``hard intervention'' operation, which offers a rule for transforming a joint probability distribution $\prob{P}^{\RV{V}}$ over a sequence of variables $\RV{V}$ according to a directed acyclic graph $\graph{G}$ with nodes $\node{V}$ corresponding 1-to-1 to the variables in $\RV{V}$. There are many variations of causal Bayesian networks with more general classes of intervention \citep{yang_characterizing_2018}.
+
+Structural Causal Models (SCMs) are an alternative class of structural interventional models. Such models distinguish a set of noises $\RV{U}$ from observed variables $\RV{V}$, and provide a collection of functions relating the observed variables to the noises and other observed variables. The noises are allowed to be stochastic. Functional relationships can be interpreted as deterministic conditional probabilities, and it is in principle possible to formulate SCMs using our approach. However SCMs are often extended in ways that causal Bayesian networks are not, for example with counterfactual operations \citep{barenboim_foundations_2020}, or to include cyclic causal relationships \citep{bongers_theoretical_2016,forre_causal_2020}, and because addressing these extensions in detail is beyond the scope of this work, we focus on causal Bayesian networks.
 
 \subsection{Definition of a Causal Bayesian Network}
 
-We follow the definition of a Causal Bayesian Network on \citet[page ~23-24]{pearl_causality:_2009}. There are a couple of technical differences: we require that interventional models are a measurable map from interventions to probability distributions, and we assume that there is a common sample space for every interventional distribution. There are also some non-technical differences: the notation is adapted for compatibility with the rest of the work in this thesis, and we separate the definition into two parts for clarity (Definitions \ref{def:interventional} and \ref{def:CBN}).
+We follow the definition of a Causal Bayesian Network on \citet[page ~23-24]{pearl_causality:_2009}. There are a couple of technical differences: we require that interventional models are a measurable map from interventions to probability distributions, and we assume that there is a common sample space for every interventional distribution. There are also some non-technical differences: the notation is adapted for compatibility with the rest of the work in this thesis, and we separate the definition into two parts for clarity (Definitions \ref{def:interventional} and \ref{def:CBN}). These changes don't make a meaningful difference to the content of the theory.
 
 An interventional model is a \emph{Causal Bayesian Network} with respect to a directed acyclic graph if it satisfies a number of compatibility requirements. The following definitions are standard, and reproduced here for convenience. The definitions here are terse, readers should refer to \citet[chap. ~1]{pearl_causality:_2009} for a more intuitive explanation.
 
-\begin{definition}[Directed graph]
-A directed graph $\graph{G}=(\graph{V},\graph{E})$ is a set of nodes $\graph{V}$ and edges, which are ordered pairs of nodes $\graph{E}\subset \graph{V}\times\graph{V}$. Nodes are written using the font $\node{V}$.
+\begin{definition}[Directed graph]\label{def:dir_graph}
+A directed graph $\graph{G}=(\node{V},\node{E})$ is a set of nodes $\node{V}$ and edges, which are ordered pairs of nodes $\node{E}\subset \node{V}\times\node{V}$. Nodes are written using the font $\node{V}$.
 \end{definition}
 
 The parents of a target node are all nodes with an edge ending at the target node.
 
 \begin{definition}[Parents]
-Given a directed graph $\graph{G}=(\graph{V},\graph{E})$ and $\node{V}_i\subset \graph{V}$, the parents of $\node{V}_i$ are $\PA(\node{V}_i):=\{\node{V}_j|(\node{V}_j,\node{V}_i)\in\graph{E}\}$.
+Given a directed graph $\graph{G}=(\node{V},\node{E})$ and $\node{V}_i\subset \node{V}$, the parents of $\node{V}_i$ are $\PA{\graph{G}}{\node{V}_i}:=\{\node{V}_j\in \node{V}|(\node{V}_j,\node{V}_i)\in\node{E}\}$.
 \end{definition}
 
 A path is a sequence of edges such that the $i$th edge and the $i+1$th edge share exactly one node.
 
 \begin{definition}[Path]
-Given a directed graph $\graph{G}=(\graph{V},\graph{E})$, a path is a sequence of edges $(E_i)_{i\in A}$ (where $A$ is either $[n]$ or $\mathbb{N}$) such that for any $i$, $E_i$ and $E_{i+1}$ share exactly one node.
+Given a directed graph $\graph{G}=(\node{V},\node{E})$, a path is a sequence of edges $(E_i)_{i\in A}$ (where $A$ is either $[n]$ or $\mathbb{N}$) such that for any $i$, $E_i$ and $E_{i+1}$ share exactly one node.
 \end{definition}
 
 A directed path is a sequence of edges such that the end of the $i$th edge is the beginning of the $i+1$th edge.
 
 \begin{definition}[Directed path]
-Given a directed graph $\graph{G}=(\graph{V},\graph{E})$, a directed path is a sequence of edges $(E_i)_{i\in A}$ (where $A$ is either $[n]$ or $\mathbb{N}$) such that for any $i$, $E_i=(\node{V}_k,\node{V}_l)$ implies $E_{i+1}=(\node{V}_l,\node{V}_m)$ for some $\node{V}_m\in \graph{V}$.
+Given a directed graph $\graph{G}=(\node{V},\node{E})$, a directed path is a sequence of edges $(E_i)_{i\in A}$ (where $A$ is either $[n]$ or $\mathbb{N}$) such that for any $i$, $E_i=(\node{V}_k,\node{V}_l)$ implies $E_{i+1}=(\node{V}_l,\node{V}_m)$ for some $\node{V}_m\in \node{V}$.
 \end{definition}
 
 In an acyclic graph, directed paths never reach to the same node more than once.
 
 \begin{definition}[Directed acyclic graph]
-A directed graph $\graph{G}=(\graph{V},\graph{E})$ is acyclic if, for every path, each node appears at most once. Directed acyclic graph is abbreviated to ``DAG''.
+A directed graph $\graph{G}=(\node{V},\node{E})$ is acyclic if, for every path, each node appears at most once. Directed acyclic graph is abbreviated to ``DAG''.
 \end{definition}
 
-D-separation is a key property of directed acyclic graphs for defining causal Bayesian networks. It is defined with respect to undirected paths.
+d-separation is a key property of directed acyclic graphs for defining causal Bayesian networks. It is defined with respect to undirected paths.
 
 \begin{definition}[Blocked path]
-Given a DAG $\graph{G}=(\graph{V},\graph{E})$, a path $p$ is blocked by $\node{V}_A\subset\graph{V}$ iff
+Given a DAG $\graph{G}=(\node{V},\node{E})$, a path $p$ is blocked by $\node{V}_A\subset\node{V}$ iff
 \begin{enumerate}
-    \item $(\node{V}_i,\node{V}_j)\in p$ and $(\node{V}_j,\node{V}_k)\in p$ while $\node{V}_j\in \node{V}_A$
-    \item $(\node{V}_j,\node{V}_i)\in p$ and $(\node{V}_j,\node{V}_k)\in p$ while $\node{V}_j\in \node{V}_A$
-    \item $(\node{V}_i,\node{V}_j)\in p$ and $(\node{V}_k,\node{V}_j)\in p$ while $\node{V}_j\cup \DE(\node{V}_j)\cap \node{V}_A=\emptyset$
+    \item $(\node{V}_i,\node{V}_j)\in p$ and $(\node{V}_j,\node{V}_k)\in p$ for all $\node{V}_j\in \node{V}_A$
+    \item $(\node{V}_j,\node{V}_i)\in p$ and $(\node{V}_j,\node{V}_k)\in p$ for all $\node{V}_j\in \node{V}_A$
+    \item $(\node{V}_i,\node{V}_j)\in p$ and $(\node{V}_k,\node{V}_j)\in p$ for all $\node{V}_j\cup \DE(\node{V}_j)\cap \node{V}_A=\emptyset$
 \end{enumerate}
 \end{definition}
 
 \begin{definition}[d-separation]
-Given a DAG $\graph{G}=(\graph{V},\graph{E})$, $\node{V}_A$ is $d$-separated from $\node{V}_B$ by $\node{V}_C$ (all subsets of \graph{V}) if $\node{V}_C$ blocks every path starting at $\node{V}_A$ and ending at $\node{V}_B$. This is written $\node{V}_A\perp_{\mathcal{G}} \node{V}_B | \mathbf{V}_C$.
+Given a DAG $\graph{G}=(\node{V},\node{E})$, $\node{V}_A$ is $d$-separated from $\node{V}_B$ by $\node{V}_C$ (all subsets of \node{V}) if $\node{V}_C$ blocks every path starting at $\node{V}_A$ and ending at $\node{V}_B$. This is written $\node{V}_A\perp_{\mathcal{G}} \node{V}_B | \node{V}_C$.
 \end{definition}
 
 \begin{definition}[Variable-node association]
-Given a graph $\graph{G}=(\graph{V},\graph{E})$ and a sequence of variables $(\RV{V}_i)_{i\in A}$, if $|A|=|\graph{V}|$ we can associate a variable with each node of the graph with an invertible map $m:\{\RV{V}_i|i\in A\}\to \graph{V}$. By convention, we give associated variables and nodes corresponding indices, and graphical operations are defined on variables through $m$, i.e. $\mathrm{Pa}(\RV{V}_i):=m(\mathrm{Pa}(m^{-1}(\RV{V}_i)))$.
+Given a graph $\graph{G}=(\node{V},\node{E})$ and a sequence of variables $\RV{V}_A:=(\RV{V}_i)_{i\in A}$, if $|A|=|\node{V}|$ we can associate a variable with each node of the graph with an invertible map $m:\{\RV{V}_i|i\in A\}\to \node{V}$ that sends $\RV{V}_i\mapsto \node{V})_i$. By convention, we give associated variables and nodes corresponding indices, and graphical operations are defined on variables through $m$, i.e. $\mathrm{Pa}(\RV{V}_i):=m(\mathrm{Pa}(m^{-1}(\RV{V}_i)))$.
 \end{definition}
 
 \begin{definition}[Compatibility]\label{def:compat}
-Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m:\RV{V}_i\mapsto \node{V}_i$, $\prob{P}_\cdot$ is compatible with $\mathcal{G}$ relative to $m$ if for all $I,J,K\subset A$, $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \mathbf{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\text{id}_C)$.
+Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m$, $\prob{P}_\cdot$ is compatible with $\mathcal{G}$ relative to $m$ if for all $I,J,K\subset A$, $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \node{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\text{id}_C)$.
 \end{definition}
 
-The following definition is reproduced fron \citet{pearl_causality:_2009} with the differences mentioned: notation has been matched to ours, the interventional model is assumed to be measurable and the interventional distributions are assumed to be defined on a common sample space.
+The following definition is reproduced from \citet{pearl_causality:_2009} with the differences previously mentioned: notation has been matched to ours, the interventional model is assumed to be measurable and the interventional distributions are assumed to be defined on a common sample space.
 
 \begin{definition}[Interventional model]\label{def:interventional}
-An interventional model is a tuple $(\prob{P}_C,\Omega,(\RV{V}_i)_{i\in A})$ where $(\Omega,\sigalg{F})$ is a measurable space,  $\RV{V}:=(\RV{V}_i)_{i\in A}$ a sequence of variables with $\RV{V}_i:\Omega\to V_i$, $V_i$ denumerable, where $C$ the choice set
+An interventional model is a tuple $(\prob{P}_C,\Omega,(\RV{V}_A)$ where $(\Omega,\sigalg{F})$ is a measurable space,  $\RV{V}:=(\RV{V}_i)_{i\in A}$, $A\subset\mathbb{N}$ a sequence of variables with $\RV{V}_i:\Omega\to V_i$, and where the option set $C$ given by
 \begin{align}
     C:=\{\mathrm{do}_{\emptyset}\}\cup \{(\mathrm{do}_B,v_B)|B\subset A,v_B\in \mathrm{Range}(V_B)\}
 \end{align}
-That is, we take every subsequence $\RV{V}_B$ of $\RV{V}$ and add to $C$ every element of the range of $\RV{V}_B$, each labeled with the symbol $\mathrm{do}_B$.
+That is, we take every subsequence $\RV{V}_B$ of $\RV{V}_A$ and for each subsequence add to $C$ every element of the range of $\RV{V}_B$, each labeled with the symbol $\mathrm{do}_B$.
 \end{definition}
 
 \begin{definition}[Causal Bayesian network]\label{def:CBN}
-Given an interventional model $(\prob{P}_C,\Omega,(\RV{V}_i)_{i\in A})$ and a directed acyclic graph $\graph{G}$ with nodes $\graph{V}$, $(\prob{P}_C,\Omega,(\RV{V}_i)_{i\in A},\graph{G})$  is a \emph{causal Bayesian network} with respect the node-variable association $m:\node{V}_i\mapsto \RV{V}_i$ if:
+Given an interventional model $(\prob{P}_C,\Omega,\RV{V}_A)$ and a directed acyclic graph $\graph{G}$ with nodes $\node{V}$, $(\prob{P}_C,\Omega,\RV{V}_A,\graph{G})$  is a \emph{causal Bayesian network} with respect the node-variable association $m$ if:
 \begin{enumerate}
     \item $\prob{P}_\cdot$ is compatible with $\graph{G}$ with respect to $m$
     \item $B\neq \emptyset \implies \prob{P}_{(\mathrm{do}_{B},v_B)}^{\RV{V}_B} = \delta_{v_B}$
@@ -82,27 +104,33 @@ Given an interventional model $(\prob{P}_C,\Omega,(\RV{V}_i)_{i\in A})$ and a di
 \end{enumerate}
 \end{definition}
 
-One might go about constructing a causal Bayesian network by starting with a joint probability distribution and then ``adding in'' the interventions. When constructing a causal Bayesian network this way, one has to make sure the chosen sequence of variables $(\RV{V}_i)_{i\in A}$ is ``interventionally compatible''. In particular, we require $v_{\mathrm{Pa}(i)}\mapsto \delta_{v_i}$ be a $\RV{V}_i|\mathrm{Pa}(\RV{V}_i)$-valid conditional for all $i$ (Definition \ref{def:valid_conditional_prob}, or else the probability set for an intervention on $\RV{V}_i$ will be empty.
+One might go about constructing a causal Bayesian network by starting with a joint probability distribution and then ``adding in'' the interventions. When constructing a causal Bayesian network this way, one has to make sure the chosen sequence of variables $\RV{V}_A$ is ``interventionally compatible''. In particular, we require $v_{\mathrm{Pa}(i)}\mapsto \delta_{v_i}$ be a $\RV{V}_i|\mathrm{Pa}(\RV{V}_i)$-valid conditional for all $i$ (Definition \ref{def:valid_conditional_prob}, or else the probability set for an intervention on $\RV{V}_i$ will be empty.
 
-For continuously valued variables, the ability to pick a version of the conditional probability for each intervention is problematic. Suppose $\node{V}_i$ is a parent of $\node{V}_j$, and the associated variable $\RV{V}_i$ is continuously valued and $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i}(\{v_i\})=0$ for all singletons $v_i\in V_i$. Then for every intervention $\mathrm{do}_{\{i\}}(v_i)$, we can choose a version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_j|\RV{V}_i}$ that takes an arbitrary value at the point $v_i$ (because this point has measure 0), so property (3) is satisfied trivially.
+For continuously valued variables, the fact that this definition offers the ability to pick a version of the conditional probability for each intervention is problematic. Suppose $\node{V}_i$ is a parent of $\node{V}_j$, and the associated variable $\RV{V}_i$ is continuously valued and $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_i}(\{v_i\})=0$ for all singletons $v_i\in V_i$. Then for every intervention $\mathrm{do}_{\{i\}}(v_i)$, we can choose a version of $\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_j|\RV{V}_i}$ that takes an arbitrary value at the point $v_i$ (because this point has measure 0), so property (3) is satisfied trivially. Some additional consistency condition seems to be required for this case, but we do not explore what it is here.
+
+The freedom to choose versions of the conditional distributions where the ``passive'' distribution has no support might actually be a feature that distinguishes causal Bayesian networks from SCMs, but we don't investigate this point in detail.
 
 \subsection{Unrolling a causal Bayesian network}\label{sec:unrolling}
 
 Given a probability space $(\prob{P},\Omega,\sigalg{F})$ and an independent and identically distributed (IID) sequence $\RV{X}:=(\RV{X}_i)_{i\in [n]}$, it is common to ``roll up'' the joint distribution $\prob{P}^{\RV{X}}\in\Delta(X^n)$ to a single representative distribution $\prob{P}^{\RV{X}_0}\in \Delta(X)$ and say something like ``the $\RV{X}_i$ are IID according to $\prob{P}^{\RV{X}_0}$''. Because of the IID assumption, the full joint distribution $\prob{P}^{\RV{X}}\in\Delta(X^n)$ can be unambiguously reconstructed from a statement like this.
 
-A causal Bayesian network is similarly a rolled-up representation of a model of some sequence of variables. Unlike an IID sequence, it isn't completely unambiguous how to unroll it. We propose the following method: first, posit a sequence of variables $\RV{V}:= (\RV{V}_ij)_{i\in A,j\in [n]}$, and extend the set $C$ to be the set of sequences of interventions 
+A causal Bayesian network is similarly a rolled-up representation of a model of some sequence of variables. Unlike an IID sequence, it isn't completely unambiguous how to unroll it, though the ambiguity doesn't seem to be especially problematic for ordinary causal Bayesian networks. Here we propose a canonical method to unroll a causal Bayesian network, and note where there seems to be more than one sensible option.
+
+Suppose we have a causal Bayesian network $(\prob{P}_C,\Omega,\RV{V}_A)$ that we want to extend to a sequence of variables $\RV{V}:= (\RV{V}_{ij})_{i\in A,j\in [n]}$. First, we extend the set $C$ to be the set of sequences of interventions 
 \begin{align}
 \{(\mathrm{do}_{B_j j}(v_B))_{j\in [n]}|\forall j: B_j \subset A,v_{B_j}\in \mathrm{Range}(\RV{V}_{B_j})\}
 \end{align}
 i.e. $C$ now consists of all sequences of separate interventions to each subsequence of variables $\RV{V}_{Aj}:=(\RV{V}_{ij})_{i\in A}$, understood to refer to variables arising from a particular iteration of the decision procedure. 
 
-Given a graph $\graph{G}=(\graph{V},\graph{E})$, we now have a collection of variable-node association maps $m_j:\{\RV{V}_{ij}|i\in A\}\to \graph{V}$ such that $m_j(\RV{V}_{ij})=\node{V}_i$.
+This specification of interventions in an unrolled causal Bayesian network differs slightly from the method explored in \citet{lattimore_causal_2019} which unrolls a causal Bayesian network to a length 2 sequence and forces the intervention on the first element of the sequence to be the passive intervention. This difference seems like it would usually be unproblematic insofar as the specification of which elements of the sequence might be influenced by the choices of the decision maker may often be pretty obvious.
 
-We now need to specify how variables in an unrolled causal Bayesian network are distributed, given some sequence of interventions. By analogy with the original case of IID variables, we conclude that the $\RV{V}_{Aj}:=(\RV{V}_{ij})_{i\in A}$ are mutually independent given any particular sequence of interventions. Furthermore, Definition \ref{def:CBN} constrains the distribution of each variable given a particular sequence of interventions from $C$. For a sequence of interventions $\alpha\in C$, let $\pi_j(\alpha)$ be the $j$th intervention in the sequence. We might posit the following analogue of condition (3): 
+Given a graph $\graph{G}=(\node{V},\node{E})$, we now have a collection of variable-node association maps $m_j:\{\RV{V}_{ij}|i\in A\}\to \node{V}$ such that $m_j(\RV{V}_{ij})=\node{V}_i$.
+
+We now need to specify how variables in an unrolled causal Bayesian network are distributed, given some sequence of interventions. By analogy with the original case of IID variables, we conclude that the $\RV{V}_{Aj}:=(\RV{V}_{ij})_{i\in A}$ are mutually independent given any particular sequence of interventions. Furthermore, Definition \ref{def:CBN} constrains the distribution of each variable given a particular sequence of interventions from $C$. For a sequence of interventions $\alpha\in C$, let $\pi_j(\alpha)$ be the $j$th intervention in the sequence. One might posit the following analogue of condition (3): 
 \begin{itemize}
     \item [3'] $\pi_j(\alpha)=(\mathrm{do}_{B_j},v_{B_j})$ implies $\prob{P}_{\alpha}^{\RV{V}_{ij}|\mathrm{Pa}(\RV{V}_{ij})}\overset{\prob{P}_{\alpha}}{\cong}\prob{P}_{\mathrm{do}_{\emptyset}^n}^{\RV{V}_{i1}|\mathrm{Pa}(\RV{V}_{i1})}$ for all $i\not\in B$
 \end{itemize}
-Where $\mathrm{do}_{\emptyset}^n$ is a sequence of $n$ $\mathrm{do}_{\emptyset}$ interventions. This is a combination of an assumption that variables in the sequence are conditionally identically distributed given appropriate interventions and condition (3) from Definition \ref{def:CBN}. However, it's not quite satisfactory. Take $B:=\mathrm{Pa}(\RV{V}_{i1})$, and suppose $\prob{P}_{\mathrm{do}_{\emptyset}^n}^{\RV{V}_{B1}}(\{x\})=0$. Then (3') would be satisfied by a model for which
+Where $\mathrm{do}_{\emptyset}^n$ is a sequence of $n$ $\mathrm{do}_{\emptyset}$ interventions. This is a combination of an assumption that variables in the sequence are conditionally independent and identically distributed given appropriate interventions and condition (3) from Definition \ref{def:CBN}. However, it's not quite satisfactory. Take $B:=\mathrm{Pa}(\RV{V}_{i1})$, and suppose $\prob{P}_{\mathrm{do}_{\emptyset}^n}^{\RV{V}_{B1}}(\{x\})=0$. Then (3') would be satisfied by a model for which
 \begin{align}
     \prob{P}_{(\mathrm{do}_{B_1},x,\mathrm{do}_{B_2},x)}^{\RV{V}_{i1}|\RV{B}}(U|x) &= \delta_0(U)\\
     \prob{P}_{(\mathrm{do}_{B_1},x,\mathrm{do}_{B_2},x)}^{\RV{V}_{i2}|\RV{B}}(U|x) &= \delta_1(U)
@@ -425,7 +453,7 @@ A potential outcomes model $(\prob{P}_C,\Omega,\sigalg{F})$ with respect to $\RV
 \end{theorem}
 
 \begin{proof}
-IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$ follows from the fact that $\RV{Y}_i$ is deterministic given $\RV{Y}^D_i$ and $\RV{D}_i$, and thus $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^C},\RV{Y}_{\{i\}^C},\text{id}_C)|(\RV{Y}^D_{i},\RV{D}_i)$. Furthermore, for all $i,j$
+IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$ follows from the fact that $\RV{Y}_i$ is deterministic given $\RV{Y}^D_i$ and $\RV{D}_i$, and thus $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^{\complement}},\RV{Y}_{\{i\}^{\complement}},\text{id}_C)|(\RV{Y}^D_{i},\RV{D}_i)$. Furthermore, for all $i,j$
 \begin{align}
     \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i} &= \prob{P}_C^{\RV{Y}_j|\RV{Y}^D_j\RV{D}_j}
 \end{align}
@@ -433,7 +461,7 @@ hence the $\prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}$ are independent and identic
 
 From Definition \ref{def:potential_outcomes}, $\prob{P}_\alpha^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}$ is the same for all $\alpha\in C$, and by the argument above,
 \begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i\RV{Y}^D_{\{i\}^C}\RV{D}_{\{i\}^C}} &= \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}\otimes \mathrm{Del}_{Y^{|D\times A\setminus\{i\}|}\times D^{|A|}}
+    \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i\RV{Y}^D_{\{i\}^{\complement}}\RV{D}_{\{i\}^{\complement}}} &= \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}\otimes \mathrm{Del}_{Y^{|D\times A\setminus\{i\}|}\times D^{|A|}}
 \end{align}
 hence
 \begin{align}
@@ -686,7 +714,7 @@ Applying Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_C^{\RV{Y}|\RV{WD}}$ is IO c
 Given a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ countable, if there is some $\RV{J}$ such that for each $\alpha$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i} &= \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i} &\forall i,j\in \mathbb{N}\\
-    \RV{Y}_i&\CI^e_{\prob{P}_C} (\RV{I}_{\{i\}^C},\RV{D}_{\{i\}^C})|(\RV{J},\RV{I}_i,\RV{D}_i)
+    \RV{Y}_i&\CI^e_{\prob{P}_C} (\RV{I}_{\{i\}^{\complement}},\RV{D}_{\{i\}^{\complement}})|(\RV{J},\RV{I}_i,\RV{D}_i)
 \end{align}
 and
 \begin{align}
@@ -901,76 +929,76 @@ Then the model exhibits a kind of ``backdoor adjustment''. Specifically, for $i>
 
 Equation \eqref{eq:backdoor} is identical to the backdoor adjustment formula \citep[Chap. 1]{pearl_causality:_2009} for an intervention on $\RV{D}_1$ targeting $\RV{Y}_1$ where $\RV{X}_1$ is a common cause of both.
 
-\paragraph{Example 6: the provenance of the choice variable}\label{sec:dm_control}
+% \paragraph{Example 6: the provenance of the choice variable}\label{sec:dm_control}
 
-\todo[inline]{Use individual-level ccont}
+% \todo[inline]{Use individual-level ccont}
 
-The point of this example is to clarify the idea of a ``choice'' variable. If we say that some value is the outcome of a choice, a straightforward interpretation of this term suggests that this value was chosen by someone, somewhere. However, for the purposes of decision making models, there are important differences between:
-\begin{itemize}
-    \item Values chosen by someone, somewhere
-    \item Values chosen by the decision make, using the decision making model
-\end{itemize}
+% The point of this example is to clarify the idea of a ``choice'' variable. If we say that some value is the outcome of a choice, a straightforward interpretation of this term suggests that this value was chosen by someone, somewhere. However, for the purposes of decision making models, there are important differences between:
+% \begin{itemize}
+%     \item Values chosen by someone, somewhere
+%     \item Values chosen by the decision make, using the decision making model
+% \end{itemize}
 
-We call this example the ``I choose vs you choose'' problem. Suppose we have a decision maker (``DM'') and an administrator (``admin'') cooperating to collect data to support DM to make a choice.
+% We call this example the ``I choose vs you choose'' problem. Suppose we have a decision maker (``DM'') and an administrator (``admin'') cooperating to collect data to support DM to make a choice.
 
-First, consider the ``I choose'' condition. Here, DM's choice $\alpha\in \{0,1\}^2$ deterministically sets the value of binary inputs $\RV{D}_1,\RV{D}_2$, and the decision maker is interested in evaluating the corresponding binary outputs $\RV{Y}_1,\RV{Y}_2$. The decision maker assesses that their knowledge of the real-world mechanisms that gives rise to each output $\RV{Y}_i$ in the context on an input $\RV{D}_i$ render these mechanisms indistinguishable. 's point of view, the input-output relations for each step are indistinguishable. In particular, they assess that the marginal probabilities of the outputs are the same given a corresponding input, and that the evidence that the first experiment brings to bear on the second is equivalent to the evidence that the second brings to bear on the first. Thus, they assess that exchange commutativity is appropriate; for all $\alpha$:
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2} &= \prob{P}_\alpha^{\RV{Y}_2\RV{Y}_1|\RV{D}_2\RV{D}_1}
-\end{align}
-
-
-but this example suggests another reason one might want to avoid deterministic treatment assignments. If the choices $\alpha$ are a deterministic sequence of assignments for each index $i$, this means that there is an enormous set of possible choices, and many degrees of freedom if the choices ``aren't actually chosen'' in the sense of the example above. In contrast, if the set of choices is a single parameter in $[0,1]$ which is then used to assign all treatments according to a random procedure depending only on this parameter, there are many fewer degrees of freedom to exploit if the choice ``isn't actually chosen''.
-
-A particular concern arises when the choice variable $\text{id}_C$ is not associated with the output of a decision procedure involving the model $\prob{P}_C$. In this situation, the value of $\text{id}_C$ can affect the model in potentially unexpected ways. ``Potentially unexpected'' is a vague notion, and we can't say whether $\text{id}_C$ being completely under the decision maker's control avoids ``unexpected'' dependence on $\text{id}_C$, but it seems to be less problematic.
-
-We set this up in terms of an ``analyst'' and an ``administrator'' who have responsibility for different parts of the procedure. They don't strictly need to be different people, but it helps make the issue clearer. The analyst's job is to construct a model $\prob{P}_C$, evaluate different options $\alpha\in C$ and offer advice regarding the choice. The administrator's job is to choose some $\alpha\in C$ satisfying the analyst's requirements and to carry out any procedure arising from this.
-
-This separation of concerns gives the administrator a degree of freedom in their choice, and they can potentially use this to choose $\alpha$ with access to information that the analyst lacks.
-
-In particular, suppose an experiment is modeled by a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{U}),\RV{Y})$ and the set of choices $C=[0,1]^{\mathbb{N}}$ is a length $\mathbb{N}$ sequence of probability distributions in $\Delta(\{0,1\})$. The analyst, based on their knowledge of the experiment, constructs $\prob{P}_C$ such that $\prob{P}_C^{\RV{Y}_i|\RV{U}_i\RV{D}_i}(1|\cdot,\cdot)$ is given by:
-\begin{center}
-\begin{tabular}{ c | c | c }
-  & $\RV{D}_i=0$ & $\RV{D}_i=1$ \\\hline 
- $\RV{U}_i=0$ & 0 & 0 \\ \hline 
- $\RV{U}_i=1$ & 1 & 1   
-\end{tabular}
-\end{center}
-and the triples $(\RV{D}_i,\RV{U}_i,\RV{Y}_i)$ are mutually independent given $\text{id}_C$. This makes $\prob{P}_C^{\RV{Y}|\RV{UD}}$ IO contractible over $*$. Suppose also 
-\begin{align}
-    \prob{P}_\alpha^{\RV{D}_i}(1) &= \alpha_i
-\end{align}
-where $\alpha=(\alpha_i)_{i\in\mathbb{N}}$. From the analyst's point of view, both before and after making their recommendations the $\RV{U}_i$ are also IID. This will be expressed with a probability distribution $\prob{Q}$ representing the analyst's prior knowledge:
-\begin{align}
-    \prob{Q}^{\RV{U}_i}(1) &= 0.5
-\end{align}
-one might be tempted to reason that, if $\prob{Q}$ is the analyst's state of knowledge after making any reccomendation, then we should take $\prob{P}_C^{\RV{U}}=\prob{Q}^{\RV{U}}$. Call the resulting model $\prob{P}_C'$. Together with the other assumptions above, this would imply
-\begin{align}
-    \prob{P}_C^{\prime \RV{Y}_i|\RV{D}_i}(1|d) &= 0.5 & \forall d\in \{0,1\}
-\end{align}
-Thus $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also IO contractible.
-
-However, the analyst's recommendation \emph{does not} fix the value of $\text{id}_C$. Suppose analyst actually recommends any $\alpha$ such that $\lim_{n\to\infty} \sum_i^n \frac{\alpha_i}{n} = 0.5$ (acknowledging that, in this contrived example, there's no obvious reason to do so). Suppose that the administrator operates by the following rule: \emph{first} they observe the value of $\RV{U}_i$, then they choose $\alpha_i$ equal to whatever they saw with an $\epsilon$ sized step towards $0.5$. That is, if they see $\RV{U}_i\yields 1$, they choose $\alpha_i=1-\epsilon$, where $\epsilon < 0.5$.
-
-Then the analyst should instead adopt the model
-\begin{align}
-    \prob{P}_\alpha^{\RV{U}_i}(1) &= \mathds{1}_{\alpha_i>0.5}
-\end{align}
-Take $\alpha$ such that $\alpha_i=1-\epsilon$ and $\alpha_j=\epsilon$. Then
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}_i|\RV{D}_i}(1|1) &= 1\\
-    &\neq \prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j}(1|1)\\
-    &=0
-\end{align}
-everything has been assumed IID, so $\prob{P}_C^{\RV{Y}|\RV{HD}}$ is not IO contractible.
-
-The original justification for having a set of choices $C$ is that $C$ is the set of things that, after deliberation aided by the model $\prob{P}_C$, the decision maker might select. The present example does not conform to this understanding of the meaning of the set $C$, and it suggests that one should be cautious when modelling ``decision problems'' with ``choices'' that are not actually the things that are being chosen.
-
-This point is related to the question of why experimenters randomise. \citet{kasy_why_2016} argues that ``randomised controlled trials are not needed for causal identifiability, only controlled trials'', and suggests that experiments should sometimes be designed with deterministic assignments of patients to treatment and control groups, optimised according to the experiment designer's criteria. Following this, \citet{banerjee_theory_2020} suggested that deterministic rules might falter when one can't pick a function to balance covariates in a way that satisfies everyone in a panel of reviewers. 
-
-Without solving the problem, we observe that the terms ``control'' and ``choice'' here subsume both different kinds of choice indicated above, each of which has different implications for the construction of decision making models. We offer a speculative alternative explanation for randomisation: perhaps that the same model may be appropriate for both notions of ``choice'' under randomised choices, but not under nonrandomised choices.
+% First, consider the ``I choose'' condition. Here, DM's choice $\alpha\in \{0,1\}^2$ deterministically sets the value of binary inputs $\RV{D}_1,\RV{D}_2$, and the decision maker is interested in evaluating the corresponding binary outputs $\RV{Y}_1,\RV{Y}_2$. The decision maker assesses that their knowledge of the real-world mechanisms that gives rise to each output $\RV{Y}_i$ in the context on an input $\RV{D}_i$ render these mechanisms indistinguishable. 's point of view, the input-output relations for each step are indistinguishable. In particular, they assess that the marginal probabilities of the outputs are the same given a corresponding input, and that the evidence that the first experiment brings to bear on the second is equivalent to the evidence that the second brings to bear on the first. Thus, they assess that exchange commutativity is appropriate; for all $\alpha$:
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2} &= \prob{P}_\alpha^{\RV{Y}_2\RV{Y}_1|\RV{D}_2\RV{D}_1}
+% \end{align}
 
 
-\citet{savje_randomization_2021} argues that random assignment (under his definition) does not imply unconfoundedness
+% but this example suggests another reason one might want to avoid deterministic treatment assignments. If the choices $\alpha$ are a deterministic sequence of assignments for each index $i$, this means that there is an enormous set of possible choices, and many degrees of freedom if the choices ``aren't actually chosen'' in the sense of the example above. In contrast, if the set of choices is a single parameter in $[0,1]$ which is then used to assign all treatments according to a random procedure depending only on this parameter, there are many fewer degrees of freedom to exploit if the choice ``isn't actually chosen''.
+
+% A particular concern arises when the choice variable $\text{id}_C$ is not associated with the output of a decision procedure involving the model $\prob{P}_C$. In this situation, the value of $\text{id}_C$ can affect the model in potentially unexpected ways. ``Potentially unexpected'' is a vague notion, and we can't say whether $\text{id}_C$ being completely under the decision maker's control avoids ``unexpected'' dependence on $\text{id}_C$, but it seems to be less problematic.
+
+% We set this up in terms of an ``analyst'' and an ``administrator'' who have responsibility for different parts of the procedure. They don't strictly need to be different people, but it helps make the issue clearer. The analyst's job is to construct a model $\prob{P}_C$, evaluate different options $\alpha\in C$ and offer advice regarding the choice. The administrator's job is to choose some $\alpha\in C$ satisfying the analyst's requirements and to carry out any procedure arising from this.
+
+% This separation of concerns gives the administrator a degree of freedom in their choice, and they can potentially use this to choose $\alpha$ with access to information that the analyst lacks.
+
+% In particular, suppose an experiment is modeled by a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{U}),\RV{Y})$ and the set of choices $C=[0,1]^{\mathbb{N}}$ is a length $\mathbb{N}$ sequence of probability distributions in $\Delta(\{0,1\})$. The analyst, based on their knowledge of the experiment, constructs $\prob{P}_C$ such that $\prob{P}_C^{\RV{Y}_i|\RV{U}_i\RV{D}_i}(1|\cdot,\cdot)$ is given by:
+% \begin{center}
+% \begin{tabular}{ c | c | c }
+%   & $\RV{D}_i=0$ & $\RV{D}_i=1$ \\\hline 
+%  $\RV{U}_i=0$ & 0 & 0 \\ \hline 
+%  $\RV{U}_i=1$ & 1 & 1   
+% \end{tabular}
+% \end{center}
+% and the triples $(\RV{D}_i,\RV{U}_i,\RV{Y}_i)$ are mutually independent given $\text{id}_C$. This makes $\prob{P}_C^{\RV{Y}|\RV{UD}}$ IO contractible over $*$. Suppose also 
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{D}_i}(1) &= \alpha_i
+% \end{align}
+% where $\alpha=(\alpha_i)_{i\in\mathbb{N}}$. From the analyst's point of view, both before and after making their recommendations the $\RV{U}_i$ are also IID. This will be expressed with a probability distribution $\prob{Q}$ representing the analyst's prior knowledge:
+% \begin{align}
+%     \prob{Q}^{\RV{U}_i}(1) &= 0.5
+% \end{align}
+% one might be tempted to reason that, if $\prob{Q}$ is the analyst's state of knowledge after making any reccomendation, then we should take $\prob{P}_C^{\RV{U}}=\prob{Q}^{\RV{U}}$. Call the resulting model $\prob{P}_C'$. Together with the other assumptions above, this would imply
+% \begin{align}
+%     \prob{P}_C^{\prime \RV{Y}_i|\RV{D}_i}(1|d) &= 0.5 & \forall d\in \{0,1\}
+% \end{align}
+% Thus $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also IO contractible.
+
+% However, the analyst's recommendation \emph{does not} fix the value of $\text{id}_C$. Suppose analyst actually recommends any $\alpha$ such that $\lim_{n\to\infty} \sum_i^n \frac{\alpha_i}{n} = 0.5$ (acknowledging that, in this contrived example, there's no obvious reason to do so). Suppose that the administrator operates by the following rule: \emph{first} they observe the value of $\RV{U}_i$, then they choose $\alpha_i$ equal to whatever they saw with an $\epsilon$ sized step towards $0.5$. That is, if they see $\RV{U}_i\yields 1$, they choose $\alpha_i=1-\epsilon$, where $\epsilon < 0.5$.
+
+% Then the analyst should instead adopt the model
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{U}_i}(1) &= \mathds{1}_{\alpha_i>0.5}
+% \end{align}
+% Take $\alpha$ such that $\alpha_i=1-\epsilon$ and $\alpha_j=\epsilon$. Then
+% \begin{align}
+%     \prob{P}_{\alpha}^{\RV{Y}_i|\RV{D}_i}(1|1) &= 1\\
+%     &\neq \prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j}(1|1)\\
+%     &=0
+% \end{align}
+% everything has been assumed IID, so $\prob{P}_C^{\RV{Y}|\RV{HD}}$ is not IO contractible.
+
+% The original justification for having a set of choices $C$ is that $C$ is the set of things that, after deliberation aided by the model $\prob{P}_C$, the decision maker might select. The present example does not conform to this understanding of the meaning of the set $C$, and it suggests that one should be cautious when modelling ``decision problems'' with ``choices'' that are not actually the things that are being chosen.
+
+% This point is related to the question of why experimenters randomise. \citet{kasy_why_2016} argues that ``randomised controlled trials are not needed for causal identifiability, only controlled trials'', and suggests that experiments should sometimes be designed with deterministic assignments of patients to treatment and control groups, optimised according to the experiment designer's criteria. Following this, \citet{banerjee_theory_2020} suggested that deterministic rules might falter when one can't pick a function to balance covariates in a way that satisfies everyone in a panel of reviewers. 
+
+% Without solving the problem, we observe that the terms ``control'' and ``choice'' here subsume both different kinds of choice indicated above, each of which has different implications for the construction of decision making models. We offer a speculative alternative explanation for randomisation: perhaps that the same model may be appropriate for both notions of ``choice'' under randomised choices, but not under nonrandomised choices.
+
+
+% \citet{savje_randomization_2021} argues that random assignment (under his definition) does not imply unconfoundedness
 
 \section{Conclusion}
 

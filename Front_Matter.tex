@@ -184,8 +184,6 @@ The assumption of \emph{precedent} is the assumption that ``whatever we can do h
 %	ABBREVIATIONS
 %----------------------------------------------------------------------------------------
 
-\todo[inline]{List of notation}
-
 % \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
 % \textbf{ANU}&\textbf{A}ustralian \textbf{N}ational \textbf{U}niversity\\
 
@@ -216,9 +214,17 @@ The assumption of \emph{precedent} is the assumption that ``whatever we can do h
  \hline
  \endfoot
  \endlastfoot
+  \multicolumn{4}{|l|}{\textbf{Miscellaneous symbols}}\\
+ \hline
+ Numbers from $m$ to $n$ & $[m,n]$ & The set of natural numbers $\{m,m+1,...,n\}$ &\\
+ Numbers up to $n$ & $[n]$ & The set of natural numbers $\{1,2,...,n\}$ & \\
+ Complement of $[n]$ & $[n]^{\complement}$ The set $\mathbb{N}\setminus[n]$  & \\
+ Iverson bracket & $\llbracket \cdot \rrbracket$ & Function equal to 1 if $\cdot$ is true, false otherwise & \\
+ Directed graphs & $\graph{G},\node{V},\node{E}$ & Directed graph $\graph{G}$, set of nodes $\node{V}$, set of edges $\node{E}$ & Definition \ref{def:dir_graph} \\
+ \hline
+ \addlinespace
  \multicolumn{4}{|l|}{\textbf{Probability theory}}\\
  \hline
- Iverson bracket & $\llbracket \cdot \rrbracket$ & Function equal to 1 if $\cdot$ is true, false otherwise & \\
  Variable & $\RV{X}$ & Measurable function $(\Omega,\sigalg{F})\to(X,\sigalg{X})$ & Definition \ref{def:variable} \\
  Trivial variable & $*$ & Single-valued variable, maps $(\Omega,\sigalg{F})\to (\{*\},\{\emptyset,\{*\}\})$ & Definition \ref{no:single_valued} \\
  Variable sequence & $(\RV{X},\RV{Y})$ & The variable given by $\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$ & Definition \ref{def:seqvar}\\
@@ -233,6 +239,7 @@ The assumption of \emph{precedent} is the assumption that ``whatever we can do h
  Uniform conditional probability & $\prob{P}_A^{\RV{Y}|\RV{X}}$ & Arbitrary Markov kernel $X\kto Y$ that is a conditional distribution for every $\alpha\in A$ & Defintion \ref{def:cprob_pset}\\
  Kernel product & $\kernel{K}\kernel{L}$ & The Markov kernel given by $(A|x)\mapsto \int_Y \kernel{L}(A|y)\kernel{K}(\mathrm{d}y|x)$ & Definition \ref{def:kproduct}\\
  Semidirect product & $\kernel{K}\odot \kernel{L}$ & The Markov kernel given by $(A\times B|x)\mapsto \int_A \kernel{L}(B)|y)\kernel{K}(\mathrm{d}y|x)$ & Definition \ref{def:copyproduct}\\
+ Permuted sequence & $\RV{Y}_\rho$ & Given $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$, $\RV{Y}_\rho:=(\RV{Y}_{\rho(i)})_{i\in\mathbb{N}}$ & \\
 \hline
 \addlinespace
 \multicolumn{4}{|l|}{\textbf{String diagrams}}\\
@@ -254,6 +261,7 @@ Complementary variables & $(\phi,\xi)$ & Sequence of nonstochastic variables tha
 Extended conditional independence & $\RV{X}\CI^e_{\prob{P}_C}(\RV{Y},\phi)|(\RV{Z},\xi)$ & Generalisation of conditional independence to decision models & Definition \ref{def:eci_orig}\\
 Choice variable & $\text{id}_C$ & Identity function on option set $C$; corresponds to the choice made by decision maker & \\
 Tabular conditional & $\RV{Y}^X$ & Variable with the property that $\RV{Y}=\sum_{x\in X} \llbracket \RV{X}=x\rrbracket \RV{Y}^x$; not necessarily interpretable as potential outcomes & Definition \ref{def:tab_cd}\\
+Input-output model & $(\prob{P}_C,\RV{D},\RV{Y})$ & Shorthand for $((\prob{P}_\cdot,(\Omega,\sigalg{F}),(C,\sigalg{C})),\RV{D},\RV{Y})$ with sequence of inputs $\RV{D}$ and corresponding outputs $\RV{Y}$ & Definition \ref{def:seq_io}\\
 \hline
 \end{symbols}
 

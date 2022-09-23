@@ -642,6 +642,52 @@
       \verb https://proceedings.neurips.cc/paper/2020/hash/f8b7aa3a0d349d9562b424160ad18612-Abstract.html
       \endverb
     \endentry
+    \entry{cartwright_no_1994}{book}{}
+      \name{author}{1}{}{%
+        {{hash=fbaade670b892f3ab57ff980f8560928}{%
+           family={Cartwright},
+           familyi={C\bibinitperiod},
+           given={Nancy},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en\_US}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{fbaade670b892f3ab57ff980f8560928}
+      \strng{fullhash}{fbaade670b892f3ab57ff980f8560928}
+      \strng{bibnamehash}{fbaade670b892f3ab57ff980f8560928}
+      \strng{authorbibnamehash}{fbaade670b892f3ab57ff980f8560928}
+      \strng{authornamehash}{fbaade670b892f3ab57ff980f8560928}
+      \strng{authorfullhash}{fbaade670b892f3ab57ff980f8560928}
+      \field{extraname}{1}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This chapter argues that one cannot get knowledge of causes from equations and associations alone, using critical analyses of theoretical examples in physics and of attempts in the philosophy of science and economics (e.g. Granger causality and various probabilistic theories of causality) to reduce causal claims to probabilities. Old causal knowledge must be supplied for new causal knowledge to be had. Analysis of experimental methods and actual experiments (Stanford Gravity Probe) show how this can be done.}
+      \field{isbn}{978-0-19-159716-9}
+      \field{month}{4}
+      \field{title}{No {Causes} in, {No} {Causes} out}
+      \field{urlday}{21}
+      \field{urlmonth}{5}
+      \field{urlyear}{2019}
+      \field{year}{1994}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb Snapshot:/home/users/u4533535/Zotero/storage/ME84AMGS/acprof-9780198235071-chapter-3.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.oxfordscholarship.com/view/10.1093/0198235070.001.0001/acprof-9780198235071-chapter-3
+      \endverb
+      \verb{url}
+      \verb https://www.oxfordscholarship.com/view/10.1093/0198235070.001.0001/acprof-9780198235071-chapter-3
+      \endverb
+    \endentry
     \entry{cartwright_modularity_2001}{article}{}
       \name{author}{1}{}{%
         {{hash=fbaade670b892f3ab57ff980f8560928}{%
@@ -659,6 +705,7 @@
       \strng{authorbibnamehash}{fbaade670b892f3ab57ff980f8560928}
       \strng{authornamehash}{fbaade670b892f3ab57ff980f8560928}
       \strng{authorfullhash}{fbaade670b892f3ab57ff980f8560928}
+      \field{extraname}{2}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{extradatescope}{labelyear}
@@ -4354,6 +4401,67 @@
       \verb{url}
       \verb https://doi.org/10.1162/NECO_a_00708
       \endverb
+    \endentry
+    \entry{peters_causal_2016}{article}{}
+      \name{author}{3}{ul=3}{%
+        {{hash=b50a0fee091540dedaefacc234101037}{%
+           family={Peters},
+           familyi={P\bibinitperiod},
+           given={Jonas},
+           giveni={J\bibinitperiod}}}%
+        {{hash=73b8ae79083852e052f5bd5f82021408}{%
+           family={Bühlmann},
+           familyi={B\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=ab9469dddb5d18ec039f709e2d7c4e00}{%
+           family={Meinshausen},
+           familyi={M\bibinitperiod},
+           given={Nicolai},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{fa0e88230d41a33895d182c3b004cfa7}
+      \strng{fullhash}{fa0e88230d41a33895d182c3b004cfa7}
+      \strng{bibnamehash}{fa0e88230d41a33895d182c3b004cfa7}
+      \strng{authorbibnamehash}{fa0e88230d41a33895d182c3b004cfa7}
+      \strng{authornamehash}{fa0e88230d41a33895d182c3b004cfa7}
+      \strng{authorfullhash}{fa0e88230d41a33895d182c3b004cfa7}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{What is the difference between a prediction that is made with a causal model and that with a non-causal model? Suppose that we intervene on the predictor variables or change the whole environment. The predictions from a causal model will in general work as well under interventions as for observational data. In contrast, predictions from a non-causal model can potentially be very wrong if we actively intervene on variables. Here, we propose to exploit this invariance of a prediction under a causal model for causal inference: given different experimental settings (e.g. various interventions) we collect all models that do show invariance in their predictive accuracy across settings and interventions. The causal model will be a member of this set of models with high probability. This approach yields valid confidence intervals for the causal relationships in quite general scenarios. We examine the example of structural equation models in more detail and provide sufficient assumptions under which the set of causal predictors becomes identifiable. We further investigate robustness properties of our approach under model misspecification and discuss possible extensions. The empirical properties are studied for various data sets, including large-scale gene perturbation experiments.}
+      \field{issn}{1467-9868}
+      \field{journaltitle}{Journal of the Royal Statistical Society: Series B (Statistical Methodology)}
+      \field{number}{5}
+      \field{shorttitle}{Causal inference by using invariant prediction}
+      \field{title}{Causal inference by using invariant prediction: identification and confidence intervals}
+      \field{urlday}{5}
+      \field{urlmonth}{10}
+      \field{urlyear}{2019}
+      \field{volume}{78}
+      \field{year}{2016}
+      \field{urldateera}{ce}
+      \field{pages}{947\bibrangedash 1012}
+      \range{pages}{66}
+      \verb{doi}
+      \verb 10.1111/rssb.12167
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/home/david/Zotero/storage/GXV8FELN/Peters et al. - 2016 - Causal inference by using invariant prediction id.pdf:application/pdf;Snapshot:/home/david/Zotero/storage/D9QGYQLQ/rssb.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167
+      \endverb
+      \verb{url}
+      \verb https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12167
+      \endverb
+      \keyw{Causal discovery,Causal inference,Confidence intervals,Invariant prediction}
     \endentry
     \entry{peters_elements_2017}{book}{}
       \name{author}{3}{ul=2}{%

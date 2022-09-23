@@ -2,27 +2,25 @@
 
 \chapter[Repeatable decision problems]{Models of repeatable decision problems}\label{ch:evaluating_decisions}
 
-\todo[inline]{Also mention that response functions are formally identical to ``causal mechanisms'' in the sense of Pearl's stable mechanisms and Janzing's independent mechanisms}
-
 Chapter \ref{ch:tech_prereq} introduced probability sets as generic tools for causal modelling, while Chapter \ref{ch:2p_statmodels} examined how probability set models can be used in decision problems and Section \ref{sec:cons_to_sdp} in particular introduced \emph{see-do} models, which featured four variables representing observations, consequences, choices and hypotheses. A decision maker wants to pick choices that promote desirable consequences, and in this chapter, we investigate how they can use observations to inform their views of which choices go with which consequences.
 
 A distinguishing feature of decision making is the need to compare the consequences of multiple different options (see Section \ref{sec:assumptions}). In the setup we consider in this work, a decision maker is interested in making a single choice. After making their choice, they can observe the consequences of the option they chose, but they can only speculate about the consequences of all of the other options they had available. Thus, instead of observing an entire (stochastic) response function that maps choices to consequences, which is what they used to make the decision, they only observe the function's output for the particular choice they made. For example, if the decision maker is a person considering taking a medicine to help with a headache they can either take the medicine, in which case they never find out what would have happened if they didn't take it, or they could avoid the medicine and never learn the consequences of taking it.
 
-A simple case to consider where the decision maker can learn a function mapping their choices to consequences is when they face a choice that is, in the appropriate sense, repeated. Specifically, we suppose that there is a fixed response function that maps ``inputs'' to ``outputs''\footnote{a note on terminology: in this work, for practical reasons we say that the decision maker can make one \emph{choice} that determines the value of many \emph{inputs}, and observes many \emph{outputs} that together determine the overall \emph{consequences}.} and the decision maker has multiple opportunities to pick an input and observe the outputs. In this case, the decision maker can learn the entire function by trying each possible input a number of times. For example, if the person previously discussed frequently has headaches they could sometimes take the medicine and sometimes avoid it (these are the different inputs), and compare the subsequent course of each headache (the outputs).
+A simple case to consider where the decision maker can learn a function mapping their choices to consequences is when they face a choice that is, in the appropriate sense, repeated. Specifically, we suppose that there is a fixed response function that maps ``inputs'' to ``outputs'' and the decision maker has multiple opportunities to pick an input and observe the outputs. In this case, the decision maker can learn the entire function by trying each possible input a number of times. If the person previously discussed frequently has headaches, then whenever they have a headache they might sometimes take the medicine and sometimes avoid it. Under the assumption that the function that maps inputs (medicine) to outputs (headaches) is repeated, they can infer that the way their headaches respond to medicine in the future will be the same as the way they have responded to it in the past.
 
-However, it's not entirely clear what this assumption -- that the decision maker's choice determines inputs to repeated copies of a fixed response function -- actually means. Our headache-prone individual cannot examine the source code of the universe and find that some fixed function is called every time they have a headache and take (or avoid) medication for it. This assumption of a repeated response function plays a similar role to the assumption of independent and identically distributed (IID) data in traditional probabilistic inference. Just as the IID assumption underpins a great deal of theory and methods for probabilistic inference, the assumption of repeated response functions underpins many common models of causal inference, as will be discussed in Chapter \ref{ch:other_causal_frameworks}.
+However, it's not entirely clear what this assumption -- that the decision maker's choice determines inputs to repeated copies of a fixed response function -- actually means. The headache-prone individual cannot examine the source code of the universe and find that some fixed function is called every time they have a headache and take (or avoid) medication for it. This assumption of a repeated response function plays a similar role to the assumption of independent and identically distributed (IID) data in traditional probabilistic inference. Just as the IID assumption underpins a great deal of theory and methods for probabilistic inference, the assumption of repeated response functions underpins many common models of causal inference, as will be discussed in Chapter \ref{ch:other_causal_frameworks}.
 
 In comparison with the IID assumption, the assumption of repeated response functions is less often appropriate. Consider our headache-prone individual once more. For argument's sake, they might reasonably assume that their daily history of medication and subsequent headaches can be modeled by an IID sequence of pairs of variables $(\RV{X}_i,\RV{Y}_i)$ where $\RV{X}_i$ represents whether they took medication on day $i$ and $\RV{Y}_i$ the severity of their subsequent headache. The distribution of this sequence $\prob{P}$ will also induce a conditional distribution $\prob{P}^{\RV{Y}_1|\RV{X}_1}$ which is a response map from medication to outcomes. However, this is \emph{not} the stochastic map that this individual should use to help them make a decision today. Supposing that in the past they only took the medication when they had a headache, then most of the days on which they took no medication were days on which they had no headache to begin with; in this case, the conditional distribution $\prob{P}^{\RV{Y}_1|\RV{X}_1}$ may well indicate that they are much more likely to have headaches on days where they took the medication, even if the medication is in reality quite effective at relieving their pain.
 
 This story describes a standard case of confounding -- this person's experience of headaches after taking medication is confounded by whether or not they had a headache before taking it. Confounding is ubiquitous in situations in which people are trying to use data to inform choices, and is one of the major reasons for the aphorism ``correlation does not imply causation''.
 
-In summary, the assumption of repeated response functions is often a critical assumption for causal inference (like the assumption of IID variables in classical statistics), it is not clear exactly what justifies this assumption and it is often inappropriate. This chapter aims to clarify the justification for this assumption. In this chapter, we present results that facilitate an alternative interpretation of this assumption, which (to some extent) addresses the second point -- that it's not clear exactly what justifies the assumption of repeated response functions -- though rather than offering new practical justifications for the assumption of repeated response functions, the perspective we offer mainly reinforces the widely held view that this assumption is mostly inappropriate\footnote{It's very easy to find statements like ``this assumption seems unreasonably strong, but we have to make it if we want to work anything out'' -- see, for example, \citet[~pg. 11]{saarela_role_2020}, \citet[~pg. 579]{hernan_estimating_2006} or \citet[~pg. 40]{pearl_causality:_2009}. One can also find many criticisms of inappropriate use of this assumption, see for example \citet{muller_causal_2015} or \citet{berk_what_2010}.}.
+In summary, the assumption of repeated response functions is often a critical assumption for causal inference (like the assumption of IID variables in classical statistics). However, it is hard to make a positive case for this assumption and in many common cases it is clearly violated. The purpose of this chapter is to explore this issue in detail: when, and to what degree is the assumption at least reasonable, even if not justified in any absolute sense. In this chapter, we present results that facilitate an alternative interpretation of this assumption, which (to some extent) addresses the second point -- that it's not clear exactly what justifies the assumption of repeated response functions -- though rather than offering new practical justifications for the assumption of repeated response functions, the perspective we offer mainly reinforces the widely held view that this assumption is mostly inappropriate\footnote{It's very easy to find statements like ``this assumption seems unreasonably strong, but we have to make it if we want to work anything out'' -- see, for example, \citet[~pg. 11]{saarela_role_2020}, \citet[~pg. 579]{hernan_estimating_2006} or \citet[~pg. 40]{pearl_causality:_2009}. One can also find many criticisms of inappropriate use of this assumption, see for example \citet{muller_causal_2015} or \citet{berk_what_2010}.}.
 
-What we show is analogous to a well-known result of Bruno De Finetti for conditionally independent and identically distributed sequences of observations. De Finetti considered models where observations were given by repetitions of identical but unknown probability distributions, where we consider input-output pairs given by repetitions of identical but unknown stochastic functions. De Finetti shows that this structural assumption was equivalent to an assumption that the measurement procedure obeyed a certain symmetry. In particular, the assumption of conditionally independent and identically distributed sequences was appropriate precisely when the measurement procedure in question was, for the purposes of modelling, identical to any measurement procedure that proceeded in the same fashion but permuted the indices to which each observation was assigned\footnote{Note that this result does not apply in a non-Bayesian setting where we use sets of probability distributions rather than a single probability distribution to model observations. In this setting, the symmetry over measurement procedures described here does not imply the structural results of independent and identically distributed variables, see \citet[pg. 463]{walley_statistical_1991}. We consider the ``Bayesian'' setting here of a single stochastic function because it is simpler.}.
+What we show is analogous to a well-known result of Bruno De Finetti for conditionally independent and identically distributed sequences of observations. De Finetti considered models where observations were given by repetitions of identical but unknown probability distributions, where we consider input-output pairs given by repetitions of identical but unknown stochastic functions. De Finetti showed that this structural assumption was equivalent to an assumption that the measurement procedure obeyed a certain symmetry. In particular, the assumption of conditionally independent and identically distributed sequences was appropriate precisely when the measurement procedure in question was, for the purposes of modelling, identical to any measurement procedure that proceeded in the same fashion but permuted the indices to which each observation was assigned\footnote{Note that this result does not apply in a non-Bayesian setting where we use sets of probability distributions rather than a single probability distribution to model observations. In this setting, the symmetry over measurement procedures described here does not imply the structural results of independent and identically distributed variables, see \citet[pg. 463]{walley_statistical_1991}. We consider the ``Bayesian'' setting here of a single stochastic function because it is simpler.}.
 
 In this chapter, we examine symmetries of this sort. The key equivalence we show can be roughly stated in the following form: given a model of a sequence of input-output pairs, these pairs can be related by repeated response functions if and only if the distribution of finite sequences of outputs conditioned on a corresponding sequence of inputs \emph{and} an infinite history of other input-output pairs is unchanged under arbitrary permutations.
 
-The motivation of deriving this result was, in part, to consider alternative justifications for the assumption of repeated response functions. However, this result is, in our view, mostly negative. Our result implies, for example:
+The motivation for deriving this result was, in part, to consider alternative justifications for the assumption of repeated response functions. However, this result is, in our view, mostly negative. Our result implies, for example:
 \begin{itemize}
     \item Suppose we have sequence of input-output pairs from a well-conducted experiment and a similar sequence from passive observation, and want to predict a held-out experimental output; the assumption of repeatable response functions implies that the experimental and observational data are interchangeable for this purpose 
     \item Suppose we have sequence of input-output pairs from a well-conducted experiment, and are interested in predicting the consequences of our own plans under consideration; the assumption of repeatable response functions implies that this problem is essentially the same as predicting held-out experimental outputs
@@ -38,21 +36,9 @@ This chapter also has a preliminary investigation into repeated response functio
 
 \subsection{Chapter outline}
 
-This chapter introduces sequences of \emph{conditionally independent and identical response functions}, a precise term for what we refer to above as ``repeated response functions''. The key theorem in this chapter, Theorem \ref{th:ciid_rep_kernel}, relates the assumption of conditionally independent and identical response functions to a kind of symmetry which we call \emph{IO contractibility}. A model with data-independent actions features conditionally independent and identical response functions if and only if it is IO contractible. Theorem \ref{th:response_is_cc_hdep} introduces a more general notion of IO contractibility and relaxes the data-independent assumption, but comes with some different side conditions.
+This chapter introduces sequences of \emph{conditionally independent and identical response functions} (CIIR sequences), a precise term for what we refer to above as ``repeated response functions''. The key theorem in this chapter, Theorem \ref{th:ciid_rep_kernel}, relates the assumption of conditionally independent and identical response functions to a kind of symmetry which we call \emph{IO contractibility}. A model with data-independent actions features conditionally independent and identical response functions if and only if it is IO contractible. Theorem \ref{th:response_is_cc_hdep} introduces a more general notion of IO contractibility and relaxes the data-independent assumption, but comes with some different side conditions.
 
-Section \ref{sec:prev_work} surveys previous work, particularly related to symmetries of causal models. Section \ref{sec:response_functions} defines and explains the idea of conditionally independent and identical response functions. Section \ref{sec:ccontracibility} defines IO contractibility, as well as setting out key definitions, lemmas and the proof of Theorem \ref{th:ciid_rep_kernel}. Section \ref{sec:examples} presents a collection of examples that illustrate various features of models that are (or are not) IO contractible. Section \ref{sec:data_dependent} extends the work from Section \ref{sec:ccontracibility} to models where inputs can be data-dependent. The extension is dense and retreads a lot of ground already covered in a slightly different way, but Section \ref{sec:def_combs} introduces the notion of a comb, which is an extension of a conditional probability, that has applications in areas of causal inference beyond what is covered in this chapter, and this subsection stands on its own. Finally, some concluding remarks are in Section \ref{sec:discussion}.
-
-\subsection{Key terminology}
-
-$C$
-$\text{id}_C$
-inputs
-outputs
-$\prob{P}_C^{\RV{Y}|\RV{D}}$
-exchange commutative
-local
-IO contractible
-$\RV{H}$
+Section \ref{sec:prev_work} surveys previous work, particularly related to symmetries of causal models. Section \ref{sec:response_functions} defines and explains the idea of conditionally independent and identical response functions. Section \ref{sec:ccontracibility} defines IO contractibility, as well as setting out key definitions, lemmas and the proof of Theorem \ref{th:ciid_rep_kernel}. Section \ref{sec:symmetries_discussion} presents a collection of examples that illustrate various features of models that are (or are not) IO contractible. Section \ref{sec:data_dependent} extends the work from Section \ref{sec:ccontracibility} to models where inputs can be data-dependent. The extension is dense and retreads a lot of ground already covered in a slightly different way, but Section \ref{sec:def_combs} introduces the notion of a comb, which is an extension of a conditional probability, that has applications in areas of causal inference beyond what is covered in this chapter, and this subsection stands on its own. Finally, some concluding remarks are in Section \ref{sec:discussion}.
 
 
 \section{Previous work on causal symmetries}\label{sec:prev_work}
@@ -120,9 +106,13 @@ The definitions follow.
 
 Call a model $\prob{P}_C$ with sequential outputs $\RV{Y}$ and a corresponding sequence of inputs $\RV{D}$ a ``sequential input-output model''.
 
-\begin{definition}[Sequential input-output model]
-A \emph{sequential input-output model} is a triple $(\prob{P}_C,\RV{D},\RV{Y})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{D}$ is a sequence of ``inputs'' $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}$ is a corresponding sequence of ``outputs'' $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$ where $\RV{D}_i:\Omega\to D$ and $\RV{Y}_i:\Omega\to Y$.
+\begin{definition}[Sequential input-output model]\label{def:seq_io}
+A \emph{sequential input-output model} is a triple $((\prob{P}_\cdot,(\Omega,\sigalg{F}),(C,\sigalg{C})),\RV{D},\RV{Y})$ where $(\prob{P}_\cdot,(\Omega,\sigalg{F}),(C,\sigalg{C}))$ is a decision model, $\RV{D}$ is a sequence of ``inputs'' $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}$ is a corresponding sequence of ``outputs'' $\RV{Y}=(\RV{Y}_i)_{i\in\mathbb{N}}$ where $\RV{D}_i:\Omega\to D$ and $\RV{Y}_i:\Omega\to Y$.
 \end{definition}
+
+\begin{notation}
+We use the shorthand $(\prob{P}_C,\RV{D},\RV{Y})$ to refer to a sequential input-output model $((\prob{P}_\cdot,(\Omega,\sigalg{F}),(C,\sigalg{C})),\RV{D},\RV{Y})$, with $(\Omega,\sigalg{F})$ implicit.
+\end{notation}
 
 Locality holds with respect to some auxiliary variable $\RV{W}$ when an output $i$ is independent of future inputs, conditioned on the corresponding input $i$ and $\RV{W}$.
 
@@ -131,15 +121,19 @@ Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ along with so
 \begin{align}
     \tikzfig{local_lhs} &= \tikzfig{local_rhs}\\
     &\iff\\
-    \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(\bigtimes_{i\in [n]} A_i\times Y^{\mathbb{N}}|w, x_{[n]},x_{[n]^C}) &= \prob{P}_C^{\RV{Y}_{[n]}|\RV{WD}_{[n]}}(\bigtimes_{i\in [n]} A_i|w,x_{[n]}) \\&  \forall A_i\in \sigalg{Y},(x_{[n]},x_{[n]^C})\in\mathbb{N},w\in W
+    \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(\bigtimes_{i\in [n]} A_i\times Y^{\mathbb{N}}|w, x_{[n]},x_{[n]^{\complement}}) &= \prob{P}_C^{\RV{Y}_{[n]}|\RV{WD}_{[n]}}(\bigtimes_{i\in [n]} A_i|w,x_{[n]}) \\&  \forall A_i\in \sigalg{Y},(x_{[n]},x_{[n]^{\complement}})\in\mathbb{N},w\in W
 \end{align}
 That is, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{X}_{(i,\infty)}|(\RV{W},\RV{X}_i,\text{id}_C)$.
 \end{definition}
 
 Exchange commutativity holds with respect to some auxiliary variable $\RV{W}$ when swapping input, output pairs doesn't alter the conditional distribution of outputs given inputs. 
 
+\begin{notation}
+Given a sequence $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$ and a permutation $\rho:\mathbb{N}\to\mathbb{N}$, the permuted sequence $\RV{Y}_{\rho}$ is defined to be $(\RV{Y}_{\rho(i)})_{i\in\mathbb{N}}$.
+\end{notation}
+
 \begin{definition}[Exchange commutativity]\label{def:caus_exch}
-Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ along with some $\RV{W}:\Omega\to W$, we say $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ \emph{commutes with exchange} over $\RV{W}$ if for all finite permutations $\rho:\mathbb{N}\to\mathbb{N}$
+Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ along with some $\RV{W}:\Omega\to W$, $\alpha\in C$ we say $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ \emph{commutes with exchange} over $\RV{W}$ if for all finite permutations $\rho:\mathbb{N}\to\mathbb{N}$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}_\rho|\RV{WD}_\rho} &=  \prob{P}_\alpha^{\RV{Y}|\RV{WD}}
 \end{align}
@@ -148,164 +142,49 @@ Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ along with so
 IO contractibility is the conjunction of both previous assumptions.
 
 \begin{definition}[IO contractibility]\label{def:ccontract}
-Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ along with some $\RV{W}:\Omega\to W$, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is \emph{IO contractible} over $\RV{W}$ if it is local and commutes with exchange.
+Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ along with some $\RV{W}:\Omega\to W$, $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is \emph{IO contractible} over $\RV{W}$ if it is local and commutes with exchange.
 \end{definition}
 
-An input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ IO contractible over $\RV{W}$ can be ``contracted'' to some subsequence of $\RV{D}$ and $\RV{Y}$, and for any two subsequences $A,B\subset\mathbb{N}$, provided the subsequences are of equal length, the distribution of $\RV{Y}_A$ given $\RV{W}$ and $\RV{X}_A$ will be the same as the distribution of $\RV{Y}_B$ given $\RV{W}$ and $\RV{X}_B$ (Theorem \ref{th:equal_of_condits}). This feature is the motivation for the name \emph{IO contractibility}. 
-
-Theorem \ref{th:no_implication} shows that exchange commutativity and locality are independent assumptions.
-
-Before these theorems are proved, the following definition and Lemma will prove helpful.
-
-All swaps can be written as a product of transpositions, so proving that a property holds for all finite transpositions is enough to show it holds for all finite swaps. It's useful to define a notation for transpositions.
-\begin{definition}[Finite transposition]
-Given two equally sized sequences $A=(a_i)_{i\in [n]}$, $B=(b_i)_{i\in [n]}$, ${A\leftrightarrow B}:\mathbb{N}\to \mathbb{N}$ is the permutation that sends the $i$th element of $A$ to the $i$th element of $B$ and vise versa. Note that $A\leftrightarrow B$ is its own inverse.
-\end{definition}
-
-Lemma \ref{lem:infinitely_extended_kernels} is used to extend conditional probabilities of finite sequences to infinite ones.
-
-\begin{lemma}[Infinitely extended kernels]\label{lem:infinitely_extended_kernels}
-Given a collection of Markov kernels $\kernel{K}_i:W\times X^{\mathbb{N}}\kto Y^i$ for all $i\in \mathbb{N}$, if we have for every $j>i$
-\begin{align}
-    \kernel{K}_j(\text{id}_{Y^i}\otimes \text{Del}_{Y^{j-i}}) &= \kernel{K}_i\otimes \text{Del}_{X^{j-i}}\label{eq:marginalise_comb}
-\end{align} 
-then there is a unique Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ such that for all $i,j\in \mathbb{N}$,$j>i$
-\begin{align}
-    \kernel{K}(\text{id}_{Y^i}\otimes \text{Del}_{Y^{\mathbb{N}}})&= \kernel{K}_i\otimes \text{Del}_{X^{j-i}}
-\end{align}
-\end{lemma}
-
-\begin{proof}
-Take any $x\in X^{\mathbb{N}}$ and let $x_{|m}\in X^n$ be the first $n$ elements of $x$. By Equation \eqref{eq:marginalise_comb}, for any $A_i\in \sigalg{Y}$, $i\in [m]$
-\begin{align}
-    \kernel{K}_n(\bigtimes_{i\in [m]}A_i\times Y^{n-m}|x_{|n}) &= \kernel{K}_m(\bigtimes_{i\in [m]}A_i|x_{|m})
-\end{align}
-
-Furthermore, by the definition of the $\mathrm{Swap}$ map for any permutation $\rho:[n]\to[n]$
-\begin{align}
-    \kernel{K}_n\mathrm{Swap}_{\rho}(\bigtimes_{i\in [m]}A_{\rho(i)}\times Y^{n-m}|x_{|n}) &= \kernel{K}_n(\bigtimes_{i\in [m]}A_{i}\times Y^{n-m}|x_{|n})
-\end{align}
-thus by the Kolmogorov Extension Theorem \citep{cinlar_probability_2011}, for each $x\in X^{\mathbb{N}}$ there is a unique probability measure $\prob{Q}_x\in \Delta(Y^{\mathbb{N}}$ satisfying
-\begin{align}
-    \prob{Q}_d(\bigtimes_{i\in [n]}A_i\times Y^{\mathbb{N}}) &= \kernel{K}_n(\bigtimes_{i\in [n]}A_{\rho(i)}|d_{|n})\label{eq:q_is_Markov}
-\end{align}
-
-Furthermore, for each $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$, $n\in \mathbb{N}$ note that for $p>n$
-\begin{align}
-\prob{Q}_d(\bigtimes_{i\in[n]} A_i \times Y^{\mathbb{N}})&\geq \prob{Q}_d(\bigtimes_{i\in [p]} A_i\times Y^{\mathbb{N}})\\
-&\geq \prob{Q}_d(\bigtimes_{i\in \mathbb{N}} A_i)
-\end{align}
-so by the Monotone convergence theorem, the sequence $\prob{Q}_d(\bigtimes_{i\in[n]} A_i)$ converges as $n\to \infty$ to $\prob{Q}_d(\bigtimes_{i\in\mathbb{N}} A_i)$. $d\mapsto \prob{Q}_d^{\RV{Z}_n}(\bigtimes_{i\in[n]} A_i)$ is measurable for all $n$, $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$ by Equation \eqref{eq:q_is_Markov}, and so $d\mapsto Q_d$ is also measurable.
-
-Thus $d\mapsto Q_d$ is the desired $\prob{P}_C^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}:D^\mathbb{N}\kto Y^\mathbb{N}$.
-\end{proof}
-
-\begin{corollary}\label{cor:equal_subconditionals}
-Given $(\prob{P}_C,\Omega,\sigalg{F})$, $\RV{V}:\Omega\to V$ and two pairs of sequences $(\RV{W},\RV{X}):=(\RV{W}_i,\RV{X}_i)_{i\in\mathbb{N}}$ and $(\RV{Y},\RV{Z}):=(\RV{Y}_i,\RV{Z}_i)_{i\in \mathbb{N}}$ with corresponding variables taking values in the same sets $W=Y$ and $X=Z$, if $(\prob{P}_C,\RV{W},\RV{X})$ and $(\prob{P}_C,\RV{Y},\RV{Z})$ are both local over $\RV{W}$ and
-\begin{align}
-    \prob{P}^{\RV{X}_{[n]}|\RV{V}\RV{W}_{[n]}} &= \prob{P}^{\RV{Z}_{[n]}|\RV{V}\RV{Y}_{[n]}}
-\end{align}
-for all $n\in\mathbb{N}$ then
-\begin{align}
-    \prob{P}^{\RV{X}|\RV{V}\RV{W}} &= \prob{P}^{\RV{Z}|\RV{V}\RV{Y}}
-\end{align}
-\end{corollary}
-
-\begin{proof}
-By assumption of locality
-\begin{align}
-    \prob{P}^{\RV{X}_{[n]}|\RV{V}\RV{W}_{[n]}}\otimes\mathrm{Del}_{W^\mathbb{N}} &= \prob{P}^{\RV{X}|\RV{V}\RV{W}}(\mathrm{id}_{X^n}\otimes \mathrm{Del}_{X^{\mathbb{N}}})\\
-    \prob{P}^{\RV{Z}_{[n]}|\RV{V}\RV{Y}_{[n]}}\otimes\mathrm{Del}_{W^\mathbb{N}} &= \prob{P}^{\RV{Z}|\RV{V}\RV{Y}}(\mathrm{id}_{X^n}\otimes \mathrm{Del}_{X^{\mathbb{N}}})
-\end{align}
-hence for all $n,m>n$
-\begin{align}
-    \prob{P}^{\RV{X}_{[m]}|\RV{V}\RV{W}_{[m]}}(\mathrm{id}_{X^n}\otimes \mathrm{Del}_{X^{m-n}}) &= \prob{P}^{\RV{Z}_{[m]}|\RV{V}\RV{Y}_{[m]}}(\mathrm{id}_{X^n}\otimes \mathrm{Del}_{X^{m-n}})\\
-    &= \prob{P}^{\RV{X}_{[n]}|\RV{V}\RV{W}_{[n]}}\otimes\mathrm{Del}_{W^{m-n}}
-\end{align}
-and, in particular, by lemma \ref{lem:infinitely_extended_kernels}, $\prob{P}^{\RV{X}|\RV{V}\RV{W}}$ and $\prob{P}^{\RV{Z}|\RV{V}\RV{Y}}$ are the limits of the same sequence.
-\end{proof}
-
-\begin{lemma}[Alternative definition of exchange commutativity]
-A sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ along with some $\RV{W}:\Omega\to W$ commutes with exchange over $\RV{W}$ if and only if for every $\alpha$, every finite permutation $\rho:\mathbb{N}\to\mathbb{N}$ and corresponding swap map $\mathrm{Swap}_\rho:X^{\mathbb{N}}\kto X^{\mathbb{N}}$
-\begin{align}
-    \tikzfig{exch_com_lhs} &= \tikzfig{exch_com_rhs}
-\end{align}
-\end{lemma}
-
-\begin{proof}
-This follows from the fact that
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_\rho|\RV{W}\RV{D}_{\rho}} = \tikzfig{exch_com_rhs}
-\end{align}
-To see this, note that
-\begin{align}
-    &\tikzfig{exch_com_rhs}(\bigtimes_{i\in \mathbb{N}} A_i|w,(d_i)_\mathbb{N})\\
-     &= \prob{P}_\alpha^{\RV{Y}|\RV{W}\RV{D}}(\bigtimes_{i\in \mathbb{N}}A_{\rho^{-1}(i)}|w,(d_{\rho^{-1}(i)})_\mathbb{N})\\
-    &= \prob{P}_\alpha^{\RV{Y}_\rho|\RV{W}\RV{D}_\rho}(\bigtimes_{i\in \mathbb{N}}A_i|w,(d_i)_\mathbb{N})
-\end{align}
-\end{proof}
-
-Theorem \ref{th:equal_of_condits} provides an alternative characterization of IO contractibility in terms of the equality of the conditional distributions of sub-sequences.
+If $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ IO contractible over $\RV{W}$, then for any subsequences $A,B\subset\mathbb{N}$ with $|A|=|B|$, we have $\prob{P}_\alpha^{\RV{Y}_A|\RV{WD}_A}=\prob{P}_\alpha^{\RV{Y}_B|\RV{WD}_B}$. In fact, Theorem \ref{th:equal_of_condits} shows a stronger condition: if we take $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ and multiply it by $\text{del}_{A^{\complement}}$ which erases all the indices in $A^{\complement}$, we get the same result as multiplying $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ by $\text{del}_{B^{\complement}}$. The fact that arbitrary contractions of the sequence yield the same result motivates the name \emph{IO contractibility}. 
 
 \begin{theorem}[Equality of equally sized contractions]\label{th:equal_of_condits}
-A sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is IO contractible over $\RV{W}$ if and only if for and every subsequence $A=(A_i)_{i\in |A|}$ and $B=(B_i)_{i\in |A|}$ with $i\neq j\implies A_i\neq A_j$ and $B_i\neq B_j$ and every $\alpha$
+Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ and some $\RV{W}$, $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible over $\RV{W}$ if and only if for all subsequences $A,B\subset \mathbb{N}^{|A|}$ and for every $\alpha$
 \begin{align}
-    \prob{P}_\alpha^{\RV{Y}_A|\RV{WD}_{A\leftrightarrow [|A|]}} &= \prob{P}_\alpha^{\RV{Y}_B|\RV{WD}_{B\leftrightarrow [|A|]}}\\
-    &= \prob{P}_\alpha^{\RV{Y}_A|\RV{WD}_A}\otimes \text{Del}_{D^{|\mathbb{N}\setminus A}|}
+    \prob{P}_\alpha^{\RV{Y}_A|\RV{WD}_{A,\mathbb{N}\setminus A}} &= \prob{P}_\alpha^{\RV{Y}_B|\RV{WD}_{B,\mathbb{N}\setminus B}}\\
+    &= \prob{P}_\alpha^{\RV{Y}_A|\RV{WD}_A}\otimes \text{del}_{D^{|\mathbb{N}\setminus A|}}
 \end{align}
-where $[|A|]$ is the sequence $(1,2,...,|A|)$ for finite $A$ or $(1,2,...)$ for infinite $A$.
 \end{theorem}
 
 \begin{proof}
-Only if:
-If $A$ is finite, then by exchange commutativity
-\begin{align}
-        \prob{P}_\alpha^{\RV{Y}_A|\RV{WD_{A\leftrightarrow [n]}}} &= \prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{WD}}\\
-        &= \prob{P}_\alpha^{\RV{Y}_B|\RV{WD_{B\leftrightarrow [n]}}}
-\end{align}
-if $A$ is infinite, then we can take finite subsequences $A_m$ that are the first $m$ elements of $A$. Then
-\begin{align}
-            \prob{P}_\alpha^{\RV{Y}_{A_m}|\RV{WD_{A_m\leftrightarrow [m]}}} &= \prob{P}_\alpha^{\RV{Y}_{[m]}|\RV{WD}}\\
-        &= \prob{P}_\alpha^{\RV{Y}_{B_m}|\RV{WD_{B_m\leftrightarrow [m]}}}
-\end{align}
-then by Corollary \ref{cor:equal_subconditionals}
-\begin{align}
-\prob{P}_\alpha^{\RV{Y}_A|\RV{WD_{A\leftrightarrow [n]}}}=\prob{P}_\alpha^{\RV{Y}_{B_m}|\RV{WD_{B_m\leftrightarrow [m]}}}
-\end{align}
-
-By locality
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_A|\RV{WD_{A\leftrightarrow [n]}}} &= \prob{P}_\alpha^{\RV{Y}_A|\RV{WD}_A}\otimes \text{Del}_{D^{|\mathbb{N}\setminus A}}
-\end{align}
-
-If:
-Taking $A=[n]$ for all $n$ establishes locality, and taking $A=(\rho(i))_{i\in \mathbb{N}}$ for arbitrary finite permutation $\rho$ establishes exchange commutativity.
+Appendix \ref{sec:io_contract_proof}
 \end{proof}
 
 Theorem \ref{th:no_implication} shows that neither locality nor exchange commutativity is implied by the other.
 
 \begin{theorem}\label{th:no_implication}
-Exchange commutativity does not imply locality or vise versa.
+Exchange commutativity does not imply locality or vice versa.
 \end{theorem}
 
 \begin{proof}
+We prove the claim by way of presenting counterexamples.
+
 First, a model that exhibits exchange commutativity but not locality. Suppose $D=Y=\{0,1\}$ and $\prob{P}_C^{\RV{Y}|\RV{D}}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is given by
 \begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{D}}(\bigtimes_{i\in\mathbb{N}} A_i |(d_i)_{i\in\mathbb{N}}) &= \prod_{i\in \mathbb{N}} \delta_{\lim_{n\to\infty} \sum_{i}^{\mathbb{N}} \frac{d_i}{n}}(A_i)
+    \prob{P}_C^{\RV{Y}|\RV{D}}(\bigtimes_{i\in\mathbb{N}} A_i |(d_i)_{i\in\mathbb{N}}) &= \prod_{i\in \mathbb{N}} \delta_{\lim_{n\to\infty} \sum_{i\in\mathbb{N}} \frac{d_i}{n}}(A_i)
 \end{align}
-then 
+for some sequence $(d_i)_{i\in\mathbb{N}}$ such that this limit exists. Then for any finite permutation $\rho$
 \begin{align}
-    \prob{P}_C^{\RV{Y}_\rho|\RV{D}_\rho}(\bigtimes_{i\in\mathbb{N}} A_i |(d_i)_{i\in\mathbb{N}}) &= \prod_{i\in \mathbb{N}} \delta_{\lim_{n\to\infty} \sum_{i}^{\mathbb{N}} \frac{d_{\rho^{-1}(i)}}{n}}(A_{\rho^{-1}(i)})\\
+    \prob{P}_C^{\RV{Y}_\rho|\RV{D}_\rho}(\bigtimes_{i\in\mathbb{N}} A_i |(d_i)_{i\in\mathbb{N}}) &= \prod_{i\in \mathbb{N}} \delta_{\lim_{n\to\infty} \sum_{i\in\mathbb{N}} \frac{d_{\rho^{-1}(i)}}{n}}(A_{\rho^{-1}(i)})\\
     &= \prob{P}_C^{\RV{Y}|\RV{D}}(\bigtimes_{i\in\mathbb{N}} A_i |(d_i)_{i\in\mathbb{N}})
 \end{align}
 so $(\prob{P}_C,\RV{D},\RV{Y})$ commutes with exchange, but
 \begin{align}
-    \prob{P}_C^{\RV{Y}_1|\RV{D}}(\bigtimes_{i\in\mathbb{N}} A_i |0,1,1,1....) &= \delta_1(A_i)\\
-    \prob{P}_C^{\RV{Y}_1|\RV{D}}(\bigtimes_{i\in\mathbb{N}} A_i |0,0,0,0....) &= \delta_0(A_i)
+    \prob{P}_C^{\RV{Y}_1|\RV{D}}(A_1 |0,1,1,1....) &= \delta_1(A_1)\\
+    \prob{P}_C^{\RV{Y}_1|\RV{D}}(A_1 |0,0,0,0....) &= \delta_0(A_1)
 \end{align}
 so $(\prob{P}_C,\RV{D},\RV{Y})$ is not local.
 
-Next, a Markov kernel that satisfies locality but does not commute with exchange. Suppose again $D=Y=\{0,1\}$ and $\prob{P}_C^{\RV{Y}|\RV{D}}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is given by
+Next, a model that satisfies locality but does not commute with exchange. Suppose again $D=Y=\{0,1\}$ and $\prob{P}_C^{\RV{Y}|\RV{D}}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is given by
 \begin{align}
     \prob{P}_C^{\RV{Y}|\RV{D}}(\bigtimes_{i\in\mathbb{N}} A_i |(d_i)_{i\in\mathbb{N}}) &= \prod_{i\in \mathbb{N}} \delta_i(A_i)
 \end{align}
@@ -327,7 +206,7 @@ Theorem \ref{th:no_implication} presents abstract counterexamples to show that t
 
 A model of strategic behaviour could satisfy exchange commutativity but not locality. Suppose a decision maker is observing people playing a game where they press a red or green button, and (for reasons mysterious to the decision maker), receive a payout randomly of 0 or \$100. The decision maker might reason that the results should be the same no matter who presses a button, but also that people will be more likely to press the red button if the red button tends to give a higher payout. In this case, the decision maker's prediction for the payout of the $i$th attempt given the red button has been pressed will be higher if the proportion of red button presses in the entire dataset is higher. There are other reasons why exchange commutativity might hold but not locality -- \citet{dawid_causal_2000} offers the alternative example of herd immunity in vaccination campaigns. In this case, the overall proportion of the population vaccinated will affect the disease prevalence over and above an individual's vaccination status.
 
-Although locality could be described as an assumption that there is no interference between inputs and outputs of different indices, it actually allows for some models with certain kinds of interference between inputs and non-corresponding. For example: consider an experiment where I first flip a coin and record the results of this flip as the outcome $\RV{Y}_1$ of ``step 1''. Subsequently, I can either copy the outcome from step 1 to the result for ``step 2'' (this is the input $\RV{D}_1=0$), or flip a second coin use this as the input for step 2 (this is the input $\RV{D}_1=1$). $\RV{D}_2$ is an arbitrary single-valued variable. Then for all $d_1, d_2$
+Although locality could be described as an assumption that there is no interference between inputs and outputs of different indices, it actually allows for some models with certain kinds of interference between inputs and non-corresponding outputs. For example: consider an experiment where I first flip a coin and record the results of this flip as the outcome $\RV{Y}_1$ of ``step 1''. Subsequently, I can either copy the outcome from step 1 to the result for ``step 2'' (this is the input $\RV{D}_1=0$), or flip a second coin use this as the input for step 2 (this is the input $\RV{D}_1=1$). $\RV{D}_2$ is an arbitrary single-valued variable. Then for all $d_1, d_2$
 \begin{align}
     \prob{P}^{\RV{Y}_1|\RV{D}}(y_1|d_1,d_2) &= 0.5\\
     \prob{P}^{\RV{Y}_2|\RV{D}}(y_2|d_1,d_2) &= 0.5
@@ -336,11 +215,11 @@ Thus the marginal distribution of both experiments in isolation is $\text{Bernou
 
 \subsection[Representation of IO contractible models]{Representation of IO contractible models}\label{sec:rep_theorem}
 
-Theorem \ref{th:table_rep_kernel} shows that a IO contractible conditional distribution can be represented as the product of a column exchangeable probability distribution and a ``lookup function'' or ``switch''. This lookup function is also used in the representation of potential outcomes models (see, for example, \citet{rubin_causal_2005}), but potential outcomes also carry an interpretation that is absent here.. This theorem allows De Finetti's theorem to be applied to the column exchangeable probability distribution, which is a key step in proving the main result (Theorem \ref{th:ciid_rep_kernel}).
+In this section, we prove the main Theorem \ref{th:ciid_rep_kernel}, which shows that a sequence of inputs and corresponding outputs features conditionally independent and identical responses if and only if the conditional distribution of the outputs given the inputs is IO contractible over some variable $\RV{W}$.
 
-We reuse a number of concepts in the following work: models with sequences of inputs and outputs, ``tabulated'' representations of conditional probabilities and ``hypothesis'' or ``directing measures'' defined as the limit of relative frequencies.
+We make use of a number of concepts in the following work: models with sequences of inputs and outputs, ``tabulated'' representations of conditional probabilities and ``hypotheses'' or ``directing measures'' defined as the limit of relative frequencies. These are all defined below.
 
-\begin{definition}[Count of input values]
+\begin{definition}[Count of input values]\label{def:count_of_inputs}
 Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ on $(\Omega,\sigalg{F})$ with countable $D$, $\#_{j}^k$ is the variable
 \begin{align}
     \#_{j}^k := \sum_{i=1}^{k-1} \llbracket \RV{D}_i = j \rrbracket
@@ -360,7 +239,7 @@ That is, the $(i,j)$-th coordinate of $\RV{Y}^D(\omega)$ is equal to the coordin
 Given a measurable set $(\Omega,\sigalg{F})$, the measurable set of distributions on $\Omega$, $\mathcal{M}_1(\Omega)$, is the set of all probability distributions on $\Omega$ equipped with the coarsest $\sigma$-algebra such that the evaluation maps $\eta_B:\nu\mapsto \nu(B)$ are measurable for all $B\in \sigalg{F}$.
 \end{definition}
 
-We define the \emph{directing random measure} of a sequence of variables as the limit of normalised partial sums of variables in the sequence. We refer to directing random measures with the letter $\RV{H}$ by default. We also define $\RV{H}$ in the case that the relevant limit does not exist for completeness, although we are only interested in cases where it is well-defined. Definition \ref{def:dir_rand_meas} reduces to the definition of a directing random measure given in \citet{kallenberg_basic_2005} when we consider a probability space instead of a probability set.
+We define the \emph{directing random measure} of a sequence of variables as the map from a set to the limit of normalised partial sums of indicator functions over that set, where that limit exists. We refer to directing random measures with the letter $\RV{H}$ by default, and treat it like a hypothesis -- under appropriate conditions, the directing random measure $\RV{H}$ is almost surely equal to the distribution of any variable in the sequence conditional on $\RV{H}$. We also define $\RV{H}$ in the case that the relevant limit does not exist for completeness, although we are only interested in cases where the limit does exist. Definition \ref{def:dir_rand_meas} reduces to the definition of a directing random measure given in \citet{kallenberg_basic_2005} when we consider a probability space instead of a probability set.
 
 \begin{definition}[Directing random measure]\label{def:dir_rand_meas}
 Given a probability set $(\prob{P}_C,\Omega,\sigalg{F})$ and a sequence $\RV{X}:=(\RV{X}_i)_{i\in\mathbb{N}}$, the directing random measure of $\RV{X}$ written $\RV{H}:\Omega\to \mathcal{M}_1(X)$ is the function
@@ -384,7 +263,7 @@ Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$, we will say 
 \end{align}
 \end{definition}
 
-We say a model observes data-independence when future inputs are independent of outputs conditional on past inputs and the directing measure $\RV{H}$.
+We say a model satisfies data-independence when future inputs are independent of outputs conditional on past inputs and the directing measure $\RV{H}$. This makes the analysis much easier, but it rules out the analysis of decision rules that depend in some non-symmetric way on the input-output sequence (or on finite subsequences).
 
 \begin{definition}[Data-independent]\label{def:weak_di}
 A sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is weakly data-independent if $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}|(\RV{H},\RV{D}_{[1,i]},\text{id}_C)$.
@@ -396,10 +275,17 @@ A finite permutation of rows is a function that independently permutes a finite 
 Given a sequence of indices $(i,j)_{i\in \mathbb{N},j\in D}$ a finite permutation of rows is a function $\eta:\mathbb{N}\times D\to \mathbb{N}\times D$ such that for each $j\in D$, $\eta_j:=\eta(\cdot,j)$ is a finite permutation $\mathbb{N}\to \mathbb{N}$ and $\eta(i,j)=(\eta_j(i),j)$.
 \end{definition}
 
-There is an assumption in the following theorem that the set of input sequences in which each value appears infinitely often has measure 1, which is needed in the main Theorem \ref{th:ciid_rep_kernel} to guarantee that the hypothesis $\RV{H}$ is a function of the observable variables.
+Lemma \ref{th:table_rep_kernel} shows that a IO contractible conditional distribution can be represented as the product of a column exchangeable probability distribution and a ``lookup function'' or ``switch''. This lookup function is also used in the representation of potential outcomes models (see, for example, \citet{rubin_causal_2005}), but interpreting such a model as potential outcomes requires additional assumptions we don't make here. By representing a conditional probability as an exchangeable regular probability distribution, we can apply De Finetti's, which is a key step in proving the main result of Theorem \ref{th:ciid_rep_kernel}.
 
-\begin{theorem}\label{th:table_rep_kernel}
-Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable and, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}}(E)=1$ for all $\alpha$. Then for some $\RV{W}$, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible if and only if for all $\alpha$
+To prove Lemma \ref{th:table_rep_kernel}, we assume that the set of input sequences in which each value appears infinitely often has measure 1 for every option in $C$. Without this assumption, the tabulated conditional $\RV{Y}^D$ cannot be a function of the inputs $\RV{D}$ and outputs $\RV{Y}$ as there would be some values of the inputs which would not be seen often enough. Without this assumption, $\RV{Y}^D$ may not be uniquely defined. We call this side condition \emph{infinite support}.
+
+\begin{definition}[Infinite support]
+Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $D$ countable if, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}|\RV{W}}(E|w)=1$ for all $\alpha,w$, then we say $\RV{D}$ is \emph{infinitely supported over }$\RV{W}$.
+\end{definition}
+
+
+\begin{lemma}\label{th:table_rep_kernel}
+Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable and $\RV{D}$ infinitely supported over $\RV{W}$. Then for some $\RV{W}$, $\alpha$, $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible if and only if
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel}\\
     &\iff\\
@@ -414,482 +300,126 @@ and for any finite permutation of rows $\eta:\mathbb{N}\times D\to \mathbb{N}\ti
 \begin{align}
     \prob{P}_\alpha^{(\RV{Y}^D_{ij})_{\mathbb{N}\times D}|\RV{W}}&= \prob{P}_\alpha^{(\RV{Y}^D_{\eta(i,j)})_{\mathbb{N}\times D}|\RV{W}}\label{eq:col_exch}
 \end{align}
-\end{theorem}
+\end{lemma}
 
 \begin{proof}
-Only if:
-Note that at most one of $\llbracket \#_j^k = i-1\rrbracket\llbracket \RV{D}_k=j\rrbracket$ and $\llbracket \#_j^l = i-1\rrbracket\llbracket \RV{D}_l=j\rrbracket$ can be greater than 0 for $k\neq l$ and, by assumption, $\sum_{j\in D}\sum_{k\in \mathbb{N}} \llbracket \#_j^k = i-1\rrbracket\llbracket \RV{D}_k=j\rrbracket=1$ almost surely (that is, for any $i,j$ there is some $k$ such that $\RV{D}_k$ is the $i$th occurrence of $j$). Define $\RV{R}_k:\Omega\to \mathbb{N}\times D$ by $\omega \mapsto \argmax_{i\in\mathbb{N},j\in D} \llbracket \#_j^k = i-1\rrbracket\llbracket \RV{D}_k=j\rrbracket(\omega)$ (i.e. $\RV{R}_k$ returns the $(i,j)$ pair where $j$ is the value of $\RV{D}_k$ and $i$ is the count of $j$ occurrences up to $\RV{D}_k$). Let $\RV{R}:\mathbb{N}\to \mathbb{N}\times D$ by $k\mapsto \RV{R}_k$. $\RV{R}$ is almost surely bijective and 
-\begin{align}
-    \RV{Y}^D&:= (\RV{Y}^D_{ij})_{i\in \mathbb{N},j\in D}\\
-    &= (\RV{Y}_{\RV{R}^{-1}(i,j)})_{i\in \mathbb{N},j\in D}\\
-    &=: \RV{Y}_{\RV{R}^{-1}|\RV{W}}
-\end{align}
+Only if: We define a random invertible function $\RV{R}:\Omega\times \mathbb{N}\to \mathbb{N}\times {D}$ that reorders the indicies so that, for $i\in \mathbb{N},j\in D$, $\RV{D}_{\RV{R}^{-1}(i,j)}=j$ almost surely. We then use IO contractibility to show that $\prob{P}_\alpha^{\RV{Y}|\RV{D}}(\cdot|d)$ is equal to the distribution of the elements of $\RV{Y}^D$ selected according to $d\in D^{\mathbb{N}}$.
 
-By construction, $\RV{D}_{\RV{R}^{-1}(i,j)}=j$ almost surely; that is, $\RV{D}_{\RV{R}^{-1}}$ is a single-valued variable. In particular, it is almost surely equal to $e:=(e_{ij})_{i\in\mathbb{N},j\in D}$ such that $e_{ij}=j$ for all $i$. Hence
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}^D|\RV{W}\RV{D}_{\RV{R}^{-1}}}(A|w,d)&= \prob{P}_\alpha^{\RV{Y}_{\RV{R}^{-1}}|\RV{W}\RV{D}_{\RV{R}^{-1}}}(A|w,d)\\
-    &\overset{\prob{P}_C}{\cong} \prob{P}_\alpha^{\RV{Y}_{\RV{R}^{-1}}|\RV{W}\RV{D}_{\RV{R}^{-1}}}(A|e,w)\label{eq:yd_is_indep}\\
-    &= \prob{P}_\alpha^{\RV{Y}^D}(A|w)\label{eq:yd_dist}
-\end{align}
-for any $d\in D^{\mathbb{N}}$. Equation \eqref{eq:yd_is_indep} implies $\RV{Y}^D\CI \RV{D}|(\RV{W},\text{id}_C)$.
+If: We construct a conditional probability according to Definition \ref{def:tab_cd} and verify that it satisfies IO contractibility.
 
-Now,
-\begin{align}
-    \prob{P}^{\RV{Y}_{\RV{R}^{-1}}|\RV{W}\RV{D}_{\RV{R}^{-1}}}_\alpha(A|w,d) &= \int_R \prob{P}_\alpha^{\RV{Y}_\rho|\RV{W}\RV{D}_{\rho}}(A|d)\prob{P}_\alpha^{\RV{R}^{-1}|\RV{W}\RV{D}_{\RV{R}^{-1}}}(\mathrm{d}\rho|w,d)\label{eq:need_ccont}\\
-\end{align}
-For each $\rho$, define $\rho^n:\mathbb{N}\to \mathbb{N}$ as the finite permutation that agrees with $\rho$ on the first $n$ indices and is the identity otherwise. By IO contractibility, for $n\in \mathbb{N}$
-\begin{align}
-    \prob{P}^{\RV{Y}_{\rho^n([n])}|\RV{D}_{\rho^n([n])}} &= \prob{P}^{\RV{Y}_{\rho([n])}|\RV{D}_{\rho([n])}}\\
-    &= \prob{P}^{\RV{Y}_{[n]}|\RV{D}_{[n]}}
-\end{align}
-By Corollary \ref{cor:equal_subconditionals}, it must therefore be the case that
-\begin{align}
-    \prob{P}^{\RV{Y}|\RV{D}} = \prob{P}^{\RV{Y}_{\rho}|\RV{D}_{\rho}}
-\end{align}
-Then from Equation \eqref{eq:need_ccont}
-\begin{align}
-    \prob{P}^{\RV{Y}_{\RV{R}^{-1}}|\RV{W}\RV{D}_{\RV{R}^{-1}}}_\alpha(A|w,d) &\overset{\prob{P}_C}{\cong} \int_R \prob{P}_\alpha^{\RV{Y}_\rho|\RV{W}\RV{D}_{\rho}}(A|d)\prob{P}_\alpha^{\RV{R}^{-1}|\RV{W}\RV{D}_{\RV{R}^{-1}}}(\mathrm{d}\rho|w,d)\\
-    &\overset{\prob{P}_C}{\cong} \int_R \prob{P}_C^{\RV{Y}|\RV{WD}}(A|w,d)\prob{P}_\alpha^{\RV{R}^{-1}|\RV{W}\RV{D}_{\RV{R}^{-1}}}(\mathrm{d}\rho|w,d)\\
-    &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{Y}|\RV{WD}}(A|w,d)\label{eq:rotated_conditional}
-\end{align}
- for all $i,j\in \mathbb{N}$. Then by Equation \eqref{eq:yd_dist} and Equation \eqref{eq:rotated_conditional}
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}^D|\RV{W}}(A|w) &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,e)\label{eq:rel_bet_y_yd}
-\end{align}
-
-Take some $d\in D^{\mathbb{N}}$. From Equation \eqref{eq:rel_bet_y_yd} and IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{WD}}(A|e)$,
-\begin{align}
-    (\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}\otimes \mathrm{id}_D)\kernel{F}_{lu}(A|w,d) &= \prob{P}_\alpha^{(\RV{Y}^D_{i d_i})_{i\in \mathbb{N}}|\RV{W}}(A|d)\\
-    &=\prob{P}_\alpha^{(\RV{Y}_{i d_i})_{i\in \mathbb{N}}|\RV{WD}}(A|w,e)\\
-    &= \prob{P}_\alpha^{(\RV{Y}_{i d_i})_{i\in \mathbb{N}}|\RV{W}(\RV{D}_{i d_i})_{\mathbb{N}})}(A|w,(e_{i d_i})_{i\in \mathbb{N}})\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,(e_{i d_i})_{i\in \mathbb{N}})\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,(d_i)_{i\in\mathbb{N}})
-\end{align}
-
-Furthermore, for some finite permutation within columns $\eta:\mathbb{N}\times D\to \mathbb{N}\times D$, note that $e_{\eta(i,j)}=j$ and hence $(e_{\eta(i,j)})_{i\in\mathbb{N},j\in D}=e$. Thus
-\begin{align}
-    \prob{P}_\alpha^{(\RV{Y}^D_{\eta_(i,j)})_{\mathbb{N}\times D}|\RV{W}}(A|w) &= \prob{P}_\alpha^{(\RV{Y}^D)_{\mathbb{N}\times D}|\RV{W}}\text{Swap}_{\eta}(A|w)\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}\text{Swap}_{\eta}(A|w,e)&\text{from Eq. }\eqref{eq:rel_bet_y_yd}\\
-    &= \prob{P}_\alpha^{\RV{Y}_\eta|\RV{WD}}(A|w,e)\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}_{\eta^{-1}}}(A|w,e)&\text{by exchange commutativity}\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,(e_{\eta^{-1}(i,j)})_{i\in \mathbb{N},j\in D})\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,e)\\
-    &= \prob{P}_\alpha^{(\RV{Y}^D_{ij})_{\mathbb{N}\times D}|\RV{W}}(A|w)&\text{from Eq. }\eqref{eq:rel_bet_y_yd}
-\end{align}
-
-If:
-Suppose 
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \tikzfig{lookup_representation_kernel}
-\end{align}
-where $\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}$ satisfies Equation \eqref{eq:col_exch}.
-
-Consider any two $d,d'\in D^{\mathbb{N}}$ such that for some $S,T\subset\mathbb{N}$ with $|S|=|T|=n$, $d_S=d'_T$. Let $S\leftrightarrow T$ be the transposition that swaps the $i$th element of $S$ with the $i$th element of $T$ for all $i$.
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_S|\RV{WD}}(\bigtimes_{i\in [n]} A_i|w,d) &= \prob{P}_\alpha^{(\RV{Y}^D_{i d_i})_{i\in S}|\RV{W}} (\bigtimes_{i\in [n]} A_i|w)\\
-    &= \prob{P}_\alpha^{(\RV{Y}^D_{S\leftrightarrow T(i) d_i})_{i\in S}|\RV{W}} (\bigtimes_{i\in [n]} A_i|w)\\
-    &= \prob{P}_\alpha^{(\RV{Y}^D_{i d_{S\leftrightarrow T(i)}})_{i\in T}|\RV{W}} (\bigtimes_{i\in [n]} A_i|w)\\
-    &= \prob{P}_\alpha^{(\RV{Y}^D_{i d'_{i}})_{i\in T}|\RV{W}} (\bigtimes_{i\in [n]} A_i|w)\\
-    &=  \prob{P}_\alpha^{\RV{Y}_T|\RV{WD}}(\bigtimes_{i\in [n]} A_i|w,d')
-\end{align}
-and, in particular, taking $T=[n]$
-\begin{align}
-    &= \prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{WD}} (\bigtimes_{i\in [n]} A_i|w,d')
-\end{align}
-but $d'$ is an arbitrary sequence such that the $T$ elements match the $S$ elements of $d$, so this holds for any other $d''$ whose $T$ elements also match the $S$ elements of $d$. That is
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_S|\RV{WD}}(\bigtimes_{i\in [n]} A_i|w,d)&= (\prob{P}_\alpha^{\RV{Y}_{[n]}|\RV{WD}_{[n]}}\otimes \mathrm{Del}_{D^{\mathbb{N}}}) (\bigtimes_{i\in [n]} A_i|w,d')
-\end{align}
-so $\kernel{K}$ is IO contractible by Theorem \ref{th:equal_of_condits}.
+The full proof can be found in Appendix \ref{sec:io_contract_models}.
 \end{proof}
 
-As a consequence of Theorem \ref{th:table_rep_kernel} along with De Finetti's representation theorem, we can say that given $(\prob{P}_C,\RV{D},\RV{Y})$ IO contractible, the columns of $\RV{Y}^D$ are independent conditional on the directing random conditional $\RV{H}$.
+As a consequence of Lemma \ref{th:table_rep_kernel} along with De Finetti's representation theorem, we can say that given $(\prob{P}_C,\RV{D},\RV{Y})$ IO contractible, conditioning on $\RV{H}$ renders the columns of $\RV{Y}^D$ independent and identically distributed.
 
 \begin{lemma}\label{lem:ciid_yd}
-Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable and, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}}(E)=1$ for all $\alpha$ and for some $\RV{W}$, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible. Then, letting $\RV{H}$ be the directing random conditional of $(\prob{P}_C,\RV{D},\RV{Y})$ (Definition \ref{def:dir_rand_cond}) and $\RV{Y}^D_{iD}:=(\RV{Y}^D_{ij})_{j\in D}$, we have for all $i\in\mathbb{N}$, $\RV{Y}^D_{iD}\CI^e_{\prob{P}_C} (\RV{Y}^D_{\mathbb{N}\setminus\{i\}D},\RV{W}) | (\RV{H},\text{id}_C)$ and $\prob{P}_\alpha^{\RV{Y}^D_{iD}} = \prob{P}_\alpha^{\RV{Y}^D_{kD}}$ and
+Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable, $\RV{D}$ infinitely supported over $\RV{W}$ and for some $\RV{W}$, $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible for all $\alpha$. Then, letting $\RV{H}$ be the directing random conditional of $(\prob{P}_C,\RV{D},\RV{Y})$ (Definition \ref{def:dir_rand_cond}) and $\RV{Y}^D_{iD}:=(\RV{Y}^D_{ij})_{j\in D}$, we have for all $i\in\mathbb{N}$, $\RV{Y}^D_{iD}\CI^e_{\prob{P}_C} (\RV{Y}^D_{\mathbb{N}\setminus\{i\}D},\RV{W}) | (\RV{H},\text{id}_C)$ and $\prob{P}_\alpha^{\RV{Y}^D_{iD}} = \prob{P}_\alpha^{\RV{Y}^D_{kD}}$ and
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}^D_{iD}|\RV{H}}(A|\nu) \overset{\prob{P}_\alpha}{\cong} \nu(A)
 \end{align}
 \end{lemma}
 
 \begin{proof}
-Fix $w\in W$ and consider $\prob{P}_{\alpha,w}^{\RV{Y}^D}:= \prob{P}_{\alpha}^{\RV{Y}^D|\RV{W}}(\cdot|w)$. From Theorem \ref{th:table_rep_kernel}, we have the exchangeability of the sequence $(\RV{Y}^D_{1D},\RV{Y}^D_{2D},...)$ with respect to $(\prob{P}_{\alpha,w},\Omega,\sigalg{F})$ as a special case of the invariance of $\prob{P}_\alpha^{(\RV{Y}^D_{ij})_{\mathbb{N}\times D}|\RV{W}}$ to permutations of rows. By the column exchangeability of $\prob{P}_{\alpha,w}^{\RV{Y}^D}$, from \citet[Prop. 1.4]{kallenberg_basic_2005} (where $\RV{H}$ is what Kallenberg calls the directing random measure)
-\begin{align}
-    \prob{P}_{\alpha,w}^{\RV{Y}^D|\RV{H}} &= \tikzfig{de_finetti_conditional}
-\end{align}
-Because the right hand side does not depend on $w$, we can say
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}^D|\RV{HW}} &= \tikzfig{de_finetti_conditional_erase}
-\end{align}
-which yields $\RV{Y}^D\CI^e_{\prob{P}_C} \RV{W} | (\RV{H},\text{id}_C)$. Further application of \citet[Prop. 1.4]{kallenberg_basic_2005} yields $\RV{Y}^D_{iD}\CI^e_{\prob{P}_C} (\RV{Y}^D_{\mathbb{N}\setminus\{i\}D},\RV{W}) | (\RV{H},\text{id}_C)$ and
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}^D_{iD}|\RV{H}}(A|\nu) \overset{\prob{P}_\alpha}{\cong} \nu(A)
-\end{align}
+This follows directly from applying De Finetti's representation theorem to $\RV{Y}^D$, see Appendix \ref{sec:io_contract_models}.
 \end{proof}
 
-If the conditions of Theorem \ref{th:table_rep_kernel} are satisfied, we do not need the full sequence of pairs $(\RV{D},\RV{Y})$ to calculate $\RV{H}$, any subsequence that satisfies the condition that each value of $D$ occurs infinitely often is sufficient.
+If the conditions of Lemma \ref{th:table_rep_kernel} are satisfied, we do not need the full sequence of pairs $(\RV{D},\RV{Y})$ to calculate $\RV{H}$; any subsequence $A\subset\mathbb{N}$ that satisfies the condition that $\RV{D}_A$ is infinitely supported over $\RV{W}$ is sufficient.
 
 \begin{theorem}\label{th:any_infinite_sequence}
-Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable. Consider an infinite set $A\subset \mathbb{N}$, and let $\RV{D}_A:=(\RV{D}_i)_{i\in A}$ and $\RV{Y}_A:=(\RV{Y}_i)_{i\in A}$, and letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, suppose $\prob{P}_\alpha^{\RV{D}_A}(E)=1$ for all $\alpha$. Suppose also that for some $\RV{W}$, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible. Then $\RV{H}_A$, the directing random conditional of $(\prob{P}_C,\RV{D}_A,\RV{Y}_A)$ is almost surely equal to $\RV{H}$, the directing random conditional of $(\prob{P}_C,\RV{D},\RV{Y})$.
+Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable,  $\RV{D}$ infinitely supported over $\RV{W}$ and for some $\RV{W}$, $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible for all $\alpha$. Consider an infinite set $A\subset \mathbb{N}$, and let $\RV{D}_A:=(\RV{D}_i)_{i\in A}$ and $\RV{Y}_A:=(\RV{Y}_i)_{i\in A}$ such that $\RV{D}_A$ is also infinitely supported over $\RV{W}$. Then $\RV{H}_A$, the directing random conditional of $(\prob{P}_C,\RV{D}_A,\RV{Y}_A)$ is almost surely equal to $\RV{H}$, the directing random conditional of $(\prob{P}_C,\RV{D},\RV{Y})$.
 \end{theorem}
 
 \begin{proof}
-The strategy we will pursue is to show that an arbitrary subsequence of $(\RV{D}_i,\RV{Y}_i)$ pairs induces a random contraction of the rows of $\RV{Y}^D$. Then we show that the contracted version of $\RV{Y}^D$ has the same distribution as the original, and consequently the normalised partial sums converge to the same limit.
+The strategy we pursue is to show that an arbitrary subsequence of $(\RV{D}_i,\RV{Y}_i)$ pairs induces a random contraction of the rows of $\RV{Y}^D$. Then we show that the contracted version of $\RV{Y}^D$ has the same distribution as the original, and consequently the normalised partial sums converge to the same limit.
 
-Define $\RV{Y}^{D,A}$ as the tabulated conditional of $(\RV{D}_A,\RV{Y}_A)$, i.e. let $\#^{A,k}_j$ be the count restricted to $A$:
-\begin{align}
-    \#^{A,k}_j := \sum_{i\in A}^{k-1} \llbracket \RV{D}_i = j \rrbracket
-\end{align}
-then
-\begin{align}
-    \RV{Y}^{D,A}_{ij} &:= \sum_{k\in A} \llbracket\#^{A,k}_j=i-1\rrbracket\llbracket \RV{D}_k=j\rrbracket \RV{Y}_k\\
-        &= \sum_{k\in A} \llbracket\#^{A,k}_j=i-1\rrbracket\llbracket \RV{D}_k=j\rrbracket \RV{Y}^D_{\RV{R}_k j}
-\end{align}
-That is, defining $\RV{Q}:\mathbb{N}\to \mathbb{N}$ by $i\mapsto \sum_{k\in A} \llbracket\#^{A,k}_j=i-1\rrbracket\llbracket \RV{D}_k=j\rrbracket \RV{R}_k$ then
-\begin{align}
-    \RV{Y}^{D,A}_{ij} &= \RV{Y}^D_{\RV{Q}(i) j}\label{eq:random_contraction}
-\end{align}
-where $\RV{Q}(i)\in \mathbb{N}$ by the assumption that each value of $D$ occurs infinitely often in $A$ (otherwise $\RV{Q}(i)$ might be 0).
-
-Equation \eqref{eq:random_contraction} is what is meant by ``the subsequence $(\RV{D}_A,\RV{Y}_A)$ induces a random contraction over the rows of $\RV{Y}^D$''. We will now show that $\RV{Y}^{D,A}$ has the same distribution as $\RV{Y}^D$.
-
-Let $\text{con}_{q}:Y^{\mathbb{N}\times D}\kto Y^{\mathbb{N}\times D}$ be the Markov kernel associated with the function that sends $(\RV{Y}^D_{ij})_{i\in \mathbb{N},j\in D}$ to $(\RV{Y}^D_{q(i)j})_{i\in \mathbb{N},j\in D}$. Then for any $B\in \sigalg{Y}^{\mathbb{N}\times D}$, $w,q$:
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}^{D,A}|\RV{WQ}}(B|w,q) &= \prob{P}_\alpha^{\RV{Y}^D|\RV{W}}\text{con}_q(B|w)\\
-    &= \prob{P}^{\RV{Y}|\RV{WD}}\text{con}_q(B|w,e)&\text{by Eq.} \eqref{eq:rel_bet_y_yd}\\
-    &= \prob{P}^{\RV{Y}|\RV{WD}}(B|w,e)&\text{by Theorem }\ref{th:equal_of_condits}\\
-    &= \prob{P}_\alpha^{\RV{Y}^D|\RV{W}}(B|w)&\text{by Eq.} \eqref{eq:rel_bet_y_yd}\label{eq:equal_of_tabs}
-\end{align}
-
-Finally, take $\RV{H}^A$ the directing random measure of $\RV{Y}^{D,A}$. We conclude from the equality Eq. \eqref{eq:equal_of_tabs} and from the fact that there is a one-to-one map from directing random measures to exchangeable distributions that $\RV{H}^A\overset{\prob{P}_\alpha}{\cong} \RV{H}$.
-\end{proof}
-
-The following lemma establishes that, if a sequence of input and output pairs features independent and identical responses conditional on some arbitrary variable, then we can without loss of generality consider the conditioning variable to be the directing random conditional defined over the same sequence of input-output pairs.
-
-\begin{lemma}\label{lem:ci_drc}
-If a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ has independent and identical response functions conditional on some variable $\RV{G}$, letting $\RV{H}$ be the directing random measure with respect to inputs $\RV{D}$ and outputs $\RV{Y}$, then for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{G}|(\RV{X}_i,\RV{H},\text{id}_C)$ and for all $\alpha, i, j$, $\prob{P}_\alpha^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_\alpha^{\RV{Y}_j|\RV{X}_j\RV{H}}$.
-\end{lemma}
-
-\begin{proof}
-We'll show for all $A_j\in \sigalg{Y}^D$, $h\in H$, $g\in G$:
-\begin{align}
-    \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}\RV{G}}(A_j|j,h,g) &= \RV{H}(\bigtimes_{j\in D} A_j)\\
-    &= \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}(A_j|j,h)
-\end{align}
-
-Note first that $\prob{P}_\alpha^{\RV{Y}|\RV{GD}}$ is IO contractible. Thus by Theorem \ref{th:table_rep_kernel},
-
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{GD}}(\bigtimes_{i\in \mathbb{N}}A_i|g,(d_i)_{i\in \mathbb{N}}) &= \prob{P}_\alpha^{(\RV{Y}^D_{i d_i})_{i\in\mathbb{N}}|\RV{G}}(\bigtimes_{i\in \mathbb{N}}A_i|g)&\forall A_i\in \sigalg{Y}^{D}, g\in G, d_i\in D
-\end{align}
-
-but by the assumption of conditional independence and identity given $\RV{G}$, the sequences $(\RV{Y}^D_{ij})_{i\in\mathbb{N}}$ are IID given $\RV{G}$ for each $j\in D$. In particular, for all $i$
-
-\begin{align}
-    \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}}(A_j|j,g) &= \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}^D_{1 j}|\RV{G}}(A_j|g)\\
-    &= \prob{P}_\alpha^{\RV{Y}^D_{1 j}|\RV{G}}(\bigtimes_{j\in D} A_j|g)
-\end{align}
-
-Hence, by applying the law of large numbers after conditioning on each $g\in G$,
-\begin{align}
-    \RV{H}(\bigtimes_{j\in D} A_j) &\overset{\prob{P}_\alpha}{\cong} \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}}(A_j|j,g)\\
-    &\overset{\prob{P}_\alpha}{\cong} \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}\RV{G}}(A_j|j,h,g)\\
-    &\overset{\prob{P}_\alpha}{\cong} \prod_{j\in D} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}(A_j|j,h)
-\end{align}
+The proof is in Appendix \ref{sec:io_contract_models}.
 \end{proof}
 
 The following is a technical lemma that will be used in Theorem \ref{th:ciid_rep_kernel}.
 
 \begin{lemma}\label{lem:hw_interchange}
-Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable and, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}}(E)=1$ for all $\alpha$, for some $\RV{W}$, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible and for all $\alpha$
+Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable, $\RV{D}$ infinitely supported over $\RV{W}$, for some $\RV{W}$, $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible for all $\alpha$ and for all $\alpha$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel_2}
 \end{align}
-then
+then $\RV{Y}\CI^e_{\prob{P}_C} \RV{W} | (\RV{H},\RV{D},\text{id}_C)$ and for all $\alpha$
 \begin{align}
     \prob{P}_{\alpha}^{\RV{Y}|\RV{HD}} &= \tikzfig{lookup_representation_kernel_h}
 \end{align}
 \end{lemma}
 
 \begin{proof}
-$\RV{Y}^D$ is a function of $\RV{Y}$ and $\RV{D}$ (see Definition \ref{def:tab_cd}) and $\RV{H}$ is a function of $\RV{Y}^D$. Say $f:Y\times D\to H$ is such that $\RV{H}=f(\RV{Y},\RV{D})$ (see Definition \ref{def:dir_rand_meas}). Because $\RV{H}=f(\RV{Y},\RV{D})$, we have $\RV{H}\CI^e_{\prob{P}_C} (\RV{W},\text{id}_C)|(\RV{Y},\RV{D})$. Thus
-\begin{align}
-    \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint}\label{eq:luprep_joint}
-\end{align}
-For a sequence $d\in D^{\mathbb{N}}$ where each $j\in D$ occurs infinitely often, take $[d=j]_i$ to be the $i$th coordinate of $d$ equal to $j\in D$ and $\#_{[d=j]_i}$ to be the position in $d$ of $[d=j]_i$. Concretely, $f$ is given by
-\begin{align}
-    f(y,d) &= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y_{\#_{[d=j]_i}})\\
-    &=: f_d(y)
-\end{align}
-where the limit exists. Note that for $y^D\in Y^{D\times\mathbb{N}}$ we have
-\begin{align}
-    f_d\circ \mathrm{lu}(y^D,d) &= \bigtimes_{j\in D} A_j \mapsto \lim_{n\to \infty} \frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{\#_{[d=j]_i} j})
-\end{align}
-Let $g:=(y^D,d)\mapsto f_d\circ \mathrm{lu}(y^D,d)$ for some $d\in D^{\mathbb{N}}$ where each $j\in D$ occurs infinitely often.
+We show that the function that maps the variables $\RV{Y}$ and $\RV{D}$ to $\RV{H}$ also maps $\RV{Y}^D$ and the constant $e\in D^{\mathbb{N}}$ to $\RV{H}'$ with $\RV{H}'\overset{\prob{P}_C}{\cong} \RV{H}$, and the result follows from disintegration along with a conditional independence given by Lemma \ref{th:table_rep_kernel}.
 
-We aim to show that $g(\RV{Y}^D,d)\overset{\prob{P}_\alpha}{\cong} g(\RV{Y}^D,d')$ for all $d,d'\in D^{\mathbb{N}}$ such that each $j\in D$ occurs infinitely often.
-
-Consider, for arbitrary $A\in \sigalg{Y}^D$
-\begin{align}
-    \prob{P}_\alpha (g(\RV{Y}^D,d)(A)\yields g(\RV{Y}^D,d')(A)) &= \int_H \prob{P}_\alpha^{\mathrm{Id}_{\Omega}|\RV{H}}(g(\RV{Y}^D,d)(A)\yields g(\RV{Y}^D,d')(A)|\nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)
-\end{align}
-
-Note that
-\begin{align}
-     \prob{P}_\alpha^{\mathrm{Id}_{\Omega}|\RV{H}}(g(\RV{Y}^D,d)(A)\yields \nu(A)|\nu) &= \prob{P}_\alpha^{\RV{Y}^D|\RV{H}}(\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{\#_{[d=j]_i},j})\yields \nu(A)| \nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)
-\end{align}
-by independent permutability of the rows of $\RV{Y}^D$ (Theorem \ref{th:table_rep_kernel}), for each row we can send $\#_{[d=j]_i}$ to $i$ and obtain
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}^D|\RV{H}}(\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{\#_{[d=j]_i},j})\yields \nu(A)| \nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu) &= \prob{P}_\alpha^{\RV{Y}^D|\RV{H}} (\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \prod_{j\in D} \mathds{1}_{A_j}(y^D_{i,j})\yields \nu(A)| \nu)\\
-    &= \prob{P}_\alpha^{\RV{Y}^D_{iD}|\RV{H}} (\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \mathds{1}_{A}(y^D_{i,D})\yields \nu(A)| \nu)
-\end{align}
-but by Lemma \ref{lem:ciid_yd}, the sequence $(\RV{Y}^D_{iD})_{i\in \mathbb{N}}$ are mutually independent conditional on $\RV{H}$ and for all $\alpha$, $\prob{P}_\alpha^{\RV{Y}_{iD}|\RV{H}}(A|\nu)\overset{\prob{P}_C}{\cong}\nu(A)$. Thus, by the law of large numbers
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}^D|\RV{H}} (\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n \mathds{1}_{\prod_{j\in D} A_j}(y^D_{i,D})\yields \nu(A)| \nu)&= 1\\
-    \implies \int_H \prob{P}_\alpha^{\mathrm{Id}_{\Omega}|\RV{H}}(g(\RV{Y}^D,d)(A)\yields g(\RV{Y}^D,d')(A)|\nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu) &= \int_H \prob{P}_\alpha^{\mathrm{Id}_{\Omega}|\RV{H}}(g(\RV{Y}^D,d)(A)\yields \nu(A) \cap  g(\RV{Y}^D,d')(A)\yields \nu(A)|\nu)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}\nu)\\
-    &= 1\\
-    \implies g(\RV{Y}^D,d)&\overset{\prob{P}_\alpha}{\cong} g(\RV{Y}^D,d) & \text{as this holds for all }A
-\end{align}
-And, as a consequence, defining
-\begin{align}
-    i:(y^d,d,d')\mapsto (\mathrm{lu}(\RV{Y}^D,d),g(\RV{Y}^D,d'))
-\end{align}
-we have
-\begin{align}
-    i(y^d,d,d) &\overset{\prob{P}_\alpha}{\cong} i(y^d,d,d)
-\end{align}
-which in turn implies
-\begin{align}
-    &\phantom{=} \tikzfig{lookup_representation_kernel_joint}\\
-    &= \tikzfig{lookup_representation_kernel_joint_half}
-    &=: \tikzfig{lookup_representation_kernel_joint_2}
-\end{align}
-noting that $\kernel{F}_h\otimes\mathrm{Del}_W = \prob{P}_\alpha^{\RV{H}|\RV{Y}^D\RV{W}}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}^D\RV{H}|\RV{W}} &= \tikzfig{p_yd_on_w} \\
-    &= \tikzfig{yd_h_on_w_invert}
-\end{align}
-and so
-\begin{align}
-    \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint_3}
-\end{align}
-From Theorem \ref{th:table_rep_kernel} we also have $\RV{Y}^D\CI^e_{\prob{P}_C} \RV{W}|(\RV{H},\text{id}_C)$ , so
-\begin{align}
-    \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint_4}
-\end{align}
-and so by higher order conditionals,
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}|\RV{HD}} &= \tikzfig{lookup_representation_kernel_h}
-\end{align}
+The full proof is in Appendix \ref{sec:ciid_rep_proof}.
 \end{proof}
 
 Theorem \ref{th:ciid_rep_kernel} is the main result of this section. It shows that sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is IO contractible over some $\RV{W}$ if and only if there is some hypothesis $\RV{H}$ such that the $\RV{Y}_i$s are related to the $\RV{D}_i$s by conditionally independent and identical response functions (subject to a support assumption).
 
-Note that property (2) is equivalent to the conjunction of conditionally independent and identical response functions (Def \ref{def:cii_rf}) and weak data-independence (Def \ref{def:weak_di}).
+In the following theorem, property (2) is equivalent to the conjunction of conditionally independent and identical response functions (Def \ref{def:cii_rf}) and weak data-independence (Def \ref{def:weak_di}).
 
 \begin{theorem}[Representation of IO contractible models]\label{th:ciid_rep_kernel}
-Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with sample space $(\Omega,\sigalg{F})$ is given with $D$ countable and, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}}(E)=1$ for all $\alpha$. Then the following are equivalent:
+Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with sample space $(\Omega,\sigalg{F})$ is given with $D$ countable and $\RV{D}$ infinitely supported over $\RV{W}$. Then the following are equivalent:
 \begin{enumerate}
-    \item There is some $\RV{W}$ such that $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible
-    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{id}_C)|(\RV{H},\RV{D}_i)$ and for all $i,j$ $$\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$$
+    \item There is some $\RV{W}$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible for all $\alpha$
+    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{id}_C)|(\RV{H},\RV{D}_i)$ and for all $i,j, \alpha$ $$\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_\alpha^{\RV{Y}_j|\RV{H}\RV{D}_j}$$
     \item There is some $\kernel{L}:H\times X\kto Y$ such that for all $\alpha$, $$\prob{P}_\alpha^{\RV{Y}|\RV{HD}}= \tikzfig{do_model_representation_conditional}$$
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-As a preliminary, we will show
-\begin{align}
-    \kernel{F}_{\mathrm{lu}} &= \tikzfig{lookup_rep_intermediate_kernel}\label{eq:ev_alternate_rep}
-\end{align}
-where  $\mathrm{lus}:D\times Y^D\to Y$ is the single-shot lookup function
-\begin{align}
-    ((y_i)_{i\in D},d)\mapsto y_d
-\end{align}
-
-Recall that $\mathrm{lu}$ is the function
-\begin{align}
-    ((d_i)_\mathbb{N},(y_{ij})_{i,j\in \mathbb{N}\times D})&\mapsto (y_{i d_i})_{i\in \mathbb{N}}
-\end{align}
-By definition, for any $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$
-\begin{align}
-    \kernel{F}_{\mathrm{lu}}(\bigtimes_{i\in \mathbb{N}}A_i|(d_i)_\mathbb{N},(y_{ij})_{i\in \mathbb{N}\times D}) &= \delta_{(y_{i d_i})_{i\in \mathbb{N}}}(\bigtimes_{i\in \mathbb{N}}A_i)\\
-        &= \prod_{i\in \mathbb{N}} \delta_{y_{i d_i}} (A_i)\\
-        &= \prod_{i\in \mathbb{N}} \kernel{F}_{\text{evs}} (A_i|d_i,(y_{ij})_{j\in D})\\
-        &= \left(\bigotimes_{i\in\mathbb{N}} \kernel{F}_{\mathrm{evs}} \right)(\bigtimes_{i\in \mathbb{N}}A_i|(d_i)_\mathbb{N},(y_{ij})_{i,j\in \mathbb{N}\times D})
-\end{align}
-which is what we wanted to show.
-
 (1)$\implies$(3):
-Let $H:=\sigalg{M}_1(Y^D)$ and define $\kernel{M}:H\kto Y^X$ by $\kernel{M}(A|h)=h(A)$ for all $A\in\sigalg{Y}^X$, $h\in H$. Define $\RV{Y}^D:\Omega\to Y^{\mathbb{N}\times D}$ as in Theorem \ref{th:table_rep_kernel}. Fix $w\in W$ and let $\prob{P}_{\alpha,w}^{\RV{Y}^D}:=\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}(\cdot|w)$. By the column exchangeability of $\prob{P}_{\alpha,w}^{\RV{Y}^D}$, from \citet[Prop. 1.4]{kallenberg_basic_2005} there is a directing random measure $\RV{H}:Y^{X\times\mathbb{N}}\to H$ such that
-\begin{align}
-    \prob{P}_{\alpha,w}^{\RV{Y}^D|\RV{H}} &= \tikzfig{de_finetti_representation_conditional}
-\end{align}
-as the right hand side does not depend on $w$
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}^D|\RV{WH}} &= \tikzfig{de_finetti_representation_conditional_w}\label{eq:df_rep_mu}
-\end{align}
+We apply Lemma \ref{th:table_rep_kernel} followed by Lemma \ref{lem:ciid_yd} followed by Lemma \ref{lem:hw_interchange}.
 
-By Theorem \ref{th:table_rep_kernel}, for each $w\in W$
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}|\RV{WD}} &= \tikzfig{lookup_representation_kernel}
-\end{align}
-and so by Lemma \ref{lem:hw_interchange}
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}|\RV{HD}} &= \tikzfig{lookup_representation_kernel_h}\label{eq:lu_rep_h}
-\end{align}
-
-By the assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{W} | (\RV{H},\RV{D},\text{id}_C)$, we can substitute Equations \eqref{eq:df_rep_mu} and \eqref{eq:ev_alternate_rep} into \eqref{eq:lu_rep_h} for
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}|\RV{HD}} &= \tikzfig{do_model_representation_conditional}
-\end{align}
 
 (3)$\implies$ (2):
-If
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}|\RV{HD}} &= \tikzfig{do_model_representation_conditional}
-\end{align}
-then by the definition of higher order conditionals, for any $i\in \mathbb{N}$ and any $\alpha\in C$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_i|\RV{HD}_i\RV{Y}_{\neq i}\RV{D}_{\neq i}} &\overset{\prob{P}_C}{\cong} \kernel{L}\otimes \text{Del}_{Y^{\mathbb{N}}\times X^{\mathbb{N}}}
-\end{align}
-hence $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{id}_C)|(\RV{H},\RV{D}_i)$
+We verify that the required conditional independences hold assuming (3).
 
 (2)$\implies$ (1):
-Take $\RV{W}:=\RV{H}$, which implies $\RV{Y}\CI^e_{\prob{P}_C} \RV{W} | (\RV{H},\RV{D},\text{id}_C)$ immediately. Take $\kernel{L}:= \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{X}_i}$ for arbitrary $i$ (by assumption, they are all the same). Then, by assumption $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{[1,i)},\RV{D}_{[1,i),\text{id}_C})|(\RV{H},\RV{D}_i)$, for all $\alpha$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_i|\RV{HD}_i\RV{Y}_{[1,i)}\RV{D}_{[1,i)}} &\overset{\prob{P}_C}{\cong} \kernel{L}\otimes \text{Del}_{Y^{i-1}\times X^{i-1}}
-\end{align}
-and so by higher order conditionals
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}|\RV{HD}} &= \tikzfig{do_model_representation_conditional}\\
-    &= \tikzfig{do_model_representation_conditional_permuted}
-\end{align}
-hence $(\prob{P}_C,\RV{D},\RV{Y})$ is exchange commutative over $\RV{H}$. Furthermore, take $A\subset \mathbb{N}$. Then
-\begin{align}
-    &\tikzfig{do_model_representation_conditional_deleted}\\
-    =& \tikzfig{do_model_representation_conditional_deleted1}
-\end{align}
-so $(\prob{P}_C,\RV{D},\RV{Y})$ is also local over $\RV{H}$.
+We show that, assuming (2), then $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible over $\RV{W}$ for all $\alpha$.
+
+See Appendix \ref{sec:data_independent_proofs} for the full proof.
 \end{proof}
 
-\subsection[Data-independent inputs]{Conditionally independent and identical responses with data-independent inputs}\label{sec:data_independent_actions}
+As a consequence of Theorem \ref{th:ciid_rep_kernel}, if a sequence of input and output pairs features independent and identical responses conditional on some arbitrary variable, then we can without loss of generality consider the conditioning variable to be the directing random conditional defined over the same sequence of input-output pairs.
 
-Theorem \ref{th:ciid_rep_kernel} says that a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ features conditionally independent and identical response functions $\prob{P}_C^{\RV{Y}_i|\RV{HD}_i}$ and is weakly data independent if and only if there is some $\RV{W}$ such that $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible over $\RV{W}$, and $\RV{Y}\CI^E_{\prob{P}_C} \RV{W}|(\RV{H},\text{id}_C)$ (see Definition \ref{def:dir_rand_meas} for the definition of $\RV{H}$).
+\begin{corollary}\label{lem:ci_drc}
+If a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ has independent and identical response functions conditional on some variable $\RV{G}$ and $\RV{D}$ has infinite support over $\RV{W}$, then letting $\RV{H}$ be the directing random conditional with respect to inputs $\RV{D}$ and outputs $\RV{Y}$, it follows that for for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{G}|(\RV{D}_i,\RV{H},\text{id}_C)$ and for all $\alpha, i, j$, $\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}=\prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j\RV{H}}$.
+\end{corollary}
 
-A simple special case to consider is when $\RV{W}$ is single valued -- that is, when $\prob{P}_C^{\RV{Y}|\RV{D}}$ is IO contractible. As Theorem \ref{th:data_ind_CC} shows, this corresponds to the models where the inputs $\RV{D}$ are strongly data-independent and everywhere independent of the hypothesis $\RV{H}$. We can also consider the case where $(\prob{P}_C, \RV{D},\RV{Y})$ is only exchange commutative over $*$. This corresponds to models where the inputs $\RV{D}$ are data-independent and the hypothesis $\RV{H}$ depends on a symmetric function of the inputs $\RV{D}$ (under some side conditions).
+\begin{proof}
+We have $\prob{P}_\alpha^{\RV{Y}|\RV{G}\RV{D}}$ is IO contractible over $\RV{G}$. The conclusion follows by applying Theorem \ref{th:ciid_rep_kernel}.
+\end{proof}
+
+\subsection[Symmetries of CIIR sequences]{Symmetries of sequences with conditionally independent and identical responses}\label{sec:data_independent_actions}
+
+Theorem \ref{th:ciid_rep_kernel} says that a data independent sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ features conditionally independent and identical response functions $\prob{P}_\alpha^{\RV{Y}_i|\RV{HD}_i}$ for all $\alpha$ if and only if there is some $\RV{W}$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible over $\RV{W}$ for all $\alpha$. The variable $\RV{W}$ is something of a nuisance; rather than thinking only about whether IO contractibility holds, we must consider whether there's \emph{any} variable that licenses the assumption of IO contractibility.
+
+A simple special case to consider is when $\RV{W}$ is single valued -- that is, when $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$ is IO contractible. As Theorem \ref{th:data_ind_CC} shows, this corresponds to the CIIR sequence models where the inputs $\RV{D}$ are unconditionally data-independent and independent of the hypothesis $\RV{H}$. We can also consider the case where $(\prob{P}_C, \RV{D},\RV{Y})$ is only exchange commutative over $*$. This corresponds to models where the inputs $\RV{D}$ are data-independent and the hypothesis $\RV{H}$ depends on a symmetric function of the inputs $\RV{D}$ (under some side conditions).
+
+More generally, we can observe that by Lemma \ref{lem:ci_drc}, any sequence of inputs and outputs with conditionally independent and identical responses with infinitely supported inputs must be causally contractible over $\RV{H}$. Furthermore, by Theorem \ref{th:any_infinite_sequence}, we can take $\RV{H}$ to be a function of any sequence of inputs and outputs for which the inputs have infinite support. Together, these imply IO contractibility over arbitrary subsequences with infinite support. This observation is the basis of Theorem \ref{th:infinite_condition_swaps}. Applying Theorem \ref{th:equal_of_condits} allows us to state this implication in a manner that we feel is more intuitive: informally speaking, if we want to predict any output from its corresponding input and some infinitely supported subsequence of data, then it doesn't matter which output we pick or which subsequence of data we pick, the problem remains essentially the same in every case.
 
 \begin{theorem}[Data-independent IO contractibility]\label{th:data_ind_CC}
 Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with sample space $(\Omega,\sigalg{F})$ is given with $D$ countable and, letting $E\subset D^{\mathbb{N}}$ be the set of all sequences for which each $j\in D$ occurs infinitely often, $\prob{P}_\alpha^{\RV{D}}(E)=1$ for all $\alpha$. Then the following are equivalent:
 \begin{enumerate}
-    \item $\prob{P}_\cdot^{\RV{Y}|\RV{D}}$ is IO contractible
-    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{id}_C)|(\RV{H},\RV{D}_i)$, for all $i,j$ $$\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$$, $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$ and for all $i$ $\RV{D}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}) | (\RV{D}_{[1,i)},\text{id}_C)$
+    \item $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$ is IO contractible for all $\alpha$
+    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{id}_C)|(\RV{H},\RV{D}_i)$, for all $i,j,\alpha$ $$\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_\alpha^{\RV{Y}_j|\RV{H}\RV{D}_j}$$, $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$ and for all $i$ $\RV{D}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}) | (\RV{D}_{[1,i)},\text{id}_C)$
     \item There is some $\kernel{L}:H\times X\kto Y$ such that for all $\alpha$, $$\prob{P}_\alpha^{\RV{YH}|\RV{D}}= \tikzfig{do_model_representation_with_h}$$
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-(1)$\implies$(3)
-From Theorem \ref{th:table_rep_kernel}, $(\prob{P}_C,\RV{D},\RV{Y})$ IO contractible over $\RV{W}$ implies $\RV{Y}^D\CI^e_{\prob{P}_C} \RV{D}|(\RV{W},\text{id}_C)$ which in turn implies $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|(\RV{W},\text{id}_C)$. If $\prob{P}_\cdot^{\RV{Y}|\RV{D}}$ is IO contractible, then $\RV{H}\CI^e_{\prob{P}_C}\RV{D}$.
-
-From Theorem \ref{th:ciid_rep_kernel} we have $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{[1,i)},\RV{D}_{[1,i),\text{id}_C})|(\RV{H},\RV{D}_i)$ and $\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$ and 
-\begin{align}
- \prob{P}_\alpha^{\RV{Y}|\RV{HD}}= \tikzfig{do_model_representation_conditional}
-\end{align}
-Noting that $\RV{H}\CI^e_{\prob{P}_C}\RV{D}$, we can write
-\begin{align}
-    \prob{P}_\alpha^{\RV{YH}|\RV{D}}= \tikzfig{do_model_representation_with_h}
-\end{align}
-
-(3)$\implies$(2)
-From 
-\begin{align}
-    \prob{P}_\alpha^{\RV{YH}|\RV{D}}= \tikzfig{do_model_representation_with_h}\label{eq:do_over_h}
-\end{align}
-we have
-\begin{align}
- \prob{P}_\alpha^{\RV{Y}|\RV{HD}}= \tikzfig{do_model_representation_conditional}
-\end{align}
-and $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$, so we get all elements of (2) immediately except $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{[1,i)}) | (\RV{D}_{[1,i)},\text{id}_C)$. But marginalising Equation \eqref{eq:do_over_h} over $\RV{H}$ yields
-\begin{align}
-     \prob{P}_\alpha^{\RV{Y}|\RV{D}}= \tikzfig{do_model_representation}
-\end{align}
-and, in particular, for any $A\subset\mathbb{N}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_A|\RV{D}_{(A,\mathbb{N}\setminus A)}} &= \prob{P}_\alpha^{\RV{Y}_A|\RV{D}_A}\otimes \text{Del}_{D^{|\mathbb{N}\setminus A|}} 
-\end{align}
-hence, taking $A=\{i\}$, $\RV{D}_{\mathbb{N}\setminus \{i\}}\CI^e_{\prob{P}_C} (\RV{Y}_{i}) | (\RV{D}_{i},\text{id}_C)$ which implies $\RV{D}_{(i,\infty]}\CI^e_{\prob{P}_C} (\RV{Y}_{i}) | (\RV{D}_{[1,i]},\text{id}_C)$.
-(2)$\implies$(1)
-From Theorem \ref{th:ciid_rep_kernel} and $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$,
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{D}}&= \tikzfig{do_model_representation}
-\end{align}
-and the argument from here is analogous to the section ``(2)$\implies$(1)'' from Theorem \ref{th:ciid_rep_kernel}. In particular
-\begin{align}
-    \prob{P}_{\alpha}^{\RV{Y}|\RV{D}} &= \tikzfig{do_model_representation_permuted}
-\end{align}
-hence $\prob{P}_C^{\RV{Y}|\RV{D}}$ is exchange commutative. Furthermore, take $A\subset \mathbb{N}$. Then
-\begin{align}
-    &\tikzfig{do_model_representation_deleted}\\
-    =& \tikzfig{do_model_representation_deleted1}
-\end{align}
+See Appendix \ref{sec:data_independent_proofs}.
 \end{proof}
 
-\begin{lemma}[Exchangeably dominated conditionals]\label{lem:dom_cond}
-Given $(\prob{P}_C,\Omega,\sigalg{F})$ and variables $\RV{D},\RV{Y}$, if for each $\alpha$ there is some $\prob{Q}_\alpha$ such that $\prob{Q}_\alpha^{\RV{DY}}$ is exchangeable with directing random measure $\RV{G}$ and for any $i$, $\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^C}}\overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^C}}$ then $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible (where $\RV{H}$ is the directing random conditional for $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$).
-\end{lemma}
-
-\begin{proof}
-By \citet[Prop. 1.4]{kallenberg_basic_2005}, there is a $\RV{G}$ such that $(\RV{D}_i,\RV{Y}_i)\CI^e_{\prob{Q}_C} (\RV{D}_{\{i\}^C}\RV{Y}_{\{i\}^C})|(\RV{G},\text{id}_C)$ and for all $i,j$
-\begin{align}
-    \prob{Q}_\alpha^{\RV{Y}_i\RV{D}_i|\RV{G}} &= \prob{Q}_\alpha^{\RV{Y}_j\RV{D}_j|\RV{G}}\label{eq:joint_given_g}
-\end{align}
-
-There is some function $f:D^{\mathbb{N}}\times Y^{\mathbb{N}}$ such that $\RV{G}=f(\RV{D},\RV{Y})$, i.e.
-
-\begin{align}
-    \prob{Q}_\alpha^{\RV{Y_iG}|\RV{D}\RV{Y}_{\{i\}^C}} &= \tikzfig{qyg_eq_pyg}\\
-                                     &\overset{P}{\cong} \prob{P}_\alpha^{\RV{Y_iG}|\RV{D}\RV{Y}_{\{i\}^C}}\\
-    \implies \prob{Q}_\alpha^{\RV{Y_i}|\RV{G}\RV{D}\RV{Y}_{\{i\}^C}}&\overset{P}{\cong} \prob{P}_\alpha^{\RV{Y}_i|\RV{G}\RV{D}\RV{Y}_{\{i\}^C}}\label{eq:cond_on_g}
-\end{align}
-
-It follows from weak union that
-\begin{align}
-    \RV{Y}_i\CI^e_{\prob{Q}_C} (\RV{D}_{\{i\}^C}\RV{Y}_{\{i\}^C}) | (\RV{D}_i,\RV{G},\text{id}_C)\\
-    \iff \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}\RV{Y}_{\{i\}^C}\RV{D}_{\{i\}^C}}(A|d_i,g,d,y) &\overset{P}{\cong} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}}(A|d_i,g) & \forall A,d_i,g,d,y,\alpha\label{eq:swap_q_for_p}\\
-    \implies \RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^C}\RV{Y}_{\{i\}^C}) | (\RV{D}_i,\RV{G},\text{id}_C)
-\end{align}
-where Eq. \eqref{eq:swap_q_for_p} follows from Eq. \eqref{eq:cond_on_g}.
-
-Finally, from Eq. \eqref{eq:joint_given_g} and Eq. \eqref{eq:swap_q_for_p}
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}} &\overset{\prob{P}}{\cong} \prob{P}_\alpha^{\RV{Y}_j\RV{D}_j|\RV{G}}
-\end{align}
-Thus $(\prob{P}_C,\RV{D},\RV{Y})$ features independent and identical responses conditioned on $\RV{G}$, and by Lemma \ref{lem:ci_drc} it also has independent and identical responses conditioned on $\RV{H}$. Finally, by Theorem \ref{th:ciid_rep_kernel} $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible.
-\end{proof}
-
-While $\prob{P}_C^{\RV{Y}|\RV{D}}$ exchange commutative is not necessarily IO contractible, exchange commutativity of this conditional implies IO contractibility over the directing random conditional $\RV{H}$, and thus is sufficient for conditionally indpeendent and identical responses.
+While $\prob{P}_C^{\RV{Y}|\RV{D}}$ exchange commutative is not necessarily IO contractible, exchange commutativity of this conditional implies IO contractibility over the directing random conditional $\RV{H}$, and thus is sufficient for conditionally independent and identical responses.
 
 \begin{theorem}\label{lem:exch_prod_ciid}
-If $\prob{P}_C^{\RV{Y}|\RV{D}}$ is exchange commutative, and for each $\alpha$ $\prob{P}_\alpha^{\RV{D}}$ is absolutely continuous with respect to some exchangeable distribution $\prob{Q}_\alpha^{\RV{D}}$ in $\Delta(D^{\mathbb{N}})$ then $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible, where $\RV{H}$ is the directing random conditional for $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$.
+If $\prob{P}_C^{\RV{Y}|\RV{D}}$ is exchange commutative, and for each $\alpha$ $\prob{P}_\alpha^{\RV{D}}$ is absolutely continuous with respect to some exchangeable distribution $\prob{Q}_\alpha^{\RV{D}}$ in $\Delta(D^{\mathbb{N}})$ with directing random measure $\RV{F}$ and $\RV{D}$ infinitely supported over $\RV{F}$ with respect to $\prob{Q}_\alpha$ , then $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible, where $\RV{H}$ is the directing random conditional for $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$.
 \end{theorem}
 
 \begin{proof}
-For each $\alpha$, extend $\prob{Q}_\alpha^{\RV{D}}$ to a distribution on $(\RV{D},\RV{Y})$ by defining a version of the conditional $\prob{P}_\alpha^{\RV{Y}|\RV{D}}\in \prob{Q}_\alpha^{\RV{Y}|\RV{D}}$. Because $\prob{Q}_\alpha^{\RV{D}}$ dominates $\prob{P}_\alpha^{\RV{D}}$, we have in fact $\prob{Q}_\alpha^{\RV{Y}|\RV{D}}\overset{\prob{P}}{\cong}\prob{P}_\alpha^{\RV{Y}|\RV{D}}$
-
-We will show $\prob{Q}_\alpha^{\RV{DY}}$ is unchanged by finite permutations of $(\RV{D}_i,\RV{Y}_i)$ pairs. For some finite permutation $\rho:\mathbb{N}\to\mathbb{N}$:
-\begin{align}
-    \prob{Q}_\alpha^{\RV{D}_\rho\RV{Y}_\rho} &= \prob{Q}_\alpha^{\RV{D}_\rho\RV{Y}_\rho} (\text{Swap}_{\rho,D^{\mathbb{N}}}\otimes \text{Swap}_{\rho,Y^{\mathbb{N}}})\\
-    &= \prob{Q}_\alpha^{\RV{D}}\odot \prob{Q}_\alpha^{\RV{Y}|\RV{D}}(\text{Swap}_{\rho,D^{\mathbb{N}}}\otimes \text{Swap}_{\rho,Y^{\mathbb{N}}})\\
-    &= \tikzfig{exch_dom_swap1}\\
-    &= \tikzfig{exch_dom_swap2}\\
-    &= \tikzfig{exch_dom_swap3}\label{eq:exch_comep}\\
-    &= \tikzfig{exch_dom_swap4}\label{eq:det_comep}\\
-    &= \tikzfig{exch_dom_swap5}\label{eq:exchep}\\
-    &= \prob{Q}_\alpha^{\RV{D}\RV{Y}}
-\end{align}
-Where line \eqref{eq:exch_comep} follows from exchange commutativity, \eqref{eq:det_comep} follows from Theorem \ref{th:fong_det_kerns} and the fact that the swap map is deterministic and line \eqref{eq:exchep} comes from the exchangeability of $\prob{Q}_\alpha^{\RV{D}}$.
-
-Because $\prob{P}_\alpha^{\RV{D}}$ is dominated by $\prob{Q}_\alpha^{\RV{D}}$ by assumption, we have $\prob{P}_\alpha^{\RV{Y}|\RV{D}} \overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}|\RV{D}}$, which implies $\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^C}}\overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^C}}$ and the result follows from Lemma \ref{lem:dom_cond}.
+We show that there is an exchangeable distribution for which the relevant conditional automatically satisfies IO contractibility and is almost surely equal to $\prob{P}_\alpha^{\RV{Y}|\RV{GD}}$ for some $\RV{G}$.
 \end{proof}
 
 \begin{corollary}\label{th:ciid_rep_kernel_nolocal}
@@ -900,27 +430,17 @@ If $(\prob{P}_C,\RV{D},\RV{Y})$ is exchange commutative over $*$, and for each $
 \end{corollary}
 
 \begin{proof}
-By Theorem \ref{lem:exch_prod_ciid}, $\prob{P}_\cdot^{\RV{Y}|\RV{WD}}$ is IO contractible over some $\RV{W}$, so the result follows immediately from Theorem \ref{th:ciid_rep_kernel}.
+By Theorem \ref{lem:exch_prod_ciid}, $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible over some $\RV{W}$ for all $\alpha$, so the result follows immediately from Theorem \ref{th:ciid_rep_kernel}.
 \end{proof}
 
+Theorem \ref{th:infinite_condition_swaps} shows that the interchangeability of infinitely supported subsequences of data is a necessary condition for CIIR sequences. We only show sufficiency under the assumption that the input-output sequence is exchangeably dominated, and it is an open question if sufficiency holds in the general case.
+
 \begin{theorem}\label{th:infinite_condition_swaps}
-Given $(\prob{P}_C,\RV{D},\RV{Y})$ with conditionally independent and identical response functions $\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}$, for any infinite set $A,B\subset \mathbb{N}$ with $\sum_{i\in A} \llbracket \RV{D}_i = d\rrbracket = \infty$ for all $d\in D$, and any $i,j\in \mathbb{N}$, $i\not\in A$, $j\not\in B$, $$\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_A,\RV{D}_A}=\prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j|RV{Y}_B\RV{D}_B}$$. If in addition each $\prob{P}_\alpha^{\RV{YD}}$ is dominated by some $\prob{Q}_\alpha$ such that $\prob{Q}_\alpha^{\RV{Y}\RV{D}}$ is exchangeable, then the reverse implication also holds.
+A data-independent sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ features conditionally independent and identical response functions $\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}}$ with $\RV{D}$ infinitely supported over $\RV{G}$ only if for any sets $A,B\subset \mathbb{N}$ such that $\RV{D}_A$ and $\RV{D}_B$ are also infinitely supported over $\RV{G}$ and any $i,j\in \mathbb{N}$ such that $i\not\in A$, $j\not\in B$, $$\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_A,\RV{D}_A}=\prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j|RV{Y}_B\RV{D}_B}$$.  If in addition each $\prob{P}_\alpha^{\RV{YD}}$ is dominated by some $\prob{Q}_\alpha$ such that $\prob{Q}_\alpha^{\RV{Y}\RV{D}}$ is exchangeable, then the reverse implication also holds.
 \end{theorem}
 
 \begin{proof}
-If: By Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible. By Theorem \ref{th:any_infinite_sequence}, $\RV{H}$ is almost surely a function of both $(\RV{D}_A,\RV{Y}_A)$ and $(\RV{D}_B,\RV{Y}_B)$ and, furthermore, $\RV{Y}_i\CI_{\prob{P}_C}^e (\RV{D}_A,\RV{Y}_A)|(\RV{D}_i,\RV{H},\text{id}_C)$, $\RV{Y}_j\CI_{\prob{P}_C}^e (\RV{D}_B,\RV{Y}_B)|(\RV{D}_j,\RV{H},\text{id}_C)$. Hence there is some $f:D^{\mathbb{N}}\times Y^{\mathbb{N}}\to H$ such that for all $E\in \sigalg{Y}, d_i\in D, d\in D^{\mathbb{N}}, y\in Y^{\mathbb{N}}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_A,\RV{D}_A}(E|d_i,y,d) &= \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}(E|d_i,f(y,d))\\
-     &= \prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j\RV{H}}(E|d_i,f(y,d))\\
-     &= \prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j\RV{Y}_B,\RV{D}_B}(E|d_i,y,d)
-\end{align}
-
-Only if:
-By construction
-\begin{align}
-    \prob{Q}_\alpha^{\RV{Y}_i\RV{D}_i\RV{Y}_{\{i^C\}}\RV{D}_{\{i^C\}}}:=\prob{Q}_\alpha^{\RV{D}_i\RV{Y}_{\{i^C\}}\RV{D}_{\{i^C\}}}\odot \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_{\{i^C\}},\RV{D}_{\{i^C\}}}
-\end{align}
-is exchangeable, and by domination $\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_{\{i^C\}},\RV{D}_{\{i^C\}}}\overset{\prob{P}}{\cong}\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_{\{i^C\}},\RV{D}_{\{i^C\}}}$. The result follows from Lemma \ref{lem:dom_cond}.
+See Appendix \ref{sec:data_independent_proofs}.
 \end{proof}
 
 \section[Discussion]{Discussion}\label{sec:symmetries_discussion}
@@ -966,7 +486,7 @@ so here the decision maker has adopted a model where $\prob{P}_C^{\RV{Y}|\RV{D}}
 
 A decision maker might be in the position of having both observational and experimental data. Modify the machine from the previous example so that the good lever pays out \$100 $0.5+\epsilon$ of the time, and the bad lever pays out $0.5-\epsilon$ of the time and (as before) the DM's prior probability that each lever is the good one is $0.5$. Suppose the DM from the previous examples observes a sequence of strangers operating the machine, the results associated with the sequence of pairs $(\RV{D}_i,\RV{Y}_i)_{i\in\mathbb{N}}$, and also operates the machine themselves according to a plan fixed in advance, the results associated with the sequence of pairs $(\RV{E}_i,\RV{Z}_i)_{i\in \mathbb{N}}$. 
 
-If, in this situation, the DM were to adopt a model $(\prob{P}_C,(\RV{D},\RV{E}),(\RV{Y},\RV{Z}))$ such that $\prob{P}_\cdot^{\RV{YZ}|\RV{DE}}$ is IO contractible over $*$, understanding $(\RV{D},\RV{E},\RV{Y},\RV{Z})$ to be a single sequence of pairs, then by Theorem \ref{th:equal_of_condits} implies, for some $n\in\mathbb{N}$ and any choice of actions by the DM $\alpha$,
+If, in this situation, the DM were to adopt a model $(\prob{P}_C,(\RV{D},\RV{E}),(\RV{Y},\RV{Z}))$ such that $\prob{P}_\alpha^{\RV{YZ}|\RV{DE}}$ is IO contractible over $*$ for all $\alpha$, understanding $(\RV{D},\RV{E},\RV{Y},\RV{Z})$ to be a single sequence of pairs, then Theorem \ref{th:equal_of_condits} implies, for some $n\in\mathbb{N}$ and any choice of actions by the DM $\alpha$,
 \begin{align}
     \prob{P}_\alpha^{\RV{Z}_i|\RV{E}_i\RV{D}_{[n]}\RV{Y}_{[n]}} &= \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{E}_{[n]}\RV{Z}_{[n]}}
 \end{align}
@@ -980,7 +500,7 @@ In this case, the DMs model is not even exchange commutative over $*$.
 
 Theorem \ref{th:infinite_condition_swaps} establishes a necessary condition for conditionally independent and identical response functions: the conditional distributions of every output given the corresponding input and a suitable infinite sequence of other input-output pairs are identical. The following two examples substantiate the claims made at the beginning of this chapter: that conditionally independent and identical response functions imply, under appropriate conditions, that experimental and observational data is interchangeable and that experimental data predicts the outcomes of a decision maker's choices just as well as it predicts held out experimental outputs.
 
-It is common to find statements to the effect that it is \emph{hard} to assess whether conditionally independent and identical responses are reasonable to assume, and may require expert knowledge\todo{some references}. However, we propose that, in fact, it's often easy to reject this assumptions. One might respond that we might still accept that the condition is close to holding, and in this case it's may often be possible to make good decisions by reasoning as if it holds precisely. However, this begs the question: in what sense is it ``close'' to holding? In other words, if we want to relax this assumption, what do we relax it to?
+We are of the view that it is not simply ``hard to know'' when this condition is reasonable -- in fact, it's often easy to know that it is unreasonable. One might respond that we might still accept that the condition is close to holding, and in this case it's may often be possible to make good decisions by reasoning as if it holds precisely. However, this begs the question: in what sense is it ``close'' to holding? In other words, if we want to relax this assumption, what do we relax it to?
 
 A key question is thus: how do we formulate weaker assumptions that are more widely acceptable than the assumption of conditionally independent and identical response functions? This is explored in Chapter \ref{ch:other_causal_frameworks}.
 
@@ -1007,6 +527,15 @@ But the proposition that these problems are \emph{identical} is hard to swallow:
 
 In practice, when both experimental and observational data are available, they are \emph{not} assumed to be interchangeable in this sense -- in fact, the question of how well the observational data predicts experimental outputs is one of substantial interest \citet{eckles_bias_2021,gordon_comparison_2018,gordon_close_2022}.
 
+\subsection{No causes in, no causes out}
+
+Example 1 above shows that the assumption of a CIIR sequence applies to an exchangeable probability model with no real alternative options or anything else ``causal''. As a result, one might wonder whether the assumption of CIIR sequences really is a ``causal'' assumption (we have no clear idea what does or does not constitute a causal assumption here, we're merely noting that an assumption that applies to probability models seems like it may not fit the bill). The apparent claim that CIIR sequences nonetheless allow us to draw causal conclusions might them (seemingly) run afoul of Cartwright's well-known adage ``no causes in, no causes out'' \citep{cartwright_no_1994}.
+
+We have also supposed, in the background at least, that a relation between the chosen option $\alpha$ and the distribution of (some) inputs $\prob{P}_\alpha^{\RV{D}}$ was known in advance. This seems much more like a causal assumption -- it really doesn't make sense to try to apply this assumption to a probability model with no option set.
+
+There is no obvious reason why the problem has to be this way, but it is certainly intuitively appealing to think about ``inputs'' that we already know how to control and ``outputs'' that we want to learn how to control from the given data. In fact, it is perhaps this intuitive appeal that led us to name the two sequences ``inputs'' and ``outputs'' respectively.
+
+If we are working this way, then we can postulate that there is a distinction between inputs and outputs encoded in the model that is independent of any joint distribution of inputs and outputs $\prob{P}_\alpha^{\RV{Y}_i\RV{D}_i|\RV{H}}$. In particular, we postulate that $\RV{D}_i$ is distinguished from $\RV{Y}_i$ by the fact that the degree to which we can control of $\RV{Y}_i$ improves as we observe more data, while the degree to which we can control $\RV{D}_i$ is already at a maximum and improves no further with additional data. A proper formalisation of this distinction between inputs and outputs is an open question.
 
 % \paragraph{Weaker assumptions}\label{pgph:weaker_assumptions}
 
@@ -1045,15 +574,16 @@ In practice, when both experimental and observational data are available, they a
 
 \section[Data-dependent inputs]{Conditionally independent and identical response functions with data-dependent inputs}\label{sec:data_dependent}
 
-The results of the previous section concern ``just-do'' models where actions have not dependence on previous data. Decision problems of interest actually have actions that depend on data -- what's really wanted are ``see-do'' models of some variety (see Definition \ref{def:see_do_model}). Here, Theorem \ref{th:data_ind_CC} is generalised to sequential see-do models with the use of \emph{probability combs}. This work is preliminary, and in particular this generalisation doesn't lend itself to an easy interpretation that we are aware of.
+The results of the previous section concern data independent models; in these models, inputs cannot depend on previous data except via an ``oracle'' on the hypothesis $\RV{H}$. This differ from the ``see-do'' models discussed in the previous chapter, where some inputs can depend in arbitrary ways on the sequence of data preceding them. Intuitively, we might expect that something similar to Theorems \ref{th:ciid_rep_kernel} and \ref{th:infinite_condition_swaps} might hold. However, the situation is complicated by the fact that we can no longer arbitrarily shuffle the order of the input-output sequence; if future inputs depend on the past data, then we could have, for example, $\RV{D}_2$ deterministically equal to $\RV{Y}_1$ which would, in general, may $\RV{Y}_1$ not independent of $\RV{D}_2$ conditional on the hypothesis $\RV{H}$. Theorem \ref{th:ciid_rep_kernel_k} is similar to Theorem \ref{th:ciid_rep_kernel} except it applies to this more general setting of data-dependent inputs. However, it also doesn't lend itself to any easy interpretation that we are aware of. We consider the work in this section to be preliminary.
 
-To begin with an example, consider a probability set $(\prob{P}_C,\RV{D},\RV{Y})$ with $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$ as usual, and take a subsequence $(\RV{D}_i,\RV{Y}_i)_{i\in [2]}$ of length 2. Suppose $\prob{P}_C$ features conditionally independent and identical response functions -- that is, the following holds:
+\begin{example}\label{ex:insertion}
+Consider an input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$ as usual, and take a subsequence $(\RV{D}_i,\RV{Y}_i)_{i\in [2]}$ of length 2. Suppose $\prob{P}_C$ features conditionally independent and identical response functions -- that is, the following holds for some hypothesis $\RV{G}$:
 \begin{align}
-    \RV{Y}_i&\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i},\text{id}_C)|\RV{H}\RV{D}_i&\forall i\in \mathbb{N}\\
-    \land \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \prob{P}_C^{\RV{Y}_0|\RV{H}\RV{D}_0} & \forall i\in \mathbb{N}
+    \RV{Y}_i&\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i},\text{id}_C)|\RV{G}\RV{D}_i&\forall i\in \mathbb{N}\\
+    \land \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \prob{P}_\alpha^{\RV{Y}_0|\RV{G}\RV{D}_0} & \forall \alpha\in C, i\in \mathbb{N}
 \end{align}
 
-and, for simplicity, assume $\RV{H} \CI^e_{\prob{P}_C} (\RV{D}, \text{id}_C)$ also.
+and, for simplicity, assume $\RV{G} \CI^e_{\prob{P}_C} (\RV{D}, \text{id}_C)$ also.
 
 Then, for arbitrary $\alpha\in C$
 \begin{align}
@@ -1069,13 +599,13 @@ then $\prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}$ is IO contractible. $\pr
 \begin{align}
     \prob{P}_\alpha^{\RV{D}_1\RV{D}_2} \prob{P}_C^{\RV{Y}_{[2]}\combbreak \RV{D}_{[2]}}\neq \prob{P}_\alpha^{\RV{Y}_1\RV{Y}_2}
 \end{align}
-
+\end{example}
 
 \subsection{Combs}\label{sec:def_combs}
 
-Combs generalise conditional probabilities in this sense: given a conditional distribution and a marginal distribution of the right type, joining them together (with the semidirect product\ref{def:copyproduct}) I get a marginal distribution of a different type. Define ``1-combs'' as conditional probabilities and ``0-combs'' as conditional distributions. Then the previous observation can be restated as: given a 1-comb and a 0-comb of the right type,  joining them together yields a 0-comb of a different type. Higher order combs generalise this: given an $n$-comb and an $n-1$-comb of the right type, joining them yields an $n-1$ comb.
+Combs are a generalisation of conditional distributions that support the ``insert'' operation that appears in Example \ref{ex:insertion}. Speaking very roughly, where conditional distributions are Markov kernels missing a part ``on the left'', combs are Markov kernels that may be missing one or more parts ``in the middle''. If we provide a conditional distribution with its missing part -- that is, if we compute the semidirect product of the conditional distribution and the appropriate marginal -- we get the joint distribution of the variables that appear on the left and right sides of the conditional distribution. Similarly, if we ``insert'' all of the missing parts into a comb, we get the joint distribution of all of the incoming and outgoing variables that appear in the comb.
 
-Joining combs uses an ``insert'' operation (Definition \ref{def:insert_discrete}).  A graphical depiction of this operation gives some intuition for why it is called ``insert'':
+A graphical depiction of the ``insert'' operation gives some intuition for why it is called ``insert'':
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}_{1}\RV{D}_2\RV{Y}_2|\RV{D}_1}&=\text{insert}(\prob{P}_\alpha^{\RV{D}_2|\RV{D}_1\RV{Y}_1},\prob{P}_C^{\RV{Y_{[2]}}\combbreak\RV{D}_{[2]}})\\
     &= \tikzfig{comb_insert_complicated}\label{eq:comb_insert_complicated}\\
@@ -1084,7 +614,7 @@ Joining combs uses an ``insert'' operation (Definition \ref{def:insert_discrete}
 \end{align}
 While Equation \eqref{eq:comb_insert_complicated} is a well-formed string diagram in the category of Markov kernels, Equation \eqref{eq:comb_insert_simple} is not. In the case that all the underlying sets are discrete, Equation \eqref{eq:comb_insert_simple} can be defined using an extended string diagram notation appropriate for the category of real-valued matrices \citep{jacobs_causal_2019}, though we do not introduce this extension here.
 
-Formal definitions of combs and both notations follow. As with conditional probabilities, a \emph{uniform} $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{X}_{[n]}}$ is a Markov kernel that satisfies the definition of an $n$-comb for each $\alpha\in C$.
+Formal definitions of combs follow. As with conditional probabilities, a \emph{uniform} $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{X}_{[n]}}$ is a Markov kernel that satisfies the definition of an $n$-comb for each $\alpha\in C$.
 
 \begin{definition}[$n$-Comb]\label{def:uniform_comb}
 Given a probability space $(\prob{P},\Omega,\sigalg{F})$ with variables $\RV{Y}_i:\Omega\to Y$, $\RV{D}_i:\Omega\to D$ for $i\in [n]$ and $\RV{W}:\Omega\to W$, the uniform $n$-comb $\prob{P}^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}|\RV{W}}:W\times D^n\kto Y^n$ is the Markov kernel given by the recursive definition\todo{image alignment}
@@ -1097,7 +627,7 @@ Given a probability space $(\prob{P},\Omega,\sigalg{F})$ with variables $\RV{Y}_
 \begin{definition}[$\mathbb{N}$-comb]
 Given a probability space $(\prob{P},\Omega,\sigalg{F})$ with variables $\RV{Y}_i:\Omega\to Y$ and $\RV{D}_i:\Omega\to D$, for $i\in \mathbb{N}$ and $\RV{W}:\Omega\to W$, the $\mathbb{N}$-comb $\prob{P}^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}|\RV{W}}:W\times D^\mathbb{N}\kto Y^\mathbb{N}$ is the Markov kernel such that for all $n\in \mathbb{N}$
 \begin{align}
-    \prob{P}^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}|\RV{W}}[\mathrm{id}_{Y^{n}}\otimes \mathrm{Del}_{Y^{\mathbb{N}}}] &= \prob{P}^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}|\RV{W}}\otimes \mathrm{Del}_{Y^{\mathbb{N}}}
+    \prob{P}^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}|\RV{W}}[\mathrm{id}_{Y^{n}}\otimes \mathrm{del}_{Y^{\mathbb{N}}}] &= \prob{P}^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}|\RV{W}}\otimes \mathrm{del}_{Y^{\mathbb{N}}}
 \end{align}
 \end{definition}
 
@@ -1108,7 +638,7 @@ Given a probability set $\prob{P}$ with variables $\RV{Y}_i:\Omega\to Y$ and $\R
 \begin{proof}
 For each $n\in \mathbb{N}$ $m<n$, we have
 \begin{align}
-    \prob{P}^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}|\RV{W}}[\mathrm{id}_{Y^{n-m}}\otimes \mathrm{Del}_{Y^m}] &= \prob{P}^{\RV{Y}_{[n-m]}\combbreak \RV{D}_{[n-m]}}\otimes \mathrm{Del}_{Y^m}
+    \prob{P}^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}|\RV{W}}[\mathrm{id}_{Y^{n-m}}\otimes \mathrm{del}_{Y^m}] &= \prob{P}^{\RV{Y}_{[n-m]}\combbreak \RV{D}_{[n-m]}}\otimes \mathrm{del}_{Y^m}
 \end{align}
 and each $m$ and $n$ comb exists because the requisite conditional probabilities exist. Therefore the existence of $\prob{P}^{\RV{Y}_{\mathbb{N}}\combbreak \RV{D}_{\mathbb{N}}}$ is a consequence of Lemma \ref{lem:infinitely_extended_kernels}.
 \end{proof}
@@ -1163,30 +693,28 @@ The definitions of IO contractibility (Section \ref{sec:ccontracibility}) don't 
 \begin{align}
     \text{Swap}_{\rho} \prob{P}_C^{\RV{Y}\combbreak \RV{D}} \text{Swap}_{\rho-1} \neq \prob{P}_C^{\RV{Y}_{\rho}\combbreak \RV{D}_\rho}
 \end{align}
+ 
+We can generalise IO contractibility to a notion that applies to generic Markov kernels, and do so in Section \ref{sec:ccontracibile_kernel}. The downside of this is that it's no longer easy to talk about what the transformations mean in terms of equalities of conditional distributions of variables -- nor indeed, in terms of probability comb equalities, because unlike a conditional distribution, the product of a probability comb and a swap map is not necessarily a probability comb itself. In any case, Theorem \ref{th:response_is_cc_hdep} is an analogue of Theorem \ref{th:ciid_rep_kernel} for the case of a data-dependent model. There are two crucial differences between these theorems. First, while Theorem \ref{th:ciid_rep_kernel} constructs the hypothesis $\RV{H}$ as a function of the given variables, Theorem \ref{th:response_is_cc_hdep} extends the sample space to construct the corresponding hypothesis $\RV{G}$. If the ``given variables'' are observable, this means that $\RV{G}$ is not necessarily able to be constructed from observables.
 
-We can generalise IO contractibility to a notion that applies to generic Markov kernels, and do so in Section \ref{sec:ccontracibile_kernel}. The downside of this is that it's no longer easy to talk about what the transformations mean in terms of equalities of conditional distributions of variables -- nor indeed, in terms of probability comb equalities, because unlike a conditional distribution, the product of a probability comb and a swap map is not necessarily a probability comb itself. In any case, Theorem \ref{th:response_is_cc_hdep} is an analogue of Theorem \ref{th:ciid_rep_kernel} for the case of a data-dependent model. There are two crucial differences between these theorems. First, while Theorem \ref{th:ciid_rep_kernel} constructs the hypothesis $\RV{H}$ as a function of the given variables, Theorem \ref{th:response_is_cc_hdep} extends the sample space to construct the corresponding hypothesis $\RV{G}$. If the ``given variables'' are observable, this means that $\RV{G}$ is not necessarily able to be constructed from observables. This leads to an open question:
-\begin{itemize}
-    \item Under what conditions is the hypothesis $\RV{G}$ (as defined in \ref{th:response_is_cc_hdep}) equal to a function of the given variables?
-\end{itemize}
-Secondly, Theorem \ref{th:response_is_cc_hdep} is proved without the ``auxiliary'' variable $\RV{W}$, and as a result it includes the additional assumption $\RV{H}\CI_{\prob{P}_C} (\RV{X},\text{id}_C)$.
+Secondly, Theorem \ref{th:response_is_cc_hdep} considers the only unconditional IO contractibility, without the ``auxiliary'' variable $\RV{W}$. As a result it, it is restricted to the special case where $\RV{G}\CI_{\prob{P}_C} (\RV{X},\text{id}_C)$.
 
-\section[IO contractible Markov kernels]{IO contractible Markov kernels - definitions and explanation}\label{sec:ccontracibile_kernel}
+\subsubsection[IO contractible Markov kernels]{IO contractible Markov kernels - definitions and explanation}\label{sec:ccontracibile_kernel}
 
-The following definitions mirror the defintions Section \ref{sec:ccontracibility}, except they are stated in terms of kernel products instead of variables. This is so that they can be applied to combs, instead of limited to conditional probabilities.
+The following definitions mirror the definitions Section \ref{sec:ccontracibility}, except they are stated in terms of kernel products instead of variables. This is so that they can be applied to combs, instead of limited to conditional probabilities.
 
 \begin{definition}[kernel locality]\label{def:caus_cont_k}
-A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{local} if for all $n\in \mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^C})\in\mathbb{N}$ there exists $\kernel{L}:X^n\kto Y^n$ such that
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{local} if for all $n\in \mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^{\complement}})\in\mathbb{N}$ there exists $\kernel{L}:X^n\kto Y^n$ such that
 \begin{align}
     \tikzfig{local_lhs} &= \tikzfig{local_rhs}\\
     &\iff\\
-    \kernel{K}(\bigtimes_{i\in [n]} A_i\times Y^{\mathbb{N}}|x_{[n]},x_{[n]^C}) &= \kernel{L}(\bigtimes_{i\in [n]} A_i|x_{[n]})
+    \kernel{K}(\bigtimes_{i\in [n]} A_i\times Y^{\mathbb{N}}|x_{[n]},x_{[n]^{\complement}}) &= \kernel{L}(\bigtimes_{i\in [n]} A_i|x_{[n]})
 \end{align}
 \end{definition}
 
 \begin{definition}[kernel exchange commutativity]\label{def:caus_exch_k}
-A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ \emph{commutes with exchange} if for all finite permutations $\rho:\mathbb{N}\to\mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^C})\in\mathbb{N}$
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ \emph{commutes with exchange} if for all finite permutations $\rho:\mathbb{N}\to\mathbb{N}$, $A_i\in \sigalg{Y}$, $(x_{[n]},x_{[n]^{\complement}})\in\mathbb{N}$
 \begin{align}
-    \kernel{K}\mathrm{Swap}_{\rho,Y} &=  \mathrm{Swap}_{\rho,X} \kernel{K}\\
+    \kernel{K}\mathrm{swap}_{\rho,Y} &=  \mathrm{swap}_{\rho,X} \kernel{K}\\
     &\iff\\
     \kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{\rho(i)}|(x_i)_{i\in {\mathbb{N}}}) &= \kernel{K}(\bigtimes_{i\in\mathbb{N}} A_{i}|(x_{\rho(i)})_{i\in {\mathbb{N}}})
 \end{align}
@@ -1197,158 +725,46 @@ IO contractibility is the conjunction of both assumptions.
 A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{IO contractible} if it is local and commutes with exchange.
 \end{definition}
 
-\subsection[Representation of IO contractible kernels]{Representation of IO contractible Markov kernels}
+\subsubsection[Representation of IO contractible kernels]{Representation of IO contractible Markov kernels}
 
 The main theorem is proved in this section. Much of the work parallels work already done in Section \ref{sec:ccontracibility}.
 
 Theorem \ref{th:equal_of_condits_k} is similar to Theorem \ref{th:equal_of_condits}, except it is stated in terms of transformations of a Markov kernel instead of in terms of conditional probabilities of variables.
 
+\begin{definition}[Marginalisation map]
+Given a sequence $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$ and $A\subset \mathbb{N}$, $\text{marg}_A$ is the Markov kernel associated with the function $\RV{Y}\mapsto (\RV{Y}_i)_{i\in A}$.
+\end{definition}
+
 \begin{theorem}[Equality of equally sized contractions]\label{th:equal_of_condits_k}
 A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is \emph{IO contractible} if and only if for every $n\in \mathbb{N}$ and every $A\subset\mathbb{N}$ there exists some $\kernel{L}:X^n\kto Y^n$ such that
 \begin{align}
-    \kernel{K} \text{marg}_A &= \text{Swap}_{[n]\leftrightarrow A} \kernel{L}\otimes \text{Del}_{X^{\mathbb{N}}}
+    \kernel{K} \text{marg}_A &= \text{swap}_{A\rightarrow [n]} \kernel{L}\otimes \text{del}_{X^{\mathbb{N}}}
 \end{align}
 \end{theorem}
 
 \begin{proof}
-Only if:
-By exchange commutativity
-\begin{align}
-    \text{Swap}_{[n]\leftrightarrow A} \kernel{K} &= \kernel{K} \text{Swap}_{[n]\leftrightarrow A}
-\end{align}
-multiply both sides by $\text{Swap}_{[n]\leftrightarrow A}$ on the right and, because $\text{Swap}_{[n]\leftrightarrow A}$ is its own inverse,
-\begin{align}
-        \text{Swap}_{[n]\leftrightarrow A} \kernel{K}\text{Swap}_{[n]\leftrightarrow A} &= \kernel{K}
-\end{align}
-so
-\begin{align}
-    \kernel{K}\text{marg}_A &= \text{Swap}_{[n]\leftrightarrow A} \kernel{K}\text{Swap}_{[n]\leftrightarrow A}\text{marg}_A\\
-    &= \text{Swap}_{[n]\leftrightarrow A} \kernel{K}\text{marg}_{[n]}
-\end{align}
-By locality, there exists some $\kernel{L}:X^n\kto Y^n$ such that
-\begin{align}
-    \kernel{K} \text{marg}_{[n]} &= \kernel{K}(\text{id}_{[n]}\otimes \text{Del}_{X^{\mathbb{N}}})\\
-     &= \kernel{L}\otimes \mathrm{Del}_{X^{\mathbb{N}}}
-\end{align}
-If:
-Taking $A=[n]$ for all $n$ establishes locality.
-
-For exchange commutativity, note that for all $x\in X^{\mathbb{N}}$, $n\in\mathbb{N}$, we have
-\begin{align}
-    \text{Swap}_{A\leftrightarrow [n]} \kernel{K} \text{marg}_A &= \text{Swap}_{A\leftrightarrow [n]} \kernel{K} \text{Swap}_{A\leftrightarrow [n]} (\text{id}_{[n]}\otimes \text{Del}_{X^{\mathbb{N}}})\\
-     &= \kernel{K} \text{marg}_{[n]}\\
-     &= \kernel{K}(\text{id}_{[n]}\otimes \text{Del}_{X^{\mathbb{N}}})
-\end{align}
-Then by Lemma \ref{lem:infinitely_extended_kernels}
-\begin{align}
-    \text{Swap}_{A\leftrightarrow [n]} \kernel{K} \text{Swap}_{A\leftrightarrow [n]} &= \kernel{K}
-\end{align}
-Consider an arbitrary finite permutation $\rho:\mathbb{N}\to \mathbb{N}$. $\rho$ can be decomposed into a finite set of cyclic permutations on disjoint orbits. Each cyclic permutation is simply the composition of some set of transpositions, and so $\rho$ itself can be written as a composition of a sequence of transpositions. Thus for any finite $\rho:\mathbb{N}\to\mathbb{N}$
-\begin{align}
-    \text{Swap}_{\rho} \kernel{K} \text{Swap}_{\rho} &= \kernel{K}
-\end{align}
+Appendix \ref{sec:data_dep_proofs}
 \end{proof}
 
-Theorem \ref{th:table_rep_kernel_k} is similar to Theorem \ref{th:table_rep_kernel}, except the latter uses a variable $\RV{Y}^D$ explicitly defined on the sample space, while Theorem \ref{th:table_rep_kernel_k} simply says an appropriate probability distribution exists. 
+Lemma \ref{th:table_rep_kernel_k} is similar to Lemma \ref{th:table_rep_kernel}, except the latter uses a variable $\RV{Y}^D$ explicitly defined on the sample space, while Lemma \ref{th:table_rep_kernel_k} simply says an appropriate probability distribution exists, but may not be the distribution of any variable on the given sample space.
 
-\begin{theorem}\label{th:table_rep_kernel_k}
-A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is IO contractible if and only if there exists a column exchangeable probability distribution $\mu \Delta(Y^{|X|\times \mathbb{N}})$ such that
+\begin{lemma}\label{th:table_rep_kernel_k}
+A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is IO contractible if and only if there exists a column exchangeable probability distribution $\mu \in \Delta(Y^{|X|\times \mathbb{N}})$ such that
 \begin{align}
     \kernel{K} &= \tikzfig{lookup_representation_kernel}\label{eq:lup_rep_kernel_k}\\
     &\iff\\
-    \kernel{K}(A|(x_i)_{i\in \mathbb{N}}) &= \mu \Pi_{(x_i i)_{i\in\mathbb{N}}}(A)\forall A\in \sigalg{Y}^{\mathbb{N}}
+    \kernel{K}(\bigtimes_{i\in \mathbb{N}} A_i|(x_i)_{i\in \mathbb{N}}) &= \mu (\bigtimes_{i\in \mathbb{N}} Y^{x_i-1}\times A\times Y^{|X|-(x_{i}+1)})\forall A_i\in \sigalg{Y}
 \end{align}
-Where $\Pi_{(d_i i)_{i\in\mathbb{N}}}:Y^{|X|\times \mathbb{N}}\to Y^{\mathbb{N}}$ is the function 
+Where $\prob{F}_{\text{lu}}$ is the Markov kernel associated with the lookup map
 \begin{align}
-    (y_{j i})_{j,i \in X\times  \mathbb{N}}\mapsto (y_{d_i i})_{i\in \mathbb{N}}
+    \text{lu}:X^\mathbb{N}\times Y^{\mathbb{N}\times D}&\to Y\\
+    ((x_i)_\mathbb{N},(y_{ij})_{i,j\in \mathbb{N}\times D})&\mapsto (y_{i d_i})_{i\in \mathbb{N}}
 \end{align}
-that projects the $(x_i,i)$ indices of $y$ for all $i\in \mathbb{N}$, and $\prob{F}_{\text{ev}}$ is the Markov kernel associated with the evaluation map
-\begin{align}
-    \text{ev}:X^\mathbb{N}\times Y^{X\times \mathbb{N}}&\to Y\\
-    ((x_i)_\mathbb{N},(y_{ji})_{j,i\in X\times \mathbb{N}})&\mapsto (y_{x_i i})_{i\in \mathbb{N}}
-\end{align}
-\end{theorem}
+\end{lemma}
 
 \begin{proof}
-Only if:
-Choose $e:=(e_i)_{i\in\mathbb{N}}$ such that $e_{i+|X|j}$ is the $i$th element of $X$ for all $i,j\in \mathbb{N}$.
-
-Define
-\begin{align}
-    \mu(\bigtimes_{(i,j)\in X\times \mathbb{N}} A_{ij}):=\kernel{K}(\bigtimes_{(i,j)\in X\times \mathbb{N}} A_{ij}|e)& \forall A_{ij}\in \sigalg{Y}
-\end{align}
-
-Now consider any $x:=(x_i)_{i\in \mathbb{N}}\in X^{\mathbb{N}}$. By definition of $e$, $e_{x_i i}=x_i$ for any $i,j\in \mathbb{N}$.
-
-Define
-\begin{align}
-    \prob{Q}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}\\
-    \prob{Q}:= \tikzfig{lookup_representation_kernel}
-\end{align}
-and consider some $A\subset \mathbb{N}$, $|A|=n$ and $B:= (x_i,i))_{i\in A}$. Note that the subsequence of $e$ indexed by $B$, $e_B:=(e_{x_i i})_{i\in A}=x_A$. Thus given the swap map $\mathrm{Swap}_{A\leftrightarrow B}:\mathbb{N}\to\mathbb{N}$ that sends the first element of $A$ to the first element of $B$ and so forth, $\mathrm{Swap}_{A\leftrightarrow B} (e_B) = x_A$. For arbitrary $\{C_i\in \sigalg{Y}|i\in A\}$, define $C_A:=\mathrm{Swap}_{[n]\leftrightarrow A} (\times_{i\in [n]} C_i\times Y^{\mathbb{N}})$. Then, for arbitrary $x\in X^{\mathbb{N}}$
-\begin{align}
-    \prob{Q}(C_A|x) &= \mu (\mathrm{ev}_x^{-1}(C_A))\label{eq:q_mu_rel_k}
-\end{align}
-
-The argument of $\mu$ is
-\begin{align}
-    \mathrm{ev}_x^{-1}(C_A)&=\{(y_{ji})_{j,i\in X\times\mathbb{N}}|(y_{x_i i})_{i\in\mathbb{N}}\in C_A\}\\
-    &= \bigtimes_{i\in \mathbb{N}} \bigtimes_{j\in X} D_{ji}
-\end{align}
-where
-\begin{align}
-    D_{ji} = \begin{cases}
-        C_i & (j,i)\in B\\
-        Y & \text{otherwise}
-    \end{cases}
-\end{align}
-and so
-\begin{align}
-    \text{Swap}_{A\leftrightarrow B} (\mathrm{ev}_x^{-1}(C_A)) &= C_A\label{eq:swap_select_relation_k}
-\end{align}
-
-Substituting Equation \eqref{eq:swap_select_relation_k} into \eqref{eq:q_mu_rel_k}
-\begin{align}
-    \prob{Q}(C_A|x) &= \mu \text{Swap}_{A\leftrightarrow B} (C_A)\\
-    &= \kernel{K} \text{Swap}_{A\leftrightarrow B} (C_A|e)\\
-    &= \kernel{K}\text{Swap}_{A\leftrightarrow B} (C_A|e_B,\text{Swap}_{B\leftrightarrow A}(x)_B^C)&\text{by locality}\\
-    &= \kernel{K}\text{Swap}_{A\leftrightarrow B} (C_A|\text{Swap}_{B\leftrightarrow A}(x))\\
-    &= \text{Swap}_{B\leftrightarrow A} \kernel{K}\text{Swap}_{A\leftrightarrow B} (C_A|x)\\
-    &= \kernel{K}(C_A|x)&\text{by commutativity of exchange}
-\end{align}
-
-Because this holds for all $x$, $A\subset\mathbb{N}$, by Lemma \ref{lem:infinitely_extended_kernels}
-
-\begin{align}
-    \prob{Q} &= \kernel{K}
-\end{align}
-
-Next we will show $\mu$ is column exchangeable. Consider any column swap $\text{Swap}_{c}:X\times \mathbb{N}\to X\times \mathbb{N}$ that acts as the identity on the $X$ component and a finite permutation on the $\mathbb{N}$ component. From the definition of $e$, $\text{Swap}_c(e)=e$. Thus by commutativity of exchange, for any $A\in \sigalg{Y}^{\mathbb{N}}$
-\begin{align}
- \kernel{K}(A|e) &= \text{Swap}_c\kernel{K}\text{Swap}_c(A|e)\\
- &= \kernel{K}\text{Swap}_c(A|\text{Swap}_c(e))\\
- &= \kernel{K}\text{Swap}_c(A|e)
-\end{align}
-
-
-If:
-Suppose 
-\begin{align}
-    \kernel{K} &= \tikzfig{lookup_representation_kernel}
-\end{align}
-where $\mu$ is column exchangeable, and consider any two $x,x'\in X^{\mathbb{N}}$ such that some subsequences are equal $x_S=x'_T$ with $S,T\subset \mathbb{N}$ and $|S|=|T|=[n]$.
-
-For any $\{A_i\in\sigalg{Y}|i\in S\}$, let $A_S = \text{Swap}_{[n]\leftrightarrow S} \times_{i\in [n]} A_i\times Y^{\mathbb{N}}$, $A_T = \text{Swap}_{S\leftrightarrow T} (A_S)$, $B=(x_i i)_{i\in S}$ and $C=(x_i i)_{i\in T}=(x_{\text{Swap}_{S\leftrightarrow T}}(i) i)_{i\in S}$. By Equations \eqref{eq:q_mu_rel_k} and \eqref{eq:swap_select_relation_k}
-\begin{align}
-    \kernel{K}(A_S|x) &= \mu \text{Swap}_{S\leftrightarrow B} (A_S)\\
-    &= \mu \text{Swap}_{T\leftrightarrow C} (A_T)&\text{ by column exchangeability of }\mu\\
-    &= \kernel{K}(A_T|\text{Swap}_{S\leftrightarrow T}(x))\\
-    &=  \text{Swap}_{S\leftrightarrow T}\kernel{K}(A_T| x)\\
-    &= \text{Swap}_{S\leftrightarrow T} \kernel{K} \text{Swap}_{S\leftrightarrow T} (A_S| x)
-\end{align}
-so $\kernel{K}$ is IO contractible by Theorem \ref{th:equal_of_condits_k}.
+Appendix \ref{sec:data_dep_proofs}.
 \end{proof}
-
 
 
 \begin{lemma}[Exchangeable table to response functions]\label{lem:extabl_to_respf_k}
@@ -1363,44 +779,10 @@ for $\mu\in \Delta(Y^{X\times\mathbb{N}})$ column exchangeable, then defining $(
 \end{lemma}
 
 \begin{proof}
-As a preliminary, we will show
-\begin{align}
-    \kernel{F}_{\mathrm{ev}} &= \tikzfig{lookup_rep_intermediate_kernel}\label{eq:ev_alternate_rep_k}
-\end{align}
-where  $\mathrm{evs}_{Y^X\times X}:Y^X\times X\to Y$ is the single-shot evaluation function
-\begin{align}
-    (x,(y_i)_{i\in X})\mapsto y_x
-\end{align}
-
-Recall that $\mathrm{ev}$ is the function
-\begin{align}
-    ((x_i)_\mathbb{N},(y_{ji})_{j,i\in X\times \mathbb{N}})&\mapsto (y_{x_i i})_{i\in \mathbb{N}}
-\end{align}
-By definition, for any $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$
-\begin{align}
-    \kernel{F}_{\mathrm{ev}}(\bigtimes_{i\in \mathbb{N}}A_i|(x_i)_\mathbb{N},(y_{ji})_{i\in X\times \mathbb{N}}) &= \delta_{(y_{x_i i})_{i\in \mathbb{N}}}(\bigtimes_{i\in \mathbb{N}}A_i)\\
-        &= \prod_{i\in \mathbb{N}} \delta_{y_{x_i i}} (A_i)\\
-        &= \prod_{i\in \mathbb{N}} \kernel{F}_{\text{evs}} (A_i|x_i,(y_{ji})_{j\in X})\\
-        &= \left(\bigotimes_{i\in\mathbb{N}} \kernel{F}_{\mathrm{evs}} \right)(\bigtimes_{i\in \mathbb{N}}A_i|(x_i)_\mathbb{N},(y_{ji})_{j\in X\times \mathbb{N}})
-\end{align}
-which is what we wanted to show.
-
-Define $\kernel{M}:H\kto Y^X$ by $\kernel{M}(A|h)=h(A)$ for all $A\in\sigalg{Y}^X$, $h\in H$. By the column exchangeability of $\mu$, from \citet[Prop. 1.4]{kallenberg_basic_2005} there is a directing random measure $\RV{H}:Y^{X\times\mathbb{N}}\to H$ such that
-\begin{align}
-    \mu(\kernel{F}_{\RV{H}}\otimes \mathrm{id}_{Y^{X\times\mathbb{N}}}) &= \tikzfig{de_finetti_representation_kernel}\label{eq:df_rep_mu_k}\\
-    &\iff\\
-    \mu(\bigtimes_{i\in \mathbb{N}} A_i\times B) &= \int_B \prod_{i\in \mathbb{N}} \kernel{M}(A_i|h) \mu\kernel{F}_{\RV{H}}(\mathrm{d}h)&\forall A_i\in\sigalg{Y}^X
-\end{align}
-
-By Equations \eqref{eq:lookup_representation_k} and \eqref{eq:ev_alternate_rep_k}
-\begin{align}
-    \kernel{K} &= \tikzfig{do_model_representation_kernel_pre}\\
-    &:= \tikzfig{do_model_representation_kernel_k}\label{eq:lup_rep_combined_k}
-\end{align}
-Where we can connect the copied outputs of $\mu\kernel{F}_{\RV{H}}$ to the inputs of each $\kernel{M}$ ``inside the plate'' as the plates in Equations \eqref{eq:ev_alternate_rep} and \eqref{eq:df_rep_mu} are equal in number and each connected wire represents a single copy of $Y^D$.
+Appendix \ref{sec:data_dep_proofs}.
 \end{proof}
 
-Theorem \ref{th:ciid_rep_kernel_k} is similar to Theorem \ref{th:ciid_rep_kernel}, but it is stated without the use of variables.
+Theorem \ref{th:ciid_rep_kernel_k} is similar to Theorem \ref{th:ciid_rep_kernel}, but it is stated without the use of variables.  It shows that a IO contractible Markov kernel $X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is representable as a ``prior'' $\mu\in \Delta(H)$ and a ``parallel product'' of Markov kernels $H\times X\kto Y$, which the response conditionals.
 
 \begin{theorem}\label{th:ciid_rep_kernel_k}
 Given a kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$, let $(H,\sigalg{H}):=\mathcal{M}_1(Y^X)$ be the set of probability distributions on $(Y^X,\sigalg{Y}^X)$. $\kernel{K}$ is IO contractible if and only if there is some $\mu\in \Delta(H)$ and $\kernel{L}:H\times X\kto Y$ such that 
@@ -1412,84 +794,17 @@ Given a kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$, let $(H,\sigalg{H
 \end{theorem}
 
 \begin{proof}
-Only if:
-By Theorem \ref{th:table_rep_kernel_k}, we can represent the conditional probability $\kernel{K}$ as
-\begin{align}
-        \kernel{K} &= \tikzfig{lookup_representation_kernel}\label{eq:lookup_representation_k}
-\end{align}
-where $\nu\in \Delta(Y^{X\times\mathbb{N}})$ is column exchangeable.
-
-Applying Lemma \ref{lem:extabl_to_respf_k} yields the desired result.
-
-If:
-By assumption, for any $\{A_i\in \sigalg{Y}|i\in\mathbb{N}\}$, $x:=(x_i)_{i\in\mathbb{N}}\in X^{\mathbb{N}}$
-\begin{align}
-    \kernel{K}(\bigtimes_{i\in \mathbb{N}} A_i|x) &= \int_H \prod_{i\in \mathbb{N}}\kernel{L}(A_i|h,x_i)\mu(\mathrm{d}h)
-\end{align}
-
-Consider any $S,T\subset\mathbb{N}$ with $|S|=|T|$, and define $A_S:=\times_{i\in\mathbb{N}} B_i$ where $B_i=Y$ if $i\not\in S$, otherwise $A_i$ is an arbitrary element of $\sigalg{Y}$. Define $A_T:=\times_{i\in\mathbb{N}} B_{\mathrm{Swap}_{S\leftrightarrow T}(i)}$.
-
-\begin{align}
-    \kernel{K}(A_S|x) &= \int_H \prod_{i\in S}\kernel{L}(A_i|h,x_i)\mu(\mathrm{d}h)\\
-                      &= \int_H\prod_{i\in T}\kernel{L}(A_i|h,x_{\mathrm{Swap}_{S\leftrightarrow T}(i)})\mu(\mathrm{d}h)\\
-                      &= \mathrm{Swap}_{S\leftrightarrow T}\kernel{K}(A_T|x)\\
-                      &= \mathrm{Swap}_{S\leftrightarrow T}\kernel{K}\mathrm{Swap}_{S\leftrightarrow T}(A_S|x)
-\end{align}
-So by Theorem \ref{th:equal_of_condits}, $\kernel{K}$ is IO contractible.
+Appendix \ref{sec:data_dep_proofs}.
 \end{proof}
 
-Theorem \ref{th:ciid_rep_kernel} is the main result of this section. It shows that a IO contractible Markov kernel $X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is representable as a ``prior'' $\mu\in \Delta(H)$ and a ``parallel product'' of Markov kernels $H\times X\kto Y$. These will be the response conditionals when Theorem \ref{th:ciid_rep_kernel} is applied to probability set models. It is a data-dependent approximate analogue of Theorem \ref{th:ciid_rep_kernel}.
+Theorem \ref{th:response_is_cc_hdep} introduces a latent hypothesis variable $\RV{G}$ to allow a statement of Theorem \ref{th:ciid_rep_kernel_k} in terms of conditional probabilities instead of ``anonymous'' Markov kernels.
 
 \begin{theorem}\label{th:response_is_cc_hdep}
-Given a sequential input-output model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}'}$ is IO contractible if and only if there is a latent extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times H,\sigalg{F}\otimes\sigalg{Y}^{D\times\mathbb{N}})$ with projection map $\RV{H}:\Omega\times H\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{X}_{<i},C)|(\RV{X}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{X}_j\RV{H}}$ for all $i,j\in \mathbb{N}$ and $\RV{H}\CI_{\prob{P}_C} (\RV{X},\text{id}_C)$.
+Given a sequential input-output model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}'}$ is IO contractible if and only if there is a latent extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times H,\sigalg{F}\otimes\sigalg{Y}^{D\times\mathbb{N}})$ with projection map $\RV{G}:\Omega\times G\to G$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{X}_{<i},C)|(\RV{X}_i,\RV{G})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{G}}=\prob{P}_C^{\RV{Y}_j|\RV{X}_j\RV{G}}$ for all $i,j\in \mathbb{N}$ and $\RV{G}\CI_{\prob{P}_C} (\RV{X},\text{id}_C)$.
 \end{theorem}
 
 \begin{proof}
-If:
-By assumption, there is some $\kernel{L}:H\times D\kto Y$ such that
-\begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \kernel{L}
-\end{align}
-and $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i})|(\RV{D}_i,\RV{H})$. Thus
-\begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i\RV{Y}_{<i}\RV{D}_{<i}} &= \kernel{L}\otimes \text{erase}_{Y^{i-1}\times D^{i-1}}
-\end{align}
-and so
-\begin{align}
-    \prob{P}_C^{\RV{Y}\combbreak \RV{D}} &= \tikzfig{do_model_representation}\label{eq:comb_representation_w_CI_k}
-\end{align}
-and so by Theorem \ref{th:ciid_rep_kernel_k}, $\prob{P}_C^{\RV{Y}\combbreak \RV{D}}$ is IO contractible.
-
-Only if:
-First, define the extension $\prob{P}_C$. From Theorem \ref{th:ciid_rep_kernel_k} and IO contractibility of $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}'}$ there is some set $H$, $\mu\in \Delta(H)$ and $\kernel{L}:H\times D\kto Y$ such that
-\begin{align}
-    \prob{P}_C^{\prime \RV{Y}'\combbreak\RV{D}'} &= \tikzfig{do_model_representation_mu_k} 
-\end{align}
-thus, by the definition of the comb insert operation
-\begin{align}
-    \prob{P}_\alpha^{\prime\RV{D}'_{[n]} \RV{Y}'_{[n]}} &= \prob{P}_\alpha^{\RV{D}_1}\odot \text{insert}(\prob{P}_\alpha^{\prime \RV{D}'_{[2,n]}\combbreak\RV{Y}'_{[n-1]}}, \prob{P}_C^{\prime \RV{Y}'_{[n]}\combbreak\RV{D}'_{[n]}}) 
-\end{align}
-Let
-\begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \kernel{L}\label{eq:identical_response_assumption_k}
-\end{align}
-and let $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i})|(\RV{D}_i,\RV{H})$, and for all $\alpha$ set $\prob{P}_\alpha^{\RV{W}|\RV{DY}}=\prob{P}_\alpha^{\prime \RV{W}'|\RV{D'Y'}}$ for all $\RV{W}':\Omega\to W$ and $\prob{P}_\alpha^{\RV{D}_i|\RV{Y}_{<i}\RV{D}_{<i}}=\prob{P}_\alpha^{\prime \RV{D}_i'|\RV{Y}_{<i}'\RV{D}_{<i}''}$.
-
-It remains to be shown that $\prob{P}_\alpha^{\RV{DY}}=\prob{P}_\alpha^{\prime \RV{DY}}$.
-
-By Equation \eqref{eq:identical_response_assumption_k} and $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i})|(\RV{D}_i,\RV{H})$, it follows (for identical reasons as Equation \eqref{eq:comb_representation_w_CI_k}) that
-\begin{align}
-    \prob{P}_C^{\RV{Y}\combbreak \RV{D}} &= \tikzfig{do_model_representation}\\
-    &= \tikzfig{do_model_representation_mu}\\
-    &= \prob{P}_C^{\prime \RV{Y}'\combbreak\RV{D}'}
-\end{align}
-
-And so for all $n\in \mathbb{N}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{D}_{[n]} \RV{Y}_{[n]}} &=  \prob{P}_\alpha^{\RV{D}_1}\odot \text{insert}(\prob{P}_\alpha^{ \RV{D}_{[2,n]}\combbreak\RV{Y}_{[n-1]}}, \prob{P}_C^{\prime \RV{Y}_{[n]}\combbreak\RV{D}_{[n]}}) \\
-    &= \prob{P}_\alpha^{\RV{D}_1}\odot \text{insert}(\prob{P}_\alpha^{\prime \RV{D}'_{[2,n]}\combbreak\RV{Y}'_{[n-1]}}, \prob{P}_C^{\prime \RV{Y}'_{[n]}\combbreak\RV{D}'_{[n]}}) \\
-    &= \prob{P}_\alpha^{\prime\RV{D}'_{[n]} \RV{Y}'_{[n]}}
-\end{align}
+Appendix \ref{sec:data_dep_proofs}.
 \end{proof}
 
 \section{Discussion}\label{sec:discussion}

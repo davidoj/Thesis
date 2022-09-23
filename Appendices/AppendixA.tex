@@ -1,0 +1,77 @@
+%!TEX root = ../main.tex
+
+% Appendix A
+
+\chapter{Axiomatisation of decision theories} % Main appendix title
+
+\label{AppendixA} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+As a supplement to Chapter \ref{ch:2p_statmodels}, we reproduce the axioms of Savage and Jeffrey-Bolker decision theories. We offer these for the reader's convenience with minimal commentary.
+
+\section{Savage axioms}\label{sec:savage_axioms}
+
+Careful analysis of Savage's theorem is outside the scope of this work, but for the reader's convenience we will reproduce the axioms from \citet{savage_foundations_1954} with a small amount of commentary. Keep in mind that Savage's theorem establishes that the following are sufficient for representation with a probability set, not necessary, and furthermore the probability set representation of preferences satisfying these axioms is unique.
+
+Given acts $C$, states $(S,\sigalg{S})$ and consequences $F$ and a map $T:S\times C\to F$, let all greek letters $\alpha,\beta$ etc. be elements of $C$. Savage's axioms are:
+\begin{enumerate}[P1:]
+    \item There is a complete preference relation $\preceq$ on $C$
+    \begin{enumerate}[D1:]
+        \item $\alpha\preceq \beta$ given $B\in \sigalg{S}$ if and only if $\alpha'\preceq \beta'$ for every $\alpha'$ and $\beta'$ such that $T(\alpha,s)=T(\alpha',s)$ for $s\in B$ and $T(\alpha',r)=T(\beta',r)$ for $r\not\in B$, and $\beta'\preceq \alpha'$ either for every such pair or for none.
+    \end{enumerate}
+    \item For every $\alpha,\beta$ and $B\in \sigalg{S}$, $\alpha\preceq \beta$ given $B$ or $\beta\preceq \alpha$ given $B$
+    \begin{enumerate}[D2:]
+        \item for $q,q'\in F$, $q\preceq q'$ if and only if $\alpha\preceq \alpha'$ where $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for all $s\in S$
+        \item $B\in \sigalg{S}$ is null if and only if $\alpha\preceq \beta$ given B for every $\alpha,\beta\in C$
+    \end{enumerate}
+    \item If $T(\alpha,s)=q$ and $T(\alpha',s)=q'$ for every $s\in B$, $B\in \sigalg{S}$ non-null, then $\alpha\preceq \alpha'$ given $B$ if and only if $q\preceq q'$
+    \begin{enumerate}[D4:]
+        \item For $A,B\in \sigalg{S}$, $A\leqslant B$ if and only if $\alpha_A\preceq \alpha_B$ or $q\preceq q'$ for all $\alpha_A,\alpha_B\in C$, $q,q'\in F$ such that $T(\alpha_A,s) = q$ for $s\in A$, $T(\alpha_A,s')=q'$ for $s'\not\in A$, $T(\alpha_B,s)=q$ for $s\in B$, $T(\alpha_B,s')=q'$ for $s'\not\in B$. Read $\leqslant$ as ``is less probable than''
+    \end{enumerate}
+    \item For every $A,B\in\sigalg{S}$, $A\leqslant B$ or $B\leqslant A$
+    \item For some $\alpha,\beta$, $\alpha\prec \beta$
+    \item Suppose $\alpha\not\preceq \beta$. Then for every $\gamma$ there is a finite partition of $S$ such that if $\alpha'$ agrees with $\alpha$ and $\beta'$ agrees with $\beta$ except on some element $B$ of the partition, $\alpha'$ and $\beta'$ being equal to $\gamma$ on $B$, then $\alpha\not\preceq \beta'$ and $\alpha'\not\preceq \beta$
+    \begin{enumerate}[D5:]
+        \item $\alpha\preceq q$ for $q\in F$ given $B$ if and only if $\alpha\preceq \beta$ given $B$ where $T(\beta,s)=q$ for all $s\in S$
+    \end{enumerate}
+    \item If $\alpha\preceq T(\beta,s)$ given $B$ for every $s\in B$, then $\alpha\preceq \beta$ given $B$
+    \begin{enumerate}[P7':]
+        \item The proposition given by inverting every expression in D5 and P7
+    \end{enumerate}
+\end{enumerate}
+
+D1 formalises the idea of one act $\alpha$ being not preferred to another $\beta$ given the knowledge that the true state lies in the set $B$ (in short: ``given $B$'' or ``conditional on $B$''). P2 is sometimes called the ``sure thing principle'', as it implies the following: for any $\alpha, \beta$ if $\alpha$ is better than $\beta$ on some states and no worse on any other, then $\alpha\succ \beta$. In Savage's model, the ``likelihood'' that of any state cannot depend on the act chosen.
+
+D4 + P4 defines the ``probability preorder'' $\leqslant$ on $(S,\sigalg{S})$ and assumes it is complete.
+
+P5 is the requirement that the preference relation is non-trivial; not everything is equally desirable. This doesn't seem like it should be a practical requirement to me; we might hope that a model can distinguish between some of our options, but that doesn't mean we should assume it can. Savage claims that this requirement is ``innocuous'' because any exception must be trivial, but I'm not sure I agree.
+
+P6 is a requirement of continuity; for any $\alpha\preceq \beta$, we can divide $S$ finely enough to squeeze a ``small slice'' of any third outcome $\gamma$ into the gap between the two.
+
+P7 in combination with the other axioms forces preferences to be bounded.
+
+\section{Bolker axioms}\label{sec:bolker_axioms}
+
+$\underline{\sigalg{F}}$ a complete, atomless Boolean algebra with the impossible proposition removed.
+ 
+\begin{enumerate}[A1:]
+    \item $\preceq$ is a complete preference relation
+    \item $\underline{\sigalg{F}}$ is a complete, atomless Boolean algebra with the impossible proposition removed
+    \item For $A,B\in \underline{\sigalg{F}}$, if $A\cap B=\emptyset$, then
+    \begin{enumerate}[a)]
+        \item If $A\succ B$ then $A\succ A\cup B \succ B$
+        \item If $A\sim B$ then $A\sim A\cup B \sim B$
+    \end{enumerate}
+    \item Given $A\cap B=\emptyset$ and $A\sim B$, if $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$, then $A\cup G\sim B\cup G$ for every such $G$
+    \begin{enumerate}[D1:]
+        \item The supremum (infimum) of a subset $W\subset \underline{\sigalg{F}}$ is a set $G$ ($D$) such that for all $A\in W$, $G\subset A$ ($A\subset D$), and for any $E$ that also has this property, $G\subset E$ ($E\subset D$)
+    \end{enumerate}
+    \item Given $W:= \{W_i\}_{i\in M\subset \mathbb{N}}$ with $i<j\implies W_j\subset W_i$ and $W\subset \underline{\sigalg{F}}$ with supremum $G$ (infimum $D$), whenever $A\prec G \prec B$ ($A\prec D\prec B$) then there exists some $k\in M$ such that $i\geq k$ ($i\leq k$) implies $A\prec W_i \prec B$.
+\end{enumerate}
+
+Like Savage's theory, A1 requires the preference relation to be complete.
+
+A3 is the assumption that the desirability of disjunctions of events lies between the desirability of each event; it is sometimes called ``averaging''. It notably rules out the following: if $A\succ B$ we cannot have $A\cup B\sim A$. In the Jeffrey-Bolker theory, propositions all have positive probabilities.
+
+A4 allows a probability order to be defined on $\underline{\sigalg{F}}$. The conditions $A\cap B=\emptyset$, $A\sim B$, $A\cup G\sim B\cup G$ for some $G$ where $A\cap G=B\cap G=\emptyset$ and $G\not\sim A$ can be seen as a test for $A$ and $B$ being ``equally probable''. A4 requires that if $A$ and $B$ are rated as equally probable by one such test, then they are rated as equally probable by all such tests.
+
+A5 is an axiom of continuity.

@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=Llabel tikzit] (1) at (-2.75, 0.5) {$\RV{D}$};
+		\node [style=none] (4) at (-0.25, 0.5) {};
+		\node [style=Llabel tikzit] (6) at (-2.75, 1.75) {$\RV{W}$};
+		\node [style=RLabel tikzit] (7) at (1.25, 1.75) {$\RV{H}$};
+		\node [style=small kernel tikzit] (9) at (-1.5, 1.75) {$\prob{P}_\alpha^{\RV{H}|\RV{W}}$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (6) to (9);
+		\draw (9) to (7);
+		\draw [style=delmap] (1) to (4.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

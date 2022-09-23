@@ -1,6 +1,6 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (0.25, 0) {$\prob{P}^{\RV{S}_0|\RV{H}}$};
+		\node [style=small kernel tikzit] (0) at (0.25, 0) {$\prob{P}^{\RV{Y}^D_{iD}|\RV{H}}$};
 		\node [style=RLabel tikzit] (1) at (1.75, 0) {$\RV{S}_i$};
 		\node [style=none] (2) at (-1.25, 1.25) {};
 		\node [style=none] (3) at (-1.25, -2) {};
