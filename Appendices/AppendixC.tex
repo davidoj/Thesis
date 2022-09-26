@@ -1,0 +1,111 @@
+%!TEX root = ../main.tex
+
+% Appendix C
+
+\chapter{Proofs of key results in Chapter \ref{ch:other_causal_frameworks}} % Main appendix title
+
+\label{AppendixC} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\section{Proofs related to causal Bayesian networks}\label{sec:cbn_proofs}
+
+\begin{reptheorem}{th:causal_contractibility_cbn}
+Given an uncertain unrolled causal Bayesian network $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in [n]},\RV{H},\graph{G})$, take $C'\subset C$ to be sequences of interventions that, for some $i\in A$, do not target a particular $\RV{V}_{ij}$ for any $j\in [n]$ and ensure every sequence $\RV{V}_{j[n]}$ has infinite support. Then $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\text{id}_C|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$ and $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ is IO contractible over $\RV{H}$. 
+\end{reptheorem}
+
+\begin{proof}
+First we will prove $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\text{id}_C|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$. This is equivalent to the claim that $\prob{P}_\alpha^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ is the same as $\prob{P}_{\alpha'}^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ for any $\alpha,\alpha'$. By assumption 5* of Definition \ref{def:unr_CBN}, for each $h\in H$
+\begin{align}
+    \RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha,h}} \RV{V}_{A [n]\setminus\{j\}} |\text{id}_C
+\end{align}
+which implies
+\begin{align}
+    &\RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\text{id}_C,\RV{H})\\
+    &\implies \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\text{id}_C)\label{eqApp:mutual_conditional_independence}
+\end{align}
+thus it is sufficient to show that, for any $\alpha,\alpha'\in C'$ and $j\in[n]$
+\begin{align}
+    \prob{P}_\alpha^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})} &= \prob{P}_{\alpha'}^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})}
+\end{align}
+By assumption, if $\pi_j(\alpha) =: (\mathrm{do}_{B_j},v_{B_j})$ and $\pi_j(\alpha') =: (\mathrm{do}_{B_j'},v_{B_j'}')$, $i\not\in B_j\cup B_j'$, and similarly replacing the $j$s with $k$s for any $k\in [n]$. Define $\alpha''$ such that, for some $k$, $\pi_k(\alpha'')=\pi_k(\alpha')$ and $\pi_j(\alpha'')=\pi_j(\alpha)$. Then by 4*, for all $h\in H$
+\begin{align}
+    \prob{P}_{\alpha}^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})}(A|h,y) &= \prob{P}_{\alpha''}^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})}(A|h,y)\\
+    &= \prob{P}_{\alpha''}^{\RV{V}_{ik}|\RV{H}\mathrm{Pa}(\RV{V}_{ik})}(A|h,y)&\text{by 3*}\\
+    &= \prob{P}_{\alpha'}^{\RV{V}_{ik}|\RV{H}\mathrm{Pa}(\RV{V}_{ik})}(A|h,y)&\text{by 4*}\\
+    &= \prob{P}_{\alpha'}^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})}(A|h,y)&\text{by 3*}\\
+    \implies \prob{P}_\alpha^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})} &= \prob{P}_{\alpha'}^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})}
+\end{align}
+
+Next, IO contractibility of $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ over $\RV{H}$. By Eq. \eqref{eqApp:mutual_conditional_independence}
+\begin{align}
+    \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} (\RV{V}_{i [1,j)},\mathrm{Pa}(\RV{V}_{i [1,j)}) )|(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\text{id}_C)
+\end{align}
+furthermore, by 3* and the assumption that no intervention $\alpha\in C'$ targets $\RV{V}_{ij}$ for any $j$, for any $\alpha\in C'$
+\begin{align}
+    \prob{P}_{\alpha}^{\RV{V}_{ij}|\RV{H}\mathrm{Pa}(\RV{V}_{ij})}(A|h,y) &= \prob{P}_{\alpha}^{\RV{V}_{ik}|\RV{H}\mathrm{Pa}(\RV{V}_{ik})}(A|h,y) 
+\end{align}
+thus $\prob{P}_C$ has independent and identical response functions conditional on $\RV{H}$, by assumption the inputs have infinite support and therefore by Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ is IO contractible over $\RV{H}$.
+\end{proof}
+
+\section{Proofs related to precedent}\label{sec:proof_precedent}
+
+
+\begin{reptheorem}{th:det_obs_to_cons}
+Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{i\in \mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{i\in \mathbb{N}}$, with $X,Y,Z$ discrete and $n$-precedented with indexing variable $\RV{T}$. Let $\RV{G}$ be the directing random conditional of $(\RV{P}_C,\RV{T},\RV{Z})$ and $\RV{H}$ the directing random conditional of $(\prob{P}_C,(\RV{T},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose there is some $N\in\sigalg{H}$ such that $\prob{P}_\alpha^{\RV{H}}(N)>0$ for all $\alpha$, and define the probability conditioned on $\RV{H}\in N$:
+\begin{align}
+prob{P}_{\alpha,\RV{H}\in N} (A):= \frac{\prob{P}_\alpha^{\text{id}_\Omega \RV{H}}(A\times N)}{\prob{P}_\alpha^{\RV{H}}(N)}
+\end{align}
+
+Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in N}} \RV{Z}_i|(\RV{H},\RV{X}_i)$, and for all $t\in T$ and $z,z'\in Z$,
+\begin{align}
+    \prob{P}_{\alpha,\RV{H}\in N}^{\RV{G}^t_{z}|\RV{H}\RV{G}^t_{z'}}(\cdot|h,g^t_{z'}) \ll U_{[0,1]}\label{eqApp:lebesgue_dom}
+\end{align}
+where $U_{[0,1]}$ is the uniform probability measure on $([0,1],\mathcal{B}([0,1]))$.
+
+Then $\prob{P}_{\alpha,\RV{H}\in N}^{\RV{Y}|\RV{X}\RV{H}}$ is IO contractible over $\RV{H}$.
+\end{reptheorem}
+
+\begin{proof}
+For arbitrary $h\in N$, define matrices $k$ and $l$ by
+\begin{align}
+    \prob{P}_{\alpha,\RV{H}\in N}^{\RV{Y}_i|\RV{H}\RV{T}_i\RV{Z}_i\RV{X}_i}(y|h,t,z,x)&\overset{\prob{P}_{\alpha,\RV{H}\in N}}{\cong}: k^y_{tzx}\\
+    \prob{P}_{\alpha,\RV{H}\in N}^{\RV{X}_i|\RV{H}\RV{T}_i\RV{Z}_i}(x|h,t,z)&\overset{\prob{P}_{\alpha,\RV{H}\in N}}{\cong}: l^x_{tz}
+\end{align}
+noting that both $RV{K}$ and $l$ are almost surely deterministic functions of $\RV{H}$.
+
+The assumption $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\text{id}_C)$ implies, for $\prob{P}_\alpha$-almost all $\alpha,z,z',x,y$
+\begin{align}
+    \sum_{t\in T} k^y_{tzx}\frac{l^x_{tz}g^t_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z}&\overset{\prob{P}_C}{\cong} \sum_{t\in T} k^y_{tz'x}\frac{l^x_{tz'}g^t_{z'}}{\sum_{t'\in T}l^x_{t'z'}g^{t'}_{z'}}\label{eqApp:polynomial}
+\end{align}
+For fixed $k$, $l$ and $g^t_z$, Eq. \eqref{eqApp:polynomial} defines a polynomial constraint on $g^t_{z'}$. We will show that, unless $k^y_{tzx}= k^y_{t'zx}$ for all $t,t'$ and $z$, that this constraint is nontrivial for some $z'$. Consequently, the set of solutions subject to the restriction $k^y_{tzx}\neq k^y_{t'zx}$ has Lebesgue measure 0.
+
+For arbitrary $t$, assume $k^y_{tz'x} > k^y_{t^<z'x}$ for some $t^<$. 
+
+Then either $l^x_{tz'}=l^x_{t^<z'}$, $l^x_{tz'}< l^x_{t^<z'}$ or $l^x_{tz'}=l^x_{t^>z'}$. Consider the first case, and take $g'$ such that $g^{\prime t}_{z'}=g^{t}_{z'}-\epsilon$ and $g^{\prime t^<}_{z'}=g^{t^<}_{z'}+\epsilon$ and equal to $g$ otherwise. There is almost surely some $\epsilon$ such that $g'$ is a Markov kernel, as $g^{t}_{z'}>0$ almost surely. Then
+\begin{align}
+    \frac{l^x_{tz}g^t_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &> \frac{l^x_{tz}g^{\prime t}_z}{\sum_{t'\in T}l^x_{t'z}g^{\prime t'}_z}\\
+    \frac{l^x_{t^<z}g^{t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &< \frac{l^x_{t^<z}g^{\prime t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{\prime t'}_z}
+\end{align}
+because by assumption the denominator remains the same. But then
+\begin{align}
+    \sum_{t\in T} k^y_{tzx}\frac{l^x_{tz}g^t_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z}&> \sum_{t\in T} k^y_{tz'x}\frac{l^x_{tz'}g^{\prime t}_{z'}}{\sum_{t'\in T}l^x_{t'z'}g^{\prime t'}_{z'}}\label{eqApp:inequality}
+\end{align}
+because on the left side a larger term in the sum receives more weight, a smaller term receives less weight and all other terms are weighted equally.
+
+Consider $l^x_{tz'}> l^x_{t^<z'}$. Then we still have
+\begin{align}
+    \frac{l^x_{tz}g^t_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &> \frac{l^x_{tz}g^{\prime t}_z}{\sum_{t'\in T}l^x_{t'z}g^{\prime t'}_z}\\
+    \frac{l^x_{t^<z}g^{t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &< \frac{l^x_{t^<z}g^{\prime t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{\prime t'}_z}
+\end{align}
+For the first inequality, both the numerator and the denominator shrink. For the second, note that
+\begin{align}
+    \frac{l^x_{t^<z}g^{t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &= \frac{l^x_{t^<z}(g^{t^<}_z+\epsilon)}{(1+\frac{\epsilon}{g^{t'}_z})\sum_{t'\in T}l^x_{t'z}g^{t'}_z}\\
+    &< \frac{l^x_{t^<z}(g^{t^<}_z+\epsilon)}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z}
+\end{align}
+and so the conclusion in Eq. \eqref{eqApp:inequality} follows for the same reasons. Finally considering $l^x_{tz'}< l^x_{t^<z'}$, analogous reasoning implies Eq. \eqref{eqApp:inequality} once again.
+
+Thus, unless $k^y_{tzx}=k^y_{t'zx}$ for all $t,t'$ and $z$, Eq. \eqref{eqApp:polynomial} implies a nontrivial constraint on  $g^t_{z'}$ for some $z'$. Thus, for some $z'$, $x$, $t,t'$, $y$ the set of solutions $S:=\{g^t_{z'}|\text{Eq. \eqref{eqApp:polynomial} is satisfied}\land k^y_{tzx}\neq k^y_{t'zx}\}$ has Lebesgue measure 0 in the set $[0,1]^{D}$ \citep{okamoto_distinctness_1973}, and so
+\begin{align}
+    \prob{P}_{\alpha,\RV{H}\in N}^{\RV{G}^t_{z}|\RV{H}\RV{G}^t_{z'}}(S|h,g^t_{z}) = 0
+\end{align}
+by the assumption that this probability is dominated by the Lebesgue measure. On the other hand, by assumption, the set $B:=\{g^t_{z'}|\text{Eq. \eqref{eqApp:polynomial} is satisfied}\}$ has measure 1. Thus we conclude that $k^y_{tzx}=k^y_{t'zx}$ with probability 1. That is, $\RV{Y}_i\CI_{\prob{P}_{C,\RV{H}\in\mathbb{N}}}^e \RV{T}_i|(\RV{H},\RV{Z}_i,\RV{X}_i,\text{id}_C)$. By contraction with $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in\mathbb{N}}} \RV{Z}_i|(\RV{H},\RV{X}_i,\text{id}_C)$, we have $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in\mathbb{N}}} (\RV{Z}_i,\RV{T}_i)|(\RV{H},\RV{X}_i,\text{id}_C)$. Because we already know $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i\RV{Z}_i}$ are identical for all $i$, this implies $\prob{P}_{\alpha,\RV{H}\in N}^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical response functions.
+\end{proof}

@@ -1,13 +1,13 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (3.5, 0.5) {$\prob{P}_C^{\RV{V}_{3\RV{Q}([n])}|\RV{H}\RV{V}_{1\RV{Q}([n])}\RV{V}_{2\RV{Q}([n])}}$};
-		\node [style=small kernel tikzit] (1) at (-3, 0.5) {$\prob{P}_C^{\RV{V}_{1[n]}|\RV{H}\RV{V}_{2[n]}}$};
+		\node [style=small kernel tikzit] (0) at (3.5, 0.5) {$\prob{P}_C^{\RV{V}_{3\RV{Q}(\mathbb{N})}|\RV{H}_3\RV{V}_{1\RV{Q}(\mathbb{N})}\RV{V}_{2\RV{Q}(\mathbb{N})}}$};
+		\node [style=small kernel tikzit] (1) at (-3, 0.5) {$\prob{P}_C^{\RV{V}_{1\mathbb{N}}|\RV{H}_3\RV{V}_{2\mathbb{N}}}$};
 		\node [style=none] (2) at (1.25, 1) {};
 		\node [style=none] (3) at (1.25, 0.5) {};
 		\node [style=none] (4) at (1.25, 0) {};
-		\node [style=RLabel tikzit] (5) at (7.5, 0.5) {$\RV{V}_{3\RV{Q}([n])}$};
+		\node [style=RLabel tikzit] (5) at (7.5, 0.5) {$\RV{V}_{3\RV{Q}(\mathbb{N})}$};
 		\node [style=Llabel tikzit] (6) at (-6.5, 1.25) {$\RV{H}$};
-		\node [style=Llabel tikzit] (7) at (-6.5, -0.5) {$\RV{V}_{2\RV{Q}([n])}$};
+		\node [style=Llabel tikzit] (7) at (-6.5, -0.5) {$\RV{V}_{2\RV{Q}(\mathbb{N})}$};
 		\node [style=none] (8) at (-3.5, 0.75) {};
 		\node [style=none] (9) at (-3.5, 0.25) {};
 		\node [style=copymap tikzit] (10) at (-5.75, 1.25) {};

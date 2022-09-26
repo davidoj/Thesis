@@ -527,9 +527,25 @@ But the proposition that these problems are \emph{identical} is hard to swallow:
 
 In practice, when both experimental and observational data are available, they are \emph{not} assumed to be interchangeable in this sense -- in fact, the question of how well the observational data predicts experimental outputs is one of substantial interest \citet{eckles_bias_2021,gordon_comparison_2018,gordon_close_2022}.
 
+\paragraph{Example 5: Backdoor adjustment}
+
+The ``backdoor adjustment'' formula is a fundamental tool for many kinds of causal inference. This is a short example to show the conditions under which it's applicable, stated in terms of IO contractibility. Suppose a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{X}),\RV{Y})$ where $(\prob{P}_\cdot^{\RV{Y}|\RV{WDX}}$ is IO contractible, and:
+\begin{itemize}
+    \item $i>n\implies \RV{X}_{i}\CI^e_{\prob{P}_C}\RV{D}_{i}|(\RV{H},\text{id}_C)$
+    \item $\prob{P}_\alpha^{\RV{X}_{i}|\RV{H}}\cong \prob{P}_\alpha^{\RV{X}_{1}|\RV{H}}$ for all $\alpha$
+ \end{itemize}
+Then the model exhibits a kind of ``backdoor adjustment''. Specifically, for $i>n$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_{i}|\RV{D}_{i}\RV{H}}(A|d,h) &= \int_X \prob{P}_\alpha^{\RV{Y}_{i}|\RV{X}_{i}\RV{D}_{i}\RV{H}}(A|d,x,h)\prob{P}_\alpha^{\RV{X}_{i}|\RV{D}_{i}\RV{H}}(\mathrm{d}x|d,h)\\
+    &= \int_X \prob{P}_\alpha^{\RV{Y}_{1}|\RV{X}_{1}\RV{D}_{1}\RV{H}}(A|d,x,h)\prob{P}_\alpha^{\RV{X}_{i}|\RV{H}}(\mathrm{d}x|h)\\
+    &= \int_X \prob{P}_\alpha^{\RV{Y}_{1}|\RV{X}_{1}\RV{D}_{1}\RV{H}}(A|d,x,h)\prob{P}_\alpha^{\RV{X}_{1}|\RV{H}}(\mathrm{d}x|h)\label{eq:backdoor}
+\end{align}
+
+Equation \eqref{eq:backdoor} is identical to the backdoor adjustment formula \citep[Chap. 1]{pearl_causality:_2009} for an intervention on $\RV{D}_1$ targeting $\RV{Y}_1$ where $\RV{X}_1$ is a common cause of both.
+
 \subsection{No causes in, no causes out}
 
-Example 1 above shows that the assumption of a CIIR sequence applies to an exchangeable probability model with no real alternative options or anything else ``causal''. As a result, one might wonder whether the assumption of CIIR sequences really is a ``causal'' assumption (we have no clear idea what does or does not constitute a causal assumption here, we're merely noting that an assumption that applies to probability models seems like it may not fit the bill). The apparent claim that CIIR sequences nonetheless allow us to draw causal conclusions might them (seemingly) run afoul of Cartwright's well-known adage ``no causes in, no causes out'' \citep{cartwright_no_1994}.
+Example 1 above shows that the assumption of a CIIR sequence applies to an exchangeable probability model with no real alternative options or anything else ``causal''. As a result, one might wonder whether the assumption of CIIR sequences really is a ``causal'' assumption (we have no clear idea what does or does not constitute a causal assumption here, we're merely noting that an assumption that applies to regular probability distributions seems like it might not fit the bill). The apparent claim that CIIR sequences nonetheless allow us to draw causal conclusions might them (seemingly) run afoul of Cartwright's adage ``no causes in, no causes out'' \citep{cartwright_no_1994}.
 
 We have also supposed, in the background at least, that a relation between the chosen option $\alpha$ and the distribution of (some) inputs $\prob{P}_\alpha^{\RV{D}}$ was known in advance. This seems much more like a causal assumption -- it really doesn't make sense to try to apply this assumption to a probability model with no option set.
 

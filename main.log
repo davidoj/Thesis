@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.13.0 (TeX Live 2021)  (format=lualatex 2021.7.16)  23 SEP 2022 10:28
+This is LuaHBTeX, Version 1.13.0 (TeX Live 2021)  (format=lualatex 2021.7.16)  26 SEP 2022 20:57
  system commands enabled.
 **main.tex
 (./main.tex
@@ -2061,20 +2061,7 @@ Package csquotes Info: ... found 'babel' package.
 (./Chapters/chapter_4_response_functions.aux)
 (./Chapters/chapter_5_other_causal_inference.aux)
 (./Chapters/chapter_6_discussion.aux) (./Appendices/AppendixA.aux)
-(./Appendices/AppendixB.aux
-
-LaTeX Warning: Label `eq:lup_rep_kernel' multiply defined.
-
-
-LaTeX Warning: Label `eq:col_exch' multiply defined.
-
-
-LaTeX Warning: Label `eq:lup_rep_kernel_2' multiply defined.
-
-
-LaTeX Warning: Label `eq:lup_rep_kernel_k' multiply defined.
-
-))
+(./Appendices/AppendixB.aux) (./Appendices/AppendixC.aux))
 \openout1 = main.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
@@ -2088,7 +2075,8 @@ LaTeX Font Info:    ... okay on input line 70.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 70.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 7
 0.
- (/usr/local/texlive/2021/texmf-dist/tex/latex/base/ts1cmr.fd
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 70.
@@ -2334,7 +2322,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 (./Front_Matter.tex
 1: section
-<gfx/ANU_LOGO_cmyk_56mm.pdf, id=196, 211.06152pt x 107.066pt>
+<gfx/ANU_LOGO_cmyk_56mm.pdf, id=204, 211.06152pt x 107.066pt>
 File: gfx/ANU_LOGO_cmyk_56mm.pdf Graphic file (type pdf)
 <use gfx/ANU_LOGO_cmyk_56mm.pdf>
 Package luatex.def Info: gfx/ANU_LOGO_cmyk_56mm.pdf  used on input line 62.
@@ -2398,6 +2386,38 @@ LaTeX Font Info:    Trying to load font information for U+fplmbb on input line
 (/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ufplmbb.fd
 File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
 )
+LaTeX Font Info:    Trying to load font information for OML+cmbr on input line 
+223.
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/cmbright/omlcmbr.fd
+File: omlcmbr.fd 2005/04/13 v8.1 (WaS)
+)
+LaTeX Font Info:    Trying to load font information for OML+cmbrm on input line
+ 223.
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/cmbright/omlcmbrm.fd
+File: omlcmbrm.fd 2005/04/13 v8.1 (WaS)
+)
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <10.95> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 223
+.
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <8> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 223
+.
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <6> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 223
+.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2
+23.
+
+(/usr/local/texlive/2021/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
 Underfull \hbox (badness 10000) in paragraph at lines 228--228
 []|\TU/lmr/m/n/10.95 Meas-ur-able func-tion
  []
@@ -2589,13 +2609,146 @@ Overfull \hbox (41.99992pt too wide) in alignment at lines 241--266
 \openout2 = Chapters/chapter_1_introduction.aux
 (./Chapters/chapter_1_introduction.tex
 Chapter 1.
+
+LaTeX Warning: Citation 'proctor_history_2012' on page 1 undefined on input lin
+e 8.
+
+
+LaTeX Warning: Citation 'oreskes_merchants_2011' on page 1 undefined on input l
+ine 8.
+
+
+LaTeX Warning: Citation 'fisher_cancer_1958' on page 1 undefined on input line 
+8.
+
+
+LaTeX Warning: Citation 'world_health_organisation_tobacco_nodate' on page 1 un
+defined on input line 8.
+
+
+LaTeX Warning: Citation 'wiblin_why_2016' on page 1 undefined on input line 8.
+
+
+LaTeX Warning: Citation 'world_health_organisation_tobacco_nodate' on page 1 un
+defined on input line 10.
+
+
+LaTeX Warning: Citation 'noauthor_cigarettes_nodate' on page 1 undefined on inp
+ut line 10.
+
 1: section
 [1
 
 
 
-] [2] [3] (./figures/simple_dag.tikz) (./figures/simple_dag.tikz) [4]
-[5] [6]
+]
+
+LaTeX Warning: Citation 'kohavi_surprising_2017' on page 2 undefined on input l
+ine 22.
+
+
+LaTeX Warning: Citation 'zhang_abdul_2014' on page 2 undefined on input line 22
+.
+
+
+LaTeX Warning: Citation 'open_science_collaboration_estimating_2015' on page 2 
+undefined on input line 22.
+
+
+LaTeX Warning: Citation 'stroebe_what_2019' on page 2 undefined on input line 2
+2.
+
+
+LaTeX Warning: Citation 'nosek_preregistration_2018' on page 2 undefined on inp
+ut line 22.
+
+
+LaTeX Warning: Citation 'liberati_prisma_2009' on page 2 undefined on input lin
+e 22.
+
+[2]
+
+LaTeX Warning: Citation 'bongers_theoretical_2016' on page 3 undefined on input
+ line 42.
+
+
+LaTeX Warning: Citation 'forre_markov_2017' on page 3 undefined on input line 4
+2.
+
+[3] (./figures/simple_dag.tikz) (./figures/simple_dag.tikz)
+
+LaTeX Warning: Citation 'hernan_does_2008' on page 4 undefined on input line 54
+.
+
+
+LaTeX Warning: Citation 'noauthor_does_2016' on page 4 undefined on input line 
+54.
+
+
+LaTeX Warning: Citation 'pearl_does_2018' on page 4 undefined on input line 54.
+
+
+[4]
+
+LaTeX Warning: Citation 'imbens_causal_2015' on page 5 undefined on input line 
+64.
+
+
+LaTeX Warning: Citation 'starr_counterfactuals_2021' on page 5 undefined on inp
+ut line 66.
+
+
+Overfull \hbox (12.16905pt too wide) in paragraph at lines 66--67
+\TU/lmr/m/n/10.95 struc-tural in-ter-ven-tions are one of the most prom-in-ent 
+the-or-ies ([]),
+ []
+
+
+LaTeX Warning: Citation 'tinbergen1997determination' on page 5 undefined on inp
+ut line 76.
+
+
+LaTeX Warning: Citation 'haavelmo_statistical_1943' on page 5 undefined on inpu
+t line 76.
+
+[5]
+
+LaTeX Warning: Citation 'imbens_causal_2015' on page 6 undefined on input line 
+82.
+
+
+LaTeX Warning: Citation 'imbens_identification_1994' on page 6 undefined on inp
+ut line 90.
+
+[6]
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 7 undefined on input li
+ne 98.
+
+
+LaTeX Warning: Citation 'pearl_book_2018' on page 7 undefined on input line 98.
+
+
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 7 undefined on input li
+ne 100.
+
+
+LaTeX Warning: Citation 'pearl_causes_2015' on page 7 undefined on input line 1
+00.
+
+
+LaTeX Warning: Citation 'woodward_causation_2016' on page 7 undefined on input 
+line 102.
+
+
+LaTeX Warning: Citation 'cartwright_modularity_2001' on page 7 undefined on inp
+ut line 102.
+
+
+LaTeX Warning: Citation 'lemeire_replacing_2013' on page 7 undefined on input l
+ine 104.
+
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
 (Font)              scaled to size 9.37807pt on input line 104.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
@@ -2604,18 +2757,252 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 9.37807pt on input line 104.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 7.29405pt on input line 104.
- [7] [8] [9] (./figures/simple_dag_jumper.tikz)
-(./figures/simple_dag_jumper.tikz) (./figures/simple_dag_jumper_bd.tikz)
-(./figures/simple_dag_jumper_bd.tikz) (./figures/not_simple_dag_jumper.tikz)
-(./figures/not_simple_dag_jumper.tikz) [10]
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <9> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 104
+.
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <7> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 104
+.
+[7]
 
-Package biblatex Warning: Package option 'sortcites' enabled.
-(biblatex)                Verify postnote placement on input line 183.
+LaTeX Warning: Citation 'spirtes_causation_1993' on page 8 undefined on input l
+ine 110.
 
-[11] [12] [13] [14]) [15]
+
+LaTeX Warning: Citation 'chickering_optimal_2003' on page 8 undefined on input 
+line 110.
+
+
+LaTeX Warning: Citation 'chickering_learning_2002' on page 8 undefined on input
+ line 110.
+
+
+LaTeX Warning: Citation 'zheng_dags_2018' on page 8 undefined on input line 110
+.
+
+
+LaTeX Warning: Citation 'ng_graph_2019' on page 8 undefined on input line 110.
+
+
+LaTeX Warning: Citation 'hoyer_nonlinear_2009' on page 8 undefined on input lin
+e 110.
+
+
+LaTeX Warning: Citation 'shimizu_linear_2006' on page 8 undefined on input line
+ 110.
+
+
+LaTeX Warning: Citation 'daniusis_inferring_2012' on page 8 undefined on input 
+line 110.
+
+
+LaTeX Warning: Citation 'peters_elements_2017' on page 8 undefined on input lin
+e 110.
+
+
+LaTeX Warning: Citation 'mooij_j.m._distinguishing_2016' on page 8 undefined on
+ input line 110.
+
+
+LaTeX Warning: Citation 'uhler_geometry_2013' on page 8 undefined on input line
+ 112.
+
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 8 undefined on input li
+ne 116.
+
+
+LaTeX Warning: Citation 'shpitser_complete_2008' on page 8 undefined on input l
+ine 116.
+
+
+LaTeX Warning: Citation 'richardson_nested_2017' on page 8 undefined on input l
+ine 116.
+
+[8]
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 9 undefined on input li
+ne 124.
+
+[9] (./figures/simple_dag_jumper.tikz) (./figures/simple_dag_jumper.tikz)
+(./figures/simple_dag_jumper_bd.tikz) (./figures/simple_dag_jumper_bd.tikz)
+(./figures/not_simple_dag_jumper.tikz) (./figures/not_simple_dag_jumper.tikz)
+[10]
+
+LaTeX Warning: Citation 'bongers_theoretical_2016' on page 11 undefined on inpu
+t line 176.
+
+
+LaTeX Warning: Citation 'forre_causal_2020' on page 11 undefined on input line 
+176.
+
+
+LaTeX Warning: Citation 'eberhardt_combining_2010' on page 11 undefined on inpu
+t line 176.
+
+
+LaTeX Warning: Citation 'ghassami_causal_2020' on page 11 undefined on input li
+ne 176.
+
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 11 undefined on input l
+ine 183.
+
+
+LaTeX Warning: Citation 'hauser_characterization_2012' on page 11 undefined on 
+input line 183.
+
+
+LaTeX Warning: Citation 'correa_calculus_2020' on page 11 undefined on input li
+ne 183.
+
+
+LaTeX Warning: Citation 'eberhardt_interventions_2007' on page 11 undefined on 
+input line 183.
+
+
+LaTeX Warning: Citation 'eberhardt_interventions_2007' on page 11 undefined on 
+input line 183.
+
+
+LaTeX Warning: Citation 'yang_characterizing_2018' on page 11 undefined on inpu
+t line 183.
+
+
+LaTeX Warning: Citation 'glymour_evaluating_2017' on page 11 undefined on input
+ line 183.
+
+
+LaTeX Warning: Citation 'brouillard_differentiable_2020' on page 11 undefined o
+n input line 183.
+
+
+Overfull \hbox (112.0759pt too wide) in paragraph at lines 183--184
+[]\TU/lmr/m/n/10.95 ) and gen-eral in-ter-ven-tions with un-known tar-gets ([]).
+
+ []
+
+[11]
+
+LaTeX Warning: Citation 'peters_structural_2015' on page 12 undefined on input 
+line 185.
+
+
+LaTeX Warning: Citation 'brouillard_differentiable_2020' on page 12 undefined o
+n input line 185.
+
+
+LaTeX Warning: Citation 'scherrer_learning_2022' on page 12 undefined on input 
+line 185.
+
+
+LaTeX Warning: Citation 'toth_active_2022' on page 12 undefined on input line 1
+85.
+
+
+LaTeX Warning: Citation 'forre_constraint-based_2018' on page 12 undefined on i
+nput line 185.
+
+
+LaTeX Warning: Citation 'chickering_optimal_2003' on page 12 undefined on input
+ line 185.
+
+
+LaTeX Warning: Citation 'ng_graph_2019' on page 12 undefined on input line 185.
+
+
+
+LaTeX Warning: Citation 'zheng_dags_2018' on page 12 undefined on input line 18
+5.
+
+
+LaTeX Warning: Citation 'spirtes_causation_1993' on page 12 undefined on input 
+line 185.
+
+
+Overfull \hbox (14.18268pt too wide) in paragraph at lines 185--186
+\TU/lmr/m/n/10.95 ([]). To of-fer just a few ex-amples, ([];
+ []
+
+
+Overfull \hbox (111.95442pt too wide) in paragraph at lines 185--186
+[]\TU/lmr/m/n/10.95 ; []; []; [];
+ []
+
+
+Overfull \hbox (3.33102pt too wide) in paragraph at lines 185--186
+[]\TU/lmr/m/n/10.95 ; []; []) all eval-u-ate their meth-
+ []
+
+
+LaTeX Warning: Citation 'heckerman_decision-theoretic_1995' on page 12 undefine
+d on input line 195.
+
+
+LaTeX Warning: Citation 'dawid_causal_2000' on page 12 undefined on input line 
+195.
+
+
+LaTeX Warning: Citation 'dawid_influence_2002' on page 12 undefined on input li
+ne 195.
+
+
+LaTeX Warning: Citation 'dawid_decision-theoretic_2012' on page 12 undefined on
+ input line 195.
+
+
+LaTeX Warning: Citation 'dawid_decision-theoretic_2020' on page 12 undefined on
+ input line 195.
+
+
+Overfull \hbox (23.90732pt too wide) in paragraph at lines 195--196
+\TU/lmr/m/n/10.95 ously been ex-plored by [] as well as [];
+ []
+
+
+Overfull \hbox (43.22745pt too wide) in paragraph at lines 195--196
+[]\TU/lmr/m/n/10.95 ; []; [].
+ []
+
+[12]
+
+LaTeX Warning: Citation 'meek_strong_1995' on page 13 undefined on input line 2
+05.
+
+
+LaTeX Warning: Citation 'lemeire_replacing_2013' on page 13 undefined on input 
+line 205.
+
+[13]
+
+LaTeX Warning: Citation 'barto_reinforcement_1998' on page 14 undefined on inpu
+t line 211.
+
+
+LaTeX Warning: Citation 'ogata_discrete-time_1995' on page 14 undefined on inpu
+t line 211.
+
+
+LaTeX Warning: Citation 'wald_statistical_1950' on page 14 undefined on input l
+ine 211.
+
+
+LaTeX Warning: Citation 'lattimore_learning_2017' on page 14 undefined on input
+ line 213.
+
+[14]
+
+LaTeX Warning: Citation 'fong_causal_2013' on page 15 undefined on input line 2
+15.
+
+) [15]
 \openout2 = Chapters/chapter_2_technical.aux
  (./Chapters/chapter_2_technical.tex
 Chapter 2.
+
+LaTeX Warning: Citation 'constantinou_extended_2017' on page 16 undefined on in
+put line 10.
+
 1: section
 [16
 
@@ -2630,12 +3017,62 @@ File: ueus.fd 2013/01/14 v3.01 Euler Script
 )
 (/usr/local/texlive/2021/texmf-dist/tex/latex/microtype/mt-eus.cfg
 File: mt-eus.cfg 2006/07/28 v1.2 microtype config. file: AMS Euler Script (RS)
-) [17]
-(./figures/disint_def.tikz) (./figures/disint_def.tikz) [18] [19]
+)
+
+LaTeX Warning: Citation 'cinlar_probability_2011' on page 17 undefined on input
+ line 53.
+
+[17] (./figures/disint_def.tikz) (./figures/disint_def.tikz) [18]
+
+LaTeX Warning: Citation 'cinlar_probability_2011' on page 19 undefined on input
+ line 185.
+
+[19] (./figures/odot_assoc_1.tikz) (./figures/odot_assoc_2.tikz)
 (./figures/odot_assoc_1.tikz) (./figures/odot_assoc_2.tikz)
-(./figures/odot_assoc_1.tikz) (./figures/odot_assoc_2.tikz) [20] [21]
-(./figures/copy_product.tikz) (./figures/copy_product.tikz) [22]
-(./figures/n_fold_copy.tikz) (./figures/n_fold_copy.tikz)
+
+LaTeX Warning: Citation 'cho_disintegration_2019' on page 20 undefined on input
+ line 232.
+
+[20]
+
+LaTeX Warning: Citation 'cho_disintegration_2019' on page 21 undefined on input
+ line 246.
+
+
+LaTeX Warning: Citation 'selinger_survey_2011' on page 21 undefined on input li
+ne 259.
+
+
+LaTeX Warning: Citation 'fritz_synthetic_2020' on page 21 undefined on input li
+ne 259.
+
+
+LaTeX Warning: Citation 'cho_disintegration_2019' on page 21 undefined on input
+ line 259.
+
+[21] (./figures/copy_product.tikz) (./figures/copy_product.tikz)
+
+LaTeX Warning: Citation 'fritz_synthetic_2020' on page 22 undefined on input li
+ne 361.
+
+
+LaTeX Warning: Citation 'cho_disintegration_2019' on page 22 undefined on input
+ line 361.
+
+
+LaTeX Warning: Citation 'fong_causal_2013' on page 22 undefined on input line 3
+61.
+
+
+LaTeX Warning: Citation 'selinger_survey_2011' on page 22 undefined on input li
+ne 361.
+
+
+Overfull \hbox (6.54561pt too wide) in paragraph at lines 361--362
+[]\TU/lmr/m/n/10.95 ; [] but in line with []),
+ []
+
+[22] (./figures/n_fold_copy.tikz) (./figures/n_fold_copy.tikz)
 (./figures/plate_without_copymap.tikz) (./figures/plate_with_copymap.tikz)
 (./figures/plate_without_copymap.tikz) (./figures/plate_with_copymap.tikz)
 [23] (./figures/ccom_lhs.tikz) (./figures/ccom_rhs.tikz)
@@ -2649,21 +3086,65 @@ File: mt-eus.cfg 2006/07/28 v1.2 microtype config. file: AMS Euler Script (RS)
 (./figures/mstruct1_rhs.tikz) (./figures/mstruct2_lhs.tikz)
 (./figures/mstruct2_rhs.tikz) (./figures/naturality_lhs.tikz)
 (./figures/naturality_rhs.tikz) (./figures/naturality_lhs.tikz)
-(./figures/naturality_rhs.tikz) (./figures/deterministic_copymap_commute.tikz)
+(./figures/naturality_rhs.tikz)
+
+LaTeX Warning: Citation 'fong_causal_2013' on page 24 undefined on input line 4
+58.
+
+(./figures/deterministic_copymap_commute.tikz)
 (./figures/deterministic_copymap_commute.tikz) [24]
 (./figures/identity_tensor_L.tikz) (./figures/identity_tensor_L.tikz)
 (./figures/identity_tensor_copy.tikz) (./figures/identity_tensor_copy.tikz)
 (./figures/swap_example.tikz) (./figures/swap_example.tikz)
-(./figures/swap_example_2.tikz) (./figures/swap_example_2.tikz)
+(./figures/swap_example_2.tikz) (./figures/swap_example_2.tikz) [25]
 (./figures/semidirect_K_L.tikz) (./figures/semidirect_K_L_2.tikz)
 (./figures/semidirect_K_L_3.tikz) (./figures/semidirect_K_L.tikz)
-(./figures/semidirect_K_L_2.tikz) (./figures/semidirect_K_L_3.tikz) [25]
-[26] (./figures/disintegration_existence.tikz)
+(./figures/semidirect_K_L_2.tikz) (./figures/semidirect_K_L_3.tikz) [26]
+
+LaTeX Warning: Citation 'bogachev_kantorovich_2020' on page 27 undefined on inp
+ut line 551.
+
+(./figures/disintegration_existence.tikz)
 (./figures/disintegration_existence.tikz) [27] [28]
 (./figures/conditional_pushforward.tikz)
-(./figures/conditional_pushforward.tikz) [29] (./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz) [30] (./figures/cond_indep_erase.tikz)
-(./figures/cond_indep_erase.tikz) (./figures/eci_def.tikz)
-(./figures/eci_def.tikz) [31] (./figures/eci_def.tikz) (./figures/eci_def.tikz)
+(./figures/conditional_pushforward.tikz)
+
+LaTeX Warning: Citation 'cinlar_probability_2011' on page 29 undefined on input
+ line 671.
+
+
+LaTeX Warning: Citation 'bogachev_kantorovich_2020' on page 29 undefined on inp
+ut line 674.
+
+[29]
+
+LaTeX Warning: Citation 'bogachev_kantorovich_2020' on page 30 undefined on inp
+ut line 685.
+
+
+LaTeX Warning: Citation 'constantinou_extended_2017' on page 30 undefined on in
+put line 712.
+
+(./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz) [30]
+(./figures/cond_indep_erase.tikz) (./figures/cond_indep_erase.tikz)
+
+LaTeX Warning: Citation 'cho_disintegration_2019' on page 31 undefined on input
+ line 737.
+
+
+LaTeX Warning: Citation 'constantinou_extended_2017' on page 31 undefined on in
+put line 740.
+
+
+LaTeX Warning: Citation 'constantinou_extended_2017' on page 31 undefined on in
+put line 756.
+
+(./figures/eci_def.tikz) (./figures/eci_def.tikz) [31] (./figures/eci_def.tikz) (./figures/eci_def.tikz)
+
+LaTeX Warning: Citation 'constantinou_extended_2017' on page 32 undefined on in
+put line 778.
+
+
 Overfull \hbox (7.32077pt too wide) in paragraph at lines 798--799
 []\TU/lmr/m/n/10.95 Con-trac-tion: $\OT1/cmss/m/n/10.95 X [][] \OT1/zplm/m/n/10
 .95 (\OT1/cmss/m/n/10.95 Z\OT1/ppl/m/n/10.95 , [][]\OT1/zplm/m/n/10.95 )\OMS/zp
@@ -2679,8 +3160,44 @@ lm/m/n/10.95 )\OMS/zplm/m/n/10.95 j\OT1/cmss/m/n/10.95 W$
 (./figures/eci_rep.tikz) (./figures/eci_rep.tikz) [32]
 (./figures/eci_rep_1.tikz) (./figures/eci_rep_2.tikz) (./figures/eci_rep.tikz)
 (./figures/eci_rep_1.tikz) (./figures/eci_rep_2.tikz) (./figures/eci_rep.tikz)
-(./figures/eci_rep.tikz) (./figures/eci_rep.tikz) [33] [34] [35]
-(./figures/invalid_BMI_model.tikz) (./figures/invalid_BMI_model.tikz) [36]
+(./figures/eci_rep.tikz) (./figures/eci_rep.tikz) [33]
+
+LaTeX Warning: Citation 'vorobev_consistent_1962' on page 34 undefined on input
+ line 857.
+
+
+LaTeX Warning: Citation 'forre_causal_2020' on page 34 undefined on input line 
+859.
+
+
+LaTeX Warning: Citation 'bongers_theoretical_2016' on page 34 undefined on inpu
+t line 859.
+
+
+LaTeX Warning: Citation 'forre_causal_2020' on page 34 undefined on input line 
+859.
+
+
+Overfull \hbox (10.92247pt too wide) in paragraph at lines 859--860
+[]\TU/lmr/m/n/10.95 In func-tional causal mod-els, we have the no-tions of \TU/
+lmr/m/it/10.95 global com-pat-ib-il-ity \TU/lmr/m/n/10.95 from []
+ []
+
+[34]
+
+LaTeX Warning: Citation 'richardson2013single' on page 35 undefined on input li
+ne 900.
+
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 35 undefined on input l
+ine 900.
+
+[35] (./figures/invalid_BMI_model.tikz) (./figures/invalid_BMI_model.tikz)
+[36]
+
+LaTeX Warning: Citation 'shahar_association_2009' on page 37 undefined on input
+ line 966.
+
 (./figures/higher_order_disint.tikz) (./figures/higher_order_disint_0.tikz)
 (./figures/higher_order_disint_1.tikz) (./figures/higher_order_disint_2.tikz)
 (./figures/higher_order_disint.tikz) (./figures/higher_order_disint_0.tikz)
@@ -2700,10 +3217,27 @@ ve $\U/fplmbb/m/n/10.95 P[]\OT1/zplm/m/n/10.95 (\OMS/zplm/m/n/10.95 f\OML/zplm/
 m/it/10.95 y\OMS/zplm/m/n/10.95 g  \OML/zplm/m/it/10.95 A\OMS/zplm/m/n/10.95 j\OML/zplm/m/it/10.95 x\OT1/zplm/m/n/10.95 ) = \OT1/ppl/m/n/10.95 0  \OT1/zplm/m/n/10.95 =[]\OMS/zplm/m/n/10.95 )  \U/fplmbb/m/n/10.95 P[]\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 A\OMS/zplm/m/n/10.95 j\OML/zplm/m/it/10.95 x\OT1/ppl/m/n/10.95 , \OML/zplm/m/it/10.95 y\OT1/zplm/m/n/10.95 ) =
  []
 
-[39] [40] [41] [42]) [43] [44]
-\openout2 = Chapters/chapter_3_models_with_consequences.aux
 
-(./Chapters/chapter_3_models_with_consequences.tex
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 39 undefined on input l
+ine 1043.
+
+[39]
+
+LaTeX Warning: Citation 'feynman_feynman_1979' on page 40 undefined on input li
+ne 1058.
+
+
+LaTeX Warning: Citation 'menger_random_2003' on page 40 undefined on input line
+ 1064.
+
+[40] [41] [42]
+
+LaTeX Warning: Citation 'pearl_does_2018' on page 43 undefined on input line 11
+68.
+
+) [43] [44]
+\openout2 = Chapters/chapter_3_models_with_consequences.aux
+ (./Chapters/chapter_3_models_with_consequences.tex
 Chapter 3.
 1: section
 [45
@@ -2711,8 +3245,147 @@ Chapter 3.
 
 
 
-] [46] [47] [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59])
-[60]
+]
+
+LaTeX Warning: Citation 'wald_statistical_1950' on page 46 undefined on input l
+ine 14.
+
+
+LaTeX Warning: Citation 'pearl_book_2018' on page 46 undefined on input line 18
+.
+
+
+LaTeX Warning: Citation 'barenboim_foundations_2020' on page 46 undefined on in
+put line 18.
+
+
+LaTeX Warning: Citation 'rubin_causal_2005' on page 46 undefined on input line 
+27.
+
+
+LaTeX Warning: Citation 'imbens_causal_2015' on page 46 undefined on input line
+ 27.
+
+
+LaTeX Warning: Citation 'spirtes_causation_1993' on page 46 undefined on input 
+line 27.
+
+
+LaTeX Warning: Citation 'hernan_whatif_2020' on page 46 undefined on input line
+ 27.
+
+[46] [47]
+
+LaTeX Warning: Citation 'walley_statistical_1991' on page 48 undefined on input
+ line 56.
+
+
+LaTeX Warning: Citation 'de_finetti_foresight_1992' on page 48 undefined on inp
+ut line 58.
+
+
+LaTeX Warning: Citation 'horvitz_framework_1986' on page 48 undefined on input 
+line 58.
+
+
+LaTeX Warning: Citation 'halpern_counter_1999' on page 48 undefined on input li
+ne 58.
+
+
+Overfull \hbox (0.1541pt too wide) in paragraph at lines 58--59
+\TU/lmr/m/n/10.95 use prob-ab-il-ity to rep-res-ent un-cer-tain know-ledge. For ex-ample, [];
+ []
+
+[48]
+
+LaTeX Warning: Citation 'wald_statistical_1950' on page 49 undefined on input l
+ine 91.
+
+
+LaTeX Warning: Citation 'von_neumann_theory_1944' on page 49 undefined on input
+ line 107.
+
+
+LaTeX Warning: Citation 'steele_decision_2020' on page 49 undefined on input li
+ne 107.
+
+[49]
+
+LaTeX Warning: Citation 'savage_foundations_1954' on page 50 undefined on input
+ line 113.
+
+
+Overfull \hbox (75.76053pt too wide) in paragraph at lines 113--114
+\TU/lmr/m/n/10.95 Sav-age’s de-cision the-ory dis-tin-guishes \TU/lmr/m/it/10
+.95 acts $\OML/zplm/m/it/10.95 C$\TU/lmr/m/n/10.95 , \TU/lmr/m/it/10.95 con-sequ
+ences $\OML/zplm/m/it/10.95 
+$ \TU/lmr/m/n/10.95 and \TU/lmr/m/it/10.95 states $\OT1/zplm/m/n/10.95 (\OML/zp
+lm/m/it/10.95 S\OT1/ppl/m/n/10.95 , \OMS/zplm/m/n/10.95 S\OT1/zplm/m/n/10.95 )$
+ \TU/lmr/m/n/10.95 ([]).
+ []
+
+[50]
+
+LaTeX Warning: Citation 'savage_foundations_1954' on page 51 undefined on input
+ line 133.
+
+
+LaTeX Warning: Citation 'jeffrey_logic_1990' on page 51 undefined on input line
+ 161.
+
+
+LaTeX Warning: Citation 'bolker_functions_1966' on page 51 undefined on input l
+ine 161.
+
+[51]
+
+LaTeX Warning: Citation 'bolker_simultaneous_1967' on page 52 undefined on inpu
+t line 165.
+
+
+LaTeX Warning: Citation 'bolker_functions_1966' on page 52 undefined on input l
+ine 191.
+
+[52]
+
+LaTeX Warning: Citation 'lewis_causal_1981' on page 53 undefined on input line 
+210.
+
+
+LaTeX Warning: Citation 'skyrms_causal_1982' on page 53 undefined on input line
+ 210.
+
+
+LaTeX Warning: Citation 'lewis_causal_1981' on page 53 undefined on input line 
+210.
+
+
+LaTeX Warning: Citation 'wald_statistical_1950' on page 53 undefined on input l
+ine 226.
+
+
+LaTeX Warning: Citation 'savage_theory_1951' on page 53 undefined on input line
+ 226.
+
+[53] [54] [55] [56] [57]
+
+LaTeX Warning: Citation 'toutenburg_ferguson_1967' on page 58 undefined on inpu
+t line 380.
+
+
+LaTeX Warning: Citation 'toutenburg_ferguson_1967' on page 58 undefined on inpu
+t line 395.
+
+
+LaTeX Warning: Citation 'toutenburg_ferguson_1967' on page 58 undefined on inpu
+t line 410.
+
+[58]
+
+LaTeX Warning: Citation 'blackwell_theory_1979' on page 59 undefined on input l
+ine 467.
+
+[59]) [60]
 \openout2 = Chapters/chapter_4_response_functions.aux
  (./Chapters/chapter_4_response_functions.tex
 Chapter 4.
@@ -2722,7 +3395,131 @@ Chapter 4.
 
 
 
-] [62] [63] [64] [65] [66] (./figures/commutativity_of_exchange.tikz)
+]
+
+LaTeX Warning: Citation 'saarela_role_2020' on page 62 undefined on input line 
+17.
+
+
+LaTeX Warning: Citation 'hernan_estimating_2006' on page 62 undefined on input 
+line 17.
+
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 62 undefined on input l
+ine 17.
+
+
+LaTeX Warning: Citation 'muller_causal_2015' on page 62 undefined on input line
+ 17.
+
+
+LaTeX Warning: Citation 'berk_what_2010' on page 62 undefined on input line 17.
+
+
+
+LaTeX Warning: Citation 'walley_statistical_1991' on page 62 undefined on input
+ line 19.
+
+[62]
+
+LaTeX Warning: Citation 'chiribella_quantum_2008' on page 63 undefined on input
+ line 35.
+
+
+LaTeX Warning: Citation 'jacobs_causal_2019' on page 63 undefined on input line
+ 35.
+
+[63]
+
+LaTeX Warning: Citation 'de_finetti_foresight_1992' on page 64 undefined on inp
+ut line 46.
+
+
+LaTeX Warning: Citation 'kerns_definettis_2006' on page 64 undefined on input l
+ine 46.
+
+
+LaTeX Warning: Citation 'diaconis_finite_1980' on page 64 undefined on input li
+ne 46.
+
+
+LaTeX Warning: Citation 'aldous_representations_1981' on page 64 undefined on i
+nput line 46.
+
+
+LaTeX Warning: Citation 'kallenberg_probabilistic_2005' on page 64 undefined on
+ input line 46.
+
+
+LaTeX Warning: Citation 'diaconis_recent_1988' on page 64 undefined on input li
+ne 46.
+
+
+LaTeX Warning: Citation 'lindley_role_1981' on page 64 undefined on input line 
+48.
+
+
+LaTeX Warning: Citation 'rubin_causal_2005' on page 64 undefined on input line 
+48.
+
+
+LaTeX Warning: Citation 'imbens_causal_2015' on page 64 undefined on input line
+ 48.
+
+
+LaTeX Warning: Citation 'saarela_role_2020' on page 64 undefined on input line 
+48.
+
+
+LaTeX Warning: Citation 'hernan_estimating_2006' on page 64 undefined on input 
+line 48.
+
+
+LaTeX Warning: Citation 'hernan_beyond_2012' on page 64 undefined on input line
+ 48.
+
+
+LaTeX Warning: Citation 'greenland_identifiability_1986' on page 64 undefined o
+n input line 48.
+
+
+LaTeX Warning: Citation 'banerjee_chapter_2017' on page 64 undefined on input l
+ine 48.
+
+
+LaTeX Warning: Citation 'dawid_decision-theoretic_2020' on page 64 undefined on
+ input line 48.
+
+[64]
+
+LaTeX Warning: Citation 'dawid_decision-theoretic_2020' on page 65 undefined on
+ input line 50.
+
+
+LaTeX Warning: Citation 'rubin_causal_2005' on page 65 undefined on input line 
+50.
+
+
+Overfull \hbox (6.67346pt too wide) in paragraph at lines 50--54
+\TU/lmr/m/n/10.95 stable unit treat-ment dis-tri-bu-tion as-sump-tion (SUTDA) in
+ [],
+ []
+
+
+Overfull \hbox (9.50166pt too wide) in paragraph at lines 50--54
+\TU/lmr/m/n/10.95 and the stable unit treat-ment value as-sump-tion (SUTVA) in 
+([]): ‘  (’SUTVA)
+ []
+
+
+LaTeX Warning: Citation 'saarela_role_2020' on page 65 undefined on input line 
+55.
+
+
+LaTeX Warning: Citation 'hernan_estimating_2006' on page 65 undefined on input 
+line 55.
+
+[65] [66] (./figures/commutativity_of_exchange.tikz)
 (./figures/commutativity_of_exchange.tikz) (./figures/cons_locality_1.tikz)
 (./figures/cons_locality_2.tikz) (./figures/cons_locality_1.tikz)
 (./figures/cons_locality_2.tikz) [67] (./figures/local_lhs.tikz)
@@ -2739,6 +3536,15 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 15.0049pt on input line 125.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 12.50409pt on input line 125.
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <20.74> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 125
+.
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <14.4> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 125
+.
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <12> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 125
+.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
 (Font)              scaled to size 18.00587pt on input line 125.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
@@ -2747,6 +3553,12 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 18.00587pt on input line 125.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 10.42007pt on input line 125.
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <17.28> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 125
+.
+LaTeX Font Info:    Font shape `OML/cmbr/bx/it' in size <10> not available
+(Font)              Font shape `OML/cmbrm/b/it' tried instead on input line 125
+.
  (./figures/local_lhs.tikz) (./figures/local_rhs.tikz)
 Overfull \hbox (2.48404pt too wide) in paragraph at lines 136--137
 [][]\TU/lmr/bx/n/10.95 Defin-i-tion 4.3.5 \TU/lmr/m/n/10.95 (Ex-change com-mut-a
@@ -2756,10 +3568,18 @@ ut model $\OT1/zplm/m/n/10.95 (\U/fplmbb/m/n/10.95 P[]\OT1/ppl/m/n/10.95 , \OT1
 )$
  []
 
-[68] [69] [70]
+[68] [69]
+
+LaTeX Warning: Citation 'dawid_causal_2000' on page 70 undefined on input line 
+207.
+
+[70]
+
+LaTeX Warning: Citation 'kallenberg_basic_2005' on page 71 undefined on input l
+ine 242.
+
 LaTeX Font Info:    Trying to load font information for U+dsrom on input line 2
 51.
-
 (/usr/local/texlive/2021/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
@@ -2786,6 +3606,10 @@ Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/7'
 Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/5'
 (microtype)             (new value: 5.0pt) on input line 263.
  [71]
+
+LaTeX Warning: Citation 'rubin_causal_2005' on page 72 undefined on input line 
+278.
+
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz) [72]
 (./figures/lookup_representation_kernel.tikz)
@@ -2800,14 +3624,23 @@ Overfull \hbox (27.291pt too wide) detected at line 472
 []
  []
 
-[77] [78] [79]
-! Missing \endcsname inserted.
-<to be read again> 
-\protect 
-l.532 ...no causes out'' \citep{cartwright_no_1994}.
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
+[77] [78]
+
+LaTeX Warning: Citation 'eckles_bias_2021' on page 79 undefined on input line 5
+28.
+
+
+LaTeX Warning: Citation 'gordon_comparison_2018' on page 79 undefined on input 
+line 528.
+
+
+LaTeX Warning: Citation 'gordon_close_2022' on page 79 undefined on input line 
+528.
+
+[79]
+
+LaTeX Warning: Citation 'cartwright_no_1994' on page 80 undefined on input line
+ 532.
 
 [80] (./figures/response_conditional_comb.tikz)
 (./figures/response_conditional_comb.tikz)
@@ -2815,7 +3648,22 @@ not appear between \csname and \endcsname.
 (./figures/causally_contractible_comb.tikz)
 (./figures/comb_insert_complicated.tikz)
 (./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz) (./figures/comb_insert_complicated.tikz)
-(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz) [81] (./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [82]
+(./figures/comb_insert_gettingsimpler.tikz) (./figures/comb_insert_simple.tikz) [81]
+
+LaTeX Warning: Citation 'jacobs_causal_2019' on page 82 undefined on input line
+ 615.
+
+(./figures/comb_inductive.tikz) (./figures/comb_inductive.tikz) [82]
+
+LaTeX Warning: Citation 'richardson_nested_2017' on page 83 undefined on input 
+line 679.
+
+
+Overfull \hbox (28.26485pt too wide) in paragraph at lines 679--680
+\TU/lmr/m/n/10.95 There is a re-la-tion-ship between combs and the ``fix'' op-er
+-a-tion defined in [].
+ []
+
 [83] (./figures/local_lhs.tikz) (./figures/local_rhs.tikz)
 (./figures/local_lhs.tikz) (./figures/local_rhs.tikz) [84]
 (./figures/lookup_representation_kernel.tikz)
@@ -2831,12 +3679,12 @@ not appear between \csname and \endcsname.
 (./Chapters/chapter_5_other_causal_inference.tex
 Chapter 5.
 
-Underfull \hbox (badness 1248) in paragraph at lines 17--18
+Underfull \hbox (badness 1248) in paragraph at lines 16--17
 []|\TU/lmr/m/n/10.95 Spe-cify ex-actly which
  []
 
 
-Underfull \hbox (badness 3302) in paragraph at lines 18--19
+Underfull \hbox (badness 3302) in paragraph at lines 17--18
 []|\TU/lmr/m/n/10.95 Op-tions are in-ter-ven-
  []
 
@@ -2846,34 +3694,150 @@ Underfull \hbox (badness 3302) in paragraph at lines 18--19
 
 
 
-] [89] [90] [91] [92] [93] [94] (./figures/cbn_example_cgm.tikz)
-(./figures/cbn_example_cgm.tikz) (./figures/cgm.tikz) (./figures/cgm.tikz)
-[95] (./figures/cbn_unrolled_example.tikz) (./figures/cbn_unrolled_example.tikz
-) (./figures/cbn_example_cgm.tikz) (./figures/cbn_example_cgm.tikz) [96]
-(./figures/contractible_over_hidden.tikz)
+]
+
+LaTeX Warning: Citation 'peters_causal_2016' on page 89 undefined on input line
+ 23.
+
+
+LaTeX Warning: Citation 'meek_strong_1995' on page 89 undefined on input line 2
+3.
+
+
+LaTeX Warning: Citation 'lemeire_replacing_2013' on page 89 undefined on input 
+line 23.
+
+
+LaTeX Warning: Citation 'yang_characterizing_2018' on page 89 undefined on inpu
+t line 29.
+
+
+LaTeX Warning: Citation 'barenboim_foundations_2020' on page 89 undefined on in
+put line 31.
+
+
+LaTeX Warning: Citation 'bongers_theoretical_2016' on page 89 undefined on inpu
+t line 31.
+
+
+LaTeX Warning: Citation 'forre_causal_2020' on page 89 undefined on input line 
+31.
+
+[89]
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 90 undefined on input l
+ine 39.
+
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 90 undefined on input l
+ine 41.
+
+[90]
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 91 undefined on input l
+ine 100.
+
+[91] [92]
+Overfull \hbox (20.04465pt too wide) in paragraph at lines 136--137
+[]\TU/lmr/m/n/10.95 If $\OML/zplm/m/it/10.95 []\OT1/zplm/m/n/10.95 (\OML/zplm/
+m/it/10.95 \OT1/zplm/m/n/10.95 ) = ([][]\OT1/ppl/m/n/10.95 , \OML/zplm/m/it/10
+.95 v[]\OT1/zplm/m/n/10.95 )$\TU/lmr/m/n/10.95 , $\OML/zplm/m/it/10.95 []\OT1/
+zplm/m/n/10.95 (\OML/zplm/m/it/10.95 \OT1/zplm/m/n/10.95 ) = ([][]\OT1/ppl/m/n
+/10.95 , \OML/zplm/m/it/10.95 v[]\OT1/zplm/m/n/10.95 )$ \TU/lmr/m/n/10.95 and $
+\OML/zplm/m/it/10.95 i \OMS/zplm/m/n/10.95 62 \OML/zplm/m/it/10.95 B[] \OMS/zpl
+m/m/n/10.95 [ \OML/zplm/m/it/10.95 B[]$ \TU/lmr/m/n/10.95 then $\U/fplmbb/m/n/1
+0.95 P[] [] P[][]$ 
+ []
+
+
+LaTeX Warning: Citation 'lattimore_causal_2019' on page 93 undefined on input l
+ine 152.
+
+[93] [94]
+
+LaTeX Warning: Citation 'lattimore_replacing_2019' on page 95 undefined on inpu
+t line 200.
+
+
+LaTeX Warning: Citation 'lattimore_causal_2019' on page 95 undefined on input l
+ine 200.
+
+(./figures/cbn_example_cgm.tikz) (./figures/cbn_example_cgm.tikz) [95]
+(./figures/cgm.tikz) (./figures/cgm.tikz) (./figures/cbn_unrolled_example.tikz) (./figures/cbn_unrolled_example.tikz) [96] (./figures/cbn_example_cgm.tikz)
+(./figures/cbn_example_cgm.tikz) (./figures/contractible_over_hidden.tikz)
 (./figures/contractible_over_hidden_2.tikz)
 (./figures/contractible_over_hidden_3.tikz)
 (./figures/contractible_over_hidden.tikz)
 (./figures/contractible_over_hidden_2.tikz)
-(./figures/contractible_over_hidden_3.tikz) [97] [98] [99] [100] [101]
+(./figures/contractible_over_hidden_3.tikz) [97] [98]
+Overfull \hbox (8.03764pt too wide) in paragraph at lines 300--301
+[][]\TU/lmr/bx/n/10.95 The-orem 5.1.18 \TU/lmr/m/n/10.95 (IO con-tract-ib-il-ity
+ of pre-ced-en-ted de-cision mod-els)\TU/lmr/bx/n/10.95 . []\TU/lmr/m/it/10.95 
+Given $\OT1/zplm/m/n/10.95 (\U/fplmbb/m/n/10.95 P[]\OT1/ppl/m/n/10.95 , \OT1/zp
+lm/m/n/10.95 (\OML/zplm/m/it/10.95 
+\OT1/ppl/m/n/10.95 , \OMS/zplm/m/n/10.95 F\OT1/zplm/m/n/10.95 )\OT1/ppl/m/n/10.
+95 , \OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 C\OT1/ppl/m/n/10.95 , \OMS/zplm/
+m/n/10.95 C\OT1/zplm/m/n/10.95 ))$\TU/lmr/m/it/10.95 ,
+ []
 
-LaTeX Warning: Reference `sec:counterfactual_statements' on page 102 undefined 
-on input line 419.
+[99]
 
-[102] (./figures/lookup_representation_single.tikz)
-(./figures/lookup_representation_single.tikz) [103]
+LaTeX Warning: Citation 'zhang_strong_2003' on page 100 undefined on input line
+ 347.
+
+[100]
+
+LaTeX Warning: Citation 'meek_strong_1995' on page 101 undefined on input line 
+353.
+
+
+LaTeX Warning: Citation 'lemeire_replacing_2013' on page 101 undefined on input
+ line 353.
+
+
+LaTeX Warning: Reference `sec:counterfactual_statements' on page 101 undefined 
+on input line 392.
+
+
+LaTeX Warning: Citation 'rubin_causal_2005' on page 101 undefined on input line
+ 394.
+
+[101] (./figures/lookup_representation_single.tikz)
+(./figures/lookup_representation_single.tikz) [102]
 (./figures/potential_outcomes_ccontract1.tikz)
 (./figures/potential_outcomes_ccontract2.tikz)
 (./figures/potential_outcomes_ccontract3.tikz)
 (./figures/potential_outcomes_ccontract1.tikz)
 (./figures/potential_outcomes_ccontract2.tikz)
-(./figures/potential_outcomes_ccontract3.tikz) [104] [105] [106] [107]
-(./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
-(./figures/index_independence_1.tikz) (./figures/index_independence_2.tikz)
-(./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
-(./figures/index_independence_3.tikz) (./figures/index_independence_4.tikz)
-(./figures/index_independence_5.tikz) (./figures/index_independence_5.tikz)
-[108] (./figures/kernel_fac_with_idents.tikz)
+(./figures/potential_outcomes_ccontract3.tikz) [103]
+
+LaTeX Warning: Citation 'kasy_why_2016' on page 104 undefined on input line 572
+.
+
+
+LaTeX Warning: Citation 'greenland_identifiability_1986' on page 104 undefined 
+on input line 576.
+
+
+LaTeX Warning: Citation 'dawid_decision-theoretic_2020' on page 104 undefined o
+n input line 582.
+
+[104]
+
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 105 undefined on input 
+line 588.
+
+
+LaTeX Warning: Citation 'rubin_causal_2005' on page 105 undefined on input line
+ 594.
+
+[105] [106] (./figures/index_independence_1.tikz)
+(./figures/index_independence_2.tikz) (./figures/index_independence_1.tikz)
+(./figures/index_independence_2.tikz) (./figures/index_independence_3.tikz)
+(./figures/index_independence_4.tikz) (./figures/index_independence_3.tikz)
+(./figures/index_independence_4.tikz) (./figures/index_independence_5.tikz)
+(./figures/index_independence_5.tikz) [107]
+(./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
 (./figures/kernel_fac_with_idents.tikz)
 (./figures/kernel_fac_with_idents_indepped.tikz)
@@ -2884,34 +3848,55 @@ on input line 419.
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_fac_with_idents.tikz)
 (./figures/kernel_Q_fac_with_idents_indepped.tikz)
-(./figures/kernel_Q_fac_with_idents_subbed.tikz) [109]
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
 (./figures/kernel_Q_fac_with_idents_subbed.tikz)
+(./figures/kernel_Q_fac_with_idents_subbed.tikz) [108]
 (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
 (./figures/kernel_P_indep.tikz) (./figures/kernel_Q_indepped.tikz)
 (./figures/kernel_Q_fac_with_idents_swapped.tikz)
-(./figures/kernel_P_indep.tikz) [110] [111]
+(./figures/kernel_P_indep.tikz) [109]
 
-LaTeX Warning: Reference `ex:bad_randomised_experiment' on page 112 undefined o
-n input line 820.
+LaTeX Warning: Citation 'kasy_why_2016' on page 110 undefined on input line 791
+.
+
+
+LaTeX Warning: Reference `ex:bad_randomised_experiment' on page 110 undefined o
+n input line 791.
+
+
+LaTeX Warning: Citation 'diaconis_finite_1980' on page 110 undefined on input l
+ine 793.
+
+[110]
+
+LaTeX Warning: Reference `sec:dm_control' on page 111 undefined on input line 8
+04.
+
+[111]
+
+LaTeX Warning: Reference `sec:dm_control' on page 112 undefined on input line 8
+13.
+
+
+LaTeX Warning: Citation 'willard_general_1970' on page 112 undefined on input l
+ine 813.
+
+
+Overfull \hbox (33.45747pt too wide) detected at line 843
+[]
+ []
 
 [112]
-Overfull \hbox (33.45747pt too wide) detected at line 872
+Overfull \hbox (8.6045pt too wide) detected at line 867
 []
  []
 
-[113]
-Overfull \hbox (8.6045pt too wide) detected at line 896
-[]
- []
 
-[114] [115]
-Overfull \hbox (14.41602pt too wide) in paragraph at lines 952--953
-[]\TU/lmr/m/n/10.95 In par-tic-u-lar, sup-pose an ex-per-i-ment is modeled by a se-quen-tial input-output model $\OT1/zplm/m/n/10.95 (\U/fplmbb/m/n/10.95 P[]\OT1/ppl/m/n/10.95 , \OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10.95 D\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 U\OT1/zplm/m/n/10.95 )\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 Y\OT1/zplm/m/n/10.95 )$
- []
+LaTeX Warning: Citation 'pearl_causality:_2009' on page 113 undefined on input 
+line 895.
 
-[116]) [117]
+[113]) [114]
 \openout2 = Chapters/chapter_6_discussion.aux
  (./Chapters/chapter_6_discussion.tex
 Chapter 6.
@@ -2922,90 +3907,98 @@ tern-at-ive means of as-sess-ing unconfoundedness-
  []
 
 1: section
+[115
+
+
+
+
+]
+
+LaTeX Warning: Citation 'meek_strong_1995' on page 116 undefined on input line 
+22.
+
+
+LaTeX Warning: Citation 'lemeire_replacing_2013' on page 116 undefined on input
+ line 22.
+
+
+LaTeX Warning: Citation 'mooij_j.m._distinguishing_2016' on page 116 undefined 
+on input line 22.
+
+[116]
+
+LaTeX Warning: Citation 'tian2002general' on page 117 undefined on input line 2
+6.
+
+
+LaTeX Warning: Citation 'shpitser_complete_2008' on page 117 undefined on input
+ line 26.
+
+
+LaTeX Warning: Citation 'fritz_synthetic_2020' on page 117 undefined on input l
+ine 26.
+
+) [117]
+
+LaTeX Warning: Empty bibliography on input line 101.
+
+
+\openout2 = Appendices/AppendixA.aux
+(./Appendices/AppendixA.tex
+Appendix A.
+
+LaTeX Warning: Citation 'savage_foundations_1954' on page 118 undefined on inpu
+t line 13.
+
+1: section
 [118
 
 
 
 
-] [119]) [120]
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: TU).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-
-(/usr/local/texlive/2021/texmf-dist/tex/latex/microtype/mt-FontAwesome.cfg
-File: mt-FontAwesome.cfg 2021/02/22 v1.0 microtype config. file: Font Awesome (
-RS)
-)
-1: section
-[121
-
-
-
-]
-Overfull \hbox (41.55258pt too wide) in paragraph at lines 101--101
-\TU/lmr/m/it/10.95 Math-em-at-ical Struc-tures in Com-puter Sci-ence\TU/lmr/m/n
-/10.95 , 29(7), pp. 938–971. \TU/lmr/m/sc/10.95 doi\TU/lmr/m/n/10.95 : [][]$\
-TU/lmtt/m/n/10.95 10 . 1017 / S0960129518000488$[][]
- []
-
-[122]
-Overfull \hbox (23.64513pt too wide) in paragraph at lines 101--101
-[][]\TU/lmr/m/n/10.95 Fong, B. (2013). ‘  Causal The-or-ies: A Cat-egor-ical 
-Per-spect-ive on Bayesian Net-works’. \TU/lmr/m/it/10.95 arXiv:1301.6201
- []
-
-[123] [124]
-Overfull \hbox (16.25049pt too wide) in paragraph at lines 101--101
-[][]\TU/lmr/m/n/10.95 Lat-timore, F. and Ro-hde, D. (2019b). ‘  Re-pla-cing th
-e do-calculus with Bayes rule’. \TU/lmr/m/it/10.95 arXiv:1906.07125
- []
-
-[125] [126] [127]
-Overfull \hbox (40.12738pt too wide) in paragraph at lines 101--101
-\TU/lmr/m/it/10.95 cial Psy-cho-logy\TU/lmr/m/n/10.95 , 41(2). Pub-lisher: Rout-
-ledge _eprint: ht-tps://doi.org/10.1080/01973533.2019.1577736,
- []
-
-[128] [129]
-\openout2 = Appendices/AppendixA.aux
- (./Appendices/AppendixA.tex
-Chapter 7.
-1: section
-[130
-
-
-]) [131]
+]) [119]
 \openout2 = Appendices/AppendixB.aux
  (./Appendices/AppendixB.tex
-Chapter 8.
+Appendix B.
+
+LaTeX Warning: Citation 'cinlar_probability_2011' on page 120 undefined on inpu
+t line 47.
+
 1: section
-[132
+[120
 
 
 
 
 ] (./figures/exch_com_lhs.tikz) (./figures/exch_com_rhs.tikz)
 (./figures/exch_com_lhs.tikz) (./figures/exch_com_rhs.tikz)
-(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz) [133]
-(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz) [134]
+(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz) [121]
+(./figures/exch_com_rhs.tikz) (./figures/exch_com_rhs.tikz) [122]
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [135] [136]
+(./figures/lookup_representation_kernel.tikz) [123] [124]
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [137]
+(./figures/lookup_representation_kernel.tikz) [125]
+
+LaTeX Warning: Citation 'kallenberg_basic_2005' on page 126 undefined on input 
+line 292.
+
 (./figures/de_finetti_conditional.tikz) (./figures/de_finetti_conditional.tikz) (./figures/de_finetti_conditional_erase.tikz)
-(./figures/de_finetti_conditional_erase.tikz) [138] [139]
-(./figures/lookup_representation_kernel.tikz)
+(./figures/de_finetti_conditional_erase.tikz) [126]
+
+LaTeX Warning: Citation 'kallenberg_basic_2005' on page 127 undefined on input 
+line 300.
+
+[127] (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel_h.tikz)
 (./figures/lookup_representation_kernel_h.tikz)
 (./figures/lookup_representation_kernel_joint.tikz)
-(./figures/lookup_representation_kernel_joint.tikz) [140]
+(./figures/lookup_representation_kernel_joint.tikz) [128]
 Overfull \hbox (9.68742pt too wide) detected at line 388
 []
  []
 
-[141] (./figures/hw_interchange_2.tikz) (./figures/hw_interchange_3.tikz)
+[129] (./figures/hw_interchange_2.tikz) (./figures/hw_interchange_3.tikz)
 (./figures/hw_interchange_2.tikz) (./figures/hw_interchange_3.tikz)
 (./figures/hw_interchange_1.tikz) (./figures/hw_interchange_2.tikz)
 (./figures/hw_interchange_1.tikz) (./figures/hw_interchange_2.tikz)
@@ -3018,7 +4011,7 @@ Overfull \hbox (9.68742pt too wide) detected at line 388
 ) (./figures/yd_h_on_w_invert.tikz) (./figures/p_yd_on_w.tikz)
 (./figures/yd_h_on_w_invert.tikz)
 (./figures/lookup_representation_kernel_joint_3.tikz)
-(./figures/lookup_representation_kernel_joint_3.tikz) [142]
+(./figures/lookup_representation_kernel_joint_3.tikz) [130]
 (./figures/lookup_representation_kernel_joint_4.tikz)
 (./figures/lookup_representation_kernel_joint_4.tikz)
 (./figures/lookup_representation_kernel_h.tikz)
@@ -3029,7 +4022,7 @@ Overfull \hbox (9.68742pt too wide) detected at line 388
 (./figures/lookup_representation_kernel_joint_4_marged.tikz)
 (./figures/do_model_representation_conditional.tikz)
 (./figures/lookup_rep_intermediate_kernel.tikz)
-(./figures/lookup_rep_intermediate_kernel.tikz) [143]
+(./figures/lookup_rep_intermediate_kernel.tikz) [131]
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz)
 (./figures/de_finetti_conditional_w_upd.tikz)
@@ -3039,7 +4032,7 @@ Overfull \hbox (9.68742pt too wide) detected at line 388
 (./figures/lookup_representation_kernel_h.tikz)
 (./figures/lookup_representation_kernel_h.tikz)
 (./figures/do_model_representation_conditional.tikz)
-(./figures/do_model_representation_conditional.tikz) [144]
+(./figures/do_model_representation_conditional.tikz) [132]
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation_conditional.tikz)
@@ -3049,14 +4042,14 @@ Overfull \hbox (9.68742pt too wide) detected at line 388
 (./figures/do_model_representation_conditional_deleted.tikz)
 (./figures/do_model_representation_conditional_deleted1.tikz)
 (./figures/do_model_representation_conditional_deleted.tikz)
-(./figures/do_model_representation_conditional_deleted1.tikz) [145]
+(./figures/do_model_representation_conditional_deleted1.tikz) [133]
 (./figures/do_model_representation_with_h.tikz)
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation_with_h.tikz)
 (./figures/do_model_representation_with_h.tikz)
 (./figures/do_model_representation_with_h.tikz)
-(./figures/do_model_representation_with_h.tikz) [146]
+(./figures/do_model_representation_with_h.tikz) [134]
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation_conditional.tikz)
 (./figures/do_model_representation.tikz)
@@ -3068,44 +4061,52 @@ Overfull \hbox (9.68742pt too wide) detected at line 388
 (./figures/do_model_representation_deleted.tikz)
 (./figures/do_model_representation_deleted1.tikz)
 (./figures/do_model_representation_deleted.tikz)
-(./figures/do_model_representation_deleted1.tikz) [147]
-Overfull \hbox (11.8454pt too wide) in paragraph at lines 605--606
-[]\TU/lmr/m/n/10.95 By [][][][][]Kal-len-berg (2005b[][], Prop. 1.4), there is 
-a $\OT1/cmss/m/n/10.95 G$ \TU/lmr/m/n/10.95 such that $\OT1/zplm/m/n/10.95 (\OT
-1/cmss/m/n/10.95 D[]\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 Y[]\OT1/zplm/m/n/1
-0.95 ) [][] (\OT1/cmss/m/n/10.95 D[]Y[]\OT1/zplm/m/n/10.95 )\OMS/zplm/m/n/10.95
- j\OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10.95 G\OT1/ppl/m/n/10.95 , [][]\OT1/zplm/
-m/n/10.95 )$
+(./figures/do_model_representation_deleted1.tikz) [135]
+
+LaTeX Warning: Citation 'kallenberg_basic_2005' on page 136 undefined on input 
+line 605.
+
+
+Overfull \hbox (1.42853pt too wide) in paragraph at lines 605--606
+[]\TU/lmr/m/n/10.95 By [], there is a $\OT1/cmss/m/n/10.95 G$ \TU/lmr/m/n/10.95
+ such that $\OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10.95 D[]\OT1/ppl/m/n/10.95 , \O
+T1/cmss/m/n/10.95 Y[]\OT1/zplm/m/n/10.95 ) [][] (\OT1/cmss/m/n/10.95 D[]Y[]\OT1
+/zplm/m/n/10.95 )\OMS/zplm/m/n/10.95 j\OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10.95 
+G\OT1/ppl/m/n/10.95 , [][]\OT1/zplm/m/n/10.95 )$
  []
 
-(./figures/qyg_eq_pyg.tikz) (./figures/qyg_eq_pyg.tikz) [148]
+(./figures/qyg_eq_pyg.tikz) (./figures/qyg_eq_pyg.tikz) [136]
 (./figures/exch_dom_swap1.tikz) (./figures/exch_dom_swap2.tikz)
 (./figures/exch_dom_swap3.tikz) (./figures/exch_dom_swap4.tikz)
 (./figures/exch_dom_swap5.tikz) (./figures/exch_dom_swap1.tikz)
 (./figures/exch_dom_swap2.tikz) (./figures/exch_dom_swap3.tikz)
-(./figures/exch_dom_swap4.tikz) (./figures/exch_dom_swap5.tikz) [149] [150]
+(./figures/exch_dom_swap4.tikz) (./figures/exch_dom_swap5.tikz) [137] [138]
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [151]
+(./figures/lookup_representation_kernel.tikz) [139]
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [152]
+(./figures/lookup_representation_kernel.tikz) [140]
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz)
 (./figures/lookup_representation_kernel_k.tikz)
 (./figures/lookup_representation_kernel_k.tikz)
 (./figures/do_model_representation_kernel_k.tikz)
-(./figures/do_model_representation_kernel_k.tikz) [153]
+(./figures/do_model_representation_kernel_k.tikz) [141]
 (./figures/lookup_rep_intermediate_kernel.tikz)
 (./figures/lookup_rep_intermediate_kernel.tikz)
+
+LaTeX Warning: Citation 'kallenberg_basic_2005' on page 142 undefined on input 
+line 874.
+
 (./figures/de_finetti_representation_kernel.tikz)
 (./figures/de_finetti_representation_kernel.tikz)
 (./figures/do_model_representation_kernel_pre.tikz)
 (./figures/do_model_representation_kernel_k.tikz)
 (./figures/do_model_representation_kernel_pre.tikz)
-(./figures/do_model_representation_kernel_k.tikz) [154]
+(./figures/do_model_representation_kernel_k.tikz) [142]
 (./figures/do_model_representation_kernel.tikz)
 (./figures/do_model_representation_kernel.tikz)
 (./figures/lookup_representation_kernel.tikz)
-(./figures/lookup_representation_kernel.tikz) [155]
+(./figures/lookup_representation_kernel.tikz) [143]
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation_mu_k.tikz)
@@ -3113,74 +4114,103 @@ m/n/10.95 )$
 (./figures/do_model_representation.tikz)
 (./figures/do_model_representation_mu.tikz)
 (./figures/do_model_representation.tikz)
-(./figures/do_model_representation_mu.tikz) [156]) [157] (./main.aux
-(./Chapters/chapter_1_introduction.aux) (./Chapters/chapter_2_technical.aux)
+(./figures/do_model_representation_mu.tikz) [144]) [145]
+\openout2 = Appendices/AppendixC.aux
+
+(./Appendices/AppendixC.tex
+Appendix C.
+
+Overfull \hbox (30.70335pt too wide) in paragraph at lines 12--13
+[]\TU/lmr/bx/n/10.95 The-orem 5.1.15[]. []\TU/lmr/m/it/10.95 Given an un-cer-tai
+n un-rolled causal Bayesian net-work $\OT1/zplm/m/n/10.95 (\U/fplmbb/m/n/10.95 
+P[]\OT1/ppl/m/n/10.95 , \OML/zplm/m/it/10.95 C\OT1/ppl/m/n/10.95 , \OML/zplm/m/
+it/10.95 
+\OT1/ppl/m/n/10.95 , \OT1/zplm/m/n/10.95 (\OT1/cmss/m/n/10.95 V[]\OT1/zplm/m/n/
+10.95 )[]\OT1/ppl/m/n/10.95 , \OT1/cmss/m/n/10.95 H\OT1/ppl/m/n/10.95 , \OML/cm
+brm/b/it/10.95 G\OT1/zplm/m/n/10.95 )$\TU/lmr/m/it/10.95 ,
+ []
+
+1: section
+[146
+
+
+
+
+] [147]
+
+LaTeX Warning: Citation 'okamoto_distinctness_1973' on page 148 undefined on in
+put line 106.
+
+) [148] (./main.aux (./Chapters/chapter_1_introduction.aux)
+(./Chapters/chapter_2_technical.aux)
 (./Chapters/chapter_3_models_with_consequences.aux)
 (./Chapters/chapter_4_response_functions.aux)
 (./Chapters/chapter_5_other_causal_inference.aux)
 (./Chapters/chapter_6_discussion.aux) (./Appendices/AppendixA.aux)
-(./Appendices/AppendixB.aux))
+(./Appendices/AppendixB.aux) (./Appendices/AppendixC.aux))
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: BC8C77FCDAF2C37E65D4DE39D8DF3D78;7478.
+(rerunfilecheck)             Checksum: 795255B4C0994F40C5AFF6BAEF2C21B0;8036.
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                main
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to 'main.run.xml'.
 
 \openout1 = main.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 68153 strings out of 478531
- 195418,2848258 words of node,token memory allocated
- 3917 words of node memory still in use:
-   52 hlist, 5 vlist, 10 rule, 2 disc, 2 local_par, 5 dir, 44 glue, 5 kern, 3 pe
-nalty, 1 margin_kern, 18 glyph, 463 attribute, 127 glue_spec, 257 attribute_list
-, 7 write, 2 save_pos, 95 pdf_literal, 43 pdf_action, 18 pdf_colorstack nodes
-   avail lists: 1:14,2:11289,3:3574,4:421,5:1969,6:615,7:12203,8:137,9:2526,10:2
-7,11:985,12:1
- 79659 multiletter control sequences out of 65536+600000
- 448 fonts using 30328687 bytes
- 112i,21n,108p,3197b,2539s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2021/texmf-dist/fonts/opentype/public/fontawesome/FontAwesom
-e.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmmono10-regu
-lar.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmromancaps
-10-regular.otf>{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}<
-/usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman6-regular.otf
-></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman8-italic.ot
+ 67240 strings out of 478531
+ 195413,2373549 words of node,token memory allocated
+ 3398 words of node memory still in use:
+   52 hlist, 5 vlist, 10 rule, 2 disc, 2 local_par, 4 dir, 45 glue, 5 kern, 3 pe
+nalty, 1 margin_kern, 18 glyph, 377 attribute, 126 glue_spec, 214 attribute_list
+, 7 write, 2 save_pos, 95 pdf_literal, 18 pdf_colorstack nodes
+   avail lists: 1:14,2:11288,3:3678,4:286,5:2086,6:339,7:11873,8:105,9:2569,10:3
+1,11:975,12:1
+ 78824 multiletter control sequences out of 65536+600000
+ 469 fonts using 31755559 bytes
+ 112i,21n,108p,2560b,2524s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman6-regular.ot
+f></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman8-italic.o
+tf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman9-bold.ot
 f></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.
 otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman7-regula
 r.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman8-regu
 lar.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmromanslan
-t10-regular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmr
-oman10-bold.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmr
-oman10-italic.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/l
-mroman10-regular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public/l
-m/lmroman12-italic.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/public
-/lm/lmroman12-regular.otf></usr/local/texlive/2021/texmf-dist/fonts/opentype/pub
-lic/lm/lmroman12-bold.otf></usr/local/texlive/2021/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmss10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmss8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/doublestroke/
-dsrom10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/eule
-r/eusm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fpl
-mbb.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fplmr.pf
-b></usr/local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></u
-sr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-</usr/local/texlive/2021/texmf-dist/fonts/type1/public/stmaryrd/stmary10.pfb></u
-sr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local
-/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive
-/2021/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (166 pages, 1380899 bytes).
+t10-regular.otf>{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
+}{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
+live/2021/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/local/tex
+live/2021/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf></usr/local/t
+exlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/loca
+l/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman12-italic.otf></usr/lo
+cal/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr
+/local/texlive/2021/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr
+/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/l
+ocal/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/loc
+al/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
+texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/te
+xlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texli
+ve/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2021/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive
+/2021/texmf-dist/fonts/type1/public/amsfonts/euler/eusm10.pfb></usr/local/texliv
+e/2021/texmf-dist/fonts/type1/public/mathpazo/fplmbb.pfb></usr/local/texlive/202
+1/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/2021/texm
+f-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2021/texmf-dis
+t/fonts/type1/public/hfbright/hfbrmb10.pfb></usr/local/texlive/2021/texmf-dist/f
+onts/type1/public/lm/lmsso10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1
+/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2021/texmf-dist/fonts/ty
+pe1/public/stmaryrd/stmary10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1
+/urw/palatino/uplr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/pal
+atino/uplri8a.pfb>
+Output written on main.pdf (157 pages, 1319430 bytes).
 
-PDF statistics: 2936 PDF objects out of 2984 (max. 8388607)
- 2593 compressed objects within 26 object streams
- 715 named destinations out of 1000 (max. 131072)
- 504 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 2183 PDF objects out of 2487 (max. 8388607)
+ 1861 compressed objects within 19 object streams
+ 589 named destinations out of 1000 (max. 131072)
+ 520 words of extra memory for PDF output out of 10000 (max. 100000000)
 
