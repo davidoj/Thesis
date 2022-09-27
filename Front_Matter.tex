@@ -226,7 +226,7 @@ The assumption of \emph{precedent} is the assumption that ``whatever we can do h
  \multicolumn{4}{|l|}{\textbf{Probability theory}}\\
  \hline
  Variable & $\RV{X}$ & Measurable function $(\Omega,\sigalg{F})\to(X,\sigalg{X})$ & Definition \ref{def:variable} \\
- Trivial variable & $*$ & Single-valued variable, maps $(\Omega,\sigalg{F})\to (\{*\},\{\emptyset,\{*\}\})$ & Definition \ref{no:single_valued} \\
+ Trivial variable & $*$ & Any single-valued random variable & Definition \ref{no:single_valued} \\
  Variable sequence & $(\RV{X},\RV{Y})$ & The variable given by $\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$ & Definition \ref{def:seqvar}\\
  Probability measure & $\prob{P}\in \Delta(\Omega)$ & Countably additive measure on $(\Omega,\sigalg{F})$ with $\prob{P}(\Omega)=1$ & Definition \ref{def:prob_meas}\\
  Set of probability measures & $\Delta(\Omega)$ & Set of probability measures on $(\Omega,\sigalg{F})$ & Notation \ref{no:prob_meas_set}\\
@@ -236,7 +236,7 @@ The assumption of \emph{precedent} is the assumption that ``whatever we can do h
  Marginal distribution & $\prob{P}^{\RV{X}}$ & $\prob{P}\kernel{F}_{\RV{X}}$ & Definition \ref{def:pushforward}\\
  Conditional distribution & $\prob{P}^{\RV{Y}|\RV{X}}$ & Arbitrary Markov kernel $X\kto Y$ such that $\prob{P}^{\RV{XY}}(A\times B) = \int_A \prob{P}^{\RV{Y}|\RV{X}}(B|x)\prob{P}^{\RV{X}}(\mathrm{d}x)$ & Definition \ref{def:disint} \\
  Conditional independence & $\RV{X}\CI_{\prob{P}}\RV{Y}|\RV{Z}$ & $\prob{P}^{\RV{X}|\RV{YZ}}(A|y,z)$ does not depend on $z$ & Definition \ref{def:ci}\\
- Uniform conditional probability & $\prob{P}_A^{\RV{Y}|\RV{X}}$ & Arbitrary Markov kernel $X\kto Y$ that is a conditional distribution for every $\alpha\in A$ & Defintion \ref{def:cprob_pset}\\
+ Uniform conditional probability & $\prob{P}_A^{\RV{Y}|\RV{X}}$ & Arbitrary Markov kernel $X\kto Y$ that is a conditional distribution for every $\alpha\in A$ & Definition \ref{def:cprob_pset}\\
  Kernel product & $\kernel{K}\kernel{L}$ & The Markov kernel given by $(A|x)\mapsto \int_Y \kernel{L}(A|y)\kernel{K}(\mathrm{d}y|x)$ & Definition \ref{def:kproduct}\\
  Semidirect product & $\kernel{K}\odot \kernel{L}$ & The Markov kernel given by $(A\times B|x)\mapsto \int_A \kernel{L}(B)|y)\kernel{K}(\mathrm{d}y|x)$ & Definition \ref{def:copyproduct}\\
  Permuted sequence & $\RV{Y}_\rho$ & Given $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$, $\RV{Y}_\rho:=(\RV{Y}_{\rho(i)})_{i\in\mathbb{N}}$ & \\
@@ -248,7 +248,7 @@ The assumption of \emph{precedent} is the assumption that ``whatever we can do h
  Erase map & $\mathrm{Del}_X$, $\stopper{0.5}$ & Markov kernel associated with the trivial variable $*_X:X\to \{*\}$ & Definition \ref{def:erase}\\
  Swap map & $\mathrm{Swap}_{XY}$, $\swap{0.5}$ & Markov kernel associated with the function that swaps its inputs $(x,y)\mapsto (y,x)$ & Definition \ref{def:swap}\\
  Swap according to permuation & $\mathrm{Swap}_\rho$ & Markov kernel that swaps inputs in a manner specified by permuation $\rho$ &\\
- Copy map & $\mathrm{Copy}_{X}$, $\splitter{0.5}$ & Markov kernel associated with the function that makes two copies of its inputs & Definition \ref{def:copy}\\
+ Copy map & $\mathrm{Copy}_{X}$, $\splitter{0.2}$ & Markov kernel associated with the function that makes two copies of its inputs & Definition \ref{def:copy}\\
 \hline
 \addlinespace
 \multicolumn{4}{|l|}{\textbf{Probability sets and decision models}}\\
