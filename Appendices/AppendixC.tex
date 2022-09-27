@@ -109,3 +109,84 @@ Thus, unless $k^y_{tzx}=k^y_{t'zx}$ for all $t,t'$ and $z$, Eq. \eqref{eqApp:pol
 \end{align}
 by the assumption that this probability is dominated by the Lebesgue measure. On the other hand, by assumption, the set $B:=\{g^t_{z'}|\text{Eq. \eqref{eqApp:polynomial} is satisfied}\}$ has measure 1. Thus we conclude that $k^y_{tzx}=k^y_{t'zx}$ with probability 1. That is, $\RV{Y}_i\CI_{\prob{P}_{C,\RV{H}\in\mathbb{N}}}^e \RV{T}_i|(\RV{H},\RV{Z}_i,\RV{X}_i,\text{id}_C)$. By contraction with $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in\mathbb{N}}} \RV{Z}_i|(\RV{H},\RV{X}_i,\text{id}_C)$, we have $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in\mathbb{N}}} (\RV{Z}_i,\RV{T}_i)|(\RV{H},\RV{X}_i,\text{id}_C)$. Because we already know $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i\RV{Z}_i}$ are identical for all $i$, this implies $\prob{P}_{\alpha,\RV{H}\in N}^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical response functions.
 \end{proof}
+
+\subsection{Individual level conditionally independent and identical responses}\label{app:il_ciir}
+
+
+\begin{replemma}{lem:ind_to_cc}
+Given sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob{P}_\alpha^{\RV{Y}|\RV{WDI}}$ IO contractible over $\RV{W}$, if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\text{id}_C)|(\RV{W},\RV{D})$ and for any $j\in I$, $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0$, then there is some $\RV{W}'$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{W}'\RV{D}}$ is also IO contractible over $\RV{W}$.
+\end{replemma}
+
+\begin{proof}
+Fix arbitrary $\nu\in \Delta(I^{\mathbb{N}})$ such that $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i} \gg \nu$. By assumption of IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{WDI}}$ and Theorem \ref{th:ciid_rep_kernel}
+\begin{align}
+    \prob{P}_C^{\RV{Y}|\RV{WDI}} &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_1}\\
+    &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_2}
+\end{align}
+Where $\Pi_{D,i}:D^{\mathbb{N}}\kto D$ projects the $i$th coordinate, and similarly for $\Pi_{Y,i}$.
+
+In particular, for any $i\in \mathbb{N}$, $j\in I$, this holds for some $\nu$ such that $\nu(\Pi_{Y,i}^{-1} (j))=1$ and by extension for any finite $A\subset \mathbb{N}$ we can find $\nu$ such that $\nu(\Pi_{Y,i}^{-1} (j))=1$ for all $i\in A$, $j\in I$. Thus, for any $n\in \mathbb{N}$
+\begin{align}
+    \prob{P}_C^{\RV{Y}_{[n]}|\RV{W}\RV{D}_{[n]}\RV{I}_{[n]}} &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_3}\label{eq:follows_from_determinism}\\
+    &\overset{\prob{P}_C}{\cong} \tikzfig{index_independence_4}\label{eq:follows_from_equality}
+\end{align}
+
+where Equation \eqref{eq:follows_from_determinism} follows from Theorem \ref{th:fong_det_kerns} and Equation \eqref{eq:follows_from_equality} follows from the fact that Equation \eqref{eq:follows_from_determinism} holds for arbitrary $j\in I$.
+
+Thus by Lemma \ref{lem:infinitely_extended_kernels}
+\begin{align}
+    \prob{P}_C^{\RV{Y}|\RV{WD}} &= \tikzfig{index_independence_5}
+\end{align}
+Applying Theorem \ref{th:ciid_rep_kernel}, $\prob{P}_C^{\RV{Y}|\RV{WD}}$ is IO contractible over $\RV{W}$.
+\end{proof}
+
+
+\begin{reptheorem}{th:ind}
+Given a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ countable, if there is some $\RV{J}$ such that for each $\alpha$
+\begin{align}
+    \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i} &= \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i} &\forall i,j\in \mathbb{N}\\
+    \RV{Y}_i&\CI^e_{\prob{P}_C} (\RV{I}_{\{i\}^{\complement}},\RV{D}_{\{i\}^{\complement}})|(\RV{J},\RV{I}_i,\RV{D}_i)
+\end{align}
+and
+\begin{align}
+    &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C\\
+    &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C\\
+    &\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}\\
+    &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
+\end{align}
+then $\prob{P}_C^{\RV{Y}|\RV{JD}}$ is IO contractible over $\RV{J}$.
+\end{reptheorem}
+
+\begin{proof}
+For any $\alpha\in C$
+\begin{align}
+    \prob{P}_\alpha^{\RV{YJ}|\RV{I}} &= \tikzfig{kernel_fac_with_idents}\\
+    &= \tikzfig{kernel_fac_with_idents_indepped}
+\end{align}
+
+Define $\kernel{Q}$ by $\alpha\mapsto \prob{P}_\alpha$ and $\kernel{Q}^{\cdot|\cdot\text{id}_C}$ by $\alpha\mapsto \prob{P}_\alpha^{*}$ and $\kernel{Q}^{\text{id}_C}$ is an arbitrary distribution in $\Delta(C)$ with full support. Note that the support of $\kernel{Q}^{\RV{IDYJ}}$ is the union of the support of $\prob{P}^{\RV{IDYJ}}_\alpha$ for all $\alpha$. Then
+\begin{align}
+    \kernel{Q}^{\RV{YJ}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_fac_with_idents_kernelised}
+\end{align}
+
+By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$, it is also the case that
+\begin{align}
+    \kernel{Q}^{\RV{Y}|\RV{ID}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents}\\
+    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_indepped}\\
+    &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_subbed}
+\end{align}
+But
+\begin{align}
+    \kernel{Q}^{\RV{Y}|\RV{ID}}=\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{Y}|\RV{ID}}\kernel{Q}^{\text{id}_C}(\alpha)\\
+    &= \prob{P}_C^{\RV{Y}|\RV{ID}}\\
+    \implies \tikzfig{kernel_Q_fac_with_idents_subbed} &= \prob{P}_C^{\RV{Y}|\RV{ID}}
+\end{align}
+
+Furthermore, by assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C$, so there is some $\kernel{K}:C\kto Y\times W$ such that
+\begin{align}
+    \kernel{Q}^{\RV{YJ}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_indepped}\\
+    \implies \prob{P}_C^{\RV{YJ}|\RV{ID}} &= \tikzfig{kernel_Q_fac_with_idents_swapped}\\
+    &= \tikzfig{kernel_P_indep}
+\end{align}
+Then by Lemma \ref{lem:ind_to_cc}, $\prob{P}_C^{\RV{Y}|\RV{JD}}$ is IO contractible over $\RV{J}$.
+\end{proof}
