@@ -636,7 +636,7 @@ While Equation \eqref{eq:comb_insert_complicated} is a well-formed string diagra
 Formal definitions of combs follow. As with conditional probabilities, a \emph{uniform} $n$-comb $\prob{P}_C^{\RV{Y}_{[n]}\combbreak \RV{X}_{[n]}}$ is a Markov kernel that satisfies the definition of an $n$-comb for each $\alpha\in C$.
 
 \begin{definition}[$n$-Comb]\label{def:uniform_comb}
-Given a probability space $(\prob{P},\Omega,\sigalg{F})$ with variables $\RV{Y}_i:\Omega\to Y$, $\RV{D}_i:\Omega\to D$ for $i\in [n]$ and $\RV{W}:\Omega\to W$, the uniform $n$-comb $\prob{P}^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}|\RV{W}}:W\times D^n\kto Y^n$ is the Markov kernel given by the recursive definition\todo{image alignment}
+Given a probability space $(\prob{P},\Omega,\sigalg{F})$ with variables $\RV{Y}_i:\Omega\to Y$, $\RV{D}_i:\Omega\to D$ for $i\in [n]$ and $\RV{W}:\Omega\to W$, the uniform $n$-comb $\prob{P}^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}|\RV{W}}:W\times D^n\kto Y^n$ is the Markov kernel given by the recursive definition
 \begin{align}
     \prob{P}^{\RV{Y}_{1}\combbreak \RV{D}_{1}|\RV{W}} &= \prob{P}^{\RV{Y}_1|\RV{D}_1\RV{W}}\\
     \prob{P}^{\RV{Y}_{[m]}\combbreak \RV{D}_{[m]}|\RV{W}} &= \tikzfig{comb_inductive}
