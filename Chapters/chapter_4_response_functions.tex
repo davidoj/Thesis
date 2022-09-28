@@ -543,53 +543,17 @@ Then the model exhibits a kind of ``backdoor adjustment''. Specifically, for $i>
 
 Equation \eqref{eq:backdoor} is identical to the backdoor adjustment formula \citep[Chap. 1]{pearl_causality:_2009} for an intervention on $\RV{D}_1$ targeting $\RV{Y}_1$ where $\RV{X}_1$ is a common cause of both.
 
-\subsection{No causes in, no causes out}\label{sec:nci_nco}
+\subsection[No causes in, no causes out]{Causal assumptions and distinguishing inputs from outputs}\label{sec:nci_nco}
 
 Example 1 above shows that the assumption of a CIIR sequence applies to an exchangeable probability model with no real alternative options or anything else ``causal''. As a result, one might wonder whether the assumption of CIIR sequences really is a ``causal'' assumption (we have no clear idea what does or does not constitute a causal assumption here, we're merely noting that an assumption that applies to regular probability distributions seems like it might not fit the bill). The apparent claim that CIIR sequences nonetheless allow us to draw causal conclusions might them (seemingly) run afoul of Cartwright's adage ``no causes in, no causes out'' \citep{cartwright_no_1994}.
-% \citep{cartwright_no_1994}.
-
-
 
 We have also supposed, in the background at least, that a relation between the chosen option $\alpha$ and the distribution of (some) inputs $\prob{P}_\alpha^{\RV{D}}$ was known in advance. This seems much more like a causal assumption -- it really doesn't make sense to try to apply this assumption to a probability model with no option set.
 
 There is no obvious reason why the problem has to be this way, but it is certainly intuitively appealing to think about ``inputs'' that we already know how to control and ``outputs'' that we want to learn how to control from the given data. In fact, it is perhaps this intuitive appeal that led us to name the two sequences ``inputs'' and ``outputs'' respectively.
 
-If we are working this way, then we can postulate that there is a distinction between inputs and outputs encoded in the model that is independent of any joint distribution of inputs and outputs $\prob{P}_\alpha^{\RV{Y}_i\RV{D}_i|\RV{H}}$. In particular, we postulate that $\RV{D}_i$ is distinguished from $\RV{Y}_i$ by the fact that the degree to which we can control of $\RV{Y}_i$ improves as we observe more data, while the degree to which we can control $\RV{D}_i$ is already at a maximum and improves no further with additional data. A proper formalisation of this distinction between inputs and outputs is an open question.
+Given an assumption of this type, there seems to be a distinction we can draw between inputs and outputs beyond an arbitrary convention. In particular, this assumption suggests that that $\RV{D}_i$ is distinguished from $\RV{Y}_i$ by the fact that we know how to control $\RV{D}_i$ \emph{before} we've seen any data, but in the best case we will only know how to control $\RV{Y}_i$ \emph{after} reviewing the data. This distinction does not obviously always correspond to a ``causal'' direction. For example, we might have a clearer idea of how to prompt someone to go and exercise than we have for how to help them feel energetic, yet it's plausible that (under normal circumstances) feeling energetic causes people to engage in exercise.
 
-% \paragraph{Weaker assumptions}\label{pgph:weaker_assumptions}
-
-
-
-% Given a mixture of observations and experiments, exchange commutativity holds that every experimental pair can be swapped with every observational pair without changing anything important. A weaker assumption than this is that every experimental pair can be swapped with \emph{some} unknown observational pairs without changing anything important. 
-
-% More specifically, suppose that there are $m$ observations $(\RV{D}_i,\RV{Y}_i)_{i\in [m]}$ followed by $\mathbb{N}$ experiments $(\RV{D}_i,\RV{Y}_i)_{i\in (m,\infty)}$ and there is a variable $\RV{R}$ taking values in the set of functions $\mathbb{N}\to [n]$. Then, supposing $\RV{R}(\omega)\yields r$, we might assume that for all $i\in [n]$, $(\prob{P}_C,\RV{D}_{r^{-1}(i)},\RV{Y}_{r^{-1}(i)})$ is IO contractible. Defining $r_\rho:=i\mapsto r(\rho(i))$, this amounts to the assumption that for some finite permutation $\rho:\mathbb{N}\to\mathbb{N}$ such that $r_\rho=r$: 
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{Y}|\RV{D}\RV{R}}(A|d,r) &= \prob{P}_\alpha^{\RV{Y}_\rho|\RV{D}_\rho\RV{R}_\rho}(A|d,r)
-% \end{align}
-% That is, $\RV{R}$ divides the observations and the experiments into $n$ partitions such that swaps that keep all pairs in the same partition do not change the conditional probability of $\RV{Y}$ given $\RV{D}$. As an open question:
-% \begin{itemize}
-%     \item What other conditions are needed for $\prob{P}_\alpha^{\RV{Y}|\RV{RD}}$ to be exchange commutative?
-% \end{itemize}
-% The idea is that partial IO contractibility corresponds, under some conditions, to confounding by the components $\RV{R}_i$ of $\RV{R}$.
-
-
-
-% \subsubsection{Example: body mass index}
-
-% Given a sequential just-do model $(\prob{P}_C,(\RV{B},\RV{I}),\RV{Y})$ with $\RV{B}:=(\RV{B}_i)_{i\in M}$ representing body mass index of individual $\RV{I}_i$ and $\RV{Y}:=(\RV{Y}_i)_{i\in M}$ representing health outcomes of interest for the same individual, \citet{hernan_does_2008} noted that there are multiple different choices that can influence an individual's body mass index $\RV{B}_i$ in the same way. Thus $\RV{YI}\CI^e_{\prob{P}_C} \text{id}_C|\RV{B}$ might generally be rejected, and so there may be no uniform conditional $\prob{P}_C^{\RV{Y}|\RV{IB}}$. In this case, $\prob{P}_C^{\RV{Y}|\RV{IB}}$ cannot be IO contractible because it doesn't exist.
-
-% Suppose instead a model $(\prob{P}_C,(\RV{D},\RV{I}),(\RV{B},\RV{Y}))$ is given, with $\RV{D}=(\RV{D}_i)_{i\in M}$ representing ``decisions'', appropriately fine-grained to satisfy
-% \begin{align}
-%     &\RV{YBI}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}\\
-%     &\RV{YBI}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C
-% \end{align}
-% and $\prob{P}_C^{\RV{YB}|\RV{ID}}$ IO contractible. Then by Theorem \ref{th:cc_ind_treat} $\prob{P}_C^{\RV{Y}|\RV{BD}}$ is also IO contractible. In general, there may be some $U\subset H$ such that for any $h\in U$ 
-% \begin{align}
-%     \prob{P}_C^{\RV{Y}_i|\RV{B}_i\RV{D}_i\RV{H}}(y|b,d,h) &= \prob{P}_C^{\RV{Y}_i|\RV{B}_i\RV{H}}(y|b,h)\label{eq:conditional_conditional_independence}
-% \end{align}
-% then, \emph{conditioning on }$\RV{H}\in U$, the resulting $\prob{P}_{C,\RV{H}\in U}^{\RV{Y}|\RV{B}}$ is IO contractible.
-% \todo[inline]{Defining conditioning}
-% So it may be possible to derive the fact that there is a independent and identical response conditional $\prob{P}_{C,\RV{H}\in U}^{\RV{Y}_i|\RV{H}\RV{B}_i}$ if $\RV{H}\in U$ is implied by available data, even if it is not assumed outright.
+Nevertheless, prior knowledge of this type suggests that the inputs $\RV{D}_i$ are susceptible to influence by at least one person who doesn't know exactly how the outputs depend on the inputs -- namely, the decision maker. We will investigate in the following chapter a situation where prior knowledge like this (though not this exactly) may facilitate a conclusion of a CIIR input-output from a weaker starting assumption.
 
 \section[Data-dependent inputs]{Conditionally independent and identical response functions with data-dependent inputs}\label{sec:data_dependent}
 
