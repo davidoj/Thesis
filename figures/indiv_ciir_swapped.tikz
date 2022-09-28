@@ -1,15 +1,15 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (-4.5, 2.5) {$\prob{P}_\alpha^{\RV{ID}|\RV{J}}$};
-		\node [style=small kernel tikzit] (1) at (1.25, 2.5) {$\prob{P}_C^{\RV{Y}|\RV{IDJ}}$};
-		\node [style=small kernel tikzit] (2) at (-1.5, 2.5) {$\text{swap}_{\rho^{-1}}$};
-		\node [style=small kernel tikzit] (3) at (3.75, 2.5) {$\text{swap}_{\rho}$};
-		\node [style=none] (4) at (0.75, 2.5) {};
-		\node [style=none] (5) at (0.75, 2) {};
-		\node [style=RLabel tikzit] (6) at (5.5, 2.5) {$\RV{Y}'$};
-		\node [style=Llabel tikzit] (7) at (-6.75, 2.5) {$\RV{J}$};
-		\node [style=copymap tikzit] (8) at (-6, 2.5) {};
-		\node [style=none] (9) at (-3.75, 1.5) {};
+		\node [style=small kernel tikzit] (0) at (-3.5, 0.5) {$\prob{P}_\alpha^{\RV{ID}|\RV{J}}$};
+		\node [style=small kernel tikzit] (1) at (3.25, 0.5) {$\prob{P}_C^{\RV{Y}|\RV{IDJ}}$};
+		\node [style=small kernel tikzit] (2) at (-0.5, 0.5) {$\text{swap}_{\rho^{-1}}$};
+		\node [style=small kernel tikzit] (3) at (6.25, 0.5) {$\text{swap}_{\rho}$};
+		\node [style=none] (4) at (2.75, 0.5) {};
+		\node [style=none] (5) at (2.75, 0) {};
+		\node [style=RLabel tikzit] (6) at (8, 0.5) {$\RV{Y}'$};
+		\node [style=Llabel tikzit] (7) at (-5.75, 0.5) {$\RV{J}$};
+		\node [style=copymap tikzit] (8) at (-5, 0.5) {};
+		\node [style=none] (9) at (-2.75, -0.5) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (7) to (8);
