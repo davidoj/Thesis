@@ -24,14 +24,14 @@ The assumption of \emph{precedent}, explored in  is motivated by the general ide
 
 Individual-level CIIR sequences are a weaker version of the assumption of CIIR sequences explored in Section \ref{sec:ilevel_ccontract}. Here, we suppose each element of the sequence has a unique identifier. Importantly, it must be possible for any element of the sequence to receive any identifier, which rules out (for example) identifying the first element with ``1'' and the second element with ``2'' and so forth. We then make the assumption that we can identify a CIIR sequence of (input, identifier)-output pairs -- where, we stress, \emph{the identifier is one of the ``inputs''}. This rules out the assumption that the sequence of (identifier, input) pairs has infinite support -- in fact, by assumption, each such pair can appear only once. 
 
-The assumption of individual level CIIR sequences implies that each possible value of the identifier is attached to a ``fixed but unknown'' response function. One can therefore view the assumption of individual level CIIR sequences as similar to the assumption of potential outcomes, where the ``potential outcomes'' are bound to the identifier variable. We also offer an alternative interpretation of this assumption as a kind of ``order independence''. In particular, we argue that this assumption may be reasonable if an investigator believes that the following experiments are essentially the same:
-\begin{itemize}
-    \item Run the experiment as normal
-    \item Run the experiment as normal to the point of determining the vector of (input, identifier) pairs but not the outputs, shuffle the vector of (input, identifier) pairs without altering which input goes with which identifier, then continue the experiment as normal 
-\end{itemize}
-That is, \emph{once we know how inputs and identifiers correspond}, the outputs do not further depend on the order in which they appear.
+% The assumption of individual level CIIR sequences implies that each possible value of the identifier is attached to a ``fixed but unknown'' response function. One can therefore view the assumption of individual level CIIR sequences as similar to the assumption of potential outcomes, where the ``potential outcomes'' are bound to the identifier variable. We also offer an alternative interpretation of this assumption as a kind of ``order independence''. In particular, we argue that this assumption may be reasonable if an investigator believes that the following experiments are essentially the same:
+% \begin{itemize}
+%     \item Run the experiment as normal
+%     \item Run the experiment as normal to the point of determining the vector of (input, identifier) pairs but not the outputs, shuffle the vector of (input, identifier) pairs without altering which input goes with which identifier, then continue the experiment as normal 
+% \end{itemize}
+% That is, \emph{once we know how inputs and identifiers correspond}, the outputs do not further depend on the order in which they appear.
 
-In Theorem \ref{th:cc_ind_treat} we prove that, given the assumption of individual level CIIR sequences, an experiment in which we further accept that the identifiers themselves are exchangeable in the appropriate sense \emph{and} inputs are completely under the decision maker's control, then we also conclude that the input-output sequence (excluding the identifiers) is also related by a sequence of conditinally independent and identical responses. We argue that a number of previously informal arguments for ``interchangeability of patients'' implying \emph{ignorability} in potential outcomes models are captured by Theorem \ref{th:cc_ind_treat}.
+% In Theorem \ref{th:cc_ind_treat} we prove that, given the assumption of individual level CIIR sequences, an experiment in which we further accept that the identifiers themselves are exchangeable in the appropriate sense \emph{and} inputs are completely under the decision maker's control, then we also conclude that the input-output sequence (excluding the identifiers) is also related by a sequence of conditinally independent and identical responses. We argue that a number of previously informal arguments for ``interchangeability of patients'' implying \emph{ignorability} in potential outcomes models are captured by Theorem \ref{th:cc_ind_treat}.
 
 \section{Causal Bayesian networks}\label{sec:how_to_cbn}
 
@@ -361,41 +361,6 @@ Technically, we could consider an $\epsilon$-enlargement of the set of solutions
 
 Assumptions similar to Eq. \eqref{eq:lebesgue_dom} appear in two other capacities in the causal inference literature. First, in justifications for \emph{causal faithfulness} it is assumed that, if we have variables ordered according to their structural causal relationships then an assumption of this type holds \citet{meek_strong_1995}. Secondly, according to the principle of \emph{independence of conditionals}, researchers have proposed a number of measures of ``genericity'' that are maximised when conditionals are computed in a manner compatible with their structural causal relationships \citep{lemeire_replacing_2013}. The common thread here is that an assumption like Eq. \eqref{eq:lebesgue_dom} is considered to be implied by the direction of causal relationships in a structural model. Our result is somewhat different -- we start with the assumption of a generic relationship between conditionals, rather than a causal direction, and draw a conclusion of identical responses. These approaches might be combined -- under the right conditions, assuming or inferring a causal direction might be sufficient to apply Theorem \ref{th:det_obs_to_cons}, though exactly when such reasoning is valid is an open question.
 
-% Theorem \ref{th:preempt_diverse} is a more plausibly useful theorem than \ref{th:det_obs_to_cons}. It shows that, if we believe that $\prob{P}_\alpha^{\RV{Y}_0}$ is preempted by $\prob{P}_\alpha^{\RV{Y}_{-\mathbb{N}}}$, and after conditioning on some $\RV{V}$ the set of distributions of preempting actions is suitably diverse, then we can conclude conditional independence in the consequences of the decision maker's actions from conditional independence in the given observations.
-
-% \begin{theorem}\label{th:preempt_diverse}
-% Suppose, given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{-i\in \{0\}\cup\mathbb{N}}$, $\RV{D}:=(\RV{D}_i)_{-i\in \{0\}\cup\mathbb{N}}$ and for each $i$, $(\RV{X}_i,\RV{V}_i,\RV{Z}_i) = f\circ \RV{Y}_i$ for some $f$ with both $D$ and $X$ denumerable, $\prob{P}_\alpha^{\RV{Y}_0}$ is preempted by $\prob{P}_\alpha^{\RV{Y}_{-\mathbb{N}}}$ with respect to $\RV{D}$ and and some $\RV{W}$. Let $\RV{H}$ be the directing random measure of the input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ (Definition \ref{def:dir_rand_meas}). If for each $h\in H$ and each $x\in X$, $i<0$ there is some set of real-valued weights $\{a_i|i\in V\}$ such that
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{Z}_i|\RV{H}\RV{D}_i\RV{X}_i}(\cdot|h,d,\cdot) &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{Z}_i|\RV{H}\RV{V}_i\RV{X}_i}(\cdot|h,j,\cdot)
-% \end{align}
-% and if for all $i$, $\RV{Z}_i\CI^e_{\prob{P}_C} \RV{V}_i|(\RV{X}_i,\RV{H},\text{id}_C)$ then $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is IO contractible over $\RV{H}$.
-% \end{theorem}
-
-% \begin{proof}
-% By assumption
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{Z}_0|\RV{HD}_0\RV{X}_0}(A|h,d,x) &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{HD}_{-1}\RV{X}_{-1}}(A|h,d,x)
-% \end{align}
-% and also by assumption, for all $A,h,d,x$:
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{D}_i\RV{X}_{-1}}(A|h,d,x) &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{V}_{-1}\RV{X}_{-1}}(A|h,j,x)\\
-%         &= \sum_{j\in V} a_j \prob{P}_\alpha^{\RV{X}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)&\text{by }\RV{Z}_{-1}\CI^e_{\prob{P}_C} \RV{V}_{-1}|(\RV{X}_{-1},\RV{H},\text{id}_C)\\
-%     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)\sum_{j\in V} a_j\\
-%     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)&\text{ by taking }A=Z
-% \end{align}
-% thus
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{Z}_0|\RV{HD}_0\RV{X}_0}(A|h,d,x) &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{D}_{-1}\RV{X}_{-1}}(A|h,d,x)\\
-%     &= \prob{P}_\alpha^{\RV{Z}_{-1}|\RV{H}\RV{X}_{-1}}(A|h,x)\\
-%     &= \prob{P}_\alpha^{\RV{Z}_0|\RV{H}\RV{X}_0}(A|h,x)\label{eq:indep_of_d}
-% \end{align}
-% Furthermore, by assumption $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{Z}_{\{0\}^C},\RV{D}_{\{0\}^C}|(\RV{H},\RV{D}_0,\RV{X}_0,\text{id}_C)$ and $\RV{Z}_0\CI^e_{\prob{P}_C} \RV{D}_{0}|(\RV{H},\RV{D}_0,\text{id}_C)$ by Equation \eqref{eq:indep_of_d}, thus $\prob{P}_\alpha^{\RV{Z}|\RV{HX}}$ is IO contractible over $\RV{H}$.
-% \end{proof}
-
-% Note that this is a result similar to \citet{peters_causal_2016}, where our variable $\RV{V}$ is understood to be analogous to the environment $e$ in that work.
-
-% There is a substantial literature that aims to draw causal conclusions from observational data by first applying a graph learning algorithm to a sequence of observational data, and then using the graph obtained as a DAG for a causal Bayesian network. Earlier examples treat the graph learning problem as a discrete optimization problem and include the PC algorithm and the Causal Inference Algorithm \citet[Ch. 5\& 6]{spirtes_causation_1993} and Greedy Equivalent Search \citet{chickering_optimal_2003,chickering_learning_2002}. More recent examples pose graph learning as a continuous optimization problem \citet{zheng_dags_2018,ng_graph_2019}. Underpinning all of these approaches are a number of key assumptions, which include the assumption of \emph{faithfulness} -- that missing edges in the learned graph correspond to missing edges in the appropriate causal DAG -- and often also the assumption of \emph{causal sufficiency}, which is the assumption that there are ``no relevant unobserved variables''. Together, these assumptions imply that certain conditional independences in the observational data sequence imply the same conditional independences in the data produced under intervention. One open question we raise is: can this implication also be understood as a special case of the interventional data being preempted by the observational data?
-
 \section{Potential Outcomes models}\label{sec:potential_outcomes}
 
 Potential outcomes is another popular framework for modelling causal problems. There are two key differences between the potential outcomes approach and the causal Bayesian network approach. Potential outcomes models are sequential and they feature no notion of ``intervention''. A third difference relates to the possibility of expressing ``counterfactual'' statements, (although this difference may be contingent on the particular manner we use to unroll a causal Bayesian network).
@@ -425,17 +390,17 @@ $(\prob{P}_C,\Omega,\sigalg{F})$ is a potential outcomes model with respect to $
 \end{definition}
 
 \begin{theorem}
-A potential outcomes model $(\prob{P}_C,\Omega,\sigalg{F})$ with respect to $\RV{D}_i:\Omega\to D$, $\RV{Y}_i:\Omega\to Y$ and $\RV{Y}^D_i:\Omega\to Y^D$, $\RV{Y}^D_i$ has $\RV{Y}\CI_{\prob{P}_C}^e\text{id}_C|(\RV{D},\RV{Y}^D)$ and $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$ is IO contractible (with respect to $*$).
+A potential outcomes model $(\prob{P}_C,\Omega,\sigalg{F})$ with respect to $\RV{D}_i:\Omega\to D$, $\RV{Y}_i:\Omega\to Y$ and $\RV{Y}^D_i:\Omega\to Y^D$, $\RV{Y}^D_i$ features the conditional independence $\RV{Y}\CI_{\prob{P}_C}^e\text{id}_C|(\RV{D},\RV{Y}^D)$, and $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$ is IO contractible (with respect to $*$).
 \end{theorem}
 
 \begin{proof}
-IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{Y}^D\RV{D}}$ follows from the fact that $\RV{Y}_i$ is deterministic given $\RV{Y}^D_i$ and $\RV{D}_i$, and thus $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^{\complement}},\RV{Y}_{\{i\}^{\complement}},\text{id}_C)|(\RV{Y}^D_{i},\RV{D}_i)$. Furthermore, for all $i,j$
+IO contractibility of  follows from the fact that $\RV{Y}_i$ is deterministic given $\RV{Y}^D_i$ and $\RV{D}_i$, and thus $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^{\complement}},\RV{Y}_{\{i\}^{\complement}},\text{id}_C)|(\RV{Y}^D_{i},\RV{D}_i)$. Furthermore, for all $i,j,\alpha$
 \begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i} &= \prob{P}_C^{\RV{Y}_j|\RV{Y}^D_j\RV{D}_j}
+    \prob{P}_\alpha^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i} &= \prob{P}_\alpha^{\RV{Y}_j|\RV{Y}^D_j\RV{D}_j}
 \end{align}
-hence the $\prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}$ are independent and identical response functions conditional on $*$.
+hence for all $\alpha$, $(\RV{D},\RV{Y})$ is a CIIR sequence of inputs and outputs, and hence $\prob{P}_\alpha^{\RV{Y}|\RV{Y}^D\RV{D}}$ is IO contractible for all $\alpha$.
 
-From Definition \ref{def:potential_outcomes}, $\prob{P}_\alpha^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}$ is the same for all $\alpha\in C$, and by the argument above,
+Furthermore, from Definition \ref{def:potential_outcomes}, $\prob{P}_\alpha^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}$ is the same for all $\alpha\in C$, and by the argument above,
 \begin{align}
     \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i\RV{Y}^D_{\{i\}^{\complement}}\RV{D}_{\{i\}^{\complement}}} &= \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}\otimes \mathrm{Del}_{Y^{|D\times A\setminus\{i\}|}\times D^{|A|}}
 \end{align}
@@ -446,10 +411,10 @@ hence
 hence $\RV{Y}\CI_{\prob{P}_C}^e\text{id}_C|(\RV{D},\RV{Y}^D)$.
 \end{proof}
 
-A key theorem of potential outcomes is that, if $\RV{D}$ is ``strongly ignorable'' with respect to $\RV{Y}^D$, then the average treatment effect is identified. ``Strong ignorability'' here means that the probability $\prob{P}_\alpha^{\RV{D}_i}(d)>0$ for each $d$ and for each choice $\alpha$ the inputs $\RV{D}$ are independent of the potential outcomes $\RV{Y}^D$ given the covariates and the choice. We reproduce this theorem in terms of IO contractibility. Note that Theorem \ref{th:potential_outcomes_identifiability} applies to potential outcomes models with sets of choices, rathter than simply to single probability distributions.
+A key theorem of potential outcomes is that, if $\RV{D}$ is ``strongly ignorable'' with respect to $\RV{Y}^D$, then the average treatment effect is identified. ``Strong ignorability'' here means that the probability $\prob{P}_\alpha^{\RV{D}_i}(d)>0$ for each $d$ and for each choice $\alpha$ the inputs $\RV{D}$ are independent of the potential outcomes $\RV{Y}^D$ given the covariates and the choice. We reproduce this theorem in terms of IO contractibility. Note that Theorem \ref{th:potential_outcomes_identifiability} applies to our generalisation of potential outcomes to decision models, not only to probability distributions featuring potential outcomes.
 
 \begin{theorem}[Potential outcomes identifiability]\label{th:potential_outcomes_identifiability}
-If $(\prob{P}_C,\Omega,\sigalg{F})$ is a potential outcomes model with respect to $\RV{Y}^D:=(\RV{Y}^D_i)_{i\in \mathbb{N}}$, $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$ and $(\RV{D}_i)_{i\in \mathbb{N}}$, each value of $D$ occurs infinitely often with probability 1, there is some $\RV{X}:= (\RV{X}_i)_{i\in \mathbb{N}}$ such that $\prob{P}_\alpha^{\RV{Y}^D\RV{X}}$ is exchangeable for all $\alpha$ and $\RV{D} \CI^e_{\prob{P}_C} \RV{Y}^D | (\RV{X},\RV{Y},\text{id}_C)$ and for each $\alpha$ $\prob{P}_\alpha^{\RV{D}}$ is absolutely continuous with respect to some exchangeable distribution in $\Delta(D^{\mathbb{N}})$, then there is some $\RV{W}$ such that for all $\alpha$ $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ is IO contractible over $\RV{W}$.
+Suppose $(\prob{P}_C,\Omega,\sigalg{F})$ is a potential outcomes model with respect to $\RV{Y}^D:=(\RV{Y}^D_i)_{i\in \mathbb{N}}$, $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$ and $\RV{D}:=(\RV{D}_i)_{i\in \mathbb{N}}$, and further suppose there is some $\RV{X}:= (\RV{X}_i)_{i\in \mathbb{N}}$ such that $\prob{P}_\alpha^{\RV{Y}^D\RV{X}}$ is exchangeable for all $\alpha$, $\RV{D} \CI^e_{\prob{P}_C} \RV{Y}^D | (\RV{X},\RV{Y},\text{id}_C)$, $(\RV{D},\RV{X})$ is infinitely supported and for each $\alpha$ $\prob{P}_\alpha^{\RV{DX}}$ is absolutely continuous with respect to some exchangeable distribution in $\Delta((D\times X)^{\mathbb{N}})$. Then there is some $\RV{W}$ such that for all $\alpha$ $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ is IO contractible over $\RV{W}$.
 \end{theorem}
 
 \begin{proof}
@@ -462,314 +427,221 @@ By exchangeability of $\prob{P}_\alpha^{\RV{Y}^D\RV{X}}$, $\prob{P}_\alpha^{\RV{
 IO contractibility of $\prob{P}_\alpha^{\RV{Y}|\RV{WXD}}$ over some $\RV{W}$ follows from Theorem \ref{lem:exch_prod_ciid}.
 \end{proof}
 
-% \subsection{Counterfactual statements}\label{sec:counterfactual_statements}
+\subsection{Justifying identifiability assumptions}
 
-% \section{Weaker assumptions than IO contractibility}\label{sec:weaker_assumptions}
+Theorem \ref{th:potential_outcomes_identifiability} comes with many conditions. The infinite support condition is familiar, and allows us to identify an observed variable that corresponds to ``the true distribution of $\RV{Y}_i$ given $(\RV{X}_i,\RV{D}_i)$. The exchangeable domination condition is used in Theorem \ref{lem:exch_prod_ciid}, and it is likely stronger than necessary.
 
-% The results so far apply to purely observational models or to models where every ``input'' in the sequence is fixed at the point of choosing $\alpha$ (or a fixed random function is chosen at this point). Most of the interest in causal inference is how to use observational data -- which is plentiful -- to deduce consequences of choices. Suppose in the following that superscript ``$o$'' refers to observational variables (obtained by some measurement procedure not responsive to choices) and ``$v$'' refers to interventional variables (obtained by some measurement procedure responsive to choices). That is $\RV{Y}^o:=(\RV{Y}_i^o)_{i\in \mathbb{N}}$ is a sequence of observational variables, $\RV{Y}^v$ a sequence of interventional variables and $\RV{Y}^{o,v}:=(\RV{Y}^o_i,\RV{Y}^v_i)_{i\in\mathbb{N}}$ is a mixed sequence of both observational and interventional variables. $\RV{Y}_i^o$ and $\RV{Y}_i^v$ are assumed to take values in the same set $Y$.
+We will focus on the remaining two assumptions. First, the assumption that $\prob{P}_\alpha^{\RV{Y}^D\RV{X}}$ is exchangeable for all $\alpha$, and secondly the assumption that is sometimes called ``ignorability'': $\RV{D} \CI^e_{\prob{P}_C} \RV{Y}^D | (\RV{X},\RV{Y},\text{id}_C)$. What justifies these assumptions?
 
-% One approach to bridging the gap between observations and interventions is to assume ``causal sufficiency'', which is tantamount (in the data-independent case) to assuming IO contractibility of $\prob{P}_C^{\RV{Y}^{o,v}|\RV{X}^{o,v}\RV{D}^{o,v}}$ with $\RV{D}^v$ responsive to choices and $\RV{X}^v$ unresponsive (see Example \ref{pgph:backdoor}). As discussed, this is rarely a reasonable assumption -- it implies interchangeability between observational and interventional samples.
 
-% A weaker assumption that is often adopted is to consider models satisfying IO contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{U}^{o,v}\RV{D}^{o,v}}$, where $\RV{U}^{o,v}$ is unobserved. That is, while $\RV{U}^{o,v}$ appears in the model, it is not associated with any measurement procedure. This model still asserts that $(\RV{U}^o_i,\RV{X}^o_i,\RV{Y}^o_i)$ triples are interchangeable with $(\RV{U}^v_i,\RV{X}^v_i,\RV{Y}^v_i)$ triples, but neither of these are measurement outcomes. On the other hand, $(\RV{D}_i^o,\RV{Y}_i^o)$ pairs are not generally interchangeable with $(\RV{D}_i^v,\RV{Y}_i^v)$.
 
-% Consider models that satisfy IO contractibility with respect to $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$, where no comment is made about whether $\RV{W}^{o,v}$ is observed, unobserved or some function of observed and unobserved variables. This is a generalisation of the class of models discussed in the previous paragraph.  In isolation, this assumption is not especially interesting -- for example, the support of $\RV{W}^{o}_i$ and $\RV{W}^v_i$ might be disjoint. Suppose also, then, that $W$ is finite and $\RV{W}^o_i$ has full support. This assumption amounts to the assumption that, no matter what choice is made, ``nothing truly new can be done'' (which we call ``Ecclesiastes' assumption''\footnote{Ecclesiastes 1:9 reads ``Everything that happens has happened before; nothing is new, nothing under the sun.''\citep{noauthor_holy_1995}}). More precisely, for any choice $\alpha\in C$ and any consequence $\RV{Y}_i^v$, there is a random subsequence $\RV{Q}$ of indices $(1,2,3,....)$ such that the distribution $\prob{P}_\alpha^{\RV{Y}^{o,v}}$ is unchanged by permutations that only swap elements in the sequence $(RV{Y}^o_\RV{Q},\RV{Y}^v_i)$.
 
-% \begin{theorem}\label{th:condit_exchange}
-% Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{Y}^{o,v}|\RV{W}^{o,v}}$ IO contractible, $W$ finite and $\prob{P}_C^{\RV{W}^o|\RV{H}}(w|h)>0$ for all $w,h$, define $q:W^{\mathbb{N}}\times W\to (\{*\}\cup \mathscr{P}(\mathbb{N})$ by 
+
+% \section{Individual-level response functions}\label{sec:ilevel_ccontract}
+
+% Exchangeability of potential outcomes, a key assumption in Theorem \ref{th:potential_outcomes_identifiability}, is hard to explain in terms of symmetries of experiments. Given some experiment producing a sequence of pairs $(\RV{D}_i,\RV{Y}_i)_{i\in\mathbb{N}}$, say where $\RV{D}_i$s are treatment administrations and $\RV{Y}_i$s are health outcomes, there's no obvious generic way to design a related experiment whose model is the same as the original except with potential outcomes $\RV{Y}^D_i$ interchanged. This is in sharp contrast to the assumption of exchangeability of observed outcomes - say, instead of the potential outcomes being exchangeable, we hold that the pairs $(\RV{D}_i,\RV{Y}_i)$ are exchangeable in the original experiment. Then we commit ourselves to the proposition that an alternative experiment which proceeds exactly as the first except, before being ``committed to memory'', the experimental results are interchanged should be modeled exactly as the first.
+
+% One could propose that exchangeability of potential outcomes in our example experiment corresponds to an \emph{exchangeability of patients}; perhaps, if we believe the model should be unchanged after we swap the order in which patients are seen, then we should accept that the model has exchangeable potential outcomes. However, it certainly does not follow from a potential outcomes model that exchangeability of patients implies exchangeability potential outcomes. If each patient were assumed to have a fixed but unknown vector of potential outcomes that is unchanged by the swapping operation, then swapping patients does indeed correspond to swapping potential outcomes. On the other hand, if we instead suppose that each index is associated with a fixed vector of potential outcomes regardless of any exchanges of patients that might be made, we could swap patients without altering the model and yet the potential outcomes would not in general be exchangeable.
+
+% We formalise the idea of ``potential outcomes attached to individuals'' as \emph{individual-level response functions}. We offer a formal definition of the assumption of individual-level response functions, but like exchangeability of potential outcomes it is difficult to understand fundamentally what this assumption entails, or what it might be motivated by. Nevertheless, it does allow us to separate the assumption of ``exchangeable potential outcomes'' into the assumption of individual level response functions and the assumption of exchangeability of individuals. We also use this notion to prove Theorem \ref{th:cc_ind_treat}. At a high level, it plays a similar role to Theorem \ref{th:potential_outcomes_identifiability}: it seems to justify causal identifiability in certain kinds of controlled experiments. However, the content of the two theorems is very different. While Theorem \ref{th:potential_outcomes_identifiability} concerns independence of the inputs and potential outcomes along with exchangeability of the potential outcomes, Theorem \ref{th:cc_ind_treat} says (informally) if:
+% \begin{itemize}
+%     \item There are individual-level response functions
+%     \item Individuals can be swapped without meaningfully altering the experiment
+%     \item Inputs are deterministically controlled by the choice
+%     \item There is only one choice for each value of the inputs
+% \end{itemize}
+% then the model is also IO contractible with respect to the inputs and the outputs only (ignoring the individual identifiers). In our view, this comes closer to a set of assumptions that are directly appliccable to a controlled experiment than those in Theorem \ref{th:potential_outcomes_identifiability}, and reflects \citet{kasy_why_2016}'s dictum that, for the identifiability of causal effects, a ``controlled experiment'' is sufficient.
+
+% \subsection{References to individual-level IO contractibility}
+
+% The role of individuals has often been mentioned in literature on causal inference. For example, \citet{greenland_identifiability_1986} explain
+% \begin{quote}
+%     Equivalence of response type may be thought of in terms of exchangeability of individuals: if the exposure states of the two individuals had been exchanged, the same data distribution would have resulted.
+% \end{quote}
+% Here, the idea of ``exchangeable individuals'' plays a role in the author's reasoning about model construction, but ``individuals'' are not actually referenced by the resulting model, and ``exchanging individuals'' does not correspond to a model transformation.
+
+% \citet{dawid_decision-theoretic_2020} suggests (with some qualifications) that ``post-treatment exchangeability'' for a decision problem regarding taking aspirin to treat a headache may be acceptable if the data are from
+% \begin{quote}
+%     A group of individuals whom I can regard, in an intuitive sense, as similar to myself, with headaches similar to my own.
+% \end{quote}
+% As in the previous work, the similarity of individuals involved in an experiment is raised when justifying particular model constructions, but the individuals are not referenced by the model.
+
+% \citet[pg. 98]{pearl_causality:_2009} writes
+% \begin{quote}
+%     Although the term unit in the potential-outcome literature normally stands for the identity of a specific individual in a population, a unit may also be thought of as the set of attributes that characterize that individual, the experimental conditions under study, the time of day, and so on – all of which are represented as components of the vector $u$ in structural modeling.
+% \end{quote}
+% Once again, the idea of an individual (or a particular set of conditions) is raised in the context of explaining modelling choices. Unlike the previous authors, Pearl introduces a vector $u$ to stand for the ``unit''. However, he subsequently assumes that $u$ is a sequence of \emph{independent samples} from some distribution. This seems to contradict an important feature of ``individuals'' or ``units'': individuals are typically supposed to be unique, a property that will usually not be satisfied by independently sampling from some distribution (at least, as long as the distribution is discrete).
+
+% Finally, \citet{rubin_causal_2005} writes:
+% \begin{quote}
+%     Here there are $N$ units, which are physical objects at particular points in time (e.g., plots of land, individual people, one person at repeated points in time).
+% \end{quote}
+% Note that Rubin's explanation of \emph{units} guarantees that they are unique: they are particular things at particular times. These units are associated with input-output functions (the \emph{potential outcomes}), which are later assumed to be exchangeable:
+% \begin{quote}
+%     the indexing of the units is, by definition, a random permutation of $1,..., N$, and thus any distribution on the science must be row-exchangeable
+% \end{quote}
+
+% Our proposition is: can the intuition that unique individuals are an important for the motivation for causal models, be captured by considering models that feature ``unique identifier'' variables referencing these unique individuals?
+
+% \subsection{Unique identifiers}
+
+% A sequence of \emph{unique identifiers} is a vector of finite or infinite length such that no two coordinates are equal. We are interested in models that assign positive probability to any particular coordinate having any particular value. This is straightforward in the finite case. In the infinite case, note that a vector of $|\mathbb{N}|$ unique values with an arbitrary entry $k$ in the $j$th coordinate can be obtained by starting with $(i)_{i\in \mathbb{N}}$ and then transposing $j$ with $k$. More generally, we consider infinite length sequences of unique identifiers to be elements of the set of finite permutations $\mathbb{N}\to\mathbb{N}$.
+
+% \begin{definition}[Measurable space of unique identifiers]
+% The measurable space of unique identifiers $(I,\sigalg{I})$ is the set $I$ of finite permutations $\mathbb{N}\to \mathbb{N}$ with the discrete $\sigma$-algebra $\sigalg{I}$.
+% \end{definition}
+
+% The set $I$ is countable, as it is the countable union of finite subsets (i.e. the permutations that leave all but the first $n$ numbers unchanged for all $n$).
+
+% \begin{definition}[Unique identifier]
+% Given a sample space $(\Omega,\sigalg{F})$, a \emph{sequence of unique identifiers} $\sigalg{I}:\Omega\to I$ is a variable taking values in $I$.
+% \end{definition}
+
+% The values of each coordinate of sequence of unique identifiers is just called an identifier (for obvious reasons, we don't call it an identity).
+
+% \begin{definition}[Identifiers]
+% Given $\RV{I}$, define the $i$-th \emph{identifier} $\RV{I}_i:=\mathrm{ev}(i,\RV{I})$, where $\mathrm{ev}:\mathbb{N}\times I\to \mathbb{N}$ is the evaluation map $(i,f)\mapsto f(i)$.
+% \end{definition}
+
+% For \emph{any} sample space $(\Omega,\sigalg{F})$ we can define a trivial $\sigalg{I}$ that maps every $\omega\in\Omega$ to $(1,2,3,....)=:(\mathbb{N})$. In this case, the identifiers are all known by the modeller at the outset. Using this sequence of identifiers renders exchange commutativity trivial.
+
+% \begin{example}\label{eq:il_exchc}
+% Given a sequential input-output model $(\prob{P}_C, (\RV{D},\RV{I}),\RV{Y})$ where $\RV{I}$ is the identifier variable $\omega\mapsto (\mathbb{N})$, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ commutes with exchange.
+
+% This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the identity, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ and $\text{Swap}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ will have no common support; the first will be supported on $\RV{I}\yields (\mathbb{N})$ only, and the second only on $\RV{I}\yields \rho(\mathbb{N})$.
+% \end{example}
+
+% We are particularly interested in models where exchange commutativity is not trivial, so we focus on the case where each identifier $\RV{I}_i$ has some non-zero probability of taking any value in $\mathbb{N}$. 
+
+% % \subsection{Individual-level IO contractibility and unobserved confounding}
+
+% % Our first result is that some models with individual-level IO contractibility can be seen as models with unobserved confounding. A model $\prob{P}_C$ with individual-level IO contractibility features a IO contractible $\prob{P}_C^{\RV{Y}|\RV{ID}}$ for a sequence of outputs $\RV{Y}$, inputs $\RV{D}$ and individual identifiers $\RV{I}$. A model with unobserved confounding features IO contractible $\prob{P}_C^{\RV{Y}|\RV{UD}}$ where $\RV{Y}$ and $\RV{D}$ are as before and $\RV{U}$ is an ``unobserved confounder''. They key difference between $\RV{I}$ and $\RV{U}$ is that the individual identifier for each observation is unique, while unobserved variables (typically) have $|U|<N$ where $N$ is the number of observations.
+
+% \subsection[Identification]{Identification with individual-level response functions}
+
+% The key result of this section is Theorem \ref{th:cc_ind_treat}, which establishes sufficient conditions that, in conjunction with the key assumption of \emph{individual-level response functions}, yield a conclusion of observable CIIR sequences. Individual-level response functions is the assumption that, given a sequential input-output model $(\prob{P}_C, (\RV{D},\RV{I}),\RV{Y})$, there is some $\RV{J}$ such that $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{I}_i\RV{J}}$ are mutually independent and identical responses for all $\alpha$ and $i$. $\RV{J}$, unlike the directing random conditional $\RV{H}$ (Definition \ref{def:dir_rand_cond}), is not necessarily a function of the inputs and outputs, as we do not have infinitely supported inputs.
+
+% We could consider $\RV{J}$ to be a variable assigning a stochastic response for each individual independent of the order of treatment or the treatment of any other individual. That is, $\RV{J}$ could be considered a specification of stochastic potential outcomes ``bound to the identifiers''. There is also an alternative interpretation of this assumption, which is suggested by its graphical representation. In particular, the exchange commutativity of $\prob{P}_C^{\RV{Y}|\RV{J}\RV{I}\RV{D}}$ implies
+
 % \begin{align}
-%     q:((w^o_j)_{\mathbb{N}},w^v_i)&\mapsto \{j|w^o_j=w^v_i\}
+%  &\phantom{=} \tikzfig{indiv_ciir}\\
+%  &= \tikzfig{indiv_ciir_swapped}
 % \end{align}
-% and take $\RV{Q}:=q\circ(\RV{W}^o,\RV{W}^v_i)$ for arbitrary $i\in \mathbb{N}$. For an index set $U\in\mathbb{N}$ take $\text{Swap}_{\cdot}:Y^{\mathbb{N}}\times Y^{\mathbb{N}}\to Y^{\mathbb{N}}\times Y^{\mathbb{N}}$ to be an arbitrary finite swap that acts as the identity on all indices $(j,x)\not\in \RV{Q}\times \{o\}\cup\{(i,v)\}$. Then $\prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}\text{Swap}_{\RV{Q}} = \prob{P}^{\RV{Y}^{o}\RV{Y}^v_i}$.
-% \end{theorem}
+
+% We give the following informal interpretation to this diagram: there is essentially no difference between ``sampling'' $(\RV{I},\RV{D})$ and running the experiment as normal, or ``sampling'' $(\RV{I},\RV{D})$ according to the same procedure, jointly shuffling the sequence $(\RV{I},\RV{D})$, and then continuing the experiment as normal according to the shuffled sequence. Along similar lines, we can justify locality if we accept there's no difference regarding the first $n$ outputs $\RV{Y}_{[n]}$ between  ``sampling'' $(\RV{I},\RV{D})$ and continuing as normal, or ``sampling'' $(\RV{I},\RV{D})$ and scrambling the inputs and identifiers after the $n$th $(\RV{I}_i,\RV{D}_i)_{i\in (n,\infty)}$. That is, this assumption might be justified if we accept that
+% \begin{itemize}
+%     \item The order of (input, identifier) pairs does not matter once the correspondence between inputs and identifiers has been determined
+%     \item The output $\RV{Y}_i$ does not depend on inputs and identifiers with index not equal to $i$
+% \end{itemize}
+
+% As an example, suppose we have a medical treatment experiment with binary treatments $\RV{D}_i$ and binary outcomes $\RV{Y}_i$ and patient identifiers $\RV{I}_i$. $\RV{D}_1$ is determined by random assignment and $\RV{D}_2$ is determined according to the patient's free choice. It is not known in advance which patient will appear first and which will appear second, and the patient identifiers are not informative to the decision maker. Because of the different assignment mechanisms
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{Y}_1|\RV{I}_1\RV{D}_1} \neq \prob{P}_\alpha^{\RV{Y}_2|\RV{I}_2\RV{D}_2}
+% \end{align}
+% hence $\prob{P}_\alpha^{\RV{Y}|\RV{ID}}$ is not exchange commutative. However, because the only difference is the assignment mechanism, the decision maker considers switching the assignment mechanisms to yield essentially the same experiment, modulo the order of the outputs. That is, the experiment where $\RV{D}_2$ is determined by random assignment and $\RV{D}_1$ is determined by free patient choice is essentially the same as the first experiment with the ordering of outputs switched.
+
+% The idea underpinning Theorem \ref{th:cc_ind_treat} is that if this assumption holds as well as the assumption that identifiers can be switched independently of inputs, then the observed inputs and outputs $(\RV{D},\RV{Y})$ also form a CIIR sequence. Furthermore, we can conclude that identifiers can be switched independently of inputs if we accept that identifiers are not informative on their own and that inputs are completely under our control.
+
+% Lemma \ref{lem:ind_to_cc} shows that individual level CIIR sequences along with a particular conditional independence of the identifiers implies inputs and outputs also form a CIIR sequence. Theorem \ref{th:ind} uses this to show that individual level CIIR sequences along with outputs independent of identifiers and complete control over inputs yields the same result. Both results do \emph{not} require that $\RV{I}$ be a sequence of unique identifiers. The reason why we are interested mainly in the case where $\RV{I}$ is a sequence of unique identifiers is that the key assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I}|\text{id}_C$ is less compelling in the case where $\RV{I}$ is a non-unique sequence of labels. In particular, it implies that the conditional probability of $(\RV{Y}_1,\RV{Y}_2)$ given $(\RV{I}_1=1,\RV{I}_2=1)$ is exactly the same as the conditional probability of $(\RV{Y}_1,\RV{Y}_2)$ given $(\RV{I}_i=1,\RV{I}_2=2)$; observations associated with the same labels are no more relevant to each other that observations associated with different labels.
+
+% Finally, Theorem \ref{th:cc_ind_treat} replaces the assumption that outputs are independent of identifiers in Theorem \ref{th:ind} with a permutability of identifiers assumption, and in this case the result only holds in the case that $\RV{I}$ is a sequence of unique identifiers.
+
+% \begin{lemma}\label{lem:ind_to_cc}
+% Given sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob{P}_\alpha^{\RV{Y}|\RV{WDI}}$ IO contractible over $\RV{W}$, if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\text{id}_C)|(\RV{W},\RV{D})$ and for any $j\in I$, $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0$, then there is some $\RV{W}'$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{W}'\RV{D}}$ is also IO contractible over $\RV{W}$.
+% \end{lemma}
 
 % \begin{proof}
-% Note that for $B_j\in \sigalg{W}$, where $\rho_q:\mathbb{N}\times\{i,v\}\to \mathbb{N}\times\{i,v\}$ is the permutation function associated with $\text{Swap}_{q}$
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}\text{Swap}_{\RV{Q}} (\bigtimes_{j\in\mathbb{N}} B_j) &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{\rho_q(w_l)} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\\
-%     &= \int_{W^{\mathbb{N}}}\int_{\mathscr{P}(\mathbb{N})} \prod_{k\not\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_k}(B_k) \prod_{l\in q\times\{o\}\cup\{(i,v)\}} \delta_{w_l} (B_l) \prob{P}_\alpha^{\RV{Q}|\RV{W}^o\RV{W}^v_i}(\mathrm{d}q|w)\prob{P}_\alpha^{}(\mathrm{d}w)\label{eq:all_the_same}\\
-%     &= \prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i}
-% \end{align}
-% where Eq. \eqref{eq:all_the_same} follows from the fact that for every $k,l\in q\times\{o\}\cup\{(i,v)\}$, $w_k=w_l$.
-
-% Thus for $A\in \sigalg{Y}^{\mathbb{N}}$
-% \begin{align}
-%     \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\text{Swap}_{\RV{Q}}(A) &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{Q}\RV{W}^o\RV{W}^v_i}\text{Swap}_{\RV{Q}}](A)\\
-%     &= [\prob{P}_\alpha^{\RV{W}^o\RV{W}^v_i} \text{Swap}_{\RV{Q}^{-1}} \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}\text{Swap}_{\RV{Q}}](A)\\
-%     &= \prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i}\label{eq:by_cc1}
-% \end{align}
-% Where Eq. \eqref{eq:by_cc1} follows from IO contractibility of $\prob{P}_\alpha^{\RV{Y}^{o}\RV{Y}^v_i|\RV{W}^o\RV{W}^v_i}$.
+% Appendix \ref{app:il_ciir}.
 % \end{proof}
 
-% It also follows from Ecclesiastes' assumption and finite $W$ that if some $\RV{X}_i^o$, $\RV{Z}_i^o$ are \emph{deterministically} related given $\RV{W}$, then $\prob{P}_C^{\RV{Z}|\RV{X}}$ is IO contractible.
-
-% \begin{theorem}\label{th:det_obs_to_cons}
-% Given just-do model $\prob{P}_C$ with $\prob{P}_C^{\RV{X}^{o,v}\RV{Z}^{o,v}|\RV{W}^{o,v}}$ IO contractible, $W$ finite and $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)>0$ for all $w,h$, if $\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{H}}$ is deterministic then $\prob{P}_C^{\RV{Z}^{o,v}|\RV{X}^{o,v}}$ is IO contractible.
-% \end{theorem}
-
-% \begin{proof}
-% Because $\prob{P}_\alpha^{\RV{W}_0^o}\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{W}^o_0\RV{H}}$ is deterministic, so is $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}$.
-
-% Fix $h\in H$.  Suppose there is some $w,w'\in W$ such that
+% \begin{theorem}\label{th:ind}
+% Given a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ countable, if there is some $\RV{J}$ such that for each $\alpha$
 % \begin{align}
-%     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) &\neq \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h)
-% \end{align}
-% then, by determinism, we can assume without loss of generality
-% \begin{align}
-%     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) = 1\\
-%     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h) = 0
-% \end{align}
-% but $W$ is finite and $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)>0$ for all $w$, so there is some $a>0$ such that $\prob{P}_C^{\RV{W}^o_i|\RV{H}}(w|h)\geq a$ for all $w$, and so
-% \begin{align}
-%     a \leq \sum_{w\in W} \prob{P}_C^{\RV{W}^o_0|\RV{X}^o_0,\RV{H}}(w|x,h)\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h)\leq 1-a
-% \end{align}
-% contradicting determinism of $\prob{P}_C^{\RV{Z}^o_0|\RV{X}^o_0\RV{H}}$.
-
-% Thus for all $w,w'$
-% \begin{align}
-%     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w,h) &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(A|x,w',h)
-% \end{align}
-% i.e. $\RV{Z}_0\CI^e_{\prob{P}_C} (\RV{W}_0,\text{id}_C)|(\RV{X}_0,\RV{H})$. But then there is some $\prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}$ such that
-% \begin{align}
-%     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}\otimes \text{erase}_W\\
-%     \implies \prob{P}_\alpha^{\RV{Z}^v_i|\RV{X}^v_i\RV{H}} &= \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}
-% \end{align}
-% \end{proof}
-
-% Theorem \ref{th:det_obs_to_cons} doesn't hold in the case of approximate determinism, however. Intuitively, approximate determinism can hold if there is some value of $\RV{W}$ for which $\RV{Z}$ is not conditionally independent given $\RV{H}$ and $\RV{X}$, but it only ocurrs very rarely in observations. On the other hand, values of $\RV{W}$ rare in observations might, under some choices, become common. 
-
-% \begin{example}
-% Say $\prob{P}_C^{\RV{Z}^o_i|\RV{X}^o_i\RV{H}}$ is \emph{approximately deterministic} if $\prob{P}_C^{\RV{Z}^o_i|\RV{X}^o_i\RV{H}}(A|x,h)\in [0,\epsilon]\cup[1-\epsilon,1]$ for all $A\in\sigalg{Z}$, $x,h\in X\times H$.
-
-% Take $Z=X=W=H=\{0,1\}$. Set
-% \begin{align}
-%     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(1|1,1,1) = 1\\
-%     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{W}_0\RV{H}}(1|1,0,1) = 0
+%     \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i} &= \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i} &\forall i,j\in \mathbb{N}\\
+%     \RV{Y}_i&\CI^e_{\prob{P}_C} (\RV{I}_{\{i\}^{\complement}},\RV{D}_{\{i\}^{\complement}})|(\RV{J},\RV{I}_i,\RV{D}_i)
 % \end{align}
 % and
 % \begin{align}
-%     \prob{P}_C^{\RV{W}^o_0|\RV{H}}(1|1)=1-\epsilon
+%     &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C\\
+%     &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C\\
+%     &\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}\\
+%     &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
 % \end{align}
-% then
+% then $\prob{P}_C^{\RV{Y}|\RV{JD}}$ is IO contractible over $\RV{J}$.
+% \end{theorem}
+
+% \begin{proof}
+% Appendix \ref{app:il_ciir}.
+% \end{proof}
+
+% Lemma \ref{lem:exch_to_ind} is used to apply Theorem \ref{th:ind} to models where $\RV{I}$ is a sequence of unique identifiers. Only in this case, exchangeability of the unique identifiers implies the identifiers are independent of the outcomes $\RV{Y}$.
+
+% \begin{lemma}\label{lem:exch_to_ind}
+% Given any probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \text{id}_C|(\RV{D},\RV{I})$ and $\RV{I}:\Omega\to I$ is an infinite sequence of unique identifiers, if for each finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
 % \begin{align}
-%     \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1) = 1-\epsilon
+%     \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{Swap}_{\rho(I)})\prob{P}_\alpha^{\RV{Y}|\RV{I}}
 % \end{align}
-% however, suppose there is some $\alpha$ such that
+% then $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\text{id}_C$.
+% \end{lemma}
+
+% \begin{proof}
+% By definition of the set $I$ of finite permutations, for every $\rho\in I$, $B\in\sigalg{Y}^{\mathbb{N}}$, $d\in D^{\mathbb{N}}$ there is a finite permutation $\rho^{-1}\in I$ such that $\rho\circ\rho^{-1}=\text{id}_{\mathbb{N}}$. Then
 % \begin{align}
-%     \prob{P}_\alpha^{\RV{W}^v_i|\RV{H}}(1|1)=0
+%     \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho) &= (\kernel{F}_{\rho^{-1}}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho)\\
+%     &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\text{id}_{\mathbb{N}})
 % \end{align}
-% then
+% Therefore
 % \begin{align}
-%     \prob{P}_\alpha^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1) = 0\\
-%     &\neq \prob{P}_C^{\RV{Z}_0|\RV{X}_0\RV{H}}(1|1,1)
+%     \prob{P}_\alpha^{\RV{Y}|\RV{I}} &\overset{\prob{P}_C}{\cong} \text{erase}_{I}\otimes \prob{P}_\alpha^{\RV{Y}}
 % \end{align}
-% \end{example}
+% \end{proof}
 
+% Theorem \ref{th:cc_ind_treat} presents a set of sufficient conditions for $\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}$ to be conditionally independent and identical response functions with respect to the standard directing random conditional $\RV{H}$:
+% \begin{enumerate}
+%     \item There exist variables $\RV{I}$ representing ``unique identifiers'' which satisfy the assumption that $\prob{P}_C^{\RV{Y}_i|\RV{J}\RV{D}_i\RV{I}_i}$ are a sequence of independent and identical response functions for some $\RV{J}$
+%     \item The identifiers $\RV{I}$ can be swapped without altering the model of the consequences $\RV{Y}$
+%     \item The inputs $\RV{D}$ and the choice $\text{id}_C$ are substitutable with respect to $\RV{Y}$ and $\RV{I}$: $\RV{YI}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}$ and $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$
+% \end{enumerate}
 
-\section{Individual-level response functions}\label{sec:ilevel_ccontract}
+% \begin{theorem}\label{th:cc_ind_treat}
+% Given a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$, on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ and $D$ countable, $\RV{D}$ infinitely supported, $\RV{I}$ an infinite sequence of unique identifiers, if there is some $\RV{J}$ such that
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{swap}_{\rho(I)})\prob{P}_\alpha^{\RV{Y}|\RV{I}}&\forall \text{ finite permutations }\rho\\
+%     &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C\\
+%     &\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}\\
+%     &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
+% \end{align}
+% and for each $\alpha$ $\prob{P}_\alpha^{\RV{Y}|\RV{JID}}$ is IO contractible over $\RV{J}$, then we have conditionally independent and identical responses $\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}$ for all $i$, where $\RV{H}$ is the directing random conditional with respect to $(\RV{D},\RV{Y})$.
+% \end{theorem}
 
-Exchangeability of potential outcomes, a key assumption in Theorem \ref{th:potential_outcomes_identifiability}, is hard to explain in terms of symmetries of experiments. Given some experiment producing a sequence of pairs $(\RV{D}_i,\RV{Y}_i)_{i\in\mathbb{N}}$, say where $\RV{D}_i$s are treatment administrations and $\RV{Y}_i$s are health outcomes, there's no obvious generic way to design a related experiment whose model is the same as the original except with potential outcomes $\RV{Y}^D_i$ interchanged. This is in sharp contrast to the assumption of exchangeability of observed outcomes - say, instead of the potential outcomes being exchangeable, we hold that the pairs $(\RV{D}_i,\RV{Y}_i)$ are exchangeable in the original experiment. Then we commit ourselves to the proposition that an alternative experiment which proceeds exactly as the first except, before being ``committed to memory'', the experimental results are interchanged should be modeled exactly as the first.
+% \begin{proof}
+% Apply lemma \ref{lem:exch_to_ind} to get $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C$, then apply Theorem \ref{th:ind} for $\prob{P}_C^{\RV{Y}|\RV{J}\RV{D}}$ IO contractible. The result follows from Theorem \ref{th:ciid_rep_kernel}.
+% \end{proof}
 
-One could propose that exchangeability of potential outcomes in our example experiment corresponds to an \emph{exchangeability of patients}; perhaps, if we believe the model should be unchanged after we swap the order in which patients are seen, then we should accept that the model has exchangeable potential outcomes. However, it certainly does not follow from a potential outcomes model that exchangeability of patients implies exchangeability potential outcomes. If each patient were assumed to have a fixed but unknown vector of potential outcomes that is unchanged by the swapping operation, then swapping patients does indeed correspond to swapping potential outcomes. On the other hand, if we instead suppose that each index is associated with a fixed vector of potential outcomes regardless of any exchanges of patients that might be made, we could swap patients without altering the model and yet the potential outcomes would not in general be exchangeable.
+% Theorem \ref{th:cc_ind_treat} can be extended to the case where decisions $\RV{D}$ are a one-to-one deterministic function of the choice, or a random mixtures of one-to-one deterministic functions of the choice. This extension is applicable a randomised controlled trial, where the treatments are deterministically controlled and randomly assigned.
 
-We formalise the idea of ``potential outcomes attached to individuals'' as \emph{individual-level response functions}. We offer a formal definition of the assumption of individual-level response functions, but like exchangeability of potential outcomes it is difficult to understand fundamentally what this assumption entails, or what it might be motivated by. Nevertheless, it does allow us to separate the assumption of ``exchangeable potential outcomes'' into the assumption of individual level response functions and the assumption of exchangeability of individuals. We also use this notion to prove Theorem \ref{th:cc_ind_treat}. At a high level, it plays a similar role to Theorem \ref{th:potential_outcomes_identifiability}: it seems to justify causal identifiability in certain kinds of controlled experiments. However, the content of the two theorems is very different. While Theorem \ref{th:potential_outcomes_identifiability} concerns independence of the inputs and potential outcomes along with exchangeability of the potential outcomes, Theorem \ref{th:cc_ind_treat} says (informally) if:
-\begin{itemize}
-    \item There are individual-level response functions
-    \item Individuals can be swapped without meaningfully altering the experiment
-    \item Inputs are deterministically controlled by the choice
-    \item There is only one choice for each value of the inputs
-\end{itemize}
-then the model is also IO contractible with respect to the inputs and the outputs only (ignoring the individual identifiers). In our view, this comes closer to a set of assumptions that are directly appliccable to a controlled experiment than those in Theorem \ref{th:potential_outcomes_identifiability}, and reflects \citet{kasy_why_2016}'s dictum that, for the identifiability of causal effects, a ``controlled experiment'' is sufficient.
+% \begin{theorem}\label{cor:extend_to_randomised}
+% Consider a sequential input-output model $(\prob{P}_{C'},\RV{D},\RV{Y})$ where $\prob{P}_{C'}^{\RV{Y}|\RV{WD}}$ is IO contractible over $\RV{W}$, and construct a second model $(\prob{P}_{C},\RV{D},\RV{Y})$ where $\prob{P}_C$ is the union of $\prob{P}_{C'}$ and its convex hull. Then $\prob{P}_{C}^{\RV{Y}|\RV{WD}}$ is also IO contractible.
+% \end{theorem}
 
-\subsection{References to individual-level IO contractibility}
+% \begin{proof}
+% For all $\alpha\in C$, there is some probability measure $\mu:C'\to [0,1]$ such that
+% \begin{align}
+%     \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \sum_{\beta\in C'} \mu(\beta) \prob{P}_\beta^{\RV{Y}|\RV{WD}}\\
+%     &= \prob{P}_{C'}^{\RV{Y}|\RV{WD}}
+% \end{align}
+% thus
+% \begin{align}
+%     \prob{P}_C^{\RV{Y}|\RV{WD}} = \prob{P}_{C'}^{\RV{Y}|\RV{WD}}
+% \end{align}
+% and in particular, $\prob{P}_C^{\RV{Y}|\RV{WD}}$ is IO contractible.
+% \end{proof}
 
-The role of individuals has often been mentioned in literature on causal inference. For example, \citet{greenland_identifiability_1986} explain
-\begin{quote}
-    Equivalence of response type may be thought of in terms of exchangeability of individuals: if the exposure states of the two individuals had been exchanged, the same data distribution would have resulted.
-\end{quote}
-Here, the idea of ``exchangeable individuals'' plays a role in the author's reasoning about model construction, but ``individuals'' are not actually referenced by the resulting model, and ``exchanging individuals'' does not correspond to a model transformation.
+% Theorem \ref{cor:extend_to_randomised} can be used to argue that, given a sequence of experiments IO contractible under deterministic choices, adding random mixtures of these choices also yields a IO contractible sequence. \citet{kasy_why_2016} argues that as long as the experimenter controls the treatment assignment, causal effects are identified (i.e. the randomisation step is not strictly necessary). Example \ref{ex:randomised_experiment} shows that this argument might be supported, but Example \ref{ex:bad_randomised_experiment} shows that there are subtle ways that might lead to this argument failing.
 
-\citet{dawid_decision-theoretic_2020} suggests (with some qualifications) that ``post-treatment exchangeability'' for a decision problem regarding taking aspirin to treat a headache may be acceptable if the data are from
-\begin{quote}
-    A group of individuals whom I can regard, in an intuitive sense, as similar to myself, with headaches similar to my own.
-\end{quote}
-As in the previous work, the similarity of individuals involved in an experiment is raised when justifying particular model constructions, but the individuals are not referenced by the model.
+% We assume an infinite sequence, which is clearly unreasonable. Extending the representation theorems to the case of finite sequences, using for example the result of \citet{diaconis_finite_1980} with establishes that finite exchangeable distributions are approximately mixtures of independent and identically distributed sequences, would allow some implausible assumptions in the following example to be removed.
 
-\citet[pg. 98]{pearl_causality:_2009} writes
-\begin{quote}
-    Although the term unit in the potential-outcome literature normally stands for the identity of a specific individual in a population, a unit may also be thought of as the set of attributes that characterize that individual, the experimental conditions under study, the time of day, and so on – all of which are represented as components of the vector $u$ in structural modeling.
-\end{quote}
-Once again, the idea of an individual (or a particular set of conditions) is raised in the context of explaining modelling choices. Unlike the previous authors, Pearl introduces a vector $u$ to stand for the ``unit''. However, he subsequently assumes that $u$ is a sequence of \emph{independent samples} from some distribution. This seems to contradict an important feature of ``individuals'' or ``units'': individuals are typically supposed to be unique, a property that will usually not be satisfied by independently sampling from some distribution (at least, as long as the distribution is discrete).
-
-Finally, \citet{rubin_causal_2005} writes:
-\begin{quote}
-    Here there are $N$ units, which are physical objects at particular points in time (e.g., plots of land, individual people, one person at repeated points in time).
-\end{quote}
-Note that Rubin's explanation of \emph{units} guarantees that they are unique: they are particular things at particular times. These units are associated with input-output functions (the \emph{potential outcomes}), which are later assumed to be exchangeable:
-\begin{quote}
-    the indexing of the units is, by definition, a random permutation of $1,..., N$, and thus any distribution on the science must be row-exchangeable
-\end{quote}
-
-Our proposition is: can the intuition that unique individuals are an important for the motivation for causal models, be captured by considering models that feature ``unique identifier'' variables referencing these unique individuals?
-
-\subsection{Unique identifiers}
-
-A sequence of \emph{unique identifiers} is a vector of finite or infinite length such that no two coordinates are equal. We are interested in models that assign positive probability to any particular coordinate having any particular value. This is straightforward in the finite case. In the infinite case, note that a vector of $|\mathbb{N}|$ unique values with an arbitrary entry $k$ in the $j$th coordinate can be obtained by starting with $(i)_{i\in \mathbb{N}}$ and then transposing $j$ with $k$. More generally, we consider infinite length sequences of unique identifiers to be elements of the set of finite permutations $\mathbb{N}\to\mathbb{N}$.
-
-\begin{definition}[Measurable space of unique identifiers]
-The measurable space of unique identifiers $(I,\sigalg{I})$ is the set $I$ of finite permutations $\mathbb{N}\to \mathbb{N}$ with the discrete $\sigma$-algebra $\sigalg{I}$.
-\end{definition}
-
-The set $I$ is countable, as it is the countable union of finite subsets (i.e. the permutations that leave all but the first $n$ numbers unchanged for all $n$).
-
-\begin{definition}[Unique identifier]
-Given a sample space $(\Omega,\sigalg{F})$, a \emph{sequence of unique identifiers} $\sigalg{I}:\Omega\to I$ is a variable taking values in $I$.
-\end{definition}
-
-The values of each coordinate of sequence of unique identifiers is just called an identifier (for obvious reasons, we don't call it an identity).
-
-\begin{definition}[Identifiers]
-Given $\RV{I}$, define the $i$-th \emph{identifier} $\RV{I}_i:=\mathrm{ev}(i,\RV{I})$, where $\mathrm{ev}:\mathbb{N}\times I\to \mathbb{N}$ is the evaluation map $(i,f)\mapsto f(i)$.
-\end{definition}
-
-For \emph{any} sample space $(\Omega,\sigalg{F})$ we can define a trivial $\sigalg{I}$ that maps every $\omega\in\Omega$ to $(1,2,3,....)=:(\mathbb{N})$. In this case, the identifiers are all known by the modeller at the outset. Using this sequence of identifiers renders exchange commutativity trivial.
-
-\begin{example}\label{eq:il_exchc}
-Given a sequential input-output model $(\prob{P}_C, (\RV{D},\RV{I}),\RV{Y})$ where $\RV{I}$ is the identifier variable $\omega\mapsto (\mathbb{N})$, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ commutes with exchange.
-
-This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the identity, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ and $\text{Swap}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ will have no common support; the first will be supported on $\RV{I}\yields (\mathbb{N})$ only, and the second only on $\RV{I}\yields \rho(\mathbb{N})$.
-\end{example}
-
-We are particularly interested in models where exchange commutativity is not trivial, so we focus on the case where each identifier $\RV{I}_i$ has some non-zero probability of taking any value in $\mathbb{N}$. 
-
-% \subsection{Individual-level IO contractibility and unobserved confounding}
-
-% Our first result is that some models with individual-level IO contractibility can be seen as models with unobserved confounding. A model $\prob{P}_C$ with individual-level IO contractibility features a IO contractible $\prob{P}_C^{\RV{Y}|\RV{ID}}$ for a sequence of outputs $\RV{Y}$, inputs $\RV{D}$ and individual identifiers $\RV{I}$. A model with unobserved confounding features IO contractible $\prob{P}_C^{\RV{Y}|\RV{UD}}$ where $\RV{Y}$ and $\RV{D}$ are as before and $\RV{U}$ is an ``unobserved confounder''. They key difference between $\RV{I}$ and $\RV{U}$ is that the individual identifier for each observation is unique, while unobserved variables (typically) have $|U|<N$ where $N$ is the number of observations.
-
-\subsection[Identification]{Identification with individual-level response functions}
-
-The key result of this section is Theorem \ref{th:cc_ind_treat}, which establishes sufficient conditions that, in conjunction with the key assumption of \emph{individual-level response functions}, yield a conclusion of observable CIIR sequences. Individual-level response functions is the assumption that, given a sequential input-output model $(\prob{P}_C, (\RV{D},\RV{I}),\RV{Y})$, there is some $\RV{J}$ such that $\prob{P}_C^{\RV{Y}_i|\RV{D}_i\RV{I}_i\RV{J}}$ are mutually independent and identical responses for all $\alpha$ and $i$. $\RV{J}$, unlike the directing random conditional $\RV{H}$ (Definition \ref{def:dir_rand_cond}), is not necessarily a function of the inputs and outputs, as we do not have infinitely supported inputs.
-
-We could consider $\RV{J}$ to be a variable assigning a stochastic response for each individual independent of the order of treatment or the treatment of any other individual. That is, $\RV{J}$ could be considered a specification of stochastic potential outcomes ``bound to the identifiers''. There is also an alternative interpretation of this assumption, which is suggested by its graphical representation. In particular, the exchange commutativity of $\prob{P}_C^{\RV{Y}|\RV{J}\RV{I}\RV{D}}$ implies
-
-\begin{align}
- &\phantom{=} \tikzfig{indiv_ciir}\\
- &= \tikzfig{indiv_ciir_swapped}
-\end{align}
-
-We give the following informal interpretation to this diagram: there is essentially no difference between ``sampling'' $(\RV{I},\RV{D})$ and running the experiment as normal, or ``sampling'' $(\RV{I},\RV{D})$ according to the same procedure, jointly shuffling the sequence $(\RV{I},\RV{D})$, and then continuing the experiment as normal according to the shuffled sequence. Along similar lines, we can justify locality if we accept there's no difference regarding the first $n$ outputs $\RV{Y}_{[n]}$ between  ``sampling'' $(\RV{I},\RV{D})$ and continuing as normal, or ``sampling'' $(\RV{I},\RV{D})$ and scrambling the inputs and identifiers after the $n$th $(\RV{I}_i,\RV{D}_i)_{i\in (n,\infty)}$. That is, this assumption might be justified if we accept that
-\begin{itemize}
-    \item The order of (input, identifier) pairs does not matter once the correspondence between inputs and identifiers has been determined
-    \item The output $\RV{Y}_i$ does not depend on inputs and identifiers with index not equal to $i$
-\end{itemize}
-
-As an example, suppose we have a medical treatment experiment with binary treatments $\RV{D}_i$ and binary outcomes $\RV{Y}_i$ and patient identifiers $\RV{I}_i$. $\RV{D}_1$ is determined by random assignment and $\RV{D}_2$ is determined according to the patient's free choice. It is not known in advance which patient will appear first and which will appear second, and the patient identifiers are not informative to the decision maker. Because of the different assignment mechanisms
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_1|\RV{I}_1\RV{D}_1} \neq \prob{P}_\alpha^{\RV{Y}_2|\RV{I}_2\RV{D}_2}
-\end{align}
-hence $\prob{P}_\alpha^{\RV{Y}|\RV{ID}}$ is not exchange commutative. However, because the only difference is the assignment mechanism, the decision maker considers switching the assignment mechanisms to yield essentially the same experiment, modulo the order of the outputs. That is, the experiment where $\RV{D}_2$ is determined by random assignment and $\RV{D}_1$ is determined by free patient choice is essentially the same as the first experiment with the ordering of outputs switched.
-
-The idea underpinning Theorem \ref{th:cc_ind_treat} is that if this assumption holds as well as the assumption that identifiers can be switched independently of inputs, then the observed inputs and outputs $(\RV{D},\RV{Y})$ also form a CIIR sequence. Furthermore, we can conclude that identifiers can be switched independently of inputs if we accept that identifiers are not informative on their own and that inputs are completely under our control.
-
-Lemma \ref{lem:ind_to_cc} shows that individual level CIIR sequences along with a particular conditional independence of the identifiers implies inputs and outputs also form a CIIR sequence. Theorem \ref{th:ind} uses this to show that individual level CIIR sequences along with outputs independent of identifiers and complete control over inputs yields the same result. Both results do \emph{not} require that $\RV{I}$ be a sequence of unique identifiers. The reason why we are interested mainly in the case where $\RV{I}$ is a sequence of unique identifiers is that the key assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I}|\text{id}_C$ is less compelling in the case where $\RV{I}$ is a non-unique sequence of labels. In particular, it implies that the conditional probability of $(\RV{Y}_1,\RV{Y}_2)$ given $(\RV{I}_1=1,\RV{I}_2=1)$ is exactly the same as the conditional probability of $(\RV{Y}_1,\RV{Y}_2)$ given $(\RV{I}_i=1,\RV{I}_2=2)$; observations associated with the same labels are no more relevant to each other that observations associated with different labels.
-
-Finally, Theorem \ref{th:cc_ind_treat} replaces the assumption that outputs are independent of identifiers in Theorem \ref{th:ind} with a permutability of identifiers assumption, and in this case the result only holds in the case that $\RV{I}$ is a sequence of unique identifiers.
-
-\begin{lemma}\label{lem:ind_to_cc}
-Given sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob{P}_\alpha^{\RV{Y}|\RV{WDI}}$ IO contractible over $\RV{W}$, if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\text{id}_C)|(\RV{W},\RV{D})$ and for any $j\in I$, $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0$, then there is some $\RV{W}'$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{W}'\RV{D}}$ is also IO contractible over $\RV{W}$.
-\end{lemma}
-
-\begin{proof}
-Appendix \ref{app:il_ciir}.
-\end{proof}
-
-\begin{theorem}\label{th:ind}
-Given a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ countable, if there is some $\RV{J}$ such that for each $\alpha$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i} &= \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i} &\forall i,j\in \mathbb{N}\\
-    \RV{Y}_i&\CI^e_{\prob{P}_C} (\RV{I}_{\{i\}^{\complement}},\RV{D}_{\{i\}^{\complement}})|(\RV{J},\RV{I}_i,\RV{D}_i)
-\end{align}
-and
-\begin{align}
-    &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C\\
-    &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C\\
-    &\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}\\
-    &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
-\end{align}
-then $\prob{P}_C^{\RV{Y}|\RV{JD}}$ is IO contractible over $\RV{J}$.
-\end{theorem}
-
-\begin{proof}
-Appendix \ref{app:il_ciir}.
-\end{proof}
-
-Lemma \ref{lem:exch_to_ind} is used to apply Theorem \ref{th:ind} to models where $\RV{I}$ is a sequence of unique identifiers. Only in this case, exchangeability of the unique identifiers implies the identifiers are independent of the outcomes $\RV{Y}$.
-
-\begin{lemma}\label{lem:exch_to_ind}
-Given any probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \text{id}_C|(\RV{D},\RV{I})$ and $\RV{I}:\Omega\to I$ is an infinite sequence of unique identifiers, if for each finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{Swap}_{\rho(I)})\prob{P}_\alpha^{\RV{Y}|\RV{I}}
-\end{align}
-then $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\text{id}_C$.
-\end{lemma}
-
-\begin{proof}
-By definition of the set $I$ of finite permutations, for every $\rho\in I$, $B\in\sigalg{Y}^{\mathbb{N}}$, $d\in D^{\mathbb{N}}$ there is a finite permutation $\rho^{-1}\in I$ such that $\rho\circ\rho^{-1}=\text{id}_{\mathbb{N}}$. Then
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho) &= (\kernel{F}_{\rho^{-1}}\otimes \text{Id}_X )\prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\rho)\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(B|\text{id}_{\mathbb{N}})
-\end{align}
-Therefore
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &\overset{\prob{P}_C}{\cong} \text{erase}_{I}\otimes \prob{P}_\alpha^{\RV{Y}}
-\end{align}
-\end{proof}
-
-Theorem \ref{th:cc_ind_treat} presents a set of sufficient conditions for $\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}$ to be conditionally independent and identical response functions with respect to the standard directing random conditional $\RV{H}$:
-\begin{enumerate}
-    \item There exist variables $\RV{I}$ representing ``unique identifiers'' which satisfy the assumption that $\prob{P}_C^{\RV{Y}_i|\RV{J}\RV{D}_i\RV{I}_i}$ are a sequence of independent and identical response functions for some $\RV{J}$
-    \item The identifiers $\RV{I}$ can be swapped without altering the model of the consequences $\RV{Y}$
-    \item The inputs $\RV{D}$ and the choice $\text{id}_C$ are substitutable with respect to $\RV{Y}$ and $\RV{I}$: $\RV{YI}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}$ and $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$
-\end{enumerate}
-
-\begin{theorem}\label{th:cc_ind_treat}
-Given a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$, on $(\Omega,\sigalg{F})$ with $Y$ standard measurable and $C$ and $D$ countable, $\RV{D}$ infinitely supported, $\RV{I}$ an infinite sequence of unique identifiers, if there is some $\RV{J}$ such that
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{swap}_{\rho(I)})\prob{P}_\alpha^{\RV{Y}|\RV{I}}&\forall \text{ finite permutations }\rho\\
-    &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C\\
-    &\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}\\
-    &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
-\end{align}
-and for each $\alpha$ $\prob{P}_\alpha^{\RV{Y}|\RV{JID}}$ is IO contractible over $\RV{J}$, then we have conditionally independent and identical responses $\prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}$ for all $i$, where $\RV{H}$ is the directing random conditional with respect to $(\RV{D},\RV{Y})$.
-\end{theorem}
-
-\begin{proof}
-Apply lemma \ref{lem:exch_to_ind} to get $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C$, then apply Theorem \ref{th:ind} for $\prob{P}_C^{\RV{Y}|\RV{J}\RV{D}}$ IO contractible. The result follows from Theorem \ref{th:ciid_rep_kernel}.
-\end{proof}
-
-Theorem \ref{th:cc_ind_treat} can be extended to the case where decisions $\RV{D}$ are a one-to-one deterministic function of the choice, or a random mixtures of one-to-one deterministic functions of the choice. This extension is applicable a randomised controlled trial, where the treatments are deterministically controlled and randomly assigned.
-
-\begin{theorem}\label{cor:extend_to_randomised}
-Consider a sequential input-output model $(\prob{P}_{C'},\RV{D},\RV{Y})$ where $\prob{P}_{C'}^{\RV{Y}|\RV{WD}}$ is IO contractible over $\RV{W}$, and construct a second model $(\prob{P}_{C},\RV{D},\RV{Y})$ where $\prob{P}_C$ is the union of $\prob{P}_{C'}$ and its convex hull. Then $\prob{P}_{C}^{\RV{Y}|\RV{WD}}$ is also IO contractible.
-\end{theorem}
-
-\begin{proof}
-For all $\alpha\in C$, there is some probability measure $\mu:C'\to [0,1]$ such that
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \sum_{\beta\in C'} \mu(\beta) \prob{P}_\beta^{\RV{Y}|\RV{WD}}\\
-    &= \prob{P}_{C'}^{\RV{Y}|\RV{WD}}
-\end{align}
-thus
-\begin{align}
-    \prob{P}_C^{\RV{Y}|\RV{WD}} = \prob{P}_{C'}^{\RV{Y}|\RV{WD}}
-\end{align}
-and in particular, $\prob{P}_C^{\RV{Y}|\RV{WD}}$ is IO contractible.
-\end{proof}
-
-Theorem \ref{cor:extend_to_randomised} can be used to argue that, given a sequence of experiments IO contractible under deterministic choices, adding random mixtures of these choices also yields a IO contractible sequence. \citet{kasy_why_2016} argues that as long as the experimenter controls the treatment assignment, causal effects are identified (i.e. the randomisation step is not strictly necessary). Example \ref{ex:randomised_experiment} shows that this argument might be supported, but Example \ref{ex:bad_randomised_experiment} shows that there are subtle ways that might lead to this argument failing.
-
-We assume an infinite sequence, which is clearly unreasonable. Extending the representation theorems to the case of finite sequences, using for example the result of \citet{diaconis_finite_1980} with establishes that finite exchangeable distributions are approximately mixtures of independent and identically distributed sequences, would allow some implausible assumptions in the following example to be removed.
-
-Theorem \ref{th:cc_ind_treat} is used in the following example to argue that, under certain conditions, a controlled experiment supports a IO contractible model.
+% Theorem \ref{th:cc_ind_treat} is used in the following example to argue that, under certain conditions, a controlled experiment supports a IO contractible model.
 
 \begin{example}\label{ex:randomised_experiment}
 A sequential experiment is modeled by a probability set $\prob{P}_C$ with binary treatments $\RV{D}:=(\RV{D}_i)_{i\in \mathbb{N}}$ and binary outcomes $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$. The set of choices $C$ is the set of all probability distributions$\Delta(D^N)$ for some $N\subset\mathbb{N}$ (this is to ensure $C$ is countable).
@@ -855,146 +727,76 @@ Alternatively, suppose the assistant may only choose a single stochastic assignm
 
 % This point is related to the question of why experimenters randomise. \citet{kasy_why_2016} argues that ``randomised controlled trials are not needed for causal identifiability, only controlled trials'', and suggests that experiments should sometimes be designed with deterministic assignments of patients to treatment and control groups, optimised according to the experiment designer's criteria. Following this, \citet{banerjee_theory_2020} suggested that deterministic rules might falter when one can't pick a function to balance covariates in a way that satisfies everyone in a panel of reviewers. 
 
-The condition $\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}$ without also having $\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$ does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. Informally, if $\RV{D}$ gives some ``extra information'' over and above $\text{id}_C$, then any symmetry that holds before we observe $\RV{D}$ might not hold after $\RV{D}$ has been observed. We have argued somewhat informally that the choice $\text{id}_C$ should be completely under the decision maker's control -- for Theorem \ref{th:cc_ind_treat}, this perfect control has to extend to the sequence of inputs $\RV{D}$, as we show with Example \ref{ex:not_enough_control}.
+% The condition $\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}$ without also having $\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$ does \emph{not} imply the conclusion of Theorem \ref{th:cc_ind_treat}. Informally, if $\RV{D}$ gives some ``extra information'' over and above $\text{id}_C$, then any symmetry that holds before we observe $\RV{D}$ might not hold after $\RV{D}$ has been observed. We have argued somewhat informally that the choice $\text{id}_C$ should be completely under the decision maker's control -- for Theorem \ref{th:cc_ind_treat}, this perfect control has to extend to the sequence of inputs $\RV{D}$, as we show with Example \ref{ex:not_enough_control}.
 
-Example \ref{ex:not_enough_control} requires the hypotheses that any given identifier $k\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. Thus the space of hypotheses is a sequence of binary values $J=\{0,1\}^{\mathbb{N}}$. Equipped with the product topology, $J$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(J,\mathcal{B}(J))$ is a standard measurable space and, because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
+% Example \ref{ex:not_enough_control} requires the hypotheses that any given identifier $k\in\mathbb{N}$ could be associated with one of two input-output maps $D\kto Y$. Thus the space of hypotheses is a sequence of binary values $J=\{0,1\}^{\mathbb{N}}$. Equipped with the product topology, $J$ is a countable product of separable, completely metrizable spaces and is therefore also separable and completely metrizable \citep[Thm. 16.4,Thm. 24.11]{willard_general_1970}. Thus $(J,\mathcal{B}(J))$ is a standard measurable space and, because it is uncountable, it is isomorphic to $([0,1],\mathcal{B}([0,1]))$.
 
-\begin{example}\label{ex:not_enough_control}
-Take $Y=C=D=\{0,1\}$ and take $(J,\sigalg{J})$ to be $\{0,1\}^{\mathbb{N}}$ equipped with the product topology. For any $i\neq 1$, $\RV{Y}_i\RV{I}_i\RV{D}_i\CI^e_{\prob{P}_C} \text{id}_C$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$ and $\RV{I}_i\CI^e_{\prob{P}_C} \text{id}_C$.
+% \begin{example}\label{ex:not_enough_control}
+% Take $Y=C=D=\{0,1\}$ and take $(J,\sigalg{J})$ to be $\{0,1\}^{\mathbb{N}}$ equipped with the product topology. For any $i\neq 1$, $\RV{Y}_i\RV{I}_i\RV{D}_i\CI^e_{\prob{P}_C} \text{id}_C$, while $\prob{P}_\alpha^{\RV{D}_1}=\delta_\alpha$ and $\RV{I}_i\CI^e_{\prob{P}_C} \text{id}_C$.
 
-$\RV{YI}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}$ follows from the fact that $\text{id}_C$ can be written as a function of $\RV{D}$. However, except for $i=1$, $\RV{D}_i$ is independent of $\text{id}_C$.
+% $\RV{YI}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}$ follows from the fact that $\text{id}_C$ can be written as a function of $\RV{D}$. However, except for $i=1$, $\RV{D}_i$ is independent of $\text{id}_C$.
 
-For all $i,\in \mathbb{N}$, $y,d\in \{0,1\}$, $j\in J$ set
-\begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i}(y|j,k,d) &= \delta_1(p(k,j))\delta_d(y) + \delta_0(p(k,j))\delta_{1-d}(y)
-\end{align}
-where $p(k,j)$ projects the $k$-th component of $j$. That is, if $j$ maps $k$ to 1, $\RV{Y}$ goes with $\RV{D}$ while if $h$ maps $k$ to $0$, $\RV{Y}$ goes opposite $\RV{D}$. Suppose also 
-\begin{align}
-    \RV{Y}_i\CI_{\prob{P}_C}^e (\RV{X}_{<i},\RV{Y}_{<i},\RV{I}_{<i},\text{id}_C)|(\RV{X}_i,\RV{Y}_i,\RV{J})
-\end{align}
-Then $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is IO contractible. Set $\prob{P}_{C}^{\RV{J}}$ to be the uniform measure on $(J,\sigalg{J})$ and for $i>1$
-\begin{align}
-    \prob{P}_C^{\RV{D}_i|\RV{I}_i\RV{J}}(d|k,j) &= \delta_{p(k,j)}(d)
-\end{align}
-that is, if $j$ maps $k$ to 1, $\RV{D}$ is 1 while if $j$ maps $k$ to $0$, $\RV{D}$ is 0. This also implies
-\begin{align}
-    \prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(p(\cdot,j)^{-1}(d)|d,j) &= 1\label{eq:all_eq_d}
-\end{align}
-
-Then, for $i>1$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{D}_i}(y|j,d) &= \sum_{k\in \mathbb{N}} \delta_1(p(k,j))\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(k|d,j) + \delta_0(p(k,j))\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(k|d,j)\\
-    &= \sum_{k\in \mathbb{N}} \delta_1(d)\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(k|d,j) + \delta_0(d)\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(k|d,j)&\text{by Eq \eqref{eq:all_eq_d}}\\
-    &= \delta_1(y)\\
-    \implies \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i}(y|d) &= \delta_1(y)
-\end{align}
-
-For $q\in I$, set
-\begin{align}
-    \prob{P}_C^{\RV{I}|\RV{J}}(q|j)&= \begin{cases}
-        0.5 & q=(1,2,3,4,...) \text{ or } (1,3,2,4,...)\\
-        0&\text{otherwise}
-    \end{cases}
-\end{align}
-and set
-\begin{align}
-    \prob{P}_C^{\RV{J}|\RV{D}}(j) &= \begin{cases}
-        0.5 & j=(0,1,0,1,1,...)\text{ or }j=(0,0,1,1,1,...)\\
-        0 &\text{otherwise}
-    \end{cases}
-\end{align}
-Let $\overline{J}$ be the support of $\prob{P}_C^{\RV{J}|\RV{D}}(j)$.
-
-Then for $i=1$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}_1|\RV{J}\RV{D}_1}(y|j,d) &= \sum_{h\in J} \sum_{j\in \mathbb{N}} \prob{P}_\alpha^{\RV{I}_1|\RV{D}_1\RV{J}}(j|d,j)\prob{P}_C^{\RV{J}|\RV{D}_1}(j|d)\left(\delta_1(p(j,h))\delta_d(y) + \delta_0(p(j,j))\delta_{1-d}(y)\right)\\
-    &= \sum_{j\in \overline{J}} 0.5( \delta_1(p(1,j))\delta_d(y) + \delta_0(p(1,h))\delta_{1-d}(y))\\
-    &= \delta_{1-d}(y))\\
-    &\neq  \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{D}_i}(y|j,d) & i\neq 1
-\end{align}
-Thus $\prob{P}_C^{\RV{Y}|\RV{J}\RV{D}}$ is not IO contractible by Theorem \ref{th:equal_of_condits}. 
-
-However, given any finite permutation $\rho:\mathbb{N}\to\mathbb{N}$
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q) &= \sum_{j\in \overline{J}}\sum_{d\in\{0,1\}^{\mathbb{N}}} \prod_{i\in \mathbb{N}} \prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{D}_i\RV{H}}(y_i|q_i,d_i,j) \prob{P}_\alpha^{\RV{D}_i|\RV{I}_i\RV{J}}(d_i|q_i,j)\prob{P}_C^{\RV{J}}(j)\\
-    &= \delta_{1-\alpha}(y_1)\delta_{(1)_{i\in\mathbb{N}}}(y_{>1})\\
-    &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|\rho^{-1}(q))\\
-    &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q)
-\end{align}
-\end{example}
-
-Theorem \ref{th:cc_ind_treat} requires both that the inputs fully identify which option was chosen -- there is no ``side channel'' by which different options may influence the outputs -- and that the chosen option fully determines the sequence of inputs. This is analogous to the result that randomised experiments partial compliance do not allow the same causal effects to be determined as randomised experiments with full compliance \citep[Sec. 8.1.2]{pearl_causality:_2009}.
-
-% \paragraph{Example 6: the provenance of the choice variable}\label{sec:dm_control}
-
-% \todo[inline]{Use individual-level ccont}
-
-% The point of this example is to clarify the idea of a ``choice'' variable. If we say that some value is the outcome of a choice, a straightforward interpretation of this term suggests that this value was chosen by someone, somewhere. However, for the purposes of decision making models, there are important differences between:
-% \begin{itemize}
-%     \item Values chosen by someone, somewhere
-%     \item Values chosen by the decision make, using the decision making model
-% \end{itemize}
-
-% We call this example the ``I choose vs you choose'' problem. Suppose we have a decision maker (``DM'') and an administrator (``admin'') cooperating to collect data to support DM to make a choice.
-
-% First, consider the ``I choose'' condition. Here, DM's choice $\alpha\in \{0,1\}^2$ deterministically sets the value of binary inputs $\RV{D}_1,\RV{D}_2$, and the decision maker is interested in evaluating the corresponding binary outputs $\RV{Y}_1,\RV{Y}_2$. The decision maker assesses that their knowledge of the real-world mechanisms that gives rise to each output $\RV{Y}_i$ in the context on an input $\RV{D}_i$ render these mechanisms indistinguishable. 's point of view, the input-output relations for each step are indistinguishable. In particular, they assess that the marginal probabilities of the outputs are the same given a corresponding input, and that the evidence that the first experiment brings to bear on the second is equivalent to the evidence that the second brings to bear on the first. Thus, they assess that exchange commutativity is appropriate; for all $\alpha$:
+% For all $i,\in \mathbb{N}$, $y,d\in \{0,1\}$, $j\in J$ set
 % \begin{align}
-%     \prob{P}_\alpha^{\RV{Y}_1\RV{Y}_2|\RV{D}_1\RV{D}_2} &= \prob{P}_\alpha^{\RV{Y}_2\RV{Y}_1|\RV{D}_2\RV{D}_1}
+%     \prob{P}_C^{\RV{Y}_i|\RV{J}\RV{I}_i\RV{D}_i}(y|j,k,d) &= \delta_1(p(k,j))\delta_d(y) + \delta_0(p(k,j))\delta_{1-d}(y)
+% \end{align}
+% where $p(k,j)$ projects the $k$-th component of $j$. That is, if $j$ maps $k$ to 1, $\RV{Y}$ goes with $\RV{D}$ while if $h$ maps $k$ to $0$, $\RV{Y}$ goes opposite $\RV{D}$. Suppose also 
+% \begin{align}
+%     \RV{Y}_i\CI_{\prob{P}_C}^e (\RV{X}_{<i},\RV{Y}_{<i},\RV{I}_{<i},\text{id}_C)|(\RV{X}_i,\RV{Y}_i,\RV{J})
+% \end{align}
+% Then $\prob{P}_C^{\RV{Y}|\RV{DI}}$ is IO contractible. Set $\prob{P}_{C}^{\RV{J}}$ to be the uniform measure on $(J,\sigalg{J})$ and for $i>1$
+% \begin{align}
+%     \prob{P}_C^{\RV{D}_i|\RV{I}_i\RV{J}}(d|k,j) &= \delta_{p(k,j)}(d)
+% \end{align}
+% that is, if $j$ maps $k$ to 1, $\RV{D}$ is 1 while if $j$ maps $k$ to $0$, $\RV{D}$ is 0. This also implies
+% \begin{align}
+%     \prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(p(\cdot,j)^{-1}(d)|d,j) &= 1\label{eq:all_eq_d}
 % \end{align}
 
-
-% but this example suggests another reason one might want to avoid deterministic treatment assignments. If the choices $\alpha$ are a deterministic sequence of assignments for each index $i$, this means that there is an enormous set of possible choices, and many degrees of freedom if the choices ``aren't actually chosen'' in the sense of the example above. In contrast, if the set of choices is a single parameter in $[0,1]$ which is then used to assign all treatments according to a random procedure depending only on this parameter, there are many fewer degrees of freedom to exploit if the choice ``isn't actually chosen''.
-
-% A particular concern arises when the choice variable $\text{id}_C$ is not associated with the output of a decision procedure involving the model $\prob{P}_C$. In this situation, the value of $\text{id}_C$ can affect the model in potentially unexpected ways. ``Potentially unexpected'' is a vague notion, and we can't say whether $\text{id}_C$ being completely under the decision maker's control avoids ``unexpected'' dependence on $\text{id}_C$, but it seems to be less problematic.
-
-% We set this up in terms of an ``analyst'' and an ``administrator'' who have responsibility for different parts of the procedure. They don't strictly need to be different people, but it helps make the issue clearer. The analyst's job is to construct a model $\prob{P}_C$, evaluate different options $\alpha\in C$ and offer advice regarding the choice. The administrator's job is to choose some $\alpha\in C$ satisfying the analyst's requirements and to carry out any procedure arising from this.
-
-% This separation of concerns gives the administrator a degree of freedom in their choice, and they can potentially use this to choose $\alpha$ with access to information that the analyst lacks.
-
-% In particular, suppose an experiment is modeled by a sequential input-output model $(\prob{P}_C,(\RV{D},\RV{U}),\RV{Y})$ and the set of choices $C=[0,1]^{\mathbb{N}}$ is a length $\mathbb{N}$ sequence of probability distributions in $\Delta(\{0,1\})$. The analyst, based on their knowledge of the experiment, constructs $\prob{P}_C$ such that $\prob{P}_C^{\RV{Y}_i|\RV{U}_i\RV{D}_i}(1|\cdot,\cdot)$ is given by:
-% \begin{center}
-% \begin{tabular}{ c | c | c }
-%   & $\RV{D}_i=0$ & $\RV{D}_i=1$ \\\hline 
-%  $\RV{U}_i=0$ & 0 & 0 \\ \hline 
-%  $\RV{U}_i=1$ & 1 & 1   
-% \end{tabular}
-% \end{center}
-% and the triples $(\RV{D}_i,\RV{U}_i,\RV{Y}_i)$ are mutually independent given $\text{id}_C$. This makes $\prob{P}_C^{\RV{Y}|\RV{UD}}$ IO contractible over $*$. Suppose also 
+% Then, for $i>1$
 % \begin{align}
-%     \prob{P}_\alpha^{\RV{D}_i}(1) &= \alpha_i
+%     \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{D}_i}(y|j,d) &= \sum_{k\in \mathbb{N}} \delta_1(p(k,j))\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(k|d,j) + \delta_0(p(k,j))\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(k|d,j)\\
+%     &= \sum_{k\in \mathbb{N}} \delta_1(d)\delta_d(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(k|d,j) + \delta_0(d)\delta_{1-d}(y)\prob{P}_C^{\RV{I}_i|\RV{D}_i\RV{J}}(k|d,j)&\text{by Eq \eqref{eq:all_eq_d}}\\
+%     &= \delta_1(y)\\
+%     \implies \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i}(y|d) &= \delta_1(y)
 % \end{align}
-% where $\alpha=(\alpha_i)_{i\in\mathbb{N}}$. From the analyst's point of view, both before and after making their recommendations the $\RV{U}_i$ are also IID. This will be expressed with a probability distribution $\prob{Q}$ representing the analyst's prior knowledge:
+
+% For $q\in I$, set
 % \begin{align}
-%     \prob{Q}^{\RV{U}_i}(1) &= 0.5
+%     \prob{P}_C^{\RV{I}|\RV{J}}(q|j)&= \begin{cases}
+%         0.5 & q=(1,2,3,4,...) \text{ or } (1,3,2,4,...)\\
+%         0&\text{otherwise}
+%     \end{cases}
 % \end{align}
-% one might be tempted to reason that, if $\prob{Q}$ is the analyst's state of knowledge after making any reccomendation, then we should take $\prob{P}_C^{\RV{U}}=\prob{Q}^{\RV{U}}$. Call the resulting model $\prob{P}_C'$. Together with the other assumptions above, this would imply
+% and set
 % \begin{align}
-%     \prob{P}_C^{\prime \RV{Y}_i|\RV{D}_i}(1|d) &= 0.5 & \forall d\in \{0,1\}
+%     \prob{P}_C^{\RV{J}|\RV{D}}(j) &= \begin{cases}
+%         0.5 & j=(0,1,0,1,1,...)\text{ or }j=(0,0,1,1,1,...)\\
+%         0 &\text{otherwise}
+%     \end{cases}
 % \end{align}
-% Thus $\prob{P}_C^{\RV{Y}|\RV{D}}$ is also IO contractible.
+% Let $\overline{J}$ be the support of $\prob{P}_C^{\RV{J}|\RV{D}}(j)$.
 
-% However, the analyst's recommendation \emph{does not} fix the value of $\text{id}_C$. Suppose analyst actually recommends any $\alpha$ such that $\lim_{n\to\infty} \sum_i^n \frac{\alpha_i}{n} = 0.5$ (acknowledging that, in this contrived example, there's no obvious reason to do so). Suppose that the administrator operates by the following rule: \emph{first} they observe the value of $\RV{U}_i$, then they choose $\alpha_i$ equal to whatever they saw with an $\epsilon$ sized step towards $0.5$. That is, if they see $\RV{U}_i\yields 1$, they choose $\alpha_i=1-\epsilon$, where $\epsilon < 0.5$.
-
-% Then the analyst should instead adopt the model
+% Then for $i=1$
 % \begin{align}
-%     \prob{P}_\alpha^{\RV{U}_i}(1) &= \mathds{1}_{\alpha_i>0.5}
+%     \prob{P}_\alpha^{\RV{Y}_1|\RV{J}\RV{D}_1}(y|j,d) &= \sum_{h\in J} \sum_{j\in \mathbb{N}} \prob{P}_\alpha^{\RV{I}_1|\RV{D}_1\RV{J}}(j|d,j)\prob{P}_C^{\RV{J}|\RV{D}_1}(j|d)\left(\delta_1(p(j,h))\delta_d(y) + \delta_0(p(j,j))\delta_{1-d}(y)\right)\\
+%     &= \sum_{j\in \overline{J}} 0.5( \delta_1(p(1,j))\delta_d(y) + \delta_0(p(1,h))\delta_{1-d}(y))\\
+%     &= \delta_{1-d}(y))\\
+%     &\neq  \prob{P}_\alpha^{\RV{Y}_i|\RV{J}\RV{D}_i}(y|j,d) & i\neq 1
 % \end{align}
-% Take $\alpha$ such that $\alpha_i=1-\epsilon$ and $\alpha_j=\epsilon$. Then
+% Thus $\prob{P}_C^{\RV{Y}|\RV{J}\RV{D}}$ is not IO contractible by Theorem \ref{th:equal_of_condits}. 
+
+% However, given any finite permutation $\rho:\mathbb{N}\to\mathbb{N}$
 % \begin{align}
-%     \prob{P}_{\alpha}^{\RV{Y}_i|\RV{D}_i}(1|1) &= 1\\
-%     &\neq \prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j}(1|1)\\
-%     &=0
+%     \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q) &= \sum_{j\in \overline{J}}\sum_{d\in\{0,1\}^{\mathbb{N}}} \prod_{i\in \mathbb{N}} \prob{P}_C^{\RV{Y}_i|\RV{I}_i\RV{D}_i\RV{H}}(y_i|q_i,d_i,j) \prob{P}_\alpha^{\RV{D}_i|\RV{I}_i\RV{J}}(d_i|q_i,j)\prob{P}_C^{\RV{J}}(j)\\
+%     &= \delta_{1-\alpha}(y_1)\delta_{(1)_{i\in\mathbb{N}}}(y_{>1})\\
+%     &= \prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|\rho^{-1}(q))\\
+%     &= \kernel{F}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{I}}(y|q)
 % \end{align}
-% everything has been assumed IID, so $\prob{P}_C^{\RV{Y}|\RV{HD}}$ is not IO contractible.
+% \end{example}
 
-% The original justification for having a set of choices $C$ is that $C$ is the set of things that, after deliberation aided by the model $\prob{P}_C$, the decision maker might select. The present example does not conform to this understanding of the meaning of the set $C$, and it suggests that one should be cautious when modelling ``decision problems'' with ``choices'' that are not actually the things that are being chosen.
+% Theorem \ref{th:cc_ind_treat} requires both that the inputs fully identify which option was chosen -- there is no ``side channel'' by which different options may influence the outputs -- and that the chosen option fully determines the sequence of inputs. This is analogous to the result that randomised experiments partial compliance do not allow the same causal effects to be determined as randomised experiments with full compliance \citep[Sec. 8.1.2]{pearl_causality:_2009}.
 
-% This point is related to the question of why experimenters randomise. \citet{kasy_why_2016} argues that ``randomised controlled trials are not needed for causal identifiability, only controlled trials'', and suggests that experiments should sometimes be designed with deterministic assignments of patients to treatment and control groups, optimised according to the experiment designer's criteria. Following this, \citet{banerjee_theory_2020} suggested that deterministic rules might falter when one can't pick a function to balance covariates in a way that satisfies everyone in a panel of reviewers. 
-
-% Without solving the problem, we observe that the terms ``control'' and ``choice'' here subsume both different kinds of choice indicated above, each of which has different implications for the construction of decision making models. We offer a speculative alternative explanation for randomisation: perhaps that the same model may be appropriate for both notions of ``choice'' under randomised choices, but not under nonrandomised choices.
-
-
-% \citet{savje_randomization_2021} argues that random assignment (under his definition) does not imply unconfoundedness
 
 \section{Conclusion}
 
@@ -1006,6 +808,6 @@ We showed in Theorem \ref{th:det_obs_to_cons} that the assumption of \emph{prece
 
 Recalling the discussion in Section \ref{sec:nci_nco}, the conclusion of CIIR sequences from Theorem \ref{th:det_obs_to_cons} is not enough \emph{on its own} to be useful to a decision maker. The decision maker must \emph{also} bring some prior knowledge such as how their options affect the inputs in the sequence in question. As we point out Section \ref{sec:nci_nco}, this kind of prior knowledge itself can suggest that some ``input'' variables are susceptible to influence by individuals who are ignorant about the conditional distribution of ``outputs'' given these inputs. We raise as a further open question when, if ever, reasoning of this type might support an assumption of the right kind of ``generic relationship'' between conditionals required by Theorem \ref{th:det_obs_to_cons}.
 
-We also showed how a conclusion of causal identifiability can follow from the assumptions that an experiment with identified ``experimental units'' is (in a nontrivial manner) reorderable, that the distribution over outputs it is invariant to reorderings of the experimental units and that the inputs are ``completely under the decision maker's control''. The shuffling of experimental units that we consider have previously suggested to support an analogous conclusion, and we offer a precise mathematical account of what these informal assumptions of experimental symmetries must imply for the conclusion of identifiability to follow. Notably, in Theorem \ref{th:cc_ind_treat}, full compliance arises as a formal requirement rather than an additional informal constraint on the theory of randomised experiments.
+% We also showed how a conclusion of causal identifiability can follow from the assumptions that an experiment with identified ``experimental units'' is (in a nontrivial manner) reorderable, that the distribution over outputs it is invariant to reorderings of the experimental units and that the inputs are ``completely under the decision maker's control''. The shuffling of experimental units that we consider have previously suggested to support an analogous conclusion, and we offer a precise mathematical account of what these informal assumptions of experimental symmetries must imply for the conclusion of identifiability to follow. Notably, in Theorem \ref{th:cc_ind_treat}, full compliance arises as a formal requirement rather than an additional informal constraint on the theory of randomised experiments.
 
-The assumptions of precedent and individual-level CIIR sequences employ two different methods to get around the problem discussed in Chapter \ref{ch:evaluating_decisions} that the assumption of CIIR sequences is often unreasonable. Precedent considers CIIR sequences with unobserved inputs, which makes the experimental symmetries identified in the previous chapter irrelevant on the grounds that there is no experiment that generates the required sequence of observations and therefore no altered experiment that it ought to be equivalent to. Individual-level CIIR sequences force every input in the sequence of inputs to have a unique value, which means that the ``hypothesis'' $\RV{H}$ cannot be determined as a function of the observed data, also ruling out the objectionable symmetries. The final open question we pose for this chapter is: are there any fundamental differences between these two approaches, or are they essentially similar?
+% The assumptions of precedent and individual-level CIIR sequences employ two different methods to get around the problem discussed in Chapter \ref{ch:evaluating_decisions} that the assumption of CIIR sequences is often unreasonable. Precedent considers CIIR sequences with unobserved inputs, which makes the experimental symmetries identified in the previous chapter irrelevant on the grounds that there is no experiment that generates the required sequence of observations and therefore no altered experiment that it ought to be equivalent to. Individual-level CIIR sequences force every input in the sequence of inputs to have a unique value, which means that the ``hypothesis'' $\RV{H}$ cannot be determined as a function of the observed data, also ruling out the objectionable symmetries. The final open question we pose for this chapter is: are there any fundamental differences between these two approaches, or are they essentially similar?
