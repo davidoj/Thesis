@@ -1002,22 +1002,8 @@ For arbitrary $\prob{P}_{\alpha}\in \prob{P}_C$
 Thus $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$ is a version of $\prob{P}_{\alpha}^{\RV{Z}|\RV{Y}\RV{X}}$ for all $\alpha$ and hence also a version of $\prob{P}_C^{\RV{Z}|\RV{Y}\RV{X}}$.
 \end{proof}
 
-
-\begin{theorem}
-Given probability gap model $\prob{P}_C$, $\RV{X}$, $\RV{Y}$, $\RV{Z}$ such that $\prob{P}_C^{\RV{Z}|\RV{YX}}$ exists, $\prob{P}_C^{\RV{Z}|\RV{Y}}$ exists iff $\RV{Z}\CI_{\prob{P}_C} \RV{X}|\RV{Y}$.
-\end{theorem}
-
-\begin{proof}
-If:
-If $\RV{Z}\CI_{\prob{P}_C} \RV{X}|\RV{Y}$ then by Theorem \ref{th:cho_ci_equiv}, for each $\prob{P}_\alpha\in \prob{P}_C$ there exists $\prob{P}_{\alpha}^{\RV{Z}|\RV{Y}}$ such that
-\begin{align}
-    \prob{P}_\alpha^{\RV{Y}|\RV{WX}} &= \tikzfig{cond_indep_erase}
-\end{align}
-\end{proof}
-
-
 \begin{theorem}[Valid higher order conditionals]
-Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with regular conditional $\prob{P}_C^{\RV{YZ}|\RV{X}}$, $Y$ discrete and $Z$ standard measurable. Then there exists a valid regular $\prob{P}_C^{\RV{Z}|\RV{XY}}$.
+Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with valid regular conditional $\prob{P}_C^{\RV{YZ}|\RV{X}}$, $Y$ discrete and $Z$ standard measurable. Then there exists a valid regular $\prob{P}_C^{\RV{Z}|\RV{XY}}$.
 \end{theorem}
 
 \begin{proof}
@@ -1028,12 +1014,15 @@ We will show that there is a Markov kernel $\kernel{Q}$ almost surely equal to $
 By validity of $\prob{P}_C^{\RV{YZ}|\RV{X}}$, $x\in \RV{X}(\Omega)$ and $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A=\emptyset$ implies $\prob{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0$. Thus we need to show
 
 \begin{align}
-    \forall A\in \sigalg{Z}, x\in X, y\in Y: \prob{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0 \implies \left(\prob{Q}(A|x,y) = 0\right) \lor \left((\RV{X},\RV{Y})\yields \{(x,y)\} = \emptyset\right)
+    \forall A\in \sigalg{Z}, x\in X, y\in Y:\\ \prob{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0 \implies \left(\prob{Q}(A|x,y) = 0\right) \lor \left((\RV{X},\RV{Y})\yields \{(x,y)\} = \emptyset\right)
 \end{align}
 
-For all $x,y$ such that $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}(\{y\}|x)$ is positive, we have $\model{P}^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0\implies \prob{P}_\square^{\RV{Z}|\RV{XY}}(A|x,y)=0=:\kernel{Q}(A|x,y)$.
+For all $x,y$ such that $\kernel{P}_{C}^{\RV{Y}|\RV{X}}(\{y\}|x)$ is positive, we have
+\begin{align}
+    \model{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0\implies \prob{P}_C^{\RV{Z}|\RV{XY}}(A|x,y)=0=:\kernel{Q}(A|x,y)
+\end{align}
 
-Furthermore, where $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$, we either have $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A= \emptyset$ or can choose some $\omega\in (\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A$ and let $\kernel{Q}(\RV{Z}(\omega)|x,y) = 1$. This is an arbitrary choice, and may differ from the original $\prob{P}_C^{\RV{Z}|\RV{XY}}$. However, because $Y$ is discrete the union of all points $y$ where $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$ is a measure zero set, and so $\kernel{Q}$ differs from $\kernel{P}_{\{\}}^{\RV{Y}|\RV{X}}$ on a measure zero set.
+Furthermore, where $\kernel{P}_{C}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$, we either have $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A= \emptyset$ or can choose some $\omega\in (\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A$ and let $\kernel{Q}(\RV{Z}(\omega)|x,y) = 1$. This is an arbitrary choice, and may differ from the original $\prob{P}_C^{\RV{Z}|\RV{XY}}$. However, because $Y$ is discrete the union of all points $y$ where $\kernel{P}_{C}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$ is a measure zero set, and so $\kernel{Q}$ differs from $\kernel{P}_{C}^{\RV{Y}|\RV{X}}$ on a measure zero set.
 \end{proof}
 
 \section{Interpretation of probabilistic decision models}\label{sec:interp_of_dms}
