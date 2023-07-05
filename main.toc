@@ -1,62 +1,62 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {australian}{}
 \contentsline {chapter}{Acknowledgements}{ii}{section*.2}%
-\contentsline {chapter}{Abstract}{iii}{section*.4}%
-\contentsline {chapter}{List of Symbols}{vi}{chapter*.6}%
+\contentsline {chapter}{Abstract}{iii}{section*.3}%
+\contentsline {chapter}{List of Symbols}{vi}{chapter*.5}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Making decisions with data}{1}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Hypotheticals}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Hypotheticals}{2}{subsection.1.1.1}%
 \contentsline {subsection}{\numberline {1.1.2}Structural interventions}{3}{subsection.1.1.2}%
 \contentsline {subsection}{\numberline {1.1.3}Potential outcomes}{4}{subsection.1.1.3}%
 \contentsline {subsection}{\numberline {1.1.4}Successes of theories of causal inference}{5}{subsection.1.1.4}%
-\contentsline {subsubsection}{Successes of potential outcomes}{5}{section*.7}%
-\contentsline {subsubsection}{Successes of structural interventional models}{7}{section*.8}%
+\contentsline {subsubsection}{Successes of potential outcomes}{5}{section*.6}%
+\contentsline {subsubsection}{Successes of structural interventional models}{7}{section*.7}%
 \contentsline {subsection}{\numberline {1.1.5}Challenges to popular theories of causal inference}{9}{subsection.1.1.5}%
-\contentsline {subsubsection}{Difficulties for structural models}{9}{section*.9}%
+\contentsline {subsubsection}{Difficulties for structural models}{9}{section*.8}%
 \contentsline {section}{\numberline {1.2}Outlining our approach}{12}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Technical Prerequisites}{16}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Probability Theory}{17}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Standard Probability Theory}{17}{subsection.2.1.1}%
-\contentsline {subsubsection}{$\sigma $-algebras}{17}{section*.10}%
-\contentsline {paragraph}{Common $\sigma $ algebras}{17}{section*.11}%
-\contentsline {subsubsection}{Probability measures and Markov kernels}{17}{section*.12}%
-\contentsline {paragraph}{Common probability measures and Markov kernels}{18}{section*.13}%
-\contentsline {subsubsection}{Variables, conditionals and marginals}{18}{section*.14}%
-\contentsline {subsubsection}{Markov kernel product notation}{19}{section*.15}%
-\contentsline {subsubsection}{Semidirect product}{20}{section*.16}%
-\contentsline {section}{\numberline {2.2}String Diagrams}{21}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Elements of string diagrams}{21}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Special maps}{23}{subsection.2.2.2}%
-\contentsline {paragraph}{Plates}{23}{section*.17}%
-\contentsline {subsection}{\numberline {2.2.3}Commutative comonoid axioms}{24}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Manipulating String Diagrams}{24}{subsection.2.2.4}%
-\contentsline {subsubsection}{Examples}{25}{section*.18}%
-\contentsline {section}{\numberline {2.3}Probability Sets and Decision Models}{26}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Almost sure equality}{27}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Existence of conditional distributions}{29}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Extended conditional independence}{30}{subsection.2.3.3}%
-\contentsline {section}{\numberline {2.4}Maximal probability sets and valid conditionals}{34}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Interpretation of probabilistic decision models}{39}{section.2.5}%
+\contentsline {subsection}{\numberline {1.2.1}Summary of motivation and key differences of new approach}{15}{subsection.1.2.1}%
+\contentsline {chapter}{\numberline {2}Technical Prerequisites}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Probability Theory}{18}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Standard Probability Theory}{18}{subsection.2.1.1}%
+\contentsline {subsubsection}{$\sigma $-algebras}{18}{section*.9}%
+\contentsline {paragraph}{Common $\sigma $ algebras}{18}{section*.10}%
+\contentsline {subsubsection}{Probability measures and Markov kernels}{18}{section*.11}%
+\contentsline {paragraph}{Common probability measures and Markov kernels}{19}{section*.12}%
+\contentsline {subsubsection}{Variables, conditionals and marginals}{19}{section*.13}%
+\contentsline {subsubsection}{Markov kernel product notation}{20}{section*.14}%
+\contentsline {subsubsection}{Semidirect product}{21}{section*.15}%
+\contentsline {section}{\numberline {2.2}String Diagrams}{22}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Elements of string diagrams}{22}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Special maps}{24}{subsection.2.2.2}%
+\contentsline {paragraph}{Plates}{24}{section*.16}%
+\contentsline {subsection}{\numberline {2.2.3}Commutative comonoid axioms}{25}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Manipulating String Diagrams}{25}{subsection.2.2.4}%
+\contentsline {subsubsection}{Examples}{26}{section*.17}%
+\contentsline {section}{\numberline {2.3}Probability Sets and Decision Models}{27}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Almost sure equality}{29}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Existence of conditional distributions}{30}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Extended conditional independence}{31}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Maximal probability sets and valid conditionals}{35}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Interpretation of probabilistic decision models}{40}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Random variables and measurement procedures}{40}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Defining measurement procedures}{40}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Observable variables}{41}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}Unobservable variables}{42}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.5.2}Defining measurement procedures}{41}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Observable variables}{42}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Unobservable variables}{43}{subsection.2.5.4}%
 \contentsline {subsection}{\numberline {2.5.5}Decision procedures}{43}{subsection.2.5.5}%
-\contentsline {subsection}{\numberline {2.5.6}Interpretation of potential outcomes and interventions}{43}{subsection.2.5.6}%
+\contentsline {subsection}{\numberline {2.5.6}Interpretation of potential outcomes and interventions}{44}{subsection.2.5.6}%
 \contentsline {chapter}{\numberline {3}Models with choices and consequences}{45}{chapter.3}%
 \contentsline {section}{\numberline {3.1}What is the point of causal inference?}{46}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Modelling decision problems}{47}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Formal definitions}{48}{subsection.3.2.1}%
 \contentsline {section}{\numberline {3.3}Theories of decision making}{49}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}von Neumann-Morgenstern utility}{49}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.1}von Neumann-Morgenstern utility}{50}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Savage decision theory}{50}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Jeffrey's decision theory}{51}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Causal decision theory}{53}{subsection.3.3.4}%
 \contentsline {subsection}{\numberline {3.3.5}Statistical decision theory}{53}{subsection.3.3.5}%
-\contentsline {subsubsection}{From consequences to statistical decision problems}{55}{section*.19}%
-\contentsline {subsubsection}{Complete class theorem}{57}{section*.20}%
+\contentsline {subsubsection}{From consequences to statistical decision problems}{55}{section*.18}%
+\contentsline {subsubsection}{Complete class theorem}{58}{section*.19}%
 \contentsline {section}{\numberline {3.4}Conclusion}{60}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Supplement: Axiomatisation of decision theories}{60}{section.3.5}%
 \contentsline {chapter}{\numberline {4}Repeatable decision problems}{61}{chapter.4}%
 \contentsline {subsection}{\numberline {4.0.1}Chapter outline}{64}{subsection.4.0.1}%
 \contentsline {section}{\numberline {4.1}Previous work on causal symmetries}{64}{section.4.1}%
@@ -66,46 +66,45 @@
 \contentsline {subsection}{\numberline {4.3.2}Symmetries of CIIR sequences}{75}{subsection.4.3.2}%
 \contentsline {section}{\numberline {4.4}Discussion}{77}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Simple symmetries vs strategic behaviour}{77}{subsection.4.4.1}%
-\contentsline {paragraph}{Example 1: purely passive observation}{77}{section*.21}%
-\contentsline {paragraph}{Example 2: all inputs chosen by the decision maker}{78}{section*.22}%
-\contentsline {paragraph}{Example 3: mixing strategies}{78}{section*.23}%
+\contentsline {paragraph}{Example 1: purely passive observation}{77}{section*.20}%
+\contentsline {paragraph}{Example 2: all inputs chosen by the decision maker}{78}{section*.21}%
+\contentsline {paragraph}{Example 3: mixing strategies}{78}{section*.22}%
 \contentsline {subsection}{\numberline {4.4.2}Implications of IO contractibility}{79}{subsection.4.4.2}%
-\contentsline {paragraph}{Example 4: experimental and observational data}{79}{section*.24}%
+\contentsline {paragraph}{Example 4: experimental and observational data}{79}{section*.23}%
+\contentsline {paragraph}{Example 5: Backdoor adjustment}{80}{section*.24}%
 \contentsline {subsection}{\numberline {4.4.3}No causes in, no causes out}{80}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}Data-dependent inputs}{80}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Combs}{81}{subsection.4.5.1}%
-\contentsline {subsubsection}{Aside: combs are the output of the ``fix'' operation}{83}{section*.26}%
+\contentsline {section}{\numberline {4.5}Data-dependent inputs}{81}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Combs}{82}{subsection.4.5.1}%
+\contentsline {subsubsection}{Aside: combs are the output of the ``fix'' operation}{84}{section*.25}%
 \contentsline {subsection}{\numberline {4.5.2}Representation of data-dependent inputs}{84}{subsection.4.5.2}%
-\contentsline {subsubsection}{IO contractible Markov kernels}{84}{section*.27}%
-\contentsline {subsubsection}{Representation of IO contractible kernels}{85}{section*.28}%
-\contentsline {section}{\numberline {4.6}Discussion}{86}{section.4.6}%
+\contentsline {subsubsection}{IO contractible Markov kernels}{85}{section*.26}%
+\contentsline {subsubsection}{Representation of IO contractible kernels}{85}{section*.27}%
+\contentsline {section}{\numberline {4.6}Discussion}{87}{section.4.6}%
 \contentsline {chapter}{\numberline {5}Causal modelling with decision models}{88}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Causal Bayesian networks}{89}{section.5.1}%
 \contentsline {subsection}{\numberline {5.1.1}Definition of a Causal Bayesian Network}{90}{subsection.5.1.1}%
 \contentsline {subsection}{\numberline {5.1.2}Unrolled causal Bayesian networks}{92}{subsection.5.1.2}%
-\contentsline {subsubsection}{Unrolled CBNs}{93}{section*.29}%
+\contentsline {subsubsection}{Unrolled CBNs}{93}{section*.28}%
 \contentsline {subsection}{\numberline {5.1.3}Causal Bayesian networks with uncertain joint distributions}{94}{subsection.5.1.3}%
 \contentsline {subsection}{\numberline {5.1.4}Probabilistic Graphical Models}{95}{subsection.5.1.4}%
-\contentsline {subsection}{\numberline {5.1.5}Unobserved confounders and precedent}{97}{subsection.5.1.5}%
+\contentsline {subsection}{\numberline {5.1.5}Unobserved confounders and precedent}{96}{subsection.5.1.5}%
 \contentsline {section}{\numberline {5.2}Potential Outcomes models}{101}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Individual-level response functions}{103}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}References to individual-level IO contractibility}{104}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Unique identifiers}{105}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Identification}{106}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Other examples}{113}{subsection.5.3.4}%
-\contentsline {paragraph}{Example 5: Backdoor adjustment}{113}{section*.30}%
-\contentsline {section}{\numberline {5.4}Conclusion}{114}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Conclusion}{115}{chapter.6}%
-\contentsline {chapter}{\numberline {A}Axiomatisation of decision theories}{118}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Savage axioms}{118}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Bolker axioms}{119}{section.A.2}%
-\contentsline {chapter}{\numberline {B}Proofs of key results in Chapter \ref {ch:evaluating_decisions}}{120}{appendix.B}%
-\contentsline {section}{\numberline {B.1}IO Contractibility}{120}{section.B.1}%
-\contentsline {subsection}{\numberline {B.1.1}Equality of equally sized contractions}{120}{subsection.B.1.1}%
-\contentsline {section}{\numberline {B.2}Tabulated conditional distributions}{123}{section.B.2}%
-\contentsline {section}{\numberline {B.3}Representation of IO contractible models}{128}{section.B.3}%
-\contentsline {section}{\numberline {B.4}Symmetries of CIIR sequences proofs}{134}{section.B.4}%
-\contentsline {section}{\numberline {B.5}Proofs for data-dependent models}{138}{section.B.5}%
-\contentsline {chapter}{\numberline {C}Proofs of key results in Chapter \ref {ch:other_causal_frameworks}}{146}{appendix.C}%
-\contentsline {section}{\numberline {C.1}Proofs related to causal Bayesian networks}{146}{section.C.1}%
-\contentsline {section}{\numberline {C.2}Proofs related to precedent}{147}{section.C.2}%
+\contentsline {subsection}{\numberline {5.2.1}Justifying identifiability assumptions}{103}{subsection.5.2.1}%
+\contentsline {subsubsection}{Different actions that yield the same outcome distribution}{104}{section*.29}%
+\contentsline {subsubsection}{Potential outcomes as ``pseudo-observables''}{105}{section*.30}%
+\contentsline {section}{\numberline {5.3}Conclusion}{108}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Conclusion}{109}{chapter.6}%
+\contentsline {chapter}{Bibliography}{112}{chapter*.31}%
+\contentsline {chapter}{\numberline {A}Axiomatisation of decision theories}{120}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Savage axioms}{120}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Bolker axioms}{121}{section.A.2}%
+\contentsline {chapter}{\numberline {B}Proofs of key results in Chapter \ref {ch:evaluating_decisions}}{122}{appendix.B}%
+\contentsline {section}{\numberline {B.1}IO Contractibility}{122}{section.B.1}%
+\contentsline {subsection}{\numberline {B.1.1}Equality of equally sized contractions}{122}{subsection.B.1.1}%
+\contentsline {section}{\numberline {B.2}Tabulated conditional distributions}{125}{section.B.2}%
+\contentsline {section}{\numberline {B.3}Representation of IO contractible models}{130}{section.B.3}%
+\contentsline {section}{\numberline {B.4}Symmetries of CIIR sequences proofs}{136}{section.B.4}%
+\contentsline {section}{\numberline {B.5}Proofs for data-dependent models}{140}{section.B.5}%
+\contentsline {chapter}{\numberline {C}Proofs of key results in Chapter \ref {ch:other_causal_frameworks}}{148}{appendix.C}%
+\contentsline {section}{\numberline {C.1}Proofs related to causal Bayesian networks}{148}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Proofs related to precedent}{149}{section.C.2}%

@@ -115,7 +115,7 @@ One of the simplest graphical models in which causal effects are identified that
 
 \subsection{Challenges to popular theories of causal inference}
 
-Despite the fact that both the potential outcomes and structural interventional approaches have substantially advanced everyone's understanding of causal inference, we believe that both approaches face difficulties that make them hard to apply outside of special settings. The difficulty with potential outcomes is easy to state: the potential outcomes framework offers no clear theory of counterfactuals. Thus the appropriate interpretation of counterfactuals statements must either be obvious or established by convention or else communication using the framework risks confusion. 
+Despite the fact that both the potential outcomes and structural interventional approaches have substantially advanced everyone's understanding of causal inference, we believe that both approaches face difficulties that make them hard to apply outside of special settings. The difficulty with potential outcomes is easy to state: the potential outcomes framework offers no clear theory of counterfactuals. This makes it difficult to even ask if we are making valid counterfactual inferences in general, and pragmatically we rely on the appropriate interpretation of counterfactuals being obvious to everyone who needs to interpret the model. 
 
 As we noted earlier, some authors have suggested that potential outcomes should represent the potential consequences of choices or actions, and that this might perhaps form the basis of a theory of counterfacutals. The work in this thesis builds a theory of causal inference starting from the view that the fundamental problem to be addressed is a problem of making informed choices. We don't have a particularly strong view on whether our theory is fundamentally different to potential outcomes, or whether the two approaches are fundamentally similar but look different because we focus on modelling an abstract problem of making informed choices, while potential outcomes is often focused much more on various concrete problems.
 
@@ -213,6 +213,29 @@ There is substantial overlap between these different methods for relating observ
 The mathematical basis for essentially all of the work in this thesis is probability theory, though we make use of nonstandard constructions within the theory to facilitate the representation of sets of options in the models we consider. We introduce the relevant theory in Chapter \ref{ch:tech_prereq}. As is common in causal inference, we often use a graphical language to represent probabilistic decision models. The language we use is somewhat different to the directed graphs that are standard in the area. We use a string diagram notation that can be related to ordinary directed graphs as in \citep{fong_causal_2013}, but which also supports equality statements and a collection of transformations that can be applied to a diagram to yield an equivalent diagram.
 
 We conclude in Chapter \ref{ch:discussion}, revisiting key results from this thesis and surveying important questions that they raise.
+
+\subsection{Summary of motivation and key differences of new approach}
+
+This is a brief summary of the motivation for exploring a new approach to causal modelling and key differences to existing systems. As this is a summary, it necessarily neglects many subtleties of the discussion.
+
+A key challenge in causal inference is that it requires assumptions that are not generally valid and that are hard to empirically evaluate in the context of interest. There are two existing approaches to causal modelling: potential outcomes models and structural interventional models. Both are used to formally model data-driven decision problems, and both feature a representation of causation that does not depend on the options a decision maker has available. While it is sometimes the case that the correspondence between options and counterfactuals or interventions is intuitively obvious, it is difficult to give a general account of the correspondence, and in fact explaining counterfactuals in general is an open philosophical problem. The approach to causal modelling presented here instead takes a decision maker's options as the causal primitive, and does not aim to offer a problem independent account of causation. A motivating hypothesis -- and one that is far from proven -- is that by avoiding the need to offer a general account of causation, we may be better placed to understand the assumptions requierd for valid causal inference.
+
+\begin{center}
+\begin{tabular}{ |c|p{5cm}|p{5cm}|p{5cm}| } 
+ \hline
+  & Decision Models & Potential Outcomes Models & Structural Interventional Models  \\
+ \hline
+ Causal primitive & options & potential outcomes & structural interventions \\ 
+ What they don't say & what causes what/what would have happened counterfactually & counterfactual to options correspondence & counterfactual to intervention correspondence
+ Interpretation & problem specific set of options being considered & alternative versions of key variables under counterfactual premises & consequences of acting to change key variables in particular ways \\
+ Identification assumptions & pairs of variables with invariant conditional probabilities & conditional independence of potential outcomes and premise & pairs of variables with all common causes observed\\
+ Graphical notation & string diagrams & various & directed acyclic graphs \\
+ Key questions & observation to consequence bridge principles & conditional independence of counterfactual variables & learning causal structure \\
+ \hline
+\end{tabular}
+\end{center}
+
+
 
 % These assumptions all invoke either ``potential outcomes'' or ``causal structure''. Potential outcomes are, by definition, the union of a set of observed variables and a set of hypothetical claims. If one is inclined to accept that causal structures are ultimately underwritten by certain experimental procedures, then causal structures may be observed under some conditions (for example, if an experimental procedure is given for each $do()$-intervention, one can apply the method of \citep{eberhardt_almost_2008}) However, causal structures are often held to represent relationships that cannot be reasonably probed by an experiment (\citep[Chap. ~11]{pearl_causality:_2009},\citet{pearl_does_2018}), and in our view the general question of whether causal structures are observable or a mixture of observable properties and hypothetical claims is unresolved.
 

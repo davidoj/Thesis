@@ -1,0 +1,34 @@
+# Change Notes
+
+## Additional changes
+
+Changed title, as it was (unintentionally) very close to one of my citations.
+
+Examiner 3:
+- adding a paragraph or subsection to summarize the major differences and the motivation to propose something new would be really helpful.
+
+Added at the end of Ch 1: introduction
+
+ - some terminologies are never defined (e.g. risks confusion) and some are used before they are defined such as identical responses and repeated response functions,
+seemingly assuming they are standard.
+
+Rewrote the sentence with the phrase "risks confusion" (which was not being used as a technical term)
+
+ - If I enter "repeated response functions causal" in Google Scholar, nothing pops up, contradictory to the claim that “of repeated response functions underpins many common models of causal inference”. And "repeated response function" is only defined 2 pages later on page 63; that is, "sequences of conditionally independent and identical response functions (CIIR sequences), a precise term for what we refer to above as “repeated response functions”
+
+Clarified that other causal inference frameworks depend on assumptions equivalent to conditionally independent and identical response functions, not that the assumption itself is frequently made in the same language.
+
+ - It would be great if future work can move onto causal effect estimation and testing the framework in some experiments and empirical studies and comparing inferential results in this framework to those obtained from potential outcomes framework and causal graph approach, and even the existing decision theoretic approach.
+
+I agree that evaluation is an important direction for future work, both for this and other approaches to causal inferencem, and have made this point more prominent in the conclusion.
+
+ - Pearl claims the potential outcome and causal graph paradigms are equivalent mathematically, so does Robins on some particular causal graph. I assume this new framework, after incorporating the domain expert knowledge through decision modeling, would lead to the same causality conclusion in the cases where the assumptions in other approaches are satisfied
+
+In Chapter 5 I show how to represent potential outcomes and structural interventional models as decision models. By the procedures outlined there, it's always possible to construct a potential outcomes or structural interventional model and turn it into a decision model which will yield the same conclusions (I've added to the introduction to Chapter 5 to make this point explicit). 
+
+Examiner 2:
+ - General point: I note (with approval) that the candidate has attempted careful discrimination between different types of mathematical objects by the use of distinct fonts and/or capitalisation. However there are many places where this breaks down, and further close attention is required.
+
+I have read over the text again and corrected notation where errors were found.
+
+ - 
