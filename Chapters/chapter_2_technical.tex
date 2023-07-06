@@ -79,7 +79,7 @@ Given measurable spaces $(E,\sigalg{E})$ and $(F,\sigalg{F})$ and $\kernel{M}:E\
 \end{notation}
 
 \begin{definition}[Deterministic Markov kernel]
-A \emph{deterministic} Markov kernel $\kernel{A}:E\to \Delta(\mathcal{F})$ is a kernel such that $\kernel{A}_x(B)\in\{0,1\}$ for all $x\in E$, $B\in\mathcal{F}$.
+A \emph{deterministic} Markov kernel $\kernel{A}:E\kto F$ is a kernel such that $\kernel{A}_x(B)\in\{0,1\}$ for all $x\in E$, $B\in\mathcal{F}$.
 \end{definition}
 
 \paragraph{Common probability measures and Markov kernels}
@@ -161,7 +161,7 @@ for all $A\in \sigalg{Y}$.
 \begin{definition}[Kernel-kernel product]\label{def:kproduct}
 Given $\kernel{M}:X\kto Y$ and $\kernel{N}:Y\kto Z$, the \emph{kernel-kernel product} $\kernel{M}\kernel{N}:X\kto Z$ is given by
 \begin{align}
-\kernel{MN} (A|x) := \int_Y \kernel{N}(A|x) \kernel{M}(\mathrm{d}y|x)
+\kernel{MN} (A|x) := \int_Y \kernel{N}(A|y) \kernel{M}(\mathrm{d}y|x)
 \end{align}
 for all $A\in \sigalg{Z}$, $x\in X$.
 \end{definition}
@@ -222,17 +222,19 @@ Given $\prob{K}:X\kto Y$, $\prob{L}:Y\times X\kto Z$ and $\prob{M}:Z\times Y\tim
 \end{lemma}
 
 \begin{proof}
+For $x\in X$, $A\in \sigalg{Y}$, $B\in \sigalg{Z}$, $C\in \sigalg{W}$
 \begin{align}
-    (\prob{K}\odot \prob{L})\odot \prob{M} &= \tikzfig{odot_assoc_1}\\
-                                            &=  \tikzfig{odot_assoc_2}\\
-                                            &= \prob{K}\odot (\prob{L}\odot \prob{M})
+    (\prob{K}\odot \prob{L})\odot \prob{M}(A\times B\times C |x) &= \int_B \prob{M}(C|z, y,x)\int_A \prob{L}(dz|y, x)\prob{K}(dy|x)\\
+    &= \int_B \int_A \prob{M}(C|z, y,x)\prob{L}(dz|y, x)\prob{K}(dy|x)\\
+    &= \int_A \int_B \prob{M}(C|z, y,x)\prob{L}(dz|y, x)\prob{K}(dy|x)\\
+    &= \prob{K}\odot (\prob{L}\odot \prob{M})(A\times B\times C |x)
 \end{align}
 \end{proof}
 
 The semidirect product can be used to define a notion of almost sure equality: two kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are $\mu$-almost surely equal if $\mu\odot \kernel{K}=\mu\odot \kernel{L}$. This is identical to the notion of almost sure equality in \citet{cho_disintegration_2019}, who shows that under the assumption that $(Y,\sigalg{Y})$ is countably generated, $\kernel{K}\overset{\mu}{\cong}\kernel{L}$ if and only if $\kernel{K}=\kernel{L}$ $\mu$-almost everywhere.
 
 \begin{definition}[Almost sure equality]\label{def:asequal_pspace}
-Two Markov kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are almost surely equal $\overset{\prob{P}_C}{\cong}$ with respect to a probability space $(\mu,X,\sigalg{X})$, written $\kernel{K}\overset{\mu}{\cong}\kernel{L}$ if
+Two Markov kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are almost surely equal $\overset{\mu}{\cong}$ with respect to a probability space $(\mu,X,\sigalg{X})$, written $\kernel{K}\overset{\mu}{\cong}\kernel{L}$ if
 \begin{align}
     \mu\odot \kernel{K}=\mu\odot \kernel{L}
 \end{align}
@@ -310,19 +312,19 @@ Given $\prob{K}:X\kto Y$ and $\prob{L}:Y\times X\kto Z$, the semidirect product 
                             &= \tikzfig{copy_product}
 \end{align}
 
-A space $X$ is identified with the identity kernel $\mathrm{id}^X:X\to \Delta(\sigalg{X})$. A bare wire represents the identity kernel:
+A space $X$ is identified with the identity kernel $\kernel{I}_X:X\kto X$. A bare wire represents the identity kernel:
 
 \begin{align}
-\mathrm{Id}^X:=\begin{tikzpicture}
+\kernel{I}_X:=\begin{tikzpicture}
 \path (0,0) node (X) {$X$}
 ++(2,0) node (Y) {$X$};
 \draw (X) -- (Y);
 \end{tikzpicture}
 \end{align}
 
-Product spaces $X\times Y$ are identified with tensor product of identity kernels $\mathrm{id}^X\otimes \mathrm{id}^Y$. These can be represented either by two parallel wires or by a single wire representing the identity on the product space $X\times Y$:
+Product spaces $X\times Y$ are identified with tensor product of identity kernels $\kernel{I}_X\otimes \kernel{I}_Y$. These can be represented either by two parallel wires or by a single wire representing the identity on the product space $X\times Y$:
 \begin{align}
-X\times Y \cong \mathrm{Id}^X\otimes \mathrm{Id}^Y &:= \begin{tikzpicture}
+X\times Y \cong \kernel{I}_X\otimes \kernel{I}_Y &:= \begin{tikzpicture}
 \path (0,0) node (E) {$X$}
 ++(1,0) node (F) {$X$}
 (0,-0.5) node (F1) {$Y$}
@@ -337,7 +339,7 @@ X\times Y \cong \mathrm{Id}^X\otimes \mathrm{Id}^Y &:= \begin{tikzpicture}
 \end{tikzpicture}
 \end{align}
 
-A kernel $\kernel{L}:X\to \Delta(\mathcal{Y}\otimes\mathcal{Z})$ can be written using either two parallel output wires or a single output wire, appropriately labeled:
+A kernel $\kernel{L}:X\kto Y\times Z$ can be written using either two parallel output wires or a single output wire, appropriately labeled:
 
 \begin{align}
 &\begin{tikzpicture}
@@ -363,9 +365,9 @@ We read diagrams from left to right (this is somewhat different to \citet{fritz_
 \subsection{Special maps}
 
 \begin{definition}[Identity map]\label{def:ident_k}
-The identity map $\text{Id}_X:X\kto X$ defined by $(\text{id}_X)(A|x)= \delta_x(A)$ for all $x\in X$, $A\in\sigalg{X}$, is represented by a bare line.
+The identity map $\kernel{I}_X:X\kto X$ defined by $(\kernle{I}_X)(A|x)= \delta_x(A)$ for all $x\in X$, $A\in\sigalg{X}$, is represented by a bare line.
 \begin{align}
-    \mathrm{id}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+    \mathrm{I}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
     \path (0,0) node (A) {$X$} ++ (0.5,0) node (B) {$X$};
     \draw (A) -- (B);
 \end{tikzpicture}
@@ -470,8 +472,8 @@ String diagrams can always be converted into definitions involving integrals and
 For arbitrary $\kernel{K}:X\times Y\kto Z$, $\kernel{L}:W\kto Y$
 
 \begin{align}
-    \tikzfig{identity_tensor_L} &= (\text{id}_X\otimes \kernel{L})\kernel{K}\\
-    [(\text{id}_X\otimes \kernel{L})\kernel{K}](A|x,w) &= \int_{Y}\int_X   \kernel{K}(A|x',y')\kernel{L}(\mathrm{d}y'|w)\delta_x(\mathrm{d}x')\\
+    \tikzfig{identity_tensor_L} &= (\kernel{I}_X\otimes \kernel{L})\kernel{K}\\
+    [(\kernel{I}_X\otimes \kernel{L})\kernel{K}](A|x,w) &= \int_{Y}\int_X   \kernel{K}(A|x',y')\kernel{L}(\mathrm{d}y'|w)\delta_x(\mathrm{d}x')\\
                                            &= \int_Y  \kernel{K}(A|x,y') \kernel{L}(dy'|w)
 \end{align}
 
@@ -480,8 +482,8 @@ That is, an identity map ``passes its input directly to the next kernel''.
 For arbitrary $\kernel{K}: X\times Y\times Y\kto Z$:
 
 \begin{align}
- \tikzfig{identity_tensor_copy} &= (\text{id}_X\otimes \text{Copy}_Y)\kernel{K}\\
- [(\text{id}_X\otimes \text{Copy}_Y)\kernel{K}](A|x,y) &= \int_Y\int_Y \kernel{K}(A|x,y',y'') \delta_y(\mathrm{d}y')\delta_y(\mathrm{d}y'')\\
+ \tikzfig{identity_tensor_copy} &= (\kernel{I}_X\otimes \text{Copy}_Y)\kernel{K}\\
+ [(\kernel{I}_X\otimes \text{Copy}_Y)\kernel{K}](A|x,y) &= \int_Y\int_Y \kernel{K}(A|x,y',y'') \delta_y(\mathrm{d}y')\delta_y(\mathrm{d}y'')\\
                                            &= \kernel{K}(A|x,y,y)
 \end{align}
 
@@ -509,7 +511,7 @@ For arbitrary $\kernel{K}:X\kto Y\times Z$
 Given $\kernel{K}:X\kto Y$ and $\kernel{L}:Y\kto Z$:
 
 \begin{align}
-	(\kernel{K}\cprod \kernel{L})(\mathrm{id}_{Y}\otimes \mathrm{Del}_Z) &= \tikzfig{semidirect_K_L}\\
+	(\kernel{K}\cprod \kernel{L})(\kernel{I}_{Y}\otimes \mathrm{Del}_Z) &= \tikzfig{semidirect_K_L}\\
 	 &= \tikzfig{semidirect_K_L_2} &\text{by Eq. \eqref{eq:nat}}\\
 	 &= \tikzfig{semidirect_K_L_3} &\text{by Eq. \eqref{eq:ccom2_del}}
 \end{align}
@@ -517,7 +519,7 @@ Given $\kernel{K}:X\kto Y$ and $\kernel{L}:Y\kto Z$:
 Thus the action of the $\text{Del}$ map is to marginalise over the deleted wire. With integrals, we can write
 
 \begin{align}
-	(\kernel{K}\cprod \kernel{L})(\mathrm{id}_{Y}\otimes \mathrm{Del}_Z)(A\times\{*\}|x) &= \int_{Y}\int_{\{*\}}\delta_y(A)\delta_{*}(\{*\})\kernel{L}(\mathrm{d}z|y)\kernel{K}(\mathrm{d}y|x)\\
+	(\kernel{K}\cprod \kernel{L})(\kernel{I}_{Y}\otimes \mathrm{Del}_Z)(A\times\{*\}|x) &= \int_{Y}\int_{\{*\}}\delta_y(A)\delta_{*}(\{*\})\kernel{L}(\mathrm{d}z|y)\kernel{K}(\mathrm{d}y|x)\\
 	&= \int_A \kernel{K}(\mathrm{d}y|x)\\
 	&= \kernel{K}(A|x)
 \end{align}
@@ -633,28 +635,28 @@ By definition, for any $\prob{P}_\alpha\in \prob{P}_C$
 It is known that conditional distributions do not exist in general for probability measures defined on arbitrary measurable sets. However, the requirement that the sets are \emph{standard measurable} is sufficient for the existence of conditional distributions. We also further show that, given a borel measurable map to standard measurable probability distributions, what we call ``higher order conditionals'' also exist.
 
 \begin{lemma}[Conditional pushforward]\label{th:recurs_pushf}
-Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with conditional $\prob{P}_C^{\RV{X}|\RV{Y}}$ such that $\RV{Z}=f\circ \RV{Y}$ for some $f:Y\to Z$. Then there exists a conditional probability $\prob{P}_C^{\RV{Z}|\RV{X}}=\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$.
+Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with conditional $\prob{P}_C^{\RV{Y}|\RV{X}}$ such that $\RV{Z}=f\circ \RV{Y}$ for some $f:Y\to Z$. Then there exists a conditional probability $\prob{P}_C^{\RV{Z}|\RV{X}}=\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$.
 \end{lemma}
 
 \begin{proof}
-Note that $(\RV{X},\RV{Z})=(\text{id}_X\otimes f)\circ (\RV{X},\RV{Y})$. Thus, by Lemma \ref{lem:pushf_kprod}, for any $\prob{P}_\alpha\in \prob{P}_C$
+Note that $(\RV{X},\RV{Z})=(\mathrm{Id}_X\otimes f)\circ (\RV{X},\RV{Y})$. Thus, by Lemma \ref{lem:pushf_kprod}, for any $\prob{P}_\alpha\in \prob{P}_C$
 
 \begin{align}
-    \prob{P}_\alpha^{\RV{XZ}} = \prob{P}_\alpha^{\RV{XY}}\kernel{F}_{\text{id}_X\otimes f}
+    \prob{P}_\alpha^{\RV{XZ}} = \prob{P}_\alpha^{\RV{XY}}\kernel{F}_{\mathrm{Id}_X\otimes f}
 \end{align}
 
 Note also that for all $A\in\sigalg{X}$, $B\in \sigalg{Z}$, $x\in X$, $y\in Y$:
 
 \begin{align}
-\prob{F}_{\text{id}_X\otimes f}(A\times B|x,y)&=\delta_x(A)\delta_{f(y)}(B)\\
-&= \prob{F}_{\text{id}_X} (A|x)\otimes \prob{F}_f(B|y)\\
-\implies \prob{F}_{\text{id}_X\otimes f} &= \prob{F}_{\text{id}_X} \otimes \prob{F}_f
+\prob{F}_{\mathrm{Id}}_X\otimes f}(A\times B|x,y)&=\delta_x(A)\delta_{f(y)}(B)\\
+&= \prob{F}_{\mathrm{Id}}_X} (A|x)\otimes \prob{F}_f(B|y)\\
+\implies \prob{F}_{\mathrm{Id}}_X\otimes f} &= \prob{F}_{\mathrm{Id}}_X} \otimes \prob{F}_f
 \end{align}
 
 Thus
 
 \begin{align}
-    \prob{P}_\alpha^{\RV{XZ}} &= (\prob{P}_\alpha^{\RV{X}}\odot \prob{P}_C^{\RV{Y}|\RV{X}})\kernel{F}_{\text{id}_X}\otimes \kernel{F}_f\\
+    \prob{P}_\alpha^{\RV{XZ}} &= (\prob{P}_\alpha^{\RV{X}}\odot \prob{P}_C^{\RV{Y}|\RV{X}})\kernel{F}_{\mathrm{Id}_X}\otimes \kernel{F}_f\\
     &= \tikzfig{conditional_pushforward}
 \end{align}
 
@@ -674,10 +676,10 @@ Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\t
 The following theorem was proved by \citet{bogachev_kantorovich_2020}.
 
 \begin{theorem}\label{th:bogachev}
-Given a Borel measurable map $m:X\kto Y\times Z$ let $\Pi_Y:Y\times Z\to Y$ be the projection onto $Y$. Then there exists a Borel measurable map $n:X\times Y\kto Y\times Z$ such that 
+Given a Borel measurable map $\kernel{M}:X\kto Y\times Z$ let $\Pi_Y:Y\times Z\to Y$ be the projection onto $Y$. Then there exists a Borel measurable map $\kernel{N}:X\times Y\kto Y\times Z$ such that 
 \begin{align}
-    n(\Pi_y^{-1}(y)|x,y) &= 1\label{eq:proper}\\
-    m(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) m\kernel{F}_{\Pi_Y}(dy|x)&\forall A\in \sigalg{Y},B\in\sigalg{Y\times Z}\label{eq:conditional1}
+    \kernel{N}(\Pi_Y^{-1}(y)|x,y) &= 1\label{eq:proper}\\
+    \kernel{M}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A \kernel{N}(B|x,y) \kernel{M}\kernel{F}_{\Pi_Y}(dy|x)&\forall A\in \sigalg{Y},B\in\sigalg{Y\times Z}\label{eq:conditional1}
 \end{align}
 \end{theorem}
 
@@ -692,19 +694,19 @@ Take a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\
 \end{corollary}
 
 \begin{proof}
-Take $\prob{P}_C^{\RV{YZ}|\RV{X}}$ to be the Borel measurable map $m$ from Theorem \ref{th:bogachev}, and note that $\Pi_Y\circ (\RV{Y},\RV{Z})=\RV{Y}$. Then equation \eqref{eq:conditional1} implies for all $A\in \sigalg{Y},B\in\sigalg{Y\times Z}$ there is some $n$ such that
+Take $\prob{P}_C^{\RV{YZ}|\RV{X}}$ to be the Borel measurable map $\kernel{M}$ from Theorem \ref{th:bogachev}, and note that $\Pi_Y\circ (\RV{Y},\RV{Z})=\RV{Y}$. Then equation \eqref{eq:conditional1} implies for all $A\in \sigalg{Y},B\in\sigalg{Y\times Z}$ there is some $\kernel{N}$ such that
 
 \begin{align}
-    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_C^{\RV{YZ}|\RV{X}}\kernel{F}_{\Pi_Y}(dy|x)\\
-    &=\int_A n(B|x,y) \prob{P}_C^{\RV{Y}|\RV{X}}(dy|x)\label{eq:rec_push}
+    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A \kernel{N}(B|x,y) \prob{P}_C^{\RV{YZ}|\RV{X}}\kernel{F}_{\Pi_Y}(dy|x)\\
+    &=\int_A \kernel{N}(B|x,y) \prob{P}_C^{\RV{Y}|\RV{X}}(dy|x)\label{eq:rec_push}
 \end{align}
 where Equation \eqref{eq:rec_push} follows from Lemma \ref{th:recurs_pushf}.
 
 Then, for any $\prob{P}_\alpha\in\prob{P}_C$
 \begin{align}
-    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A n(B|x,y) \prob{P}_{\alpha}^{\RV{Y}|\RV{X}}(dy|x)
+    \prob{P}_C^{\RV{YZ}|\RV{X}}(\RV{Y}^{-1}(A)\cap B|x) &= \int_A \kernel{N}(B|x,y) \prob{P}_{\alpha}^{\RV{Y}|\RV{X}}(dy|x)
 \end{align}
-which implies $n$ is a version of $\prob{P}_C^{\RV{YZ}|(\RV{Y}|\RV{X})}$. By Lemma \ref{th:recurs_pushf}, $n\kernel{F}_{\Pi_Y}$ is a version of $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
+which implies $\kernel{N}$ is a version of $\prob{P}_C^{\RV{YZ}|(\RV{Y}|\RV{X})}$. By Lemma \ref{th:recurs_pushf}, $\kernel{N}\kernel{F}_{\Pi_Y}$ is a version of $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$.
 \end{proof}
 
 \subsection{Extended conditional independence}\label{sec:eci}
@@ -714,22 +716,22 @@ Just like we defined uniform conditional probability as a version of ``condition
 We will first define regular conditional independence. We define it in terms of a having a conditional that ``ignores one of its inputs'', which, provided conditional probabilities exists, is equivalent to other common definitions (Theorem \ref{th:cho_ci_equiv}).
 
 \begin{definition}[Conditional independence]\label{def:ci}
-For a \emph{probability model} $\model{P}_{\alpha}$ and variables $\RV{A},\RV{B},\RV{Z}$, we say $\RV{B}$ is conditionally independent of $\RV{A}$ given $\text{id}_C$, written $\RV{B}\CI_{\model{P}_{\alpha}}\RV{A}|\text{id}_C$, if
+For a \emph{probability model} $\model{P}_{\alpha}$ and variables $\RV{W},\RV{X},\RV{Y}$, we say $\RV{Y}$ is conditionally independent of $\RV{X}$ given $\RV{W}$, written $\RV{Y}\CI_{\model{P}_{\alpha}}\RV{X}|\RV{W}$, if
 \begin{align}
-    \prob{P}^{\RV{Y}|\RV{WX}} &\overset{\prob{P}}{\cong} \tikzfig{cond_indep_erase}\\
+    \prob{P}_\alpha^{\RV{Y}|\RV{WX}} &\overset{\prob{P}_\alpha}{\cong} \tikzfig{cond_indep_erase}\\
     \iff
-    \prob{P}^{\RV{Y}|\RV{WX}}(A|w,x) &\overset{\prob{P}}{\cong} \prob{K}(A|w)&\forall A\in \sigalg{Y}
+    \prob{P}_\alpha^{\RV{Y}|\RV{WX}}(A|w,x) &\overset{\prob{P}_\alpha}{\cong} \prob{K}(A|w)&\forall A\in \sigalg{Y}, \text{ some }\kernel{K}:W\kto Y
 \end{align}
 \end{definition}
 
 Conditional independence can equivalently be stated in terms of the existence of a conditional probability that ``ignores'' one of its inputs.
 
 \begin{theorem}\label{th:cho_ci_equiv}
-Given standard measurable $(\Omega,\sigalg{F})$, a probability model $\prob{P}$ and variables $\RV{W}:\Omega\to W$, $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, $\RV{Y}\CI_{\prob{P}}\RV{X}|\RV{W}$ if and only if there exists some version of $\prob{P}^{\RV{Y}|\RV{WX}}$ and $\kernel{K}:W\kto Y$ such that
+Given standard measurable $(\Omega,\sigalg{F})$, a probability model $\prob{P}_\alpha$ and variables $\RV{W}:\Omega\to W$, $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, $\RV{Y}\CI_{\prob{P}}\RV{X}|\RV{W}$ if and only if there exists some version of $\prob{P}_\alpha^{\RV{Y}|\RV{WX}}$ and $\kernel{K}:W\kto Y$ such that
 \begin{align}
-    \prob{P}^{\RV{Y}|\RV{WX}} &\overset{\prob{P}}{\cong} \tikzfig{cond_indep_erase}\\
+    \prob{P}_\alpha^{\RV{XY}|\RV{W}} &\overset{\prob{P}}{\cong} \tikzfig{cond_indep_product}\\
     \iff
-    \prob{P}^{\RV{Y}|\RV{WX}}(A|w,x) &\overset{\prob{P}}{\cong} \prob{K}(A|w)&\forall A\in \sigalg{Y}
+    \prob{P}_\alpha^{\RV{XY}|\RV{W}}(A\times B|w) &\overset{\prob{P}_\alpha}{\cong} \prob{P}_\alpha^{\RV{X}|\RV{W}}(A|w)\prob{P}_\alpha^{\RV{Y}|\RV{W}}(B|w)&\forall A\in \sigalg{X}, B\in \sigalg{Y}
 \end{align}
 \end{theorem}
 
@@ -743,7 +745,7 @@ Extended conditional independence as introduced by \citet{constantinou_extended_
 Given a sample space $(\Omega,\sigalg{F})$, a choice set $(C,\sigalg{C})$, a codomain $(X,\sigalg{X})$ and a probability set $\prob{P}_C$, a nonstochastic variable is a measurable function $\phi:C\to X$.
 \end{definition}
 
-In particular, we want to consider \emph{complementary} nonstochastic variable - that is, pairs of nonstochastic variables $\phi$ and $\xi$ such that the sequence $(\phi,\xi)$ is invertible. For example, if $\phi:=\mathrm{idf}_C$, then 
+In particular, we want to consider \emph{complementary} nonstochastic variable - that is, pairs of nonstochastic variables $\phi$ and $\xi$ such that the sequence $(\phi,\xi)$ is invertible. For example, if $\phi:=\mathrm{Id}_C$, then $\phi$ and $*$ are a pair of complementary variables.
 
 \begin{definition}[Complementary nonstochastic variables]\label{def:comp_var}
 A pair of nonstochastic variables $\phi$ and $\xi$ are complementary if $(\phi,\xi)$ is invertible.
@@ -767,7 +769,7 @@ Given a probability set $\prob{P}_C$, variables $\RV{X}$, $\RV{Y}$ and $\RV{Z}$ 
 Very often, we consider a particular kind of extended conditional independence that does not explicitly make use of nonstochastic variables. We call this \emph{uniform conditional independence}.
 
 \begin{definition}[Uniform conditional independence]\label{def:eci}
-Given a probability set $\prob{P}_C$ and variables $\RV{X}$, $\RV{Y}$ and $\RV{Z}$, the uniform conditional independence $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X}, \mathrm{id}_C)|\RV{Z}$ holds if $\prob{P}_C^{\RV{Y}|\RV{XZ}}$ and $\prob{P}_C^{\RV{Y}|\RV{X}}$ exist and
+Given a probability set $\prob{P}_C$ and variables $\RV{X}$, $\RV{Y}$ and $\RV{Z}$, the uniform conditional independence $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X}, \mathrm{Id}_C)|\RV{Z}$ holds if $\prob{P}_C^{\RV{Y}|\RV{XZ}}$ and $\prob{P}_C^{\RV{Y}|\RV{X}}$ exist and
 \begin{align}
     \prob{P}_C^{\RV{Y}|\RV{XZ}} &\overset{\prob{P}_C}{\cong} \tikzfig{eci_def}\\
     &\iff\\
@@ -778,7 +780,7 @@ Given a probability set $\prob{P}_C$ and variables $\RV{X}$, $\RV{Y}$ and $\RV{Z
 For countable sets $C$ (which, recall, is an assumption we generally accept), as shown by \citet{constantinou_extended_2017} we can reason with collections of extended conditional independence statements as if they were regular conditional independence statements, with the provision that a complementary pair of nonstochastic variables must appear either side of the ``|'' symbol. 
 
 \begin{enumerate}
-    \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e \RV{Y} \phi|\RV{Z}\xi$ iff $\RV{Y}\CI_{\prob{P}_C}^e \RV{X} \phi|\RV{Z}\xi$
+    \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e \RV{Y}|(\RV{Z}, \mathrm{Id}_C)$ iff $\RV{Y}\CI_{\prob{P}_C}^e \RV{X}|(\RV{Z}, \mathrm{Id}_C)$
     \item $\RV{X}\CI_{\prob{P}_C}^e \RV{Y} C| \RV{Y} C$
     \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e \RV{Y} \phi|\RV{W}\xi$ and $\RV{Z}\varlessthan\RV{Y}$ implies $\RV{X}\CI_{\prob{P}_C}^e\RV{Z}\phi|\RV{W}\xi$
     \item Weak union:
@@ -792,10 +794,10 @@ For countable sets $C$ (which, recall, is an assumption we generally accept), as
 The following forms of these properties are often used here:
 
 \begin{enumerate}
-    \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y} \mathrm{id}_C)|\RV{Z}$ iff $\RV{Y}\CI_{\prob{P}} (\RV{X} \mathrm{id}_C)|\RV{Z}$
-    \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y},\RV{Z}, \mathrm{id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}}\RV{Y}C|\RV{W}$ and $\RV{X}\CI_{\prob{P}}(\RV{Z},\mathrm{id}_C)|\RV{W}$
-    \item Weak union: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{id}_C)|(\RV{Z},\RV{W})$
-    \item Contraction: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Z},\mathrm{id}_C)|\RV{W}$ and $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{id}_C)|(\RV{Z},\RV{W})$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{id}_C)|\RV{W}$
+    \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y}, \mathrm{Id}_C)|(\RV{Z}, \mathrm{Id}_C)$ iff $\RV{Y}\CI_{\prob{P}} (\RV{X}, \mathrm{Id}_C)|\RV{Z}$
+    \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y},\RV{Z}, \mathrm{Id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}}\RV{Y}C|\RV{W}$ and $\RV{X}\CI_{\prob{P}}(\RV{Z},\mathrm{id}_C)|\RV{W}$
+    \item Weak union: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{Id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{Id}_C)|(\RV{Z},\RV{W})$
+    \item Contraction: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Z},\mathrm{Id}_C)|\RV{W}$ and $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{Id}_C)|(\RV{Z},\RV{W})$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{Id}_C)|\RV{W}$
 \end{enumerate}
 
 Conditional independence is sometimes given in terms of a factorisation of the joint conditional distribution (or joint conditional expectations). Theorem \ref{th:uci_rep} shows that the definition given here is equivalent to the definition given in terms of factorisation.
@@ -807,7 +809,7 @@ Given a probability set $\prob{P}_C$ with a uniform conditional probability $\pr
     &\iff\\
     \prob{P}^{\RV{XY}|\RV{Z}}_C(A\times B|z) &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{X}|\RV{Z}}(A|z)\prob{P}_C^{\RV{Y}|\RV{Z}}(B|z)&\forall A\in \sigalg{X},B\in \sigalg{Y},z\in Z
 \end{align}
-if and only if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{X},\mathrm{id}_C)|\RV{Z}$
+if and only if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{X},\mathrm{Id}_C)|\RV{Z}$
 \end{theorem}
 
 \begin{proof}
@@ -829,10 +831,10 @@ and suppose for some $\alpha\in C$, $A\times C\in \sigalg{X}\otimes\sigalg{Z}$, 
 \end{align}
 then
 \begin{align}
-    \prob{P}_\alpha^{\RV{XYZ}\RV{Z}}(A\times B\times C) &= \int_{A\times C} \prob{P}_C^{\RV{Y}|\RV{XZ}}(B|x,z)\prob{P}_C^{\RV{X}|\RV{Z}}(\mathrm{dx}|z)\prob{P}_\alpha^{\RV{Z}}(\mathrm{dz})\\
-    &> \int_{A\times C} \prob{P}_C^{\RV{Y}|\RV{X}}(B|z)\prob{P}_C^{\RV{X}|\RV{Z}}(\mathrm{dx}|z)\prob{P}_\alpha^{\RV{Z}}(\mathrm{dz})\\
-    &= \int_{C} \prob{P}_C^{\RV{XY}|\RV{X}}(A\times B|z)\prob{P}_\alpha^{\RV{Z}}(\mathrm{dz})\\
-    &= \prob{P}_\alpha^{\RV{XYZ}\RV{Z}}(A\times B\times C)
+    \prob{P}_\alpha^{\RV{XYZ}}(A\times B\times C) &= \int_{A\times C} \prob{P}_C^{\RV{Y}|\RV{XZ}}(B|x,z)\prob{P}_C^{\RV{X}|\RV{Z}}(\mathrm{dx}|z)\prob{P}_\alpha^{\RV{Z}}(\mathrm{dz})\\
+    &> \int_{A\times C} \prob{P}_C^{\RV{Y}|\RV{Z}}(B|z)\prob{P}_C^{\RV{X}|\RV{Z}}(\mathrm{dx}|z)\prob{P}_\alpha^{\RV{Z}}(\mathrm{dz})\\
+    &= \int_{C} \prob{P}_C^{\RV{XY}|\RV{Z}}(A\times B|z)\prob{P}_\alpha^{\RV{Z}}(\mathrm{dz})\\
+    &= \prob{P}_\alpha^{\RV{XYZ}}(A\times B\times C)
 \end{align}
 a contradiction. An analogous argument follows if we replace ``$>$'' with ``$<$'' in Eq. \eqref{eq:assume_ieq}.
 \end{proof}
@@ -865,7 +867,7 @@ Given $(\Omega,\sigalg{F})$ and a variable $\RV{X}:\Omega\to X$, an $\RV{X}$-val
 \begin{definition}[Valid conditional]\label{def:valid_conditional_prob}
 Given $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$ a \emph{$\RV{Y}|\RV{X}$-valid conditional probability} is a Markov kernel $\prob{L}:X\kto Y$ that assigns probability 0 to impossible events, unless the argument itself corresponds to an impossible event:
 \begin{align}
-    \forall B\in \sigalg{Y}, x\in X: (\RV{X},\RV{Y})\yields \{x\}\times B = \emptyset \implies \left(\prob{L}(B|x) = 0\right) \lor \left(\RV{X}\yields \{x\} = \emptyset\right)
+    \forall B\in \sigalg{Y}, x\in X: (\RV{X},\RV{Y})^{-1} (\{x\}\times B) = \emptyset \implies \left(\prob{L}(B|x) = 0\right) \lor \left(\RV{X}^{-1} (\{x\}) = \emptyset\right)
 \end{align}
 \end{definition}
 
@@ -876,16 +878,16 @@ Given $\RV{X}:\Omega\to X$, with $\Omega$ and $X$ standard measurable, a probabi
 \end{theorem}
 
 \begin{proof}
-$*\yields *=\Omega$ necessarily. Thus validity of $\prob{P}^{\RV{X}|*}$ means 
+$*^{-1} (\{*\})=\Omega$, Thus validity of $\prob{P}^{\RV{X}|*}$ means 
 
 \begin{align}
-    \forall A\in \sigalg{X}: \RV{X}\yields A=\emptyset \implies \prob{P}^{\RV{X}|*}(A|*)&=0
+    \forall A\in \sigalg{X}: \RV{X}^{-1}( A)=\emptyset \implies \prob{P}^{\RV{X}|*}(A|*)&=0
 \end{align}
 
 But $\prob{P}^{\RV{X}|*}(A|*)=\prob{P}^{\RV{X}}(A)$ by definition, so this is equivalent to
 
 \begin{align}
-    \forall A\in \sigalg{X}: \RV{X}\yields A=\emptyset \implies \prob{P}^{\RV{X}}(A)&=0
+    \forall A\in \sigalg{X}: \RV{X}^{-1}( A)=\emptyset \implies \prob{P}^{\RV{X}}(A)&=0
 \end{align}
 \end{proof}
 
@@ -899,7 +901,7 @@ Theorem \ref{lem:valid_extendability} shows that the semidirect product of any p
 
 Collections of recursive conditional probabilities often arise in causal modelling -- in particular, they are the foundation of the structural equation modelling approach \citet{richardson2013single,pearl_causality:_2009}.
 
-Note that validity is not a necessary condition for a conditional to define a non-empty probability set. Given some $\kernel{K}:X\kto Y$, $\kernel{K}$ might be an invalid conditional on if every value of $X$ is considered, but it might be valid on some subset of $X$. A marginal of $\RV{X}$ that assigns measure 0 to the subset of $X$ where $\kernel{K}$ is invalid can still define a valid distribution when combined with $\kernel{K}$. On the other hand, if $\kernel{K}$ is required to combine with arbitrary valid marginals of $\RV{X}$, then the validity of $\kernel{K}$ is necessary (Theorem \ref{th:valid_conditional_probability}).
+Note that validity is not a necessary condition for a conditional to define a non-empty probability set. Given some $\kernel{K}:X\kto Y$, $\kernel{K}$ might be an invalid conditional on $\RV{X}$ if every value of $X$ is considered, but it might be valid on some subset of $X$. A marginal of $\RV{X}$ that assigns measure 0 to the subset of $X$ where $\kernel{K}$ is invalid can still define a valid distribution when combined with $\kernel{K}$. On the other hand, if $\kernel{K}$ is required to combine with arbitrary valid marginals of $\RV{X}$, then the validity of $\kernel{K}$ is necessary (Theorem \ref{th:valid_conditional_probability}).
 
 \begin{theorem}[Semidirect product of valid conditional distributions is valid]\label{lem:valid_extendability}
 Given $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ (all spaces standard measurable) and any valid candidate conditional $\prob{P}^{\RV{Y}|\RV{X}}$ and $\prob{Q}^{\RV{Z}|\RV{Y}\RV{X}}$, $ \prob{P}^{\RV{Y}|\RV{X}}\odot \prob{Q}^{\RV{Z}|\RV{Y}\RV{X}}$ is also a valid candidate conditional.
@@ -910,14 +912,14 @@ Let $\prob{R}^{\RV{YZ}|\RV{X}}:=\prob{P}^{\RV{Y}|\RV{X}}\odot \prob{Q}^{\RV{Z}|\
 
 We only need to check validity for each $x\in \RV{X}(\Omega)$, as it is automatically satisfied for other values of $\RV{X}$.
 
-For all $x\in \RV{X}(\Omega)$, $B\in \sigalg{Y}$ such that $\RV{X}\yields \{x\}\cap\RV{Y}\yields B=\emptyset$, $\prob{P}^{\RV{Y}|\RV{X}}(B|x)=0$ by validity. Thus for arbitrary $C\in \sigalg{Z}$
+For all $x\in \RV{X}(\Omega)$, $B\in \sigalg{Y}$ such that $\RV{X}^{-1}( \{x\})\cap\RV{Y}^{-1}( B)=\emptyset$, $\prob{P}^{\RV{Y}|\RV{X}}(B|x)=0$ by validity. Thus for arbitrary $C\in \sigalg{Z}$
 \begin{align}
     \prob{R}^{\RV{YZ}|\RV{X}}(B\times C|x) &= \int_B \prob{Q}^{\RV{Z}|\RV{YX}}(C|y,x)\prob{P}^{\RV{Y}|\RV{X}}(dy|x)\\
                                   &\leq \prob{P}^{\RV{Y}|\RV{X}}(B|x)\\
                                   &=0
 \end{align}
 
-For all $\{x\}\times B$such that $\RV{X}\yields \{x\}\cap\RV{Y}\yields B\neq \emptyset$ and $C\in \sigalg{Z}$ such that $(\RV{X},\RV{Y},\RV{Z})\yields \{x\}\times B\times C=\emptyset$, $\prob{Q}^{\RV{Z}|\RV{YX}}(C|y,x)=0$ for all $y\in B$ by validity. Thus:
+For all $\{x\}\times B$such that $\RV{X}^{-1}( \{x\})\cap\RV{Y}^{-1}( B)\neq \emptyset$ and $C\in \sigalg{Z}$ such that $(\RV{X},\RV{Y},\RV{Z})^{-1} (\{x\})\times B\times C=\emptyset$, $\prob{Q}^{\RV{Z}|\RV{YX}}(C|y,x)=0$ for all $y\in B$ by validity. Thus:
 \begin{align}
     \prob{R}^{\RV{YZ}|\RV{X}}(B\times C|x) &= \int_B \prob{Q}^{\RV{Z}|\RV{YX}}(C|y,x)\prob{P}^{\RV{Y}|\RV{X}}(dy|x)\\
                                             &=0
@@ -939,7 +941,7 @@ Suppose we have $\Omega$, $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, with $\Ome
 \begin{proof}
 If: this follows directly from Corollary \ref{corr:valid_extend_order1}.
 
-Only if: suppose $\prob{T}^{\RV{Y}|\RV{X}}$ is invalid. Then there is some $x\in X$, $y\in Y$ such that $\RV{X}\yields(x)\neq \emptyset$, $(\RV{X},\RV{Y})\yields(x,y)=\emptyset$ and $\prob{T}^{\RV{Y}|\RV{X}}(y|x)>0$. Choose $\prob{V}^{\RV{X}}$ such that $\prob{V}^{\RV{X}}(\{x\})=1$; this is possible due to standard measurability and valid due to $\RV{X}^{-1}(x)\neq \emptyset$. Then
+Only if: suppose $\prob{T}^{\RV{Y}|\RV{X}}$ is invalid. Then there is some $x\in X$, $y\in Y$ such that $\RV{X}^{-1}(\{x\})\neq \emptyset$, $(\RV{X},\RV{Y})^{-1}(\{(x,y)\})=\emptyset$ and $\prob{T}^{\RV{Y}|\RV{X}}(y|x)>0$. Choose $\prob{V}^{\RV{X}}$ such that $\prob{V}^{\RV{X}}(\{x\})=1$; this is possible due to standard measurability and valid due to $\RV{X}^{-1}(x)\neq \emptyset$. Then
 \begin{align}
     (\prob{V}^{\RV{X}}\odot \prob{T}^{\RV{Y}|\RV{X}})(x,y) &= \prob{T}^{\RV{Y}|\RV{X}}(y|x) \prob{V}^{\RV{X}}(x)\\
                                                                      &= \prob{T}^{\RV{Y}|\RV{X}}(y|x)\\
@@ -956,9 +958,9 @@ With this background, suppose we postulate a decision model in which body mass i
 \begin{align}
     \prob{P}_\square^{\RV{B}|\RV{WHD}} &= \tikzfig{invalid_BMI_model} \label{eq:bmi_example}
 \end{align}
-Then pick some $w,h,x\in\mathbb{R}$ such that $\frac{w}{h^2}\neq x$ and $(\RV{W},\RV{H})\yields (w,h)\neq \emptyset$ (which is to say, our measurement procedure could potentially yield $(w,h)$ for a person's height and weight). We have $\prob{P}_\square^{\RV{B}|\RV{WHD}}(\{x\}|w,h,x)=1$, but 
+Then pick some $w,h,x\in\mathbb{R}$ such that $\frac{w}{h^2}\neq x$ and $(\RV{W},\RV{H})^{-1}(\{(w,h)\})\neq \emptyset$ (which is to say, our measurement procedure could potentially yield $(w,h)$ for a person's height and weight). We have $\prob{P}_\square^{\RV{B}|\RV{WHD}}(\{x\}|w,h,x)=1$, but 
 \begin{align}
-    (\RV{B},\RV{W},\RV{H})\yields \{(x,w,h)\} &= \{\omega|(\RV{W},\RV{H})(\omega) = (w,h),\RV{B}(\omega) = \frac{w}{h^2}\}\\
+    (\RV{B},\RV{W},\RV{H})^{-1}( \{(x,w,h)\}) &= \{\omega|(\RV{W},\RV{H})(\omega) = (w,h),\RV{B}(\omega) = \frac{w}{h^2}\}\\
     &=\emptyset
 \end{align}
 so $\prob{P}_\square^{\RV{B}|\RV{WHD}}$ is invalid. It follows that there is some valid $\mu^{\RV{WHC}}$ such that the probability set $\prob{P}_\mu$ such that $\prob{P}_{\mu}^{\RV{BWHC}} = \mu^{\RV{WHC}}\odot \prob{P}_\square^{\RV{Y}|\RV{X}}$ is empty.
@@ -975,11 +977,11 @@ Given a probability space $(\mu,\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega
 \begin{proof}
 Take $\kernel{K}=\mu^{|\RV{X}}\kernel{F}_{\RV{Y}}$. We will show that $\kernel{K}$ is valid, and a version of $\mu^{\RV{Y}|\RV{X}}$.
 
-Defining $\RV{O}:=\text{id}_{\Omega}$ (the identity function $\Omega\to \Omega$), $\mu^{|\RV{X}}$ is a version of $\mu^{\RV{O}|\RV{X}}$. Note also that $\RV{Y}=\RV{Y}\circ\RV{O}$. Thus by Lemma \ref{th:recurs_pushf}, $\kernel{K}$ is a version of $\mu^{\RV{Y}|\RV{X}}$.
+Defining $\RV{O}:=\text{Id}_{\Omega}$ (the identity function $\Omega\to \Omega$), $\mu^{|\RV{X}}$ is a version of $\mu^{\RV{O}|\RV{X}}$. Note also that $\RV{Y}=\RV{Y}\circ\RV{O}$. Thus by Lemma \ref{th:recurs_pushf}, $\kernel{K}$ is a version of $\mu^{\RV{Y}|\RV{X}}$.
 
 It remains to be shown that $\kernel{K}$ is valid. Consider some $x\in X$, $A\in \sigalg{Y}$ such that $\RV{X}^{-1}(\{x\})\cap \RV{Y}^{-1}(A)=\emptyset$. Then by the assumption $\mu^{|\RV{X}}$ is proper
 \begin{align}
-    \kernel{K}(\RV{Y}\yields A|x) &= \delta_x(\RV{Y}^{-1}(A))\\
+    \kernel{K}(\RV{Y}^{-1}( A)|x) &= \delta_x(\RV{Y}^{-1}(A))\\
     &= 0
 \end{align}
 
@@ -1009,12 +1011,12 @@ Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\t
 \begin{proof}
 By Theorem \ref{th:ho_cond_psets}, we have a higher order conditional $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$ which, by Theorem \ref{th:higher_order_conditionals} is also a version of $\prob{P}_C^{\RV{Z}|\RV{XY}}$.
 
-We will show that there is a Markov kernel $\kernel{Q}$ almost surely equal to $\prob{P}_C^{\RV{Z}|\RV{XY}}$ which is also valid. For all $x,y\in X\times Y$, $A\in\sigalg{Z}$ such that $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A=\emptyset$, let $\kernel{Q}(A|x,y)=\prob{P}_C^{\RV{Z}|\RV{XY}}(A|x,y)$.
+We will show that there is a Markov kernel $\kernel{Q}$ almost surely equal to $\prob{P}_C^{\RV{Z}|\RV{XY}}$ which is also valid. For all $x,y\in X\times Y$, $A\in\sigalg{Z}$ such that $(\RV{X},\RV{Y},\RV{Z})^{-1}(\{(x,y)\}\times A)=\emptyset$, let $\kernel{Q}(A|x,y)=\prob{P}_C^{\RV{Z}|\RV{XY}}(A|x,y)$.
 
-By validity of $\prob{P}_C^{\RV{YZ}|\RV{X}}$, $x\in \RV{X}(\Omega)$ and $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A=\emptyset$ implies $\prob{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0$. Thus we need to show
+By validity of $\prob{P}_C^{\RV{YZ}|\RV{X}}$, $x\in \RV{X}(\Omega)$ and $(\RV{X},\RV{Y},\RV{Z})^{-1}(\{(x,y)\}\times A)=\emptyset$ implies $\prob{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0$. Thus we need to show
 
 \begin{align}
-    \forall A\in \sigalg{Z}, x\in X, y\in Y:\\ \prob{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0 \implies \left(\prob{Q}(A|x,y) = 0\right) \lor \left((\RV{X},\RV{Y})\yields \{(x,y)\} = \emptyset\right)
+    \forall A\in \sigalg{Z}, x\in X, y\in Y:\\ \prob{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0 \implies \left(\prob{Q}(A|x,y) = 0\right) \lor \left((\RV{X},\RV{Y})^{-1}(\{(x,y)\}) = \emptyset\right)
 \end{align}
 
 For all $x,y$ such that $\kernel{P}_{C}^{\RV{Y}|\RV{X}}(\{y\}|x)$ is positive, we have
@@ -1022,7 +1024,7 @@ For all $x,y$ such that $\kernel{P}_{C}^{\RV{Y}|\RV{X}}(\{y\}|x)$ is positive, w
     \model{P}_C^{\RV{YZ}|\RV{X}}(\{y\}\times A|x)=0\implies \prob{P}_C^{\RV{Z}|\RV{XY}}(A|x,y)=0=:\kernel{Q}(A|x,y)
 \end{align}
 
-Furthermore, where $\kernel{P}_{C}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$, we either have $(\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A= \emptyset$ or can choose some $\omega\in (\RV{X},\RV{Y},\RV{Z})\yields\{(x,y)\}\times A$ and let $\kernel{Q}(\RV{Z}(\omega)|x,y) = 1$. This is an arbitrary choice, and may differ from the original $\prob{P}_C^{\RV{Z}|\RV{XY}}$. However, because $Y$ is discrete the union of all points $y$ where $\kernel{P}_{C}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$ is a measure zero set, and so $\kernel{Q}$ differs from $\kernel{P}_{C}^{\RV{Y}|\RV{X}}$ on a measure zero set.
+Furthermore, where $\kernel{P}_{C}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$, we either have $(\RV{X},\RV{Y},\RV{Z})^{-1}(\{(x,y)\}\times A)= \emptyset$ or can choose some $\omega\in (\RV{X},\RV{Y},\RV{Z})^{-1}(\{(x,y)\}\times A)$ and let $\kernel{Q}(\RV{Z}(\omega)|x,y) = 1$. This is an arbitrary choice, and may differ from the original $\prob{P}_C^{\RV{Z}|\RV{XY}}$. However, because $Y$ is discrete the union of all points $y$ where $\kernel{P}_{C}^{\RV{Y}|\RV{X}}(\{y\}|x)=0$ is a measure zero set, and so $\kernel{Q}$ differs from $\kernel{P}_{C}^{\RV{Y}|\RV{X}}$ on a measure zero set.
 \end{proof}
 
 \section{Interpretation of probabilistic decision models}\label{sec:interp_of_dms}
@@ -1057,7 +1059,7 @@ A measurement procedure $\proc{S}$ is akin to \citet{menger_random_2003}'s notio
 Motivated by the example above, we define a measurement procedure as something an individual can ``do'' which leaves them, in the end, with an element of a mathematical set.
 
 \begin{definition}[Measurement procedure]
-A \emph{measurement procedure} $\proc{B}$ is a procedure that involves interacting with the real world somehow and delivering an element of a mathematical set $X$ as a result. A procedure $\proc{B}$ is said to takes values in a set $B$.
+A \emph{measurement procedure} $\proc{B}$ is a procedure that involves interacting with the real world somehow and delivering an element of a mathematical set $B$ as a result. A procedure $\proc{B}$ is said to takes values in a set $B$.
 \end{definition}
 
 We adopt the convention that the procedure name $\proc{B}$ and the set of values $B$ share the same letter.
@@ -1103,7 +1105,7 @@ The measurement procedure $\proc{S}$ represents a large collection of quantities
 Given a measurement procedure $\proc{S}$ taking values in $(\Psi,\sigalg{E})$, an observable variable is a pair $(\RV{X},\proc{S})$ where $\RV{X}:(\Psi,\sigalg{E})\to (X,\sigalg{X})$ is a measurable function.
 \end{definition}
 
-For the model $\RV{F}=\RV{MA}$, for example, suppose we have a measurement procedure $\proc{S}$ that yields a triple $(\text{``force''},\text{``mass''},\text{``acceleration''})$ taking values in the sets $X$, $Y$, $Z$ respectively. Then we can define the ``force'' variable $(\proc{S},\RV{F})$ where $\proc{F}:=\RV{F}\circ \proc{S}$ and $\RV{F}:X\times Y\times Z\to X$ is the projection function onto $X$.
+For the model $\RV{F}=\RV{MA}$, for example, suppose we have a measurement procedure $\proc{S}$ that yields a triple $(\text{``force''},\text{``mass''},\text{``acceleration''})$ taking values in the sets $X$, $Y$, $Z$ respectively. Then we can define the ``force'' variable $(\RV{F}, \proc{S})$, and also define a ``force observation'' $\proc{F}:=\RV{F}\circ \proc{S}$ and $\RV{F}:X\times Y\times Z\to X$ is the projection function onto $X$.
 
 A measurement procedure yields a particular value when it is completed. We will call a proposition of the form ``$\RV{X}\circ \proc{S}$ yields $x$'' an \emph{observation}. The proposition ``$\RV{X}$ yields $x$'' is equivalent to the proposition ``$\proc{S}$ yields a value in $\RV{X}^{-1}(x)$''. Because of this, we define the \emph{event} $\RV{X}\yields x$ to be the set $\RV{X}^{-1}(x)$.
 
@@ -1133,12 +1135,12 @@ Given a sample space $(\Omega,\sigalg{F})$, a measurement procedure $\proc{S}$ y
 
 The kind of problem we want to solve requires us to compare the consequences of different choices from a set of options $C$. We take the \emph{consequences of} $\alpha\in C$ to refer to the values obtained by some measurement procedure $\proc{S}_\alpha$ associated with the choice $\alpha$, and assume that we have in hand a \emph{conditional measurement procedure} $\proc{S}_C$ which is the procedure given by ``do $\proc{S}_\alpha$ if you choose $\alpha$''.
 
-We could instead contemplate an unconditional measurement procedure $\proc{T}$ of the form:
+We could instead contemplate an unconditional measurement procedure $\proc{T}$ which has two steps:
 \begin{enumerate}
-    \item Choose $\mathrm{id}_C$
+    \item Choose an element $\alpha$ of $C$
     \item Proceed according to $\proc{S}_\alpha$
 \end{enumerate}
-One of the reasons we might want to do this is that we already have something that looks like a procedure for part 1: first, construct a model of the consequences of each option, and then pick the best option according to the model. However, this only requires a model of the consequences of each action -- i.e. a model of part 2 -- not a model of part 1. Furthermore, modelling part 1 is difficult. Suppose we construct a model $\prob{Q}$ of parts 1 and 2, and as a result we decide on option $\alpha$. Then, seemingly, we can construct a better model $\prob{Q}'$ which assigns certainty to the outcome $\mathrm{id}_C\yields\alpha$. But \emph{then} the consequences of any $\alpha'\neq \alpha$ seem to be moot, as we are at this point certain that $\alpha$ will be chosen.
+One of the reasons we might want to do this is that we already have something that looks like a procedure for step 1: first, construct a model of the consequences of each option, and then pick the best option according to the model. However, such a procedure given only requires a model of the consequences of each action -- i.e. a model of step 2 -- not a model of step 1 and step 2. Furthermore, modelling step 1 in addition to step 2 is difficult. Suppose we construct a model $\prob{Q}$ of steps 1 and 2, and as a result we decide on option $\alpha$. Then, seemingly, we can construct a better model $\prob{Q}'$ which assigns certainty to the outcome $\mathrm{Id}_C^{-1}(\{\alpha\})$. But \emph{then} the consequences of any $\alpha'\neq \alpha$ seem to be moot, as we are at this point certain that $\alpha$ will be chosen.
 
 There may well be reasonable solutions to the problem of modelling the full procedure $\proc{T}$ that also yields a useful model of the consequences of every available option, but we only need to model part 2 in order to execute the procedure for picking an option. Exploring and resolving any difficulties related to modelling the part 1 are beyond the scope of this thesis.
 
@@ -1154,4 +1156,4 @@ Given an option set $C$, we could consider a vector of potential outcomes $\RV{Y
 
 On the other hand, the assumed decision procedure $\proc{S}_C$ does provide a means of interpreting the decision model $(\prob{P}_\cdot,\Omega,C)$. In practice, someone might analyse a decision problem with a decision procedure that is too vague, or that fails some consistency condition (questions which we don't analyse in any detail here). However, we do, at least, point to decision procedures as the kind of thing that facilitates the interpretation of a decision model.
 
-Whether our interpretation applies to interventional models depends on what kinds of interventions the model contemplates and on just how vague decision procedures are allowed to be before we disqualify them. On the one hand, an interventional model that allows only interventions on a choice variable $\mathrm{id}_C$ will induce a collection of probability distributions for each value of the option set $C$, and so would be suitable for modelling a decision procedure with this option set. It is not clear that there is a meaningful distinction in this kind of model between $\mathrm{id}_C$ taking a particular value and intervening on $\mathrm{id}_C$ ``to set it to a particular value''. On the other hand, whether an interventional model that features hard interventions on arbitrary variables can be interpreted as a model of a decision procedure depends on whether we accept that a statement like ``have Nature set an individual's body mass index to $11$'' is enough to define a measurement procedure $\proc{S}_\alpha$ \citep{pearl_does_2018}. Such a statement seems too vague to qualify to us, but we don't analyse this question in detail and the subsequent work doesn't depend on a strong commitment either way.
+Whether our interpretation applies to interventional models depends on what kinds of interventions the model contemplates and on just how vague decision procedures are allowed to be before we disqualify them. On the one hand, an interventional model that allows only interventions on a choice variable $\mathrm{Id}_C$ will induce a collection of probability distributions for each value of the option set $C$, and so would be suitable for modelling a decision procedure with this option set. It is not clear that there is a meaningful distinction in this kind of model between $\mathrm{id}_C$ taking a particular value and intervening on $\mathrm{Id}_C$ ``to set it to a particular value''. On the other hand, whether an interventional model that features hard interventions on arbitrary variables can be interpreted as a model of a decision procedure depends on whether we accept that a statement like ``have Nature set an individual's body mass index to $11$'' is enough to define a measurement procedure $\proc{S}_\alpha$ \citep{pearl_does_2018}. Such a statement seems too vague to qualify to us, but we don't analyse this question in detail and the subsequent work doesn't depend on a strong commitment either way.

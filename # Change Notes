@@ -24,11 +24,48 @@ I agree that evaluation is an important direction for future work, both for this
 
  - Pearl claims the potential outcome and causal graph paradigms are equivalent mathematically, so does Robins on some particular causal graph. I assume this new framework, after incorporating the domain expert knowledge through decision modeling, would lead to the same causality conclusion in the cases where the assumptions in other approaches are satisfied
 
-In Chapter 5 I show how to represent potential outcomes and structural interventional models as decision models. By the procedures outlined there, it's always possible to construct a potential outcomes or structural interventional model and turn it into a decision model which will yield the same conclusions (I've added to the introduction to Chapter 5 to make this point explicit). 
+In Chapter 5 I show how to represent potential outcomes and structural interventional models as decision models. By the procedures outlined there, it's always possible to construct a potential outcomes or structural interventional model and turn it into a decision model which will yield the same conclusions (I've added to the introduction to Chapter 5 to make this point explicit).
+
+In the extended discussion of precedent, I have also explained how a similar result holds 
 
 Examiner 2:
  - General point: I note (with approval) that the candidate has attempted careful discrimination between different types of mathematical objects by the use of distinct fonts and/or capitalisation. However there are many places where this breaks down, and further close attention is required.
 
 I have read over the text again and corrected notation where errors were found.
 
- - 
+ - Detailed points: 2, 3
+
+Accepted
+
+ - 4
+
+Clarified that Y^X is a function from X to Y, and agreed that the arrow T-> Y^X is unnecessary (removed)
+
+ - 5, 6
+
+Fixed a typo, made notation consistent
+
+ - 7 - 24
+
+Accepted
+
+ - 25
+
+Clarified that the notation appears as intended
+
+ - 26
+
+Clarified what it means to choose an option, and labeled procedure steps more clearly
+
+ - 27 - 28
+
+Accepted
+
+ - 29
+
+Terminology change accepted, Boolean algebra axioms are correct and $\leq$ is correct also
+
+ - 30 - 33
+
+Accepted
+

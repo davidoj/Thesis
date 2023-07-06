@@ -9,7 +9,6 @@
 		\draw [style=right arrow] (0) to (2);
 		\draw [style=right arrow] (1) to (2);
 		\draw [style=right arrow, bend left=15] (3) to (1);
-		\draw [style=right arrow] (0) to (3);
 		\draw [style=right arrow] (2) to (3);
 		\draw [style=right arrow, bend left=15] (1) to (3);
 	\end{pgfonlayer}

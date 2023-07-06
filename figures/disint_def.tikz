@@ -1,7 +1,7 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=small dist tikzit] (0) at (-3.5, 0.25) {$\mu^{\RV{X}}$};
-		\node [style=small kernel tikzit] (1) at (-0.25, 0.25) {$\overline{\mu}^{\RV{Y}|\RV{X}}$};
+		\node [style=small kernel tikzit] (1) at (-0.25, 0.25) {$\mu^{\RV{Y}|\RV{X}}$};
 		\node [style=copymap tikzit] (2) at (-2, 0.25) {};
 		\node [style=RLabel tikzit] (3) at (1.75, 1.75) {$\RV{X}$};
 		\node [style=RLabel tikzit] (4) at (1.75, 0.25) {$\RV{Y}$};

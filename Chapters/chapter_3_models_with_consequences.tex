@@ -74,7 +74,7 @@ Given a decision problem $((C,\sigalg{C}),(\Omega,\sigalg{F}),u)$, a \emph{Bayes
 \end{definition}
 
 \begin{definition}[non-Bayesian decision model]\label{def:ch_and_hyp}
-Given a decision problem $((C,\sigalg{C}),(\Omega,\sigalg{F}),u)$, a \emph{non-Bayesian decision model} is a triple $(\prob{P}_\cdot,(\Omega,\sigalg{F}),(C\times H,\sigalg{C}\otimes\sigalg{H}))$ where $H$ is a set of \emph{hypotheses} and $\prob{P}_\cdot:C\kto \Omega$ is a Markov kernel.
+Given a decision problem $((C,\sigalg{C}),(\Omega,\sigalg{F}),u)$, a \emph{non-Bayesian decision model} is a triple $(\prob{P}_\cdot,(\Omega,\sigalg{F}),(C\times H,\sigalg{C}\otimes\sigalg{H}))$ where $H$ is a set of \emph{hypotheses} and $\prob{P}_\cdot:C\times H\kto \Omega$ is a Markov kernel.
 \end{definition}
 
 By convention, we use $\prob{P}_\cdot$ with the subscript $\cdot$ to denote the map from options to consequences, subscripts $\prob{P}_\alpha$ refer to the model evaluated at $\alpha\in C$ (or in $C\times H$) and the subscript $\prob{P}_{A}$ refers to the probability set formed by the image of $A\subset C$ of $A$ under the model.
@@ -95,8 +95,9 @@ The following discussion will often make reference to \emph{complete preference 
     \item Exactly one of $a\succ b$, $a\prec b$, $a\sim b$ holds
     \item $(a\succ b)\iff(b\prec a)$
     \item $a\succ b$ and $b\succ c$ implies $a\succ c$
+    \item $\sim$ is an equivalence relation
 \end{itemize}
-In short, it is a total order without antisymmetry ($a$ and $b$ can be equally preferred even if they are not in fact equal).
+In short, it is a strict total order without antisymmetry ($a$ and $b$ can be equally preferred even if they are not in fact equal).
 
 This definition is meant to correspond to the common sense idea of having preferences over some set of things, where $\succ$ can be read as ``strictly better than'', $\prec$ read as ``strictly worse than'' and $\sim$ read as ``as good as''. Given any two things from the set, I can say which one I prefer, or if I prefer neither (and all of these are mutually exclusive). If I prefer $a$ to $a'$ then I think $a'$ is worse than $a$. Furthermore, if I prefer $a$ to $a'$ and $a'$ to $a''$ then I prefer $a$ to $a''$.
 
@@ -133,17 +134,17 @@ Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(
 \citet{savage_foundations_1954}
 \end{proof}
 
-Savage's setup implies the existence of a unique probabilistic function $C\to \Delta(\Omega)$ representing the ``probabilistic consequences'' of each choice.
+Savage's setup implies the existence of a unique probabilistic function $C\kto \Omega$ representing the ``probabilistic consequences'' of each choice.
 
 \begin{theorem}\label{th:sav_pmap}
-Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(\prec,\sim)$ on $C$ that satisfies the Savage axioms, and a $\sigma$-algebra $\sigalg{F}$ on $\Omega$ such that $T$ is measurable, there is a probabilistic function $\prob{P}_{\cdot}:C\to \Delta(\Omega)$ and a utility $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that
+Given any Savage decision problem $(S,\Omega,C,T)$ with a preference relation $(\prec,\sim)$ on $C$ that satisfies the Savage axioms, and a $\sigma$-algebra $\sigalg{F}$ on $\Omega$ such that $T$ is measurable, there is a probabilistic function $\prob{P}_{\cdot}:C\kto \Omega$ and a utility $u:\Omega\to \mathbb{R}$ unique up to affine transformation such that
 \begin{align}
     \alpha\preceq \alpha' &\iff \int_\Omega u(f)\prob{P}_\alpha(\mathrm{d}f) \leq \int_\Omega u(f)\prob{P}_{\alpha'}(\mathrm{d}f)&\forall \alpha,\alpha'\in C
 \end{align}
 \end{theorem}
 
 \begin{proof}
-Define $\prob{P}_\cdot:C\to \Delta(\Omega)$ by
+Define $\prob{P}_\cdot:C\kto \Omega$ by
 \begin{align}
     \prob{P}_\alpha(A) &:= \mu (T_\alpha^{-1}(A))&\forall A\in \sigalg{F}
 \end{align}
@@ -165,7 +166,7 @@ Recall that our fundamental problem is relating a set $C$ of things we can choos
 Complete atomless boolean algebras are somewhat different to standard measurable $\sigma$-algebras. The $\sigma$-algebra $(\mathbb{R},\sigalg{B}(\mathbb{R}))$ is a complete Boolean algebra when identifying $\land$ with $\cap$, $\lor$ with $\cup$, $0$ with $\emptyset$ and $1$ with $\mathbb{R}$, but it has atoms: any singleton $\{x\}$ has only the subsets $\emptyset$ and $\{x\}$. An example of a complete atomless boolean algebra can be constructed from the set of Lebesgue measurable sets on $[0,1]$ with any two sets that differ by a set of measure zero identified \citet{bolker_simultaneous_1967}.
 
 \begin{definition}[Complete atomless boolean algebra]\label{def:c_atom_ba}
-A complete atomless boolean algebra $\underline{\sigalg{F}}$ is a tuple $(A,\land,\lor,\not,0,1)$ such that, for all $a,b,c\in A$:
+A boolean algebra $\underline{\sigalg{F}}$ is a tuple $(A,\land,\lor,\neg,0,1)$ such that, for all $a,b,c\in A$:
 \begin{itemize}
     \item $(a\lor b)\lor c = a\lor (b\lor c)$ and $(a\land b)\land c = a\land (b\land c)$
     \item $a\lor b = b\lor a$ and $a\land b = b\land a$
@@ -174,7 +175,7 @@ A complete atomless boolean algebra $\underline{\sigalg{F}}$ is a tuple $(A,\lan
     \item $a\lor(b\land c) = (a\lor b) \land (a\lor c)$ and $a\land(b\lor c) = (a\land b) \lor (a\land c)$
     \item $a\lor \neg a = 1$ and $a\land \neg a = 0$
 \end{itemize}
-say $a\leq b$ exactly when $a\lor b = b$. A boolean algebra is atomless if for any $b$ there is some $a\neq 0$ such that $a\leq b$. A boolean algebra is complete if for every $B\subset A$, there is some $c$ such that $c$ is an upper bound of $B$ and for all upper bounds $c'$  of $B$, such that $c\leq c'$. 
+say $a\leq b$ exactly when $a\lor b = b$. A boolean algebra is atomless if for any $b$ there is some $a\neq 0$ such that $a\leq b$. A boolean algebra is complete if for every $B\subset A$, there is some $c$ such that $c$ is an upper bound of $B$ and for all upper bounds $c'$  of $B$ $c\leq c'$. 
 \end{definition}
 
 The Bolker axioms are also not analysed deeply in this work, but for the reader's convenience they can be found in Appendix \ref{sec:bolker_axioms}).
@@ -194,7 +195,7 @@ where $\mu(D_i|A):=\frac{\mu(A\cap D_i)}{\mu(A)}$ for $\mu(A)>0$, undefined othe
 As mentioned, in Jeffrey's theory the \emph{choices} under consideration $C$ are assumed to be some subset of $\underline{\sigalg{F}}$. Thus we can deduce from a Jeffrey model a function $C\to \Delta(\underline{\sigalg{F}})$ that ``represents the consequences of choices'' in the sense of Theorem \ref{th:jeffrey_with_choices}.
 
 \begin{theorem}\label{th:jeffrey_with_choices}
-Suppose there is a complete atomless Boolean algebra $\underline{\sigalg{F}}$ with a preference relation $\preceq$ that satisfies the Bolker axioms, and a set of choices $C$ over which a preference relation is sought with $\mu(\alpha)>0$ for all $\alpha\in C$. Then there is a function $\prob{P}_\cdot:C\to \Delta(\underline{\sigalg{F}})$ such that for any $\alpha,\alpha'\in C$ and finite partition $D_1,...,D_n\in \underline{\sigalg{F}}$:
+Suppose there is a complete atomless Boolean algebra $\underline{\sigalg{F}}$ with a preference relation $\preceq$ that satisfies the Bolker axioms and set of choices $C \subset \underline{\sigalg{F}}$. Then there is a function $\prob{P}_\cdot:C\to \Delta(\underline{\sigalg{F}})$ such that for any $\alpha,\alpha'\in C$ and finite partition $D_1,...,D_n\in \underline{\sigalg{F}}$:
 \begin{align}
     \alpha \preceq \alpha'\iff \sum_{i}^n \text{des}(D_i) \prob{P}_\alpha(D_i) \leq \sum_{i}^n \text{des}(D_i) \prob{P}_{\alpha'}(D_i)\label{eq:ev_with_choices}
 \end{align}
@@ -214,10 +215,10 @@ Given a set $C$ of choices, sample space $(\Omega,\sigalg{F})$, variables $\RV{H
 \begin{align}
     U(\alpha) := \int_S \int_H u(s) \prob{P}_\alpha^{\RV{S}|\RV{H}}(\mathrm{d}s|h) \prob{P}_C^{\RV{H}}(\mathrm{d}h)\label{eq:lewis_cdt}
 \end{align}
-For some probabilistic function $\prob{P}_\cdot:C\to \Delta(\Omega)$.
+For some probabilistic function $\prob{P}_\cdot:C\kto \Omega$ where $\prob{P}_C^{\RV{H}}$ exists.
 \end{definition}
 
-The reasons why Lewis wanted to introduce dependency hypothesis and modify Jeffrey's rule to Equation \eqref{eq:lewis_cdt} are controversial and do not come up in this work. However, causal decision theory is still relevant to this work in two ways: firstly, once again is a probabilistic function $\prob{P}_\cdot:C\to \Delta(\Omega)$. Secondly, causal decision theory introduces the notion of the dependency hypothesis $\RV{H}$. The dependency hypothesis is similar to the state in Savage's theory, however Lewis does not require a deterministic map from dependency hypotheses to consequences, nor does he require a choice to correspond to every possible function from dependency hypotheses to states.
+The reasons why Lewis wanted to introduce dependency hypothesis and modify Jeffrey's rule to Equation \eqref{eq:lewis_cdt} are controversial and do not come up in this work. However, causal decision theory is still relevant to this work in two ways: firstly, once again is a probabilistic function $\prob{P}_\cdot:C\kto \Omega$. Secondly, causal decision theory introduces the notion of the dependency hypothesis $\RV{H}$. The dependency hypothesis is similar to the state in Savage's theory, however Lewis does not require a deterministic map from dependency hypotheses to consequences, nor does he require a choice to correspond to every possible function from dependency hypotheses to states.
 
 Dependency hypotheses are an important idea in causal reasoning. Lewis' decision rule connects the theory of probability sets with \emph{statistical decision theory}, as Section \ref{sec:sdt} will show. Chapter \ref{ch:evaluating_decisions} goes into considerable detail concerning the question of when probability sets support certain types of dependency hypotheses. While they are typically not explicitly represented in common frameworks for causal inference, Chapter \ref{ch:other_causal_frameworks} discusses how dependency hypotheses are often implicit in these approaches, and shows how they can be made explicit.
 
@@ -374,17 +375,17 @@ If more is required of the decision rule than merely admissibility, then the com
 We have shown in Theorem \ref{th:ind_risk} that conditionally independent see-do models induce statistical decision problems. However, the complete class theorem iteself (Theorem \ref{th:complete_class}) depends only on the risk function induced by a decision making model. In particular, the complete class theorem can also apply to general see-do models, without the assumption of conditional independence, which we show in Example \ref{ex:cc_sdt} and \ref{ex:cc_nonsdt}.
 
 \begin{definition}[Risk function]
-Given a set of choice $C$ and a set of hypotheses $H$, a risk function is a map $R:H\times C\to \mathbb{R}$.
+Given a set of choice $C$ and a set of hypotheses $H$, a risk function is a map $R:C\times H\to \mathbb{R}$.
 \end{definition}
 
 If the second set $H$ were, instead of hypotheses about nature, a set of options available to a second player playing a game, then a ``risk function'' defines a two-player zero-sum game \citet{toutenburg_ferguson_1967}.
 
 \begin{definition}[Admissible choice]\label{def:admissible_decision}
-Given a risk function $R:C\times H\to \mathbb{R}$, a choice r $\alpha\in C$ dominates a choice $\alpha'\in C$ if for all $h\in H$, $R(\alpha,h)\leq R(\alpha',h)$ and for at least on $h^*$, $R(\alpha,h)<R(\alpha,h^*)$. An \emph{admissible choice} is a choice $\alpha\in C$ such that there is no $\alpha'\in C$ dominating $\alpha$.
+Given a risk function $R:C\times H\to \mathbb{R}$, a choice $\alpha\in C$ dominates a choice $\alpha'\in C$ if for all $h\in H$, $R(\alpha,h)\leq R(\alpha',h)$ and for at least on $h^*$, $R(\alpha,h)<R(\alpha,h^*)$. An \emph{admissible choice} is a choice $\alpha\in C$ such that there is no $\alpha'\in C$ dominating $\alpha$.
 \end{definition}
 
 \begin{definition}[Complete class]\label{th:complete_class}
-A \emph{complete class} is any $B\subset C$ such that, for any $\alpha'\not in B$ there is some $\alpha\in B$ that dominates $\alpha'$. A \emph{minimal complete class} is a complete class $B$ such that no proper subset of $B$ is complete
+A \emph{complete class} is any $B\subset C$ such that, for any $\alpha'\not \in B$ there is some $\alpha\in B$ that dominates $\alpha'$. A \emph{minimal complete class} is a complete class $B$ such that no proper subset of $B$ is complete
 \end{definition}
 
 \begin{theorem}

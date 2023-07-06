@@ -1,6 +1,6 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (-1.5, 1.75) {$f$};
+		\node [style=small kernel tikzit] (0) at (-1.5, 1.75) {$\kernel{K}$};
 		\node [style=none] (1) at (-3, 1.75) {};
 		\node [style=none] (2) at (0, 1.75) {};
 	\end{pgfonlayer}

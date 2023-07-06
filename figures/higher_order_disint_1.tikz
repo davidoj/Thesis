@@ -2,7 +2,7 @@
 	\begin{pgfonlayer}{nodelayer}
 		\node [style=small dist tikzit] (1) at (-4.75, 0.75) {$\prob{P}_\alpha^{\RV{X}}$};
 		\node [style=RLabel tikzit] (4) at (6.5, 3) {$\RV{X}$};
-		\node [style=small kernel tikzit] (5) at (-0.25, 0.75) {$\prob{P}_{\{\}}^{\RV{Y}|\RV{X}}$};
+		\node [style=small kernel tikzit] (5) at (-0.25, 0.75) {$\prob{P}_{C}^{\RV{Y}|\RV{X}}$};
 		\node [style=small kernel tikzit] (6) at (4.25, 0.75) {$\prob{P}_{\{\}}^{\RV{Z}|(\RV{Y}|\RV{X})}$};
 		\node [style=none] (7) at (0.5, 0.75) {};
 		\node [style=RLabel tikzit] (8) at (6.5, 0.75) {$\RV{Z}$};
