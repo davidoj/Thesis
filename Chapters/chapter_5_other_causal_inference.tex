@@ -55,7 +55,7 @@ An interventional model is a \emph{Causal Bayesian Network} with respect to a di
 A directed graph $\graph{G}=(\node{V},\node{E})$ is a set of nodes $\node{V}$ and edges, which are ordered pairs of nodes $\node{E}\subset \node{V}\times\node{V}$. Nodes are written using the font $\node{V}$.
 \end{definition}
 
-The parents of a target node are all nodes with an edge ending at the target node.
+The parents of a target node are all nodes with a directed edge ending at the target node.
 
 \begin{definition}[Parents]
 Given a directed graph $\graph{G}=(\node{V},\node{E})$ and $\node{V}_i\subset \node{V}$, the parents of $\node{V}_i$ are $\PA{\graph{G}}{\node{V}_i}:=\{\node{V}_j\in \node{V}|(\node{V}_j,\node{V}_i)\in\node{E}\}$.
@@ -63,8 +63,10 @@ Given a directed graph $\graph{G}=(\node{V},\node{E})$ and $\node{V}_i\subset \n
 
 We offer a recursive definition of \emph{descendants}.
 
-\begin{definition}[Non-descendants]
-Given a directed graph $\graph{G}=(\node{V},\node{E})$, a descendant of $\node{V}_i$ is a node $\node{V}_j$ such that $\node{V}_i$ is a parent of $\RV{V}_j$, or there is some parent $\node{V}_k$ of $\node{V}_j$ that is a descendant of $\node{V}_i$. Any node that is a not a descendant of $\node{V}_i$ is a non-descendant of $\node{V}_i$, and the set of non-descendants of $\node{V}_i$ is denoted $\mathrm{ND}({\node{V}_i})$
+\begin{definition}[Descendants and non-descendants]
+Given a directed graph $\graph{G}=(\node{V},\node{E})$, a descendant of $\node{V}_i$ is a node $\node{V}_j$ such that $\node{V}_i$ is a parent of $\RV{V}_j$, or there is some parent $\node{V}_k$ of $\node{V}_j$ that is a descendant of $\node{V}_i$. Any node that is a not a descendant of $\node{V}_i$ is a non-descendant of $\node{V}_i$, and the set of non-descendants of $\node{V}_i$ is denoted $\mathrm{ND}({\node{V}_i})$.
+
+The set of all descendances of $\node{V}_i$ is denoted $\DE{\graph{G}}{\node{V}_i}$.
 \end{definition}
 
 A path is a sequence of edges such that the $i$th edge and the $i+1$th edge share exactly one node.
@@ -79,7 +81,7 @@ A directed path is a sequence of edges such that the end of the $i$th edge is th
 Given a directed graph $\graph{G}=(\node{V},\node{E})$, a directed path is a sequence of edges $(E_i)_{i\in A}$ (where $A$ is either $[n]$ or $\mathbb{N}$) such that for any $i$, $E_i=(\node{V}_k,\node{V}_l)$ implies $E_{i+1}=(\node{V}_l,\node{V}_m)$ for some $\node{V}_m\in \node{V}$.
 \end{definition}
 
-In an acyclic graph, directed paths never reach to the same node more than once.
+In an acyclic graph, directed paths never reach the same node more than once.
 
 \begin{definition}[Directed acyclic graph]
 A directed graph $\graph{G}=(\node{V},\node{E})$ is acyclic if, for every path, each node appears at most once. Directed acyclic graph is abbreviated to ``DAG''.
@@ -92,7 +94,7 @@ Given a DAG $\graph{G}=(\node{V},\node{E})$, a path $p$ is blocked by $\node{V}_
 \begin{enumerate}
     \item $(\node{V}_i,\node{V}_j)\in p$ and $(\node{V}_j,\node{V}_k)\in p$ for all $\node{V}_j\in \node{V}_A$
     \item $(\node{V}_j,\node{V}_i)\in p$ and $(\node{V}_j,\node{V}_k)\in p$ for all $\node{V}_j\in \node{V}_A$
-    \item $(\node{V}_i,\node{V}_j)\in p$ and $(\node{V}_k,\node{V}_j)\in p$ for all $\node{V}_j\cup \DE(\node{V}_j)\cap \node{V}_A=\emptyset$
+    \item $(\node{V}_i,\node{V}_j)\in p$ and $(\node{V}_k,\node{V}_j)\in p$ for all $\node{V}_j\cup \DE{\graph{G}}{\node{V}_j}\cap \node{V}_A=\emptyset$
 \end{enumerate}
 \end{definition}
 
@@ -101,7 +103,7 @@ Given a DAG $\graph{G}=(\node{V},\node{E})$, $\node{V}_A$ is $d$-separated from 
 \end{definition}
 
 \begin{definition}[Variable-node association]
-Given a graph $\graph{G}=(\node{V},\node{E})$ and a sequence of variables $\RV{V}_A:=(\RV{V}_i)_{i\in A}$, if $|A|=|\node{V}|$ we can associate a variable with each node of the graph with an invertible map $m:\{\RV{V}_i|i\in A\}\to \node{V}$ that sends $\RV{V}_i\mapsto \node{V})_i$. By convention, we give associated variables and nodes corresponding indices, and graphical operations are defined on variables through $m$, i.e. $\mathrm{Pa}(\RV{V}_i):=m(\mathrm{Pa}(m^{-1}(\RV{V}_i)))$.
+Given a graph $\graph{G}=(\node{V},\node{E})$ and a sequence of variables $\RV{V}_A:=(\RV{V}_i)_{i\in A}$, if $|A|=|\node{V}|$ we can associate a variable with each node of the graph with an invertible map $m:\{\RV{V}_i|i\in A\}\to \node{V}$ that sends $\RV{V}_i\mapsto \node{V}_i$. By convention, we give associated variables and nodes corresponding indices, and graphical operations are defined on variables through $m$, i.e. $\mathrm{Pa}(\RV{V}_i):=m(\mathrm{Pa}(m^{-1}(\RV{V}_i)))$.
 \end{definition}
 
 \begin{definition}[Compatibility]\label{def:compat}
@@ -148,6 +150,7 @@ Given an interventional model $(\prob{P}_\cdot,C,\Omega,\RV{V}_{A\times \mathbb{
     \item [4*] $\pi_j(\alpha)=\pi_j(\alpha')$ implies $\prob{P}_\alpha^{\RV{V}_{Aj}}= \prob{P}_{\alpha'}^{\RV{V_{Aj}}}$
     \item [5*] $\RV{V}_{Aj}\CI^e_{\prob{P}_{C}} \RV{V}_{A \mathbb{N}\setminus\{j\}} |\text{id}_C$
 \end{itemize}
+where $\RV{V}_{Aj}= (\RV{V}_{ij})_{i\in A}$
 \end{definition}
 
 \subsubsection[Unrolled CBNs]{Explaining the definition of unrolled causal Bayesian networks}
@@ -156,7 +159,7 @@ Suppose we have a causal Bayesian network $(\prob{P}_C,\Omega,\RV{V}_A)$ that we
 
 First, we extend the set $C$ to be the set of sequences of interventions 
 \begin{align}
-\{(\mathrm{do}_{B_j j}(v_B))_{j\in \mathbb{N}}|\forall j: B_j \subset A,v_{B_j}\in \mathrm{Range}(\RV{V}_{B_j})\}
+\{(\mathrm{do}_{B_j j}(v_{B_j}))_{j\in \mathbb{N}}|\forall B_j \subset A,v_{B_j}\in \mathrm{Range}(\RV{V}_{B_j})\}
 \end{align}
 i.e. $C$ now consists of all sequences of separate interventions to each subsequence of variables $\RV{V}_{Aj}:=(\RV{V}_{ij})_{i\in A}$, understood to refer to variables arising from a particular iteration of the decision procedure. 
 
@@ -170,8 +173,8 @@ We now need to specify how variables in an unrolled causal Bayesian network are 
 \end{itemize}
 Where $\mathrm{do}_{\emptyset}^n$ is a sequence of $n$ $\mathrm{do}_{\emptyset}$ interventions. This is a combination of an assumption that variables in the sequence are conditionally independent and identically distributed given appropriate interventions and condition (3) from Definition \ref{def:CBN}. However, it's not quite satisfactory. Take $B_j:=\mathrm{Pa}(\RV{V}_{ij})$, and suppose $\prob{P}_{\mathrm{do}_{\emptyset}^n}^{\RV{B}_{1}}(\{x\})=0$. Then (3') would be satisfied by a model for which
 \begin{align}
-    \prob{P}_{(\mathrm{do}_{B_1},x,\mathrm{do}_{B_2},x)}^{\RV{V}_{i1}|\RV{V}_{B_1}}(U|x) &= \delta_0(U)\\
-    \prob{P}_{(\mathrm{do}_{B_1},x,\mathrm{do}_{B_2},x)}^{\RV{V}_{i2}|\RV{V}_{B_2}}(U|x) &= \delta_1(U)
+    \prob{P}_{(\mathrm{do}_{B_1}(x),\mathrm{do}_{B_2}(x))}^{\RV{V}_{i1}|\RV{V}_{B_1}}(A|x) &= \delta_0(A)\\
+    \prob{P}_{(\mathrm{do}_{B_1}(x),\mathrm{do}_{B_2}(x))}^{\RV{V}_{i2}|\RV{V}_{B_2}}(A|x) &= \delta_1(A)
 \end{align}
 that is, if the empty intervention is unsupported over some element of the range of a variable, then (3') allows models that assign different consequences to repetitions of the same intervention on this variable, if those interventions force the variable into the region that originally had no support.
 
@@ -191,7 +194,7 @@ Condition 5* is the requirement that observations are mutually independent.
 Condition 3* of Definition \ref{def:unr_CBN} establishes that in a causal Bayesian network we can identify some input and output sequences with identical responses, with exactly which ones we can identify depending on the interventions chosen. In Chapter \ref{ch:evaluating_decisions}, we considered response functions that were identical \emph{conditional on some hypothesis} $\RV{H}$. The joint distribution $\prob{P}$ that appears in the previous definition of a causal Bayesian network is implicitly understood to be unknown. We can make this explicit by adding a hypothesis $\RV{T}$ and requiring that the causal Bayesian network properties hold for each value of $\RV{T}$. We could have $\RV{T}$ index both joint distributions and directed graphs, but here we will consider the case where the graph is known in advance and only the joint distribution is not.
 
 \begin{definition}[Uncertain unrolled causal Bayesian network]\label{def:unc_unr_cbn}
-Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in \mathbb{N}})$ and a directed acyclic graph $\graph{G}$, $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in \mathbb{N}},\RV{T},\graph{G})$ is an \emph{uncertain unrolled causal Bayesian network} with respect to some hypothesis $\RV{T}:\Omega\to T$ if for each $h\in H$, defining $\prob{P}_{\cdot,t}:= \alpha\mapsto \prob{P}_\alpha^{\mathrm{id}_{\Omega}|\RV{T}}(\cdot|t)$, $(\prob{P}_{\cdot,t},C,\Omega,(\RV{V}_i)_{i\in A},\graph{G})$ is an unrolled causal Bayesian network.
+Given an interventional model $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in \mathbb{N}})$ and a directed acyclic graph $\graph{G}$, $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in \mathbb{N}},\RV{T},\graph{G})$ is an \emph{uncertain unrolled causal Bayesian network} with respect to some hypothesis $\RV{T}:\Omega\to T$ if for each $t\in T$, defining $\prob{P}_{\cdot,t}:= \alpha\mapsto \prob{P}_\alpha^{\mathrm{id}_{\Omega}|\RV{T}}(\cdot|t)$, $(\prob{P}_{\cdot,t},C,\Omega,(\RV{V}_i)_{i\in A},\graph{G})$ is an unrolled causal Bayesian network.
 \end{definition}
 
 Recalling the discussion in Section \ref{sec:probability_set_models}, Definition \ref{def:unc_unr_cbn} associates each intervention with a unique probability distribution. One could suggest that uncertain unrolled causal Bayesian networks should therefore be called ``Bayesian causal Bayesian networks''. We could also consider models with a non-stochastic hypothesis $\RV{H}$ which we might call ``non-Bayesian causal Bayesian networks''.
@@ -199,7 +202,7 @@ Recalling the discussion in Section \ref{sec:probability_set_models}, Definition
 An uncertain unrolled causal Bayesian network \emph{almost} features a number of CIIR input-output sequences. Due to 3*, such a model features conditionally independent and identical response functions with inputs $\mathrm{Pa}(\RV{V}_i)$ and outputs $\RV{V}_i$ wherever $\alpha$ consists of a sequence of interventions none of which target $\RV{V}_{ij}$ for any $j$. This leads us to the key result of this section: considering a subset of the interventions in $C$, an uncertain unrolled causal Bayesian network is IO contractible (with respect to some parameter $\RV{H}$) by application of Theorem \ref{th:ciid_rep_kernel}.
 
 \begin{theorem}[IO contractibility of CBNs]\label{th:causal_contractibility_cbn}
-Given an uncertain unrolled causal Bayesian network $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in \mathbb{N}},\RV{H},\graph{G})$, take $C'\subset C$ to be sequences of interventions that, for some $i\in A$, do not target a particular $\RV{V}_{ij}$ for any $j\in \mathbb{N}$ and ensure every sequence $\RV{V}_{j\mathbb{N}}$ has infinite support. Then $\RV{V}_{i\mathbb{N}}\CI^e_{\prob{P}_{C'}}\text{id}_C|(\RV{H}_i,\mathrm{Pa}(\RV{V}_{i \mathbb{N}}))$ and $\prob{P}_C^{\RV{V}_{i\mathbb{N}}|\RV{H}_i\mathrm{Pa}(\RV{V}_{i \mathbb{N}})}$ is IO contractible over $\RV{H}_i$ where $\RV{H}_i$ is the directing random conditional with respect to $(\prob{P}_C,\mathrm{Pa}(\RV{V}_{i \mathbb{N}}),\RV{V}_{i\mathbb{N}})$. 
+Given an uncertain unrolled causal Bayesian network $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in \mathbb{N}},\RV{H},\graph{G})$, take $C'\subset C$ to be sequences of interventions that, for some $i\in A$, do not target a particular $\RV{V}_{ij}$ for any $j\in \mathbb{N}$ and ensure every sequence $\RV{V}_{i\mathbb{N}}$ has infinite support. Then $\RV{V}_{i\mathbb{N}}\CI^e_{\prob{P}_{C'}}\text{id}_C|(\RV{H}_i,\mathrm{Pa}(\RV{V}_{i \mathbb{N}}))$ and $\prob{P}_{C'}^{\RV{V}_{i\mathbb{N}}|\RV{H}_i\mathrm{Pa}(\RV{V}_{i \mathbb{N}})}$ is IO contractible over $\RV{H}_i$ where $\RV{H}_i$ is the directing random conditional with respect to $(\prob{P}_{C'},\mathrm{Pa}(\RV{V}_{i \mathbb{N}}),\RV{V}_{i\mathbb{N}})$.
 \end{theorem}
 
 \begin{proof}
@@ -241,7 +244,7 @@ where
 \begin{align}
     \prob{P}_\alpha^{\RV{V}_{2i}|\RV{V}_{1i}\RV{H}} &= \begin{cases}
         \delta_{v} & \pi_i(\alpha)=(\mathrm{do}_2,v)\\
-        \prob{P}_{mathrm{do}_{\emptyset}}^{\RV{V}_{2i}|\RV{V}_{1i}\RV{H}} & \text{otherwise}
+        \prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_{2i}|\RV{V}_{1i}\RV{H}} & \text{otherwise}
     \end{cases}
 \end{align}
 
@@ -260,7 +263,7 @@ and we consider the subset $C'\subset C$ of interventions that are either empty 
 We observe in Theorem \ref{th:condit_exchange} that the IO contractibility of $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ implies that $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{2\mathbb{N}}}$ is unchanged by any swaps that leave the value of the full vector $\RV{V}_{1\mathbb{N}}$ unchanged. That is, the assumption of an unobserved confounder in this case implies a kind of ``partial IO contractibility''.
 
 \begin{theorem}\label{th:condit_exchange}
-Given $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in [3],j\in \mathbb{N}},\RV{H},\graph{G})$ with $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}_3\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ IO contractible over $\RV{H}_3$, $V_i$ discrete for all $i\in [3]$ and $(\RV{V}_{1\mathbb{N}},\RV{V}_{2\mathbb{N}})$ infinitely supported over $\RV{H}_3$, let $\RV{Q}:\Omega\to \mathbb{N}^\mathbb{N}$ be a random finite permutation of $\mathbb{N}$ such that $\RV{V}_{1\mathbb{N}}\overset{\prob{P}_C}{\cong}\RV{V}_{1\RV{Q}(\mathbb{N})}$. Then
+Given $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in [3],j\in \mathbb{N}},\RV{H},\graph{G})$ with $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}_3\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ IO contractible over $\RV{H}_3$, $V_i$ discrete for all $i\in [3]$ and $(\RV{V}_{1\mathbb{N}},\RV{V}_{2\mathbb{N}})$ infinitely supported over $\RV{H}_3$, let $\RV{Q}:\Omega\to \mathbb{N}^\mathbb{N}$ be a random finite permutation of $\mathbb{N}$ dependent on $\RV{V}_{1\mathbb{N}}$ such that $\RV{V}_{1\mathbb{N}}\overset{\prob{P}_C}{\cong}\RV{V}_{1\RV{Q}(\mathbb{N})}$. Then
 \begin{align}
     \prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}_3\RV{V}_{2\mathbb{N}}} &\overset{\prob{P}_C}{\cong} \prob{P}_C^{\RV{V}_{3\RV{Q}(\mathbb{N})}|\RV{H}_3\RV{V}_{2\RV{Q}(\mathbb{N})}}
 \end{align}
@@ -282,11 +285,11 @@ Thus
 \end{align}
 \end{proof}
 
-Theorem \ref{th:condit_exchange} says that IO contractibility of $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ implies the ``exchange commutativity'' of $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{2\mathbb{N}}}$ with respect to the random permutation $\RV{Q}$ of the indices of $\mathbb{N}$ -- in fact, for all such random permutations that preserve $\RV{V}_{1\mathbb{N}}$. Note that $\RV{Q}$ generally cannot be deduced from observations, because $\RV{V}_{1\mathbb{N}}$ cannot be deduced from observations. That is, $\RV{V}_{1\mathbb{N}}$ determines some subset of indices that are interchangeable, even though not \emph{all} indices are interchangeable. 
+Theorem \ref{th:condit_exchange} says that IO contractibility of $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ implies the ``exchange commutativity'' of $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{2\mathbb{N}}}$ with respect to the random permutation $\RV{Q}$ of the indices of $\mathbb{N}$ -- in fact, for all such random permutations that preserve $\RV{V}_{1\mathbb{N}}$. If $\RV{V}_{1i}=\RV{V}_{1j}$ then any permuation that swaps only $i$ and $j$ will satisfy the condtion for Theorem \ref{th:condit_exchange}. Note that $\RV{Q}$ generally cannot be deduced from observations, because $\RV{V}_{1\mathbb{N}}$ cannot be deduced from observations. That is, $\RV{V}_{1\mathbb{N}}$ determines some subset of indices that are interchangeable, even though not \emph{all} indices are interchangeable. 
 
 Suppose $\RV{V}_{[3]n}$ is the result of some intervention targeting $\RV{V}_{2n}$, and $\RV{V}_{[3]\{n\}^\complement}$ are all the result of passive observation. We can interpret Theorem \ref{th:condit_exchange} as expressing the idea that there is some (unknown) random subset of $\{n\}^\complement$ that is ``just like'' the intervened sample $\RV{V}_{[3]n}$. We could say that this random subset is a \emph{precedent} for the intervention.
 
-Thus, using causal Bayesian networks we can express the idea that some intervention has precedent in the observed data, and indeed such an assumption appears to be implicit in the notion of unobserved parents in a causal Bayesian network. This raises the question: do we \emph{need} causal Bayesian networks to express this notion? The sentiment of this assumption long predates formal theories of causation. In fact, we can find it in the Bible:
+Thus, using causal Bayesian networks we can express the idea that some intervention has precedent in the observed data. This raises the question: do we \emph{need} causal Bayesian networks to express this notion? The general idea of assuming that what can be done has been done before long predates formal theories of causation. In fact, we can find it in the Bible:
 \begin{quote}
 Everything that happens has happened before; nothing is new, nothing under the sun. Ecclesiastes 1:9, Contemporary English Version
 \end{quote}
@@ -333,7 +336,7 @@ Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $D,Y$ di
 \begin{theorem}\label{th:det_obs_to_cons}
 Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{i\in \mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{i\in \mathbb{N}}$, with $X,Y,Z$ discrete and $n$-precedented with indexing variable $\RV{T}$. Let $\RV{G}$ be the directing random conditional of $(\RV{P}_C,\RV{T},\RV{Z})$ and $\RV{H}$ the directing random conditional of $(\prob{P}_C,(\RV{T},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose there is some $N\in\sigalg{H}$ such that $\prob{P}_\alpha^{\RV{H}}(N)>0$ for all $\alpha$, and define the probability conditioned on $\RV{H}\in N$:
 \begin{align}
-prob{P}_{\alpha,\RV{H}\in N} (A):= \frac{\prob{P}_\alpha^{\text{id}_\Omega \RV{H}}(A\times N)}{\prob{P}_\alpha^{\RV{H}}(N)}
+\prob{P}_{\alpha,\RV{H}\in N} (A):= \frac{\prob{P}_\alpha^{\text{id}_\Omega \RV{H}}(A\times N)}{\prob{P}_\alpha^{\RV{H}}(N)}
 \end{align}
 
 Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in N}} \RV{Z}_i|(\RV{H},\RV{X}_i)$, and for all $t\in T$ and $z,z'\in Z$,
@@ -379,7 +382,7 @@ Given $(\prob{P}_C,\Omega,\sigalg{F})$ and, for some $i$, variables $\RV{D}_i:\O
 Where $\prob{F}_{\text{lus}}$ is the Markov kernel associated with the single-shot lookup map
 \begin{align}
     \text{lus}:Y^D\times D &\to Y\\
-    (d,(y_{i})_{i\in D})&\mapsto y_{d}
+    (d,(y_{j})_{j\in D})&\mapsto y_{d}
 \end{align}
 \end{definition}
 
@@ -404,7 +407,7 @@ hence for all $\alpha$, $(\RV{D},\RV{Y})$ is a CIIR sequence of inputs and outpu
 
 Furthermore, from Definition \ref{def:potential_outcomes}, $\prob{P}_\alpha^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}$ is the same for all $\alpha\in C$, and by the argument above,
 \begin{align}
-    \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i\RV{Y}^D_{\{i\}^{\complement}}\RV{D}_{\{i\}^{\complement}}} &= \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}\otimes \mathrm{Del}_{Y^{|D\times A\setminus\{i\}|}\times D^{|A|}}
+    \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i\RV{Y}^D_{\{i\}^{\complement}}\RV{D}_{\{i\}^{\complement}}} &= \prob{P}_C^{\RV{Y}_i|\RV{Y}^D_i\RV{D}_i}\otimes \mathrm{del}_{Y^{|D\times A\setminus\{i\}|}\times D^{|A|}}
 \end{align}
 hence
 \begin{align}
@@ -550,7 +553,7 @@ Proposition 4 together with 2 is suggestive of a two-step process of assessing s
 % \begin{example}\label{eq:il_exchc}
 % Given a sequential input-output model $(\prob{P}_C, (\RV{D},\RV{I}),\RV{Y})$ where $\RV{I}$ is the identifier variable $\omega\mapsto (\mathbb{N})$, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ commutes with exchange.
 
-% This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the identity, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ and $\text{Swap}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ will have no common support; the first will be supported on $\RV{I}\yields (\mathbb{N})$ only, and the second only on $\RV{I}\yields \rho(\mathbb{N})$.
+% This is because for any permutation $\rho:\mathbb{N}\to\mathbb{N}$ except the identity, $\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ and $\text{swap}_{\rho}\prob{P}_\alpha^{\RV{Y}|\RV{DI}}$ will have no common support; the first will be supported on $\RV{I}\yields (\mathbb{N})$ only, and the second only on $\RV{I}\yields \rho(\mathbb{N})$.
 % \end{example}
 
 % We are particularly interested in models where exchange commutativity is not trivial, so we focus on the case where each identifier $\RV{I}_i$ has some non-zero probability of taking any value in $\mathbb{N}$. 
@@ -621,7 +624,7 @@ Proposition 4 together with 2 is suggestive of a two-step process of assessing s
 % \begin{lemma}\label{lem:exch_to_ind}
 % Given any probability set $\prob{P}_C$ where $\RV{Y}\CI_{\prob{P}_C}^e \text{id}_C|(\RV{D},\RV{I})$ and $\RV{I}:\Omega\to I$ is an infinite sequence of unique identifiers, if for each finite permutation $\rho:\mathbb{N}\to \mathbb{N}$
 % \begin{align}
-%     \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{Swap}_{\rho(I)})\prob{P}_\alpha^{\RV{Y}|\RV{I}}
+%     \prob{P}_\alpha^{\RV{Y}|\RV{I}} &= (\text{swap}_{\rho(I)})\prob{P}_\alpha^{\RV{Y}|\RV{I}}
 % \end{align}
 % then $\RV{Y}\CI_{\prob{P}_C}^e \RV{I}|\text{id}_C$.
 % \end{lemma}

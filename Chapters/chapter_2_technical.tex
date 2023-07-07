@@ -375,9 +375,9 @@ The identity map $\kernel{I}_X:X\kto X$ defined by $(\kernle{I}_X)(A|x)= \delta_
 \end{definition}
 
 \begin{definition}[Erase map]\label{def:erase}
-Given some 1-element set $\{*\}$, the erase map $\text{Del}_X:X\kto \{*\}$ is defined by $(\text{Del}_X)(*|x) = 1$ for all $x\in X$. It ``discards the input''. It looks like a lit fuse:
+Given some 1-element set $\{*\}$, the erase map $\text{del}_X:X\kto \{*\}$ is defined by $(\text{del}_X)(*|x) = 1$ for all $x\in X$. It ``discards the input''. It looks like a lit fuse:
 \begin{align}
-    \text{Del}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+    \text{del}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
     \path (0,0) ++ (1,0) node (B) {$X$};
     \draw[-{Rays[n=8]}] (A) -- (B);
 \end{tikzpicture}
@@ -385,9 +385,9 @@ Given some 1-element set $\{*\}$, the erase map $\text{Del}_X:X\kto \{*\}$ is de
 \end{definition}
 
 \begin{definition}[Swap map]\label{def:swap}
-The swap map $\text{Swap}_{X,Y}:X\times Y\kto Y\times X$ is defined by $(\text{Swap}_{X,Y})(A\times B|x,y)=\delta_x(B)\delta_y(A)$ for $(x,y)\in X\times Y$, $A\in \sigalg{X}$ and $B\in \sigalg{Y}$. It swaps two inputs and is represented by crossing wires:
+The swap map $\text{swap}_{X,Y}:X\times Y\kto Y\times X$ is defined by $(\text{swap}_{X,Y})(A\times B|x,y)=\delta_x(B)\delta_y(A)$ for $(x,y)\in X\times Y$, $A\in \sigalg{X}$ and $B\in \sigalg{Y}$. It swaps two inputs and is represented by crossing wires:
 \begin{align}
-    \text{Swap}_{X,Y} &:=  \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+    \text{swap}_{X,Y} &:=  \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
         \path (0,0) node (A) {} 
         + (0,-0.5) node (B) {}
         ++ (1,0) node (C) {}
@@ -398,9 +398,9 @@ The swap map $\text{Swap}_{X,Y}:X\times Y\kto Y\times X$ is defined by $(\text{S
 \end{definition}
 
 \begin{definition}[Copy map]\label{def:copy}
-The copy map $\text{Copy}_X:X\kto X\times X$ is defined by $(\text{Copy}_X)(A\times B|x)=\delta_x(A)\delta_x(B)$ for all $x\in X$, $A,B\in \sigalg{X}$. It makes two identical copies of the input, and is drawn as a fork:
+The copy map $\text{copy}_X:X\kto X\times X$ is defined by $(\text{copy}_X)(A\times B|x)=\delta_x(A)\delta_x(B)$ for all $x\in X$, $A,B\in \sigalg{X}$. It makes two identical copies of the input, and is drawn as a fork:
 \begin{align}
-    \text{Copy}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+    \text{copy}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
     \path (0,0) node (A) {$X$} 
     ++ (0.5,0) node[copymap] (copy0) {}
     ++ (0.5,0.15) node (B) {$X$}
@@ -411,10 +411,10 @@ The copy map $\text{Copy}_X:X\kto X\times X$ is defined by $(\text{Copy}_X)(A\ti
 \end{definition}
 
 \begin{definition}[$n$-fold copy map]
-The $n$-fold copy map $\text{Copy}^n_X:X\kto X^n$ is given by the recursive definition
+The $n$-fold copy map $\text{copy}^n_X:X\kto X^n$ is given by the recursive definition
 \begin{align}
-    \text{Copy}^1_X &= \text{Copy}_X\\
-    \text{Copy}^n_X &= \tikzfig{n_fold_copy} &n>1
+    \text{copy}^1_X &= \text{copy}_X\\
+    \text{copy}^n_X &= \tikzfig{n_fold_copy} &n>1
 \end{align}
 \end{definition}
 
@@ -447,7 +447,7 @@ as well as compatibility with the monoidal structure
     \tikzfig{mstruct1_lhs} &= \tikzfig{mstruct1_rhs}\\
     \tikzfig{mstruct2_lhs} &= \tikzfig{mstruct2_rhs}
 \end{align}
-and the naturality of \emph{Del}, which means that
+and the naturality of \emph{del}, which means that
 \begin{align}
     \tikzfig{naturality_lhs} &= \tikzfig{naturality_rhs}\label{eq:nat}
 \end{align}
@@ -492,8 +492,8 @@ That is, the copy map ``passes along two copies of its input'' to the next kerne
 For arbitrary $\kernel{K}:X\times Y\kto Z$
 
 \begin{align}
-    \tikzfig{swap_example} &= \text{Swap}_{YX} \kernel{K}\\
-    (\text{Swap}_{YX}\kernel{K})(A|y,x) &= \int_{X\times Y} \kernel{K}(A|x',y')\delta_y(\mathrm{d}y')\delta_x(\mathrm{d}x')\\
+    \tikzfig{swap_example} &= \text{swap}_{YX} \kernel{K}\\
+    (\text{swap}_{YX}\kernel{K})(A|y,x) &= \int_{X\times Y} \kernel{K}(A|x',y')\delta_y(\mathrm{d}y')\delta_x(\mathrm{d}x')\\
                                         &= \kernel{K}(A|x,y)
 \end{align}
 
@@ -502,8 +502,8 @@ The swap map before a kernel switches the input arguments.
 For arbitrary $\kernel{K}:X\kto Y\times Z$
 
 \begin{align}
-    \tikzfig{swap_example_2} &= \kernel{K}\text{Swap}_{YZ}\\
-    (\kernel{K}\text{Swap}_{YZ})(A\times B|x) &= \int_{Y\times Z} \delta_{y}(B)\delta_{z}(A)\kernel{K}(\mathrm{d}y\times\mathrm{d}z|x)\\
+    \tikzfig{swap_example_2} &= \kernel{K}\text{swap}_{YZ}\\
+    (\kernel{K}\text{swap}_{YZ})(A\times B|x) &= \int_{Y\times Z} \delta_{y}(B)\delta_{z}(A)\kernel{K}(\mathrm{d}y\times\mathrm{d}z|x)\\
     &= \int_{B\times A} \kernel{K}(\mathrm{d}y\times\mathrm{d}z|x)\\
     &= \kernel{K}(B\times A|x)
 \end{align}
@@ -511,15 +511,15 @@ For arbitrary $\kernel{K}:X\kto Y\times Z$
 Given $\kernel{K}:X\kto Y$ and $\kernel{L}:Y\kto Z$:
 
 \begin{align}
-	(\kernel{K}\cprod \kernel{L})(\kernel{I}_{Y}\otimes \mathrm{Del}_Z) &= \tikzfig{semidirect_K_L}\\
+	(\kernel{K}\cprod \kernel{L})(\kernel{I}_{Y}\otimes \mathrm{del}_Z) &= \tikzfig{semidirect_K_L}\\
 	 &= \tikzfig{semidirect_K_L_2} &\text{by Eq. \eqref{eq:nat}}\\
 	 &= \tikzfig{semidirect_K_L_3} &\text{by Eq. \eqref{eq:ccom2_del}}
 \end{align}
 
-Thus the action of the $\text{Del}$ map is to marginalise over the deleted wire. With integrals, we can write
+Thus the action of the $\text{del}$ map is to marginalise over the deleted wire. With integrals, we can write
 
 \begin{align}
-	(\kernel{K}\cprod \kernel{L})(\kernel{I}_{Y}\otimes \mathrm{Del}_Z)(A\times\{*\}|x) &= \int_{Y}\int_{\{*\}}\delta_y(A)\delta_{*}(\{*\})\kernel{L}(\mathrm{d}z|y)\kernel{K}(\mathrm{d}y|x)\\
+	(\kernel{K}\cprod \kernel{L})(\kernel{I}_{Y}\otimes \mathrm{del}_Z)(A\times\{*\}|x) &= \int_{Y}\int_{\{*\}}\delta_y(A)\delta_{*}(\{*\})\kernel{L}(\mathrm{d}z|y)\kernel{K}(\mathrm{d}y|x)\\
 	&= \int_A \kernel{K}(\mathrm{d}y|x)\\
 	&= \kernel{K}(A|x)
 \end{align}

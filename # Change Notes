@@ -63,9 +63,98 @@ Accepted
 
  - 29
 
-Terminology change accepted, Boolean algebra axioms are correct and $\leq$ is correct also
+Terminology change accepted, Boolean algebra axioms are correct (in fact, there are more than strictly necessary) and $\leq$ is correct also
 
  - 30 - 33
 
 Accepted
 
+ - 34
+
+Added a sentence to clarify the nature of the set $C$
+
+ - 35 - 36
+
+Accepted
+
+ - 37
+
+ Made $\mathrm{del}$ notation consistent (as well as $\mathrm{swap}$ and $\kernel{I}$). Locality is more directly comparable to SUTDA than IO contractibility, I added a sentence pointing out the connection there.
+
+  - 38 - 39
+
+Accepted
+
+ - 40
+
+Accepted change to summation limits. Quantification for all $\alpha \in C$ is intended, and I cannot find $\mathbb{H}$ anywhere in the document, including diagrams
+
+ - 41
+
+Yes, I swapped rows and columns
+
+ - 42
+
+Commented that this definition only makes sense when the model is exchange commutative, which allows us to rearrange the order of appearance of variable pairs without changing the model
+
+ - 43 - 49
+
+Accepted
+
+ - 50
+
+Accepted superscript; RHS is as intended, rewrote the text to clarify that the point of the equation is that the tranformed comb is not generally a comb itself
+
+ - 51 - 54
+
+Accepted
+
+ - 55
+
+Accepted wire deletion, added a sentence explaining wire labeling which is admittedly confusing.
+
+ - 56
+
+Replaced "latent" with "not a function of observed variables"
+
+ - 57 - 60
+
+Accepted
+
+ - 61
+
+Clarified notation in response to 60; subscripts are as intended
+
+ - 62 - 66
+
+Accepted
+
+ - 67
+
+Notation clarified in response to earlier comments
+
+ - 68
+
+Added a sufficient condition for such a $Q$ to exist
+
+ - 69
+
+Maybe the odd phrasing was intended? I've slightly rewritten it regardless.
+
+ - 70 - 71
+
+Accepted
+
+ - 72
+
+A renamed the operation to ``set swap'' and clarified the relation to transpositions
+
+ - 73
+
+Errors corrected. Monotone convergence argument was unnecessary and removed.
+
+ - 74
+
+Fixed definition of $\rho^n$
+
+ - 

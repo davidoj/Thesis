@@ -253,11 +253,11 @@ The assumption of \emph{precedent} is the assumption that ``whatever we can do h
 \addlinespace
 \multicolumn{4}{|l|}{\textbf{String diagrams}}\\
 \hline
- Identity map & $\mathrm{Id}_X$ & Markov kernel associated with the identity function $X\to X$ & Definition \ref{def:ident_k}\\
- Erase map & $\mathrm{Del}_X$, $\stopper{0.5}$ & Markov kernel associated with the trivial variable $*_X:X\to \{*\}$ & Definition \ref{def:erase}\\
- Swap map & $\mathrm{Swap}_{XY}$, $\swap{0.5}$ & Markov kernel associated with the function that swaps its inputs $(x,y)\mapsto (y,x)$ & Definition \ref{def:swap}\\
- Swap according to permuation & $\mathrm{Swap}_\rho$ & Markov kernel that swaps inputs in a manner specified by permuation $\rho$ &\\
- Copy map & $\mathrm{Copy}_{X}$, $\splitter{0.2}$ & Markov kernel associated with the function that makes two copies of its inputs & Definition \ref{def:copy}\\
+ Identity map & $\mathrm{I}_X$ & Markov kernel associated with the identity function $X\to X$ & Definition \ref{def:ident_k}\\
+ Erase map & $\mathrm{del}_X$, $\stopper{0.5}$ & Markov kernel associated with the trivial variable $*_X:X\to \{*\}$ & Definition \ref{def:erase}\\
+ Swap map & $\mathrm{swap}_{XY}$, $\swap{0.5}$ & Markov kernel associated with the function that swaps its inputs $(x,y)\mapsto (y,x)$ & Definition \ref{def:swap}\\
+ Swap according to permuation & $\mathrm{swap}_\rho$ & Markov kernel that swaps inputs in a manner specified by permuation $\rho$ &\\
+ Copy map & $\mathrm{copy}_{X}$, $\splitter{0.2}$ & Markov kernel associated with the function that makes two copies of its inputs & Definition \ref{def:copy}\\
 \hline
 \addlinespace
 \multicolumn{4}{|l|}{\textbf{Probability sets and decision models}}\\
@@ -268,7 +268,7 @@ Option set & $C$ & Interpreted as the set of options available to a decision mak
 Nonstochastic variable & $\phi$ & Function defined on the option set $C\to A$ & Definition \ref{def:nonstoc_var}\\
 Complementary variables & $(\phi,\xi)$ & Sequence of nonstochastic variables that induces an invertible function & Definition \ref{def:comp_var}\\
 Extended conditional independence & $\RV{X}\CI^e_{\prob{P}_C}(\RV{Y},\phi)|(\RV{Z},\xi)$ & Generalisation of conditional independence to decision models & Definition \ref{def:eci_orig}\\
-Choice variable & $\text{id}_C$ & Identity function on option set $C$; corresponds to the choice made by decision maker & \\
+Choice variable & $\text{Id}_C$ & Identity function on option set $C$; corresponds to the choice made by decision maker & \\
 Tabular conditional & $\RV{Y}^X$ & Variable with the property that $\RV{Y}=\sum_{x\in X} \llbracket \RV{X}=x\rrbracket \RV{Y}^x$; not necessarily interpretable as potential outcomes & Definition \ref{def:tab_cd}\\
 Input-output model & $(\prob{P}_C,\RV{D},\RV{Y})$ & Shorthand for $((\prob{P}_\cdot,(\Omega,\sigalg{F}),(C,\sigalg{C})),\RV{D},\RV{Y})$ with sequence of inputs $\RV{D}$ and corresponding outputs $\RV{Y}$ & Definition \ref{def:seq_io}\\
 \hline
