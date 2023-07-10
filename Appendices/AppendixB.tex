@@ -728,45 +728,45 @@ Consider an arbitrary finite permutation $\rho:\mathbb{N}\to \mathbb{N}$. $\rho$
 
 
 \begin{replemma}{th:table_rep_kernel_k}
-A Markov kernel $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is IO contractible if and only if there exists a column exchangeable probability distribution $\mu \in \Delta(Y^{|X|\times \mathbb{N}})$ such that
+A Markov kernel $\kernel{K}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$ is IO contractible if and only if there exists a column exchangeable probability distribution $\mu \in \Delta(Y^{|D|\times \mathbb{N}})$ such that
 \begin{align}
-    \kernel{K} &= \tikzfig{lookup_representation_kernel}\label{eqApp:lup_rep_kernel_k}\\
+    \kernel{K} &= \tikzfig{lookup_representation_kernel_k}\label{eqApp:lup_rep_kernel_k}\\
     &\iff\\
-    \kernel{K}(\bigtimes_{i\in \mathbb{N}} A_i|(x_i)_{i\in \mathbb{N}}) &= \mu (\bigtimes_{i\in \mathbb{N}} Y^{x_i-1}\times A\times Y^{|X|-(x_i + 1)})\forall A_i\in \sigalg{Y}
+    \kernel{K}(\bigtimes_{i\in \mathbb{N}} A_i|(d_i)_{i\in \mathbb{N}}) &= \mu (\bigtimes_{i\in \mathbb{N}} Y^{d_i-1}\times A\times Y^{|D|-(d_i + 1)})\forall A_i\in \sigalg{Y}
 \end{align}
 Where $\prob{F}_{\text{lu}}$ is the Markov kernel associated with the lookup map
 \begin{align}
-    \text{lu}:X^\mathbb{N}\times Y^{\mathbb{N}\times D}&\to Y\\
+    \text{lu}:D^\mathbb{N}\times Y^{\mathbb{N}\times D}&\to Y\\
     ((x_i)_\mathbb{N},(y_{ij})_{i,j\in \mathbb{N}\times D})&\mapsto (y_{i d_i})_{i\in \mathbb{N}}
 \end{align}
 \end{replemma}
 
 \begin{proof}
 Only if:
-Choose $e:=(e_i)_{i\in\mathbb{N}}$ such that $e_{i+|X|j}$ is the $i$th element of $X$ for all $i,j\in \mathbb{N}$.
+Choose $e:=(e_i)_{i\in\mathbb{N}}$ such that $e_{i+|D|j}$ is the $i$th element of $D$ for all $i,j\in \mathbb{N}$.
 
 Define
 \begin{align}
-    \mu(\bigtimes_{(i,j)\in X\times \mathbb{N}} A_{ij}):=\kernel{K}(\bigtimes_{(i,j)\in X\times \mathbb{N}} A_{ij}|e)& \forall A_{ij}\in \sigalg{Y}
+    \mu(\bigtimes_{(i,j)\in D\times \mathbb{N}} A_{ij}):=\kernel{K}(\bigtimes_{(i,j)\in D\times \mathbb{N}} A_{ij}|e)& \forall A_{ij}\in \sigalg{Y}
 \end{align}
 
-Now consider any $x:=(x_i)_{i\in \mathbb{N}}\in X^{\mathbb{N}}$. By definition of $e$, $e_{x_i i}=x_i$ for any $i,j\in \mathbb{N}$.
+Now consider any $d:=(d_i)_{i\in \mathbb{N}}\in D^{\mathbb{N}}$. By definition of $e$, $e_{x_i i}=x_i$ for any $i,j\in \mathbb{N}$.
 
 Define
 \begin{align}
-    \prob{Q}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}\\
+    \prob{Q}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}\\
     \prob{Q}:= \tikzfig{lookup_representation_kernel}
 \end{align}
-and consider some $A\subset \mathbb{N}$, $|A|=n$ and let $B:= (x_i,i))_{i\in A}$. For arbitrary $\{C_i\in \sigalg{Y}|i\in A\}$, define $C_A:=\mathrm{swap}_{[n]\rightarrow A} (\times_{i\in [n]} C_i\times Y^{\mathbb{N}})$; i.e. the Cartesian product with the $C_i$s occupying the positions indexed by $A$ and $Y$ occupying the rest of the positions. Then, for arbitrary $x\in X^{\mathbb{N}}$
+and consider some $A\subset \mathbb{N}$, $|A|=n$ and let $B:= (x_i,i))_{i\in A}$. For arbitrary $\{C_i\in \sigalg{Y}|i\in A\}$, define $C_A:=\mathrm{swap}_{[n]\rightarrow A} (\times_{i\in [n]} C_i\times Y^{\mathbb{N}})$; i.e. the Cartesian product with the $C_i$s occupying the positions indexed by $A$ and $Y$ occupying the rest of the positions. Then, for arbitrary $d\in D^{\mathbb{N}}$
 \begin{align}
-    \prob{Q}(C_A|x) &= \mu (\mathrm{lu}_x^{-1}(C_A))\label{eqApp:q_mu_rel_k}
+    \prob{Q}(C_A|d) &= \mu (\mathrm{lu}_d^{-1}(C_A))\label{eqApp:q_mu_rel_k}
 \end{align}
-where $\mathrm{lu}_x^{-1}(C_A)=\{y^X\in Y^{X\times\mathbb{N}}|\mathrm{lu}(x,y^X)\in C_A\}$.
+where $\mathrm{lu}_d^{-1}(C_A)=\{y^D\in Y^{D\times\mathbb{N}}|\mathrm{lu}(d,y^D)\in C_A\}$.
 
 The argument of $\mu$ is
 \begin{align}
-    \mathrm{ev}_x^{-1}(C_A)&=\{(y_{ji})_{j,i\in X\times\mathbb{N}}|(y_{x_i i})_{i\in\mathbb{N}}\in C_A\}\\
-    &= \bigtimes_{i\in \mathbb{N}} \bigtimes_{j\in X} V_{ji}
+    \mathrm{ev}_d^{-1}(C_A)&=\{(y_{ji})_{j,i\in D\times\mathbb{N}}|(y_{d_i i})_{i\in\mathbb{N}}\in C_A\}\\
+    &= \bigtimes_{i\in \mathbb{N}} \bigtimes_{j\in D} V_{ji}
 \end{align}
 where
 \begin{align}
@@ -777,27 +777,27 @@ where
 \end{align}
 let $\xi:D\times \mathbb{N}\to \mathbb{N}$ be the map that sends $(j,i)$ to its rank in the enumeration of $B$. Then
 \begin{align}
-    \text{swap}_{\xi(B)\rightarrow A} (\mathrm{lu}_x^{-1}(C_A)) &= C_A\label{eqApp:swap_select_relation_k}
+    \text{swap}_{\xi(B)\rightarrow A} (\mathrm{lu}_d^{-1}(C_A)) &= C_A\label{eqApp:swap_select_relation_k}
 \end{align}
 
 Substituting Equation \eqref{eqApp:swap_select_relation_k} into \eqref{eqApp:q_mu_rel_k}
 \begin{align}
-    \prob{Q}(C_A|x) &= \mu \text{swap}_{\xi(B)\rightarrow A} (C_A)\\
+    \prob{Q}(C_A|d) &= \mu \text{swap}_{\xi(B)\rightarrow A} (C_A)\\
     &= \kernel{K} \text{swap}_{\xi(B)\rightarrow A} (C_A|e)\\
     &= \kernel{K}\text{swap}_{\xi(B)\rightarrow A} (C_A|(f_{i})_{i\in \mathbb{N}})&\text{by locality}
 \end{align}
 where 
 \begin{align}
     f_{ji} &= \begin{cases}
-        e_{x_i i} & i\in A\\
+        e_{d_i i} & i\in A\\
         x_i & \text{otherwise}
     \end{cases}
 \end{align}
-but by construction of $e$, this means $(f_i)_{i\in \mathbb{N}}=\text{swap}_{A\rightarrow\xi(B)}(x)$. Thus
+but by construction of $e$, this means $(f_i)_{i\in \mathbb{N}}=\text{swap}_{A\rightarrow\xi(B)}(d)$. Thus
 \begin{align}
-    &= \kernel{K}\text{swap}_{\xi(B)\rightarrow A} (C_A|(x))\\
-    &= \text{swap}_{A\rightarrow \xi(B)} \kernel{K}\text{swap}_{\xi(B)\rightarrow A} (C_A|x)\\
-    &= \kernel{K}(C_A|x)&\text{by commutativity of exchange}
+    &= \kernel{K}\text{swap}_{\xi(B)\rightarrow A} (C_A|(d))\\
+    &= \text{swap}_{A\rightarrow \xi(B)} \kernel{K}\text{swap}_{\xi(B)\rightarrow A} (C_A|d)\\
+    &= \kernel{K}(C_A|d)&\text{by commutativity of exchange}
 \end{align}
 
 Because this holds for all $x$, $A\subset\mathbb{N}$, by Lemma \ref{lem:infinitely_extended_kernels}
@@ -816,28 +816,28 @@ Next we will show $\mu$ is column exchangeable. Consider any column swap $\text{
 If:
 Suppose 
 \begin{align}
-    \kernel{K} &= \tikzfig{lookup_representation_kernel}
+    \kernel{K} &= \tikzfig{lookup_representation_kernel_k}
 \end{align}
-where $\mu$ is column exchangeable, and consider any two $x,x'\in X^{\mathbb{N}}$ such that some subsequences are equal $x_S=x'_T$ with $S,T\subset \mathbb{N}$ and $|S|=|T|=[n]$.
+where $\mu$ is column exchangeable, and consider any two $d,d'\in D^{\mathbb{N}}$ such that some subsequences are equal $d_S=d'_T$ with $S,T\subset \mathbb{N}$ and $|S|=|T|=[n]$.
 
-For any $\{A_i\in\sigalg{Y}|i\in S\}$, let $A_S = \text{swap}_{[n]\rightarrow S} \times_{i\in [n]} A_i\times Y^{\mathbb{N}}$, $A_T = \text{swap}_{S\rightarrow T} (A_S)$, $B=(x_i i)_{i\in S}$ and $C=(x_i i)_{i\in T}=(x_{\text{swap}_{S\rightarrow T}}(i) i)_{i\in S}$. By Equations \eqref{eqApp:q_mu_rel_k} and \eqref{eqApp:swap_select_relation_k}
+For any $\{A_i\in\sigalg{Y}|i\in S\}$, let $A_S = \text{swap}_{[n]\rightarrow S} \times_{i\in [n]} A_i\times Y^{\mathbb{N}}$, $A_T = \text{swap}_{S\rightarrow T} (A_S)$, $B=(d_i i)_{i\in S}$ and $C=(d_i i)_{i\in T}=(d_{\text{swap}_{S\rightarrow T}}(i) i)_{i\in S}$. By Equations \eqref{eqApp:q_mu_rel_k} and \eqref{eqApp:swap_select_relation_k}
 \begin{align}
-    \kernel{K}(A_S|x) &= \mu \text{swap}_{S\rightarrow B} (A_S)\\
+    \kernel{K}(A_S|d) &= \mu \text{swap}_{S\rightarrow B} (A_S)\\
     &= \mu \text{swap}_{T\rightarrow C} (A_T)&\text{ by column exchangeability of }\mu\\
-    &= \kernel{K}(A_T|\text{swap}_{S\rightarrow T}(x))\\
-    &=  \text{swap}_{S\rightarrow T}\kernel{K}(A_T| x)\\
-    &= \text{swap}_{S\rightarrow T} \kernel{K} \text{swap}_{S\rightarrow T} (A_S| x)
+    &= \kernel{K}(A_T|\text{swap}_{S\rightarrow T}(d))\\
+    &=  \text{swap}_{S\rightarrow T}\kernel{K}(A_T| d)\\
+    &= \text{swap}_{S\rightarrow T} \kernel{K} \text{swap}_{S\rightarrow T} (A_S| d)
 \end{align}
 so $\kernel{K}$ is IO contractible by Theorem \ref{th:equal_of_condits_k}.
 \end{proof}
 
 
 \begin{replemma}{lem:extabl_to_respf_k}
-Given $\kernel{K}:X^{\mathbb{N}}\kto Y^{\mathbb{N}}$, $X$ and $Y$ standard measurable, if
+Given $\kernel{K}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$, $D$ and $Y$ standard measurable, if
 \begin{align}
     \kernel{K} &= \tikzfig{lookup_representation_kernel_k}
 \end{align}
-for $\mu\in \Delta(Y^{X\times\mathbb{N}})$ column exchangeable, then defining $(H,\sigalg{H}):=\mathcal{M}_1(Y^{X\times\mathbb{N}})$ there is some $\RV{H}:Y^{X\times\mathbb{N}}\to H$ and $\kernel{L}:H\times X\kto Y$ such that
+for $\mu\in \Delta(Y^{D\times\mathbb{N}})$ column exchangeable, then defining $(H,\sigalg{H}):=\mathcal{M}_1(Y^{X\times\mathbb{N}})$ there is some $\RV{H}:Y^{D\times\mathbb{N}}\to H$ and $\kernel{L}:H\times D\kto Y$ such that
 \begin{align}
     \kernel{K} &= \tikzfig{do_model_representation_kernel_k}
 \end{align}
@@ -848,29 +848,29 @@ As a preliminary, we will show
 \begin{align}
     \kernel{F}_{\mathrm{ev}} &= \tikzfig{lookup_rep_intermediate_kernel}\label{eqApp:ev_alternate_rep_k}
 \end{align}
-where  $\mathrm{evs}_{Y^X\times X}:Y^X\times X\to Y$ is the single-shot evaluation function
+where  $\mathrm{evs}_{Y^D\times D}:Y^D\times D\to Y$ is the single-shot evaluation function
 \begin{align}
-    (x,(y_i)_{i\in X})\mapsto y_x
+    (d,(y_i)_{i\in D})\mapsto y_d
 \end{align}
 
 Recall that $\mathrm{ev}$ is the function
 \begin{align}
-    ((x_i)_\mathbb{N},(y_{ji})_{j,i\in X\times \mathbb{N}})&\mapsto (y_{x_i i})_{i\in \mathbb{N}}
+    ((d_i)_\mathbb{N},(y_{ji})_{j,i\in X\times \mathbb{N}})&\mapsto (y_{d_i i})_{i\in \mathbb{N}}
 \end{align}
 By definition, for any $\{A_i\in\sigalg{Y}|i\in \mathbb{N}\}$
 \begin{align}
-    \kernel{F}_{\mathrm{ev}}(\bigtimes_{i\in \mathbb{N}}A_i|(x_i)_\mathbb{N},(y_{ji})_{i\in X\times \mathbb{N}}) &= \delta_{(y_{x_i i})_{i\in \mathbb{N}}}(\bigtimes_{i\in \mathbb{N}}A_i)\\
-        &= \prod_{i\in \mathbb{N}} \delta_{y_{x_i i}} (A_i)\\
-        &= \prod_{i\in \mathbb{N}} \kernel{F}_{\text{evs}} (A_i|x_i,(y_{ji})_{j\in X})\\
-        &= \left(\bigotimes_{i\in\mathbb{N}} \kernel{F}_{\mathrm{evs}} \right)(\bigtimes_{i\in \mathbb{N}}A_i|(x_i)_\mathbb{N},(y_{ji})_{j\in X\times \mathbb{N}})
+    \kernel{F}_{\mathrm{ev}}(\bigtimes_{i\in \mathbb{N}}A_i|(d_i)_\mathbb{N},(y_{ji})_{i\in D\times \mathbb{N}}) &= \delta_{(y_{d_i i})_{i\in \mathbb{N}}}(\bigtimes_{i\in \mathbb{N}}A_i)\\
+        &= \prod_{i\in \mathbb{N}} \delta_{y_{d_i i}} (A_i)\\
+        &= \prod_{i\in \mathbb{N}} \kernel{F}_{\text{evs}} (A_i|d_i,(y_{ji})_{j\in D})\\
+        &= \left(\bigotimes_{i\in\mathbb{N}} \kernel{F}_{\mathrm{evs}} \right)(\bigtimes_{i\in \mathbb{N}}A_i|(d_i)_\mathbb{N},(y_{ji})_{j\in D\times \mathbb{N}})
 \end{align}
 which is what we wanted to show.
 
-Define $\kernel{M}:H\kto Y^X$ by $\kernel{M}(A|h)=h(A)$ for all $A\in\sigalg{Y}^X$, $h\in H$. By the column exchangeability of $\mu$, from \citet[Prop. 1.4]{kallenberg_basic_2005} there is a directing random measure $\RV{H}:Y^{X\times\mathbb{N}}\to H$ such that
+Define $\kernel{M}:H\kto Y^D$ by $\kernel{M}(A|h)=h(A)$ for all $A\in\sigalg{Y}^D$, $h\in H$. By the column exchangeability of $\mu$, from \citet[Prop. 1.4]{kallenberg_basic_2005} there is a directing random measure $\RV{H}:Y^{D\times\mathbb{N}}\to H$ such that
 \begin{align}
-    \mu(\kernel{F}_{\RV{H}}\otimes \mathrm{id}_{Y^{X\times\mathbb{N}}}) &= \tikzfig{de_finetti_representation_kernel}\label{eqApp:df_rep_mu_k}\\
+    \mu(\kernel{F}_{\RV{H}}\otimes \mathrm{id}_{Y^{D\times\mathbb{N}}}) &= \tikzfig{de_finetti_representation_kernel}\label{eqApp:df_rep_mu_k}\\
     &\iff\\
-    \mu(\bigtimes_{i\in \mathbb{N}} A_i\times B) &= \int_B \prod_{i\in \mathbb{N}} \kernel{M}(A_i|h) \mu\kernel{F}_{\RV{H}}(\mathrm{d}h)&\forall A_i\in\sigalg{Y}^X
+    \mu(\bigtimes_{i\in \mathbb{N}} A_i\times B) &= \int_B \prod_{i\in \mathbb{N}} \kernel{M}(A_i|h) \mu\kernel{F}_{\RV{H}}(\mathrm{d}h)&\forall A_i\in\sigalg{Y}^D
 \end{align}
 
 By Equations \eqref{eqApp:lookup_representation_k} and \eqref{eqApp:ev_alternate_rep_k}
@@ -883,7 +883,7 @@ Where we can connect the copied outputs of $\mu\kernel{F}_{\RV{H}}$ to the input
 
 
 \begin{reptheorem}{th:ciid_rep_kernel_k}
-Given a kernel $\kernel{K}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$, let $(H,\sigalg{H}):=\mathcal{M}_1(Y^D)$ be the set of probability distributions on $(Y^D,\sigalg{Y}^D)$. $\kernel{K}$ is IO contractible if and only if there is some $\mu\in \Delta(H)$ and $\kernel{L}:H\times X\kto Y$ such that 
+Given a kernel $\kernel{K}:D^{\mathbb{N}}\kto Y^{\mathbb{N}}$, let $(H,\sigalg{H}):=\mathcal{M}_1(Y^D)$ be the set of probability distributions on $(Y^D,\sigalg{Y}^D)$. $\kernel{K}$ is IO contractible if and only if there is some $\mu\in \Delta(H)$ and $\kernel{L}:H\times D\kto Y$ such that 
 \begin{align}
     \kernel{K} &= \tikzfig{do_model_representation_kernel}\\
     &\iff\\
@@ -902,7 +902,7 @@ where $\nu\in \Delta(Y^{D\times\mathbb{N}})$ is column exchangeable.
 Applying Lemma \ref{lem:extabl_to_respf_k} yields the desired result.
 
 If:
-By assumption, for any $\{A_i\in \sigalg{Y}|i\in\mathbb{N}\}$, $d:=(x_i)_{i\in\mathbb{N}}\in D^{\mathbb{N}}$
+By assumption, for any $\{A_i\in \sigalg{Y}|i\in\mathbb{N}\}$, $d:=(d_i)_{i\in\mathbb{N}}\in D^{\mathbb{N}}$
 \begin{align}
     \kernel{K}(\bigtimes_{i\in \mathbb{N}} A_i|d) &= \int_H \prod_{i\in \mathbb{N}}\kernel{L}(A_i|h,d_i)\mu(\mathrm{d}h)
 \end{align}
@@ -910,8 +910,8 @@ By assumption, for any $\{A_i\in \sigalg{Y}|i\in\mathbb{N}\}$, $d:=(x_i)_{i\in\m
 Consider any $S,T\subset\mathbb{N}$ with $|S|=|T|$, and define $A_S:=\times_{i\in\mathbb{N}} B_i$ where $B_i=Y$ if $i\not\in S$, otherwise $A_i$ is an arbitrary element of $\sigalg{Y}$. Define $A_T:=\times_{i\in\mathbb{N}} B_{\mathrm{swap}_{S\rightarrow T}(i)}$.
 
 \begin{align}
-    \kernel{K}(A_S|d) &= \int_H \prod_{i\in S}\kernel{L}(A_i|h,x_i)\mu(\mathrm{d}h)\\
-                      &= \int_H\prod_{i\in T}\kernel{L}(A_i|h,x_{\mathrm{swap}_{S\rightarrow T}(i)})\mu(\mathrm{d}h)\\
+    \kernel{K}(A_S|d) &= \int_H \prod_{i\in S}\kernel{L}(A_i|h,d_i)\mu(\mathrm{d}h)\\
+                      &= \int_H\prod_{i\in T}\kernel{L}(A_i|h,d_{\mathrm{swap}_{S\rightarrow T}(i)})\mu(\mathrm{d}h)\\
                       &= \mathrm{swap}_{S\rightarrow T}\kernel{K}(A_T|d)\\
                       &= \mathrm{swap}_{S\rightarrow T}\kernel{K}\mathrm{swap}_{T\rightarrow S}(A_S|d)
 \end{align}
@@ -920,7 +920,7 @@ So by Theorem \ref{th:equal_of_condits}, $\kernel{K}$ is IO contractible.
 
 
 \begin{reptheorem}{th:response_is_cc_hdep}
-Given a sequential input-output model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}'}$ is IO contractible if and only if there is an extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times H,\sigalg{F}\otimes\sigalg{Y}^{D\times\mathbb{N}})$ with projection map $\RV{H}:\Omega\times H\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{X}_{<i},C)|(\RV{X}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{X}_j\RV{H}}$ for all $i,j\in \mathbb{N}$ and $\RV{H}\CI_{\prob{P}_C} (\RV{X},\text{id}_C)$.
+Given a sequential input-output model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}'}$ is IO contractible if and only if there is an extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times H,\sigalg{F}\otimes\sigalg{Y}^{D\times\mathbb{N}})$ with projection map $\RV{H}:\Omega\times H\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{D}_{<i},C)|(\RV{D}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{D}_j\RV{H}}$ for all $i,j\in \mathbb{N}$ and $\RV{H}\CI_{\prob{P}_C} (\RV{D},\text{id}_C)$.
 \end{reptheorem}
 
 \begin{proof}

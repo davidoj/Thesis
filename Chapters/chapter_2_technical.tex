@@ -453,7 +453,7 @@ and the naturality of \emph{del}, which means that
 \end{align}
 
 
-\subsection{Manipulating String Diagrams}\label{sssec:string_diagram_manipulation}
+\subsection{Examples of using string diagrams}\label{sssec:string_diagram_manipulation}
 
 Planar deformations along with the applications of Equations \eqref{eq:ccom_1} through to Equation \eqref{eq:nat} are almost the only rules we have for transforming one string diagram into an equivalent one. One further rule is given by Theorem \ref{th:fong_det_kerns}.
 
@@ -465,7 +465,7 @@ For $\kernel{K}:X\kto Y$
 holds iff $\kernel{K}$ is deterministic.
 \end{theorem}
 
-\subsubsection{Examples}
+\subsubsection{Notation conversion}
 
 String diagrams can always be converted into definitions involving integrals and tensor products. A number of shortcuts can help to make the translations efficiently.
 
@@ -523,6 +523,70 @@ Thus the action of the $\text{del}$ map is to marginalise over the deleted wire.
 	&= \int_A \kernel{K}(\mathrm{d}y|x)\\
 	&= \kernel{K}(A|x)
 \end{align}
+
+\subsubsection{Substitution}
+
+Just like when manipulating ordinary mathematical notation, we can substitute equivalent subdiagrams in a larger diagram. That is, if we have
+
+\begin{align}
+	\tikzfig{joint_conditional} = \tikzfig{decomposed_conditional}
+\end{align}
+
+Then we can substitute the left hand side for the right hand side:
+
+\begin{align}
+	\tikzfig{joint_distribution} = \tikzfig{decomposed_joint_distribution}
+\end{align}
+
+
+\subsubsection{Equivalence}
+
+We can include multiple copies of the same Markov kernel in a diagram. We can use this to show, for example, that certain conditionals are equivalent. For example, we can represent the following (see Section \ref{sec:eci} for the definition of conditional independence $\CI$)
+
+\begin{align}
+	(\RV{X}_2, \RV{Y}_2) &\CI_{\prob{P}} (\RV{Y}_1,\RV{X}_1) | \RV{H}\\
+	\prob{P}^{\RV{Y}_1|\RV{X}_1\RV{H}} &= \prob{P}^{\RV{Y}_2|\RV{X}_2\RV{H}}
+\end{align}
+
+with the following diagram equation:
+\begin{align}
+	\prob{P}^{\RV{X_{\{1,2\}}\RV{Y}_{\{1,2\}}|\RV{H}}} &= \tikzfig{y_indep_example_joint}\label{eq:defn_indep_w_diagram}
+\end{align}
+Note that in this diagram, we have implicitly
+\begin{align}
+	\prob{P}^{\RV{X}_1|\RV{H}} &= \kernel{K}_1\\
+	\prob{P}^{\RV{X}_2|\RV{H}} &= \kernel{K}_2\\
+	\prob{P}^{\RV{Y}_1|\RV{X}_1\RV{H}} &= \prob{P}^{\RV{Y}_2|\RV{X}_2\RV{H}}\\
+	&= \kernel{L}
+\end{align}
+if a kernel in a diagram is equal to $\prob{P}^{\RV{W}|\RV{U}}$ we will typically label it explicitly as such for clarity, but as in Eq. \eqref{eq:defn_indep_w_diagram}, it is not strictly necessary to do so.
+
+\subsubsection{Surgery}
+
+We can also use string diagrams to compactly define ``surgery'' operations that take a probability distribution and return a probability distribution with a subset of the Markov kernels transformed. A standard definition of hard interventions in causal models is to separately define a transformation of the probability distribution takes a directed acyclic graph
+
+\begin{align}
+	\mathcal{G} = \tikzfig{simple_dag}
+\end{align}
+
+and defines a transformation of the joint probability distribution with respect to this graph (see Definition \ref{def:CBN} for a more precise explanation of interventions):
+
+\begin{align}
+	\prob{P}^{\RV{Y}|\mathrm{do}(\RV{X}=x)} = \sum_{z\in Z} \prob{P}^{\RV{Y}|\RV{X}\RV{Z}}(\cdot|x,z)
+\end{align}
+
+and separately defines a transformed graph $\mathcal{G}_{\overline{\RV{X}}}$ associated with the operation
+
+\begin{align}
+	\mathcal{G}_{\overline{X}} = \tikzfig{simple_dag_cut}
+\end{align}
+
+\citet{jacobs_causal_2019} defines the ``cut'' operation on string diagrams which subsumes both the graphical and probabilistic definition of an intervention. It involves (in this example) replacing the Markov kernel associated with $\prob{P}^{\RV{X}|\RV{Z}}$ with the markov kernel $\kernel{K}_x:= *\mapsto \delta_x$.
+
+\begin{align}
+	\mathrm{cut}(\tikzfig{simple_dag_as_string}) = \tikzfig{simple_dag_as_string_cut}
+\end{align}
+
 
 \section{Probability Sets and Decision Models}\label{sec:probability_sets}
 

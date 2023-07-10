@@ -1,0 +1,11 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=plain circle] (1) at (3.25, 1) {$\RV{Z}$};
+		\node [style=plain circle] (2) at (1.5, -1) {$\RV{X}$};
+		\node [style=plain circle] (3) at (4.75, -1) {$\RV{Y}$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=right arrow] (1) to (3);
+		\draw [style=right arrow, in=180, out=0] (2) to (3);
+	\end{pgfonlayer}
+\end{tikzpicture}
