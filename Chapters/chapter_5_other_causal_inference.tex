@@ -295,12 +295,70 @@ Theorem \ref{th:condit_exchange} says that IO contractibility of $\prob{P}_C^{\R
 
 Suppose $\RV{V}_{[3]n}$ is the result of some intervention targeting $\RV{V}_{2n}$, and $\RV{V}_{[3]\{n\}^\complement}$ are all the result of passive observation. We can interpret Theorem \ref{th:condit_exchange} as expressing the idea that there is some (unknown) random subset of $\{n\}^\complement$ that is ``just like'' the intervened sample $\RV{V}_{[3]n}$. We could say that this random subset is a \emph{precedent} for the intervention.
 
-Thus, using causal Bayesian networks we can express the idea that some intervention has precedent in the observed data. This raises the question: do we \emph{need} causal Bayesian networks to express this notion? The general idea of assuming that what can be done has been done before long predates formal theories of causation. In fact, we can find it in the Bible:
-\begin{quote}
-Everything that happens has happened before; nothing is new, nothing under the sun. Ecclesiastes 1:9, Contemporary English Version
-\end{quote}
+In some cases, an assumption of precedent can motivate the conclusion that certain input-output relationships are invariant. Consider the following example:
 
-We offer a simple definition of precedent. The idea is that we're given some sequence $\RV{Z}:=(\RV{Z}_i)_{i\in\mathbb{N}}$ and our choice influences $\RV{Z}_n$ and, no matter what we do, there is some subsequence $\RV{Z}_A$ of $\RV{Z}_{\{n\}^\complement}$ such that $\RV{Z}_{A\cup\{n\}}$ is exchangeable ($A$ may, in general, depend on the option chosen). We propose the following properties to precisely characterise precedent:
+\begin{example}\label{ex:doctor_precedent}
+Suppose a decision maker collects data about a group of peope who have variously engaged the services of dietiticians, sporting coaches, general practitioners, bariatric surgeons and none of the above, with practitioner choice recorded under the variable $\RV{Z}_i$. The decision maker has also collected data on each person's body mass index $\RV{X}_i$ at the beginning of the study and followed mortality outcomes $\RV{Y}_i$ for a considerable period of time. A decision maker is reviewing this data, and in particular is wondering if steps they take to manage their weight $\RV{X}_c$ are likely to improve their own mortality prospects $\RV{Y}_c$.
+
+Our decision maker presumes that each group of people $\RV{Z}_i$ has, in aggregate, different strategies for pursuing weight management and different contextual reasons for doing so (though, for the sake of this example, we suppose that the decision maker doesn't collect data on any of these facts). Because of this variation, the decison maker reasons, people in these different groups with different levels of body mass index should see different mortality results \emph{if, conditional on body mass index, the different circumstances and management strategies actually lead to different results}. Conversely, if there is \emph{no} variation in results for these different groups of people, then it would appear that, at least with regard to mortality, the eventual body mass index achieved is apparently the \emph{only} important feature of any management plan.
+
+This inference might fail if, for any reason, the variation in treatment plans and contexts between the different groups of people surveyed masks the variation in their effects. For example, if all groups of people overwhelmingly choose to pursue diet changes in the end and other dimensions of variation are simply not very important to the outcome, then their results will not reveal any variation in mortality outcomes due to different treatment strategies. Alternatively, it might be the case that everybody is making choices that achieve nearly optimal mortality prospects given their unobserved context and that the best achievable mortality outcomes are approximately the same for each person's achievable level of body mass index. In this case there may still be substantial variation in outcomes from different weight management strategies, but it is masked by the fact that everyone is making near-optimal choices.
+
+If the decision maker finds that $\RV{Y}_i$ is not independent of $\RV{Z}_i$ given $\RV{X}_i$, they may also consider whether $\RV{Y}_i$ is independent of $\RV{Z}_i$ given $(\RV{V}_i,\RV{X}_i)$ for some set of covariates $\RV{V}_i$.
+\end{example}
+
+We will show in Theorem \ref{th:det_obs_to_cons} a formal result motivated by Example \ref{ex:doctor_precedent}. For this, we assume that all variables of interest are discrete, and make use of an alternative notation for discrete conditional probabilities.
+
+\begin{definition}[Index notation for discrete conditionals]
+Given a joint probability distribution $\mu^{\RV{XY}}$ with $\RV{X}$ and $\RV{Y}$ discrete, let $\mu^y_x:=\mu^{\RV{Y}|\RV{X}}(\{y\}|x)$ and $\mu^Y_X:= (x,y)\mapsto \mu^y_x$
+\end{definition}
+
+The key assumptions for Theorem \ref{th:det_obs_to_cons} are the assumption of precedent and an assumption of conditional absolute continuity. The latter requires that the parameters governing certain conditional distributions are absolutely continuous with respect to the Lebesgue measure after observing the independence of $\RV{Y}_i$ from $\RV{Z}_i$ after conditioning on $\RV{X}_i$. The role of this assumption is to rules out parameter values that mask variation in the response of $\RV{Y}_i$ to $\RV{X}_i$.
+
+The assumption of precedent combines an assumption of a CIIR sequence (with the provision that the inputs are unobserved) and the assumption that any distribution of unobserved inputs achievable to the decision maker is dominated by the distribution of unobserved inputs in the passively collected data.
+
+\begin{definition}[Precedent]\label{def:precedent}
+Given a CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$. 
+
+We say that the options $C$ have \emph{precedent} with respect to $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ if $\prob{P}_\cdot$ satisfies:
+\begin{align}
+    \prob{P}_\alpha^{\RV{E}_c|\RV{H}} &\ll \sum_{z\in Z}\prob{P}_\alpha^{\RV{E}_i|\RV{H}}(\cdot|h)&\prob{P}_\alpha-\text{almost all }h
+\end{align}
+Note that we understand $\RV{E}_i$ to be an unobserved variable.
+\end{definition}
+
+\emph{Conditional absolute continuity} is a shorthand for a disjunctive assumption; either the parameter $\RV{H}^E_Z$, conditional on $\RV{H}^Y_{EXZ}$ and $\RV{H}^X_{EZ}$ is absolutely continuous with respect to the Lebesgue measure, or the parameter $\RV{H}^{X}_{EZ}$ conditional on $\RV{H}^E_Z$ and $\RV{H}^Y_{EXZ}$ is absolutely continuous with respect to the Lebesgue measure (or both). 
+
+\begin{definition}[Conditional absolute continuity]\label{def:absolute_continuity}
+Given a latent CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$. 
+
+We say that $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ satisfies conditional absolute continuity if $\prob{P}_\cdot$ satisfies one of the conditions:
+\begin{align}
+    \prob{P}_{\alpha}^{\RV{H}^{E}_{Z}|\RV{H}^{Y}_{EXZ}\RV{H}^X_{EZ}}(\cdot|g^{Y}_{EXZ}) &\ll U_{\Delta(E)}& \forall \alpha, z, \prob{P}_\alpha-\text{almost all }g^{Y}_{EXZ} \quad \text{or}\\
+    \prob{P}_{\alpha}^{\RV{H}^X_{EZ}|\RV{H}^{Y}_{EXZ}\RV{H}^{E}_{Z}}(\cdot|g^{Y}_{EXZ}) &\ll U_{\Delta(X)}& \forall \alpha, z, \prob{P}_\alpha-\text{almost all }g^{Y}_{EXZ}\label{eqApp:lebesgue_dom}
+\end{align}
+Where $U_{\Delta(E)}$ is the uniform measure on the $|E-1|$ simplex of discrete probability distributions with $|E|$ outcomes.
+\end{definition}
+
+We are interested in the setting where we have observed that $\RV{Y}_i$ is independent of $\RV{Z}_i$ given $\RV{X}_i$. We formally state this by defining the event $I$ where this independence holds, and defining an alternative model $\prob{Q}_{\cdot}$ which corresponds to $\prob{P}_\cdot$ conditioned on the occurrence of the event $I$.
+
+\begin{theorem}[Latent to observable IO contractibility]\label{th:latent_to_observable}
+Given a latent CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$.
+
+Let $I\subset \Delta(Y)^{XZ}$ be the event $\RV{H}^Y_{Xz}=\RV{H}^Y_{Xz'}$ for all $z,z'\in Z$; i.e. the event that $\RV{Y}_i$ is independent of $\RV{Z}_i$ conditional on $\RV{X}_i$ and $\RV{H}^Y_{XZ}$. Define $\prob{Q}_\alpha\in \Delta(\Omega)$ to be the probability measure such that, for all $A\in \sigalg{F}$
+\begin{align}
+\prob{Q}_\alpha(A) := \prob{P}_\alpha^{\mathrm{id}_\Omega|\mathds{1}_I\circ \RV{H}}(A|1)
+\end{align}
+i.e. $\prob{Q}_\alpha$ is $\prob{P}_\alpha$ conditioned on $\RV{H}^Y_{XZ}\in I$, so $\RV{Y}_i\CI^e_{\prob{Q}_\cdot} \RV{Z}_i|(\RV{X}_i,\mathrm{id}_C)$.
+
+If the options $C$ have precedent with respect to $(\prob{Q}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$, and this model also satisfies conditional absolute continuity, then $(\prob{Q}_\cdot,\RV{X},\RV{Y})$ is also IO contractible.
+\end{theorem}
+
+\begin{proof}
+We show that the assumption of conditional independence imposes a polynomial constraint on $\RV{H}^d_z$ which is nontrivial unless $\RV{Y}_i\CI^e (\RV{Z}_i,\RV{E}_i,\text{id}_C)|(\RV{X}_i,\RV{H})$, and hence the solution set $S$ for this constraint has measure 0 when this conditional independence does not hold.
+
+Full proof in Appendix \ref{sec:proof_precedent}.
+\end{proof}
 
 \begin{definition}[Precedent]\label{def:preemption}
 A decision model $(\prob{P}_\cdot,(\Omega,\sigalg{F}),(C,\sigalg{C}))$ along with a sequence of variables $\RV{Z}:=(\RV{Z}_i)_{i\in\mathbb{N}}$ is $n$-\emph{precedented} if
@@ -327,12 +385,6 @@ By assumption, $\prob{P}_\alpha^{\RV{Z}|\RV{T}}$ is exchange commutative. In add
 Thus precedent implies ``garden variety'' IO contractibility of $\prob{P}_C^{\RV{Z}|\RV{HT}}$. Apart from the stronger assumptions about observations, the only difference to the discussion of IO contractibility in Chapter \ref{ch:evaluating_decisions} is in our interpretation; we don't assume that $\RV{T}$ is observed, and we don't assume that we know anything in advance about how $\RV{T}$ responds to $\alpha$.
 
 The assumption of precedent as given in Definition \ref{def:preemption} can, under some side conditions, yield nontrivial conclusions, as we show in Theorem \ref{th:det_obs_to_cons}. Before we state this theorem, it is worth going through an example first.
-
-\begin{example}\label{ex:doctor_precedent}
-Suppose we have a collection of doctors who each see a series of patients, offer a treatment $\RV{X}_i$ and report their results $\RV{Y}_i$. Each doctor may decide whether or not to prescribe based on any number of unobserved factors, and may offer additional unrecorded treatments, vary in their bedside manner and so forth, and these decisions could be stochastic or deterministic. The decision maker is \emph{also} a doctor, and is reviewing the data contained in the sequences $(\RV{Z}_i,\RV{X}_i,\RV{Y}_i)_{i\in [n]}$, where $\RV{Z}_i$ identifies the doctor involved in the $i$th treatment interaction. The decision maker supposes that whatever overall treatment plan the decision maker will adopted (which could and probably does also involve features not listed in this set of variables), the same thing has probably been done at least sometimes by some of these other doctors -- that is, their treatment protocol is precedented in the data. Because the other doctors have some variation in their treatment behaviour, it stands to reason that different doctors making the same prescription decisions should see different results \emph{if the different unobserved treatment plans actually lead to different results}. Conversely, if there is \emph{no} variation in results different doctors obtain, then whether or not treatment occurred is the \emph{only} important feature of any treatment plan.
-
-This story might fail if the doctors all knew exactly the long-run probabilistic outcomes of different treatment plans and coordinated with one another to mask any variation they induced. For example, doctor 1 picks a medium effectiveness unobserved plan 100\% of the time, while doctor 2 picks a highly effective unobserved plan 50\% of the time and a low effectiveness unobserved plan 50\% of the time, leading to the same distribution over outcomes. Our decision maker also has to assume that there is some ``randomness'' in each doctor's choice of unobserved treatment plan so that they cannot precisely coordinate in this manner. In particular, one doctor's hidden treatment plan cannot be a deterministic function of any other doctor's hidden treatment plan and the ``true'' effectiveness of the treatment plans.
-\end{example}
 
 
 \begin{notation}[Matrix notation]
