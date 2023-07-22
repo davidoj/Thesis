@@ -712,8 +712,8 @@ Note that $(\RV{X},\RV{Z})=(\mathrm{Id}_X\otimes f)\circ (\RV{X},\RV{Y})$. Thus,
 Note also that for all $A\in\sigalg{X}$, $B\in \sigalg{Z}$, $x\in X$, $y\in Y$:
 
 \begin{align}
-\prob{F}_{\mathrm{Id}_X}\otimes f}(A\times B|x,y)&=\delta_x(A)\delta_{f(y)}(B)\\
-&= \prob{F}_{\mathrm{Id}_X} (A|x)\otimes \prob{F}_f(B|y)\\
+\prob{F}_{\mathrm{Id}_X\otimes f}(A\times B|x,y)&=\delta_x(A)\delta_{f(y)}(B)\\
+&= \prob{F}_{\mathrm{Id}_X} \otimes \prob{F}_f(A\times B|x,y)\\
 \implies \prob{F}_{\mathrm{Id}_X\otimes f} &= \prob{F}_{\mathrm{Id}_X} \otimes \prob{F}_f
 \end{align}
 
