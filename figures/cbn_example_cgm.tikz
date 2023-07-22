@@ -5,8 +5,8 @@
 		\node [style=plain circle] (2) at (2, 1.75) {$\node{V}_3$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
-		\draw [style=arrowlatex] (0) to (2);
-		\draw [style=arrowlatex] (1) to (2);
-		\draw [style=arrowlatex] (0) to (1);
+		\draw [-latex] (0) to (2);
+		\draw [-latex] (1) to (2);
+		\draw [-latex] (0) to (1);
 	\end{pgfonlayer}
 \end{tikzpicture}
