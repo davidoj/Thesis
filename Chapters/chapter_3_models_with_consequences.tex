@@ -90,7 +90,7 @@ The question of how decision problems ought to be represented has received subst
     \item Most theories have some notion of a ``prior'' over hypotheses, which induces a choice only model (Definition \ref{def:ch_only})
 \end{itemize}
 
-Statistical Decision Theory (SDT), introduced by \citet{wald_statistical_1950}, further proves a \emph{complete class theorem}, which shows that, under some conditions, choices that are admissible (Definition \ref{def:admissible_decision}) are also optimal with respect to some prior over hypotheses. That is, any admissible decision under a choices and hypotheses model can be rationalised as a decision under a choices only model with some prior (though, importantly, this \emph{doesn't} establish that proposing a prior is always the appropriate way to go about making a decision). We show that SDT corresponds to a particular class of decision models we call conditionally independent see-do models (Definition \ref{def:ci_see_do_model}) combined with the principle of expected utility maximisation. With this in hand, we show that the complete class theorem applies to this class of decision models, and extend it to a slightly broader class.
+Statistical Decision Theory (SDT), introduced by \citet{wald_statistical_1950}, further proves a \emph{complete class theorem}, which shows that, under some conditions, choices that are admissible (Definition \ref{def:admissible_decision}) are also optimal with respect to some prior over hypotheses. That is, any admissible decision under a choices and hypotheses model can be rationalised as a decision under a choices only model with some prior (though, importantly, this \emph{doesn't} establish that proposing a prior is always the appropriate way to go about making a decision). We show that SDT corresponds to a particular class of decision models involving action and hypothesis variables (Definition \ref{def:ci_see_do_model}) combined with the principle of expected utility maximisation. With this in hand, we show that the complete class theorem applies to this class of decision models, and extend it to a slightly broader class.
 
 The following discussion will often make reference to \emph{complete preference relations}. A complete preference relation is a relation $\succ,\prec,\sim$ on a set $A$ such that for any $a,b,c$ in $A$ we have:
 \begin{itemize}
@@ -276,105 +276,106 @@ Given decision functions $C$, hypotheses $(H,\sigalg{H})$, risk $R:C\times H\to 
 
 In this section, we relate our new work to the standard formulation of SDT presented above.
 
-Statistical decision theory ignores the notion of general consequences of choices; the only ``consequence'' in the theory is the loss incurred by a particular decision under a particular hypothesis. The kinds of probability set models studied here probabilistically map decisions to consequences, and the set of consequences is understood to have a utility function to allow for assessment of the desirability of different choices via the principle of expected utility. Not every probability set model induces a statistical decision problem in this manner. A family of models that does are what we call \emph{conditionally independent see-do models}. These models feature observations (the ``see'' part) along with decisions and consequences (the ``do'' part), and the observations come ``before'' the decisions (hence see-do). Examples of this type of model will be encountered again in Chapters \ref{ch:evaluating_decisions} and \ref{ch:other_causal_frameworks}. Furthermore, there is a hypothesis such that consequences are assumed to be independent of observations conditional on the decision and the hypothesis. This is why they are qualified as ``conditionally independent'' see-do models.
-\begin{definition}[See-do model]\label{def:see_do_model}
-A probability set model of a statistical decision problem, or a \emph{see-do model} for short, is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences and $\RV{D}:\Omega\to D$ are the decisions. $\prob{P}_{C\times H}$ must observe the following conditional independences:
+Statistical decision theory ignores the notion of general consequences of choices; the only ``consequence'' in the theory is the loss incurred by a particular decision under a particular hypothesis. The kinds of probability set models studied here probabilistically map decisions to consequences, and the set of consequences is understood to have a utility function to allow for assessment of the desirability of different choices via the principle of expected utility. Not every probability set induces a statistical decision problem in this manner. A family of models that does are those involving \emph{action}, \emph{observation} and \emph{hypothesis} variables. Observation variables are independent of the ``choice'', while action variables are independent of the hypothesis given the choice.
+\begin{definition}[Statistical decision model]\label{def:see_do_model}
+A probability set model of a statistical decision problem, or a statistical decision model for short, is a tuple $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{A})$ where $\prob{P}_{C\times H}$ is a probability set indexed by elements of $C\times H$ on $(\Omega,\sigalg{F})$. $\RV{X}:\Omega\to X$ are \emph{observations}, $\RV{Y}:\Omega\to Y$ are \emph{consequences} and $\RV{A}:\Omega\to A$ are \emph{actions}. $\prob{P}_{C\times H}$ must observe the following conditional independences:
 \begin{align}
-    \RV{X}&\CI^e_{\prob{P}_{C\times H}} \text{id}_C|\RV{H}\\
-    \RV{D}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\text{id}_C
+    \RV{X}&\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}\quad\text{observations independent of choice}\\
+    \RV{A}&\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}\quad\text{actions independent of hypothesis given choice}
 \end{align}
-where $\text{id}_C:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (refer to Definition \ref{def:eci_orig} for the definition of extended conditional independence $\CI_{\prob{P}_{C\times H}}^e$).
+where $\RV[C]:C\times H\to C$ and $\RV{H}:C\times H\to H$ are the respective projections (refer to Definition \ref{def:eci_orig}, which form a complimentary pair required for extended conditional independence with respect to $\prob{P}_{C\times H}$.
 \end{definition}
-\begin{definition}[Conditionally independent see-do model]\label{def:ci_see_do_model}
-A conditionally independent see-do model is a see do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ where the following additional conditional independence holds:
+\begin{definition}[Conditionally independent statistical decision model]\label{def:ci_see_do_model}
+A conditionally independent statistical decision model is a statistical decision model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{A})$ where the following additional conditional independence holds:
 \begin{align}
-    \RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})
+    \RV{Y}&\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{A},\RV{H})
 \end{align}
+That is, consequences are independent of the observations and the choice given the actions and the hypothesis.
 \end{definition}
-We assume that a utility function is available depending on the consequence $\RV{Y}$ only, and identify the loss with the negative expected utility, conditional on a particular decision and hypothesis.
-\begin{definition}[Induced loss]
-Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ and a utility $u:Y\to \mathbb{R}$, the induced loss $l:D\times H\to \mathbb{R}$ is defined as
-\begin{align}
-    l(d,h)&:= -\int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)
-\end{align}
-\end{definition}
-where the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}$'s existence is guaranteed by $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$.
 
-A see-do model induces a set of decision functions: for each $\alpha\in C$, there is an associated probability distribution $\prob{P}_\alpha^{\RV{D}|\RV{X}}$. Using the above definition of loss, the expected loss of a decision function in a conditionally independent see-do model induces a risk function identical to the SDP risk.
-\begin{theorem}[Induced SDP risk]\label{th:ind_risk}
-Given a conditionally independent see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice $\alpha\in C$ and hypothesis $h\in H$ is equal to the negative SDP risk of the associated decision rule $\prob{P}_\alpha^{\RV{D}|\RV{X}}$ and hypothesis $h$.
+If we are given a statistical decision model and a utility function is available depending on the consequence $\RV{Y}$ only, we can identify the loss with the negative expected utility conditional on a particular decision and hypothesis.
+\begin{definition}[Induced loss]
+Given a statistical decision model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{A})$ and a utility $u:Y\to \mathbb{R}$, the induced loss $l:A\times H\to \mathbb{R}$ is defined as
 \begin{align}
-    \prob{P}_{\alpha,h}^{\RV{Y}}u &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}},h)
+    l(a,h)&:= -\int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{A}}(\mathrm{d}y|a)
+\end{align}
+\end{definition}
+where the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{A}}$'s existence is guaranteed by $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{A},\RV{H})$.
+
+A statistical decision model induces a set of decision functions: for each $\alpha\in C$, there is an associated probability distribution $\prob{P}_\alpha^{\RV{A}|\RV{X}}$. Using the above definition of loss, the expected loss of a decision function in a conditionally independent statistical decision model induces a risk function identical to the SDP risk.
+\begin{theorem}[Induced SDP risk]\label{th:ind_risk}
+Given a conditionally independent statistical decision model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{A})$ along with a utility $u:Y\to \mathbb{R}$, the expected utility for each choice $\alpha\in C$ and hypothesis $h\in H$ is equal to the negative SDP risk of the associated decision rule $\prob{P}_\alpha^{\RV{A}|\RV{X}}$ and hypothesis $h$.
+\begin{align}
+    \prob{P}_{\alpha,h}^{\RV{Y}}u &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{A}|\RV{X}},h)
 \end{align}
 \end{theorem}
 
 \begin{proof}
 The expected utility given $\alpha$ and $h$ is
 \begin{align}
-    \int_Y u(y)\prob{P}_{\alpha,h}^{\RV{Y}}(\mathrm{d}y) &= \int_Y  \int_D \int_{X} u(y)\prob{P}_{\alpha,h}^{\RV{Y}|\RV{DX}}(\mathrm{d}y|d,x)\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha,h}^{\RV{X}}(\mathrm{d}x) \\
-    &= \int_X  \int_D \int_{Y} u(y) \prob{P}_{\alpha,h}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha,h}^{\RV{X}}(\mathrm{d}x)\label{eq:because_of_ci}\\
-    &= \int_{X} \int_D \int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{D}}(\mathrm{d}y|d)\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
-     &= -\int_D\int_X l(d,h)\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
-    &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}},h)
+    \int_Y u(y)\prob{P}_{\alpha,h}^{\RV{Y}}(\mathrm{d}y) &= \int_Y  \int_A \int_{X} u(y)\prob{P}_{\alpha,h}^{\RV{Y}|\RV{AX}}(\mathrm{d}y|a,x)\prob{P}_{\alpha,h}^{\RV{A}|\RV{X}}(\mathrm{d}a|x)\prob{P}_{\alpha,h}^{\RV{X}}(\mathrm{d}x) \\
+    &= \int_X  \int_A \int_{Y} u(y) \prob{P}_{\alpha,h}^{\RV{Y}|\RV{A}}(\mathrm{d}y|a)\prob{P}_{\alpha,h}^{\RV{A}|\RV{X}}(\mathrm{d}a|x)\prob{P}_{\alpha,h}^{\RV{X}}(\mathrm{d}x)\label{eq:because_of_ci}\\
+    &= \int_{X} \int_A \int_Y u(y) \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{A}}(\mathrm{d}y|a)\prob{P}_{\{\alpha\}\times H}^{\RV{A}|\RV{X}}(\mathrm{d}a|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
+     &= -\int_A\int_X l(d,h)\prob{P}_{\{\alpha\}\times H}^{\RV{A}|\RV{X}}(\mathrm{d}a|x)\prob{P}_{C\times\{h\}}^{\RV{X}}(\mathrm{d}x)\\
+    &= -R(\prob{P}_{\{\alpha\}\times H}^{\RV{A}|\RV{X}},h)
 \end{align}
-where Equation \eqref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{D},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{D}|\RV{X}}$ exists due to $\RV{D}\CI^e_{\prob{P}_{C\times H}} \RV{H}|\text{id}_C$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}\CI^e_{\prob{P}_{C\times H}} \text{id}_C|\RV{H}$.
+where Equation \eqref{eq:because_of_ci} follows from $\RV{Y}\CI^e_{\prob{P}_{C\times H}} (\RV{X,C})|(\RV{A},\RV{H})$, the uniform conditional $\prob{P}_{\{\alpha\}\times H}^{\RV{A}|\RV{X}}$ exists due to $\RV{A}\CI^e_{\prob{P}_{C\times H}} \RV{H}|\RV{C}$ and the uniform conditional $\prob{P}_{C\times\{h\}}^{\RV{X}}$ exists due to $\RV{X}\CI^e_{\prob{P}_{C\times H}} \RV{C}|\RV{H}$.
 \end{proof}
 
-Theorem \ref{th:ind_risk} does \emph{not} hold for general see-do models. General see-do models allow for the utility to depend on $\RV{X}$ even after conditioning on $\RV{D}$ and $\RV{H}$, while the form of the loss function in SDT forces no direct dependence on observations. The generic ``see-do risk'' (Definition \ref{def:see_do_risk}) provides a notion of risk for the more general case, while Theorem \ref{th:ind_risk} shows it reduces to SDP risk in the case of conditionally independent see-do models with a utility that depends only on the consequences $\RV{Y}$.
-\begin{definition}[See-do risk]\label{def:see_do_risk}
-Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ along with a utility $u:X\times Y\to \mathbb{R}$, the \emph{see-do risk} $R:C\times H\to \mathbb{R}$ is given by
+Theorem \ref{th:ind_risk} does \emph{not} hold if we have have a utility that depends on $\RV{X}$ even after conditioning on $\RV{A}$ and $\RV{H}$. The form of the loss function in SDT forces no direct dependence on observations. The generic ``decision model risk'' (Definition \ref{def:see_do_risk}) provides a notion of risk for the more general case, while Theorem \ref{th:ind_risk} shows it reduces to SDP risk in the case of conditionally independent statistical decision models models with a utility that depends only on the consequences $\RV{Y}$.
+\begin{definition}[Decision model risk]\label{def:see_do_risk}
+Given a statistical decision model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{A})$ along with a utility $u:X\times Y\to \mathbb{R}$, the \emph{decision problem risk} $R:C\times H\to \mathbb{R}$ is given by
 \begin{align}
     R(\alpha,h) &:= -\prob{P}_{\alpha,h}^{\RV{XY}}u&\forall \alpha\in C,h\in H
 \end{align}
 \end{definition}
 
-Section \ref{sec:modelling_decision_problems} noted that two types of probability set model are considered: probability sets $\prob{P}_C$ indexed by choices alone, and probability sets $\prob{P}_{C\times H}$ jointly indexed by choices and hypotheses. See-do models are an instance of the second kind, jointly indexed by choices and hypotheses. Bayesian see-do models are of the former type, indexed by choices alone. A see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D})$ and a prior over hypotheses $\mu\in \Delta(H)$ can be combined to form a Bayesian see-do model, and under the right conditions the risk of the Bayesian model reduces to the Bayes risk of the original see-do model.
+Section \ref{sec:modelling_decision_problems} noted that two types of probability set model are considered: probability sets $\prob{P}_C$ indexed by choices alone, and probability sets $\prob{P}_{C\times H}$ jointly indexed by choices and hypotheses. Statistical decision models are an instance of the second kind, jointly indexed by choices and hypotheses. Bayesian statistical decision models are of the former type, indexed by choices alone. A statistical decision model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{A})$ and a prior over hypotheses $\mu\in \Delta(H)$ can be combined to form a Bayesian statistical decision model, and under the right conditions the risk of the Bayesian model reduces to the Bayes risk of the original statistical decision model.
 
-\begin{definition}[Bayesian see-do model]
-A Bayesian see-do model is a tuple $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences, $\RV{D}:\Omega\to D$ are the decisions and $\RV{H}:\Omega\to H$ is the hypothesis. $\prob{P}_C$ must observe the following conditional independences:
+\begin{definition}[Bayesian statistical decision model]
+A Bayesian statistical decision model is a tuple $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ where $\prob{P}_C$ is a probability set on $(\Omega,\sigalg{F})$, $\RV{X}:\Omega\to X$ are the observations, $\RV{Y}:\Omega\to Y$ are the consequences, $\RV{A}:\Omega\to A$ are the decisions and $\RV{H}:\Omega\to H$ is the hypothesis. $\prob{P}_C$ must observe the following conditional independences:
 \begin{align}
     \RV{X}&\CI^e_{\prob{P}_{C}} \text{id}_C|\RV{H}\\
-    \RV{D}&\CI^e_{\prob{P}_{C}} \RV{H}|\text{id}_C\\
+    \RV{A}&\CI^e_{\prob{P}_{C}} \RV{H}|\text{id}_C\\
     \RV{H}&\CI^e_{\prob{P}_C} \text{id}_C
 \end{align}
 \end{definition}
 
-\begin{definition}[Induced Bayesian see-do model]
-Given a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D},\RV{H})$ on $(\Omega,\sigalg{F})$ and a prior $\mu\in \Delta(H)$, the induced Bayesian see-do model $\prob{P}_C$ on $(\Omega\times H,\sigalg{F}\otimes \sigalg{H})$ is
+\begin{definition}[Induced Bayesian tastical decision model]
+Given a statistical decision model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{A},\RV{H})$ on $(\Omega,\sigalg{F})$ and a prior $\mu\in \Delta(H)$, the induced Bayesian statistical decision model $\prob{P}_C$ on $(\Omega\times H,\sigalg{F}\otimes \sigalg{H})$ is
 \begin{align}
-    \prob{P}_C(A) &= \int_{\RV{H}^{-1}(A)} \prob{P}_{C\times \{h\}}(\Pi_{\Omega}^{-1}(A))\mu(\mathrm{d}h)&\forall A\in \sigalg{F}\otimes\sigalg{H}
+    \prob{P}_C(B\times D) &= \int_{D} \prob{P}_{C\times \{h\}}(B)\mu(\mathrm{d}h)&\forall B\in \sigalg{F}, D\in\sigalg{H}
 \end{align}
-Where $\Pi_\Omega:\Omega\times H\to \Omega$ is the projection onto $\Omega$.
 \end{definition}
 
 \begin{theorem}[Induced SDP Bayes risk]
-Given a conditionally independent see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ along with a utility $u:Y\to \mathbb{R}$ and a prior $\mu\in \Delta(H)$, the expected utility for each choice $\alpha\in C$ under the induced Bayesian see-do model is equal to the negative $\mu$-Bayes risk of that decision rule.
+Given a conditionally independent statistical decision model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{A},\RV{H})$ along with a consequence-dependent utility $u:Y\to \mathbb{R}$ and a prior $\mu\in \Delta(H)$, the expected utility for each choice $\alpha\in C$ under the induced Bayesian statistical decision model is equal to the negative $\mu$-Bayes risk of that decision rule.
 \end{theorem}
 
 \begin{proof}
-First, note that $h\mapsto \prob{P}_{C\times \{h\}}^{\RV{Y}|\RV{XD}}$ is a version of $\prob{P}_C^{\RV{Y}|\RV{XD}}$ and hence $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X},\text{id}_C)|(\RV{H},\RV{D})$, a property it inherits from the underlying see-do model.
+First, note that $h\mapsto \prob{P}_{C\times \{h\}}^{\RV{Y}|\RV{XA}}$ is a version of $\prob{P}_C^{\RV{Y}|\RV{XA}}$ and hence $\RV{Y}\CI^e_{\prob{P}_C} (\RV{X},\text{id}_C)|(\RV{H},\RV{A})$, a property it inherits from the underlying statistical decision model.
 
 Also, note that $\prob{P}_C^{\RV{H}}=\mu$, by construction.
 
 The expected utility of $\alpha\in C$ is 
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}} u &= \int_Y u(y) \prob{P}_{\alpha}^{\RV{Y}}(\mathrm{d}y) \\
-    &= \int_Y  \int_D \int_{X} \int_H u(y)\prob{P}_{\alpha}^{\RV{Y}|\RV{DXH}}(\mathrm{d}y|d,x,h)\prob{P}_{\alpha}^{\RV{D}|\RV{XH}}(\mathrm{d}d|x,h)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h) \\
-    &= \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{\alpha}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h)\\
-    &=  \int_X  \int_D \int_{Y} \int_H u(y) \prob{P}_{C}^{\RV{Y}|\RV{DH}}(\mathrm{d}y|d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
-     &= -\int_D\int_X\int_H l(d,h)\prob{P}_{\alpha}^{\RV{D}|\RV{X}}(\mathrm{d}d|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
-    &= -\int_H R(\prob{P}_{\alpha}^{\RV{D}|\RV{X}},h)\mu(\mathrm{d}h)\\
-    &= -R_{\mu}(\prob{P}_{\alpha}^{\RV{D}|\RV{X}})
+    &= \int_Y  \int_A \int_{X} \int_H u(y)\prob{P}_{\alpha}^{\RV{Y}|\RV{AXH}}(\mathrm{d}y|a,x,h)\prob{P}_{\alpha}^{\RV{A}|\RV{XH}}(\mathrm{d}a|x,h)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h) \\
+    &= \int_X  \int_A \int_{Y} \int_H u(y) \prob{P}_{\alpha}^{\RV{Y}|\RV{AH}}(\mathrm{d}y|a,h)\prob{P}_{\alpha}^{\RV{A}|\RV{X}}(\mathrm{d}a|x)\prob{P}_{\alpha}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\prob{P}_\alpha^{\RV{H}}(\mathrm{d}h)\\
+    &=  \int_X  \int_A \int_{Y} \int_H u(y) \prob{P}_{C}^{\RV{Y}|\RV{AH}}(\mathrm{d}y|a,h)\prob{P}_{\alpha}^{\RV{A}|\RV{X}}(\mathrm{d}a|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
+     &= -\int_A\int_X\int_H l(a,h)\prob{P}_{\alpha}^{\RV{A}|\RV{X}}(\mathrm{d}a|x)\prob{P}_{C}^{\RV{X}|\RV{H}}(\mathrm{d}x|h)\mu(\mathrm{d}h)\\
+    &= -\int_H R(\prob{P}_{\alpha}^{\RV{A}|\RV{X}},h)\mu(\mathrm{d}h)\\
+    &= -R_{\mu}(\prob{P}_{\alpha}^{\RV{A}|\RV{X}})
 \end{align}
 \end{proof}
 
 \subsubsection{Complete class theorem}\label{sec:cc_theorem}
 
-The \emph{complete class theorem} is a key theorem of classical SDT that establishes, under certain conditions, any \emph{admissible} decision rule (Definition \ref{def:admissible_decision}) for a see-do model $\prob{P}_{C\times H}$ with a utility $u$ must minimise the Bayes risk for a Bayesian model constructed from $\prob{P}_{C\times H}$ and some prior over hypotheses $\mu\in \Delta(H)$. This can be interpreted in a similar way to the decision theoretic representation discussed above: if you accept that the relevant assumptions apply to the decision problem at hand, then there is a Bayesian see-do model along with $u$ that captures the important features of this problem. The assumptions are that a see-do model $\prob{P}_{C\times H}$ with a utility $u$ that satisfies the relevant conditions is available, and that the principle used to evaluate decision rules should yield an admissible decision rule (though it may also be desired to satisfy other properties as well).
+The \emph{complete class theorem} is a key theorem of classical SDT that establishes, under certain conditions, any \emph{admissible} decision rule (Definition \ref{def:admissible_decision}) for a statistical decision model $\prob{P}_{C\times H}$ with a utility $u$ must minimise the Bayes risk for a Bayesian model constructed from $\prob{P}_{C\times H}$ and some prior over hypotheses $\mu\in \Delta(H)$. This can be interpreted in a similar way to the decision theoretic representation discussed above: if you accept that the relevant assumptions apply to the decision problem at hand, then there is a Bayesian statistical decision model along with $u$ that captures the important features of this problem. The assumptions are that a statistical decision model $\prob{P}_{C\times H}$ with a utility $u$ that satisfies the relevant conditions is available, and that the principle used to evaluate decision rules should yield an admissible decision rule (though it may also be desired to satisfy other properties as well).
 
 If more is required of the decision rule than merely admissibility, then the complete class theorem does not prove that it is easy to find any Bayesian model that will yield rules satisfying these requirements. It also does not prove that a Bayesian approach is helpful for finding a ``correct'' decision rule according to some vague notion of ``correct''.
 
-We have shown in Theorem \ref{th:ind_risk} that conditionally independent see-do models induce statistical decision problems. However, the complete class theorem iteself (Theorem \ref{th:complete_class}) depends only on the risk function induced by a decision making model. In particular, the complete class theorem can also apply to general see-do models, without the assumption of conditional independence, which we show in Example \ref{ex:cc_sdt} and \ref{ex:cc_nonsdt}.
+We have shown in Theorem \ref{th:ind_risk} that conditionally independent statistical decision models induce statistical decision problems. However, the complete class theorem iteself (Theorem \ref{th:complete_class}) depends only on the risk function induced by a decision making model. In particular, the complete class theorem can also apply to general statistical decision models, without the assumption of conditional independence, which we show in Example \ref{ex:cc_sdt} and \ref{ex:cc_nonsdt}.
 
 \begin{definition}[Risk function]
 Given a set of choice $C$ and a set of hypotheses $H$, a risk function is a map $R:C\times H\to \mathbb{R}$.
@@ -418,11 +419,11 @@ Two examples of the application of the complete class theorem will be presented 
 \begin{lemma}\label{lem:convex_closed}
 Given $H$ and $C$ both finite and a risk function $R:C\times H\to \mathbb{R}$ and an associated probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$, $\Omega$ finite, if the function
 \begin{align}
-    \prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}\mapsto R(\alpha,h)
+    \prob{P}_{\alpha,h}^{\RV{A}|\RV{X}}\mapsto R(\alpha,h)
 \end{align}
 is linear and 
 \begin{align}
-    Q:= ((\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}})_{h\in H})_{\alpha\in C}
+    Q:= ((\prob{P}_{\alpha,h}^{\RV{A}|\RV{X}})_{h\in H})_{\alpha\in C}
 \end{align}
 is convex closed, then the risk set $S$ is convex closed.
 \end{lemma}
@@ -430,19 +431,19 @@ is convex closed, then the risk set $S$ is convex closed.
 \begin{proof}
 By linearity of 
 \begin{align}
-    \prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}\mapsto R(\alpha,h)
+    \prob{P}_{\alpha,h}^{\RV{A}|\RV{X}}\mapsto R(\alpha,h)
 \end{align}
 we also have linearity of 
 \begin{align}
-    (\prob{P}_{\alpha,h}^{\RV{D}|\RV{X}})_{h\in H}\mapsto (R(\alpha,h))_{h\in H}
+    (\prob{P}_{\alpha,h}^{\RV{A}|\RV{X}})_{h\in H}\mapsto (R(\alpha,h))_{h\in H}
 \end{align}
 Furthermore, $Q$ is bounded when viewed as an element of $\mathbb{R}^{\Omega\times H\times C}$, and so $S$ is the linear image of a compact convex set, and is therefore also compact convex.
 \end{proof}
 
 \begin{lemma}\label{lem:linear}
-For a see-do model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{D},\RV{H})$ with utility $u:X\times Y\to \mathbb{R}$, the map
+For a statistical decision model $(\prob{P}_{C\times H}, \RV{X},\RV{Y},\RV{A},\RV{H})$ with utility $u:X\times Y\to \mathbb{R}$, the map
 \begin{align}
-    \prob{P}_{\alpha,h}^{\RV{D}|\RV{X}}\mapsto R(\alpha,h)
+    \prob{P}_{\alpha,h}^{\RV{A}|\RV{X}}\mapsto R(\alpha,h)
 \end{align}
 is linear.
 \end{lemma}
@@ -451,27 +452,27 @@ is linear.
 By definition,
 \begin{align}
     R(\alpha,h) &= - \prob{P}_{\alpha,h}^{\RV{XY}} u\\
-    &= -\prob{P}_{C\times\{h\}}^{\RV{X}} \odot \prob{P}_{\alpha\times h}^{\RV{D}|\RV{X}} \odot \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{DX}} u
+    &= -\prob{P}_{C\times\{h\}}^{\RV{X}} \odot \prob{P}_{\alpha\times h}^{\RV{A}|\RV{X}} \odot \prob{P}_{C\times\{h\}}^{\RV{Y}|\RV{AX}} u
 \end{align}
-Which is a composition of kernel products involving $\prob{P}_{\alpha\times H}^{\RV{D}|\RV{X}}$, and kernel products are linear, hence this function is linear.
+Which is a composition of kernel products involving $\prob{P}_{\alpha\times H}^{\RV{A}|\RV{X}}$, and kernel products are linear, hence this function is linear.
 \end{proof}
 
 The preceding theorem does \emph{not} hold for a utility defined on $\Omega$ rather than on $X\times Y$. In this case we have instead
 \begin{align}
-    -\prob{P}_{C\times\{h\}}^{\RV{X}} \odot \prob{P}_{\alpha\times h}^{\RV{D}|\RV{X}} \odot \prob{P}_{\alpha,h}^{\Omega|\RV{DX}} u
+    -\prob{P}_{C\times\{h\}}^{\RV{X}} \odot \prob{P}_{\alpha\times h}^{\RV{A}|\RV{X}} \odot \prob{P}_{\alpha,h}^{\Omega|\RV{AX}} u
 \end{align}
 where $\alpha$ appears twice on the right hand side, rendering the map nonlinear.
 
 \begin{lemma}\label{lem:all_kernels_is_convex_hull}
-For finite $X$ and $D$, the set of all Markov kernels $X\kto D$ is convex closed.
+For finite $X$ and $A$, the set of all Markov kernels $X\kto A$ is convex closed.
 \end{lemma}
 
 \begin{proof}
-From \citet{blackwell_theory_1979}, the set of all Markov kernels $X\kto D$ is the convex hull of the set of all deterministic Markov kernels $X\kto D$. There are a finite number of deterministic Markov kernels, and so the convex hull of this set is closed.
+From \citet{blackwell_theory_1979}, the set of all Markov kernels $X\kto A$ is the convex hull of the set of all deterministic Markov kernels $X\kto A$. There are a finite number of deterministic Markov kernels, and so the convex hull of this set is closed.
 \end{proof}
 
 \begin{example}\label{ex:cc_sdt}
-Suppose we have a conditionally independent see-do model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{D},\RV{H})$ along with a bounded utility $u:Y\to \mathbb{R}$ where $H,D,X$ and $Y$ are all finite, and $\{\prob{P}_\alpha^{\RV{D}|\RV{X}}|\alpha\in C\}$ is the set of all Markov kernels $X\kto D$. Then the risk set is convex and closed downwards, and so the set of Bayes optimal choices is exactly the set of admissible choices.
+Suppose we have a conditionally independent statistical decision model $(\prob{P}_{C}, \RV{X},\RV{Y},\RV{A},\RV{H})$ along with a bounded utility $u:Y\to \mathbb{R}$ where $H,A,X$ and $Y$ are all finite, and $\{\prob{P}_\alpha^{\RV{A}|\RV{X}}|\alpha\in C\}$ is the set of all Markov kernels $X\kto A$. Then the risk set is convex and closed downwards, and so the set of Bayes optimal choices is exactly the set of admissible choices.
 
 The boundedness of the risk set $S$ follows from the boundedness of the utility $u$; if $u$ is bounded above by $k$, then $S$ is bounded below in every dimension by $-k$.
 
@@ -479,7 +480,7 @@ The fact that $S$ is convex and closed follows from Lemmas \ref{lem:convex_close
 \end{example}
 
 \begin{example}\label{ex:cc_nonsdt}
-As before, but suppose we have the see-do model is not conditionally independent. Because none of the lemmas \ref{lem:convex_closed}, \ref{lem:linear} and \ref{lem:all_kernels_is_convex_hull} made use of the conditional independence assumption, the risk set is still convex and closed downwards and so the set of Bayes optimal choices is also exactly the set of admissible choices.
+As before, but suppose we have the statistical decision model is not conditionally independent. Because none of the lemmas \ref{lem:convex_closed}, \ref{lem:linear} and \ref{lem:all_kernels_is_convex_hull} made use of the conditional independence assumption, the risk set is still convex and closed downwards and so the set of Bayes optimal choices is also exactly the set of admissible choices.
 \end{example}
 
 % \subsection{How should decision making models be constructed?}\label{sec:how_to_construct}
@@ -510,6 +511,6 @@ As before, but suppose we have the see-do model is not conditionally independent
 
 We define ``decision making models'' as maps from a set of choices $C$ to distributions over a set of consequences $\Omega$. We suppose that decision making models are accompanied by a utility function that rates the desirability of each consequence, though we do not often explicitly consider the utility function. This general scheme is common to many theories of decision making.
 
-We distinguish decision making models with choices only from decision making models with choices and consequences. The former are ``Bayesian'' models, with the consequences of each choice given by a unique probability distribution, while the latter are ``non-Bayesian''. Bayesian models with an expected utility induce a complete order on the choices -- each choice is either better, worse or just the same as another choice. On the other hand, non-Bayesian models induce a partial order, with admissible choices being better than inadmissible choices, but pairs of admissible choices are not known to be indifferent. The complete class theorem shows that any rule for selecting from the admissible choices can be rationalised as a rule for selecting Bayes-optimal choices with respect to \emph{some} prior, and we show that this theorem applies to see-do models equipped with a utility function if the set of hypotheses is finite and the induced risk function is convex and downward closed.
+We distinguish decision making models with choices only from decision making models with choices and consequences. The former are ``Bayesian'' models, with the consequences of each choice given by a unique probability distribution, while the latter are ``non-Bayesian''. Bayesian models with an expected utility induce a complete order on the choices -- each choice is either better, worse or just the same as another choice. On the other hand, non-Bayesian models induce a partial order, with admissible choices being better than inadmissible choices, but pairs of admissible choices are not known to be indifferent. The complete class theorem shows that any rule for selecting from the admissible choices can be rationalised as a rule for selecting Bayes-optimal choices with respect to \emph{some} prior, and we show that this theorem applies to statistical decision models equipped with a utility function if the set of hypotheses is finite and the induced risk function is convex and downward closed.
 
 We introduce variables and measurement procedures as our understanding of how models correspond to ``real world decision problems''. Measurement procedures are typically in the background, and we don't explicitly discuss them. However, when we talk about ``observed variables'', we mean that there is a measurement procedure in the background, and an observed variable is a partial result of this procedure.

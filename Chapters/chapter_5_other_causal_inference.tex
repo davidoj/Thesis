@@ -63,7 +63,7 @@ A directed graph $\graph{G}=(\node{V},\node{E})$ is a set of nodes $\node{V}$ an
 
 The parents of a target node are all nodes with a directed edge ending at the target node.
 
-\begin{definition}[Parents]
+\begin{definition}[Parents]\label{def:parents}
 Given a directed graph $\graph{G}=(\node{V},\node{E})$ and $\node{V}_i\subset \node{V}$, the parents of $\node{V}_i$ are $\PA{\graph{G}}{\node{V}_i}:=\{\node{V}_j\in \node{V}|(\node{V}_j,\node{V}_i)\in\node{E}\}$.
 \end{definition}
 
@@ -104,7 +104,7 @@ Given a DAG $\graph{G}=(\node{V},\node{E})$, a path $p$ is blocked by $\node{V}_
 \end{enumerate}
 \end{definition}
 
-\begin{definition}[d-separation]
+\begin{definition}[d-separation]\label{def:dsep}
 Given a DAG $\graph{G}=(\node{V},\node{E})$, $\node{V}_A$ is $d$-separated from $\node{V}_B$ by $\node{V}_C$ (all subsets of \node{V}) if $\node{V}_C$ blocks every path starting at $\node{V}_A$ and ending at $\node{V}_B$. This is written $\node{V}_A\perp_{\mathcal{G}} \node{V}_B | \node{V}_C$.
 \end{definition}
 
@@ -307,43 +307,58 @@ This inference might fail if, for any reason, the variation in treatment plans a
 If the decision maker finds that $\RV{Y}_i$ is not independent of $\RV{Z}_i$ given $\RV{X}_i$, they may also consider whether $\RV{Y}_i$ is independent of $\RV{Z}_i$ given $(\RV{V}_i,\RV{X}_i)$ for some set of covariates $\RV{V}_i$.
 \end{example}
 
-We will show in Theorem \ref{th:det_obs_to_cons} a formal result motivated by Example \ref{ex:doctor_precedent}. For this, we assume that all variables of interest are discrete, and make use of an alternative notation for discrete conditional probabilities.
+Note one way that the inference in Example \ref{ex:doctor_precedent} differs from inferences in standard interventional frameworks: if the conclusion is upheld -- i.e. if the decision maker concludes the relationship between $\RV{Y}_i$ and $\RV{X}_i$ is the same for all $i$ no matter what they decide to do -- then any questions about whether available options are an ``intervention on $\RV{X}_c$'' or not. It is sufficient that they have some prior knowledge about the distribution of $\RV{X}_c$ under different options. This contrasts to the approach of \citet{spirtesCausalInferenceAmbiguous2004} where, in the case where it is unclear what an intervention on one variable is, a decision maker must fall back on some other set of interventions which are assumed elementary. Here, the decision maker need not worry about interventions at all.
+
+We will now develop a formal result, Theorem \ref{th:det_obs_to_cons}, motivated by Example \ref{ex:doctor_precedent}. The above remarks apply to the formal result as well: if the conditions hold, a decision maker can infer the consequences of their actions from prior knowledge of the effect on an ``input'' variable alone, \emph{without} any further need for understanding how their available options correspond to interventions. 
+
+In the following discussion, we assume that all variables of interest are discrete. This assumption enables the use of an alternative notation for discrete conditional probabilities, which we introduce now.
 
 \begin{definition}[Index notation for discrete conditionals]
 Given a joint probability distribution $\mu^{\RV{XY}}$ with $\RV{X}$ and $\RV{Y}$ discrete, let $\mu^y_x:=\mu^{\RV{Y}|\RV{X}}(\{y\}|x)$ and $\mu^Y_X:= (x,y)\mapsto \mu^y_x$
 \end{definition}
 
-The key assumptions for Theorem \ref{th:det_obs_to_cons} are the assumption of precedent and an assumption of conditional absolute continuity. The latter requires that the parameters governing certain conditional distributions are absolutely continuous with respect to the Lebesgue measure after observing the independence of $\RV{Y}_i$ from $\RV{Z}_i$ after conditioning on $\RV{X}_i$. The role of this assumption is to rules out parameter values that mask variation in the response of $\RV{Y}_i$ to $\RV{X}_i$.
+Another convenient notion is that of a ``see-do'' model; a model in which we observe a long sequence of observations followed by a single opportunity to act and observe the consequences. This is almost a statistical decision model, but it does not have any ``action'' variables.
 
-The assumption of precedent combines an assumption of a CIIR sequence (with the provision that the inputs are unobserved) and the assumption that any distribution of unobserved inputs achievable to the decision maker is dominated by the distribution of unobserved inputs in the passively collected data.
+\begin{definition}[See-do model]
+A see-do model is a Bayesian decision model $(\prob{P}_\cdot,(\Omega, \sigalg{F}),(C,\sigalg{C}))$ along with a sequence of variables $\RV{X}_{\mathbb{N}\cup\{c\}}$ where $\RV{X}_{\mathbb{N}}\CI^e_{\prob{P}_\cdot} \mathrm{id}_C$. Variables indexed with $i\in \mathbb{N}$ are \emph{observations} and variables indexed with the special index $c$ are \emph{consequences}. We specify a see-do model with the shorthand $(\prob{P}_\cdot,\RV{X}_{\mathbb{N}\cup\{c\}})$.
+\end{definition}
+
+The key assumptions for Theorem \ref{th:det_obs_to_cons} are the assumption of precedent and an assumption of conditional absolute continuity. The latter requires that the parameters governing certain conditional distributions are absolutely continuous with respect to the Lebesgue measure after observing the independence of $\RV{Y}_i$ from $\RV{Z}_i$ after conditioning on $\RV{X}_i$. The role of this assumption is to rules out ``finely tuned'' parameter values that mask variation in the response of $\RV{Y}_i$ to $\RV{X}_i$, ( it also rules out $\RV{Z}_i$ being independent of $(\RV{E}_i,\RV{X}_i,\RV{Y}_i)$).
+
+We define the basic kind of model of interest as a ``latent CIIR see-do model''. In this model, we have two different CIIR pair sequences. The first is limited to the passively observed variables (indices in $\mathbb{N}$), and may be justified by a standard assumption of exchangeability. The second applies to the entire sequence of variables, with the caveat that one of the input variables in the second pair sequence is unobserved -- thus we assume that there is ``in principle'' a consistent response function that may be observed, but the investigator does not know what observations are needed to witness it.
+
+\begin{definition}[Latent CIIR see-do model]\label{def:lciirm}
+A \emph{latent CIIR see-do model} is a see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{Z}_{i},\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}\cup\{c\}})$ such that the observation pairs $(\RV{Z}_{i},(\RV{E}_i,\RV{X}_i,\RV{Y}_i))_{i\in \mathbb{N}}$ share conditionally independent and identical responses and the pairs $((\RV{E}_i, \RV{X}_i),\RV{Y}_i)_{i\in\mathbb{N}\cup\{c\}}$ also share conditionally independent and identical responses. We say the $\RV{E}_i$s are ``latent'' variables, which informally means that we may not get to observe them. This means that the objections of the previous chapter -- that the CIIR assumption implies an implausible interchangeability of observational and experimental data -- do not apply, though in this work unobservability has no formal implications.
+\end{definition}
+
+Precedent is the further condition that the actions the investigator may take -- at least, with regard to their effect on the unobserved input $\RV{E}_i$ -- have ``happened before'' in the observed data (a condition we formalise via absolute continuity).
 
 \begin{definition}[Precedent]\label{def:precedent}
-Given a CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$. 
+Given a latent CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{Z}_i,\RV{X}_i,\RV{Y}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, let $\RV{H}$ be the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$. 
 
 We say that the options $C$ have \emph{precedent} with respect to $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ if $\prob{P}_\cdot$ satisfies:
 \begin{align}
     \prob{P}_\alpha^{\RV{E}_c|\RV{H}} &\ll \sum_{z\in Z}\prob{P}_\alpha^{\RV{E}_i|\RV{H}}(\cdot|h)&\prob{P}_\alpha-\text{almost all }h
 \end{align}
-Note that we understand $\RV{E}_i$ to be an unobserved variable.
 \end{definition}
 
-\emph{Conditional absolute continuity} is a shorthand for a disjunctive assumption; either the parameter $\RV{H}^E_Z$, conditional on $\RV{H}^Y_{EXZ}$ and $\RV{H}^X_{EZ}$ is absolutely continuous with respect to the Lebesgue measure, or the parameter $\RV{H}^{X}_{EZ}$ conditional on $\RV{H}^E_Z$ and $\RV{H}^Y_{EXZ}$ is absolutely continuous with respect to the Lebesgue measure (or both). 
+\emph{Conditional absolute continuity} is a shorthand for a disjunction of two assumptions; either the parameter $\RV{H}^E_Z$, conditional on $\RV{H}^Y_{EXZ}$ and $\RV{H}^X_{EZ}$ is absolutely continuous with respect to the Lebesgue measure, or the parameter $\RV{H}^{X}_{EZ}$ conditional on $\RV{H}^E_Z$ and $\RV{H}^Y_{EXZ}$ is absolutely continuous with respect to the Lebesgue measure (or both). 
 
 \begin{definition}[Conditional absolute continuity]\label{def:absolute_continuity}
-Given a latent CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$. 
+Given a CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$. 
 
 We say that $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ satisfies conditional absolute continuity if $\prob{P}_\cdot$ satisfies one of the conditions:
 \begin{align}
-    \prob{P}_{\alpha}^{\RV{H}^{E}_{Z}|\RV{H}^{Y}_{EXZ}\RV{H}^X_{EZ}}(\cdot|g^{Y}_{EXZ}) &\ll U_{\Delta(E)}& \forall \alpha, z, \prob{P}_\alpha-\text{almost all }g^{Y}_{EXZ} \quad \text{or}\\
-    \prob{P}_{\alpha}^{\RV{H}^X_{EZ}|\RV{H}^{Y}_{EXZ}\RV{H}^{E}_{Z}}(\cdot|g^{Y}_{EXZ}) &\ll U_{\Delta(X)}& \forall \alpha, z, \prob{P}_\alpha-\text{almost all }g^{Y}_{EXZ}\label{eqApp:lebesgue_dom}
+    \prob{P}_{\alpha}^{\RV{H}^{E}_{Z}|\RV{H}^{Y}_{EXZ}\RV{H}^X_{EZ}}(\cdot|g^{Y}_{EXZ}, g^X_{EZ}) &\ll U_{\Delta(E)}& \forall \alpha, z, \prob{P}_\alpha-\text{almost all }g^{Y}_{EXZ}, g^X_{EZ} \quad \text{or}\\
+    \prob{P}_{\alpha}^{\RV{H}^X_{EZ}|\RV{H}^{Y}_{EXZ}\RV{H}^{E}_{Z}}(\cdot|g^{Y}_{EXZ}, g^E_Z) &\ll U_{\Delta(X)}& \forall \alpha, z, \prob{P}_\alpha-\text{almost all }g^{Y}_{EXZ}, g^E_Z\label{eqApp:lebesgue_dom}
 \end{align}
 Where $U_{\Delta(E)}$ is the uniform measure on the $|E-1|$ simplex of discrete probability distributions with $|E|$ outcomes.
 \end{definition}
 
 We are interested in the setting where we have observed that $\RV{Y}_i$ is independent of $\RV{Z}_i$ given $\RV{X}_i$. We formally state this by defining the event $I$ where this independence holds, and defining an alternative model $\prob{Q}_{\cdot}$ which corresponds to $\prob{P}_\cdot$ conditioned on the occurrence of the event $I$.
 
-\begin{theorem}[Latent to observable IO contractibility]\label{th:latent_to_observable}
-Given a latent CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$.
+\begin{theorem}[Unobserved to observable IO contractibility]\label{th:latent_to_observable}
+Given a CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$.
 
 Let $I\subset \Delta(Y)^{XZ}$ be the event $\RV{H}^Y_{Xz}=\RV{H}^Y_{Xz'}$ for all $z,z'\in Z$; i.e. the event that $\RV{Y}_i$ is independent of $\RV{Z}_i$ conditional on $\RV{X}_i$ and $\RV{H}^Y_{XZ}$. Define $\prob{Q}_\alpha\in \Delta(\Omega)$ to be the probability measure such that, for all $A\in \sigalg{F}$
 \begin{align}
@@ -351,78 +366,52 @@ Let $I\subset \Delta(Y)^{XZ}$ be the event $\RV{H}^Y_{Xz}=\RV{H}^Y_{Xz'}$ for al
 \end{align}
 i.e. $\prob{Q}_\alpha$ is $\prob{P}_\alpha$ conditioned on $\RV{H}^Y_{XZ}\in I$, so $\RV{Y}_i\CI^e_{\prob{Q}_\cdot} \RV{Z}_i|(\RV{X}_i,\mathrm{id}_C)$.
 
-If the options $C$ have precedent with respect to $(\prob{Q}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$, and this model also satisfies conditional absolute continuity, then $(\prob{Q}_\cdot,\RV{X},\RV{Y})$ is also IO contractible.
+If the options $C$ have precedent with respect to $(\prob{Q}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$, and this model also satisfies conditional absolute continuity, then $(\prob{Q}_\cdot,\RV{X},\RV{Y})$ is also CIIR.
 \end{theorem}
 
 \begin{proof}
-We show that the assumption of conditional independence imposes a polynomial constraint on $\RV{H}^d_z$ which is nontrivial unless $\RV{Y}_i\CI^e (\RV{Z}_i,\RV{E}_i,\text{id}_C)|(\RV{X}_i,\RV{H})$, and hence the solution set $S$ for this constraint has measure 0 when this conditional independence does not hold.
+We apply the conditional absolute continuity condition to show that $\RV{Y}_i\CI^e_{\prob{Q}} \RV{E}_i|(\RV{Z}_i,\RV{X}_i,\RV{G},\text{id}_C)$ for $i\in \mathbb{N}$. We then apply the precedent condition to extend this independence to $\RV{Y}_c\CI^e_{\prob{Q}} \RV{E}_c|(\RV{Z}_c,\RV{X}_c,\RV{G},\text{id}_C)$ to complete the proof.
 
 Full proof in Appendix \ref{sec:proof_precedent}.
 \end{proof}
 
-\begin{definition}[Precedent]\label{def:preemption}
-A decision model $(\prob{P}_\cdot,(\Omega,\sigalg{F}),(C,\sigalg{C}))$ along with a sequence of variables $\RV{Z}:=(\RV{Z}_i)_{i\in\mathbb{N}}$ is $n$-\emph{precedented} if
+\subsubsection{Continuity and structure}{Causal structure and the conditional absolute continuity assumption}
+
+We've suggested that the precedent assumption may be plausible when we suppose that the outcomes of interest exhibit a probabilistically regular response to some unobserved state, and that the values of this unobserved state that can be brought about through our actions have some precedent in the observed data. The conditional absolute continuity assumption deserves some more attention. Note that we require the continuity assumption to hold after conditioning on the independence of $\RV{Y}_i$ from $\RV{Z}_i$ given $\RV{X}_i$; the core of Theorem \ref{th:latent_to_observable} is that if we rule out the possibility of explaining this independence through a lack of joint ``fine-tunedness'' of the conditionals $\RV{G}^{X}_{EZ}$ and $\RV{G}^{E}_{Z}$, then it must be due to $\RV{Y}_i$ also being independent of $\RV{E}_i$ given $\RV{X}_i$. However, this conclusion is itself a ``fine-tunedness'' of $\RV{G}^Y_{EXZ}$ (that is, $\RV{Y}_i$ independent of $\RV{E}_i$ given $\RV{X}_i$ is also a Lebesgue measure 0 event), so we must have reason to think that this kind of ``fine-tunedness'' is more likely than the kinds we rule out by the assumption of conditional absolute continuity. What kind of reasons would lead us to believe this?
+
+We do not propose a conclusive answer to this question. However, the causal discovery literature offers an interesting angle on it. As we have discussed at length, structural causal models are conventionally interpreted as ``atlases of intervention operations'' -- given a probability distribution and a structural causal model, we can perform the operation of ``intervening on a variable'' and use this to reason about the consequences of actions we might take (an interpretation which we have argued is somewhat problematic). However, structural causal models are \emph{also} conventionally interpreted as implying assumptions of conditional absolute continuity. In particular, the parameters governing parental conditional distributions (see Definition \ref{def:parents}) are considered to be jointly absolutely continuous with respect to the Lebesgue measure on the relevant parameter space. This is explicit in \citet{heckerman_learning_1995}, where these parameters are mutually independent with marginals absolutely continuous with respect to the Lebesgue measure. It is also arguably implicit in \citet{meek_strong_1995}, who argues that violations of \emph{faithfulness} (an assumption we will explain shortly) having Lebesgue measure 0 in the relvant parameter space is reason to think that such violations are unlikely.
+
+The observation that structural causal models embody assumptions of absolute continuity independently of their interpretation as atlases of interentions is not original to us -- a development of this idea is defended as an alternative foundation of causal discovery in \citet{lemeire_replacing_2013}. However, to our knowledge this idea has only been exploited for the purposes of discovering causal structure (see \citet{peters_elements_2017} for a review of some methods arising from the application of this principle), and not for predicting the consequences of actions from data. What we show in Theorem \ref{th:latent_to_observable} is that assumptions of absolute continuity can, in conjunction with the assumption of precedent, also yield models with nontrivial predictions about the consequences of actions.
+
+Concretely, some structural models imply conditional absolute continuity in the sense of Definition \ref{def:absolute_continuity}. If we are able to narrow our structural hypotheses to a subset of these models, then we can conclude that conditional absolute continuity holds and (if we also have precedent), so does Theorem \ref{th:latent_to_observable}.
+
+We have already mentioned that the assumption of faithfulness has been shown to be satisfied with probability 1 if we assume that, for any possible structural model, the associated prior distribution over parameters is absolutely continuous with respect to the Lebesgue measure. The assumption of faithfulness is the assumption that, if some causal structure $\mathcal{G}$ is the ``true'' structural model, then the observed distribution $\prob{P}$ will feature conditional independences only where they correspond to d-separation properties of $\mathcal{G}$ (see Definition \ref{def:dsep}). Under faithfulness, there can be no ``extra'' conditional independences not associated with a conditional independence in $\mathcal{G}$ and, conversely, observing a conditional independence allows a decision maker to rule out many structures they previously thought were possible.
+
+For example, suppose that we observe $\RV{Z}_i$ independent of $\RV{Y}_i$ given $\RV{X}_i$ and also make the following three structural assumptions:
 \begin{enumerate}
-    \item The sample space can be extended with a discrete variable $\RV{T}:=(\RV{T}_i)_{i\in\mathbb{N}}$ such that for every $\alpha\in C$, each $\RV{T}_i$ indexes an exchangeable subsequence to which the corresponding $\RV{Z}_i$ belongs; i.e. $\prob{P}_\alpha^{\RV{Z}|\RV{T}}$ is exchange commutative for all $\alpha\in C$ (over $*$)
-    \item Neither $\RV{Z}_{\{n\}^\complement}$ nor $\RV{T}_{\{n\}^\complement}$ depend on the choice $\alpha$; $(\RV{Z}_{\{n\}^\complement},\RV{T}_{\{n\}^\complement} )\CI^e_{\prob{P}_C} \text{id}_C$
-    \item $(\RV{Z}_i,\RV{T}_i)_{i\in\{n\}^\complement}$ is exchangeable
-    \item $\RV{T}$ is infinitely supported over to the $(\prob{P}_C,\RV{T},\RV{Z})$ directing conditional $\RV{H}$
-    \item $\prob{P}_\alpha^{\RV{T}_n}(t)>0$ for $t\in T$
+    \item $\RV{E}_i$ is a parent of $\RV{X}_i$ (and not independent of $\RV{X}_i$)
+    \item $\RV{Z}_i$ is a parent of $\RV{X}_i$ (and not independent of $\RV{X}_i$)
+    \item $\RV{X}_i$, $\RV{E}_i$ and $\RV{Z}_i$ are nondescendants of $\RV{Y}_i$
 \end{enumerate}
-\end{definition}
-Property (1) guarantees that for every available choice, $\RV{Z}$ can be partitioned into exchangeable subsequences, and we identify which exchangeable subsequence $\RV{Z}_i$ belongs to with $\RV{T}_i$. Property (2) identifies $(\RV{Z}_{\{n\}^\complement},\RV{T}_{\{n\}^\complement})$ as passive observations that the decision maker can't affect. Property (3) assumes for convenience that these observations are exchangeable, a common assumption to make of observations. Properties (4) and (5) are convenient and (as far as we can tell) do no harm.
 
-From this, it follows that, for $\RV{H}$ the directing random conditional of $(\prob{P}_C,\RV{T},\RV{Z})$, $\prob{P}_C^{\RV{Z}|\RV{HT}}$ is IO contractible.
+If the investigator is confident a priori that their actions will affect $\RV{X}_i$, we might justify the first assumption by arguing that their actions affect the observed $\RV{X}_i$ via the unobserved $\RV{E}_i$ and $\RV{X}_i$ is thus a descendant of $\RV{E}_i$. The non-independence of $\RV{Z}_i$ and $\RV{X}_i$ may be observed, and the direction of their relationship may be argued on the basis of temporal ordering, or inferred via, for example, one of the methods in \citep{peters_elements_2017}. The third assumption may be justified by appealing to faithfulness given the observed conditional independence and the first two assumptions, as graphs satisfying 1 and 2 but not 3 will not feature $\RV{Y}_i$ d-separated from $\RV{Z}_i$ given $\RV{E}_i$.    
 
-\begin{theorem}[IO contractibility of precedented decision models]
-Given $(\prob{P}_\cdot,(\Omega,\sigalg{F}),(C,\sigalg{C}))$, if $\RV{Z}:=(\RV{Z}_i)_{i\in\mathbb{N}}$ is $n$-precedented with indexing variable $\RV{T}$, then taking $\RV{H}$ to be the directing random conditional of $(\prob{P}_C,\RV{T},\RV{Z})$, $\RV{Z}\CI^e_{\prob{P}_C} \text{id}_C | (\RV{H},\RV{T})$ and $\prob{P}_C^{\RV{Z}|\RV{HT}}$ is IO contractible.
-\end{theorem}
+In any case, the three assumptions imply that the joint distribution of $(\RV{G}^{\RV{EZ}}, \RV{G}^{X}_{EZ}, \RV{G}^Y_{EXZ})$ is absolutely continuous with respect to the Lebesge measure, and therefore $\RV{G}^X_{EZ}$ is absolutely continuous with respect to the Lebesgue measure conditional on $\RV{G}^E_Z$ and $\RV{G}^Y_{EXZ}$, sufficient for conditional absolute continuity.
 
-\begin{proof}
-By assumption, $\prob{P}_\alpha^{\RV{Z}|\RV{T}}$ is exchange commutative. In addition, also by assumption, $\prob{P}_\alpha^{\RV{T}_{\{n\}^\complement}}$ is exchangeable. But then $\prob{P}_\alpha^{\RV{T}}$ is exchangeably dominated, and the result follows from Theorem \ref{lem:exch_prod_ciid}.
-\end{proof}
+The assumption of conditional absolute continuity is disjunctive, and there is correspondingly an alternate set of structural assumptions that yield the assumption as a conclusion.
 
-Thus precedent implies ``garden variety'' IO contractibility of $\prob{P}_C^{\RV{Z}|\RV{HT}}$. Apart from the stronger assumptions about observations, the only difference to the discussion of IO contractibility in Chapter \ref{ch:evaluating_decisions} is in our interpretation; we don't assume that $\RV{T}$ is observed, and we don't assume that we know anything in advance about how $\RV{T}$ responds to $\alpha$.
+\begin{enumerate}
+    \item$.'$ $\RV{Z}_i$ is a parent of $\RV{E}_i$ (and not independent of $\RV{E}_i$)
+    \item$.'$ $\RV{E}_i$ is a parent of $\RV{X}_i$ (and not independent of $\RV{X}_i$)
+    \item$.'$ $\RV{Z}_i$ is a nondescendant of $\RV{X}_i$
+    \item$.'$ $(\RV{E}_i, \RV{Z}_i)$ is a nondescendant of $\RV{Y}_i$
+\end{enumerate}
 
-The assumption of precedent as given in Definition \ref{def:preemption} can, under some side conditions, yield nontrivial conclusions, as we show in Theorem \ref{th:det_obs_to_cons}. Before we state this theorem, it is worth going through an example first.
+Note that the third assumption here follows from the first two and acyclicity, and the fourth from the first two plus $\RV{Z}_i$ independent of $\RV{Y}_i$ given $\RV{X}_i$ and faithfulness (if we want to make those additional assumptions). In this case, we have $(\RV{G}^E_Z, \RV{G}^{XY}_{EZ})$ mutually absolutely continuous with respect to the Lebesgue measure, which gives $\RV{G}^E_Z$ absolutely continuous WRT Lebesgue conditional on $(\RV{G}^X_{EZ}, \RV{G}^Y_{EXZ})$ also.
 
+Under the same structural assumptions, d-separation and faithfulness yields a very similar result to Theorem \ref{th:latent_to_observable}. In particular, we note that both sets of assumptions leave us with an unblocked path from $\RV{E}_i$ to $\RV{Z}_i$ after conditioning on $\RV{X}_i$. Thus, if there is an unblocked path from $\RV{E}_i$ to $\RV{Y}_i$ after conditioning on $\RV{X}_i$ then there is also an unblocked path from $\RV{Z}_i$ to $\RV{Y}_i$. Conversely, the absence of an unblocked path from $\RV{Z}_i$ to $\RV{Y}_i$ conditional on $\RV{X}_i$ -- i.e. $\RV{X}_i$ d-separates these nodes -- implies also the absence of an unblocked path from $\RV{Y}_i$ to $\RV{E}_i$, i.e. that $\RV{Y}_i$ is independent of $\RV{E}_i$ conditional on $\RV{X}_i$.
 
-\begin{notation}[Matrix notation]
-Given a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $D,Y$ discrete, the directing random conditional $\RV{H}$ takes values in the set of Markov kernels $D\kto Y$, which can be identified with a subset of matrices in $\mathbb{R}^{|D|\times |Y|}$. We can therefore refer to elements of $\RV{H}$ as matrix elements $(\RV{H}_d^y)_{d\in D,y\in Y}$ with $\sum_{y\in Y} \RV{H}_d^y \overset{\prob{P}_C}{\cong} 1$ for all $d$, and $\RV{H}_d^y\overset{\prob{P}_\alpha}{\cong}\prob{P}_\alpha^{\RV{Y}|\RV{H}\RV{D}}(y|h,d)$.
-\end{notation}
-
-\begin{theorem}\label{th:det_obs_to_cons}
-Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{i\in \mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{i\in \mathbb{N}}$, with $X,Y,Z$ discrete and $n$-precedented with indexing variable $\RV{T}$. Let $\RV{G}$ be the directing random conditional of $(\RV{P}_C,\RV{T},\RV{Z})$ and $\RV{H}$ the directing random conditional of $(\prob{P}_C,(\RV{T},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose there is some $N\in\sigalg{H}$ such that $\prob{P}_\alpha^{\RV{H}}(N)>0$ for all $\alpha$, and define the probability conditioned on $\RV{H}\in N$:
-\begin{align}
-\prob{P}_{\alpha,\RV{H}\in N} (A):= \frac{\prob{P}_\alpha^{\text{id}_\Omega \RV{H}}(A\times N)}{\prob{P}_\alpha^{\RV{H}}(N)}
-\end{align}
-
-Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in N}} \RV{Z}_i|(\RV{H},\RV{X}_i)$, and for all $t\in T$ and $z,z'\in Z$,
-\begin{align}
-    \prob{P}_{\alpha,\RV{H}\in N}^{\RV{G}^d_{z}|\RV{H}\RV{G}^d_{z'}}(\cdot|h,g^d_{z'}) \ll U_{[0,1]}\label{eq:lebesgue_dom}
-\end{align}
-where $U_{[0,1]}$ is the uniform probability measure on $([0,1],\mathcal{B}([0,1]))$.
-
-Then $\prob{P}_{\alpha,\RV{H}\in N}^{\RV{Y}|\RV{X}\RV{H}}$ is IO contractible over $\RV{H}$.
-\end{theorem}
-
-\begin{proof}
-We show that the assumption of conditional independence imposes a polynomial constraint on $\RV{G}^d_z$ which is nontrivial unless $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in\mathbb{N}}} (\RV{Z}_i,\RV{T}_i,\text{id}_C)|(\RV{H},\RV{X}_i)$, and hence the solution set $S$ for this constraint is empty when this conditional independence does not hold.
-
-Full proof in Appendix \ref{sec:proof_precedent}.
-\end{proof}
-
-Theorem \ref{th:det_obs_to_cons} provides some support for the kind of inference explained in Example \ref{ex:doctor_precedent}. We offer the assumption of precedent as a formalisation of the idea that ``whatever the decision maker does, it's been done before''. If the decision maker can conclude that the hypothesis $\RV{H}$ lies in a set $N$ that implies the outcome is independent of the doctor identifiers $\RV{Z}_i$ given the treatment decisions $\RV{X}_i$, and further believes that within the set $N$, there is nevertheless zero probability that doctors coordinate precisely enough to mask any variation due to unobserved differences in treatment protocol, then the decision maker can conclude that the observed treatment-outcome map is identical to the treatment-outcome map they should use to assess the decision of whether or not to treat.
-
-A substantial shortcoming of Theorem \ref{th:det_obs_to_cons} is the fact that, if the distribution of $\RV{H}$ is dominated by the uniform measure on $[0,1]^{|T||Z||X||Y||}$, then $\RV{H}\in N$ will also be a set of measure 0, as the conditional independence condition required by $N$ is itself a nontrivial polynomial restriction on values of $\RV{H}$. Thus assuming some continuous distribution of $\RV{H}$ does not satisfy the conditions required by the theorem.
-
-This is reminiscent of problems encountered by other conditional independence based approaches to causal inference. In particular, we draw conclusions from conditional independence -- a measure 0 event under a continuous distribution of $\RV{H}$ -- but also from the assumption that \emph{other} measure 0 events under continuous distributions can be neglected. One way that this has been addressed is to treat approximate conditional independence as if it was conditional independence \citep{zhang_strong_2003}.
-
-The appropriate strengthening of the assumptions in Example \ref{ex:doctor_precedent} seems to require not only that the other doctor's actions aren't perfectly coordinated, but that we can further place a limit on how precisely they might be approximately coordinated. In this case, insufficient variation in overall outcomes between doctors might still license the conclusion that the unobserved treatment variations \emph{probably} don't have \emph{much} influence. Strengthening the required conditions like this has substantial practical implications; our decision maker is interested in $\RV{Y}$ presumably because they are interested in influencing $\RV{Y}$. However, for the same reason, all of the other doctors may well be interested in influencing $\RV{Y}$ in exactly the same way. Thus, while it's unlikely they can all coordinate \emph{perfectly}, they may well achieve a good approximation of coordination, which, unless the decision maker has a very large amount of data, might be enough to prevent them from drawing conclusions from an apparent lack of variation in outcomes between doctors.
-
-Technically, we could consider an $\epsilon$-enlargement of the set of solutions $S$ constructed in the proof of Theorem \ref{th:det_obs_to_cons}, and place an upper limit on the probability of parameters falling into this set. It may then be possible to conclude a similar result from a suitably precise approximation of the assumed conditional independence, but demonstrating this remains an open question.
-
-Assumptions similar to Eq. \eqref{eq:lebesgue_dom} appear in two other capacities in the causal inference literature. First, in justifications for \emph{causal faithfulness} it is assumed that, if we have variables ordered according to their structural causal relationships then an assumption of this type holds \citet{meek_strong_1995}. Secondly, according to the principle of \emph{independence of conditionals}, researchers have proposed a number of measures of ``genericity'' that are maximised when conditionals are computed in a manner compatible with their structural causal relationships \citep{lemeire_replacing_2013}. The common thread here is that an assumption like Eq. \eqref{eq:lebesgue_dom} is considered to be implied by the direction of causal relationships in a structural model. Our result is somewhat different -- we start with the assumption of a generic relationship between conditionals, rather than a causal direction, and draw a conclusion of identical responses. These approaches might be combined -- under the right conditions, assuming or inferring a causal direction might be sufficient to apply Theorem \ref{th:det_obs_to_cons}, though exactly when such reasoning is valid is an open question.
+\citet{meek_strong_1995} showed that conditional independences implied by Bayesian network structure (along with an assumption similar to mutual absolute continuity of parental conditionals) were precisely those implied by d-separation. This suggests that any result along the lines of Theorem \ref{th:latent_to_observable} may be also able to be derived from d-separation properties -- if absolute continuity implied by some acyclic structural also implies a conditional independence then that conditional independence is also implied by d-separation. This leaves open the possibility of absolute continuity assumptions that are not justified by an acyclic structural model.
 
 \section{Potential Outcomes models}\label{sec:potential_outcomes}
 

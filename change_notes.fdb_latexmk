@@ -1,0 +1,14 @@
+# Fdb version 3
+["xdvipdfmx"] 0 "change_notes.xdv" "change_notes.pdf" "change_notes" 0
+  "change_notes.xdv" 0 -1 0 "xelatex"
+  (generated)
+  "change_notes.pdf"
+["xelatex"] 1689716999 "change_notes.tex" "change_notes.xdv" "change_notes" 1689717000
+  "/usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf" 1616443989 39972 3d6bb4d9d719e93193fa020b58adf5d4 ""
+  "/usr/local/texlive/2021/texmf-var/web2c/xetex/xelatex.fmt" 1626400322 5093965 558b211bf21aa646a8594b20968ee6d7 ""
+  "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
+  "change_notes.aux" 1689681573 8 a94a2480d3289e625eea47cd1b285758 ""
+  "change_notes.tex" 1689716999 16330 5378b217419731cc1a04b65c8c3ef17d ""
+  (generated)
+  "change_notes.xdv"
+  "change_notes.log"

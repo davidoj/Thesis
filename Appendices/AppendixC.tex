@@ -9,18 +9,18 @@
 \section{Proofs related to causal Bayesian networks}\label{sec:cbn_proofs}
 
 \begin{reptheorem}{th:causal_contractibility_cbn}
-Given an uncertain unrolled causal Bayesian network $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in [n]},\RV{H},\graph{G})$, take $C'\subset C$ to be sequences of interventions that, for some $i\in A$, do not target a particular $\RV{V}_{ij}$ for any $j\in [n]$ and ensure every sequence $\RV{V}_{j[n]}$ has infinite support. Then $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\text{id}_C|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$ and $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ is IO contractible over $\RV{H}$. 
+Given an uncertain unrolled causal Bayesian network $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in A,j\in [n]},\RV{H},\graph{G})$, take $C'\subset C$ to be sequences of interventions that, for some $i\in A$, do not target a particular $\RV{V}_{ij}$ for any $j\in [n]$ and ensure every sequence $\RV{V}_{j[n]}$ has infinite support. Then $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\text{Id}_C|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$ and $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ is IO contractible over $\RV{H}$. 
 \end{reptheorem}
 
 \begin{proof}
-First we will prove $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\text{id}_C|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$. This is equivalent to the claim that $\prob{P}_\alpha^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ is the same as $\prob{P}_{\alpha'}^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ for any $\alpha,\alpha'$. By assumption 5* of Definition \ref{def:unr_CBN}, for each $h\in H$
+First we will prove $\RV{V}_{i[n]}\CI^e_{\prob{P}_{C'}}\text{Id}_C|(\RV{H},\mathrm{Pa}(\RV{V}_{i [n]}))$. This is equivalent to the claim that $\prob{P}_\alpha^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ is the same as $\prob{P}_{\alpha'}^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i[n]})}$ for any $\alpha,\alpha'$. By assumption 5* of Definition \ref{def:unr_CBN}, for each $h\in H$
 \begin{align}
-    \RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha,h}} \RV{V}_{A [n]\setminus\{j\}} |\text{id}_C
+    \RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha,h}} \RV{V}_{A [n]\setminus\{j\}} |\text{Id}_C
 \end{align}
 which implies
 \begin{align}
-    &\RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\text{id}_C,\RV{H})\\
-    &\implies \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\text{id}_C)\label{eqApp:mutual_conditional_independence}
+    &\RV{V}_{Aj}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\text{Id}_C,\RV{H})\\
+    &\implies \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} \RV{V}_{A [n]\setminus\{j\}} |(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\text{Id}_C)\label{eqApp:mutual_conditional_independence}
 \end{align}
 thus it is sufficient to show that, for any $\alpha,\alpha'\in C'$ and $j\in[n]$
 \begin{align}
@@ -37,7 +37,7 @@ By assumption, if $\pi_j(\alpha) =: (\mathrm{do}_{B_j},v_{B_j})$ and $\pi_j(\alp
 
 Next, IO contractibility of $\prob{P}_C^{\RV{V}_{i[n]}|\RV{H}\mathrm{Pa}(\RV{V}_{i [n]})}$ over $\RV{H}$. By Eq. \eqref{eqApp:mutual_conditional_independence}
 \begin{align}
-    \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} (\RV{V}_{i [1,j)},\mathrm{Pa}(\RV{V}_{i [1,j)}) )|(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\text{id}_C)
+    \RV{V}_{ij}\CI^e_{\prob{P}_{\alpha}} (\RV{V}_{i [1,j)},\mathrm{Pa}(\RV{V}_{i [1,j)}) )|(\RV{H},\mathrm{Pa}(\RV{V}_{i[n]}),\text{Id}_C)
 \end{align}
 furthermore, by 3* and the assumption that no intervention $\alpha\in C'$ targets $\RV{V}_{ij}$ for any $j$, for any $\alpha\in C'$
 \begin{align}
@@ -49,72 +49,82 @@ thus $\prob{P}_C$ has independent and identical response functions conditional o
 \section{Proofs related to precedent}\label{sec:proof_precedent}
 
 
-\begin{reptheorem}{th:det_obs_to_cons}
-Suppose we have a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$ with variables $\RV{Y}:=(\RV{Y}_i)_{i\in \mathbb{N}}$, $\RV{X}:=(\RV{X}_i)_{i\in \mathbb{N}}$ and $\RV{Z}_i:= (\RV{Z}_i)_{i\in \mathbb{N}}$, with $X,Y,Z$ discrete and $n$-precedented with indexing variable $\RV{T}$. Let $\RV{G}$ be the directing random conditional of $(\RV{P}_C,\RV{T},\RV{Z})$ and $\RV{H}$ the directing random conditional of $(\prob{P}_C,(\RV{T},\RV{Z}),(\RV{X},\RV{Y}))$. Suppose there is some $N\in\sigalg{H}$ such that $\prob{P}_\alpha^{\RV{H}}(N)>0$ for all $\alpha$, and define the probability conditioned on $\RV{H}\in N$:
-\begin{align}
-prob{P}_{\alpha,\RV{H}\in N} (A):= \frac{\prob{P}_\alpha^{\text{id}_\Omega \RV{H}}(A\times N)}{\prob{P}_\alpha^{\RV{H}}(N)}
-\end{align}
+\begin{reptheorem}{th:latent_to_observable}
+Given a CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$.
 
-Suppose for all $i$, $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in N}} \RV{Z}_i|(\RV{H},\RV{X}_i)$, and for all $t\in T$ and $z,z'\in Z$,
+Let $I\subset \Delta(Y)^{XZ}$ be the event $\RV{H}^Y_{Xz}=\RV{H}^Y_{Xz'}$ for all $z,z'\in Z$; i.e. the event that $\RV{Y}_i$ is independent of $\RV{Z}_i$ conditional on $\RV{X}_i$ and $\RV{H}^Y_{XZ}$. Define $\prob{Q}_\alpha\in \Delta(\Omega)$ to be the probability measure such that, for all $A\in \sigalg{F}$
 \begin{align}
-    \prob{P}_{\alpha,\RV{H}\in N}^{\RV{G}^t_{z}|\RV{H}\RV{G}^t_{z'}}(\cdot|h,g^t_{z'}) \ll U_{[0,1]}\label{eqApp:lebesgue_dom}
+\prob{Q}_\alpha(A) := \prob{P}_\alpha^{\mathrm{Id}_\Omega|\mathds{1}_I\circ \RV{H}}(A|1)
 \end{align}
-where $U_{[0,1]}$ is the uniform probability measure on $([0,1],\mathcal{B}([0,1]))$.
+i.e. $\prob{Q}_\alpha$ is $\prob{P}_\alpha$ conditioned on $\RV{H}^Y_{XZ}\in I$, so $\RV{Y}_i\CI^e_{\prob{Q}_\cdot} \RV{Z}_i|(\RV{X}_i,\mathrm{Id}_C)$.
 
-Then $\prob{P}_{\alpha,\RV{H}\in N}^{\RV{Y}|\RV{X}\RV{H}}$ is IO contractible over $\RV{H}$.
+If the options $C$ have precedent with respect to $(\prob{Q}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$, and this model also satisfies conditional absolute continuity, then $(\prob{Q}_\cdot,\RV{X},\RV{Y})$ is also CIIR.
 \end{reptheorem}
 
 \begin{proof}
-For arbitrary $h\in N$, define matrices $k$ and $l$ by
+We apply the conditional absolute continuity condition to show that $\RV{Y}_i\CI^e_{\prob{Q}} \RV{E}_i|(\RV{Z}_i,\RV{X}_i,\RV{G},\text{Id}_C)$ for $i\in \mathbb{N}$. We then apply the precedent condition to extend this independence to $\RV{Y}_c\CI^e_{\prob{Q}} \RV{E}_c|(\RV{Z}_c,\RV{X}_c,\RV{G},\text{Id}_C)$ to complete the proof.
+
+Note that by construction of $\prob{Q}_\alpha$ we have $\RV{Y}_i\CI^e_{\prob{Q}} \RV{Z}_i|(\RV{X}_i,\RV{G},\text{Id}_C)$. This in turn implies, for all $\alpha$ the following holds $\prob{Q}_\alpha$-almost surely:
 \begin{align}
-    \prob{P}_{\alpha,\RV{H}\in N}^{\RV{Y}_i|\RV{H}\RV{T}_i\RV{Z}_i\RV{X}_i}(y|h,t,z,x)&\overset{\prob{P}_{\alpha,\RV{H}\in N}}{\cong}: k^y_{tzx}\\
-    \prob{P}_{\alpha,\RV{H}\in N}^{\RV{X}_i|\RV{H}\RV{T}_i\RV{Z}_i}(x|h,t,z)&\overset{\prob{P}_{\alpha,\RV{H}\in N}}{\cong}: l^x_{tz}
+    \sum_{e\in E} \RV{G}^y_{exz}\frac{\RV{G}^x_{ez}\RV{G}^e_z}{\sum_{e'\in E}\RV{G}^x_{e'z}\RV{G}^{e'}_z}&\overset{\prob{Q}_\alpha}{\cong} \sum_{e\in E} \RV{G}^y_{exz'}\frac{\RV{G}^x_{ez'}\RV{G}^e_{z'}}{\sum_{e'\in E}\RV{G}^x_{e'z'}\RV{G}^{e'}_{z'}}\label{eqApp:polynomial_base}
 \end{align}
-noting that both $RV{K}$ and $l$ are almost surely deterministic functions of $\RV{H}$.
 
-The assumption $\RV{Y}_i\CI^e_{\prob{P}_C} \RV{Z}_i|(\RV{H},\RV{X}_i,\text{id}_C)$ implies, for $\prob{P}_\alpha$-almost all $\alpha,z,z',x,y$
+Conditioning on $\RV{G}^Y_{EXZ}=g^Y_{EXZ}$
+
 \begin{align}
-    \sum_{t\in T} k^y_{tzx}\frac{l^x_{tz}g^t_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z}&\overset{\prob{P}_C}{\cong} \sum_{t\in T} k^y_{tz'x}\frac{l^x_{tz'}g^t_{z'}}{\sum_{t'\in T}l^x_{t'z'}g^{t'}_{z'}}\label{eqApp:polynomial}
+    \sum_{e\in E} g^y_{exz}\frac{\RV{G}^x_{ez}\RV{G}^e_z}{\sum_{e'\in E}\RV{G}^x_{e'z}\RV{G}^{e'}_z}&\overset{\prob{P}_C}{\cong} \sum_{e\in E} \RV{g}^y_{exz'}\frac{\RV{G}^x_{ez'}\RV{G}^e_{z'}}{\sum_{e'\in E}\RV{G}^x_{e'z'}\RV{G}^{e'}_{z'}}\label{eqApp:polynomial}
 \end{align}
-For fixed $k$, $l$ and $g^t_z$, Eq. \eqref{eqApp:polynomial} defines a polynomial constraint on $g^t_{z'}$. We will show that, unless $k^y_{tzx}= k^y_{t'zx}$ for all $t,t'$ and $z$, that this constraint is nontrivial for some $z'$. Consequently, the set of solutions subject to the restriction $k^y_{tzx}\neq k^y_{t'zx}$ has Lebesgue measure 0.
 
-For arbitrary $t$, assume $k^y_{tz'x} > k^y_{t^<z'x}$ for some $t^<$. 
+Eq. \eqref{eqApp:polynomial} defines a polynomial constraint on $\RV{G}^{\RV{Ex}}_{\{z,z'\}}$ for each $x,z,z'$. If $g^y_{exz}=g^y_{e'xz}$ for all $e,e'$ then this constraint is trivial; if $g^y_{exz} = g^y_{exz'}$ also, then it is satisfied for every possible value of $\RV{G}^x_{E\{z,z'\}}$, otherwise it is unsatisfiable.
 
-Then either $l^x_{tz'}=l^x_{t^<z'}$, $l^x_{tz'}< l^x_{t^<z'}$ or $l^x_{tz'}=l^x_{t^>z'}$. Consider the first case, and take $g'$ such that $g^{\prime t}_{z'}=g^{t}_{z'}-\epsilon$ and $g^{\prime t^<}_{z'}=g^{t^<}_{z'}+\epsilon$ and equal to $g$ otherwise. There is almost surely some $\epsilon$ such that $g'$ is a Markov kernel, as $g^{t}_{z'}>0$ almost surely. Then
+We will show that, unless $g^y_{exz}= g^y_{e'xz}$ for all $e,e'$ and $z$, that this constraint is nontrivial for some $z$. Consequently, the set of solutions for $\RV{G}^x_{EZ}$ subject to the restriction $g^y_{exz}\neq g^y_{e'xz}$ has Lebesgue measure 0. We will do this by showing that, assuming $g^y_{exz} > g^y_{e^<xz}$ for some $e,e^<$, we can find alternative realisations of $\RV{G}^e_{z}$ that lead to unequal values of the left hand side of Eq \eqref{eqApp:polynomial} without affecting the right hand side.
+
+Let $g^x_{ez}$ and $g^e_z$ be a possible realisation of $\RV{G}^x_{ez}$ and $\RV{G}^e_z$. Assuming $g^y_{exz} > g^y_{e^<xz}$, either $g^x_{ez}=g^x_{e^<z}$, $g^x_{ez}< g^x_{e^<z}$ or $g^x_{ez}>g^x_{e^<z}$. Consider the first case, and take $g'$ such that $g^{\prime e}_{z}=0.5g^{e}_{z}$ and $g^{\prime e^<}_{z}=g^{e^<}_{z}+0.5g^{e}_{z}$ and equal to $g^{e''}_z$ for all other $e''\in E$. Note that $g^{\prime E}_z$ is also a possible realisation of $\RV{G}^e_z$, as it is everywhere positive and sums to 1, and $g'^{\prime e}_{z}<g^{e}_{z}$ almost surely as $g^{e}_{z}>0$ almost surely. Then
 \begin{align}
-    \frac{l^x_{tz}g^t_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &> \frac{l^x_{tz}g^{\prime t}_z}{\sum_{t'\in T}l^x_{t'z}g^{\prime t'}_z}\\
-    \frac{l^x_{t^<z}g^{t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &< \frac{l^x_{t^<z}g^{\prime t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{\prime t'}_z}
+    \frac{g^x_{ez}g^e_z}{\sum_{e'\in E}g^x_{e'z}g^{e'}_z} &> \frac{g^x_{ez}g^{\prime e}_z}{\sum_{e'\in E}g^x_{e'z}g^{\prime e'}_z}\\
+    \frac{g^x_{e^<z}g^{e^<}_z}{\sum_{e'\in E}g^x_{e'z}g^{e'}_z} &< \frac{g^x_{e^<z}g^{\prime e^<}_z}{\sum_{e'\in E}g^x_{e'z}g^{\prime e'}_z}
 \end{align}
 because by assumption the denominator remains the same. But then
 \begin{align}
-    \sum_{t\in T} k^y_{tzx}\frac{l^x_{tz}g^t_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z}&> \sum_{t\in T} k^y_{tz'x}\frac{l^x_{tz'}g^{\prime t}_{z'}}{\sum_{t'\in T}l^x_{t'z'}g^{\prime t'}_{z'}}\label{eqApp:inequality}
+    \sum_{e\in E} g^y_{exz}\frac{g^x_{ez}^e_z}{\sum_{e'\in E}g^x_{e'z}^{e'}_z}&> \sum_{e\in E} g^y_{exz'}\frac{g^x_{ez}^{\prime e}_{z'}}{\sum_{e'\in E}g^x_{e'z'}^{\prime e'}_{z'}}\label{eqApp:inequality}
 \end{align}
-because on the left side a larger term in the sum receives more weight, a smaller term receives less weight and all other terms are weighted equally.
+because on the right side a smaller term in the sum receives more weight, a larger term receives less weight and all other terms are weighted equally.
 
-Consider $l^x_{tz'}> l^x_{t^<z'}$. Then we still have
+Consider $g^x_{ez'}>g^x_{e^<z'}$. Then we still have
 \begin{align}
-    \frac{l^x_{tz}g^t_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &> \frac{l^x_{tz}g^{\prime t}_z}{\sum_{t'\in T}l^x_{t'z}g^{\prime t'}_z}\\
-    \frac{l^x_{t^<z}g^{t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &< \frac{l^x_{t^<z}g^{\prime t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{\prime t'}_z}
+    \frac{g^x_{ez}g^e_z}{\sum_{e'\in E}g^x_{e'z}g^{e'}_z} &> \frac{g^x_{ez}g^{\prime e}_z}{\sum_{e'\in E}g^x_{e'z}g^{\prime e'}_z}\\
+    \frac{g^x_{e^<z}g^{e^<}_z}{\sum_{e'\in E}g^x_{e'z}g^{e'}_z} &< \frac{g^x_{e^<z}g^{\prime e^<}_z}{\sum_{e'\in E}g^x_{e'z}g^{\prime e'}_z}
 \end{align}
-For the first inequality, both the numerator and the denominator shrink. For the second, note that
+For the second inequality, the right hand numerator grows and the denominator shrinks. For the first, note that
 \begin{align}
-    \frac{l^x_{t^<z}g^{t^<}_z}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z} &= \frac{l^x_{t^<z}(g^{t^<}_z+\epsilon)}{(1+\frac{\epsilon}{g^{t'}_z})\sum_{t'\in T}l^x_{t'z}g^{t'}_z}\\
-    &< \frac{l^x_{t^<z}(g^{t^<}_z+\epsilon)}{\sum_{t'\in T}l^x_{t'z}g^{t'}_z}
+    \frac{g^x_{ez}g^{\prime e}_z}{\sum_{e'\in E}g^x_{e'z}g^{\prime e'}_z} &= \frac{0.5 g^x_{ez}g^{e}_z}{\sum_{e'\in E}g^x_{e'z}g^{e'}_z - 0.5 g^{e}_z (g^x_{ez} - g^x_{e^< z})}
 \end{align}
-and so the conclusion in Eq. \eqref{eqApp:inequality} follows for the same reasons. Finally considering $l^x_{tz'}< l^x_{t^<z'}$, analogous reasoning implies Eq. \eqref{eqApp:inequality} once again.
+$g^e_z g^x_{ez}<1$ (an almost sure event) implies that the right hand denominator is greater than $0.5 \sum_{e'\in E}g^x_{e'z}g^{e'}_z$, and hence the right hand side is less than $\frac{g^x_{ez}g^e_z}{\sum_{e'\in E}g^x_{e'z}g^{e'}_z}$.
 
-Thus, unless $k^y_{tzx}=k^y_{t'zx}$ for all $t,t'$ and $z$, Eq. \eqref{eqApp:polynomial} implies a nontrivial constraint on  $g^t_{z'}$ for some $z'$. Thus, for some $z'$, $x$, $t,t'$, $y$ the set of solutions $S:=\{g^t_{z'}|\text{Eq. \eqref{eqApp:polynomial} is satisfied}\land k^y_{tzx}\neq k^y_{t'zx}\}$ has Lebesgue measure 0 in the set $[0,1]^{D}$ \citep{okamoto_distinctness_1973}, and so
+Thus the conclusion in Eq. \eqref{eqApp:inequality} follows for the same reasons as before. Considering $g^x_{ez'}< g^x_{e^<z'}$, analogous reasoning implies Eq. \eqref{eqApp:inequality} once again.
+
+Thus, unless $g^y_{exz}=g^y_{e'xz}$ for all $e,e'$ and $z$, Eq. \eqref{eqApp:polynomial} implies a nontrivial constraint on $\RV{G}^x_{Ez}$ for some $z$. Thus for some $e,e'$,$z$, $x$ and $y$ the set of solutions $S:=\{g^X_{EZ}|\RV{G}^X_{EZ}=g^X_{EZ}\text{ satisfies Eq. \eqref{eqApp:polynomial} for all }x, z\land g^y_{exz}\neq g^y_{e'xz}\}$ has Lebesgue measure 0 \citep{okamoto_distinctness_1973}, and so by domination
 \begin{align}
-    \prob{P}_{\alpha,\RV{H}\in N}^{\RV{G}^t_{z}|\RV{H}\RV{G}^t_{z'}}(S|h,g^t_{z}) = 0
+    \prob{Q}_{\alpha}^{\RV{G}^X_{EZ}|\RV{G}^{XY}_{EZ}}(S|g^{XY}_{EZ}) = 0
 \end{align}
-by the assumption that this probability is dominated by the Lebesgue measure. On the other hand, by assumption, the set $B:=\{g^t_{z'}|\text{Eq. \eqref{eqApp:polynomial} is satisfied}\}$ has measure 1. Thus we conclude that $k^y_{tzx}=k^y_{t'zx}$ with probability 1. That is, $\RV{Y}_i\CI_{\prob{P}_{C,\RV{H}\in\mathbb{N}}}^e \RV{T}_i|(\RV{H},\RV{Z}_i,\RV{X}_i,\text{id}_C)$. By contraction with $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in\mathbb{N}}} \RV{Z}_i|(\RV{H},\RV{X}_i,\text{id}_C)$, we have $\RV{Y}_i\CI^e_{\prob{P}_{C,\RV{H}\in\mathbb{N}}} (\RV{Z}_i,\RV{T}_i)|(\RV{H},\RV{X}_i,\text{id}_C)$. Because we already know $\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i\RV{Z}_i}$ are identical for all $i$, this implies $\prob{P}_{\alpha,\RV{H}\in N}^{\RV{Y}_i|\RV{H}\RV{X}_i}$ are independent and identical response functions.
+On the other hand, by assumption, the set $T:=\{g^E_{z}|\RV{G}^E_z=g^E_z\text{ satisfies Eq. \eqref{eqApp:polynomial}}\}$ has measure 1. Thus we conclude that with the exception of a $\prob{Q}_\alpha$ measure 0 set, $g^y_{exz}=g^y_{e'xz}$. That is, $\RV{Y}_i\CI^e_{\prob{Q}} \RV{E}_i|(\RV{Z}_i,\RV{X}_i,\RV{G},\text{Id}_C)$. By contraction with $\RV{Y}_i\CI^e_{\prob{Q}} \RV{Z}_i|(\RV{X}_i,\RV{G},\text{Id}_C)$, we have $\RV{Y}_i\CI^e_{\prob{Q}} (\RV{Z}_i,\RV{E}_i)|(\RV{X}_i,\RV{G},\text{Id}_C)$. 
+
+By CIIR of the $(\RV{E}_i|(\RV{X}_i,\RV{Y}_i))$ pairs, we have for all $i$, $\prob{Q}_\alpha^{\RV{Y}_i\RV{X}_i|\RV{E}_i\RV{G}}\overset{\prob{Q}_\alpha^{\RV{E}_i|\RV{G}}}{\cong}\prob{Q}_\alpha^{\RV{Y}_c\RV{X}_c|\RV{E}_c\RV{G}}$. Because we have a representative version $\RV{G}^{XY}_E$ of \prob{Q}_\alpha^{\RV{Y}_i\RV{X}_i|\RV{E}_i\RV{G}} for all $i\in \mathbb{N}$ (Theorem \ref{th:repr_cond}) and precedent implies that any set of measure 0 with respect to  $\prob{Q}_\alpha^{\RV{E}_i|\RV{G}}$ for all $i\in\mathbb{N}$ also has measure 0 with respect to $\prob{Q}_\alpha^{\RV{E}_c|\RV{G}}$, we have
+\begin{align}
+    \RV{G}^{XY}_{E} \overset{\prob{Q}_\alpha^{\RV{E}_c|\RV{G}}}{\cong} \prob{Q}_\alpha^{\RV{Y}_c\RV{X}_c|\RV{E}_c\RV{G}}
+\end{align}
+and thus
+\begin{align}
+    \RV{G}^Y_X \overset{\prob{Q}_\alpha^{\RV{X}_c|\RV{G}}}{\cong} \prob{Q}_\alpha^{\RV{Y}_c|\RV{X}_c\RV{G}}
+\end{align}
+completing the proof.
 \end{proof}
 
 % \subsection{Individual level conditionally independent and identical responses}\label{app:il_ciir}
 
 
 % \begin{replemma}{lem:ind_to_cc}
-% Given sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob{P}_\alpha^{\RV{Y}|\RV{WDI}}$ IO contractible over $\RV{W}$, if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\text{id}_C)|(\RV{W},\RV{D})$ and for any $j\in I$, $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0$, then there is some $\RV{W}'$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{W}'\RV{D}}$ is also IO contractible over $\RV{W}$.
+% Given sequential input-output model $(\prob{P}_C,(\RV{D},\RV{I}),\RV{Y})$ with $\prob{P}_\alpha^{\RV{Y}|\RV{WDI}}$ IO contractible over $\RV{W}$, if $\RV{Y}\CI_{\prob{P}_C}^e (\RV{I},\text{Id}_C)|(\RV{W},\RV{D})$ and for any $j\in I$, $\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0$, then there is some $\RV{W}'$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{W}'\RV{D}}$ is also IO contractible over $\RV{W}$.
 % \end{replemma}
 
 % \begin{proof}
@@ -149,9 +159,9 @@ by the assumption that this probability is dominated by the Lebesgue measure. On
 % \end{align}
 % and
 % \begin{align}
-%     &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C\\
-%     &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C\\
-%     &\RV{YIJ}\CI^e_{\prob{P}_C} \text{id}_C|\RV{D}\\
+%     &\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{Id}_C\\
+%     &\RV{YIJ}\CI^e_{\prob{P}_C} \RV{D}|\text{Id}_C\\
+%     &\RV{YIJ}\CI^e_{\prob{P}_C} \text{Id}_C|\RV{D}\\
 %     &\forall i,j\in \mathbb{N}: \sum_{\alpha\in C} \prob{P}_\alpha^{\RV{I}_i}(j)>0
 % \end{align}
 % then $\prob{P}_C^{\RV{Y}|\RV{JD}}$ is IO contractible over $\RV{J}$.
@@ -164,12 +174,12 @@ by the assumption that this probability is dominated by the Lebesgue measure. On
 %     &= \tikzfig{kernel_fac_with_idents_indepped}
 % \end{align}
 
-% Define $\kernel{Q}$ by $\alpha\mapsto \prob{P}_\alpha$ and $\kernel{Q}^{\cdot|\cdot\text{id}_C}$ by $\alpha\mapsto \prob{P}_\alpha^{*}$ and $\kernel{Q}^{\text{id}_C}$ is an arbitrary distribution in $\Delta(C)$ with full support. Note that the support of $\kernel{Q}^{\RV{IDYJ}}$ is the union of the support of $\prob{P}^{\RV{IDYJ}}_\alpha$ for all $\alpha$. Then
+% Define $\kernel{Q}$ by $\alpha\mapsto \prob{P}_\alpha$ and $\kernel{Q}^{\cdot|\cdot\text{Id}_C}$ by $\alpha\mapsto \prob{P}_\alpha^{*}$ and $\kernel{Q}^{\text{Id}_C}$ is an arbitrary distribution in $\Delta(C)$ with full support. Note that the support of $\kernel{Q}^{\RV{IDYJ}}$ is the union of the support of $\prob{P}^{\RV{IDYJ}}_\alpha$ for all $\alpha$. Then
 % \begin{align}
 %     \kernel{Q}^{\RV{YJ}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_fac_with_idents_kernelised}
 % \end{align}
 
-% By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$, it is also the case that
+% By assumption $\RV{YI}\CI^e_{\prob{P}_C} \RV{D}|\text{Id}_C$, it is also the case that
 % \begin{align}
 %     \kernel{Q}^{\RV{Y}|\RV{ID}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents}\\
 %     &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_fac_with_idents_indepped}\\
@@ -177,12 +187,12 @@ by the assumption that this probability is dominated by the Lebesgue measure. On
 % \end{align}
 % But
 % \begin{align}
-%     \kernel{Q}^{\RV{Y}|\RV{ID}}=\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{Y}|\RV{ID}}\kernel{Q}^{\text{id}_C}(\alpha)\\
+%     \kernel{Q}^{\RV{Y}|\RV{ID}}=\sum_{\alpha\in C} \prob{P}_\alpha^{\RV{Y}|\RV{ID}}\kernel{Q}^{\text{Id}_C}(\alpha)\\
 %     &= \prob{P}_C^{\RV{Y}|\RV{ID}}\\
 %     \implies \tikzfig{kernel_Q_fac_with_idents_subbed} &= \prob{P}_C^{\RV{Y}|\RV{ID}}
 % \end{align}
 
-% Furthermore, by assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{id}_C$, so there is some $\kernel{K}:C\kto Y\times W$ such that
+% Furthermore, by assumption $\RV{Y}\CI^e_{\prob{P}_C} \RV{I} | \text{Id}_C$, so there is some $\kernel{K}:C\kto Y\times W$ such that
 % \begin{align}
 %     \kernel{Q}^{\RV{YJ}|\RV{IC}} &\overset{\prob{Q}}{\cong} \tikzfig{kernel_Q_indepped}\\
 %     \implies \prob{P}_C^{\RV{YJ}|\RV{ID}} &= \tikzfig{kernel_Q_fac_with_idents_swapped}\\

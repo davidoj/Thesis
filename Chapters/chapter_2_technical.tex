@@ -308,7 +308,7 @@ Given kernels $\kernel{K}:W\kto Y$ and $\kernel{L}:X\kto Z$, the tensor product 
 Given $\prob{K}:X\kto Y$ and $\prob{L}:Y\times X\kto Z$, the semidirect product is graphically represented by connecting $\kernel{K}$ and $\kernel{L}$ and keeping an extra copy
 
 \begin{align}
-    \prob{K}\cprod\prob{L}:&= \text{Copy}_X(\prob{K}\otimes \text{id}_X)(\text{Copy}_Y\otimes\text{id}_X )(\text{id}_Y \otimes \prob{L})\\
+    \prob{K}\cprod\prob{L}:&= \text{Copy}_X(\prob{K}\otimes \kernel{I}_X)(\text{Copy}_Y\otimes\kernel{I}_X )(\kernel{I}_Y \otimes \prob{L})\\
                             &= \tikzfig{copy_product}
 \end{align}
 
@@ -859,7 +859,7 @@ The following forms of these properties are often used here:
 
 \begin{enumerate}
     \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y}, \mathrm{Id}_C)|(\RV{Z}, \mathrm{Id}_C)$ iff $\RV{Y}\CI_{\prob{P}} (\RV{X}, \mathrm{Id}_C)|\RV{Z}$
-    \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y},\RV{Z}, \mathrm{Id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}}\RV{Y}C|\RV{W}$ and $\RV{X}\CI_{\prob{P}}(\RV{Z},\mathrm{id}_C)|\RV{W}$
+    \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y},\RV{Z}, \mathrm{Id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}}\RV{Y}C|\RV{W}$ and $\RV{X}\CI_{\prob{P}}(\RV{Z},\mathrm{Id}_C)|\RV{W}$
     \item Weak union: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{Id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{Id}_C)|(\RV{Z},\RV{W})$
     \item Contraction: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Z},\mathrm{Id}_C)|\RV{W}$ and $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{Id}_C)|(\RV{Z},\RV{W})$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{Id}_C)|\RV{W}$
 \end{enumerate}
@@ -1220,4 +1220,4 @@ Given an option set $C$, we could consider a vector of potential outcomes $\RV{Y
 
 On the other hand, the assumed decision procedure $\proc{S}_C$ does provide a means of interpreting the decision model $(\prob{P}_\cdot,\Omega,C)$. In practice, someone might analyse a decision problem with a decision procedure that is too vague, or that fails some consistency condition (questions which we don't analyse in any detail here). However, we do, at least, point to decision procedures as the kind of thing that facilitates the interpretation of a decision model.
 
-Whether our interpretation applies to interventional models depends on what kinds of interventions the model contemplates and on just how vague decision procedures are allowed to be before we disqualify them. On the one hand, an interventional model that allows only interventions on a choice variable $\mathrm{Id}_C$ will induce a collection of probability distributions for each value of the option set $C$, and so would be suitable for modelling a decision procedure with this option set. It is not clear that there is a meaningful distinction in this kind of model between $\mathrm{id}_C$ taking a particular value and intervening on $\mathrm{Id}_C$ ``to set it to a particular value''. On the other hand, whether an interventional model that features hard interventions on arbitrary variables can be interpreted as a model of a decision procedure depends on whether we accept that a statement like ``have Nature set an individual's body mass index to $11$'' is enough to define a measurement procedure $\proc{S}_\alpha$ \citep{pearl_does_2018}. Such a statement seems too vague to qualify to us, but we don't analyse this question in detail and the subsequent work doesn't depend on a strong commitment either way.
+Whether our interpretation applies to interventional models depends on what kinds of interventions the model contemplates and on just how vague decision procedures are allowed to be before we disqualify them. On the one hand, an interventional model that allows only interventions on a choice variable $\mathrm{Id}_C$ will induce a collection of probability distributions for each value of the option set $C$, and so would be suitable for modelling a decision procedure with this option set. It is not clear that there is a meaningful distinction in this kind of model between $\mathrm{Id}_C$ taking a particular value and intervening on $\mathrm{Id}_C$ ``to set it to a particular value''. On the other hand, whether an interventional model that features hard interventions on arbitrary variables can be interpreted as a model of a decision procedure depends on whether we accept that a statement like ``have Nature set an individual's body mass index to $11$'' is enough to define a measurement procedure $\proc{S}_\alpha$ \citep{pearl_does_2018}. Such a statement seems too vague to qualify to us, but we don't analyse this question in detail and the subsequent work doesn't depend on a strong commitment either way.

@@ -68,12 +68,12 @@ for all $n\in\mathbb{N}$ then
 \begin{proof}
 By assumption of locality
 \begin{align}
-    \prob{P}^{\RV{X}_{[n]}|\RV{W}\RV{V}_{[n]}}\otimes\mathrm{del}_{W^\mathbb{N}} &= \prob{P}^{\RV{X}|\RV{W}\RV{V}}(\mathrm{id}_{X^n}\otimes \mathrm{del}_{X^{\mathbb{N}}})\\
-    \prob{P}^{\RV{Z}_{[n]}|\RV{W}\RV{Y}_{[n]}}\otimes\mathrm{del}_{W^\mathbb{N}} &= \prob{P}^{\RV{Z}|\RV{W}\RV{Y}}(\mathrm{id}_{X^n}\otimes \mathrm{del}_{X^{\mathbb{N}}})
+    \prob{P}^{\RV{X}_{[n]}|\RV{W}\RV{V}_{[n]}}\otimes\mathrm{del}_{W^\mathbb{N}} &= \prob{P}^{\RV{X}|\RV{W}\RV{V}}(\mathrm{Id}_{X^n}\otimes \mathrm{del}_{X^{\mathbb{N}}})\\
+    \prob{P}^{\RV{Z}_{[n]}|\RV{W}\RV{Y}_{[n]}}\otimes\mathrm{del}_{W^\mathbb{N}} &= \prob{P}^{\RV{Z}|\RV{W}\RV{Y}}(\mathrm{Id}_{X^n}\otimes \mathrm{del}_{X^{\mathbb{N}}})
 \end{align}
 hence for all $n,m>n$
 \begin{align}
-    \prob{P}^{\RV{X}_{[m]}|\RV{W}\RV{V}_{[m]}}(\mathrm{id}_{X^n}\otimes \mathrm{del}_{X^{m-n}}) &= \prob{P}^{\RV{Z}_{[m]}|\RV{V}\RV{Y}_{[m]}}(\mathrm{id}_{X^n}\otimes \mathrm{del}_{X^{m-n}})\\
+    \prob{P}^{\RV{X}_{[m]}|\RV{W}\RV{V}_{[m]}}(\mathrm{Id}_{X^n}\otimes \mathrm{del}_{X^{m-n}}) &= \prob{P}^{\RV{Z}_{[m]}|\RV{V}\RV{Y}_{[m]}}(\mathrm{Id}_{X^n}\otimes \mathrm{del}_{X^{m-n}})\\
     &= \prob{P}^{\RV{X}_{[n]}|\RV{W}\RV{V}_{[n]}}
 \end{align}
 and, in particular, by lemma \ref{lem:infinitely_extended_kernels}, $\prob{P}^{\RV{X}|\RV{W}\RV{V}}$ and $\prob{P}^{\RV{Z}|\RV{W}\RV{Y}}$ agree on all finite subsequences and hence are the same Markov kernel.
@@ -230,7 +230,7 @@ Then from Equation \eqref{eqApp:need_ccont}
 
 Take some $d\in D^{\mathbb{N}}$. From Equation \eqref{eqApp:rel_bet_y_yd} and IO contractibility of $\prob{P}_C^{\RV{Y}|\RV{WD}}(A|e)$,
 \begin{align}
-    (\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}\otimes \mathrm{id}_D)\kernel{F}_{lu}(A|w,d) &= \prob{P}_\alpha^{(\RV{Y}^D_{i d_i})_{i\in \mathbb{N}}|\RV{W}}(A|d)\\
+    (\prob{P}_\alpha^{\RV{Y}^D|\RV{W}}\otimes \mathrm{Id}_D)\kernel{F}_{lu}(A|w,d) &= \prob{P}_\alpha^{(\RV{Y}^D_{i d_i})_{i\in \mathbb{N}}|\RV{W}}(A|d)\\
     &=\prob{P}_\alpha^{(\RV{Y}_{i d_i})_{i\in \mathbb{N}}|\RV{WD}}(A|w,e)\\
     &= \prob{P}_\alpha^{(\RV{Y}_{i d_i})_{i\in \mathbb{N}}|\RV{W}(\RV{D}_{i d_i})_{\mathbb{N}})}(A|w,(e_{i d_i})_{i\in \mathbb{N}})\\
     &= \prob{P}_\alpha^{\RV{Y}|\RV{WD}}(A|w,(e_{i d_i})_{i\in \mathbb{N}})\\
@@ -277,7 +277,7 @@ so $\kernel{K}$ is IO contractible by Theorem \ref{th:equal_of_condits}.
 \end{proof}
 
 \begin{replemma}{lem:ciid_yd}
-Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable, $\RV{D}$ infinitely supported and for some $\RV{W}$, $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible for all $\alpha$. Then, letting $\RV{H}$ be the directing random conditional of $(\prob{P}_C,\RV{D},\RV{Y})$ (Definition \ref{def:dir_rand_cond}) and $\RV{Y}^D_{iD}:=(\RV{Y}^D_{ij})_{j\in D}$, we have for all $i\in\mathbb{N}$, $\RV{Y}^D_{iD}\CI^e_{\prob{P}_C} (\RV{Y}^D_{\mathbb{N}\setminus\{i\}D},\RV{W},\text{id}_C) | \RV{H}$ and
+Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given with $D$ countable, $\RV{D}$ infinitely supported and for some $\RV{W}$, $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible for all $\alpha$. Then, letting $\RV{H}$ be the directing random conditional of $(\prob{P}_C,\RV{D},\RV{Y})$ (Definition \ref{def:dir_rand_cond}) and $\RV{Y}^D_{iD}:=(\RV{Y}^D_{ij})_{j\in D}$, we have for all $i\in\mathbb{N}$, $\RV{Y}^D_{iD}\CI^e_{\prob{P}_C} (\RV{Y}^D_{\mathbb{N}\setminus\{i\}D},\RV{W},\text{Id}_C) | \RV{H}$ and
 \begin{align}
     \prob{P}_C^{\RV{Y}^D_{iD}|\RV{H}}(A|\nu) \overset{\prob{P}_\alpha}{\cong} \nu(A)
 \end{align}
@@ -292,11 +292,11 @@ Because the right hand side does not depend on $w$, we can say
 \begin{align}
     \prob{P}_{\alpha}^{\RV{Y}^D|\RV{HW}} &= \tikzfig{de_finetti_conditional_erase}
 \end{align}
-and because it also does not depend on $\alpha$ we have $\RV{Y}^D\CI^e_{\prob{P}_C} (\RV{W},\text{id}_C) | \RV{H}$. Further application of \citet[Prop. 1.4]{kallenberg_basic_2005} yields $\RV{Y}^D_{iD}\CI^e_{\prob{P}_C} (\RV{Y}^D_{\mathbb{N}\setminus\{i\}D},\RV{W}) | (\RV{H},\text{id}_C)$ and
+and because it also does not depend on $\alpha$ we have $\RV{Y}^D\CI^e_{\prob{P}_C} (\RV{W},\text{Id}_C) | \RV{H}$. Further application of \citet[Prop. 1.4]{kallenberg_basic_2005} yields $\RV{Y}^D_{iD}\CI^e_{\prob{P}_C} (\RV{Y}^D_{\mathbb{N}\setminus\{i\}D},\RV{W}) | (\RV{H},\text{Id}_C)$ and
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}^D_{iD}|\RV{H}}(A|\nu) \overset{\prob{P}_\alpha}{\cong} \nu(A)
 \end{align}
-Again, the right hand side does not depend on $\alpha$, which yields $\RV{Y}^D_{iD}\CI^e_{\prob{P}_C} (\RV{Y}^D_{\mathbb{N}\setminus\{i\}D},\RV{W},\text{id}_C) | \RV{H}$.
+Again, the right hand side does not depend on $\alpha$, which yields $\RV{Y}^D_{iD}\CI^e_{\prob{P}_C} (\RV{Y}^D_{\mathbb{N}\setminus\{i\}D},\RV{W},\text{Id}_C) | \RV{H}$.
 \end{proof}
 
 \begin{reptheorem}{th:any_infinite_sequence}
@@ -343,14 +343,14 @@ Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ is given wi
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{WD}} &= \tikzfig{lookup_representation_kernel}\label{eqApp:lup_rep_kernel_2}
 \end{align}
-then $\RV{Y}\CI^e_{\prob{P}_C} (\RV{W}, \text{id}_C) | (\RV{H},\RV{D})$, $\RV{H}\CI^e_{\prob{P}_C} \RV{D} | (\RV{W},\text{id}_C)$ and
+then $\RV{Y}\CI^e_{\prob{P}_C} (\RV{W}, \text{Id}_C) | (\RV{H},\RV{D})$, $\RV{H}\CI^e_{\prob{P}_C} \RV{D} | (\RV{W},\text{Id}_C)$ and
 \begin{align}
     \prob{P}_{C}^{\RV{Y}|\RV{HD}} &= \tikzfig{lookup_representation_kernel_h}
 \end{align}
 \end{replemma}
 
 \begin{proof}
-$\RV{Y}^D$ is a function of $\RV{Y}$ and $\RV{D}$ (see Definition \ref{def:tab_cd}) and $\RV{H}$ is a function of $\RV{Y}^D$. Say $f:Y\times D\to H$ is such that $\RV{H}=f(\RV{Y},\RV{D})$ (see Definition \ref{def:dir_rand_meas}). Because $\RV{H}=f(\RV{Y},\RV{D})$, we have $\RV{H}\CI^e_{\prob{P}_C} (\RV{W},\text{id}_C)|(\RV{Y},\RV{D})$. Thus
+$\RV{Y}^D$ is a function of $\RV{Y}$ and $\RV{D}$ (see Definition \ref{def:tab_cd}) and $\RV{H}$ is a function of $\RV{Y}^D$. Say $f:Y\times D\to H$ is such that $\RV{H}=f(\RV{Y},\RV{D})$ (see Definition \ref{def:dir_rand_meas}). Because $\RV{H}=f(\RV{Y},\RV{D})$, we have $\RV{H}\CI^e_{\prob{P}_C} (\RV{W},\text{Id}_C)|(\RV{Y},\RV{D})$. Thus
 \begin{align}
     \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint}\label{eqApp:luprep_joint}
 \end{align}
@@ -428,15 +428,15 @@ and so
 \begin{align}
     \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint_3}
 \end{align}
-From Lemma \ref{th:table_rep_kernel} we also have $\RV{Y}^D\CI^e_{\prob{P}_C} (\RV{W},\text{id}_C)|\RV{H}$ , so
+From Lemma \ref{th:table_rep_kernel} we also have $\RV{Y}^D\CI^e_{\prob{P}_C} (\RV{W},\text{Id}_C)|\RV{H}$ , so
 \begin{align}
     \prob{P}_\alpha^{\RV{YH}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint_4}\label{eqApp:disintegrate_twice}
 \end{align}
-and so by higher order conditionals $\RV{Y}\CI^e_{\prob{P}_C} \RV{W} | (\RV{H},\RV{D},\text{id}_C)$ and
+and so by higher order conditionals $\RV{Y}\CI^e_{\prob{P}_C} \RV{W} | (\RV{H},\RV{D},\text{Id}_C)$ and
 \begin{align}
     \prob{P}_{\alpha}^{\RV{Y}|\RV{HD}} &= \tikzfig{lookup_representation_kernel_h}
 \end{align}
-Because the right hand side does not depend on $\alpha$, we finally have $\RV{Y}\CI^e_{\prob{P}_C} (\RV{W},\text{id}_C) | (\RV{H},\RV{D})$ and the result
+Because the right hand side does not depend on $\alpha$, we finally have $\RV{Y}\CI^e_{\prob{P}_C} (\RV{W},\text{Id}_C) | (\RV{H},\RV{D})$ and the result
 \begin{align}
     \prob{P}_{C}^{\RV{Y}|\RV{HD}} &= \tikzfig{lookup_representation_kernel_h}
 \end{align}
@@ -444,14 +444,14 @@ Furthermore, by marginalising the right hand side of Equation \ref{eqApp:disinte
 \begin{align}
 	\prob{P}_\alpha^{\RV{H}|\RV{WD}} &= \tikzfig{lookup_representation_kernel_joint_4_marged}
 \end{align}
-Hence $\RV{H} \CI^e_{\prob{P}_C} \RV{D} | (\RV{W},\text{id}_C)$.
+Hence $\RV{H} \CI^e_{\prob{P}_C} \RV{D} | (\RV{W},\text{Id}_C)$.
 \end{proof}
 
 \begin{reptheorem}{th:ciid_rep_kernel}
 Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with sample space $(\Omega,\sigalg{F})$ is given with $D$ countable and $\RV{D}$ infinitely supported. Then the following are equivalent:
 \begin{enumerate}
     \item There is some $\RV{W}$ such that $\prob{P}_\alpha^{\RV{Y}|\RV{WD}}$ is IO contractible for all $\alpha$
-    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{id}_C)|(\RV{H},\RV{D}_i)$ and for all $i,j$ $$\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$$
+    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{Id}_C)|(\RV{H},\RV{D}_i)$ and for all $i,j$ $$\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$$
     \item There is some $\kernel{L}:H\times X\kto Y$ such that $$\prob{P}_C^{\RV{Y}|\RV{HD}}= \tikzfig{do_model_representation_conditional}$$
 \end{enumerate}
 \end{reptheorem}
@@ -512,10 +512,10 @@ then by the definition of higher order conditionals, for any $i\in \mathbb{N}$ a
 \begin{align}
     \prob{P}_C^{\RV{Y}_i|\RV{HD}_i\RV{Y}_{\neq i}\RV{D}_{\neq i}} &\overset{\prob{P}_C}{\cong} \kernel{L}\otimes \text{del}_{Y^{\mathbb{N}}\times X^{\mathbb{N}}}
 \end{align}
-hence $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{id}_C)|(\RV{H},\RV{D}_i)$
+hence $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{Id}_C)|(\RV{H},\RV{D}_i)$
 
 (2)$\implies$ (1):
-Take $\RV{W}:=\RV{H}$. Because we assume $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{[1,i)},\RV{D}_{[1,i),\text{id}_C})|(\RV{H},\RV{D}_i)$ we can take $\kernel{L}:= \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ for arbitrary $i$ (by assumption, they are all the same) and
+Take $\RV{W}:=\RV{H}$. Because we assume $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{[1,i)},\RV{D}_{[1,i),\text{Id}_C})|(\RV{H},\RV{D}_i)$ we can take $\kernel{L}:= \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{X}_i}$ for arbitrary $i$ (by assumption, they are all the same) and
 \begin{align}
     \prob{P}_C^{\RV{Y}_i|\RV{HD}_i\RV{Y}_{[1,i)}\RV{D}_{[1,i)}} &\overset{\prob{P}_C}{\cong} \kernel{L}\otimes \text{del}_{Y^{i-1}\times X^{i-1}}
 \end{align}
@@ -540,16 +540,16 @@ In this section Theorems \ref{th:data_ind_CC}, \ref{lem:exch_prod_ciid} and \ref
 Suppose a sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with sample space $(\Omega,\sigalg{F})$ is given with $D$ countable and and $\RV{D}$ infinitely supported over $*$. Then the following are equivalent:
 \begin{enumerate}
     \item $\prob{P}_\alpha^{\RV{Y}|\RV{D}}$ is IO contractible for all $\alpha$
-    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{id}_C)|(\RV{H},\RV{D}_i)$, for all $i,j,\alpha$ $$\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_\alpha^{\RV{Y}_j|\RV{H}\RV{D}_j}$$, $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$ and for all $i$ $\RV{D}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}) | (\RV{D}_{[1,i)},\text{id}_C)$
+    \item For all $i$, $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{\neq i},\RV{D}_{\neq i},\text{Id}_C)|(\RV{H},\RV{D}_i)$, for all $i,j,\alpha$ $$\prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_\alpha^{\RV{Y}_j|\RV{H}\RV{D}_j}$$, $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{Id}_C$ and for all $i$ $\RV{D}_i\CI^e_{\prob{P}_C} \RV{D}_{(i,\infty]}) | (\RV{D}_{[1,i)},\text{Id}_C)$
     \item There is some $\kernel{L}:H\times X\kto Y$ such that for all $\alpha$, $$\prob{P}_\alpha^{\RV{YH}|\RV{D}}= \tikzfig{do_model_representation_with_h}$$
 \end{enumerate}
 \end{reptheorem}
 
 \begin{proof}
 (1)$\implies$(3)
-From Lemmas \ref{th:table_rep_kernel} and \ref{lem:hw_interchange}, $(\prob{P}_C,\RV{D},\RV{Y})$ IO contractible over $*$ implies $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|(\RV{W},\text{id}_C)$.
+From Lemmas \ref{th:table_rep_kernel} and \ref{lem:hw_interchange}, $(\prob{P}_C,\RV{D},\RV{Y})$ IO contractible over $*$ implies $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|(\RV{W},\text{Id}_C)$.
 
-From Theorem \ref{th:ciid_rep_kernel} we have $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{[1,i)},\RV{D}_{[1,i),\text{id}_C})|(\RV{H},\RV{D}_i)$ and $\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$ and 
+From Theorem \ref{th:ciid_rep_kernel} we have $\RV{Y}_i\CI^e_{\prob{P}_C} (\RV{Y}_{[1,i)},\RV{D}_{[1,i),\text{Id}_C})|(\RV{H},\RV{D}_i)$ and $\prob{P}_C^{\RV{Y}_i|\RV{H}\RV{D}_i}=\prob{P}_C^{\RV{Y}_j|\RV{H}\RV{D}_j}$ and 
 \begin{align}
  \prob{P}_C^{\RV{Y}|\RV{HD}}= \tikzfig{do_model_representation_conditional}
 \end{align}
@@ -567,7 +567,7 @@ we have
 \begin{align}
  \prob{P}_\alpha^{\RV{Y}|\RV{HD}}= \tikzfig{do_model_representation_conditional}
 \end{align}
-and $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$, so we get all elements of (2) immediately except $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{[1,i)}) | (\RV{D}_{[1,i)},\text{id}_C)$. But marginalising Equation \eqref{eqApp:do_over_h} over $\RV{H}$ yields
+and $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{Id}_C$, so we get all elements of (2) immediately except $\RV{D}_i\CI^e_{\prob{P}_C} (\RV{Y}_{[1,i)}) | (\RV{D}_{[1,i)},\text{Id}_C)$. But marginalising Equation \eqref{eqApp:do_over_h} over $\RV{H}$ yields
 \begin{align}
      \prob{P}_\alpha^{\RV{Y}|\RV{D}}= \tikzfig{do_model_representation}
 \end{align}
@@ -575,9 +575,9 @@ and, in particular, for any $A\subset\mathbb{N}$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}_A|\RV{D}_{(A,\mathbb{N}\setminus A)}} &= \prob{P}_\alpha^{\RV{Y}_A|\RV{D}_A}\otimes \text{del}_{D^{|\mathbb{N}\setminus A|}} 
 \end{align}
-hence, taking $A=\{i\}$, $\RV{D}_{\mathbb{N}\setminus \{i\}}\CI^e_{\prob{P}_C} (\RV{Y}_{i}) | (\RV{D}_{i},\text{id}_C)$ which implies $\RV{D}_{(i,\infty]}\CI^e_{\prob{P}_C} (\RV{Y}_{i}) | (\RV{D}_{[1,i]},\text{id}_C)$.
+hence, taking $A=\{i\}$, $\RV{D}_{\mathbb{N}\setminus \{i\}}\CI^e_{\prob{P}_C} (\RV{Y}_{i}) | (\RV{D}_{i},\text{Id}_C)$ which implies $\RV{D}_{(i,\infty]}\CI^e_{\prob{P}_C} (\RV{Y}_{i}) | (\RV{D}_{[1,i]},\text{Id}_C)$.
 (2)$\implies$(1)
-From Theorem \ref{th:ciid_rep_kernel} and $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{id}_C$,
+From Theorem \ref{th:ciid_rep_kernel} and $\RV{H}\CI^e_{\prob{P}_C} \RV{D}|\text{Id}_C$,
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}|\RV{D}}&= \tikzfig{do_model_representation}
 \end{align}
@@ -597,7 +597,7 @@ Given $(\prob{P}_C,\Omega,\sigalg{F})$ and variables $\RV{D},\RV{Y}$, if for any
 \end{lemma}
 
 \begin{proof}
-By \citet[Prop. 1.4]{kallenberg_basic_2005}, there is a $\RV{G}$ such that $(\RV{D}_i,\RV{Y}_i)\CI^e_{\prob{Q}_C} (\RV{D}_{\{i\}^{\complement}}\RV{Y}_{\{i\}^{\complement}})|(\RV{G},\text{id}_C)$ and for all $i,j$
+By \citet[Prop. 1.4]{kallenberg_basic_2005}, there is a $\RV{G}$ such that $(\RV{D}_i,\RV{Y}_i)\CI^e_{\prob{Q}_C} (\RV{D}_{\{i\}^{\complement}}\RV{Y}_{\{i\}^{\complement}})|(\RV{G},\text{Id}_C)$ and for all $i,j$
 \begin{align}
     \prob{Q}_\alpha^{\RV{Y}_i\RV{D}_i|\RV{G}} &= \prob{Q}_\alpha^{\RV{Y}_j\RV{D}_j|\RV{G}}\label{eqApp:joint_given_g}
 \end{align}
@@ -611,9 +611,9 @@ There is some function $f:D^{\mathbb{N}}\times Y^{\mathbb{N}}$ such that $\RV{G}
 
 It follows from weak union that
 \begin{align}
-    \RV{Y}_i\CI^e_{\prob{Q}_C} (\RV{D}_{\{i\}^{\complement}}\RV{Y}_{\{i\}^{\complement}}) | (\RV{D}_i,\RV{G},\text{id}_C)\\
+    \RV{Y}_i\CI^e_{\prob{Q}_C} (\RV{D}_{\{i\}^{\complement}}\RV{Y}_{\{i\}^{\complement}}) | (\RV{D}_i,\RV{G},\text{Id}_C)\\
     \iff \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}\RV{Y}_{\{i\}^{\complement}}\RV{D}_{\{i\}^{\complement}}}(A|d_i,g,d,y) &\overset{P}{\cong} \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{G}}(A|d_i,g) & \forall A,d_i,g,d,y,\alpha\label{eqApp:swap_q_for_p}\\
-    \implies \RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^{\complement}}\RV{Y}_{\{i\}^{\complement}}) | (\RV{D}_i,\RV{G},\text{id}_C)
+    \implies \RV{Y}_i\CI^e_{\prob{P}_C} (\RV{D}_{\{i\}^{\complement}}\RV{Y}_{\{i\}^{\complement}}) | (\RV{D}_i,\RV{G},\text{Id}_C)
 \end{align}
 where Eq. \eqref{eqApp:swap_q_for_p} follows from Eq. \eqref{eqApp:cond_on_g}.
 
@@ -644,7 +644,7 @@ We will show $\prob{Q}_\alpha^{\RV{DY}}$ is unchanged by finite permutations of 
 \end{align}
 Where line \eqref{eqApp:exch_comep} follows from exchange commutativity, \eqref{eqApp:det_comep} follows from Theorem \ref{th:fong_det_kerns} and the fact that the swap map is deterministic and line \eqref{eqApp:exchep} comes from the exchangeability of $\prob{Q}_\alpha^{\RV{D}}$.
 
-Because $\prob{P}_\alpha^{\RV{D}}$ is dominated by $\prob{Q}_\alpha^{\RV{D}}$ by assumption, we have $\prob{P}_\alpha^{\RV{Y}|\RV{D}} \overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}|\RV{D}}$, which implies $\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^{\complement}}}\overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^{\complement}}}$ and from Lemma \ref{lem:dom_cond} we therefore have $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ IO contractible over $\RV{H}$, and from Theorem \ref{th:ciid_rep_kernel} we have $\RV{Y}\CI^e_{\prob{P}_C} \text{id}_C | (\RV{D},\RV{H})$ and so $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ IO contractible over $\RV{H}$ also.
+Because $\prob{P}_\alpha^{\RV{D}}$ is dominated by $\prob{Q}_\alpha^{\RV{D}}$ by assumption, we have $\prob{P}_\alpha^{\RV{Y}|\RV{D}} \overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}|\RV{D}}$, which implies $\prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^{\complement}}}\overset{\prob{P}}{\cong} \prob{Q}_\alpha^{\RV{Y}_i|\RV{D}\RV{Y}_{\{i\}^{\complement}}}$ and from Lemma \ref{lem:dom_cond} we therefore have $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ IO contractible over $\RV{H}$, and from Theorem \ref{th:ciid_rep_kernel} we have $\RV{Y}\CI^e_{\prob{P}_C} \text{Id}_C | (\RV{D},\RV{H})$ and so $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ IO contractible over $\RV{H}$ also.
 \end{proof}
 
 
@@ -653,7 +653,7 @@ A data-independent sequential input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ fe
 \end{reptheorem}
 
 \begin{proof}
-Only if: By Theorem \ref{th:ciid_rep_kernel} and Lemma \ref{lem:ci_drc}, $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible. By Theorem \ref{th:any_infinite_sequence}, $\RV{H}$ is almost surely a function of both $(\RV{D}_A,\RV{Y}_A)$ and $(\RV{D}_B,\RV{Y}_B)$ and, furthermore, $\RV{Y}_i\CI_{\prob{P}_C}^e (\RV{D}_A,\RV{Y}_A)|(\RV{D}_i,\RV{H},\text{id}_C)$, $\RV{Y}_j\CI_{\prob{P}_C}^e (\RV{D}_B,\RV{Y}_B)|(\RV{D}_j,\RV{H},\text{id}_C)$. Hence there is some $f:D^{\mathbb{N}}\times Y^{\mathbb{N}}\to H$ such that for all $E\in \sigalg{Y}, d_i\in D, d\in D^{\mathbb{N}}, y\in Y^{\mathbb{N}}$
+Only if: By Theorem \ref{th:ciid_rep_kernel} and Lemma \ref{lem:ci_drc}, $\prob{P}_\alpha^{\RV{Y}|\RV{HD}}$ is IO contractible. By Theorem \ref{th:any_infinite_sequence}, $\RV{H}$ is almost surely a function of both $(\RV{D}_A,\RV{Y}_A)$ and $(\RV{D}_B,\RV{Y}_B)$ and, furthermore, $\RV{Y}_i\CI_{\prob{P}_C}^e (\RV{D}_A,\RV{Y}_A)|(\RV{D}_i,\RV{H},\text{Id}_C)$, $\RV{Y}_j\CI_{\prob{P}_C}^e (\RV{D}_B,\RV{Y}_B)|(\RV{D}_j,\RV{H},\text{Id}_C)$. Hence there is some $f:D^{\mathbb{N}}\times Y^{\mathbb{N}}\to H$ such that for all $E\in \sigalg{Y}, d_i\in D, d\in D^{\mathbb{N}}, y\in Y^{\mathbb{N}}$
 \begin{align}
     \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{Y}_A,\RV{D}_A}(E|d_i,y,d) &= \prob{P}_\alpha^{\RV{Y}_i|\RV{D}_i\RV{H}}(E|d_i,f(y,d))\\
      &= \prob{P}_\alpha^{\RV{Y}_j|\RV{D}_j\RV{H}}(E|d_i,f(y,d))\label{eqApp:eq_cond}\\
@@ -697,7 +697,7 @@ so
 \end{align}
 By locality, there exists some $\kernel{L}:X^n\kto Y^n$ such that
 \begin{align}
-    \kernel{K} \text{marg}_{[n]} &= \kernel{K}(\text{id}_{[n]}\otimes \text{del}_{X^{\mathbb{N}}})\\
+    \kernel{K} \text{marg}_{[n]} &= \kernel{K}(\text{Id}_{[n]}\otimes \text{del}_{X^{\mathbb{N}}})\\
      &= \kernel{L}\otimes \mathrm{del}_{X^{\mathbb{N}}}
 \end{align}
 thus
@@ -710,9 +710,9 @@ Taking $A=[n]$ for all $n$ establishes locality.
 
 For exchange commutativity, note that for all $x\in X^{\mathbb{N}}$, $n\in\mathbb{N}$, we have
 \begin{align}
-    \text{swap}_{A\rightarrow [n]} \kernel{K} \text{marg}_A &= \text{swap}_{A\rightarrow [n]} \kernel{K} \text{swap}_{[n]\rightarrow A} (\text{id}_{[n]}\otimes \text{del}_{X^{\mathbb{N}}})\\
+    \text{swap}_{A\rightarrow [n]} \kernel{K} \text{marg}_A &= \text{swap}_{A\rightarrow [n]} \kernel{K} \text{swap}_{[n]\rightarrow A} (\text{Id}_{[n]}\otimes \text{del}_{X^{\mathbb{N}}})\\
      &= \kernel{K} \text{marg}_{[n]}\\
-     &= \kernel{K}(\text{id}_{[n]}\otimes \text{del}_{X^{\mathbb{N}}})
+     &= \kernel{K}(\text{Id}_{[n]}\otimes \text{del}_{X^{\mathbb{N}}})
 \end{align}
 Then by Lemma \ref{lem:infinitely_extended_kernels}
 \begin{align}
@@ -868,7 +868,7 @@ which is what we wanted to show.
 
 Define $\kernel{M}:H\kto Y^D$ by $\kernel{M}(A|h)=h(A)$ for all $A\in\sigalg{Y}^D$, $h\in H$. By the column exchangeability of $\mu$, from \citet[Prop. 1.4]{kallenberg_basic_2005} there is a directing random measure $\RV{H}:Y^{D\times\mathbb{N}}\to H$ such that
 \begin{align}
-    \mu(\kernel{F}_{\RV{H}}\otimes \mathrm{id}_{Y^{D\times\mathbb{N}}}) &= \tikzfig{de_finetti_representation_kernel}\label{eqApp:df_rep_mu_k}\\
+    \mu(\kernel{F}_{\RV{H}}\otimes \mathrm{Id}_{Y^{D\times\mathbb{N}}}) &= \tikzfig{de_finetti_representation_kernel}\label{eqApp:df_rep_mu_k}\\
     &\iff\\
     \mu(\bigtimes_{i\in \mathbb{N}} A_i\times B) &= \int_B \prod_{i\in \mathbb{N}} \kernel{M}(A_i|h) \mu\kernel{F}_{\RV{H}}(\mathrm{d}h)&\forall A_i\in\sigalg{Y}^D
 \end{align}
@@ -920,7 +920,7 @@ So by Theorem \ref{th:equal_of_condits}, $\kernel{K}$ is IO contractible.
 
 
 \begin{reptheorem}{th:response_is_cc_hdep}
-Given a sequential input-output model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}'}$ is IO contractible if and only if there is an extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times H,\sigalg{F}\otimes\sigalg{Y}^{D\times\mathbb{N}})$ with projection map $\RV{H}:\Omega\times H\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{D}_{<i},C)|(\RV{D}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{D}_j\RV{H}}$ for all $i,j\in \mathbb{N}$ and $\RV{H}\CI_{\prob{P}_C} (\RV{D},\text{id}_C)$.
+Given a sequential input-output model $(\prob{P}_C',\RV{D}',\RV{Y}')$ on $(\Omega,\sigalg{F})$, then $\prob{P}_C^{\prime \RV{Y}'\combbreak \RV{D}'}$ is IO contractible if and only if there is an extension $\prob{P}_C$ of $\prob{P}_C'$ to $(\Omega\times H,\sigalg{F}\otimes\sigalg{Y}^{D\times\mathbb{N}})$ with projection map $\RV{H}:\Omega\times H\to H$ such that $\RV{Y}_i\CI^e_{\prob{P}_C'} (\RV{Y}_{<i},\RV{D}_{<i},C)|(\RV{D}_i,\RV{H})$ and $\prob{P}_C^{\RV{Y}_i|\RV{X}_i\RV{H}}=\prob{P}_C^{\RV{Y}_j|\RV{D}_j\RV{H}}$ for all $i,j\in \mathbb{N}$ and $\RV{H}\CI_{\prob{P}_C} (\RV{D},\text{Id}_C)$.
 \end{reptheorem}
 
 \begin{proof}

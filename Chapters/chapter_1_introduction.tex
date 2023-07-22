@@ -175,7 +175,7 @@ Concretely, taking $-1$ to be ``cold'', $0$ to be ``comfortable'', $1$ to be ``h
 \end{align}
 Here, a left arrow indicates a causal assignment. This has a unique solution for each value of $\RV{T}_i$. Instructing Ella to wear a jumper is modelled by replacing the right hand side of Eq. \eqref{eq:struct_x} with 1 and instructing Ella to exerciese is modelled by replacing the right hand side of  Eq. \eqref{eq:struct_y} with $\text{max}(1,\RV{T}_i + \RV{X}_i + 1)$. See \citet{bongers_theoretical_2016,forre_causal_2020} for a much more in-depth treatment of structural models with cycles, and see \citet{eberhardt_combining_2010,ghassami_causal_2020} for algorithms for discovering linear cyclic causal structures
 
-Suppose, finally, we are interested in the results of a) tampering with the device Ella uses to determine the temperature each day and b) putting up a large structure to shade Ella's house. Both of these actions are likely to affect the reading $\RV{T}_i$, but otherwise have different consequences. It does not seem possible, therefore, that any single structural model limited to the variables $\RV{X}_i$, $\RV{Y}_i$ and $\RV{T}_i$ and functions thereof can represent the consequences of both of these actions.
+Suppose, finally, we are interested in the results of a) tampering with the device Ella uses to determine the temperature each day and b) putting up a large structure to shade Ella's house. Both of these actions will affect the reading $\RV{T}_i$, but otherwise have different consequences. It does not seem possible, therefore, that any single structural model limited to the variables $\RV{X}_i$, $\RV{Y}_i$ and $\RV{T}_i$ and functions thereof can represent the consequences of both of these actions.
 \end{example}
 
 In this example, different kinds of models are suitable for assessing the consequences of different sets of options, and a model accommodating all of the options considered is substantially more complex than a model accommodating only the request to wear a jumper. Maybe it is in principle possible to come up with a structural model that covers every set of options anyone might want to consider -- though it's far from obvious that this really is possible -- but it would be very surprising to us if there was any practical way to do so.
@@ -186,7 +186,9 @@ On the other hand, evaulation of causal discovery research almost invariably emp
 
 Why do we have on the one hand an acknowledgement of the need to allow ``interventions'' in structural models to be flexible enough to accommodate a decision maker's needs, while on the other hand causal discovery methods are evaluated only according to a rigid interpretation of perfect interventions? One of the reasons for this, we presume, is that if we consider a very broad class of interventions -- say, general interventions with unknown targets -- then a structural model places no constraints on what consequences can be achieved by an arbitrary intervention. However, we want causal discovery to tell us something useful, and restricting our attention to what it tells us about perfect interventions ensures that at least it tells us something nontrivial. Exactly when this is also something useful, we don't know.
 
-In short, there is some conceptual difficulty for structural models in determining how they should interface with a given decision maker's options. In this thesis, we ask (loosely speaking) the reverse of this question; rather than starting with a structural model and asking how we can accommodate a decision maker, we start with a decision maker and ask what sorts of models they might want to use.
+\citet{spirtesCausalInferenceAmbiguous2004} discuss the issue of ``ambiguous interventions'', where the nature of an intervention on a particular variable seems to be impossible to precisely specify. This is related to the last part of Example \ref{ex:prob_int_2}, where we offered two different ways to affect the temperature reading $\RV{T}_i$. The solution proposed by Spirtes and Scheines is to expand the set of variables and consider interventions on the expanded set. While it is undoubtedly true that one will run into fewer issues if one only wants to define interventions on some variables (and not all of them), this solution still does not offer a general account of when interventions correspond to available actions.
+
+In short, an open problem for structural models is to determine when and how interventions correspond to a decision maker's actions. In this thesis, we ask (roughly) the opposite question. Instead of starting with a model of interventions and asking when it corresponds to available actions, we start with a set of available actions and ask how to model them -- including whether, perhaps, they might sometimes be modeled as interventions.
 
 \section{Outlining our approach}
 
@@ -223,16 +225,15 @@ This is a brief summary of the motivation for exploring a new approach to causal
 A key challenge in causal inference is that it requires assumptions that are not generally valid and that are hard to empirically evaluate in the context of interest. There are two existing approaches to causal modelling: potential outcomes models and structural interventional models. Both are used to formally model data-driven decision problems, and both feature a representation of causation that does not depend on the options a decision maker has available. While it is sometimes the case that the correspondence between options and counterfactuals or interventions is intuitively obvious, it is difficult to give a general account of the correspondence, and in fact explaining counterfactuals in general is an open philosophical problem. The approach to causal modelling presented here instead takes a decision maker's options as the causal primitive, and does not aim to offer a problem independent account of causation. A motivating hypothesis -- and one that is far from proven -- is that by avoiding the need to offer a general account of causation, we may be better placed to understand the assumptions requierd for valid causal inference.
 
 \begin{center}
-\begin{tabular}{ |c|p{5cm}|p{5cm}|p{5cm}| } 
+\begin{tabular}{ |c|p{3cm}|p{3cm}|p{3cm}| } 
  \hline
   & Decision Models & Potential Outcomes Models & Structural Interventional Models  \\
  \hline
  Causal primitive & options & potential outcomes & structural interventions \\ 
- What they don't say & what causes what/what would have happened counterfactually & counterfactual to options correspondence & counterfactual to intervention correspondence
- Interpretation & problem specific set of options being considered & alternative versions of key variables under counterfactual premises & consequences of acting to change key variables in particular ways \\
- Identification assumptions & pairs of variables with invariant conditional probabilities & conditional independence of potential outcomes and premise & pairs of variables with all common causes observed\\
+ Interpretation & set of options relevant to problem & alternative versions of key variables under counterfactual premises & consequences of acts that change key variables satisfying properties of interventions \\
+ Identification assumptions & pairs of variables with common but unknown conditional probabilities & conditional independence of potential outcomes and premise & pairs of variables with all common causes observed\\
  Graphical notation & string diagrams & various & directed acyclic graphs \\
- Key questions & observation to consequence bridge principles & conditional independence of counterfactual variables & learning causal structure \\
+ Key questions & shared properties of observation and consequence models & conditional independence of counterfactual variables & causal structure \\
  \hline
 \end{tabular}
 \end{center}
