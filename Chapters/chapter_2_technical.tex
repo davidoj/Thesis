@@ -365,7 +365,7 @@ We read diagrams from left to right (this is somewhat different to \citet{fritz_
 \subsection{Special maps}
 
 \begin{definition}[Identity map]\label{def:ident_k}
-The identity map $\kernel{I}_X:X\kto X$ defined by $(\kernle{I}_X)(A|x)= \delta_x(A)$ for all $x\in X$, $A\in\sigalg{X}$, is represented by a bare line.
+The identity map $\kernel{I}_X:X\kto X$ defined by $(\kernel{I}_X)(A|x)= \delta_x(A)$ for all $x\in X$, $A\in\sigalg{X}$, is represented by a bare line.
 \begin{align}
     \mathrm{I}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
     \path (0,0) node (A) {$X$} ++ (0.5,0) node (B) {$X$};
@@ -529,7 +529,7 @@ Thus the action of the $\text{del}$ map is to marginalise over the deleted wire.
 Just like when manipulating ordinary mathematical notation, we can substitute equivalent subdiagrams in a larger diagram. That is, if we have
 
 \begin{align}
-	\tikzfig{joint_conditional} = \tikzfig{decomposed_conditional}
+	\tikzfig{joint_conditional} = \tikzfig{joint_conditional_decomposed}
 \end{align}
 
 Then we can substitute the left hand side for the right hand side:
