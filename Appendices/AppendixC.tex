@@ -49,6 +49,25 @@ thus $\prob{P}_C$ has independent and identical response functions conditional o
 \section{Proofs related to precedent}\label{sec:proof_precedent}
 
 
+\begin{theorem}[Existence of representative conditional distribution]\label{th:repr_cond}
+Given a sequential input-output model $(\prob{P}_\cdot,\RV{D},\RV{Y})$, if the $(\RV{D}_i,\RV{Y}_i)$ pairs are related by independent and identical responses conditional on $\RV{H}$, then for every $\alpha$, $\prob{P}_\alpha$-almost all $h\in H$ there is a representative conditional distribution $h^Y_X$ such that $\prob{P}_\alpha^{\RV{Y}_i|\RV{X}_i\RV{H}}(\cdot|h)\overset{\prob{P}_\alpha^{\RV{D}_i|\RV{H}}(\cdot|h)}{\cong} h^Y_X$ for all $i$.
+
+We refer to the function $\RV{H}^Y_X:h\mapsto h^Y_X$ as a \emph{representative conditional distribution}.
+\end{theorem}
+
+\begin{proof}
+Fix $h$ and take $h^Y_{X,i}:=\prob{P}_\alpha^{\RV{Y}_i|\RV{X}_i\RV{H}}(\cdot|\cdot,h)$ to be an arbitrary version of the conditional distribution for all $i$.
+
+For $i,j\in \mathbb{N}$, take $S_{ij} := \{x|h^Y_{x,i}\text{ is not a version of }\prob{P}_\alpha^{\RV{Y}_j|\RV{X}_j\RV{H}}(\cdot|\cdot,h)\}$. Note that $S_i:= \cup_{j\in \mathbb{N}} S_{ij}$ is a countable union of sets of $\prob{P}_\alpha^{\RV{X}_i|\RV{H}}(\cdot|h)$-measure 0, hence is also a set of $\prob{P}_\alpha^{\RV{X}_i|\RV{H}}(\cdot|h)$-measure 0.
+
+Define
+\begin{align}
+    h^Y_X(A|x) := \sum_{i\in \mathh{N}} \mathds{1}_{S_i^\complement\setminus \cup_{j\in[i]}S_j^\complement}(x) h^Y_{X,i}(A|x)
+\end{align}
+
+By construction, $h^Y_X$ differs from each $h^Y_{X,i}$ by a measure 0 set with respect to $\prob{P}_\alpha^{\RV{X}_i|\RV{H}}(\cdot|h)$. Hence it is a version of $\prob{P}_\alpha^{\RV{Y}_i|\RV{X}_i\RV{H}}(\cdot|h)$ for every $i$.
+\end{proof}
+
 \begin{reptheorem}{th:latent_to_observable}
 Given a CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$.
 
