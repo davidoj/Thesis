@@ -1,5 +1,10 @@
-\title{Change Notes}
+\documentclass[12pt, a4paper]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[parfill]{parskip}
 
+\title{Change Notes}
+\begin{document}
+\maketitle
 \section{Miscellaneous changes}
 
 Changed title, as it was (unintentionally) very close to two of my citations (both of which are unrelated to each other).
@@ -51,13 +56,13 @@ I have read over the text again and corrected notation where errors were found.
 Examiner 2 provided a great deal of detailed feedback. I have noted the feedback in detail where I've made a substantive response, and otherwise simply noted where I accepted the examiner's suggestions.
 
 \begin{itemize}
-    - 2-3, 5-24, 27-28, 30-33, 35-36, 38-39, 43-49, 51-54, 57-60, 62-66, 70-71, 75
+    \item 1, 2-3, 5-24, 27-28, 30-33, 35-36, 38-39, 43-49, 51-54, 57-60, 62-66, 70-71, 75
 \end{itemize}
 
 Accepted
 
 \begin{itemize}
-    \item 4 p.11, middle. Meaning of $x \mapsto x − 1$ etc is obscure. Also, do we need the arrow from $T _$ to $Y_i^X$ ?
+    \item 4 p.11, middle. Meaning of $x \mapsto x − 1$ etc is obscure. Also, do we need the arrow from $T_i$ to $Y_i^X$ ?
 \end{itemize}
 
 Clarified that $Y^X$ is a function from $X\to Y$ and $x\mapsto x-1$ is a function of this type and hence a possible value of $Y^X$. Agreed that the arrow $T$ to $Y^X_i$ is unnecessary (removed)
@@ -87,7 +92,7 @@ Terminology change accepted, Boolean algebra axioms are correct (in fact, there 
 Added a sentence to clarify the nature of the set $C$, and why it is appropriate here.
 
 \begin{itemize}
-    \item 37 p.68, second line. Should $\mathrm{del}_{D \mathbb{N}\setminusA}$ be $\mathrm{Del}_{D \mathbb{N}\setminusA}$? Also, this property seems to be related to the SUTDA condition, which may be worth mentioning.
+    \item 37 p.68, second line. Should $\mathrm{del}_{D \mathbb{N}\setminus A}$ be $\mathrm{Del}_{D \mathbb{N}\setminus A}$? Also, this property seems to be related to the SUTDA condition, which may be worth mentioning.
 \end{itemize}
 
 Made a pass through the whole document to ensure $\mathrm{del}$ notation was consistent, as well as $\mathrm{swap}$ and $\mathbb{I}$). 
@@ -204,8 +209,7 @@ Note that the discussion of counterfactuals here is just a brief explanation of 
     \item Chapter 4: I did wish that the candidate would have explored the relative strengths and weaknesses of EC (exchange commutativity) and L (locality), however. In particular, it seems to me that L is relatively innocuous, at least in many decision settings. There are certainly contexts in which the impact on X (of my decision) can depend on the impact on Y, but I think that we often have good reasons to think that L holds. (Obviously, it can fail if there is significant learning over time, but any good decision theory should allow for that.) In contrast, EC seems much less plausible, as it points towards a very strong type of exchangeability. It would have been helpful to have more discussion about whether there are ever contexts in which EC might reasonably be expected to hold, or whether there are slight weakenings of EC that “break” the key theorems (i.e., is EC only a problem in its most extreme form?)
 \end{itemize}
 
-I added Section ___ containing additional examples and discussion of reasons for why L might often be acceptable and EC appears to be less often acceptable. I also added a forward reference to Section ___ which offers additional reasons to consider EC implausible.
-
+I added Section 4. containing additional examples and discussion of reasons for why L might often be acceptable and EC appears to be less often acceptable. I also added a forward reference to Section 4. which offers additional reasons to consider EC implausible.
 
 \begin{itemize}
     \item Chapter 5: The theorems for both causal graphical models and potential outcomes models show that we can (mostly) derive the standard frameworks if CIIR holds for variables that are never the target of an intervention. The candidate seems to take this result as a concern for the dominant frameworks, but it was not clear why. I agree that CIIR is often unreasonable when it is assumed for all variables, but the ones that are never the target of interventions are presumably part of more “stable” (in some sense) causal relations, and so CIIR seems less problematic for them. In particular, CIIR will presumably never hold of $id_C$ and so it seems more plausible than in the fully abstract formulation of Chapter 4.
@@ -221,3 +225,5 @@ It was not my intention to indicate that this feature was problematic in and of 
 I have revised and substantially expanded the discussion of Theorem 5.1.21. In particular, I connect this theorem to the work of Schölkopf, Kun Zhang, Mooij, and others by showing how an interpretation of structural models in terms of ``independent conditionals'' can justify the assumptions of Theorem 5.1.21. Schölkopf, Kun Zhang, Mooij talk about how the principle of independent conditionals can justify certain approaches to causal structure discovery -- here I show how it can also justify conclusions about the consequences of actions.
 
 I added a discussion of Spirtes \& Scheines (2004) to chapter 1, where a similar issue was raised, and note in this chapter how inference in the form of Theorem 5.1.21 does not require decomposing ambiguous interventions into a combination of unambiguous interventions (which is the approach explained in Spirtes \& Scheines (2004)).
+
+\end{document}
