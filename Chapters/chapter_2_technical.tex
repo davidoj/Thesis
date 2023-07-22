@@ -541,7 +541,7 @@ Then we can substitute the left hand side for the right hand side:
 
 \subsubsection{Equivalence}
 
-We can include multiple copies of the same Markov kernel in a diagram. We can use this to show, for example, that certain conditionals are equivalent. For example, we can represent the following (see Section \ref{sec:eci} for the definition of conditional independence $\CI$)
+We can include multiple copies of the same Markov kernel in a diagram. We can use this to show, for example, that certain conditionals are equivalent. For example, we can represent the following two properties (see Section \ref{sec:eci} for the definition of conditional independence $\CI$)
 
 \begin{align}
 	(\RV{X}_2, \RV{Y}_2) &\CI_{\prob{P}} (\RV{Y}_1,\RV{X}_1) | \RV{H}\\
@@ -559,7 +559,7 @@ Note that in this diagram, we have implicitly
 	\prob{P}^{\RV{Y}_1|\RV{X}_1\RV{H}} &= \prob{P}^{\RV{Y}_2|\RV{X}_2\RV{H}}\\
 	&= \kernel{L}
 \end{align}
-if a kernel in a diagram is equal to $\prob{P}^{\RV{W}|\RV{U}}$ we will typically label it explicitly as such for clarity, but as in Eq. \eqref{eq:defn_indep_w_diagram}, it is not strictly necessary to do so.
+if a kernel in a diagram is equal to $\prob{P}^{\RV{W}|\RV{U}}$ we will typically label it explicitly as such for clarity, but typically it is not strictly necessary to do so as conditionals are implicitly defined by wire labels (as in Eq. \eqref{eq:defn_indep_w_diagram}).
 
 \subsubsection{Surgery}
 
@@ -572,7 +572,7 @@ We can also use string diagrams to compactly define ``surgery'' operations that 
 and defines a transformation of the joint probability distribution with respect to this graph (see Definition \ref{def:CBN} for a more precise explanation of interventions):
 
 \begin{align}
-	\prob{P}^{\RV{Y}|\mathrm{do}(\RV{X}=x)} = \sum_{z\in Z} \prob{P}^{\RV{Y}|\RV{X}\RV{Z}}(\cdot|x,z)
+	\prob{P}^{\RV{Y}|\mathrm{do}(\RV{X}=x)}(\cdot) = \sum_{z\in Z} \prob{P}^{\RV{Y}|\RV{X}\RV{Z}}(\cdot|x,z)
 \end{align}
 
 and separately defines a transformed graph $\mathcal{G}_{\overline{\RV{X}}}$ associated with the operation
@@ -581,12 +581,15 @@ and separately defines a transformed graph $\mathcal{G}_{\overline{\RV{X}}}$ ass
 	\mathcal{G}_{\overline{X}} = \tikzfig{simple_dag_cut}
 \end{align}
 
-\citet{jacobs_causal_2019} defines the ``cut'' operation on string diagrams which subsumes both the graphical and probabilistic definition of an intervention. It involves (in this example) replacing the Markov kernel associated with $\prob{P}^{\RV{X}|\RV{Z}}$ with the markov kernel $\kernel{K}_x:= *\mapsto \delta_x$.
+``Intervention'' is thus defined as two operations, one on the joint probability distribution and one on the graphical representation.
+
+With string diagrams, it is possible to define a single operation that subsumes both the graphical and probabilistic operation above. \citet{jacobs_causal_2019} defines the ``cut'' operation on string diagrams which subsumes both the graphical and probabilistic definition of an intervention. It involves (in this example) replacing the Markov kernel associated with $\prob{P}^{\RV{X}|\RV{Z}}$ with the markov kernel $\kernel{K}_x:= *\mapsto \delta_x$.
 
 \begin{align}
-	\mathrm{cut}(\tikzfig{simple_dag_as_string}) = \tikzfig{simple_dag_as_string_cut}
+	\mathrm{cut}\left(\tikzfig{simple_dag_as_string}\right) = \tikzfig{simple_dag_as_string_cut}
 \end{align}
 
+The reason why both the graphical and probabilistic transformations can be captured by a single string diagram operation is because string diagrams, unlike standard causal diagrams, explicitly represent Markov kernels. This is the same property that allows us to write meaningful equations with string diagrams.
 
 \section{Probability Sets and Decision Models}\label{sec:probability_sets}
 
@@ -1218,6 +1221,6 @@ A decision procedure is a collection $\proc{S}_C:=\{\proc{S}_\alpha\}_{\alpha\in
 
 Given an option set $C$, we could consider a vector of potential outcomes $\RV{Y}^C$  where $\RV{Y}^\alpha$ is interpreted as ``the value that $\RV{Y}$ would take had I chosen $\alpha$''. Because $\RV{Y}^\alpha$ is defined whether or not I choose $\alpha$, it's clear that the vector $\RV{Y}^C$ must be an unobservable variable. Thus it comes with the warning we mentioned -- we don't necessarily assume that there is any obvious way to interpret this variable.
 
-On the other hand, the assumed decision procedure $\proc{S}_C$ does provide a means of interpreting the decision model $(\prob{P}_\cdot,\Omega,C)$. In practice, someone might analyse a decision problem with a decision procedure that is too vague, or that fails some consistency condition (questions which we don't analyse in any detail here). However, we do, at least, point to decision procedures as the kind of thing that facilitates the interpretation of a decision model.
+On the other hand, the assumed decision procedure $\proc{S}_C$ does provide a means of interpreting the decision model $(\prob{P}_\cdot,\Omega,C)$. The decision procedure, of course, might not be up to the job. It might, for example, be too vague such that two different people trying to follow it end up doing two meaningfully different things. The interpretation of the model depends on the decision procedure, and the robustness of the interpretation therefore depends on the soundness of the decision procedure.
 
-Whether our interpretation applies to interventional models depends on what kinds of interventions the model contemplates and on just how vague decision procedures are allowed to be before we disqualify them. On the one hand, an interventional model that allows only interventions on a choice variable $\mathrm{Id}_C$ will induce a collection of probability distributions for each value of the option set $C$, and so would be suitable for modelling a decision procedure with this option set. It is not clear that there is a meaningful distinction in this kind of model between $\mathrm{Id}_C$ taking a particular value and intervening on $\mathrm{Id}_C$ ``to set it to a particular value''. On the other hand, whether an interventional model that features hard interventions on arbitrary variables can be interpreted as a model of a decision procedure depends on whether we accept that a statement like ``have Nature set an individual's body mass index to $11$'' is enough to define a measurement procedure $\proc{S}_\alpha$ \citep{pearl_does_2018}. Such a statement seems too vague to qualify to us, but we don't analyse this question in detail and the subsequent work doesn't depend on a strong commitment either way.
+Can decision procedures offer a means of interpreting interventional or counterfactuals models? To begin with, an interventional model that allows only interventions on a choice variable $\mathrm{Id}_C$ will induce a collection of probability distributions for each value of the option set $C$, and so would be suitable for modelling a decision procedure with this option set. However, in a model of this type the notion of intervention seems redundant; there is no meaningful distinction between assuming $\mathrm{Id}_C$ takes a particular value and ``intervening on $\mathrm{Id}_C$ to set it to a particular value''. On the other hand, whether an interventional model that features hard interventions on arbitrary variables can be interpreted as a model of a decision procedure depends on whether we accept that a statement like ``have Nature set an individual's body mass index to $11$'' is enough to define a valid measurement procedure $\proc{S}_\alpha$ \citep{pearl_does_2018}.
