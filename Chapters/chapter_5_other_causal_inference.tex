@@ -264,9 +264,9 @@ Unobserved variables in the set of parents of a particular variable of interest 
 \begin{align}
     \tikzfig{cbn_example_cgm}
 \end{align}
-and we consider the subset $C'\subset C$ of interventions that are either empty or target $\RV{V}_2$ only. We note that Theorem \ref{th:causal_contractibility_cbn} implies that $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}_3\RV{V}_{1\mathbb{N}}\RV{V}_{2[n]}}$ is IO contractible, but not $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}_3\RV{V}_{2\mathbb{N}}}$. We declare that $\RV{V}_{1[n]}$ is not observed -- that is, it is not associated with a measurement procedure.
+and we consider the subset $C'\subset C$ of interventions that are either empty or target $\RV{V}_2$ only. We note that Theorem \ref{th:causal_contractibility_cbn} implies that $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}_3\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ is IO contractible, but not $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}_3\RV{V}_{2\mathbb{N}}}$. We understand that $\RV{V}_{1\mathbb{N}}$ is not observed -- that is, it is not associated with a measurement procedure -- though for the theory explored here this has no further implications.
 
-We observe in Theorem \ref{th:condit_exchange} that the IO contractibility of $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ implies that $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{2\mathbb{N}}}$ is unchanged by any swaps that leave the value of the full vector $\RV{V}_{1\mathbb{N}}$ unchanged. That is, the assumption of an unobserved confounder in this case implies a kind of ``partial IO contractibility''.
+We observe in Theorem \ref{th:condit_exchange} that the IO contractibility of $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ implies that $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{2\mathbb{N}}}$ is unchanged by any operation that swaps $(\RV{V}_{1i}, \RV{V}_{2i})$ pairs as long as the value of vector $\RV{V}_{1\mathbb{N}}$ is unchanged by the swap. That is, given  That is, given $\RV{V}_{1\mathbb{N}}$, we can find swap operations that do not change $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{2\mathbb{N}}}$, though in general this will not be every swap operation. Because $\RV{V}_{3\mathbb{N}}$ is random, the relevant swap operations are also random.
 
 \begin{theorem}\label{th:condit_exchange}
 Given $(\prob{P}_\cdot,C,\Omega,(\RV{V}_{ij})_{i\in [3],j\in \mathbb{N}},\RV{H},\graph{G})$ with $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}_3\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ IO contractible over $\RV{H}_3$, $V_i$ discrete for all $i\in [3]$ and $(\RV{V}_{1\mathbb{N}},\RV{V}_{2\mathbb{N}})$ infinitely supported over $\RV{H}_3$, let $\RV{Q}:\Omega\to \mathbb{N}^\mathbb{N}$ be a random finite permutation of $\mathbb{N}$ dependent on $\RV{V}_{1\mathbb{N}}$ such that $\RV{V}_{1\mathbb{N}}\overset{\prob{P}_C}{\cong}\RV{V}_{1\RV{Q}(\mathbb{N})}$. Then
@@ -293,9 +293,11 @@ Thus
 
 Theorem \ref{th:condit_exchange} says that IO contractibility of $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{1\mathbb{N}}\RV{V}_{2\mathbb{N}}}$ implies the ``exchange commutativity'' of $\prob{P}_C^{\RV{V}_{3\mathbb{N}}|\RV{H}\RV{V}_{2\mathbb{N}}}$ with respect to the random permutation $\RV{Q}$ of the indices of $\mathbb{N}$ -- in fact, for all such random permutations that preserve $\RV{V}_{1\mathbb{N}}$. If $\RV{V}_{1i}=\RV{V}_{1j}$ then any permuation that swaps only $i$ and $j$ will satisfy the condtion for Theorem \ref{th:condit_exchange}. Note that $\RV{Q}$ generally cannot be deduced from observations, because $\RV{V}_{1\mathbb{N}}$ cannot be deduced from observations. That is, $\RV{V}_{1\mathbb{N}}$ determines some subset of indices that are interchangeable, even though not \emph{all} indices are interchangeable. 
 
-Suppose $\RV{V}_{[3]n}$ is the result of some intervention targeting $\RV{V}_{2n}$, and $\RV{V}_{[3]\{n\}^\complement}$ are all the result of passive observation. We can interpret Theorem \ref{th:condit_exchange} as expressing the idea that there is some (unknown) random subset of $\{n\}^\complement$ that is ``just like'' the intervened sample $\RV{V}_{[3]n}$. We could say that this random subset is a \emph{precedent} for the intervention.
+Suppose the decision maker's actions affect $\RV{V}_{2i}$ in some known way, which in turn affects $\RV{V}_{3i}$ in some way that is at least initially unknown, and $(\RV{V}_{2\{i\}^\complement},\RV{V}_{3\{i\}^\complement})$ are all the result of passive observation. We can interpret Theorem \ref{th:condit_exchange} as expressing the idea that there is some (unknown) random subset of $C\subset \{i\}^\complement$ such that for $j\in C$ the relation between $\RV{V}_{2j}$ and $\RV{V}_{3j}$ is ``just like'' in the controlled pair $(\RV{V}_{2i},\RV{V}_{3i})$. That is to say: whatever the decision maker can accomplish, it has been done sometime before; the decision maker's actions have \emph{precedent}.
 
-In some cases, an assumption of precedent can motivate the conclusion that certain input-output relationships are invariant. Consider the following example:
+\subsubsection{Causal inference from precedent}
+
+In some cases, assuming a decision maker's actions have precedent can yield nontrivial inferences. Consider the following example:
 
 \begin{example}\label{ex:doctor_precedent}
 Suppose a decision maker collects data about a group of peope who have variously engaged the services of dietiticians, sporting coaches, general practitioners, bariatric surgeons and none of the above, with practitioner choice recorded under the variable $\RV{Z}_i$. The decision maker has also collected data on each person's body mass index $\RV{X}_i$ at the beginning of the study and followed mortality outcomes $\RV{Y}_i$ for a considerable period of time. A decision maker is reviewing this data, and in particular is wondering if steps they take to manage their weight $\RV{X}_c$ are likely to improve their own mortality prospects $\RV{Y}_c$.
@@ -357,7 +359,7 @@ Where $U_{\Delta(E)}$ is the uniform measure on the $|E-1|$ simplex of discrete 
 
 We are interested in the setting where we have observed that $\RV{Y}_i$ is independent of $\RV{Z}_i$ given $\RV{X}_i$. We formally state this by defining the event $I$ where this independence holds, and defining an alternative model $\prob{Q}_{\cdot}$ which corresponds to $\prob{P}_\cdot$ conditioned on the occurrence of the event $I$.
 
-\begin{theorem}[Unobserved to observable IO contractibility]\label{th:latent_to_observable}
+\begin{theorem}[Inferring identical responses from precedent]\label{th:latent_to_observable}
 Given a CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$.
 
 Let $I\subset \Delta(Y)^{XZ}$ be the event $\RV{H}^Y_{Xz}=\RV{H}^Y_{Xz'}$ for all $z,z'\in Z$; i.e. the event that $\RV{Y}_i$ is independent of $\RV{Z}_i$ conditional on $\RV{X}_i$ and $\RV{H}^Y_{XZ}$. Define $\prob{Q}_\alpha\in \Delta(\Omega)$ to be the probability measure such that, for all $A\in \sigalg{F}$
@@ -366,7 +368,7 @@ Let $I\subset \Delta(Y)^{XZ}$ be the event $\RV{H}^Y_{Xz}=\RV{H}^Y_{Xz'}$ for al
 \end{align}
 i.e. $\prob{Q}_\alpha$ is $\prob{P}_\alpha$ conditioned on $\RV{H}^Y_{XZ}\in I$, so $\RV{Y}_i\CI^e_{\prob{Q}_\cdot} \RV{Z}_i|(\RV{X}_i,\mathrm{id}_C)$.
 
-If the options $C$ have precedent with respect to $(\prob{Q}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$, and this model also satisfies conditional absolute continuity, then $(\prob{Q}_\cdot,\RV{X},\RV{Y})$ is also CIIR.
+If the options $C$ have precedent with respect to $(\prob{Q}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$, and this model also satisfies conditional absolute continuity, then $(\RV{X},\RV{Y})$ are also related by conditionally independent and identical responses with respect to $\prob{Q}_\cdot$.
 \end{theorem}
 
 \begin{proof}
