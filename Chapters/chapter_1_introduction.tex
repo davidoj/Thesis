@@ -224,16 +224,16 @@ This is a brief summary of the motivation for exploring a new approach to causal
 
 A key challenge in causal inference is that it requires assumptions that are not generally valid and that are hard to empirically evaluate in the context of interest. There are two existing approaches to causal modelling: potential outcomes models and structural interventional models. Both are used to formally model data-driven decision problems, and both feature a representation of causation that does not depend on the options a decision maker has available. While it is sometimes the case that the correspondence between options and counterfactuals or interventions is intuitively obvious, it is difficult to give a general account of the correspondence, and in fact explaining counterfactuals in general is an open philosophical problem. The approach to causal modelling presented here instead takes a decision maker's options as the causal primitive, and does not aim to offer a problem independent account of causation. A motivating hypothesis -- and one that is far from proven -- is that by avoiding the need to offer a general account of causation, we may be better placed to understand the assumptions requierd for valid causal inference.
 
+The following table summarises key differences between the approach developed here (decision models) and the two most common frameworks for causal modelling -- potential outcomes and structural interventional models.
+
 \begin{center}
-\begin{tabular}{ | c | p{3cm} | p{3cm} | p{3cm} | } 
+\begin{tabular}{ | p{3cm} | p{3cm} | p{3cm} | p{3cm} | } 
  \hline
   & Decision Models & Potential Outcomes Models & Structural Interventional Models  \\
  \hline
- Causal primitive & options & potential outcomes & structural interventions \\ 
- Interpretation & set of options relevant to problem & alternative versions of key variables under counterfactual premises & consequences of acts that change key variables satisfying properties of interventions \\
- Identification assumptions & pairs of variables with common but unknown conditional probabilities & conditional independence of potential outcomes and premise & pairs of variables with all common causes observed\\
- Graphical notation & string diagrams & various & directed acyclic graphs \\
- Key questions & shared properties of observation and consequence models & conditional independence of counterfactual variables & causal structure \\
+ Distinguishing feature & options & potential outcomes & structural interventions \\ 
+ Premise & decision maker must select one option from a set & key variables have alternative versions under counterfactual premises & idealised interventions change the distribution of variables according to causal structure \\
+ Identification justifications & common relationships between variables in different conditions & independence of potential outcomes and premises & pairs of variables with all common causes known to be observed
  \hline
 \end{tabular}
 \end{center}
