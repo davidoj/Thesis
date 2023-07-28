@@ -1,10 +1,10 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small dist tikzit] (0) at (-3.5, 0) {$\prob{P}^{\RV{Z}}$};
+		\node [style=small dist tikzit] (0) at (-3.75, 0) {$\prob{P}^{\RV{Z}}$};
 		\node [style=small kernel tikzit] (1) at (-1, 0) {$\prob{P}^{\RV{X}|\RV{Z}}$};
 		\node [style=small kernel tikzit] (2) at (2, -1.25) {$\prob{P}^{\RV{Y}|\RV{XZ}}$};
 		\node [style=copymap tikzit] (3) at (0.5, 0) {};
-		\node [style=copymap tikzit] (4) at (-2.5, 0) {};
+		\node [style=copymap tikzit] (4) at (-2.75, 0) {};
 		\node [style=RLabel tikzit] (5) at (4, -1.25) {$\RV{Y}$};
 		\node [style=RLabel tikzit] (6) at (4, 0) {$\RV{X}$};
 		\node [style=RLabel tikzit] (7) at (4, 1.5) {$\RV{Z}$};
@@ -19,6 +19,6 @@
 		\draw (3) to (6);
 		\draw (2) to (5);
 		\draw [in=180, out=-75] (3) to (8.center);
-		\draw [in=180, out=-30, looseness=0.75] (4) to (9.center);
+		\draw [in=180, out=-60, looseness=0.75] (4) to (9.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

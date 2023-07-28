@@ -1,10 +1,10 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (2.25, 0.75) {$\kernel{K}$};
-		\node [style=copymap tikzit] (1) at (3.75, 0.75) {};
-		\node [style=RLabel tikzit] (2) at (6.5, 1.75) {$Y$};
-		\node [style=Llabel tikzit] (3) at (0.5, 0.75) {$X$};
-		\node [style=none] (5) at (6.5, -0.25) {};
+		\node [style=small kernel tikzit] (0) at (-0.25, 0) {$\kernel{K}$};
+		\node [style=copymap tikzit] (1) at (1.25, 0) {};
+		\node [style=RLabel tikzit] (2) at (4, 1) {$Y$};
+		\node [style=Llabel tikzit] (3) at (-2, 0) {$X$};
+		\node [style=none] (5) at (4, -1) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (0) to (1);

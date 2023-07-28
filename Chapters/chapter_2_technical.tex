@@ -66,6 +66,8 @@ Given a measurable space $(E,\sigalg{E})$, a map $\mu:\sigalg{E}\to [0,1]$ is a 
 The set of all probability measures on $(E,\sigalg{E})$ is written $\Delta(E)$.
 \end{notation}
 
+Markov kernels are stochastic functions -- they map values to probability distributions. Because they typically are used to represent conditional probability distributions, we represent them with notation evocative of standard conditional probability notation.
+
 \begin{definition}[Markov kernel]\label{def:markov_kern}
 Given measurable spaces $(E,\sigalg{E})$ and $(F,\sigalg{F})$, a \emph{Markov kernel} or \emph{stochastic function} is a map $\kernel{M}:E\times\sigalg{F}\to [0,1]$ such that
 \begin{itemize}
@@ -79,7 +81,7 @@ Given measurable spaces $(E,\sigalg{E})$ and $(F,\sigalg{F})$ and $\kernel{M}:E\
 \end{notation}
 
 \begin{definition}[Deterministic Markov kernel]
-A \emph{deterministic} Markov kernel $\kernel{A}:E\kto F$ is a kernel such that $\kernel{A}_x(B)\in\{0,1\}$ for all $x\in E$, $B\in\mathcal{F}$.
+A \emph{deterministic} Markov kernel $\kernel{A}:E\kto F$ is a kernel such that $\kernel{A}(B|x)\in\{0,1\}$ for all $x\in E$, $B\in\mathcal{F}$.
 \end{definition}
 
 \paragraph{Common probability measures and Markov kernels}
@@ -102,10 +104,10 @@ Given measurable $f:X\to Y$ and $g:Y\to Z$, $\kernel{F}_f\kernel{F}_g = \kernel{
 
 \begin{proof}
 \begin{align}
-    (\kernel{F}_{f}\kernel{F}_g)_x(A) &= \int_X (\kernel{F}_g)_y(A) d(\kernel{F}_f)_x(y)\\
-                                      &= \int_X \delta_{g(y)}(A) d\delta_{f(x)}(y)\\
+    (\kernel{F}_{f}\kernel{F}_g)(A|x) &= \int_X (\kernel{F}_g)(A|y) (\kernel{F}_f)(\mathrm{d}y|x)\\
+                                      &= \int_X \delta_{g(y)}(A) \delta_{f(x)}(\mathrm{d}y)\\
                                       &= \delta_{g(f(x))} (A)\\
-                                      &= (\kernel{F}_{g\circ f})_x(A) 
+                                      &= (\kernel{F}_{g\circ f})(A|x) 
 \end{align}
 \end{proof}
 
@@ -121,9 +123,17 @@ A sequence of random variables is also a random variable.
 
 \begin{definition}[Sequence of variables]\label{def:seqvar}
 Given a measurable space $(\Omega,\sigalg{F})$ and two random variables $\RV{X}:(\Omega,\sigalg{F})\to (X,\sigalg{X})$, $\RV{Y}:(\Omega,\sigalg{F})\to (Y,\sigalg{Y})$, $(\RV{X},\RV{Y}):\Omega\to X\times Y$ is the random variable $\omega\mapsto (\RV{X}(\omega),\RV{Y}(\omega))$.
+
+Given a sequence of random variables $\RV{X}_i,...,\RV{X}_j$ with a finite set of indices $A$, $(\RV{X}_i)_{i\in A}$ is the sequence given by the recursive definition
+\begin{align}
+	(\RV{X}_i)_{i\in [n]} = \begin{cases}
+	(\RV{X}_{i_1},\RV{X}_{i_2}) & |A|=2\\
+	(\RV{X}_{i_1},\RV{X}_{A\setminus \{i_1\}}) & |A|>2
+	\end{cases}
+\end{align}
 \end{definition}
 
-We define a partial order on random variables such that $\RV{Y}$ is higher than $\RV{X}$ if $\RV{X}$ is given by application of a function to $\RV{Y}$. For example, $\RV{Y}\varlessthan (\RV{W},\RV{Y})$ as $\RV{Y}$ can be obtained by composing a projection with $(\RV{W},\RV{Y})$.
+We define a partial order $\varlessthan$, which we read ``is determined by'', such that $\RV{X}$ is determined by $\RV{Y}$ if $\RV{X}$ is given by application of a function to $\RV{Y}$. For example, $\RV{Y}\varlessthan (\RV{W},\RV{Y})$ as $\RV{Y}$ can be obtained by composing a projection with $(\RV{W},\RV{Y})$.
 
 \begin{definition}[Random variables determined by another random variable]\label{def:variable_po}
 Given a sample space $(\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, $\RV{X}\varlessthan \RV{Y}$ if there is some $f:Y\to X$ such that $\RV{X}=f\circ \RV{Y}$.
@@ -136,9 +146,7 @@ Given a probability space $(\mu,\Omega,\sigalg{F})$ and a variable $\RV{X}:\Omeg
 \begin{definition}[Conditional distribution]\label{def:disint}
 Given a probability space $(\mu,\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$, the \emph{conditional distribution} of $\RV{Y}$ given $\RV{X}$ is any Markov kernel $\mu^{\RV{Y}|\RV{X}}:X\kto Y$ such that
 \begin{align}
-	\mu^{\RV{XY}}(A\times B)&=\int_{A} \mu^{\RV{Y}|\RV{X}}(B|x) \mathrm{d}\mu^{\RV{X}}(x) &\forall A\in \sigalg{X}, B\in \sigalg{Y}\\
-	&\iff\\
-	\mu^{\RV{XY}}&= \tikzfig{disint_def}\label{eq:conditional} 
+	\mu^{\RV{XY}}(A\times B)&=\int_{A} \mu^{\RV{Y}|\RV{X}}(B|x) \mathrm{d}\mu^{\RV{X}}(x) &\forall A\in \sigalg{X}, B\in \sigalg{Y}
 \end{align}
 \end{definition}
 
@@ -283,9 +291,9 @@ Given two Markov kernels $\kernel{L}:X\kto Y$ and $\kernel{M}:Y\kto Z$, the prod
 \begin{align}
     \kernel{L}\kernel{M}:= \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
     \path (0,0) node (A) {$X$}
-    ++ (0.5,0) node[kernel] (K) {$\kernel{K}$}
+    ++ (0.7,0) node[kernel] (K) {$\kernel{K}$}
     ++ (0.7,0) node[kernel] (M) {$\kernel{M}$}
-    ++ (0.5,0) node (B) {$Z$};
+    ++ (0.7,0) node (B) {$Z$};
     \draw (A) -- (K) -- (M) -- (B);
 \end{tikzpicture}
 \end{align}
@@ -295,11 +303,11 @@ Given kernels $\kernel{K}:W\kto Y$ and $\kernel{L}:X\kto Z$, the tensor product 
 \begin{align}
     \kernel{K}\otimes \kernel{L}&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
     \path (0,0) node (A) {$W$}
-    ++ (0.5,0) node[kernel] (K) {$\kernel{K}$}
-    ++ (0.5,0) node (B) {$Y$};
+    ++ (0.7,0) node[kernel] (K) {$\kernel{K}$}
+    ++ (0.7,0) node (B) {$Y$};
     \path (0,-0.5) node (C) {$X$}
-    ++ (0.5,0) node[kernel] (L) {$\kernel{L}$}
-    ++ (0.5,0) node (D) {$Z$};
+    ++ (0.7,0) node[kernel] (L) {$\kernel{L}$}
+    ++ (0.7,0) node (D) {$Z$};
     \draw (A) -- (K) -- (B);
     \draw (C) -- (L) -- (D);
 \end{tikzpicture}
@@ -378,7 +386,7 @@ The identity map $\kernel{I}_X:X\kto X$ defined by $(\kernel{I}_X)(A|x)= \delta_
 Given some 1-element set $\{*\}$, the erase map $\text{del}_X:X\kto \{*\}$ is defined by $(\text{del}_X)(*|x) = 1$ for all $x\in X$. It ``discards the input''. It looks like a lit fuse:
 \begin{align}
     \text{del}_X&:=\begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
-    \path (0,0) ++ (1,0) node (B) {$X$};
+    \path (0,0) node (A) {$X$} ++ (1,0) node (B) {};
     \draw[-{Rays[n=8]}] (A) -- (B);
 \end{tikzpicture}
 \end{align}
@@ -388,10 +396,10 @@ Given some 1-element set $\{*\}$, the erase map $\text{del}_X:X\kto \{*\}$ is de
 The swap map $\text{swap}_{X,Y}:X\times Y\kto Y\times X$ is defined by $(\text{swap}_{X,Y})(A\times B|x,y)=\delta_x(B)\delta_y(A)$ for $(x,y)\in X\times Y$, $A\in \sigalg{X}$ and $B\in \sigalg{Y}$. It swaps two inputs and is represented by crossing wires:
 \begin{align}
     \text{swap}_{X,Y} &:=  \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
-        \path (0,0) node (A) {} 
-        + (0,-0.5) node (B) {}
-        ++ (1,0) node (C) {}
-        + (0,-0.5) node (D) {};
+        \path (0,0) node (A) {$X$} 
+        + (0,-0.5) node (B) {$Y$}
+        ++ (1,0) node (C) {$Y$}
+        + (0,-0.5) node (D) {$X$};
         \draw (A) to [out=0,in=180] (D) (B) to [out=0, in=180] (C);
     \end{tikzpicture}
 \end{align}
@@ -425,13 +433,13 @@ In a string diagram, a plate that is annotated $i\in A$ means the tensor product
 Thus, given $\kernel{K}_i:X\kto Y$ for $i\in A$,
 
 \begin{align}
-    \bigotimes_{i\in A} \kernel{K}_i &:= \tikzfig{plate_without_copymap}
+    \bigotimes_{i\in A} \kernel{K}_i &:= \tikzfig{plate_without_copymap}\\
     \text{Copy}^{|A|}_X(\bigotimes_{i\in A} \kernel{K}_i) &:= \tikzfig{plate_with_copymap}
 \end{align}
 
 \subsection{Commutative comonoid axioms}
 
-Diagrams in Markov categories satisfy the commutative comonoid axioms.
+Diagrams in Markov categories satisfy the commutative comonoid axioms. These axioms specify certain operations that can be carried out with a combination of swap, copy and erase maps. In the following diagrams, all wire endes are labeled with the same space.
 
 \begin{align}
     \tikzfig{ccom_lhs} = \tikzfig{ccom_rhs}\label{eq:ccom_1}
@@ -595,7 +603,7 @@ The reason why both the graphical and probabilistic transformations can be captu
 
 A probability set is a set of probability measures. This section establishes a number of useful properties of conditional probability with respect to probability sets. Unlike conditional probability with respect to a probability space, conditional probabilities don't always exist for probability sets. Where they do, however, they are almost surely unique and we can marginalise and disintegrate them to obtain other conditional probabilities with respect to the same probability set.
 
-First, we define a \emph{decision model} as a triple of a probability set along with an indexing \emph{option set} and the common sample space. We could also consider a decision model to be a function $C\kto \Omega$, where we do not distinguish options options $\alpha,\alpha'\in C$ that induce the same probability distributions (i.e. $\prob{P}_\alpha=\prob{P}_{\alpha'}$).
+First, we define a \emph{decision model} as a triple of a Markov kernel along with an indexing \emph{option set} and a sample space.
 
 \begin{definition}[Decision model]\label{def:dec_model}
 A decision model is a triple $(\prob{P}_\cdot, (\Omega,\sigalg{F}), (C,\sigalg{C}))$ where $\prob{P}_\cdot:C\kto \Omega$ is a Markov kernel, $(\Omega,\sigalg{F})$ is the shared sample space and $C$ is the option set.
@@ -632,26 +640,20 @@ Given a probability space $(\mu,\Omega,\sigalg{F})$ and variables $\RV{X}:\Omega
 Given a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$ and $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$, if $\prob{P}_C^{\RV{ZY}|\RV{X}}$ exists then a uniform higher order conditional $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$ is any Markov kernel $X\times Y\kto Z$ that is a higher order conditional of some version of $\prob{P}_C^{\RV{ZY}|\RV{X}}$. If no $\prob{P}_C^{\RV{ZY}|\RV{X}}$ exists, $\prob{P}_C^{\RV{Z}|(\RV{Y}|\RV{X})}$ is undefined.
 \end{definition}
 
-\begin{definition}[Almost sure equality]
-Two Markov kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are $\prob{P}_C,\RV{X},\RV{Y}$-almost surely equal if for all $A\in\sigalg{X}$, $B\in \sigalg{Y}$, $\alpha\in C$
-\begin{align}
-    \int_A \kernel{K}(B|x)\prob{P}_\alpha^{\RV{X}}(\mathrm{d}x) = \int_A\kernel{L}(B|x)\prob{P}_\alpha^{\RV{X}}(\mathrm{d}x)
-\end{align}
-we write this as $\kernel{K}\overset{\prob{P}_C}{\cong}\kernel{L}$, as the variables $\RV{X}$ and $\RV{Y}$ are clear from the context.
-\end{definition}
-
-Equivalently, $\kernel{K}$ and $\kernel{L}$ are almost surely equal if the set $C:\{x|\exists B\in\sigalg{Y}:\kernel{K}(B|x)\neq\kernel{L}(B|x)\}$ has measure 0 with respect to $\prob{P}_\alpha^{\RV{X}}$ for all $\alpha\in C$.
 
 \subsection{Almost sure equality}
 
-Two Markov kernels are almost surely equal with respect to a probability set $\prob{P}_C$ if the semidirect product $\odot$ of all marginal probabilities of $\prob{P}_\alpha^\RV{X}$ with each Markov kernel is identical.
+We define a generalisation of almost sure equality with respect to probability sets as almost sure equality with respect to every probability measure in the set.
 
-\begin{definition}[Almost sure equality]\label{def:asequal}
+\begin{definition}[Almost sure equality with respect to a probability set]\label{def:asequal}
 Two Markov kernels $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are almost surely equal $\overset{\prob{P}_C}{\cong}$ with respect to a probability set $\prob{P}_C$ and variable $\RV{X}:\Omega\to X$ if for all $\prob{P}_\alpha \in \prob{P}_C$,
 \begin{align}
     \prob{P}^{\RV{X}}_\alpha\odot \kernel{K}=\prob{P}^{\RV{X}}_\alpha\odot \kernel{L}
 \end{align}
+Equivalently, $\kernel{K}$ and $\kernel{L}$ are almost surely equal if the set $C:\{x|\exists B\in\sigalg{Y}:\kernel{K}(B|x)\neq\kernel{L}(B|x)\}$ has measure 0 with respect to $\prob{P}_\alpha^{\RV{X}}$ for all $\alpha\in C$.
 \end{definition}
+
+Almost sure equality behaves as we would like it to -- uniform conditonal distributions are almost surely equal with respect to the underlying probability set (a generalisation of the fact that conditional distributions are almost surely equal with respect to the underlying probability measure), and provided we stick to the specified probability set, we can freely substitute almost surely equal Markov kernels.
 
 \begin{lemma}[Uniform conditional distributions are almost surely equal]
 If $\kernel{K}:X\kto Y$ and $\kernel{L}:X\kto Y$ are both versions of $\prob{P}_C^{\RV{Y}|\RV{X}}$ then $\kernel{K}\overset{\prob{P}_C}{\cong}\kernel{L}$
@@ -681,6 +683,8 @@ For any $\prob{P}_\alpha\in\prob{P}_C$
 \end{align}
 \end{proof}
 
+The semidirect product of uniform conditional distributions is itself a uniform conditional distribution, which generalises the analogous property for conditional distributions.
+
 \begin{theorem}[Semidirect product of uniform conditional distributions is a joint uniform conditional distribution]\label{lem:joint_conditional}
 Given a probability set $\prob{P}_C$ on $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$, $\RV{Y}:\Omega\to Y$ and uniform conditional distributions $\prob{P}_C^{\RV{Y}|\RV{X}}$ and $\prob{P}_C^{\RV{Z}|\RV{XY}}$, then $\prob{P}_C^{\RV{YZ}|\RV{X}}$ exists and is equal to
 \begin{align}
@@ -699,7 +703,9 @@ By definition, for any $\prob{P}_\alpha\in \prob{P}_C$
 
 \subsection{Existence of conditional distributions}
 
-It is known that conditional distributions do not exist in general for probability measures defined on arbitrary measurable sets. However, the requirement that the sets are \emph{standard measurable} is sufficient for the existence of conditional distributions. We also further show that, given a borel measurable map to standard measurable probability distributions, what we call ``higher order conditionals'' also exist.
+It is known that conditional distributions do not exist in general for probability measures defined on arbitrary measurable sets. However, the requirement that the sets are \emph{standard measurable} is known to be sufficient for the existence of conditional distributions. 
+
+Uniform conditional distributions clearly have more stringent conditions for existence -- there must be some version of the conditional distribution that works for every probability measure in the probability set, which does not generally hold. We can show, however, that given a ``joint'' uniform conditional (say, of $\RV{Y}$ and $\RV{Z}$ given $\RV{X}$), a uniform conditional of $\RV{Y}$ given $\RV{X}$ and $\RV{Z}$ also exists (Theorem \ref{th:ho_cond_psets} and Theorem \ref{th:higher_order_conditionals}).
 
 \begin{lemma}[Conditional pushforward]\label{th:recurs_pushf}
 Suppose we have a sample space $(\Omega,\sigalg{F})$, variables $\RV{X}:\Omega\to X$ and $\RV{Y}:\Omega\to Y$, $\RV{Z}:\Omega\to Z$ and a probability set $\prob{P}_C$ with conditional $\prob{P}_C^{\RV{Y}|\RV{X}}$ such that $\RV{Z}=f\circ \RV{Y}$ for some $f:Y\to Z$. Then there exists a conditional probability $\prob{P}_C^{\RV{Z}|\RV{X}}=\prob{P}_C^{\RV{Y}|\RV{X}}\kernel{F}_{f}$.
@@ -848,7 +854,7 @@ For countable sets $C$ (which, recall, is an assumption we generally accept), as
 
 \begin{enumerate}
     \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e \RV{Y}|(\RV{Z}, \mathrm{Id}_C)$ iff $\RV{Y}\CI_{\prob{P}_C}^e \RV{X}|(\RV{Z}, \mathrm{Id}_C)$
-    \item $\RV{X}\CI_{\prob{P}_C}^e \RV{Y} C| \RV{Y} C$
+    \item $\RV{X}\CI_{\prob{P}_C}^e \RV{Y} \mathrm{Id}_C| \RV{Y} \mathrm{Id}_C$
     \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e \RV{Y} \phi|\RV{W}\xi$ and $\RV{Z}\varlessthan\RV{Y}$ implies $\RV{X}\CI_{\prob{P}_C}^e\RV{Z}\phi|\RV{W}\xi$
     \item Weak union:
     \begin{enumerate}
@@ -861,8 +867,8 @@ For countable sets $C$ (which, recall, is an assumption we generally accept), as
 The following forms of these properties are often used here:
 
 \begin{enumerate}
-    \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y}, \mathrm{Id}_C)|(\RV{Z}, \mathrm{Id}_C)$ iff $\RV{Y}\CI_{\prob{P}} (\RV{X}, \mathrm{Id}_C)|\RV{Z}$
-    \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y},\RV{Z}, \mathrm{Id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}}\RV{Y}C|\RV{W}$ and $\RV{X}\CI_{\prob{P}}(\RV{Z},\mathrm{Id}_C)|\RV{W}$
+    \item Symmetry: $\RV{X}\CI_{\prob{P}_C}^e \RV{Y}|(\RV{Z}, \mathrm{Id}_C)$ iff $\RV{Y}\CI_{\prob{P}} \RV{X}|(\RV{Z},\mathrm{Id}_C)$
+    \item Decomposition: $\RV{X}\CI_{\prob{P}_C}^e (\RV{Y},\RV{Z}, \mathrm{Id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}}\RV{Y}\mathrm{Id}_C|\RV{W}$ and $\RV{X}\CI_{\prob{P}}(\RV{Z},\mathrm{Id}_C)|\RV{W}$
     \item Weak union: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{Id}_C)|\RV{W}$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{Id}_C)|(\RV{Z},\RV{W})$
     \item Contraction: $\RV{X}\CI_{\prob{P}_C}^e(\RV{Z},\mathrm{Id}_C)|\RV{W}$ and $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\mathrm{Id}_C)|(\RV{Z},\RV{W})$ implies $\RV{X}\CI_{\prob{P}_C}^e(\RV{Y},\RV{Z},\mathrm{Id}_C)|\RV{W}$
 \end{enumerate}
@@ -909,11 +915,11 @@ a contradiction. An analogous argument follows if we replace ``$>$'' with ``$<$'
 
 \section{Maximal probability sets and valid conditionals}\label{sec:validity}
 
-So far, we have been implicitly supposing that we first set up a non-empty probability set and from that set we may sometimes derive conditional probabilities, extended conditional independences and so forth. However, sometimes we want to work backwards: start with a collection of conditional probabilities, and work with the probability set implicitly defined by this collection. This is similar to the case in which we specify how some system works by specifying, based on a priori knowledge, a set of equations that govern it. A sanity check on proposing such a set of equations is to check whether they admit any solutions, and (possibly) to check how large the set of solutions they admit is.
+So far, we have been implicitly supposing that we first set up a non-empty probability set and from that set we may sometimes derive conditional probabilities, extended conditional independences and so forth. However, sometimes we want to work backwards: start with a collection of conditional probabilities, and ``build them up'' to form a probability set. This is similar to the case in which we specify how some system works by specifying, based on a priori knowledge, a set of equations that govern it. A sanity check on proposing such a set of equations is to check whether they admit any solutions, and (possibly) to check how large the set of solutions they admit is.
 
 Similarly, proposing a collection of condiitonal probabilities may similarly be compatible with a large set of base probability distributions, a unique probability distribution or no probability distributions at all. \emph{Validity} is a sufficient (but not necessary) condition to ensure that certain collections of conditional probabilities yield a non-empty set of compatible distributions.
 
-A particular example of specifying conditional probabilities a priori is given by Causal Bayesian Networks (see \ref{def:CBN} for more details on this kind of model). The collection of operations of the form ``$\mathrm{do}(\RV{X}=x)$'' force the conditional distribution of $\RV{X}$ given its parents to a particular value. Specifically:
+A particular example of building probability sets from conditional probabilities is given by Causal Bayesian Networks (see \ref{def:CBN} for more details on this kind of model). The collection of operations of the form ``$\mathrm{do}(\RV{X}=x)$'' force the conditional distribution of $\RV{X}$ given its parents to a particular value. Specifically:
 \begin{align}
 	\prob{P}_{\mathrm{do}_\RV{X},x}^{\RV{Y}|\mathrm{Pa}(\RV{Y})} &= \begin{cases}
 	\prob{P}_{\mathrm{obs}}^{\RV{Y}|\mathrm{Pa}(\RV{Y})}&\RV{Y}\text{ is a causal variable and not equal to }\RV{X}\\
@@ -925,7 +931,7 @@ Given a causal Bayesian network with the graph $\RV{Y}\rightarrow \RV{X}$ and so
 
 The key result of this section is: probability sets defined by collections of recursive valid conditionals and distributions are nonempty. While we suspect this condition is often satisfied by causal models in practice, we offer one example in the literature where it apparently is not. The problem of whether a probability set is valid is analogous to the problem of whether a probability distribution satisfying a collection of constraints exists discussed in \citet{vorobev_consistent_1962}. As that work shows, there are many questions of this nature that can be asked and that are not addressed by the criterion of validity.
 
-In functional causal models, we have the notions of \emph{global compatibility} from \citet{forre_causal_2020} and \emph{unique solvability} in \citet{bongers_theoretical_2016}. These are more general than validity; they are not just sufficient but also necessary for the existence of a solution. In addition, we note that the intervention operation discussed in \citet{forre_causal_2020} preserves global compatibility, unlike the acyclic notion of intervention discussed above.
+In functional causal models, we have the notions of \emph{global compatibility} from \citet{forre_causal_2020} and \emph{unique solvability} in \citet{bongers_theoretical_2016}. Compared to validity, these conditoins are not just sufficient but also necessary for the existence of a solution, though they are limited to causal models defined by a collection of functions rather than the more general kind defined by a collection of Markov kernels under consideration here. Notably, the intervention operation defined in \citet{forre_causal_2020} preserves global compatibility, unlike the notion of intervention discussed above which can violate validity.
 
 \begin{definition}[Valid distribution]\label{def:valid_dist}
 Given $(\Omega,\sigalg{F})$ and a variable $\RV{X}:\Omega\to X$, an $\RV{X}$-valid probability distribution is any probability measure $\prob{K}\in \Delta(X)$ such that $\RV{X}^{-1}(A)=\emptyset\implies \prob{K}(A) = 0$ for all $A\in\sigalg{X}$.

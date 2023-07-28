@@ -1,8 +1,8 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (1, 0.75) {$\kernel{K}$};
-		\node [style=Llabel tikzit] (3) at (-0.75, 0.75) {$X$};
-		\node [style=RLabel tikzit] (4) at (2.75, 0.75) {$Y$};
+		\node [style=small kernel tikzit] (0) at (0, 0) {$\kernel{K}$};
+		\node [style=Llabel tikzit] (3) at (-1.75, 0) {$X$};
+		\node [style=RLabel tikzit] (4) at (1.75, 0) {$Y$};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (3) to (0);

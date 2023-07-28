@@ -1,11 +1,11 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=none] (0) at (0.5, 0.75) {};
-		\node [style=none] (1) at (5.75, 2.25) {};
-		\node [style=none] (2) at (5.75, 1) {};
-		\node [style=none] (3) at (5.75, -0.5) {};
-		\node [style=copymap tikzit] (5) at (2.75, 0.75) {};
-		\node [style=copymap tikzit] (6) at (4.25, 0.25) {};
+		\node [style=none] (0) at (-2.25, 0) {};
+		\node [style=none] (1) at (3, 1.5) {};
+		\node [style=none] (2) at (3, 0.25) {};
+		\node [style=none] (3) at (3, -1.25) {};
+		\node [style=copymap tikzit] (5) at (0, 0) {};
+		\node [style=copymap tikzit] (6) at (1.5, -0.5) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (0.center) to (5);

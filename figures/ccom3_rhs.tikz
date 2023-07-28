@@ -1,9 +1,9 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=none] (0) at (-3.5, 0.75) {};
-		\node [style=none] (1) at (1.75, -0.25) {};
-		\node [style=copymap tikzit] (2) at (-1.25, 0.75) {};
-		\node [style=none] (3) at (1.75, 1.75) {};
+		\node [style=none] (0) at (-2.25, 0) {};
+		\node [style=none] (1) at (3, -1) {};
+		\node [style=copymap tikzit] (2) at (0, 0) {};
+		\node [style=none] (3) at (3, 1) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (0.center) to (2);
