@@ -1,14 +1,14 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=small kernel tikzit] (0) at (0.5, 1.25) {$\prob{P}_\alpha^{\RV{Y}|\RV{D}}$};
-		\node [style=Llabel tikzit] (1) at (-1.5, 1.5) {$\RV{D}_{[n]}$};
-		\node [style=Llabel tikzit] (2) at (-1.5, 0.75) {$\RV{D}_{(n,\infty)}$};
-		\node [style=RLabel tikzit] (3) at (2.5, 1.75) {$\RV{Y}_{[n]}$};
-		\node [style=none] (4) at (-0.25, 1.25) {};
-		\node [style=none] (5) at (-0.25, 0.75) {};
-		\node [style=none] (6) at (2.5, 1) {};
-		\node [style=none] (7) at (1, 1.5) {};
-		\node [style=none] (8) at (1, 1) {};
+		\node [style=small kernel tikzit] (0) at (0, 0.25) {$\prob{P}_\alpha^{\RV{Y}|\RV{D}}$};
+		\node [style=Llabel tikzit] (1) at (-2, 0.5) {$\RV{D}_{[n]}$};
+		\node [style=Llabel tikzit] (2) at (-2, -0.25) {$\RV{D}_{(n,\infty)}$};
+		\node [style=RLabel tikzit] (3) at (2, 0.75) {$\RV{Y}_{[n]}$};
+		\node [style=none] (4) at (-0.75, 0.25) {};
+		\node [style=none] (5) at (-0.75, -0.25) {};
+		\node [style=none] (6) at (2, 0) {};
+		\node [style=none] (7) at (0.5, 0.5) {};
+		\node [style=none] (8) at (0.5, 0) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [in=-180, out=0, looseness=1.25] (1) to (4.center);
