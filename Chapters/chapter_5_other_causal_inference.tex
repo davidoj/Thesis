@@ -105,23 +105,23 @@ Given a DAG $\graph{G}=(\node{V},\node{E})$, a path $p$ is blocked by $\node{V}_
 \end{definition}
 
 \begin{definition}[d-separation]\label{def:dsep}
-Given a DAG $\graph{G}=(\node{V},\node{E})$, $\node{V}_A$ is $d$-separated from $\node{V}_B$ by $\node{V}_C$ (all subsets of \node{V}) if $\node{V}_C$ blocks every path starting at $\node{V}_A$ and ending at $\node{V}_B$. This is written $\node{V}_A\perp_{\mathcal{G}} \node{V}_B | \node{V}_C$.
+Given a DAG $\graph{G}=(\node{V},\node{E})$, $\node{V}_A$ is $d$-separated from $\node{V}_B$ by $\node{V}_C$ (all subsets of \node{V}) if $\node{V}_C$ blocks every path starting at $\node{V}_A$ and ending at $\node{V}_B$. This is written $\node{V}_A\perp_{\graph{G}} \node{V}_B | \node{V}_C$.
 \end{definition}
 
 \begin{definition}[Variable-node association]
 Given a graph $\graph{G}=(\node{V},\node{E})$ and a sequence of variables $\RV{V}_A:=(\RV{V}_i)_{i\in A}$, if $|A|=|\node{V}|$ we can associate a variable with each node of the graph with an invertible map $m:\{\RV{V}_i|i\in A\}\to \node{V}$ that sends $\RV{V}_i\mapsto \node{V}_i$. By convention, we give associated variables and nodes corresponding indices, and graphical operations are defined on variables through $m$, i.e. $\mathrm{Pa}(\RV{V}_i):=m(\mathrm{Pa}(m^{-1}(\RV{V}_i)))$.
 \end{definition}
 
-A minimal condition for a directed graph $\mathcal{G}$ to be associated with a decision model and a set of variables is \emph{compatibility}: if $\mathcal{G}$ features a d-separation property, this must correspond to a conditional independence in the decision model. The converse -- that conditional independences in the decision model imply d-separations in $\mathcal{G}$ -- is an additional assumption that is not always required.
+A minimal condition for a directed graph $\graph{G}$ to be associated with a decision model and a set of variables is \emph{compatibility}: if $\graph{G}$ features a d-separation property, this must correspond to a conditional independence in the decision model. The converse -- that conditional independences in the decision model imply d-separations in $\graph{G}$ -- is an additional assumption that is not always required.
 
 \begin{definition}[Compatibility]\label{def:compat}
-Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m$, $\prob{P}_\cdot$ is compatible with $\mathcal{G}$ relative to $m$ if for all $I,J,K\subset A$, $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \node{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\text{id}_C)$.
+Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\graph{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m$, $\prob{P}_\cdot$ is compatible with $\graph{G}$ relative to $m$ if for all $I,J,K\subset A$, $\node{V}_I\perp_{\graph{G}} \node{V}_J | \node{V}_K$ implies $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\text{id}_C)$.
 \end{definition}
 
-The assumption of faithfulness is the assumption that, if some structure $\mathcal{G}$ (Definition \ref{def:dir_graph}) is the ``true'' structural model, then the observed distribution $\prob{P}$ will feature conditional independences only where they correspond to d-separation properties of $\mathcal{G}$ (see Definition \ref{def:dsep}). Under faithfulness, there can be no ``extra'' conditional independences not associated with a d-separation independence in $\mathcal{G}$ and, conversely, observing a conditional independence allows a decision maker to conclude that the true causal structure is among those that feature a corresponding d-separation property. This assumption allows much stronger conclusions about the correct causal model to be drawn from observational data.
+The assumption of faithfulness is the assumption that, if some structure $\graph{G}$ (Definition \ref{def:dir_graph}) is the ``true'' structural model, then the observed distribution $\prob{P}$ will feature conditional independences only where they correspond to d-separation properties of $\graph{G}$ (see Definition \ref{def:dsep}). Under faithfulness, there can be no ``extra'' conditional independences not associated with a d-separation independence in $\graph{G}$ and, conversely, observing a conditional independence allows a decision maker to conclude that the true causal structure is among those that feature a corresponding d-separation property. This assumption allows much stronger conclusions about the correct causal model to be drawn from observational data.
 
 \begin{definition}[Faithfulness]\label{def:faithfulness}
-Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\mathcal{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m$, $\prob{P}_\cdot$ is faithful with $\mathcal{G}$ relative to $m$ if for all $I,J,K\subset A$, $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\text{id}_C)$ unokues $\node{V}_I\perp_{\mathcal{G}} \node{V}_J | \node{V}_K$.
+Given a measurable space $(\Omega,\sigalg{F})$, a Markov kernel $\prob{P}_\cdot:C\kto \Omega$ and a sequence of variables $(\RV{V}_i)_{i\in A}$ with $\RV{V}_i:\Omega\to V_i$ and a DAG $\graph{G}$ with nodes $\{\node{V}_i\}_{i\in A}$ and the variable-node association $m$, $\prob{P}_\cdot$ is faithful with $\graph{G}$ relative to $m$ if for all $I,J,K\subset A$, $\RV{V}_I\CI^e_{\prob{P}_\cdot} \RV{V}_J | (\RV{V}_K,\text{id}_C)$ unokues $\node{V}_I\perp_{\graph{G}} \node{V}_J | \node{V}_K$.
 \end{definition}
 
 The following definition is reproduced from \citet{pearl_causality:_2009} with the differences previously mentioned: notation has been matched to ours, the interventional model is assumed to be measurable and the interventional distributions are assumed to be defined on a common sample space.
@@ -181,7 +181,7 @@ This specification of interventions in an unrolled causal Bayesian network diffe
 
 Given a graph $\graph{G}=(\node{V},\node{E})$, we now have a collection of variable-node association maps $m_j:\{\RV{V}_{ij}|i\in A\}\to \node{V}$ such that $m_j(\RV{V}_{ij})=\node{V}_i$.
 
-We now need to specify how variables in an unrolled causal Bayesian network are distributed, given some sequence of interventions. By analogy with the original case of IID variables, we conclude that the $\RV{V}_{Aj}:=(\RV{V}_{ij})_{i\in A}$ are mutually independent given any particular sequence of interventions. Furthermore, Definition \ref{def:CBN} constrains the distribution of each variable given a particular sequence of interventions from $C$. For a sequence of interventions $\alpha\in C$, let $\pi_j(\alpha)$ be the $j$th intervention in the sequence. One might posit the following analogue of condition (3): 
+We now need to specify how variables in an unrolled causal Bayesian network are distributed, given some sequence of interventions. By analogy with the original case of IID variables, we conclude that the $\RV{V}_{Aj}:=(\RV{V}_{ij})_{i\in A}$ are mutually independent given any particular sequence of interventions. Furthermore, Definition \ref{def:CBN} constrains the distribution of each variable given a particular sequence of interventions from $C$. For a sequence of interventions $\alpha\in C$, let $\pi_j(\alpha)$ be the $j$th intervention in the sequence. One might posit the following analogue of condition ($3*$): 
 \begin{itemize}
     \item [3'] $\pi_j(\alpha)=(\mathrm{do}_{B_j},v_{B_j})$ implies $\prob{P}_{\alpha}^{\RV{V}_{ij}|\mathrm{Pa}(\RV{V}_{ij})}\overset{\prob{P}_{\alpha}}{\cong}\prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_{i1}|\mathrm{Pa}(\RV{V}_{i1})}$ for all $i\not\in B$
 \end{itemize}
@@ -239,18 +239,16 @@ Here is the original graph $\graph{G}$ associated with $(\prob{Q}_\cdot,C,\Omega
     \tikzfig{cbn_example_cgm}
 \end{align}
 
-Here is the probabilistic graphical model associated with the intervention $(\mathrm{do}_2,v_2)$
+Here is the probabilistic graphical model associated with the intervention $(\mathrm{do}_2,v_2)$, in string diagram notation
 
 \begin{align}
-    &\phantom{=} \prob{P}_\alpha^{\RV{V}\RV{V}^*}\\
-    &=\tikzfig{cgm}
+    \prob{P}_\alpha^{\RV{V}\RV{V}^*}&=\tikzfig{cgm}
 \end{align}
 
 and here is the uncertain unrolled CBN associated with the restricted set of interventions $C'$ that consists of, for each element of the sequence, either the empty intervention or some intervention targeting $\RV{V}_2$
 
 \begin{align}
-    &\phantom{=}\prob{P}_\alpha^{\RV{V}_{[1,3][n]}}\\
-     &=\tikzfig{cbn_unrolled_example}
+    \prob{P}_\alpha^{\RV{V}_{[1,3][n]}}&=\tikzfig{cbn_unrolled_example}
 \end{align}
 
 where 
@@ -261,6 +259,8 @@ where
         \prob{P}_{\mathrm{do}_{\emptyset}}^{\RV{V}_{2i}|\RV{V}_{1i}\RV{H}} & \text{otherwise}
     \end{cases}
 \end{align}
+
+The differences between these models are fairly minor. The probabilistic graphical model explicitly factorises the directing random conditional $\RV{H}$ into parameters $\RV{W}_1, \RV{W}_2, \RV{W}_3$ for each of the parental conditionals, and the unrolled CBN allows for various choices of $\alpha$ to pick different conditionals for $\RV{V}_{2i}$ for each $i$.
 
 \subsection{Unobserved confounders and precedent}\label{sec:precedent}
 
@@ -323,17 +323,17 @@ We will now develop a formal result, Theorem \ref{th:latent_to_observable}, moti
 
 In the following discussion, we assume that all variables of interest are discrete. This assumption enables the use of an alternative notation for discrete conditional probabilities, which we introduce now.
 
-\begin{definition}[Index notation for discrete conditionals]
+\begin{definition}[Index notation for parameters of discrete conditionals]
 Given a joint probability distribution $\mu^{\RV{XY}}$ with $\RV{X}$ and $\RV{Y}$ discrete, let $\mu^y_x:=\mu^{\RV{Y}|\RV{X}}(\{y\}|x)$ and $\mu^Y_X:= (x,y)\mapsto \mu^y_x$
 \end{definition}
 
 Another convenient notion is that of a ``see-do'' model; a model in which we observe a long sequence of observations followed by a single opportunity to act and observe the consequences. This is almost a statistical decision model, but it does not have any ``action'' variables.
 
 \begin{definition}[See-do model]
-A see-do model is a Bayesian decision model $(\prob{P}_\cdot,(\Omega, \sigalg{F}),(C,\sigalg{C}))$ along with a sequence of variables $\RV{X}_{\mathbb{N}\cup\{c\}}$ where $\RV{X}_{\mathbb{N}}\CI^e_{\prob{P}_\cdot} \mathrm{id}_C$. Variables indexed with $i\in \mathbb{N}$ are \emph{observations} and variables indexed with the special index $c$ are \emph{consequences}. We specify a see-do model with the shorthand $(\prob{P}_\cdot,\RV{X}_{\mathbb{N}\cup\{c\}})$.
+A see-do model is a Bayesian decision model $$(\prob{P}_\cdot,(\Omega, \sigalg{F}),(C,\sigalg{C}))$$ along with a sequence of variables $\RV{X}_{\mathbb{N}\cup\{c\}}$ where $\RV{X}_{\mathbb{N}}\CI^e_{\prob{P}_\cdot} \mathrm{id}_C$. Variables indexed with $i\in \mathbb{N}$ are \emph{observations} and variables indexed with the special index $c$ are \emph{consequences}. We specify a see-do model with the shorthand $(\prob{P}_\cdot,\RV{X}_{\mathbb{N}\cup\{c\}})$.
 \end{definition}
 
-The key assumptions for Theorem \ref{th:latent_to_observable} are the assumption of precedent and an assumption of conditional absolute continuity. The latter requires that the parameters governing certain conditional distributions are absolutely continuous with respect to the Lebesgue measure after observing the independence of $\RV{Y}_i$ from $\RV{Z}_i$ after conditioning on $\RV{X}_i$. The role of this assumption is to rules out ``finely tuned'' parameter values that mask variation in the response of $\RV{Y}_i$ to $\RV{X}_i$, ( it also rules out $\RV{Z}_i$ being independent of $(\RV{E}_i,\RV{X}_i,\RV{Y}_i)$).
+The key assumptions for Theorem \ref{th:latent_to_observable} are the assumption of precedent and an assumption of conditional absolute continuity. The latter requires that the parameters governing certain conditional distributions are absolutely continuous with respect to the Lebesgue measure after observing the independence of $\RV{Y}_i$ from $\RV{Z}_i$ after conditioning on $\RV{X}_i$. The role of this assumption is to rules out ``finely tuned'' parameter values that mask variation in the response of $\RV{Y}_i$ to $\RV{X}_i$, (it also rules out $\RV{Z}_i$ being independent of $(\RV{E}_i,\RV{X}_i,\RV{Y}_i)$).
 
 We define the basic kind of model of interest as a ``dual CIIR see-do model''. In this model, we have two different CIIR pair sequences. The first is limited to the passively observed variables (indices in $\mathbb{N}$). This assumption may be justified, for example, by the standard assumption of exchangeability. The second applies to the entire sequence of variables, but requires conditioning on an input variable $\RV{E}_i$ which we understandis generally unobserved. There is ``in principle'' a consistent response function that may be observed, but the investigator does not know what observations are needed to witness it. The objections to the CIIR assumption from the previous chapter -- that it is unreasonable to treat experimental and observational data as interchangeable -- does not apply if inputs are unobserved as no interchange is possible if the datasets are incomplete.
 
@@ -346,7 +346,7 @@ Precedent is the further condition that the actions the investigator may take --
 \begin{definition}[Precedent]\label{def:precedent}
 Given a dual CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{Z}_i,\RV{X}_i,\RV{Y}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, let $\RV{H}$ be the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$. 
 
-We say that the options $C$ have \emph{precedent} with respect to $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ if $\prob{P}_\cdot$ satisfies:
+We say that the options $C$ have \emph{precedent} with respect to $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ if for all $\alpha$, $\prob{P}_\alpha$ satisfies:
 \begin{align}
     \prob{P}_\alpha^{\RV{E}_c|\RV{H}} &\ll \sum_{z\in Z}\prob{P}_\alpha^{\RV{E}_i|\RV{H}}(\cdot|h)&\prob{P}_\alpha-\text{almost all }h
 \end{align}
@@ -355,7 +355,7 @@ We say that the options $C$ have \emph{precedent} with respect to $(\prob{P}_\cd
 \emph{Conditional absolute continuity} is a shorthand for a disjunction of two assumptions; either the parameter $\RV{H}^E_Z$, conditional on $\RV{H}^Y_{EXZ}$ and $\RV{H}^X_{EZ}$ is absolutely continuous with respect to the Lebesgue measure, or the parameter $\RV{H}^{X}_{EZ}$ conditional on $\RV{H}^E_Z$ and $\RV{H}^Y_{EXZ}$ is absolutely continuous with respect to the Lebesgue measure (or both). 
 
 \begin{definition}[Conditional absolute continuity]\label{def:absolute_continuity}
-Given a dual CIIR see-do model $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ with $E,X,Y$ and $Z$ all discrete, recall $\RV{H}$ is the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$. 
+Given a dual CIIR see-do model $$(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$$ with $E,X,Y$ and $Z$ all discrete, let $\RV{H}$ be the directing random conditional of $(\prob{P}_\cdot,\RV{Z}_{\mathbb{N}},(\RV{E}_i,\RV{X}_i,\RV{Y}_i)_{i\in \mathbb{N}})$. 
 
 We say that $(\prob{P}_\cdot,(\RV{E}_i,\RV{X}_i,\RV{Y}_i,\RV{Z}_i)_{i\in\mathbb{N}\cup\{c\}})$ satisfies conditional absolute continuity if $\prob{P}_\cdot$ satisfies one of the conditions:
 \begin{align}
@@ -380,7 +380,7 @@ If the options $C$ have precedent with respect to $(\prob{Q}_\cdot,(\RV{E}_i,\RV
 \end{theorem}
 
 \begin{proof}
-We apply the conditional absolute continuity condition to show that $\RV{Y}_i\CI^e_{\prob{Q}} \RV{E}_i|(\RV{Z}_i,\RV{X}_i,\RV{G},\text{id}_C)$ for $i\in \mathbb{N}$. We then apply the precedent condition to extend this independence to $\RV{Y}_c\CI^e_{\prob{Q}} \RV{E}_c|(\RV{Z}_c,\RV{X}_c,\RV{G},\text{id}_C)$ to complete the proof.
+We apply the conditional absolute continuity condition to show that $$\RV{Y}_i\CI^e_{\prob{Q}} \RV{E}_i|(\RV{Z}_i,\RV{X}_i,\RV{G},\text{id}_C)$$itemize for $i\in \mathbb{N}$. We then apply the precedent condition to extend this independence to $\RV{Y}_c\CI^e_{\prob{Q}} \RV{E}_c|(\RV{Z}_c,\RV{X}_c,\RV{G},\text{id}_C)$ to complete the proof.
 
 Full proof in Appendix \ref{sec:proof_precedent}.
 \end{proof}
@@ -408,12 +408,12 @@ In any case, the three assumptions imply that the joint distribution of $(\RV{G}
 
 The assumption of conditional absolute continuity is disjunctive, and there is correspondingly an alternate set of structural assumptions that yield the assumption as a conclusion.
 
-\begin{enumerate}
-    \item$.'$ $\RV{Z}_i$ is a parent of $\RV{E}_i$ (and not independent of $\RV{E}_i$)
-    \item$.'$ $\RV{E}_i$ is a parent of $\RV{X}_i$ (and not independent of $\RV{X}_i$)
-    \item$.'$ $\RV{Z}_i$ is a nondescendant of $\RV{X}_i$
-    \item$.'$ $(\RV{E}_i, \RV{Z}_i)$ is a nondescendant of $\RV{Y}_i$
-\end{enumerate}
+\begin{itemize}
+    \item[$1'$] $\RV{Z}_i$ is a parent of $\RV{E}_i$ (and not independent of $\RV{E}_i$)
+    \item[$2'$] $\RV{E}_i$ is a parent of $\RV{X}_i$ (and not independent of $\RV{X}_i$)
+    \item[$3'$] $\RV{Z}_i$ is a nondescendant of $\RV{X}_i$
+    \item[$4'$] $(\RV{E}_i, \RV{Z}_i)$ is a nondescendant of $\RV{Y}_i$
+\end{itemize}
 
 Note that we can motivate these assumptions from alternative premises: the third assumption here follows from the first two and acyclicity, and the fourth from the first two plus the observation $\RV{Z}_i$ independent of $\RV{Y}_i$ given $\RV{X}_i$ and faithfulness. 
 
@@ -735,7 +735,7 @@ How might the decision maker justify an assumption of IO contractibility of $\pr
     \item They might assess that given any two choices $\alpha$ and $\alpha'$ that yield treatment distributions that are equivalent up to a permutation of one another, the corresponding outcomes will also be equivalent up to the same permutation, and conclude exchange commutativity from this (see Section \ref{sec:exch_peop})
     \item They might assess that any sequences of input-output pairs are essentially interchangeable for the purposes of predicting future outputs given future inputs (see Section \ref{sec:imp_iocont})
     \item They might assess that a sufficiently detailed measurement of each patient just before treatment would in principle yield a variable $\RV{Y}^D$ which is a potential outcome with respect to $\RV{Y}$ and $\RV{D}$. Furthermore, as each patient at each point in time is randomly chosen, they might also assess that the distribution of these potential outcomes is exchangeable (Section \ref{sec:exch_po})
-    \item They might assess that their choices are well-modeled by interventions in an uncertain unrolled causal Bayesian network (Definition \ref{def:unc_unr_cbn}, see also \citet[Ch. ~4]{pearl_book_2018}) with stucture $\mathcal{G}$ which identifies $\RV{D}$ as the sole parent of $\RV{Y}$
+    \item They might assess that their choices are well-modeled by interventions in an uncertain unrolled causal Bayesian network (Definition \ref{def:unc_unr_cbn}, see also \citet[Ch. ~4]{pearl_book_2018}) with stucture $\graph{G}$ which identifies $\RV{D}$ as the sole parent of $\RV{Y}$
 \end{itemize}
 \end{example}
 

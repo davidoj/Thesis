@@ -11,7 +11,7 @@
 		\node [style=none] (10) at (2.5, 0.75) {};
 		\node [style=none] (11) at (2.5, 0.25) {};
 		\node [style=RLabel tikzit] (14) at (0.75, -0.5) {$D$};
-		\node [style=medium dist tikzit] (15) at (-3.5, 0.75) {$\mu$};
+		\node [style=medium dist tikzit] (15) at (-4.25, 0.75) {$\mu$};
 		\node [style=small kernel tikzit] (16) at (-2, 0.75) {$\kernel{F}_{\RV{H}}$};
 		\node [style=copymap tikzit] (17) at (-1, 0.75) {};
 	\end{pgfonlayer}

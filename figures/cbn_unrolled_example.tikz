@@ -1,27 +1,27 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style=copymap tikzit] (1) at (-4.5, 4) {};
-		\node [style=small kernel tikzit] (2) at (-2.75, 4) {$\prob{P}_C^{\RV{V}_{1i}|\RV{H}}$};
-		\node [style=small kernel tikzit] (3) at (1, 2.5) {$\prob{P}_\alpha^{\RV{V}_{2i}|\RV{V}_{1i}\RV{H}}$};
-		\node [style=small kernel tikzit] (4) at (6.75, 1) {$\prob{P}_C^{\RV{V}_{3i}|\RV{V}_{\{1,2\}i}\RV{H}}$};
-		\node [style=RLabel tikzit] (5) at (9, 4) {$\RV{V}_1$};
-		\node [style=RLabel tikzit] (6) at (9, 3) {$\RV{V}_2$};
-		\node [style=RLabel tikzit] (7) at (9, 1) {$\RV{V}_3$};
-		\node [style=none] (11) at (-0.25, 2.75) {};
-		\node [style=none] (12) at (-0.25, 2.25) {};
-		\node [style=none] (13) at (5, 1.25) {};
-		\node [style=none] (14) at (5, 1) {};
-		\node [style=none] (15) at (5, 0.75) {};
-		\node [style=copymap tikzit] (16) at (-1.25, 4) {};
-		\node [style=copymap tikzit] (17) at (3.25, 2.5) {};
-		\node [style=copymap tikzit] (18) at (3.75, 4) {};
-		\node [style=none] (31) at (-5, 6) {};
-		\node [style=none] (32) at (-5, -1) {};
-		\node [style=none] (33) at (10.25, -1) {};
-		\node [style=none] (34) at (10.25, 6) {};
-		\node [style=small dist tikzit] (35) at (-7, 4) {$\prob{P}_C^{\RV{H}}$};
-		\node [style=none] (36) at (-3.75, -0.5) {$i\in [n]$};
-		\node [style=copymap tikzit] (37) at (-5, 4) {};
+		\node [style=copymap tikzit] (1) at (-6.25, 1.5) {};
+		\node [style=small kernel tikzit] (2) at (-4.5, 1.5) {$\prob{P}_C^{\RV{V}_{1i}|\RV{H}}$};
+		\node [style=small kernel tikzit] (3) at (-0.75, 0) {$\prob{P}_\alpha^{\RV{V}_{2i}|\RV{V}_{1i}\RV{H}}$};
+		\node [style=small kernel tikzit] (4) at (5, -1.5) {$\prob{P}_C^{\RV{V}_{3i}|\RV{V}_{\{1,2\}i}\RV{H}}$};
+		\node [style=RLabel tikzit] (5) at (7.25, 1.5) {$\RV{V}_1$};
+		\node [style=RLabel tikzit] (6) at (7.25, 0.5) {$\RV{V}_2$};
+		\node [style=RLabel tikzit] (7) at (7.25, -1.5) {$\RV{V}_3$};
+		\node [style=none] (11) at (-2, 0.25) {};
+		\node [style=none] (12) at (-2, -0.25) {};
+		\node [style=none] (13) at (3.25, -1.25) {};
+		\node [style=none] (14) at (3.25, -1.5) {};
+		\node [style=none] (15) at (3.25, -1.75) {};
+		\node [style=copymap tikzit] (16) at (-3, 1.5) {};
+		\node [style=copymap tikzit] (17) at (1.5, 0) {};
+		\node [style=copymap tikzit] (18) at (2, 1.5) {};
+		\node [style=none] (31) at (-6.75, 3.5) {};
+		\node [style=none] (32) at (-6.75, -3.5) {};
+		\node [style=none] (33) at (8.5, -3.5) {};
+		\node [style=none] (34) at (8.5, 3.5) {};
+		\node [style=small dist tikzit] (35) at (-8.75, 1.5) {$\prob{P}_C^{\RV{H}}$};
+		\node [style=none] (36) at (-5.5, -3) {$i\in [n]$};
+		\node [style=copymap tikzit] (37) at (-6.75, 1.5) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw (4) to (7);

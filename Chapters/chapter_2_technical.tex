@@ -574,7 +574,7 @@ if a kernel in a diagram is equal to $\prob{P}^{\RV{W}|\RV{U}}$ we will typicall
 We can also use string diagrams to compactly define ``surgery'' operations that take a probability distribution and return a probability distribution with a subset of the Markov kernels transformed. A standard definition of hard interventions in causal models is to separately define a transformation of the probability distribution takes a directed acyclic graph
 
 \begin{align}
-	\mathcal{G} = \tikzfig{simple_dag}
+	\graph{G} = \tikzfig{simple_dag}
 \end{align}
 
 and defines a transformation of the joint probability distribution with respect to this graph (see Definition \ref{def:CBN} for a more precise explanation of interventions):
@@ -583,10 +583,10 @@ and defines a transformation of the joint probability distribution with respect 
 	\prob{P}^{\RV{Y}|\mathrm{do}(\RV{X}=x)}(\cdot) = \sum_{z\in Z} \prob{P}^{\RV{Y}|\RV{X}\RV{Z}}(\cdot|x,z)
 \end{align}
 
-and separately defines a transformed graph $\mathcal{G}_{\overline{\RV{X}}}$ associated with the operation
+and separately defines a transformed graph $\graph{G}_{\overline{\RV{X}}}$ associated with the operation
 
 \begin{align}
-	\mathcal{G}_{\overline{X}} = \tikzfig{simple_dag_cut}
+	\graph{G}_{\overline{X}} = \tikzfig{simple_dag_cut}
 \end{align}
 
 ``Intervention'' is thus defined as two operations, one on the joint probability distribution and one on the graphical representation.

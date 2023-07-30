@@ -581,7 +581,7 @@ Nevertheless, prior knowledge of this type suggests that the inputs $\RV{D}_i$ a
 
 \section[Data-dependent inputs]{Conditionally independent and identical response functions with data-dependent inputs}\label{sec:data_dependent}
 
-The results of the previous section concern data independent models; in these models, inputs cannot depend on previous data except via an ``oracle'' on the hypothesis $\RV{H}$. This differs from the statistical decision models discussed in the previous chapter, where some inputs can depend in arbitrary ways on the sequence of data preceding them. Intuitively, we might expect that something similar to Theorems \ref{th:ciid_rep_kernel} and \ref{th:infinite_condition_swaps} might hold. However, the situation is complicated by the fact that we can no longer arbitrarily shuffle the order of the input-output sequence; if future inputs depend on the past data, then we could have, for example, $\RV{D}_2$ deterministically equal to $\RV{Y}_1$ which would, in general, may $\RV{Y}_1$ not independent of $\RV{D}_2$ conditional on the hypothesis $\RV{H}$. Theorem \ref{th:ciid_rep_kernel_k} is similar to Theorem \ref{th:ciid_rep_kernel} except it applies to this more general setting of data-dependent inputs. However, it also doesn't lend itself to any easy interpretation that we are aware of. We consider the work in this section to be preliminary.
+The results of the previous section concern data independent models; in these models, inputs cannot depend on previous data except via an ``oracle'' on the hypothesis $\RV{H}$. This differs from the statistical decision models discussed in the previous chapter, where some inputs can depend in arbitrary ways on the sequence of data preceding them. Intuitively, we might expect that something similar to Theorems \ref{th:ciid_rep_kernel} and \ref{th:infinite_condition_swaps} might hold. However, the situation is complicated by the fact that we can no longer arbitrarily shuffle the order of the input-output sequence; if future inputs depend on the past data, then we could have, for example, $\RV{D}_2$ deterministically equal to $\RV{Y}_1$ which would, in general, make $\RV{Y}_1$ non independent of $\RV{D}_2$ conditional on the hypothesis $\RV{H}$. Theorem \ref{th:ciid_rep_kernel_k} is similar to Theorem \ref{th:ciid_rep_kernel} except it applies to this more general setting of data-dependent inputs. However, it also doesn't lend itself to any easy interpretation that we are aware of. We consider the work in this section to be preliminary.
 
 We characterise CIIR sequences with data-dependent inputs in terms of a symmetry of a generalisation of conditional probability called \emph{combs}. These were first used in causal analysis by \citet{jacobs_causal_2019}. We will introduce the idea of a comb in Example \ref{ex:insertion} and define it in Section \ref{sec:def_combs}.
 
@@ -589,7 +589,7 @@ We characterise CIIR sequences with data-dependent inputs in terms of a symmetry
 Consider an input-output model $(\prob{P}_C,\RV{D},\RV{Y})$ with $\RV{D}:=(\RV{D}_i)_{i\in\mathbb{N}}$ and $\RV{Y}:=(\RV{Y}_i)_{i\in\mathbb{N}}$ as usual, and take a subsequence $(\RV{D}_i,\RV{Y}_i)_{i\in [2]}$ of length 2. Suppose $\prob{P}_C$ features conditionally independent and identical response functions -- that is, the following holds for some hypothesis $\RV{G}$:
 \begin{align}
     \RV{Y}_i&\CI^e_{\prob{P}_C} (\RV{Y}_{<i},\RV{D}_{<i},\text{id}_C)|\RV{G}\RV{D}_i&\forall i\in \mathbb{N}\\
-    \land \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \prob{P}_\alpha^{\RV{Y}_1|\RV{G}\RV{D}_1} & \forall \alpha\in C, i\in \mathbb{N}
+    \prob{P}_\alpha^{\RV{Y}_i|\RV{H}\RV{D}_i} &= \prob{P}_\alpha^{\RV{Y}_1|\RV{G}\RV{D}_1} & \forall \alpha\in C, i\in \mathbb{N}
 \end{align}
 
 and, for simplicity, assume $\RV{G} \CI^e_{\prob{P}_C} (\RV{D}, \text{id}_C)$ also.
@@ -673,7 +673,7 @@ Given an $n$-comb $\prob{P}_\alpha^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}$ and an
 \end{theorem}
 
 \begin{proof}
-Take $\RV{Y}_[0]=\RV{D}_{n+1}=*$, and
+Take $\RV{Y}_{[0]}=\RV{D}_{n+1}=*$, and
 \begin{align}
     &\mathrm{insert}(\prob{P}_\alpha^{\RV{D}_{[2,n]}\combbreak \RV{Y}_{[n-1]}|\RV{D}_1},\prob{P}_\alpha^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}})(y_{[n]},d_{[2,n]}|d_1)\\
      &= \prob{P}_\alpha^{\RV{Y}_{[n]}\combbreak \RV{D}_{[n]}}(y_{[n]}|d_{[n]})\prob{P}_\alpha^{\RV{D}_{[n]}\combbreak\RV{Y}_{[n-1]}|\RV{D}_1}(d_{[2,n]}|d_1,y_{[n-1]})\\
@@ -683,7 +683,7 @@ Take $\RV{Y}_[0]=\RV{D}_{n+1}=*$, and
     
 \end{proof}
 
-\subsubsection{Aside: combs are the output of the ``fix'' operation}
+\subsubsection{Aside: combs may be the output of the ``fix'' operation}
 
 There is a relationship between combs and the ``fix'' operation defined in \citet{richardson_nested_2017}. In particular, suppose we have a probability $\prob{P}_\alpha$ and a comb $\prob{P}_\alpha^{\RV{Y}_{[2]}|\RV{D}_{[2]}}$. Then (assuming discrete sets)
 \begin{align}
