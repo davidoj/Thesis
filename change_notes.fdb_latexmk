@@ -1,9 +1,9 @@
 # Fdb version 3
-["xdvipdfmx"] 1690024579 "change_notes.xdv" "change_notes.pdf" "change_notes" 1690024579
-  "change_notes.xdv" 1690024579 155100 41b43f11e2615d41571b3f33a6ec9386 "xelatex"
+["xdvipdfmx"] 1690724182 "change_notes.xdv" "change_notes.pdf" "change_notes" 1690724182
+  "change_notes.xdv" 1690724182 161732 0569deaa5368d050c58e7c6233dddcb7 "xelatex"
   (generated)
   "change_notes.pdf"
-["xelatex"] 1690024578 "change_notes.tex" "change_notes.xdv" "change_notes" 1690024579
+["xelatex"] 1690724181 "change_notes.tex" "change_notes.xdv" "change_notes" 1690724182
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -44,9 +44,9 @@
   "/usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf" 1616443989 39972 3d6bb4d9d719e93193fa020b58adf5d4 ""
   "/usr/local/texlive/2021/texmf-var/web2c/xetex/xelatex.fmt" 1626400322 5093965 558b211bf21aa646a8594b20968ee6d7 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "change_notes.aux" 1690024579 435 9dfb050f27f6c013d988169b57a4d71e "xelatex"
-  "change_notes.tex" 1690024577 17507 0a5bb674adcb4c4899ebc33fe955f93c ""
+  "change_notes.aux" 1690724182 435 d2aa6bc9284a47d022a0126734da102a "xelatex"
+  "change_notes.tex" 1690724179 18189 a83dea093c6a989425c189a1b78e2964 ""
   (generated)
+  "change_notes.xdv"
   "change_notes.aux"
   "change_notes.log"
-  "change_notes.xdv"
